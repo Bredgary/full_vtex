@@ -7,6 +7,7 @@ from os import system
 from google.cloud import bigquery
 #import subprocess
 
+listIdCategory = ""
 client = bigquery.Client()
 cantidad = 0
 
@@ -28,5 +29,6 @@ for row in rows:
     print("Cant IDS Product: "+str(cantidad))
 
 listIdCategory = text_file.read(idsProducts.json)
+
 
 print("Finalizado")
