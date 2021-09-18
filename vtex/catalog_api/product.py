@@ -29,11 +29,8 @@ for row in rows:
     print("Cant IDS Product: "+str(cantidad))
 
 
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/idsProducts.json", "w")
-text_file.read(listIdCategory)
-text_file.close() 
-
-print("--------------------------------------")
+my_file=open("idsProducts.json","r")
+print(my_file.read())
 
 
 print("Finalizado")
