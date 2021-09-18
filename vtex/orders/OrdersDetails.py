@@ -63,9 +63,10 @@ for i in range(1):
     for order in OrderF:
         for k, v in order.items():
             order[k] = replace_blank_dict(v)
+    string =  json.dumps(OrderF)
     system("touch /home/bred_valenzuela/full_vtex/vtex/orders/respaldo.json")
     text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders/respaldo.json", "w")
-    text_file.write(orderDe)
+    text_file.write(string)
     text_file.close() 
 
 formatoOrder =  json.dumps(OrderF)
