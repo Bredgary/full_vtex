@@ -7,7 +7,7 @@ from os import system
 from google.cloud import bigquery
 #import subprocess
 
-listIdCategory = ""
+listIdCategory = 0
 client = bigquery.Client()
 cantidad = 0
 
