@@ -63,32 +63,32 @@ for i in range(1):
     for order in OrderF:
         for k, v in order.items():
             order[k] = replace_blank_dict(v)
-	#formatoOrder =  json.dumps(OrderF)
-	#system("touch /home/bred_valenzuela/full_vtex/vtex/orders/temp.json")
+	formatoOrder =  json.dumps(OrderF)
+	system("touch /home/bred_valenzuela/full_vtex/vtex/orders/temp.json")
 	text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders/temp.json", "w")
 	text_file.write(formatoOrder)
 	text_file.close() 
 	#system("cat temp.json | jq -c '.[]' > DetailOrdersFinal.json")
-    DetailOrdersFinal = subprocess.check_output(OrderF, shell=True)
+    #DetailOrdersFinal = subprocess.check_output(OrderF, shell=True)
 	contador = contador + 1
 	print("Pagina: "+str(numeroPaginas) +" de: "+str(total))
 	print("Registros almacenados "+str(contador) +" de: "+str(total*15))
 
 
-client = bigquery.Client()
-filename = DetailOrdersFinal#'/home/bred_valenzuela/full_vtex/vtex/orders/DetailOrdersFinal.json'
-dataset_id = 'landing_zone'
-table_id = 'shopstar_orders_detail'
-dataset_ref = client.dataset(dataset_id)
-table_ref = dataset_ref.table(table_id)
-job_config = bigquery.LoadJobConfig()
-job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-job_config.autodetect = True
-with open(filename, "rb") as source_file:
-    job = client.load_table_from_file(
-        source_file,
-        table_ref,
-        location="southamerica-east1",  # Must match the destination dataset location.
-    job_config=job_config,)  # API request
-job.result()  # Waits for table load to complete.
-print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
+#client = bigquery.Client()
+#filename = DetailOrdersFinal#'/home/bred_valenzuela/full_vtex/vtex/orders/DetailOrdersFinal.json'
+#dataset_id = 'landing_zone'
+#table_id = 'shopstar_orders_detail'
+#dataset_ref = client.dataset(dataset_id)
+#table_ref = dataset_ref.table(table_id)
+#job_config = bigquery.LoadJobConfig()
+#job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+#job_config.autodetect = True
+#with open(filename, "rb") as source_file:
+#    job = client.load_table_from_file(
+#        source_file,
+#        table_ref,
+#        location="southamerica-east1",  # Must match the destination dataset location.
+#    job_config=job_config,)  # API request
+#job.result()  # Waits for table load to complete.
+#print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
