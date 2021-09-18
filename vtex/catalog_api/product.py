@@ -36,7 +36,7 @@ idsCategory=open("idsProducts.json","r")
 idsCategory.read()
 system("rm idsProducts.json")
 
-for i in range[2]:
+for i in range(2):
     for x in idsCategory:
         ids = str(x)
         querystring = {"categoryId":"1","_from":"1","_to":"10"}
