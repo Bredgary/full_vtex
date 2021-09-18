@@ -9,7 +9,7 @@ client = bigquery.Client()
 
 # Perform a query.
 QUERY = (
-    'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_category` ')
+    'SELECT id, count(id) FROM `shopstar-datalake.landing_zone.shopstar_vtex_category` ')
 
 query_job = client.query(QUERY)  # API request
 rows = query_job.result()  # Waits for query to finish
