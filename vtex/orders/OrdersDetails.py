@@ -5,6 +5,7 @@ import re
 from datetime import datetime
 from os import system
 from google.cloud import bigquery
+import subprocess
 
 #================================================TOTAL DE PAGINAS===============================================================
 headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
@@ -51,32 +52,31 @@ for i in range(1):
   #print("===========================================================================")
   url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders?page="+str(i)+""
   response = requests.request("GET", url, headers=headers, params=querystring)
+  numeroPaginas = i
   formatoJson = json.loads(response.text)
   listOrder = formatoJson["list"]
   for ids in listOrder:
     OrderId.append(ids["orderId"])
   for x in OrderId:
-    contador = contador + 1
-    print("Registros almacenados "+str(contador) +" de: "+str(total))
     orderDe = insertar(str(x),headers)
     OrderF.append(orderDe)
     for order in OrderF:
         for k, v in order.items():
             order[k] = replace_blank_dict(v)
+	formatoOrder =  json.dumps(OrderF)
+	system("touch /home/bred_valenzuela/full_vtex/vtex/orders/temp.json")
+	text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders/temp.json", "w")
+	text_file.write(formatoOrder)
+	text_file.close() 
+	#system("cat temp.json | jq -c '.[]' > DetailOrdersFinal.json")
+    DetailOrdersFinal = subprocess.check_output(formatoOrder, shell=True)
+	contador = contador + 1
+	print("Pagina: "+str(numeroPaginas) +" de: "+str(total))
+	print("Registros almacenados "+str(contador) +" de: "+str(total*15))
 
-formatoOrder =  json.dumps(OrderF)
-
-system("touch /home/bred_valenzuela/full_vtex/vtex/orders/temp.json")
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders/temp.json", "w")
-text_file.write(formatoOrder)
-text_file.close() 
-
-system("cat temp.json | jq -c '.[]' > DetailOrders.json")
-#system("chmod 777 convert.py")
-#system("/home/bred_valenzuela/full_vtex/vtex/ORDERS/orderDetails/convert.py < /home/bred_valenzuela/full_vtex/vtex/ORDERS/orderDetails/DetailOrders1.json > /home/bred_valenzuela/full_vtex/vtex/ORDERS/orderDetails/orderDetails")
 
 client = bigquery.Client()
-filename = '/home/bred_valenzuela/full_vtex/vtex/orders/DetailOrders.json'
+filename = DetailOrdersFinal#'/home/bred_valenzuela/full_vtex/vtex/orders/DetailOrdersFinal.json'
 dataset_id = 'landing_zone'
 table_id = 'shopstar_orders_detail'
 dataset_ref = client.dataset(dataset_id)

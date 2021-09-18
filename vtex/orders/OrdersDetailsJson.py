@@ -20,6 +20,7 @@ OrderF = []
 print("Total de registros: "+str(paging["total"])+" del mes de agosto.")
 
 contador = 0
+numeroPaginas = 0
 #================================================TOTAL DE PAGINAS===============================================================
 
 def replace_blank_dict(d):
@@ -51,24 +52,23 @@ for i in range(1):
   #print("===========================================================================")
   url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders?page="+str(i)+""
   response = requests.request("GET", url, headers=headers, params=querystring)
+  numeroPaginas = i
   formatoJson = json.loads(response.text)
   listOrder = formatoJson["list"]
   for ids in listOrder:
     OrderId.append(ids["orderId"])
   for x in OrderId:
-    contador = contador + 1
-    print("Registros almacenados "+str(contador) +" de: "+str(total))
     orderDe = insertar(str(x),headers)
     OrderF.append(orderDe)
     for order in OrderF:
         for k, v in order.items():
             order[k] = replace_blank_dict(v)
-
-formatoOrder =  json.dumps(OrderF)
-
-system("touch /home/bred_valenzuela/full_vtex/vtex/orders/temp2.json")
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders/temp2.json", "w")
-text_file.write(formatoOrder)
-text_file.close() 
-
-system("cat temp2.json | jq -c '.[]' > DetailOrdersFinal.json")
+	formatoOrder =  json.dumps(OrderF)
+	system("touch /home/bred_valenzuela/full_vtex/vtex/orders/temp2.json")
+	text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders/temp2.json", "w")
+	text_file.write(formatoOrder)
+	text_file.close() 
+	system("cat temp2.json | jq -c '.[]' > DetailOrdersFinal2.json")
+	contador = contador + 1
+	print("Pagina: "+str(numeroPaginas) +" de: "+str(total))
+	print("Registros almacenados "+str(contador) +" de: "+str(total*15))
