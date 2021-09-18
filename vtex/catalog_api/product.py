@@ -8,7 +8,8 @@ from google.cloud import bigquery
 
 url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/GetProductAndSkuIds"
 headers = {"Content-Type": "application/json",    "Accept": "application/json",    "X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA",    "X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-
+querystring = {"categoryId":"1","_from":"1","_to":"10"}
+response = requests.request("GET", url, headers=headers, params=querystring)
 listIdCategory = []
 client = bigquery.Client()
 cantidad = 0
@@ -33,7 +34,7 @@ text_file.write(string)
 text_file.close()
 
 idsCategory=open("idsProducts.json","r")
-print(idsCategory.read())
+idsCategory.read()
 system("rm idsProducts.json")
 
 for x in idsCategory:
@@ -41,6 +42,4 @@ for x in idsCategory:
     querystring = {"categoryId":ids,"_from":"1","_to":"10"}
     response = requests.request("GET", url, headers=headers, params=querystring)
     
-
-
 print(response.text)
