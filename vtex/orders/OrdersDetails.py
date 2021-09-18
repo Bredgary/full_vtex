@@ -69,7 +69,7 @@ for i in range(1):
 	text_file.write(formatoOrder)
 	text_file.close() 
 	#system("cat temp.json | jq -c '.[]' > DetailOrdersFinal.json")
-    DetailOrdersFinal = subprocess.check_output(formatoOrder, shell=True)
+    DetailOrdersFinal = subprocess.check_output(OrderF, shell=True)
 	contador = contador + 1
 	print("Pagina: "+str(numeroPaginas) +" de: "+str(total))
 	print("Registros almacenados "+str(contador) +" de: "+str(total*15))
