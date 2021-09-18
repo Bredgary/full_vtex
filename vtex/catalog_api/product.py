@@ -9,7 +9,7 @@ client = bigquery.Client()
 
 # Perform a query.
 QUERY = (
-    'SELECT id, count(id) as "total" FROM `shopstar-datalake.landing_zone.shopstar_vtex_category` ')
+    'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_category` ')
 
 QUERYTOTAL = (
     'SELECT count(id) FROM `shopstar-datalake.landing_zone.shopstar_vtex_category` ')
