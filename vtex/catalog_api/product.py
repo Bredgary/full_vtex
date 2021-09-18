@@ -12,7 +12,7 @@ QUERY = (
     'SELECT id, count(id) as "total" FROM `shopstar-datalake.landing_zone.shopstar_vtex_category` ')
 
 QUERYTOTAL = (
-    'SELECT count(id) as total FROM `shopstar-datalake.landing_zone.shopstar_vtex_category` ')
+    'SELECT count(id) FROM `shopstar-datalake.landing_zone.shopstar_vtex_category` ')
 
 
      
