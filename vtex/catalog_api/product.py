@@ -10,11 +10,11 @@ QUERY = (
 query_job = client.query(QUERY)  # API request
 rows = query_job.result()  # Waits for query to finish
 
-print("total={}".format(row["total"]))
+#print("total={}".format(row["total"]))
 
-for row in rows:
-    string =  json.dumps(row.id)
-    system("touch /home/bred_valenzuela/full_vtex/vtex/catalog_api/idsProducts.json")
-    text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/idsProducts.json", "w")
-    text_file.write(string)
-    text_file.close()
+#for row in rows:
+#    string =  json.dumps(row.id)
+#    system("touch /home/bred_valenzuela/full_vtex/vtex/catalog_api/idsProducts.json")
+#    text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/idsProducts.json", "w")
+#    text_file.write(string)
+#    text_file.close()
