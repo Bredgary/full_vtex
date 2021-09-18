@@ -7,7 +7,8 @@ from os import system
 from google.cloud import bigquery
 #import subprocess
 
-listIdCategory = 0
+
+listIdCategory = []
 client = bigquery.Client()
 cantidad = 0
 
@@ -19,18 +20,20 @@ QUERY = (
 query_job = client.query(QUERY)  # API request
 rows = query_job.result()  # Waits for query to finish
 
+system("touch /home/bred_valenzuela/full_vtex/vtex/catalog_api/idsProducts.json")
 for row in rows:
-    string =  json.dumps(row.id)
-    system("touch /home/bred_valenzuela/full_vtex/vtex/catalog_api/idsProducts.json")
-    text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/idsProducts.json", "w")
-    text_file.write(string)
-    text_file.close()
+    listIdCategory.append(row.id)
     cantidad = cantidad+1
     print("Cant IDS Product: "+str(cantidad))
 
+string =  json.dumps(listIdCategory)
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/idsProducts.json", "w")
+text_file.write(string)
+text_file.close()
 
-my_file=open("idsProducts.json","r")
-print(my_file.read())
+idsCategory=open("idsProducts.json","r")
+print(idsCategory.read())
+
 
 
 print("Finalizado")
