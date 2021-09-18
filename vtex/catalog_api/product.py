@@ -40,7 +40,7 @@ for x in idsCategory:
     ids = str(x)
     querystring = {"categoryId":ids,"_from":"1","_to":"10"}
     response = requests.request("GET", url, headers=headers, params=querystring)
-    print(response.text)
+    
 
 
-print("Finalizado")
+print(response.text)
