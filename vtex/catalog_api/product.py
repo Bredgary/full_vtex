@@ -1,6 +1,5 @@
 from google.cloud import bigquery
 
-GOOGLE_APPLICATION_CREDENTIALS="/home/bred_valenzuela/full_vtex/vtex/orders/miclave.json"
 
 client = bigquery.Client()
 
