@@ -7,7 +7,7 @@ from os import system
 from google.cloud import bigquery
 #import subprocess
 
-listIdCategory = ""
+listIdCategory = []
 client = bigquery.Client()
 cantidad = 0
 
@@ -34,6 +34,6 @@ text_file.read(listIdCategory)
 text_file.close() 
 
 print("--------------------------------------")
-print(listIdCategory)
+
 
 print("Finalizado")
