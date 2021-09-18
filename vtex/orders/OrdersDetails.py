@@ -60,6 +60,9 @@ for i in range(1):
   for x in OrderId:
     orderDe = insertar(str(x),headers)
     OrderF.append(orderDe)
+    contador = contador + 1
+    print("Pagina: "+str(numeroPaginas) +" de: "+str(total))
+    print("Registros almacenados "+str(contador) +" de: "+str(total*15))
     for order in OrderF:
         for k, v in order.items():
             order[k] = replace_blank_dict(v)
@@ -75,9 +78,6 @@ text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders/temp.json", "w")
 text_file.write(formatoOrder)
 text_file.close() 
 system("cat temp.json | jq -c '.[]' > DetailOrdersFinal.json")
-contador = contador + 1
-print("Pagina: "+str(numeroPaginas) +" de: "+str(total))
-print("Registros almacenados "+str(contador) +" de: "+str(total*15))
 
 
 client = bigquery.Client()
@@ -97,3 +97,6 @@ with open(filename, "rb") as source_file:
     job_config=job_config,)  # API request
 job.result()  # Waits for table load to complete.
 print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
+system("rm DetailOrdersFinal.json")
+system("rm temp.json")
+print("finalizado")
