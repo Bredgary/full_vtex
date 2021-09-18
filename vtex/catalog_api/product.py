@@ -5,8 +5,9 @@ import re
 from datetime import datetime
 from os import system
 from google.cloud import bigquery
-#import subprocess
 
+url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/GetProductAndSkuIds"
+headers = {"Content-Type": "application/json",    "Accept": "application/json",    "X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA",    "X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
 listIdCategory = []
 client = bigquery.Client()
@@ -36,7 +37,10 @@ print(idsCategory.read())
 system("rm idsProducts.json")
 
 for x in idsCategory:
-    print(x)
+    ids = str(x)
+    querystring = {"categoryId":ids,"_from":"1","_to":"10"}
+    response = requests.request("GET", url, headers=headers, params=querystring)
+    print(response.text)
 
 
 print("Finalizado")
