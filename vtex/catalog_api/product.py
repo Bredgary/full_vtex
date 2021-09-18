@@ -24,7 +24,7 @@ for row in rows:
     text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/idsProducts.json", "w")
     text_file.write(string)
     text_file.close()
-    cantidad+1
-    print("Cant IDS Product"+str(cantidad))
+    cantidad = cantidad+1
+    print("Cant IDS Product: "+str(cantidad))
 
 print("Finalizado")
