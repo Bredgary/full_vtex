@@ -33,7 +33,10 @@ text_file.close()
 
 idsCategory=open("idsProducts.json","r")
 print(idsCategory.read())
+system("rm idsProducts.json")
 
+for x in idsCategory:
+    print(x)
 
 
 print("Finalizado")
