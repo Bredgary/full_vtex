@@ -22,7 +22,7 @@ rows = query_job.result()  # Waits for query to finish
 query_job_total = client.query(QUERYTOTAL)  # API request
 rowsTotal = query_job.result()  # Waits for query to finish
 
-print("total= "+ str(rowsTotal))
+print("Total={}".format(rowsTotal["f0_"]))
 
 #for row in rows:
 #    string =  json.dumps(row.id)
