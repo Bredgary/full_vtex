@@ -67,7 +67,7 @@ for i in range(1):
 	#formatoOrder =  json.dumps(OrderF)
 	#system("touch /home/bred_valenzuela/full_vtex/vtex/orders/temp.json")
 	#text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders/temp.json", "w")
-	3text_file.write(formatoOrder)
+	#text_file.write(formatoOrder)
 	#text_file.close() 
 	#system("cat temp.json | jq -c '.[]' > DetailOrdersFinal.json")
     #DetailOrdersFinal = subprocess.check_output(OrderF, shell=True)
