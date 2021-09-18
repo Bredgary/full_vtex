@@ -1,5 +1,7 @@
 from google.cloud import bigquery
 
+GOOGLE_APPLICATION_CREDENTIALS="[8f5d1e898a7c53b21764609e8af700b844cc278f]"
+
 client = bigquery.Client()
 
 # Perform a query.
