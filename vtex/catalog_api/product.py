@@ -26,6 +26,5 @@ for row in rows:
     text_file.close()
     cantidad+1
     print("Cant IDS Product"+str(cantidad))
-    print("id={}".format(row["id"])
 
 print("Finalizado")
