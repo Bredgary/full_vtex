@@ -64,16 +64,17 @@ for i in range(1):
     for order in OrderF:
         for k, v in order.items():
             order[k] = replace_blank_dict(v)
-        formatoOrder =  json.dumps(OrderF)
+
+formatoOrder =  json.dumps(OrderF)
 
 system("touch /home/bred_valenzuela/full_vtex/vtex/ORDERS/orderDetails/temp.json")
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/ORDERS/orderDetails/temp.json", "w")
 text_file.write(formatoOrder)
 text_file.close() 
 
-system("cat temp.json | jq -c '.[]' > DetailOrders1.json")
-system("chmod 777 convert.py")
-system("/home/bred_valenzuela/full_vtex/vtex/ORDERS/orderDetails/convert.py < /home/bred_valenzuela/full_vtex/vtex/ORDERS/orderDetails/DetailOrders1.json > /home/bred_valenzuela/full_vtex/vtex/ORDERS/orderDetails/orderDetails")
+system("cat temp.json | jq -c '.[]' > DetailOrders.json")
+#system("chmod 777 convert.py")
+#system("/home/bred_valenzuela/full_vtex/vtex/ORDERS/orderDetails/convert.py < /home/bred_valenzuela/full_vtex/vtex/ORDERS/orderDetails/DetailOrders1.json > /home/bred_valenzuela/full_vtex/vtex/ORDERS/orderDetails/orderDetails")
 
 client = bigquery.Client()
 filename = '/home/bred_valenzuela/full_vtex/vtex/ORDERS/orderDetails/DetailOrders.json'
