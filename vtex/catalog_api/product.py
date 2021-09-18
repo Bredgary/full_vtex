@@ -11,7 +11,7 @@ headers = {"Content-Type": "application/json",    "Accept": "application/json", 
 querystring = {"categoryId":"441","_from":"1","_to":"10"}
 response2 = requests.request("GET", url, headers=headers, params=querystring)
 formJson = json.loads(response2.text)
-total = formJson["total"]
+#total = formJson["total"]
 tableDetails = []
 
 
@@ -47,7 +47,7 @@ system("rm idsProducts.json")
 for i in range(2):
     for x in idsCategory:
         ids = str(x)
-        print("Paginas totales: "+str(total))
+        #print("Paginas totales: "+str(total))
         querystring = {"categoryId":"441","_from":"1","_to":"10"}
         response = requests.request("GET", url, headers=headers, params=querystring)
         formatoJson.append(response.text)
