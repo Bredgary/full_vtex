@@ -12,7 +12,7 @@ QUERY = (
     'SELECT id, count(id) as "total" FROM `shopstar-datalake.landing_zone.shopstar_vtex_category` ')
 
 QUERYTOTAL = (
-    'SELECT count(id) as total FROM `shopstar-datalake.landing_zone.shopstar_vtex_category`` ')
+    'SELECT count(id) FROM `shopstar-datalake.landing_zone.shopstar_vtex_category`` ')
 
 
      
@@ -22,7 +22,7 @@ rows = query_job.result()  # Waits for query to finish
 query_job_total = client.query(QUERYTOTAL)  # API request
 rowsTotal = query_job.result()  # Waits for query to finish
 
-print("total={}".format(rowsTotal["total"]))
+print("total={}".format(rowsTotal["f0"]))
 
 #for row in rows:
 #    string =  json.dumps(row.id)
