@@ -63,16 +63,17 @@ for i in range(1):
     for order in OrderF:
         for k, v in order.items():
             order[k] = replace_blank_dict(v)
-	formatoOrder =  json.dumps(OrderF)
-	system("touch /home/bred_valenzuela/full_vtex/vtex/orders/temp.json")
-	text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders/temp.json", "w")
-	text_file.write(formatoOrder)
-	text_file.close() 
+
+	#formatoOrder =  json.dumps(OrderF)
+	#system("touch /home/bred_valenzuela/full_vtex/vtex/orders/temp.json")
+	#text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders/temp.json", "w")
+	3text_file.write(formatoOrder)
+	#text_file.close() 
 	#system("cat temp.json | jq -c '.[]' > DetailOrdersFinal.json")
     #DetailOrdersFinal = subprocess.check_output(OrderF, shell=True)
-	contador = contador + 1
-	print("Pagina: "+str(numeroPaginas) +" de: "+str(total))
-	print("Registros almacenados "+str(contador) +" de: "+str(total*15))
+	#contador = contador + 1
+	#print("Pagina: "+str(numeroPaginas) +" de: "+str(total))
+	#print("Registros almacenados "+str(contador) +" de: "+str(total*15))
 
 
 #client = bigquery.Client()
