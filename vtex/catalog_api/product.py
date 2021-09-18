@@ -3,7 +3,9 @@ import json
 import os
 import re
 from datetime import datetime
+from os import system
 from google.cloud import bigquery
+#import subprocess
 
 client = bigquery.Client()
 
@@ -22,3 +24,4 @@ for row in rows:
     text_file.write(string)
     text_file.close()
 
+print("Finalizado")
