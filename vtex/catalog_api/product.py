@@ -19,13 +19,13 @@ query_job = client.query(QUERY)  # API request
 rows = query_job.result()  # Waits for query to finish
 
 for row in rows:
-    cantidad+1
-    print("Cant IDS Product"+str(cantidad))
-    print("id={}".format(row["id"])
     string =  json.dumps(row.id)
     system("touch /home/bred_valenzuela/full_vtex/vtex/catalog_api/idsProducts.json")
     text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/idsProducts.json", "w")
     text_file.write(string)
     text_file.close()
+    cantidad+1
+    print("Cant IDS Product"+str(cantidad))
+    print("id={}".format(row["id"])
 
 print("Finalizado")
