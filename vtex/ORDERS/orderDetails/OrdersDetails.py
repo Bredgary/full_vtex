@@ -66,17 +66,17 @@ for i in range(1):
             order[k] = replace_blank_dict(v)
         formatoOrder =  json.dumps(OrderF)
 
-system("touch /home/bred_valenzuela/test/orders/temp.json")
-text_file = open("/home/bredg/full_vtex/vtex/ORDERS/orderDetails/temp.json", "w")
+system("touch /home/bred_valenzuela/full_vtex/vtex/ORDERS/orderDetails/temp.json")
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/ORDERS/orderDetails/temp.json", "w")
 text_file.write(formatoOrder)
 text_file.close() 
 
-system("cat temp.json | jq -c '.[]' > DetailOrders.json")
+system("cat temp.json | jq -c '.[]' > DetailOrders1.json")
 system("chmod 777 convert.py")
-system("/home/bredg/full_vtex/vtex/ORDERS/orderDetails/convert.py < /home/bredg/full_vtex/vtex/ORDERS/orderDetails > /home/bredg/full_vtex/vtex/ORDERS/orderDetails/orderDetails")
+system("/home/bred_valenzuela/full_vtex/vtex/ORDERS/orderDetails/convert.py < /home/bred_valenzuela/full_vtex/vtex/ORDERS/orderDetails/DetailOrders1.json > /home/bred_valenzuela/full_vtex/vtex/ORDERS/orderDetails/orderDetails")
 
 client = bigquery.Client()
-filename = '/home/bredg/full_vtex/vtex/ORDERS/orderDetails/DetailOrders.json'
+filename = '/home/bred_valenzuela/full_vtex/vtex/ORDERS/orderDetails/DetailOrders.json'
 dataset_id = 'landing_zone'
 table_id = 'shopstar_orders_detail'
 dataset_ref = client.dataset(dataset_id)
