@@ -27,4 +27,6 @@ for row in rows:
     cantidad = cantidad+1
     print("Cant IDS Product: "+str(cantidad))
 
+listIdCategory = text_file.read(idsProducts.json)
+
 print("Finalizado")
