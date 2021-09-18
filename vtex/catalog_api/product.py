@@ -19,10 +19,12 @@ QUERYTOTAL = (
 
 query_job = client.query(QUERY)  # API request
 rows = query_job.result()  # Waits for query to finish
-query_job_total = client.query(QUERYTOTAL)  # API request
-rowsTotal = query_job.result()  # Waits for query to finish
 
-print("Total rows available: ", result.rowsTotal)
+
+job = client.query(QUERYTOTAL)
+result = job.result()
+
+print("Total rows available: ", result.total_rows)
 
 #for row in rows:
 #    string =  json.dumps(row.id)
