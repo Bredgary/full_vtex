@@ -28,7 +28,12 @@ for row in rows:
     cantidad = cantidad+1
     print("Cant IDS Product: "+str(cantidad))
 
-listIdCategory = text_file.read(idsProducts.json)
 
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/idsProducts.json", "w")
+text_file.read(listIdCategory)
+text_file.close() 
+
+print("--------------------------------------")
+print(listIdCategory)
 
 print("Finalizado")
