@@ -71,6 +71,7 @@ text_file = open("/home/bredg/full_vtex/vtex/ORDERS/orderDetails/temp.json", "w"
 text_file.write(formatoOrder)
 text_file.close()
 
+system("touch /home/bredg/full_vtex/vtex/ORDERS/orderDetails/DetailOrders.json")
 system("cat temp.json | jq -c '.[]' > DetailOrders.json")
 
 client = bigquery.Client()
