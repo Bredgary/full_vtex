@@ -6,6 +6,7 @@ from datetime import datetime
 from os import system
 from google.cloud import bigquery
 
+
 #================================================TOTAL DE PAGINAS===============================================================
 headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 querystring = {"f_creationDate":"creationDate:[2021-07-01T01:00:00.000Z TO 2021-08-31T01:59:59.999Z]","f_hasInputInvoice":"false"}
