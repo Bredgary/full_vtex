@@ -66,12 +66,14 @@ for i in range(1):
             order[k] = replace_blank_dict(v)
         formatoOrder =  json.dumps(OrderF)
 
-
+system("touch /home/bred_valenzuela/test/orders/temp.json")
 text_file = open("/home/bredg/full_vtex/vtex/ORDERS/orderDetails/temp.json", "w")
 text_file.write(formatoOrder)
 text_file.close() 
 
 system("cat temp.json | jq -c '.[]' > DetailOrders.json")
+system("chmod 777 convert.py")
+system("/home/bredg/full_vtex/vtex/ORDERS/orderDetails/convert.py < /home/bredg/full_vtex/vtex/ORDERS/orderDetails > /home/bredg/full_vtex/vtex/ORDERS/orderDetails/orderDetails")
 
 client = bigquery.Client()
 filename = '/home/bredg/full_vtex/vtex/ORDERS/orderDetails/DetailOrders.json'
