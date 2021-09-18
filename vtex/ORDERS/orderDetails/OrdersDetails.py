@@ -66,15 +66,15 @@ for i in range(total):
         formatoOrder =  json.dumps(OrderF)
 
 
-system("touch /home/bred_valenzuela/shopstar/vtex/orders/temp.json")
-text_file = open("/home/bred_valenzuela/shopstar/vtex/orders/temp.json", "w")
+system("touch /home/bredg/full_vtex/vtex/ORDERS/orderDetails/temp.json")
+text_file = open("/home/bredg/full_vtex/vtex/ORDERS/orderDetails/temp.json", "w")
 text_file.write(formatoOrder)
 text_file.close()
 
 system("cat temp.json | jq -c '.[]' > DetailOrders.json")
 
 client = bigquery.Client()
-filename = '/home/bred_valenzuela/shopstar/vtex/orders/DetailOrders.json'
+filename = '/home/bredg/full_vtex/vtex/ORDERS/orderDetails/DetailOrders.json'
 dataset_id = 'landing_zone'
 table_id = 'shopstar_orders_detail'
 dataset_ref = client.dataset(dataset_id)
