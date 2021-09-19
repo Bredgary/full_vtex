@@ -19,7 +19,7 @@ def replace_blank_dict(d):
             d[k] = replace_blank_dict(v)
     return d
 
-def get_product(id):
+def get_product():
 	url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/product/441"
 	headers = {
     	"Content-Type": "application/json",
@@ -28,12 +28,12 @@ def get_product(id):
     	"X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"
 	}
 	response = requests.request("GET", url, headers=headers)
-    data = response.text.encode('utf8')
+    #data = response.text.encode('utf8')
     #formatoJson = json.loads(response.text)
     #dataProduct = formatoJson["data"]
     #for i in dataProduct:
     #  productList.append(i)
-    return data
+    return response.txt
 
 idsProduct=open("lista","r")
 idsProduct.read()
@@ -42,6 +42,8 @@ system("rm lista.json")
 for i in idsProduct:
 	print("ID Producto"+str(i)
 
+hola = get_product()
+print(hola)
 
 
 
