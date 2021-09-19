@@ -9,7 +9,7 @@ from google.cloud import bigquery
 
 #================================================TOTAL DE PAGINAS===============================================================
 headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-querystring = {"f_creationDate":"creationDate:[2021-07-01T01:00:00.000Z TO 2021-08-31T01:59:59.999Z]","f_hasInputInvoice":"false"}
+querystring = {"f_creationDate":"creationDate:[2021-08-30T01:00:00.000Z TO 2021-08-31T01:59:59.999Z]","f_hasInputInvoice":"false"}
 urlPag = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders"
 responsePag = requests.request("GET", urlPag, headers=headers, params=querystring)
 formJson = json.loads(responsePag.text)
@@ -45,7 +45,7 @@ def insertar(ids,headers):
   return data
 #================================================Obtener Orden Por ID============================================================
 
-
+system("touch /home/bred_valenzuela/full_vtex/vtex/orders/respaldo.json")
 for i in range(total):
   i =+1
   OrderId = []
@@ -67,7 +67,6 @@ for i in range(total):
         for k, v in order.items():
             order[k] = replace_blank_dict(v)
     string =  json.dumps(OrderF)
-    system("touch /home/bred_valenzuela/full_vtex/vtex/orders/respaldo.json")
     text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders/respaldo.json", "w")
     text_file.write(string)
     text_file.close() 

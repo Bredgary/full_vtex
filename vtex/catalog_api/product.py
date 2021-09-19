@@ -76,7 +76,7 @@ system("touch /home/bred_valenzuela/full_vtex/vtex/catalog_api/idsProducts.json"
 for row in rows:
     listIdCategory.append(row.id)
     cantidad = cantidad+1
-    print("Cant IDS Product: "+str(cantidad))
+    #print("Cant IDS Product: "+str(cantidad))
 
 string =  json.dumps(listIdCategory)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/idsProducts.json", "w")
@@ -90,11 +90,13 @@ for i in listIdCategory:
     total = total(i)
     contador = 0
     for x in range(total):
-        print(str(contador+1))
-        orderDe = get_product(str(i),CFrom,CTo)
-        OrderF.append(orderDe)
-        CFrom = CFrom + 1
-        CTo = CTo +1
+        print(x)
+        #print(str(contador+1))
+
+        #orderDe = get_product(str(i),CFrom,CTo)
+        #OrderF.append(orderDe)
+        #CFrom = CFrom + 1
+        #CTo = CTo +1
 
 string =  json.dumps(OrderF)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/temp.json", "w")
