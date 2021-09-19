@@ -11,6 +11,7 @@ CTo = 0
 productList = []
 contador = 0
 total = 0
+client = bigquery.Client()
 
 def replace_blank_dict(d):
     if not d:
