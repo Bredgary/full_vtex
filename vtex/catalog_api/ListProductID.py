@@ -6,12 +6,9 @@ from datetime import datetime
 from os import system
 from google.cloud import bigquery
 
-CFrom = 0
-CTo = 0
-productList = []
-contador = 0
-total = 0
+
 client = bigquery.Client()
+listIdCategory = []
 
 def replace_blank_dict(d):
     if not d:
