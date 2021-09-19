@@ -91,13 +91,11 @@ for i in listIdCategory:
     total = total(i)
     contador = 0
     for x in range(total):
-        print(i)
-        #print(str(contador+1))
-
-        #orderDe = get_product(str(i),CFrom,CTo)
-        #OrderF.append(orderDe)
-        #CFrom = CFrom + 1
-        #CTo = CTo +1
+        print(str(contador+1))
+        orderDe = get_product(str(i),CFrom,CTo)
+        OrderF.append(orderDe)
+        CFrom = CFrom + 1
+        CTo = CTo +1
 
 string =  json.dumps(OrderF)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/temp.json", "w")
