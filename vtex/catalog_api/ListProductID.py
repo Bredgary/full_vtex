@@ -90,9 +90,9 @@ for i in listIdCategory:
     orderDe = get_product(str(i))
     OrderF.append(orderDe)
 
-fjson =  json.loans(OrderF)
-#text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/temp.json", "w")
-#text_file.write(string2)
-#text_file.close() 
+#fjson =  json.loans(OrderF)
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/lista.json", "w")
+text_file.write(orderDe)
+text_file.close() 
 #system("cat temp.json | jq -c '.[]' > IdProducts.json")
 print("Finalizado")
