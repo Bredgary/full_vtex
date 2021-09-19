@@ -61,14 +61,11 @@ rows = query_job.result()  # Waits for query to finish
 for row in rows:
     get_productIFD(str(row.id))
 
-
-print("exito")
-
-#for x in productList[0]:
-#    cargandoIdProducto.appened(x)
+for x in productList[0]:
+    cargandoIdProducto.appened(x)
 
 
-
+print(cargandoIdProducto)
 
 
 
