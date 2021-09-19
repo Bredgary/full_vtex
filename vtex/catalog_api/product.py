@@ -76,7 +76,3 @@ for i in idsCategory:
         break
     break
 
-
-
-
-print(ids)
