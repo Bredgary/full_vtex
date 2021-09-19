@@ -91,7 +91,7 @@ for i in listIdCategory:
     orderDe = get_product(str(i))
     productList.append(orderDe)
 
-fjson =  json.loans(productList)
+fjson =  json.dumps(productList)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/lista", "wb")
 text_file.write(orderDe)
 text_file.close() 
