@@ -25,7 +25,7 @@ def replace_blank_dict(d):
             d[k] = replace_blank_dict(v)
     return d
 
-def get_product(id,CFrom,CTo):
+def get_product(id):
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/GetProductAndSkuIds"
     querystring = {"categoryId":""+str(id)+"","_from":"0","_to":"50"}
     headers = {
