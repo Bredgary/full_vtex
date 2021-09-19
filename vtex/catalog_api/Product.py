@@ -70,6 +70,7 @@ rows = query_job.result()  # Waits for query to finish
 
 for row in rows:
     get_productIFD(str(row.id))
+    print("ID de categoria: "+str(row.id))
 
 for ids in productoID:
     get_product(ids)
