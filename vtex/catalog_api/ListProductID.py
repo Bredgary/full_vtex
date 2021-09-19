@@ -89,9 +89,8 @@ system("rm idsProducts.json")
 for i in listIdCategory:
     print("Category: "+str(i))
     orderDe = get_product(str(i))
-    productList.append(orderDe)
 
-fjson =  json.dumps(productList)
+fjson =  json.dumps(orderDe)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/lista", "wb")
 text_file.write(orderDe)
 text_file.close() 
