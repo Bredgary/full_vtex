@@ -96,10 +96,6 @@ for i in listIdCategory:
         CFrom = CFrom + 1
         CTo = CTo +1
 
-        for order in OrderF:
-        for k, v in order.items():
-            order[k] = replace_blank_dict(v)
-
 string =  json.dumps(OrderF)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/temp.json", "w")
 text_file.write(string)
