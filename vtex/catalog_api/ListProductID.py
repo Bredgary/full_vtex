@@ -76,8 +76,6 @@ rows = query_job.result()  # Waits for query to finish
 system("touch /home/bred_valenzuela/full_vtex/vtex/catalog_api/idsProducts.json")
 for row in rows:
     listIdCategory.append(row.id)
-    cantidad = cantidad+1
-    #print("Cant IDS Product: "+str(cantidad))
 
 string =  json.dumps(listIdCategory)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/idsProducts.json", "w")
@@ -92,9 +90,9 @@ for i in listIdCategory:
     orderDe = get_product(str(i))
     OrderF.append(orderDe)
 
-string =  json.dumps(OrderF)
+string2 =  json.dumps(OrderF)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/temp.json", "w")
-text_file.write(string)
+text_file.write(string2)
 text_file.close() 
 system("cat temp.json | jq -c '.[]' > IdProducts.json")
 print("Finalizado")
