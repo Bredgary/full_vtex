@@ -8,7 +8,7 @@ from google.cloud import bigquery
 
 def get_product(id):
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/GetProductAndSkuIds"
-    querystring = {"categoryId":+id+,"_from":"1","_to":"10"}
+    querystring = {"categoryId":""+str(id)+"","_from":"0","_to":"50"}
     headers = {
         "Content-Type": "application/json",
         "Accept": "application/json",
@@ -17,13 +17,34 @@ def get_product(id):
     }
     response = requests.request("GET", url, headers=headers, params=querystring)
     data = response.text.encode('utf8')
+    formatoJson = json.loads(response.text)
+    range = formatoJson["range"]
+    total = range["total"]
+    print("El ID: "+str(id)+" tiene "+str(total)+" productos")
     return data
 
+def total(id):
+    url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/GetProductAndSkuIds"
+    querystring = {"categoryId":""+str(id)+"","_from":"1","_to":"10"}
+    headers = {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA",
+        "X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"
+    }
+    response = requests.request("GET", url, headers=headers, params=querystring)
+    data = response.text.encode('utf8')
+    formatoJson = json.loads(response.text)
+    range = formatoJson["range"]
+    total = range["total"]
+    return total
 
-formatoJson = []
+
+formJson = []
 listIdCategory = []
 client = bigquery.Client()
 cantidad = 0
+temp = 0
 
 # Perform a query.
 QUERY = (
@@ -48,9 +69,14 @@ idsCategory=open("idsProducts.json","r")
 idsCategory.read()
 system("rm idsProducts.json")
 
-for i in range(1):
-    for x in idsCategory:
-        ids = get_product(str(x)):
+for i in idsCategory:
+    total = total(i)
+    for x in total:
+        print("ID = "+str(i))
         break
+    break
+
+
+
 
 print(ids)
