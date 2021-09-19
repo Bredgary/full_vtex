@@ -89,6 +89,3 @@ text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/temp.json", "
 text_file.write(string)
 text_file.close() 
 system("cat temp.json | jq -c '.[]' > IdProducts.json")
-        
-    break
-
