@@ -6,9 +6,12 @@ from datetime import datetime
 from os import system
 from google.cloud import bigquery
 
-def get_product(id):
+CFrom = 0
+CTo = 0
+
+def get_product(id,CFrom,CTo):
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/GetProductAndSkuIds"
-    querystring = {"categoryId":""+str(id)+"","_from":"0","_to":"50"}
+    querystring = {"categoryId":""+str(id)+"","_from":""+str(CFrom)+"","_to":""+str(CTo)+""}
     headers = {
         "Content-Type": "application/json",
         "Accept": "application/json",
@@ -64,7 +67,6 @@ string =  json.dumps(listIdCategory)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/idsProducts.json", "w")
 text_file.write(string)
 text_file.close()
-
 idsCategory=open("idsProducts.json","r")
 idsCategory.read()
 system("rm idsProducts.json")
@@ -72,7 +74,21 @@ system("rm idsProducts.json")
 for i in idsCategory:
     total = total(i)
     for x in total:
-        print("ID = "+str(i))
+        orderDe = get_product(str(i),CFrom,CTo)
+        OrderF.append(orderDe)
+        CFrom = CFrom + 1
+        CTo = CTo +1
+        for order in OrderF:
+            for k, v in order.items():
+                order[k] = replace_blank_dict(v)
         break
+    break
+
+string =  json.dumps(OrderF)
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/temp.json", "w")
+text_file.write(string)
+text_file.close() 
+system("cat temp.json | jq -c '.[]' > IdProducts.json")
+        
     break
 
