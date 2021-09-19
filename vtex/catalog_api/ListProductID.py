@@ -68,14 +68,14 @@ for i in listIdCategory:
 
 
 tableProduct =  json.dumps(productF)
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders/temp.json", "w")
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/caralog_api/temp.json", "w")
 text_file.write(tableProduct)
 text_file.close() 
 system("cat temp.json | jq -c '.[]' > Product.json")
 
 
 client = bigquery.Client()
-filename = '/home/bred_valenzuela/full_vtex/vtex/orders/Product.json'
+filename = '/home/bred_valenzuela/full_vtex/vtex/caralog_api/Product.json'
 dataset_id = 'landing_zone'
 table_id = 'shopstar_vtex_product'
 dataset_ref = client.dataset(dataset_id)
