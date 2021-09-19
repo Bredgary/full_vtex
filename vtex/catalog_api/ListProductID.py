@@ -27,7 +27,7 @@ def replace_blank_dict(d):
 
 def get_product(id,CFrom,CTo):
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/GetProductAndSkuIds"
-    querystring = {"categoryId":""+str(id)+"","_from":""+str(CFrom)+"","_to":""+str(CTo)+""}
+    querystring = {"categoryId":""+str(id)+"","_from":"0","_to":"50"}
     headers = {
         "Content-Type": "application/json",
         "Accept": "application/json",
@@ -88,14 +88,9 @@ idsCategory.read()
 system("rm idsProducts.json")
 
 for i in listIdCategory:
-    total = total(i)
-    contador = 0
-    for x in range(total):
-        print(str(contador+1))
-        orderDe = get_product(str(i),CFrom,CTo)
-        OrderF.append(orderDe)
-        CFrom = CFrom + 1
-        CTo = CTo +1
+    print("Category: "+str(i))
+    orderDe = get_product(str(i))
+    OrderF.append(orderDe)
 
 string =  json.dumps(OrderF)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/temp.json", "w")
