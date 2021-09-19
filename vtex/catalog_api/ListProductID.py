@@ -62,8 +62,7 @@ for row in rows:
     get_productIFD(str(row.id))
 
 for x in productList[0]:
-    cargandoIdProducto.appened(x)
-
+    cargandoIdProducto.append(x)
 
 print(cargandoIdProducto)
 
