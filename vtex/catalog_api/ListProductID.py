@@ -8,7 +8,7 @@ from google.cloud import bigquery
 
 CFrom = 0
 CTo = 0
-OrderF = []
+productList = []
 contador = 0
 total = 0
 
@@ -26,6 +26,7 @@ def replace_blank_dict(d):
     return d
 
 def get_product(id):
+    print(id)
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/GetProductAndSkuIds"
     querystring = {"categoryId":""+str(id)+"","_from":"0","_to":"50"}
     headers = {
@@ -37,26 +38,26 @@ def get_product(id):
     response = requests.request("GET", url, headers=headers, params=querystring)
     data = response.text.encode('utf8')
     formatoJson = json.loads(response.text)
-    range = formatoJson["range"]
-    total = range["total"]
-    #print("El ID: "+str(id)+" tiene "+str(total)+" productos")
-    return data
+    dataProduct = formatoJson["data"]
+    for i in dataProduct:
+      productList.append(i)
+    return productList
 
-def total(id):
-    url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/GetProductAndSkuIds"
-    querystring = {"categoryId":""+str(id)+"","_from":"1","_to":"10"}
-    headers = {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-        "X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA",
-        "X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"
-    }
-    response = requests.request("GET", url, headers=headers, params=querystring)
-    data = response.text.encode('utf8')
-    formatoJson = json.loads(response.text)
-    range = formatoJson["range"]
-    total = range["total"]
-    return total
+#def total(id):
+#    url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/GetProductAndSkuIds"
+#    querystring = {"categoryId":""+str(id)+"","_from":"1","_to":"10"}
+#    headers = {
+#        "Content-Type": "application/json",
+#        "Accept": "application/json",
+#        "X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA",
+#        "X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"
+#    }
+#    response = requests.request("GET", url, headers=headers, params=querystring)
+#    data = response.text.encode('utf8')
+#    formatoJson = json.loads(response.text)
+#    range = formatoJson["range"]
+#    total = range["total"]
+#    return total
 
 
 formJson = []
@@ -88,9 +89,9 @@ system("rm idsProducts.json")
 for i in listIdCategory:
     print("Category: "+str(i))
     orderDe = get_product(str(i))
-    OrderF.append(orderDe)
+    productList.append(orderDe)
 
-#fjson =  json.loans(OrderF)
+fjson =  json.loans(productList)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/lista", "wb")
 text_file.write(orderDe)
 text_file.close() 
