@@ -94,5 +94,3 @@ print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id)
 system("rm DetailOrdersFinal.json")
 system("rm temp.json")
 print("finalizado")
-
-print("Finalizado")
