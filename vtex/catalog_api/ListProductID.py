@@ -59,8 +59,10 @@ query_job = client.query(QUERY)  # API request
 rows = query_job.result()  # Waits for query to finish
 
 for row in rows:
-    #get_productIFD(row.id)
-    print(row.id)
+    get_productIFD(row.id)
+
+
+print("exito")
 
 #for x in productList[0]:
 #    cargandoIdProducto.appened(x)
