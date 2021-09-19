@@ -71,7 +71,7 @@ idsCategory=open("idsProducts.json","r")
 idsCategory.read()
 system("rm idsProducts.json")
 
-for i in idsCategory:
+for i in listIdCategory:
     total = total(i)
     for x in total:
         orderDe = get_product(str(i),CFrom,CTo)
