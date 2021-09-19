@@ -12,6 +12,7 @@ listIdCategory = []
 productF = []
 productList = []
 cargandoIdProducto = []
+productoID = []
 
 def replace_blank_dict(d):
     if not d:
@@ -51,7 +52,9 @@ def get_productIFD(id):
     jsonF = json.loads(response.text)
     data = jsonF["data"]
     productList.append(data)
-    return productList
+    for i in productList[0]:
+      productoID.append(i)
+    return productoID
 
 QUERY = (
     'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_category` ')
@@ -61,10 +64,9 @@ rows = query_job.result()  # Waits for query to finish
 for row in rows:
     get_productIFD(str(row.id))
 
-for x in productList[0]:
-    cargandoIdProducto.append(x)
+print("Exito")
 
-print(cargandoIdProducto)
+
 
 
 
