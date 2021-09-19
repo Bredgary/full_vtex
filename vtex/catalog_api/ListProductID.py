@@ -92,7 +92,7 @@ for i in listIdCategory:
 
 fjson =  json.dumps(orderDe)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/lista", "wb")
-text_file.write(orderDe)
+text_file.write(fjson)
 text_file.close() 
 #system("cat temp.json | jq -c '.[]' > IdProducts.json")
 print("Finalizado")
