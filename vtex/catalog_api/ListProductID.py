@@ -72,9 +72,17 @@ for ids in productoID:
     get_product(ids)
     break
 
-print(cargaProduct)
+for order in cargaProduct:
+        for k, v in order.items():
+            order[k] = replace_blank_dict(v)
+    string =  json.dumps(OrderF)
 
+string = json.dumps(cargaProduct)
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/lista.json", "w")
+text_file.write(string)
+text_file.close() 
 
+print("Exito")
 
 #for i in listIdCategory:
 #    productF.append(jsonF)
