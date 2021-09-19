@@ -72,7 +72,6 @@ for i in range(total):
     text_file.close() 
 
 formatoOrder =  json.dumps(OrderF)
-system("touch /home/bred_valenzuela/full_vtex/vtex/orders/temp.json")
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders/temp.json", "w")
 text_file.write(formatoOrder)
 text_file.close() 
