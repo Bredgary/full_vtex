@@ -28,12 +28,12 @@ def get_product(id):
     	"X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"
 	}
 	response = requests.request("GET", url, headers=headers)
-    #data = response.text.encode('utf8')
+    data = response.text.encode('utf8')
     #formatoJson = json.loads(response.text)
     #dataProduct = formatoJson["data"]
     #for i in dataProduct:
     #  productList.append(i)
-    return response.text
+    return data
 
 idsProduct=open("lista","r")
 idsProduct.read()
