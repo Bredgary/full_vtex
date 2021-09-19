@@ -70,7 +70,6 @@ for row in rows:
 
 for ids in productoID:
     get_product(ids)
-    break
 
 for order in cargaProduct:
         for k, v in order.items():
