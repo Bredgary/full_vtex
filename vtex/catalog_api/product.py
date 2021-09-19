@@ -10,6 +10,7 @@ CFrom = 0
 CTo = 0
 OrderF = []
 contador = 0
+total = 0
 
 def replace_blank_dict(d):
     if not d:
@@ -38,7 +39,7 @@ def get_product(id,CFrom,CTo):
     formatoJson = json.loads(response.text)
     range = formatoJson["range"]
     total = range["total"]
-    print("El ID: "+str(id)+" tiene "+str(total)+" productos")
+    #print("El ID: "+str(id)+" tiene "+str(total)+" productos")
     return data
 
 def total(id):
@@ -90,7 +91,7 @@ for i in listIdCategory:
     total = total(i)
     contador = 0
     for x in range(total):
-        print(x)
+        print(i)
         #print(str(contador+1))
 
         #orderDe = get_product(str(i),CFrom,CTo)
