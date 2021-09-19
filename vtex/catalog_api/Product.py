@@ -33,7 +33,7 @@ def get_product():
     #dataProduct = formatoJson["data"]
     #for i in dataProduct:
     #  productList.append(i)
-    return response.txt
+    print(response.txt)S
 
 idsProduct=open("lista","r")
 idsProduct.read()
