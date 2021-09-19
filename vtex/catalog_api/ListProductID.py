@@ -36,7 +36,7 @@ def get_product(id):
         "X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA",
         "X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"
         }
-    response = requests.request("GET", url, headers=headers, params=querystring)
+    response = requests.request("GET", url, headers=headers)
     jsonF = json.loads(response.text)
     cargaProduct.append(jsonF)
     return cargaProduct
