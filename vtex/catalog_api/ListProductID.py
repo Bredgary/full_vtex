@@ -59,7 +59,7 @@ query_job = client.query(QUERY)  # API request
 rows = query_job.result()  # Waits for query to finish
 
 for row in rows:
-    get_productIFD(row.id)
+    get_productIFD(str(row.id))
 
 
 print("exito")
