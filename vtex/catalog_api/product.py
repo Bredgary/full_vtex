@@ -9,6 +9,7 @@ from google.cloud import bigquery
 CFrom = 0
 CTo = 0
 OrderF = []
+contador = 0
 def get_product(id,CFrom,CTo):
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/GetProductAndSkuIds"
     querystring = {"categoryId":""+str(id)+"","_from":""+str(CFrom)+"","_to":""+str(CTo)+""}
@@ -73,7 +74,9 @@ system("rm idsProducts.json")
 
 for i in listIdCategory:
     total = total(i)
-    for x in total:
+    contador = 0
+    for x in range(total):
+        print(str(contador+1))
         orderDe = get_product(str(i),CFrom,CTo)
         OrderF.append(orderDe)
         CFrom = CFrom + 1
