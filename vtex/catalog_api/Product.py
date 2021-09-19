@@ -1,5 +1,5 @@
 
-idsProduct=open("lista")
+idsProduct=open("lista.py")
 idsProduct.read()
 
 for i in idsProduct:
