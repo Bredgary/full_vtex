@@ -75,7 +75,6 @@ for ids in productoID:
 for order in cargaProduct:
         for k, v in order.items():
             order[k] = replace_blank_dict(v)
-    string =  json.dumps(OrderF)
 
 string = json.dumps(cargaProduct)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/lista.json", "w")
