@@ -13,6 +13,7 @@ productF = []
 productList = []
 cargandoIdProducto = []
 productoID = []
+cargaProduct = []
 
 def replace_blank_dict(d):
     if not d:
@@ -35,9 +36,12 @@ def get_product(id):
         "X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA",
         "X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"
         }
-    response = requests.request("GET", url, headers=headers)
-    jsonF = json.loads(response.text)  
-    return jsonF
+    response = requests.request("GET", url, headers=headers, params=querystring)
+    jsonF = json.loads(response.text)
+    cargaProduct.append(jsonF)
+    return cargaProduct
+
+
 
 def get_productIFD(id):
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/GetProductAndSkuIds"
@@ -64,9 +68,11 @@ rows = query_job.result()  # Waits for query to finish
 for row in rows:
     get_productIFD(str(row.id))
 
-print("Exito")
+for ids in productoID:
+    get_product(ids)
+    break
 
-
+print(cargaProduct)
 
 
 
