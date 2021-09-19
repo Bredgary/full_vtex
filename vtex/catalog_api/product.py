@@ -10,6 +10,20 @@ CFrom = 0
 CTo = 0
 OrderF = []
 contador = 0
+
+def replace_blank_dict(d):
+    if not d:
+        return None
+    if type(d) is list:
+        for list_item in d:
+            if type(list_item) is dict:
+                for k, v in list_item.items():
+                    list_item[k] = replace_blank_dict(v)
+    if type(d) is dict:
+        for k, v in d.items():
+            d[k] = replace_blank_dict(v)
+    return d
+
 def get_product(id,CFrom,CTo):
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/GetProductAndSkuIds"
     querystring = {"categoryId":""+str(id)+"","_from":""+str(CFrom)+"","_to":""+str(CTo)+""}
@@ -81,9 +95,10 @@ for i in listIdCategory:
         OrderF.append(orderDe)
         CFrom = CFrom + 1
         CTo = CTo +1
+
         for order in OrderF:
-            for k, v in order.items():
-                order[k] = replace_blank_dict(v)
+        for k, v in order.items():
+            order[k] = replace_blank_dict(v)
 
 string =  json.dumps(OrderF)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/temp.json", "w")
