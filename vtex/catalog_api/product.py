@@ -8,7 +8,7 @@ from google.cloud import bigquery
 
 CFrom = 0
 CTo = 0
-
+OrderF = []
 def get_product(id,CFrom,CTo):
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/GetProductAndSkuIds"
     querystring = {"categoryId":""+str(id)+"","_from":""+str(CFrom)+"","_to":""+str(CTo)+""}
