@@ -38,8 +38,8 @@ from google.cloud import bigquery
 idsProduct=open("lista","r")
 idsProduct.read()
 
-#for i in idsProduct:
-#	print("ID Producto"+str(i)
+for i in idsProduct:
+    print("ID Producto"+str(i)
 
 print("Hola")
 
