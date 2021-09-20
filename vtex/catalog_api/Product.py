@@ -98,7 +98,7 @@ with open(filename, "rb") as source_file:
 job.result()  # Waits for table load to complete.
 print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 system("rm lista.json")
-system("rm Product.json")
+system("rm product.json")
 print("finalizado")
 
 
