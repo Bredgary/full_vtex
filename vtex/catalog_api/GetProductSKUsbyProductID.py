@@ -40,9 +40,11 @@ rows = query_job.result()  # Waits for query to finish
 for row in rows:
     temp = skuandproduct(str(row.id))
     productList.append(temp)
-    for order in productList:
-        for k, v in order.items():
-            order[k] = replace_blank_dict(v)
+
+
+for order in productList:
+    for k, v in order.items():
+        order[k] = replace_blank_dict(v)
 
 
 
