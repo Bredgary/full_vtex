@@ -39,12 +39,15 @@ QUERY = (
 query_job = client.query(QUERY)  # API request
 rows = query_job.result()  # Waits for query to finish
 
-print("Final")
 
-'''
+
+
 for row in rows:
     temp = get_policy(str(row.id))
     productList.append(temp)
+
+print("Final")
+'''
 
 for order in productList:
     for k, v in order.items():
