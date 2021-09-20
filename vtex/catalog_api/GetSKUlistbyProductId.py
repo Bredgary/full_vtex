@@ -33,7 +33,9 @@ text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/lista.json", 
 text_file.write(string)
 text_file.close() 
 
-system("cat lista.json | jq -c '.[]' > context.json")
+system("cat lista.json | jq -c '.[]' > temp1.json")
+system("sed 's/ //g' temp1.json > temp2.json")
+system("cat temp2.json | tr '\n' ' ' > context.json")
 
 print("Cargando a BigQuery")
 client = bigquery.Client()
@@ -54,5 +56,6 @@ with open(filename, "rb") as source_file:
 job.result()  # Waits for table load to complete.
 print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 system("rm context.json")
-system("rm lista.json")
+system("rm temp1.json")
+system("rm temp2.json")
 print("finalizado")
