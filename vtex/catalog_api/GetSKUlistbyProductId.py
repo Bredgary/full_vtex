@@ -63,11 +63,11 @@ job_config = bigquery.LoadJobConfig()
 job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
 job_config.autodetect = True
 with open(filename, "rb") as source_file:
-    job = client.load_table_from_string(
+    job = client.load_table_from_json(
         source_file,
         table_ref,
         location="southamerica-east1",  # Must match the destination dataset location.
-    job_config=job_config,)  # API request
+    job_config=job_config)  # API request
 job.result()  # Waits for table load to complete.
 print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 system("rm context.json")
