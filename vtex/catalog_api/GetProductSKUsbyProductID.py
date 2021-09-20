@@ -43,7 +43,7 @@ query_job = client.query(QUERY)  # API request
 rows = query_job.result()  # Waits for query to finish
 
 for row in rows:
-    temp = get_policy(str(row.id))
+    temp = skuandproduct(str(row.id))
     productList.append(temp)
 
 for order in productList:
