@@ -69,6 +69,7 @@ for row in rows:
     print("ID de categoria: "+str(temp))
     load.append(temp)
 
+string = json.dumps(load)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/load","wb")
 text_file.write(string)
 text_file.close()   
