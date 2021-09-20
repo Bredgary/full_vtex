@@ -15,22 +15,10 @@ headers = {"Content-Type": "application/json","Accept": "application/json","X-VT
 def get_sku_list(id,headers):
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitByProductId/"""+str(id)+""
     response = requests.request("GET", url, headers=headers)
-    data = json.loads(response.text) 
+    data = response.text
     print(type(data))
     return data
     
-def replace_blank_dict(d):
-    if not d:
-        return None
-    if type(d) is list:
-        for list_item in d:
-            if type(list_item) is dict:
-                for k, v in list_item.items():
-                    list_item[k] = replace_blank_dict(v)
-    if type(d) is dict:
-        for k, v in d.items():
-            d[k] = replace_blank_dict(v)
-    return d
 
 QUERY = (
     'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_product` ')
@@ -40,11 +28,8 @@ rows = query_job.result()  # Waits for query to finish
 for row in rows:
     temp = get_sku_list(str(row.id),headers)
     productList.append(temp)
+    break
 
-
-for order in productList:
-    for k, v in order:
-        order[k] = replace_blank_dict(v)
 
 string = json.dumps(productList)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/lista.json", "w")
