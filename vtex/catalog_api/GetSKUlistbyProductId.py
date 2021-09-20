@@ -30,6 +30,8 @@ for row in rows:
     productList.append(temp)
     break
 
+system("rm lista.json")
+system("rm context.json")
 
 string = json.dumps(productList)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/lista.json", "w")
@@ -40,7 +42,7 @@ system("cat lista.json | jq -c '.[]' > context.json")
 
 print("Cargando a BigQuery")
 client = bigquery.Client()
-filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/context.json'
+filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/context2.json'
 dataset_id = 'landing_zone'
 table_id = 'shopstar_vtex_list_sku'
 dataset_ref = client.dataset(dataset_id)
