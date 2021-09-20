@@ -13,12 +13,11 @@ headers = {"Content-Type": "application/json","Accept": "application/json","X-VT
 
 
 def get_sku_list(id,headers):
-    lista = {} 
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitByProductId/"""+str(id)+""
     response = requests.request("GET", url, headers=headers)
-    lista = response.text
-    print(lista)
-    return jsonF
+    data = json.load(response.text) 
+    print(type(data))
+    return data
     
 def replace_blank_dict(d):
     if not d:
