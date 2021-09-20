@@ -45,14 +45,11 @@ for row in rows:
     get_sku_list(str(row.id),headers)
     break
 
-
-print("Fin")
-'''
 string = json.dumps(productList)
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/lista1.json", "w")
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/lista.json", "w")
 text_file.write(string)
 text_file.close() 
-system("cat lista.json | jq -c '.[]' > lista.json")
+system("cat lista.json | jq -c '.[]' > context.json")
 
 
 
