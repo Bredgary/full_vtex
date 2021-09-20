@@ -10,6 +10,7 @@ client = bigquery.Client()
 productList = [] 
 temp = ""
 headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
+temporal = {}
 
 def get_sku_list(id,headers):
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitByProductId/"""+str(id)+""
@@ -39,8 +40,14 @@ rows = query_job.result()  # Waits for query to finish
 for row in rows:
     temp = get_sku_list(str(row.id),headers)
     productList.append(temp)
+
+def Convert(productList):
+    res_dct = {lst[i]: lst[i + 1] for i in range(0, len(lst), 2)}
+    return res_dct
+
+temporal = Convert(productList)
     
-for order in productList:
+for order in temporal:
     for k, v in order.items():
         order[k] = replace_blank_dict(v)
 
