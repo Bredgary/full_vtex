@@ -73,8 +73,9 @@ for row in rows:
     print("ID de categoria: "+str(row.id))
 
 for ids in productoID:
-    get_product(ids)
-    print("Cargando Productos")
+    #get_product(ids)
+    #print("Cargando Productos")
+    print("IDS: "+str(ids))
 
 
 
