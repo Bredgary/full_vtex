@@ -7,8 +7,8 @@ from os import system
 from google.cloud import bigquery
 
 client = bigquery.Client()
-producSku = [] 
 temp = ""
+producSku = [] 
 
 def replace_blank_dict(d):
     if not d:
@@ -49,8 +49,8 @@ for order in producSku:
     for k, v in order.items():
         order[k] = replace_blank_dict(v)
 
-
-
+print("fin")
+'''
 string = json.dumps(productList)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/lista.json", "w")
 text_file.write(string)
@@ -79,3 +79,4 @@ print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id)
 system("rm context.json")
 system("rm lista.json")
 print("finalizado")
+'''
