@@ -21,6 +21,7 @@ def get_specification(id):
 	}
 	response = requests.request("GET", url, headers=headers)
     jsonF = json.loads(response.text)
+    productList.append(jsonF)
     return jsonF
 
 
@@ -44,7 +45,6 @@ rows = query_job.result()  # Waits for query to finish
 
 for row in rows:
     temp = get_specification(str(row.id))
-    productList.append(temp)
 
 for order in productList:
     for k, v in order.items():
