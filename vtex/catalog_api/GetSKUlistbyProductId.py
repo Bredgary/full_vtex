@@ -26,6 +26,7 @@ rows = query_job.result()  # Waits for query to finish
 
 for row in rows:
     get_sku_list(str(row.id),headers)
+    break
 
 
 string = json.dumps(productList)
