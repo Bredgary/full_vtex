@@ -14,7 +14,7 @@ headers = {"Content-Type": "application/json","Accept": "application/json","X-VT
 def get_sku_list(id,headers):
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitByProductId/"""+str(id)+""
     response = requests.request("GET", url, headers=headers)
-    for order in response:
+    for order in response.text:
         for k, v in order.items():
             order[k] = replace_blank_dict(v)
 
