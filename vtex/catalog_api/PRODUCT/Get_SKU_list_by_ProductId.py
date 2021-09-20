@@ -49,13 +49,14 @@ string = json.dumps(productList)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/lista.json", "w")
 text_file.write(string)
 text_file.close() 
-system("cat lista.json | jq -c '.[]' > context.json")
+system("cat lista.json | jq -c '.[]' > context")
+system("chmod 777 context")
 
 
  
 print("Cargando a BigQuery")
 client = bigquery.Client()
-filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/context.json'
+filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/context'
 dataset_id = 'landing_zone'
 table_id = 'shopstar_vtex_sku_list_by_productid'
 dataset_ref = client.dataset(dataset_id)
@@ -72,5 +73,5 @@ with open(filename, "rb") as source_file:
 job.result()  # Waits for table load to complete.
 print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 system("rm lista.json")
-system("rm context.json")
+system("rm context")
 print("finalizado")
