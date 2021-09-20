@@ -40,6 +40,10 @@ text_file.close()
 
 system("cat lista.json | jq -c '.[]' > context.json")
 
+with open('context.json') as json_file:
+    data = json.load(json_file)
+    print("Type:", type(data))
+
 print("Cargando a BigQuery")
 client = bigquery.Client()
 filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/context.json'
