@@ -16,9 +16,8 @@ def get_sku_list(id,headers):
     lista = {} 
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitByProductId/"""+str(id)+""
     response = requests.request("GET", url, headers=headers)
-    jsonF = json.loads(response.text)
-    lista = jsonF
-    print(type(jsonF))
+    lista = response
+    print(lista)
     return jsonF
     
 def replace_blank_dict(d):
