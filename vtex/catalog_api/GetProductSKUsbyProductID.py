@@ -50,7 +50,7 @@ for row in rows:
 #        order[k] = replace_blank_dict(v)
 
 
-string = json.dumps(productList)
+string = json.dumps(producSku)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/lista.json", "w")
 text_file.write(string)
 text_file.close() 
