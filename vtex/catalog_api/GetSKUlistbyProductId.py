@@ -28,8 +28,8 @@ for row in rows:
     get_sku_list(str(row.id),headers)
 
 
-string = json.dumps(productList)
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/lista.json", "w")
+string = productList
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/lista.json", "wb")
 text_file.write(string)
 text_file.close() 
 
