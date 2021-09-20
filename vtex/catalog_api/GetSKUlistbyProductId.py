@@ -40,7 +40,7 @@ for row in rows:
     temp = get_sku_list(str(row.id),headers)
     productList.append(temp)
 
-lista = json.loads(productList)
+lista = json.dumps(productList)
 for order in lista:
     for k, v in order.items():
         order[k] = replace_blank_dict(v)
