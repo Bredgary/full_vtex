@@ -45,12 +45,14 @@ for row in rows:
     temp = skuandproduct(str(row.id))
     producSku.append(temp)
 
+print("FIN")
+'''
 for order in producSku:
     for k, v in order.items():
         order[k] = replace_blank_dict(v)
 
-print("FIN")
-'''
+
+
 string = json.dumps(productList)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/lista.json", "w")
 text_file.write(string)
