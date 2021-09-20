@@ -5,7 +5,7 @@ import re
 from datetime import datetime
 from os import system
 from google.cloud import bigquery
-#import subprocess 
+#import subprocess  
 
 #================================================TOTAL DE PAGINAS===============================================================
 headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
