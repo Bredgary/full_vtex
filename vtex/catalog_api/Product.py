@@ -14,6 +14,7 @@ productList = []
 cargandoIdProducto = []
 productoID = []
 cargaProduct = []
+load = []
 
 def replace_blank_dict(d):
     if not d:
@@ -65,17 +66,16 @@ rows = query_job.result()  # Waits for query to finish
 for row in rows:
     get_productIFD(str(row.id))
     print("ID de categoria: "+str(row.id))
+    load.append(get_product(str(productoID))
+    print(productID)
 
-for ids in productoID:
-    get_product(ids)
-    print("Cargando Productos")
-    print("IDS: "+str(ids))
 
-for order in cargaProduct:
+
+for order in load:
     for k, v in order.items():
         order[k] = replace_blank_dict(v)
 
-string = json.dumps(cargaProduct)
+string = json.dumps(load)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/lista.json", "w")
 text_file.write(string)
 text_file.close() 
