@@ -69,7 +69,6 @@ for row in rows:
     temp = get_product(str(productoID)
     #print(str(temp))
     #load.append(temp)
-    break
 
 
 
