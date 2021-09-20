@@ -15,8 +15,8 @@ headers = {"Content-Type": "application/json","Accept": "application/json","X-VT
 def get_sku_list(id,headers):
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitByProductId/"""+str(id)+""
     response = requests.request("GET", url, headers=headers)
-    data = response.text
-    print(type(data))
+    formatoJson = json.loads(response.text)
+    productList.append(formatoJson)
     return data
     
 
@@ -27,23 +27,16 @@ rows = query_job.result()  # Waits for query to finish
 
 for row in rows:
     temp = get_sku_list(str(row.id),headers)
-    productList.append(temp)
     break
-
-system("rm lista.json")
-system("rm context.json")
 
 string = json.dumps(productList)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/lista.json", "w")
 text_file.write(string)
 text_file.close() 
 
-system("cat lista.json | jq -c '.[]' > context.json")
+#system("cat lista.json | jq -c '.[]' > context.json")
 
-with open('lista.json') as json_file:
-    data = json.load(json_file)
-    print("Type:", type(data))
-
+'''
 print("Cargando a BigQuery")
 client = bigquery.Client()
 filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/context.json'
@@ -65,3 +58,4 @@ print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id)
 system("rm lista.json")
 system("rm context.json")
 print("finalizado")
+'''
