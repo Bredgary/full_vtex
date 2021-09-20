@@ -8,7 +8,7 @@ from google.cloud import bigquery
 
 client = bigquery.Client()
 temp = ""
-producSku = [] 
+
 
 def replace_blank_dict(d):
     if not d:
@@ -41,13 +41,15 @@ QUERY = (
 query_job = client.query(QUERY)  # API request
 rows = query_job.result()  # Waits for query to finish
 
+producSku = [] 
 for row in rows:
     temp = skuandproduct(str(row.id))
     producSku.append(temp)
 
-#for order in producSku:
-#    for k, v in order.items():
-#        order[k] = replace_blank_dict(v)
+
+for order in producSku:
+    for k, v in order.items():
+        order[k] = replace_blank_dict(v)
 
 
 string = json.dumps(producSku)
