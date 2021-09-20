@@ -40,7 +40,7 @@ text_file.close()
 
 system("cat lista.json | jq -c '.[]' > context.json")
 
-with open('context.json') as json_file:
+with open('lista.json') as json_file:
     data = json.load(json_file)
     print("Type:", type(data))
 
