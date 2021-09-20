@@ -18,7 +18,7 @@ def get_sku_list(id,headers):
     response = requests.request("GET", url, headers=headers)
     jsonF = json.loads(response.text)
     lista = jsonF
-    print(type(lista))
+    print(type(jsonF))
     return jsonF
     
 def replace_blank_dict(d):
