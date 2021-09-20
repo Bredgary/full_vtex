@@ -32,6 +32,7 @@ string = json.dumps(productList)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/lista.json", "w")
 text_file.write(string)
 text_file.close() 
+system("cat lista.json | jq -c '.[]' > lista1.json")
 
 job_config = bigquery.LoadJobConfig(
     schema=[
@@ -42,13 +43,10 @@ job_config = bigquery.LoadJobConfig(
 )
 uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/lista.json"
 table_id = 'shopstar_vtex_list_sku'
-dataset_id = 'landing_zone'
-dataset_ref = client.dataset(dataset_id)
-table_ref = dataset_ref.table(table_id)
+
 load_job = client.load_table_from_uri(
     uri,
     table_id,
-    table_ref,
     location="US",  # Must match the destination dataset location.
     job_config=job_config,
 )  # Make an API request.
