@@ -39,6 +39,9 @@ QUERY = (
 query_job = client.query(QUERY)  # API request
 rows = query_job.result()  # Waits for query to finish
 
+print("Final")
+
+'''
 for row in rows:
     temp = get_policy(str(row.id))
     productList.append(temp)
@@ -75,3 +78,4 @@ print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id)
 system("rm context.json")
 system("rm lista.json")
 print("finalizado")
+'''
