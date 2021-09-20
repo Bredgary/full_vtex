@@ -44,15 +44,18 @@ rows = query_job.result()  # Waits for query to finish
 for row in rows:
     get_sku_list(str(row.id),headers)
 
-string = json.dumps(productList)
+
+string = re.sub(r"[^a-zA-Z0-9]","",productList)
+
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/context.json", "w")
 text_file.write(string)
 text_file.close() 
-system("cat context.json | jq -c '.[]'")
-
+system("cat context.json | jq -c '.[]' > newNDJSON.json")
+print("fin")
+'''
 print("Cargando a BigQuery")
 client = bigquery.Client()
-filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/context.json'
+filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/newNDJSON.json'
 dataset_id = 'landing_zone'
 table_id = 'shopstar_vtex_sku_list_by_productid'
 dataset_ref = client.dataset(dataset_id)
@@ -68,4 +71,5 @@ with open(filename, "rb") as source_file:
     job_config=job_config,)  # API request
 job.result()  # Waits for table load to complete.
 print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
-print("finalizado")
+print("finalizado")}
+'''
