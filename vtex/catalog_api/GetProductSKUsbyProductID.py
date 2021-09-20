@@ -10,7 +10,6 @@ client = bigquery.Client()
 productList = [] 
 temp = ""
 
-cat oldfile.json | jq -c '.[]' > newNDJSON.json
 
 def replace_blank_dict(d):
     if not d:
