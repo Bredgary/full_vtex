@@ -34,7 +34,7 @@ def skuandproduct(id):
         }
     response = requests.request("GET", url, headers=headers)
     jsonF = json.loads(response.text)
-    return jsonF
+    return jsonF 
 
 
 QUERY = (
