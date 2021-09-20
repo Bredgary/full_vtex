@@ -16,11 +16,10 @@ def get_sku_list(id,headers):
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitByProductId/"""+str(id)+""
     response = requests.request("GET", url, headers=headers)
     jsonF = json.loads(response.text)
-    list_dict = dict(jsonF)
-    for order in list_dict:
+    for order in dict(jsonF):
         for k, v in order.items():
             order[k] = replace_blank_dict(v)
-    return list_dict
+    return jsonF
     
 def replace_blank_dict(d):
     if not d:
