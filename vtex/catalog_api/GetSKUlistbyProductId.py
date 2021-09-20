@@ -17,7 +17,6 @@ def get_sku_list(id,headers):
     response = requests.request("GET", url, headers=headers)
     formatoJson = json.loads(response.text)
     productList.append(formatoJson)
-    return data
     
 
 QUERY = (
@@ -26,7 +25,7 @@ query_job = client.query(QUERY)  # API request
 rows = query_job.result()  # Waits for query to finish
 
 for row in rows:
-    temp = get_sku_list(str(row.id),headers)
+    get_sku_list(str(row.id),headers)
     break
 
 string = json.dumps(productList)
