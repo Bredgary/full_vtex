@@ -42,7 +42,7 @@ job_config = bigquery.LoadJobConfig(
     source_format=bigquery.SourceFormat.NEWLINE_DELIMITED_JSON,
 )
 uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/lista.json"
-table_id = 'shopstar-datalake.landing_zone.shopstar_vtex_list_sku'
+table_id = "`shopstar-datalake.landing_zone.shopstar_vtex_listsku`"
 
 load_job = client.load_table_from_uri(
     uri,
