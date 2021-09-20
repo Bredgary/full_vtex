@@ -46,15 +46,15 @@ for row in rows:
     
 
 string = json.dumps(productList)
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/lista.json", "w")
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/lista", "w")
 text_file.write(string)
 text_file.close() 
 
-system("cat lista.json | jq -c '.[]' > context.json")
+system("cat lista | jq -c '.[]' > context")
 
 print("Cargando a BigQuery")
 client = bigquery.Client()
-filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/context.json'
+filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/context'
 dataset_id = 'landing_zone'
 table_id = 'shopstar_vtex_list_sku'
 dataset_ref = client.dataset(dataset_id)
@@ -63,7 +63,7 @@ job_config = bigquery.LoadJobConfig()
 job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
 job_config.autodetect = True
 with open(filename, "rb") as source_file:
-    job = client.load_table_from_json(
+    job = client.load_table_from_file(
         source_file,
         table_ref,
         location="southamerica-east1",  # Must match the destination dataset location.
