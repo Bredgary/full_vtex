@@ -66,9 +66,9 @@ rows = query_job.result()  # Waits for query to finish
 
 for row in rows:
     temp = get_productIFD(str(row.id))
-    load.append(temp)
+    #load.append(temp)
 
-string = json.dumps(load)
+string = json.dumps(str(temp))
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/load","wb")
 text_file.write(string)
 text_file.close()   
