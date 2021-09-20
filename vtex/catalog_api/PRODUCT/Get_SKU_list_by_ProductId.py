@@ -74,4 +74,3 @@ print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id)
 system("rm lista.json")
 system("rm context.json")
 print("finalizado")
-'''
