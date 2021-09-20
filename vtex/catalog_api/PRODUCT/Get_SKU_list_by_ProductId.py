@@ -46,16 +46,16 @@ for row in rows:
     break
 
 string = json.dumps(productList)
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/lista.json", "w")
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/lista.json", "w")
 text_file.write(string)
 text_file.close() 
 system("cat lista.json | jq -c '.[]' > context.json")
 
 
-
+ 
 print("Cargando a BigQuery")
 client = bigquery.Client()
-filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/context.json'
+filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/context.json'
 dataset_id = 'landing_zone'
 table_id = 'shopstar_vtex_sku_list_by_productid'
 dataset_ref = client.dataset(dataset_id)
