@@ -67,9 +67,8 @@ rows = query_job.result()  # Waits for query to finish
 for row in rows:
     temp = get_productIFD(str(row.id))
     load.append(temp)
+    print(type(temp)+" "+type(load))
 
-with open(load, 'rb') as f:
-    lines = [x.decode('utf8').strip() for x in f.readlines()]
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/load","wb")
 text_file.write(lines)
 text_file.close()   
