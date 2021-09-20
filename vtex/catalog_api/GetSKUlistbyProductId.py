@@ -47,9 +47,14 @@ dataset_id = 'landing_zone'
 table_id = 'shopstar_vtex_list_sku'
 dataset_ref = client.dataset(dataset_id)
 table_ref = dataset_ref.table(table_id)
-job_config = bigquery.LoadJobConfig()
-job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-job_config.autodetect = True
+job_config = bigquery.LoadJobConfig(
+    schema=[
+        bigquery.SchemaField("IsInventoried", "String"),
+        bigquery.SchemaField("IsTransported", "String"),
+        bigquery.SchemaField("IsGiftCardRecharge", "String"),
+    ],
+    source_format=bigquery.SourceFormat.NEWLINE_DELIMITED_JSON,
+)
 with open(filename, "rb") as source_file:
     job = client.load_table_from_file(
         source_file,
