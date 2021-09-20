@@ -41,10 +41,14 @@ job_config = bigquery.LoadJobConfig(
     source_format=bigquery.SourceFormat.NEWLINE_DELIMITED_JSON,
 )
 uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/lista.json"
-
+table_id = 'shopstar_vtex_list_sku'
+dataset_id = 'landing_zone'
+dataset_ref = client.dataset(dataset_id)
+table_ref = dataset_ref.table(table_id)
 load_job = client.load_table_from_uri(
     uri,
     table_id,
+    table_ref,
     location="US",  # Must match the destination dataset location.
     job_config=job_config,
 )  # Make an API request.
