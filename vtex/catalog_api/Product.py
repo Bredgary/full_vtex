@@ -72,7 +72,7 @@ for row in rows:
 
 
 
-for order in load:
+for order in temp:
     for k, v in order.items():
         order[k] = replace_blank_dict(v)
 
