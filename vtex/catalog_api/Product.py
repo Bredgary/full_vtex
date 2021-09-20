@@ -67,7 +67,7 @@ for row in rows:
     get_productIFD(str(row.id))
     print("ID de categoria: "+str(row.id))
     temp = get_product(str(productoID)
-    print(temp)
+    print(str(temp))
     #load.append(temp)
     break
 
