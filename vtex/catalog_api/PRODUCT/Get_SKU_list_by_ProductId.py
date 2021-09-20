@@ -16,8 +16,7 @@ headers = {"Content-Type": "application/json","Accept": "application/json","X-VT
 def get_sku_list(id,headers):
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitByProductId/"""+str(id)+""
     response = requests.request("GET", url, headers=headers)
-    formatoJson = json.loads(response.text)
-    cargando = json.loads(response.content)
+    formatoJson = json.loads(response.content)
     productList.append(formatoJson)
 
     
@@ -33,8 +32,8 @@ for row in rows:
 
 
 
-
-print(type(cargando))
+print(type(formatoJson))
+print(type(productList))
 '''
 string = json.dumps(productList)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/lista1.json", "w")
