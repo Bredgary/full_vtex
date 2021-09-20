@@ -78,7 +78,7 @@ for ids in productoID:
 
 
 
-tring = json.dumps(cargaProduct)
+string = json.dumps(cargaProduct)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/lista.json", "w")
 text_file.write(string)
 text_file.close() 
