@@ -39,7 +39,7 @@ def get_product(id):
         }
     response = requests.request("GET", url, headers=headers)
     jsonF = json.loads(response.text)
-    cargaProduct.append(jsonF)
+    return jsonF
 
 
 def get_productIFD(id):
@@ -66,7 +66,8 @@ rows = query_job.result()  # Waits for query to finish
 for row in rows:
     get_productIFD(str(row.id))
     print("ID de categoria: "+str(row.id))
-    load.append(get_product(str(productoID))
+    temp = get_product(str(productoID)
+    load.append(temp)
 
 
 
