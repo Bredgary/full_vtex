@@ -42,7 +42,7 @@ for row in rows:
     productList.append(temp)
 
 def Convert(productList):
-    res_dct = {lst[i]: lst[i + 1] for i in range(0, len(lst), 2)}
+    res_dct = {productList[i]: productList[i + 1] for i in range(0, len(productList), 2)}
     return res_dct
 
 temporal = Convert(productList)
