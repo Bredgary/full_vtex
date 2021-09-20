@@ -45,8 +45,6 @@ for row in rows:
     temp = skuandproduct(str(row.id))
     producSku.append(temp)
 
-print("FIN")
-'''
 for order in producSku:
     for k, v in order.items():
         order[k] = replace_blank_dict(v)
@@ -81,4 +79,3 @@ print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id)
 system("rm context.json")
 system("rm lista.json")
 print("finalizado")
-'''
