@@ -14,6 +14,10 @@ headers = {"Content-Type": "application/json","Accept": "application/json","X-VT
 def get_sku_list(id,headers):
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitByProductId/"""+str(id)+""
     response = requests.request("GET", url, headers=headers)
+    for order in response:
+        for k, v in order.items():
+            order[k] = replace_blank_dict(v)
+
     jsonF = json.loads(response.text)
     return jsonF
 
@@ -40,11 +44,7 @@ for row in rows:
     temp = get_sku_list(str(row.id),headers)
     productList.append(temp)
 
-temporal = json.dumps(productList)
     
-for order in temporal:
-    for k, v in order.items():
-        order[k] = replace_blank_dict(v)
 
 prin("listo")
 '''
