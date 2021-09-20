@@ -27,30 +27,15 @@ rows = query_job.result()  # Waits for query to finish
 for row in rows:
     get_sku_list(str(row.id),headers)
 
-def replace_blank_dict(d):
-    if not d:
-        return None
-    if type(d) is list:
-        for list_item in d:
-            if type(list_item) is dict:
-                for k, v in list_item.items():
-                    list_item[k] = replace_blank_dict(v)
-    if type(d) is dict:
-        for k, v in d.items():
-            d[k] = replace_blank_dict(v)
-    return d
-
-for order in productList:
-    for k, v in order.items():
-        order[k] = replace_blank_dict(v)
-
 
 string = json.dumps(productList)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/lista.json", "w")
 text_file.write(string)
 text_file.close() 
 
-system("cat lista.json | jq -c '.[]' > context.json")
+system("cat lista.json | jq -c '.[]' > lista1.json")
+system("sed 's/ //g' lista1.json > lista2.json")
+system("cat lista2.json | tr '\n' ' ' > context.json")
 
 
 print("Cargando a BigQuery")
