@@ -42,7 +42,7 @@ system("cat lista.json | jq -c '.[]' > context.json")
 
 print("Cargando a BigQuery")
 client = bigquery.Client()
-filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/context2.json'
+filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/context.json'
 dataset_id = 'landing_zone'
 table_id = 'shopstar_vtex_list_sku'
 dataset_ref = client.dataset(dataset_id)
