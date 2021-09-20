@@ -37,13 +37,12 @@ def replace_blank_dict(d):
     return d
 
 QUERY = (
-    'SELECT RefId FROM `shopstar-datalake.landing_zone.shopstar_vtex_product` ')
+    'SELECT RefId FROM `shopstar-datalake.landing_zone.shopstar_vtex_product` WHERE RefId is not null ')
 query_job = client.query(QUERY)  # API request
 rows = query_job.result()  # Waits for query to finish
 
 for row in rows:
-    if row in not None:
-        temp = get_RefId(str(row.id))
+    temp = get_RefId(str(row.id))
     productList.append(temp)
 
 for order in productList:
