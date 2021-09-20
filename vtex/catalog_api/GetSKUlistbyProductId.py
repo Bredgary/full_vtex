@@ -41,9 +41,9 @@ for row in rows:
     productList.append(temp)
 
 lista = json.loads(productList)
-    for order in lista:
-        for k, v in order.items():
-            order[k] = replace_blank_dict(v)
+for order in lista:
+    for k, v in order.items():
+        order[k] = replace_blank_dict(v)
 
 string = json.dumps(productList)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/lista.json", "w")
