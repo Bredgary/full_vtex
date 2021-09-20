@@ -64,7 +64,7 @@ def get_productIFD(id):
     return productoID
 
 QUERY = (
-    'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_category` ')
+    'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_detail_category` ')
 query_job = client.query(QUERY)  # API request
 rows = query_job.result()  # Waits for query to finish
 
