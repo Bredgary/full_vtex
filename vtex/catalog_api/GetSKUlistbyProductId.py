@@ -33,6 +33,15 @@ text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/lista.json", 
 text_file.write(string)
 text_file.close() 
 
+# Opening JSON file
+f = open('lista.json',)
+ 
+# returns JSON object as
+# a dictionary
+data = json.load(f)
+
+print(type(data))
+'''
 system("cat lista.json | jq -c '.[]' > lista1.json")
 system("sed 's/ //g' lista1.json > lista2.json")
 system("cat lista2.json | tr '\n' ' ' > context.json")
@@ -59,4 +68,4 @@ print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id)
 system("rm lista.json")
 system("rm context.json")
 print("finalizado")
-
+'''
