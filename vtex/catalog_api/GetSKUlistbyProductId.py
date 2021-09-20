@@ -37,14 +37,12 @@ query_job = client.query(QUERY)  # API request
 rows = query_job.result()  # Waits for query to finish
 
 for row in rows:
-    temp = str(row.id)
-    for i in temp:
-        temp = get_sku_list(str(i),headers)
-        productList.append(temp)
+    temp = get_sku_list(str(i),headers)
+    productList.append(temp)
 
-for order in productList:
-    for k, v in order.items():
-        order[k] = replace_blank_dict(v)
+#for order in productList:
+#    for k, v in order.items():
+#        order[k] = replace_blank_dict(v)
     
 
 string = json.dumps(productList)
@@ -65,7 +63,7 @@ job_config = bigquery.LoadJobConfig()
 job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
 job_config.autodetect = True
 with open(filename, "rb") as source_file:
-    job = client.load_table_from_file(
+    job = client.load_table_from_string(
         source_file,
         table_ref,
         location="southamerica-east1",  # Must match the destination dataset location.
