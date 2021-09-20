@@ -10,14 +10,14 @@ client = bigquery.Client()
 productList = [] 
 temp = ""
 
-def get_RefId(id):
+def get_sku_list(id):
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitByProductId/"""+str(id)+""
-	headers = {
-		"Content-Type": "application/json",
-		"Accept": "application/json",
-		"X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA",
-		"X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"
-	}
+    headers = {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA",
+        "X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"
+        }
 	response = requests.request("GET", url, headers=headers)
     jsonF = json.loads(response.text)
     return jsonF
@@ -42,12 +42,11 @@ query_job = client.query(QUERY)  # API request
 rows = query_job.result()  # Waits for query to finish
 
 for row in rows:
-    temp = get_RefId(str(row.RefId))
+    temp = get_sku_list(str(row.id))
     productList.append(temp)
-
-for order in productList:
-    for k, v in order.items():
-        order[k] = replace_blank_dict(v)
+    for order in productList:
+        for k, v in order.items():
+            order[k] = replace_blank_dict(v)
 
 string = json.dumps(productList)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/lista.json", "w")
