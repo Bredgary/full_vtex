@@ -41,7 +41,7 @@ for row in rows:
     productList.append(temp)
 
 lista = json.dumps(productList)
-lista2 = json.loads(lista1)
+lista2 = json.loads(lista2)
 for order in lista2:
     for k, v in order.items():
         order[k] = replace_blank_dict(v)
