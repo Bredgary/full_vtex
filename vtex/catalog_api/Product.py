@@ -66,7 +66,6 @@ rows = query_job.result()  # Waits for query to finish
 
 for row in rows:
     temp = get_productIFD(str(row.id))
-    print("ID de categoria: "+str(temp))
     load.append(temp)
 
 string = json.dumps(load)
