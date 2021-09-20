@@ -7,6 +7,10 @@ from os import system
 from google.cloud import bigquery
 
 client = bigquery.Client()
+productList = [] 
+temp = ""
+
+cat oldfile.json | jq -c '.[]' > newNDJSON.json
 
 def replace_blank_dict(d):
     if not d:
@@ -35,22 +39,19 @@ def skuandproduct(id):
 
 
 QUERY = (
-    'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_product` where id is not null')
+    'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_product` ')
 query_job = client.query(QUERY)  # API request
 rows = query_job.result()  # Waits for query to finish
 
-producSku = [] 
 for row in rows:
-    temp = skuandproduct(str(row.id))
-    producSku.append(temp)
+    temp = get_policy(str(row.id))
+    productList.append(temp)
 
+for order in productList:
+    for k, v in order.items():
+        order[k] = replace_blank_dict(v)
 
-#for order in producSku:
-#    for k, v in order.items():
-#        order[k] = replace_blank_dict(v)
-
-
-string = json.dumps(producSku)
+string = json.dumps(productList)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/lista.json", "w")
 text_file.write(string)
 text_file.close() 
@@ -61,7 +62,7 @@ print("Cargando a BigQuery")
 client = bigquery.Client()
 filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/context.json'
 dataset_id = 'landing_zone'
-table_id = 'shopstar_vtex_getproduct_skusbyproduct_id'
+table_id = 'shopstar_vtex_skybyproduct'
 dataset_ref = client.dataset(dataset_id)
 table_ref = dataset_ref.table(table_id)
 job_config = bigquery.LoadJobConfig()
