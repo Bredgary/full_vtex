@@ -11,7 +11,7 @@ productList = []
 temp = ""
 
 def get_specification(id):
-	url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/1243/specification"
+	url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/"""+str(id)+"""/specification"""
 
 	headers = {
 		"Content-Type": "application/json",
