@@ -40,7 +40,7 @@ for row in rows:
     temp = get_sku_list(str(row.id),headers)
     productList.append(temp)
 
-temporal = json.loans(productList)
+temporal = json.loads(productList)
     
 for order in temporal:
     for k, v in order.items():
