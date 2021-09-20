@@ -15,30 +15,9 @@ dict = {}
 def get_sku_list(id,headers):
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitByProductId/"""+str(id)+""
     response = requests.request("GET", url, headers=headers)
-    forms = json.loads(response.text)
-    for i in forms:
-        dict = i
-    print(dict.items)
-    #for order in dict:
-    #    for k, v in order.items():
-    #        order[k] = replace_blank_dict(v)
-
     jsonF = json.loads(response.text)
     return jsonF
 
-
-def replace_blank_dict(d):
-    if not d:
-        return None
-    if type(d) is list:
-        for list_item in d:
-            if type(list_item) is dict:
-                for k, v in list_item.items():
-                    list_item[k] = replace_blank_dict(v)
-    if type(d) is dict:
-        for k, v in d.items():
-            d[k] = replace_blank_dict(v)
-    return d
 
 QUERY = (
     'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_product` ')
@@ -52,7 +31,7 @@ for row in rows:
     
 
 prin("listo")
-'''
+
 string = json.dumps(productList)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/lista.json", "w")
 text_file.write(string)
@@ -81,4 +60,3 @@ print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id)
 system("rm context.json")
 system("rm lista.json")
 print("finalizado")
-'''
