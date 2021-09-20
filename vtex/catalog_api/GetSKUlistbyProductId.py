@@ -29,10 +29,10 @@ for row in rows:
 
 
 string = json.dumps(productList)
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/lista.json", "w")
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/lista1.json", "w")
 text_file.write(string)
 text_file.close() 
-system("cat lista.json | jq -c '.[]' > lista1.json")
+system("cat lista1.json | jq -c '.[]' > lista.json")
 
 job_config = bigquery.LoadJobConfig(
     schema=[
