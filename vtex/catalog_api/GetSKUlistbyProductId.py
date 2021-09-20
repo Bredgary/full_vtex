@@ -72,7 +72,6 @@ with open(filename, "rb") as source_file:
     job_config=job_config,)  # API request
 job.result()  # Waits for table load to complete.
 print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
+system("rm lista.json")
 system("rm context.json")
-system("rm temp1.json")
-system("rm temp2.json")
 print("finalizado")
