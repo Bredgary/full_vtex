@@ -7,6 +7,7 @@ from os import system
 from google.cloud import bigquery
 
 client = bigquery.Client()
+'''
 productList = [] 
 temp = ""
 headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
@@ -35,7 +36,7 @@ text_file.write(string)
 text_file.close() 
 system("cat lista1.json | jq -c '.[]' > lista.json")
 
-
+'''
 print("Cargando a BigQuery")
 client = bigquery.Client()
 filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/lista.json'
