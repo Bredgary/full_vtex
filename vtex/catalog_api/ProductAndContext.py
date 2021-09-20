@@ -6,6 +6,7 @@ from datetime import datetime
 from os import system
 from google.cloud import bigquery
 
+client = bigquery.Client()
 productList = []
 
 def get_contex(id):
