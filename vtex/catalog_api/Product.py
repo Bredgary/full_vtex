@@ -67,30 +67,21 @@ for row in rows:
         lost = get_product(i)
         productList.append(lost)
     
-string = json.dumps(productList)
-
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/load","w")
-text_file.write(string)
-text_file.close()   
-
-print("Fin")
-
-'''
-for order in temp:
+for order in productList:
     for k, v in order.items():
         order[k] = replace_blank_dict(v)
 
-string = json.dumps(load)
+string = json.dumps(productList)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/lista.json", "w")
 text_file.write(string)
 text_file.close() 
 
-system("cat lista.json | jq -c '.[]' > Product.json")
+system("cat lista.json | jq -c '.[]' > product.json")
 
 
 print("Cargando a BigQuery")
 client = bigquery.Client()
-filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/Product.json'
+filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/product.json'
 dataset_id = 'landing_zone'
 table_id = 'shopstar_vtex_product'
 dataset_ref = client.dataset(dataset_id)
@@ -106,8 +97,8 @@ with open(filename, "rb") as source_file:
     job_config=job_config,)  # API request
 job.result()  # Waits for table load to complete.
 print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
-#system("rm lista.json")
-#system("rm Product.json")
+system("rm lista.json")
+system("rm Product.json")
 print("finalizado")
 
 '''
