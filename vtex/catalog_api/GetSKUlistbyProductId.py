@@ -9,17 +9,12 @@ from google.cloud import bigquery
 client = bigquery.Client()
 productList = [] 
 temp = ""
+headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
-def get_sku_list(id):
+def get_sku_list(id,headers):
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitByProductId/"""+str(id)+""
-    headers = {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-        "X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA",
-        "X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"
-        }
-        response = requests.request("GET", url, headers=headers)
-        jsonF = json.loads(response.text)
+    response = requests.request("GET", url, headers=headers)
+    jsonF = json.loads(response.text)
     return jsonF
 
 
@@ -42,7 +37,7 @@ query_job = client.query(QUERY)  # API request
 rows = query_job.result()  # Waits for query to finish
 
 for row in rows:
-    temp = get_sku_list(str(row.id))
+    temp = get_sku_list(str(row.id),headers)
     productList.append(temp)
     for order in productList:
         for k, v in order.items():
