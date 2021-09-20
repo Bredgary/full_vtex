@@ -57,6 +57,7 @@ def get_productIFD(id):
     productList.append(data)
     for i in productList[0]:
       productoID.append(i)
+    return productoID
 
 QUERY = (
     'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_detail_category` ')
@@ -64,14 +65,17 @@ query_job = client.query(QUERY)  # API request
 rows = query_job.result()  # Waits for query to finish
 
 for row in rows:
-    get_productIFD(str(row.id))
-    print("ID de categoria: "+str(row.id))
-    temp = get_product(str(productoID)
-    #print(str(temp))
-    #load.append(temp)
+    temp = get_productIFD(str(row.id))
+    print("ID de categoria: "+str(temp))
+    load.append(temp)
 
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/load","wb")
+text_file.write(string)
+text_file.close()   
 
+print("Fin")
 
+'''
 for order in temp:
     for k, v in order.items():
         order[k] = replace_blank_dict(v)
@@ -83,7 +87,7 @@ text_file.close()
 
 system("cat lista.json | jq -c '.[]' > Product.json")
 
-'''
+
 print("Cargando a BigQuery")
 client = bigquery.Client()
 filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/Product.json'
