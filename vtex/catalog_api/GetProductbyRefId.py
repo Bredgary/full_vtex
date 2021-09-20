@@ -10,7 +10,7 @@ client = bigquery.Client()
 productList = [] 
 temp = ""
 
-def get_policy(id):
+def get_RefId(id):
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/productgetbyrefid/"""+str(id)+""
     headers = {
         "Content-Type": "application/json",
