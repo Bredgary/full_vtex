@@ -10,18 +10,18 @@ client = bigquery.Client()
 productList = [] 
 temp = ""
 
-def get_RefId(RefId):
+def get_policy(id):
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/productgetbyrefid/"""+str(id)+""
-
     headers = {
         "Content-Type": "application/json",
         "Accept": "application/json",
         "X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA",
         "X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"
         }
-	response = requests.request("GET", url, headers=headers)
+    response = requests.request("GET", url, headers=headers)
     jsonF = json.loads(response.text)
     return jsonF
+
 
 def replace_blank_dict(d):
     if not d:
