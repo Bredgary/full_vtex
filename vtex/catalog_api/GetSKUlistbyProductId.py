@@ -41,11 +41,7 @@ for row in rows:
     temp = get_sku_list(str(row.id),headers)
     productList.append(temp)
 
-def Convert(productList):
-    res_dct = {productList[i]: productList[i + 1] for i in range(0, len(productList), 2)}
-    return res_dct
-
-temporal = Convert(productList)
+temporal = productList
     
 for order in temporal:
     for k, v in order.items():
