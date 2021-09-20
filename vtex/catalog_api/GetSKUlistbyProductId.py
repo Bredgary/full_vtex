@@ -37,7 +37,7 @@ query_job = client.query(QUERY)  # API request
 rows = query_job.result()  # Waits for query to finish
 
 for row in rows:
-    temp = row.id
+    temp = str(row.id)
     for i in temp:
         temp = get_sku_list(str(i),headers)
         productList.append(temp)
