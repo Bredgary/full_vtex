@@ -67,7 +67,7 @@ for row in rows:
     get_productIFD(str(row.id))
     print("ID de categoria: "+str(row.id))
     temp = get_product(str(productoID)
-    print(str(temp))
+    #print(str(temp))
     #load.append(temp)
     break
 
@@ -84,6 +84,7 @@ text_file.close()
 
 system("cat lista.json | jq -c '.[]' > Product.json")
 
+'''
 print("Cargando a BigQuery")
 client = bigquery.Client()
 filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/Product.json'
@@ -105,3 +106,6 @@ print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id)
 #system("rm lista.json")
 #system("rm Product.json")
 print("finalizado")
+
+'''
+
