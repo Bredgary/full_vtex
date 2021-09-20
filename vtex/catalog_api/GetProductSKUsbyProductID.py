@@ -7,21 +7,8 @@ from os import system
 from google.cloud import bigquery
 
 client = bigquery.Client()
-productList = [] 
+producSku = [] 
 temp = ""
-
-def skuandproduct(id):
-    url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pub/products/variations/"""+str(id)+""
-    headers = {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-        "X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA",
-        "X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"
-        }
-    response = requests.request("GET", url, headers=headers)
-    jsonF = json.loads(response.text)
-    return jsonF
-
 
 def replace_blank_dict(d):
     if not d:
@@ -36,6 +23,19 @@ def replace_blank_dict(d):
             d[k] = replace_blank_dict(v)
     return d
 
+def skuandproduct(id):
+    url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pub/products/variations/"""+str(id)+""
+    headers = {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA",
+        "X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"
+        }
+    response = requests.request("GET", url, headers=headers)
+    jsonF = json.loads(response.text)
+    return jsonF
+
+
 QUERY = (
     'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_product`')
 query_job = client.query(QUERY)  # API request
@@ -43,13 +43,14 @@ rows = query_job.result()  # Waits for query to finish
 
 for row in rows:
     temp = skuandproduct(str(row.id))
-    productList.append(temp)
+    producSku.append(temp)
 
-    
-for order in productList:
+for order in producSku:
     for k, v in order.items():
         order[k] = replace_blank_dict(v)
 
+print("FIN")
+'''
 string = json.dumps(productList)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/lista.json", "w")
 text_file.write(string)
@@ -78,3 +79,4 @@ print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id)
 system("rm context.json")
 system("rm lista.json")
 print("finalizado")
+'''
