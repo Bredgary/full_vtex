@@ -10,7 +10,6 @@ client = bigquery.Client()
 productList = [] 
 temp = ""
 headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-temporal = {}
 
 def get_sku_list(id,headers):
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitByProductId/"""+str(id)+""
@@ -41,7 +40,7 @@ for row in rows:
     temp = get_sku_list(str(row.id),headers)
     productList.append(temp)
 
-temporal = productList
+temporal = json.loans(productList)
     
 for order in temporal:
     for k, v in order.items():
