@@ -53,9 +53,8 @@ def get_productIFD(id):
         }
     response = requests.request("GET", url, headers=headers, params=querystring)
     jsonF = json.loads(response.text)
-    data = jsonF["data"]
-    separacion = data[0]
-    return separacion
+    product = jsonF["data"]
+    return product
 
 QUERY = (
     'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_detail_category` ')
@@ -64,13 +63,15 @@ rows = query_job.result()  # Waits for query to finish
 
 for row in rows:
     temp = get_productIFD(str(row.id))
-    load.append(temp)
-    for i in load:
-        print(load)
+    for i in temp:
+        lost = get_product(i)
+        productList.append(lost)
+    
+string = json.dumps(productList)
 
-#text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/load","wb")
-#text_file.write(lines)
-#text_file.close()   
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/load","w")
+text_file.write(string)
+text_file.close()   
 
 print("Fin")
 
