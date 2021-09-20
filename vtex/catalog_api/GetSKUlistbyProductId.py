@@ -40,21 +40,23 @@ for row in rows:
     temp = get_sku_list(str(row.id),headers)
     productList.append(temp)
 
-#for order in productList:
-#    for k, v in order.items():
-#        order[k] = replace_blank_dict(v)
+list_dict = dict(productList)
+
+for order in list_dict:
+    for k, v in order.items():
+        order[k] = replace_blank_dict(v)
     
 
 string = json.dumps(productList)
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/lista", "w")
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/lista.json", "w")
 text_file.write(string)
 text_file.close() 
 
-system("cat lista | jq -c '.[]' > context")
+system("cat lista.json | jq -c '.[]' > context.json")
 
 print("Cargando a BigQuery")
 client = bigquery.Client()
-filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/context'
+filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/context.json'
 dataset_id = 'landing_zone'
 table_id = 'shopstar_vtex_list_sku'
 dataset_ref = client.dataset(dataset_id)
