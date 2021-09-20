@@ -11,7 +11,12 @@ productList = []
 
 def get_policy(id):
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/productget/"""+str(id)+""
-	headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
+    headers = {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA",
+        "X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"
+        }
     response = requests.request("GET", url, headers=headers)
     jsonF = json.loads(response.text)
     return jsonF
