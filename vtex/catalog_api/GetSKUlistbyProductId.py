@@ -15,7 +15,7 @@ dict = {}
 def get_sku_list(id,headers):
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitByProductId/"""+str(id)+""
     response = requests.request("GET", url, headers=headers)
-    forms = json.loads(response.txt)
+    forms = json.loads(response.text)
     for i in forms:
         dict = i
     print(dict.items)
