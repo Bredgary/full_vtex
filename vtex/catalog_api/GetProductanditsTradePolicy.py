@@ -7,7 +7,7 @@ from os import system
 from google.cloud import bigquery
 
 client = bigquery.Client()
-productList = []
+productList = [] 
 
 def get_policy(id):
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/productget/"""+str(id)+""
