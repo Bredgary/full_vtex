@@ -39,11 +39,6 @@ def get_product(id):
     response = requests.request("GET", url, headers=headers)
     jsonF = json.loads(response.text)
     cargaProduct.append(jsonF)
-    for order in cargaProduct:
-        for k, v in order.items():
-            order[k] = replace_blank_dict(v)
-    return cargaProduct
-
 
 
 def get_productIFD(id):
@@ -61,7 +56,6 @@ def get_productIFD(id):
     productList.append(data)
     for i in productList[0]:
       productoID.append(i)
-    return productoID
 
 QUERY = (
     'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_detail_category` ')
@@ -73,11 +67,14 @@ for row in rows:
     print("ID de categoria: "+str(row.id))
 
 for ids in productoID:
-    #get_product(ids)
-    #print("Cargando Productos")
+    get_product(ids)
+    print("Cargando Productos")
     print("IDS: "+str(ids))
 
-
+for order in cargaProduct:
+        for k, v in order.items():
+            order[k] = replace_blank_dict(v)
+    return cargaProduct
 
 string = json.dumps(cargaProduct)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/lista.json", "w")
