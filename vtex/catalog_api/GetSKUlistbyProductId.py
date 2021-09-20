@@ -40,12 +40,14 @@ for row in rows:
     temp = get_sku_list(str(row.id),headers)
     productList.append(temp)
 
-temporal = json.loads(productList)
+temporal = json.dumps(productList)
     
 for order in temporal:
     for k, v in order.items():
         order[k] = replace_blank_dict(v)
 
+prin("listo")
+'''
 string = json.dumps(productList)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/lista.json", "w")
 text_file.write(string)
@@ -74,3 +76,4 @@ print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id)
 system("rm context.json")
 system("rm lista.json")
 print("finalizado")
+'''
