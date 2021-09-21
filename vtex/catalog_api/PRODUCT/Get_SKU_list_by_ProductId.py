@@ -38,12 +38,12 @@ for row in rows:
     break
     
 
-formatoJson = json.loads(temp)
+formatoJson = json.dumps(temp)
 #def listToStringWithoutBrackets(list1):
 #    return str(list1).replace('[','').replace(']','').replace("'{","{").replace("}'","}")
 
 #temp2 = listToStringWithoutBrackets(temp)
-
+print(formatoJson)
 print("Comenzando la conversión")
 
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/context.json", "w")
