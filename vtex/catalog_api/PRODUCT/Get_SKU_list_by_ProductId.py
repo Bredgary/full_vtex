@@ -18,12 +18,14 @@ registro = 0
 temp2 = "" 
 list1 = ""
 headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-url = ""
+url2 = ""
 
 def get_sku_list(id,headers):
-    url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitByProductId/"""+(str(id))+""
-    response = requests.request("GET", url, headers=headers) 
-    print(response.text)
+    url1 = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitByProductId/"""+(str(id))+""
+    url2 = url1
+    print(url2)
+    #response = requests.request("GET", url, headers=headers) 
+    #print(response.text)
     #data = response.text.encode('utf8')
     #temp.append(response.text)
     
