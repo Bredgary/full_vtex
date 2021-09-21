@@ -43,7 +43,7 @@ rows = query_job.result()  # Waits for query to finish
 
 for row in rows:
     temp.append(get_sku_list(str(row.id),headers))
-    contador = contado+1
+    contador = contador+1
     if contador == 5:
         break
 
