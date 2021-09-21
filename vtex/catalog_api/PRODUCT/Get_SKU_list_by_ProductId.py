@@ -35,7 +35,6 @@ for row in rows:
     get_sku_list(str(row.id),headers)
     registro +=1
     print("Registros almacenados en archivo temporal: "+ str(registro))
-    break    
     
 print("Comenzando la conversión")
 
@@ -49,10 +48,8 @@ print(temp2)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/context.json", "w")
 text_file.write(temp2)
 text_file.close() 
-
+'''
 system("cat context.json | jq -c '.[]' > newNDJSON.json")
-print("prueba terminada")
-
 print("Cargando a BigQuery")
 client = bigquery.Client()
 filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/context.json'
@@ -72,3 +69,4 @@ with open(filename, "rb") as source_file:
 job.result()  # Waits for table load to complete.
 print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 print("finalizado")
+'''
