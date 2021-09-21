@@ -19,6 +19,7 @@ temp2 = ""
 list1 = ""
 headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 url2 = ""
+num = 0
 
 def get_sku_list(id,headers):
     url1 = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitByProductId/"""+(str(id))+""
@@ -36,7 +37,7 @@ query_job = client.query(QUERY)  # API request
 rows = query_job.result()  # Waits for query to finish
 
 for row in rows:
-    get_sku_list(str(row),headers)
+    get_sku_list(str(row.id),headers)
     break
     #registro +=1
     #print("Registros almacenados en archivo temporal: "+ str(registro))
