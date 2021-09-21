@@ -49,16 +49,19 @@ for row in rows:
     if contador == 5:
         break
 
-def listToStringWithoutBrackets(list1):
+def listToStringWithoutBrackets(temp):
     return str(list1).replace('[','').replace(']','') 
 temp2 = listToStringWithoutBrackets(temp)
 
-string = json.dumps(temp2)
+print(temp2)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/context.json", "w")
-text_file.write(string)
+text_file.write(temp2)
 text_file.close() 
 system("cat context.json | jq -c '.[]' > newNDJSON.json")
 
+
+
+'''
 print("Cargando a BigQuery")
 client = bigquery.Client()
 filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/newNDJSON.json'
@@ -77,4 +80,5 @@ with open(filename, "rb") as source_file:
     job_config=job_config,)  # API request
 job.result()  # Waits for table load to complete.
 print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
+'''
 print("finalizado")
