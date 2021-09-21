@@ -9,7 +9,7 @@ from google.cloud import bigquery
 client = bigquery.Client()
 formatoJson = {}
 productList = [] 
-temp = ""
+
 headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
 def replace_blank_dict(d):
@@ -29,12 +29,10 @@ def get_sku_list(id,headers):
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitByProductId/"""+str(id)+""
     response = requests.request("GET", url, headers=headers)
     formatoJson = json.loads(response.text)
-    #for order in formatoJson:
-    #    for k, v in order.items():
-    #        order[k] = replace_blank_dict(v)
-    productList.append(formatoJson)
-
-    
+    for order in formatoJson:
+        for k, v in order.items():
+            order[k] = replace_blank_dict(v)
+    return formatoJson
 
 QUERY = (
     'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_product` ')
@@ -42,12 +40,11 @@ query_job = client.query(QUERY)  # API request
 rows = query_job.result()  # Waits for query to finish
 
 for row in rows:
-    get_sku_list(str(row.id),headers)
+    temp.append(get_sku_list(str(row.id),headers))
 
-string = json.dumps(productList)
-conv = re.sub(r"[^a-zA-Z0-9]","",string)
+string = json.dumps(temp)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/context.json", "w")
-text_file.write(conv)
+text_file.write(string)
 text_file.close() 
 system("cat context.json | jq -c '.[]' > newNDJSON.json")
 print("fin")
