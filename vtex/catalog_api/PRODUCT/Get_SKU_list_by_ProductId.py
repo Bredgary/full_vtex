@@ -40,11 +40,11 @@ for row in rows:
 
 print("Comenzando la conversión")
 
-#def listToStringWithoutBrackets(list1):
-#    return str(list1).replace('[','').replace(']','') 
+def listToStringWithoutBrackets(list1):
+    return str(list1).replace('[','').replace(']','') 
 
-#temp2 = listToStringWithoutBrackets(temp)
-#print(temp)
+temp2 = listToStringWithoutBrackets(temp)
+print(temp)
 '''
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/context.json", "w")
 text_file.write(temp2)
