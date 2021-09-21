@@ -28,8 +28,8 @@ def replace_blank_dict(d):
 def get_sku_list(id,headers):
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitByProductId/"""+str(id)+""
     response = requests.request("GET", url, headers=headers)
-    string = re.sub(r"[^a-zA-Z0-9]","",response.text)
-    formatoJson = json.loads(string)
+    formatoJson = json.loads(response.text)
+    conv = re.sub(r"[^a-zA-Z0-9]","",formatoJson)
     #for order in formatoJson:
     #    for k, v in order.items():
     #        order[k] = replace_blank_dict(v)
