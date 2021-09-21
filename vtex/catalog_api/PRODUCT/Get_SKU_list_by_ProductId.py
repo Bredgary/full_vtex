@@ -14,6 +14,7 @@ client = bigquery.Client()
 formatoJson = {}
 productList = [] 
 temp = []
+registro = 0
 temp2 = "" 
 list1 = ""
 headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
@@ -23,6 +24,7 @@ def get_sku_list(id,headers):
     response = requests.request("GET", url, headers=headers) 
     data = response.text.encode('utf8')
     temp.append(data)
+    print("Registros almacenados en archivo temporal: "+ str(registro+1))
     #formatoJson = json.loads(data)
     
 
