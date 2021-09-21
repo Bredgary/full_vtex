@@ -16,7 +16,6 @@ productList = []
 temp = []
 temp2 = "" 
 list1 = ""
-registro = ""
 headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
 def get_sku_list(id,headers):
@@ -33,7 +32,7 @@ query_job = client.query(QUERY)  # API request
 rows = query_job.result()  # Waits for query to finish
 
 for row in rows:
-    registro = get_sku_list(str(row),headers)
+    get_sku_list(str(row),headers)
 #    temp.append(registro)
 '''
 print("Comenzando la conversión")
