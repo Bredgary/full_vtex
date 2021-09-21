@@ -46,7 +46,7 @@ for row in rows:
     get_sku_list(str(row),headers)
     contador = contador+1
     registro += 1
-    print("Registro N° "+ registro + " almacenado en archivo temporal")
+    #print("Registro N° "+ registro + " almacenado en archivo temporal")
     if contador == 5:
         break
 
