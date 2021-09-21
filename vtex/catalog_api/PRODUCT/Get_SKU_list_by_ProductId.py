@@ -32,7 +32,7 @@ rows = query_job.result()  # Waits for query to finish
 for row in rows:
     registro = get_sku_list(str(row),headers)
     temp.append(registro)
-
+'''
 print("Comenzando la conversión")
 
 def listToStringWithoutBrackets(list1):
@@ -45,7 +45,7 @@ text_file.write(temp2)
 text_file.close() 
 system("cat context.json | jq -c '.[]' > newNDJSON.json")
 print("prueba terminada")
-'''
+
 print("Cargando a BigQuery")
 client = bigquery.Client()
 filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/newNDJSON.json'
