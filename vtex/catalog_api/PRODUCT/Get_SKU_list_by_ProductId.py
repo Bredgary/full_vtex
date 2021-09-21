@@ -34,7 +34,6 @@ for row in rows:
     get_sku_list(str(row.id),headers)
     registro +=1
     print("Registros almacenados en archivo temporal: "+ str(registro))
-    break
     
 def listToString(lista): 
     str1 = "" 
