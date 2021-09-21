@@ -53,11 +53,11 @@ text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/conte
 text_file.write(string)
 text_file.close() 
 
-system("cat context.json | jq -c '.[]' > newNDJSON.json")
+system("cat context.json | jq -c '.[]' > table.json")
 '''
 print("Cargando a BigQuery")
 client = bigquery.Client()
-filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/context.json'
+filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/table.json'
 dataset_id = 'landing_zone'
 table_id = 'shopstar_vtex_sku_list_by_productid'
 dataset_ref = client.dataset(dataset_id)

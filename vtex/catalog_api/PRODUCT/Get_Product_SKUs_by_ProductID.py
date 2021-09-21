@@ -54,7 +54,7 @@ text_file.write(string)
 text_file.close() 
 
 system("cat lista.json | jq -c '.[]' > context.json")
-
+'''
 print("Cargando a BigQuery")
 client = bigquery.Client()
 filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/context.json'
@@ -76,3 +76,4 @@ print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id)
 system("rm context.json")
 system("rm lista.json")
 print("finalizado")
+'''
