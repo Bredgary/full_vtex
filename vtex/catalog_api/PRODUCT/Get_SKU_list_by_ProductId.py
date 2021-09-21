@@ -10,6 +10,7 @@ client = bigquery.Client()
 formatoJson = {}
 productList = [] 
 temp = []
+contador = 0
 
 headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
@@ -42,6 +43,9 @@ rows = query_job.result()  # Waits for query to finish
 
 for row in rows:
     temp.append(get_sku_list(str(row.id),headers))
+    contador = contado+1
+    if contador == 5:
+        break
 
 string = json.dumps(temp)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/context.json", "w")
