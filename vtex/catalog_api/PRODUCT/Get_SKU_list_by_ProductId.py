@@ -20,7 +20,7 @@ list1 = ""
 headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
 def get_sku_list(id,headers):
-    url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitByProductId/"""+str(id)+""
+    
     response = requests.request("GET", url, headers=headers) 
     print(response.text)
     #data = response.text.encode('utf8')
@@ -34,16 +34,17 @@ rows = query_job.result()  # Waits for query to finish
 
 for row in rows:
     get_sku_list(str(row),headers)
-    registro +=1
-    print("Registros almacenados en archivo temporal: "+ str(registro))
     break
+    #registro +=1
+    #print("Registros almacenados en archivo temporal: "+ str(registro))
+    
 
-print("Comenzando la conversión")
+#print("Comenzando la conversión")
 
-def listToStringWithoutBrackets(list1):
-    return str(list1).replace('[','').replace(']','') 
+#def listToStringWithoutBrackets(list1):
+#    return str(list1).replace('[','').replace(']','') 
 
-temp2 = listToStringWithoutBrackets(temp)
+#temp2 = listToStringWithoutBrackets(temp)
 #print(temp)
 '''
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/context.json", "w")
