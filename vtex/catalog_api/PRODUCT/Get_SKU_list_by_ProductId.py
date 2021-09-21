@@ -1,3 +1,6 @@
+!/usr/bin/python
+ #-*- coding: ascii -*-
+import os, sys
 import requests
 import json
 import os
