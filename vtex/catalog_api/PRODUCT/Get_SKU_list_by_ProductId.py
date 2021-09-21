@@ -20,24 +20,13 @@ list1 = ""
 headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 registro = []
 
-def replace_blank_dict(d):
-    if not d:
-        return None
-    if type(d) is list:
-        for list_item in d:
-            if type(list_item) is dict:
-                for k, v in list_item.items():
-                    list_item[k] = replace_blank_dict(v)
-    if type(d) is dict:
-        for k, v in d.items():
-            d[k] = replace_blank_dict(v)
-    return d
 
 def get_sku_list(id,headers):
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitByProductId/"""+(str(id))+""
     response = requests.request("GET", url, headers=headers) 
     data = response.text.encode('utf8')
     formatoJson = json.loads(data)
+    print(formatoJson)
     return formatoJson
     
 
@@ -46,22 +35,22 @@ QUERY = (
 query_job = client.query(QUERY)  # API request
 rows = query_job.result()  # Waits for query to finish
 
-for row in rows:
-    registro = get_sku_list(str(row),headers)
-    temp.append(registro)
-    registro +=1
-    print("Registros almacenados en archivo temporal: "+ str(registro))
-    break
+#for row in rows:
+#    registro = get_sku_list(str(row),headers)
+#    temp.append(registro)
+#    registro +=1
+#    print("Registros almacenados en archivo temporal: "+ str(registro))
+#    break
     
 
-print("Comenzando la conversión")
+#print("Comenzando la conversión")
 
-def listToStringWithoutBrackets(list1):
-    return str(list1).replace('[','').replace(']','') 
+#def listToStringWithoutBrackets(list1):
+#    return str(list1).replace('[','').replace(']','') 
 
-temp2 = listToStringWithoutBrackets(temp)
+#temp2 = listToStringWithoutBrackets(temp)
 
-print(temp2)
+#print(temp2)
 '''
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/context.json", "w")
 text_file.write(temp2)
