@@ -22,8 +22,9 @@ headers = {"Content-Type": "application/json","Accept": "application/json","X-VT
 def get_sku_list(id,headers):
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitByProductId/"""+str(id)+""
     response = requests.request("GET", url, headers=headers) 
-    data = response.text.encode('utf8')
-    temp.append(response.text)
+    print(response.text)
+    #data = response.text.encode('utf8')
+    #temp.append(response.text)
     
 
 QUERY = (
@@ -35,6 +36,7 @@ for row in rows:
     get_sku_list(str(row),headers)
     registro +=1
     print("Registros almacenados en archivo temporal: "+ str(registro))
+    break
 
 print("Comenzando la conversión")
 
@@ -42,7 +44,7 @@ def listToStringWithoutBrackets(list1):
     return str(list1).replace('[','').replace(']','') 
 
 temp2 = listToStringWithoutBrackets(temp)
-print(temp)
+#print(temp)
 '''
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/context.json", "w")
 text_file.write(temp2)
