@@ -53,12 +53,11 @@ def listToStringWithoutBrackets(list1):
     return str(list1).replace('[','').replace(']','') 
 temp2 = listToStringWithoutBrackets(temp)
 
+string = json.dumps(temp2)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/context.json", "w")
-text_file.write(temp2)
+text_file.write(string)
 text_file.close() 
 system("cat context.json | jq -c '.[]' > newNDJSON.json")
-print()
-
 
 print("Cargando a BigQuery")
 client = bigquery.Client()
