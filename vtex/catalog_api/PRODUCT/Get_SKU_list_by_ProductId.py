@@ -35,17 +35,19 @@ for row in rows:
     get_sku_list(str(row.id),headers)
     registro +=1
     print("Registros almacenados en archivo temporal: "+ str(registro))
+    break
     
+
+formatoJson = json.loads(temp)
+#def listToStringWithoutBrackets(list1):
+#    return str(list1).replace('[','').replace(']','').replace("'{","{").replace("}'","}")
+
+#temp2 = listToStringWithoutBrackets(temp)
+
 print("Comenzando la conversión")
 
-def listToStringWithoutBrackets(list1):
-    return str(list1).replace('[','').replace(']','').replace("'{","{").replace("}'","}")
-
-temp2 = listToStringWithoutBrackets(temp)
-
-
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/context.json", "w")
-text_file.write(temp2)
+text_file.write(formatoJson)
 text_file.close() 
 
 system("cat context.json | jq -c '.[]' > newNDJSON.json")
