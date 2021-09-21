@@ -20,7 +20,7 @@ headers = {"Content-Type": "application/json","Accept": "application/json","X-VT
 
 def get_sku_list(id,headers):
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitByProductId/"""+str(id)+""
-    #response = requests.request("GET", url, headers=headers) 
+    response = requests.request("GET", url, headers=headers) 
     #data = response.text.encode('utf8')
     #formatoJson = json.loads(data)
     
