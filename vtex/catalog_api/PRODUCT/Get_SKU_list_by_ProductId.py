@@ -13,15 +13,15 @@ productList = []
 temp = []
 temp2 = "" 
 list1 = ""
-contador = 0
-
+registro = ""
 headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
 def get_sku_list(id,headers):
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitByProductId/"""+str(id)+""
     response = requests.request("GET", url, headers=headers) 
     formatoJson = json.loads(response.text)
-    temp.append(formatoJson)
+    return formatoJson
+    
 
 QUERY = (
     'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_product` ')
@@ -29,10 +29,10 @@ query_job = client.query(QUERY)  # API request
 rows = query_job.result()  # Waits for query to finish
 
 for row in rows:
-    get_sku_list(str(row),headers)
-    contador = contador+1
-    if contador == 5:
-        break
+    registro = get_sku_list(str(row),headers)
+    temp.append(registro)
+
+print("Comenzando la conversión")
 
 def listToStringWithoutBrackets(list1):
     return str(list1).replace('[','').replace(']','') 
