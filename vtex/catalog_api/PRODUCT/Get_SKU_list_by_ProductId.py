@@ -45,7 +45,7 @@ def listToStringWithoutBrackets(list1):
 temp2 = listToStringWithoutBrackets(temp)
 
 print(temp2)
-'''
+
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/context.json", "w")
 text_file.write(temp2)
 text_file.close() 
@@ -72,4 +72,3 @@ with open(filename, "rb") as source_file:
 job.result()  # Waits for table load to complete.
 print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 print("finalizado")
-'''
