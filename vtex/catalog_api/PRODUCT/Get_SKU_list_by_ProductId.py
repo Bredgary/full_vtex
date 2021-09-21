@@ -36,6 +36,8 @@ for row in rows:
     registro +=1
     print("Registros almacenados en archivo temporal: "+ str(registro))
     break
+
+print(temp)
 #    
     
 
