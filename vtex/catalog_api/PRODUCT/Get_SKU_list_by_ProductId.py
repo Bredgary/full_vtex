@@ -44,11 +44,11 @@ rows = query_job.result()  # Waits for query to finish
 for row in rows:
     get_sku_list(str(row.id),headers)
 
-
-string = re.sub(r"[^a-zA-Z0-9]","",productList)
+string = json.dumps(productList)
+string2 = re.sub(r"[^a-zA-Z0-9]","",string)
 
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/context.json", "w")
-text_file.write(string)
+text_file.write(string2)
 text_file.close() 
 system("cat context.json | jq -c '.[]' > newNDJSON.json")
 print("fin")
