@@ -10,7 +10,7 @@ client = bigquery.Client()
 formatoJson = {}
 productList = [] 
 temp = []
-'''
+
 headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
 def replace_blank_dict(d):
@@ -44,12 +44,12 @@ for row in rows:
     temp.append(get_sku_list(str(row.id),headers))
 
 string = json.dumps(temp)
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/context.json", "w")
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/context.json", "wb")
 text_file.write(string)
 text_file.close() 
 system("cat context.json | jq -c '.[]' > newNDJSON.json")
-print("fin")
-'''
+
+
 print("Cargando a BigQuery")
 client = bigquery.Client()
 filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/newNDJSON.json'
