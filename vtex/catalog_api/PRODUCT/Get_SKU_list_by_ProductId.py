@@ -7,6 +7,7 @@ from os import system
 from google.cloud import bigquery
 
 client = bigquery.Client()
+'''
 formatoJson = {}
 productList = [] 
 temp = []
@@ -52,7 +53,7 @@ text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/conte
 text_file.write(string)
 text_file.close() 
 system("cat context.json | jq -c '.[]' > newNDJSON.json")
-
+'''
 
 print("Cargando a BigQuery")
 client = bigquery.Client()
