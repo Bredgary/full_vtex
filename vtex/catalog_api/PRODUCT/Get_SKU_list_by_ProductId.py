@@ -45,7 +45,7 @@ def listToStringWithoutBrackets(list1):
 temp2 = listToStringWithoutBrackets(temp)
 
 print(temp2)
-
+'''
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/context.json", "w")
 text_file.write(temp2)
 text_file.close() 
