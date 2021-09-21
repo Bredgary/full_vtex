@@ -14,6 +14,7 @@ temp = []
 temp2 = "" 
 list1 = ""
 contador = 0
+registro = 0
 
 headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
@@ -34,10 +35,9 @@ def get_sku_list(id,headers):
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitByProductId/"""+str(id)+""
     response = requests.request("GET", url, headers=headers) 
     formatoJson = json.loads(response.text)
-    for order in formatoJson:
-        for k, v in order.items():
-            order[k] = replace_blank_dict(v)
     temp.append(formatoJson)
+    registro += 1
+    print("Registro N° "+ registro + " almacenado en archivo temporal")
 
 QUERY = (
     'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_product` ')
