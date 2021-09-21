@@ -11,7 +11,6 @@ from google.cloud import bigquery
 
 client = bigquery.Client()
 
-formatoJson = {}
 productList = [] 
 temp = []
 registro = 0
@@ -39,7 +38,7 @@ for row in rows:
     
 def listToString(lista): 
     str1 = "" 
-    for ele in s: 
+    for ele in lista: 
         str1 += ele  
     return str1 
              
