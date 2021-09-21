@@ -44,7 +44,7 @@ for row in rows:
     temp.append(get_sku_list(str(row.id),headers))
 
 string = json.dumps(temp)
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/context.json", "wb")
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/context.json", "w")
 text_file.write(string)
 text_file.close() 
 system("cat context.json | jq -c '.[]' > newNDJSON.json")
