@@ -32,7 +32,7 @@ query_job = client.query(QUERY)  # API request
 rows = query_job.result()  # Waits for query to finish
 
 for row in rows:
-    get_sku_list(str(row),headers)
+    get_sku_list(str(row.id),headers)
     registro +=1
     print("Registros almacenados en archivo temporal: "+ str(registro))
     break
