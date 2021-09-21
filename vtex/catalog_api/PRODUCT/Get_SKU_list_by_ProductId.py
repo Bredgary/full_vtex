@@ -34,7 +34,7 @@ rows = query_job.result()  # Waits for query to finish
 
 for row in rows:
     registro = get_sku_list(str(row),headers)
-    temp.append(registro)
+#    temp.append(registro)
 '''
 print("Comenzando la conversión")
 
