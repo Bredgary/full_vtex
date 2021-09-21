@@ -36,8 +36,6 @@ def get_sku_list(id,headers):
     response = requests.request("GET", url, headers=headers) 
     formatoJson = json.loads(response.text)
     temp.append(formatoJson)
-    registro += 1
-    print("Registro N° "+ registro + " almacenado en archivo temporal")
 
 QUERY = (
     'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_product` ')
@@ -47,6 +45,8 @@ rows = query_job.result()  # Waits for query to finish
 for row in rows:
     get_sku_list(str(row),headers)
     contador = contador+1
+    registro += 1
+    print("Registro N° "+ registro + " almacenado en archivo temporal")
     if contador == 5:
         break
 
