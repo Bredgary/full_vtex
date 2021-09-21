@@ -40,7 +40,7 @@ for row in rows:
 print("Comenzando la conversión")
 
 def listToStringWithoutBrackets(list1):
-    return str(list1).replace('[','').replace(']','') 
+    return str(list1).replace('[','').replace(']','').replace("{'","{").replace("}'","}")
 
 temp2 = listToStringWithoutBrackets(temp)
 
