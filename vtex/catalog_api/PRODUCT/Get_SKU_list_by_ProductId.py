@@ -14,22 +14,8 @@ temp = []
 temp2 = "" 
 list1 = ""
 contador = 0
-registro = 0
 
 headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-
-def replace_blank_dict(d):
-    if not d:
-        return None
-    if type(d) is list:
-        for list_item in d:
-            if type(list_item) is dict:
-                for k, v in list_item.items():
-                    list_item[k] = replace_blank_dict(v)
-    if type(d) is dict:
-        for k, v in d.items():
-            d[k] = replace_blank_dict(v)
-    return d
 
 def get_sku_list(id,headers):
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitByProductId/"""+str(id)+""
@@ -45,8 +31,6 @@ rows = query_job.result()  # Waits for query to finish
 for row in rows:
     get_sku_list(str(row),headers)
     contador = contador+1
-    registro += 1
-    #print("Registro N° "+ registro + " almacenado en archivo temporal")
     if contador == 5:
         break
 
