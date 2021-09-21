@@ -37,16 +37,22 @@ for row in rows:
     print("Registros almacenados en archivo temporal: "+ str(registro))
     break
     
-
+def listToString(lista): 
+    str1 = "" 
+    for ele in s: 
+        str1 += ele  
+    return str1 
+             
+string = listToString(temp)
 #def listToStringWithoutBrackets(list1):
 #    return str(list1).replace('[','').replace(']','').replace("'{","{").replace("}'","}")
 
 #temp2 = listToStringWithoutBrackets(temp)
-print(temp)
+print(string)
 print("Comenzando la conversión")
 
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/context.json", "w")
-text_file.write(temp)
+text_file.write(string)
 text_file.close() 
 
 system("cat context.json | jq -c '.[]' > newNDJSON.json")
