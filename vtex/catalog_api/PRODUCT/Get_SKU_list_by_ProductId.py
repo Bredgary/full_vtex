@@ -37,7 +37,7 @@ def get_sku_list(id,headers):
     for order in formatoJson:
         for k, v in order.items():
             order[k] = replace_blank_dict(v)
-    return formatoJson
+    temp.append(formatoJson)
 
 QUERY = (
     'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_product` ')
@@ -45,7 +45,7 @@ query_job = client.query(QUERY)  # API request
 rows = query_job.result()  # Waits for query to finish
 
 for row in rows:
-    temp.append(get_sku_list(str(row),headers))
+    get_sku_list(str(row),headers)
     contador = contador+1
     if contador == 5:
         break
@@ -59,7 +59,8 @@ text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/conte
 text_file.write(temp2)
 text_file.close() 
 system("cat context.json | jq -c '.[]' > newNDJSON.json")
-
+print("prueba terminada")
+'''
 print("Cargando a BigQuery")
 client = bigquery.Client()
 filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/newNDJSON.json'
@@ -79,3 +80,4 @@ with open(filename, "rb") as source_file:
 job.result()  # Waits for table load to complete.
 print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 print("finalizado")
+'''
