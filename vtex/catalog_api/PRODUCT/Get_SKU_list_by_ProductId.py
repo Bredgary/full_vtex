@@ -24,8 +24,6 @@ def get_sku_list(id,headers):
     response = requests.request("GET", url, headers=headers) 
     data = response.text.encode('utf8')
     temp.append(data)
-    print("Registros almacenados en archivo temporal: "+ str(registro+1))
-    #formatoJson = json.loads(data)
     
 
 QUERY = (
@@ -35,7 +33,8 @@ rows = query_job.result()  # Waits for query to finish
 
 for row in rows:
     get_sku_list(str(row),headers)
-#    temp.append(registro)
+    registro +=1
+    print("Registros almacenados en archivo temporal: "+ str(registro+1))
 '''
 print("Comenzando la conversión")
 
