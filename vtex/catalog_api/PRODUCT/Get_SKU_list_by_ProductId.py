@@ -22,6 +22,7 @@ def get_sku_list(id,headers):
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitByProductId/"""+str(id)+""
     response = requests.request("GET", url, headers=headers) 
     data = response.text.encode('utf8')
+    temp.append(data)
     #formatoJson = json.loads(data)
     
 
