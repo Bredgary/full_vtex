@@ -52,7 +52,7 @@ text_file.close()
 
 system("cat context.json | jq -c '.[]' > newNDJSON.json")
 print("prueba terminada")
-'''
+
 print("Cargando a BigQuery")
 client = bigquery.Client()
 filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/newNDJSON.json'
@@ -72,4 +72,3 @@ with open(filename, "rb") as source_file:
 job.result()  # Waits for table load to complete.
 print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 print("finalizado")
-'''
