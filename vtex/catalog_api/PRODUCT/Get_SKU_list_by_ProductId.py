@@ -43,13 +43,13 @@ rows = query_job.result()  # Waits for query to finish
 
 for row in rows:
     temp = get_sku_list(str(row.id),headers)
-    x = (list(map(int, temp)))
+    print(list(map(int, temp)))
     #for i in x:
     #    productList.append(i)
     registro +=1
     if registro == 5:
         break
-    print("Registros almacenados en archivo temporal: "+ str(registro))
+    #print("Registros almacenados en archivo temporal: "+ str(registro))
 
 for order in productList:
     for k, v in order.items():
