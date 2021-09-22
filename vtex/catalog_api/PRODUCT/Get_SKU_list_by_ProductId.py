@@ -44,7 +44,8 @@ rows = query_job.result()  # Waits for query to finish
 for row in rows:
     temp = get_sku_list(str(row.id),headers)
     for i in temp:
-        productList.append(i)
+        x = (list(map(int, i)))
+        productList.append(x)
     registro +=1
     if registro == 5:
         break
@@ -53,6 +54,7 @@ for row in rows:
 for order in productList:
     for k, v in order.items():
         order[k] = replace_blank_dict(v)
+
 
 #def listToString(lista): 
 #    str1 = "" 
@@ -66,7 +68,7 @@ for order in productList:
 
 #def listToStringWithoutBrackets(list1):
 #    return str(list1).replace('}','},').replace(']','').replace("'{","{").replace("}'","}")
-
+'''
 my_schema = [
   {
     "name": "Id",
@@ -207,3 +209,4 @@ with open(filename, "rb") as source_file:
 job.result()  # Waits for table load to complete.
 print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 print("finalizado")
+'''
