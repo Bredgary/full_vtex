@@ -42,19 +42,21 @@ def listToString(lista):
     return str1 
              
 string = listToString(temp)
-#def listToStringWithoutBrackets(list1):
-#    return str(list1).replace('[','').replace(']','').replace("'{","{").replace("}'","}")
+#columns = json.dumps(string)
+ 
+#columns = listToStringWithoutBrackets(string)
 
-#temp2 = listToStringWithoutBrackets(temp)
-print(string)
+#def listToStringWithoutBrackets(list1):
+#    return str(list1).replace('}','},').replace(']','').replace("'{","{").replace("}'","}")
+
 print("Comenzando la conversión")
 
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/context.json", "w")
-text_file.write(string)
+text_file.write(columns)
 text_file.close() 
 
 system("cat context.json | jq -c '.[]' > table.json")
-
+'''
 print("Cargando a BigQuery")
 client = bigquery.Client()
 filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/table.json'
@@ -74,3 +76,4 @@ with open(filename, "rb") as source_file:
 job.result()  # Waits for table load to complete.
 print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 print("finalizado")
+'''
