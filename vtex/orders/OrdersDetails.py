@@ -9,7 +9,7 @@ from google.cloud import bigquery
 system("touch comenzando trabajo")
 #================================================TOTAL DE PAGINAS===============================================================
 headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-querystring = {"f_creationDate":"creationDate:[2021-01-01T01:00:00.000Z TO 2021-02-28T01:59:59.999Z]","f_hasInputInvoice":"false"}
+querystring = {"f_creationDate":"creationDate:[2021-01-01T02:00:00.000Z TO 2021-02-28T01:59:59.999Z]","f_hasInputInvoice":"false"}
 urlPag = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders"
 responsePag = requests.request("GET", urlPag, headers=headers, params=querystring)
 formJson = json.loads(responsePag.text)
@@ -18,7 +18,11 @@ total = paging["total"]
 tableDetails = []
 dataorderDe=[]
 OrderF = []
-print("Total de registros: "+str(paging["total"])+" del mes de agosto.")
+xx1 = "Llevo 100 registros"
+xx2 = "Llevo 1000 registros"
+xx3 = "Llevo mas de 3000 registros"
+xx4 = "Comenzando ingesta"
+
 
 contador = 0
 #================================================TOTAL DE PAGINAS===============================================================
@@ -58,20 +62,23 @@ for i in range(total):
   for ids in listOrder:
     OrderId.append(ids["orderId"])
   for x in OrderId:
+    print("Total de registros: "+str(paging["total"]))
     orderDe = insertar(str(x),headers)
     OrderF.append(orderDe)
     contador = contador + 1
-    print("Pagina: "+str(numeroPaginas) +" de: "+str(total))
-    print("Registros almacenados "+str(contador) +" de: "+str(total*15))
+    print("Registros almacenados "+str(contador))
     if contador == 100:
-        system("touch llevo_100_registros")
-    if contador == 1000:
-        system("touch llevo_1000_registros")
+        text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders/Proceso_1", "w")
+        text_file.write(xx1)
+        text_file.close()
+    if contador == 500:
+        text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders/Proceso_2", "w")
+        text_file.write(xx2)
+        text_file.close()
     if contador == 2500:
-        system("touch voy_por_la_mitad")
-        print("Llevo 40")
-    if contador == 5652:
-        system("touch Termine_mes_de_enero")
+        text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders/Proceso_3", "w")
+        text_file.write(xx3)
+        text_file.close()
     for order in OrderF:
         for k, v in order.items():
             order[k] = replace_blank_dict(v)
@@ -79,6 +86,10 @@ for i in range(total):
     text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders/respaldo.json", "w")
     text_file.write(string)
     text_file.close() 
+
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders/Proceso_4.json", "w")
+text_file.write(x4)
+text_file.close() 
 
 formatoOrder =  json.dumps(OrderF)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders/temp.json", "w")
