@@ -34,8 +34,8 @@ def get_sku_list(id,headers):
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitByProductId/"""+(str(id))+""
     response = requests.request("GET", url, headers=headers) 
     print(list(map(int, response)))
-    jsonF = json.loads(response.text)
-    return jsonF
+    #jsonF = json.loads(response.text)
+    #return jsonF
 
 QUERY = (
     'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_product` ')
