@@ -42,7 +42,7 @@ def listToString(lista):
     return str1 
              
 string = listToString(temp)
-#columns = json.dumps(string)
+columns = json.dumps(string)
  
 #columns = listToStringWithoutBrackets(string)
 
