@@ -9,7 +9,7 @@ from google.cloud import bigquery
 client = bigquery.Client()
 productList = [] 
 temp = ""
- 
+
 
 def replace_blank_dict(d):
     if not d:
