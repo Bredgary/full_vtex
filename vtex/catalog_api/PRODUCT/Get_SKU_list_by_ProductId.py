@@ -10,7 +10,6 @@ from os import system
 from google.cloud import bigquery
 
 client = bigquery.Client()
-'''
 columns = ""
 productList = []
 registro = 0
@@ -68,6 +67,120 @@ for order in productList:
 #def listToStringWithoutBrackets(list1):
 #    return str(list1).replace('}','},').replace(']','').replace("'{","{").replace("}'","}")
 
+my_schema = [
+  {
+    "name": "Id",
+    "type": "STRING"
+  },{
+    "name": "ProductId",
+    "type": "STRING"
+  },{
+    "name": "IsActive",
+    "type": "STRING"
+  },{
+    "name": "Name",
+    "type": "STRING"
+  },{
+    "name": "Height",
+    "type": "STRING"
+  },{
+    "name": "RealHeight",
+    "type": "STRING"
+  },{
+    "name": "Width",
+    "type": "STRING"
+  },{
+    "name": "RealWidth",
+    "type": "STRING"
+  },{
+    "name": "Length",
+    "type": "STRING"
+  },{
+    "name": "RealLength",
+    "type": "STRING"
+  },{
+    "name": "WeightKg",
+    "type": "STRING"
+  },{
+    "name": "RealWeightKg",
+    "type": "STRING"
+  },{
+    "name": "ModalId",
+    "type": "STRING"
+  },{
+    "name": "RefId",
+    "type": "STRING"
+  },{
+    "name": "CubicWeight",
+    "type": "STRING"
+  },{
+    "name": "IsKit",
+    "type": "STRING"
+  },{
+    "name": "IsDynamicKit",
+    "type": "STRING"
+  },{
+    "name": "InternalNote",
+    "type": "STRING"
+  },{
+    "name": "DateUpdated",
+    "type": "STRING"
+  },{
+    "name": "RewardValue",
+    "type": "STRING"
+  },{
+    "name": "CommercialConditionId",
+    "type": "STRING"
+  },{
+    "name": "EstimatedDateArrival",
+    "type": "STRING"
+  },{
+    "name": "FlagKitItensSellApart",
+    "type": "STRING"
+  },{
+    "name": "ManufacturerCode",
+    "type": "STRING"
+  },{
+    "name": "ReferenceStockKeepingUnitId",
+    "type": "STRING"
+  },{
+    "name": "Position",
+    "type": "STRING"
+  },{
+    "name": "EditionSkuId",
+    "type": "STRING"
+  },{
+    "name": "ApprovedAdminId",
+    "type": "STRING"
+  },{
+    "name": "EditionAdminId",
+    "type": "STRING"
+  },{
+    "name": "ActivateIfPossible",
+    "type": "STRING"
+  },{
+    "name": "SupplierCode",
+    "type": "STRING"
+  },{
+    "name": "MeasurementUnit",
+    "type": "STRING"
+  },{
+    "name": "UnitMultiplier",
+    "type": "STRING"
+  },{
+    "name": "IsInventoried",
+    "type": "STRING"
+  },{
+    "name": "IsTransported",
+    "type": "STRING"
+  },{
+    "name": "IsGiftCardRecharge",
+    "type": "STRING"
+  },{
+    "name": "ModalType",
+    "type": "STRING"
+  }
+]
 
 print("Comenzando la conversión")
 columns = json.dumps(productList)
@@ -75,7 +188,7 @@ text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/conte
 text_file.write(columns)
 text_file.close() 
 system("cat context.json | jq -c '.[]' > table.json")
-'''
+
 print("Cargando a BigQuery")
 client = bigquery.Client()
 filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/context.json'
@@ -83,9 +196,8 @@ dataset_id = 'landing_zone'
 table_id = 'shopstar_vtex_sku_list_by_productid'
 dataset_ref = client.dataset(dataset_id)
 table_ref = dataset_ref.table(table_id)
-job_config = bigquery.LoadJobConfig()
+job_config = bigquery.LoadJobConfig(schema=my_schema)
 job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-job_config.autodetect = True
 with open(filename, "rb") as source_file: 
     job = client.load_table_from_file(
         source_file,
