@@ -10,6 +10,7 @@ from os import system
 from google.cloud import bigquery
 
 client = bigquery.Client()
+'''
 columns = ""
 productList = []
 registro = 0
@@ -94,4 +95,3 @@ with open(filename, "rb") as source_file:
 job.result()  # Waits for table load to complete.
 print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 print("finalizado")
-'''
