@@ -40,7 +40,6 @@ def insertar(ids,headers):
   response = requests.request("GET", urlDetail, headers=headers)
   result = re.sub('[!@#$|]', '', response.text)
   data = json.loads(result)
-  print("Total de registros: "+str(paging["total"]))
   return data
 #================================================Obtener Orden Por ID============================================================
 
