@@ -35,21 +35,23 @@ for row in rows:
     get_sku_list(str(row.id),headers)
     registro +=1
     print("Registros almacenados en archivo temporal: "+ str(registro))
-print(temp)
-'''   
-def listToString(lista): 
-    str1 = "" 
-    for ele in lista: 
-        str1 += ele  
-    return str1 
-             
-string = listToString(temp)
+
  
-#columns = listToStringWithoutBrackets(string)
+#def listToString(lista): 
+#    str1 = "" 
+#    for ele in lista: 
+#        str1 += ele  
+#    return str1 
+             
+#string = listToString(temp)
+ 
+#columns = listToStringWithoutBrackets(temp)
 
 #def listToStringWithoutBrackets(list1):
 #    return str(list1).replace('}','},').replace(']','').replace("'{","{").replace("}'","}")
-
+columns = json.dumps(temp)
+print(columns)
+'''
 print("Comenzando la conversión")
 
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/context.json", "w")
