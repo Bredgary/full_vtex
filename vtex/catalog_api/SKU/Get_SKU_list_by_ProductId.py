@@ -33,9 +33,9 @@ def replace_blank_dict(d):
 def get_sku_list(id,headers):
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitByProductId/"""+(str(id))+""
     response = requests.request("GET", url, headers=headers) 
-    print(list(map(int, response.content)))
-    #jsonF = json.loads(response.text)
-    #return jsonF
+    #print(list(map(int, response.content)))
+    jsonF = json.loads(response.text)
+    return jsonF
 
 QUERY = (
     'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_product` ')
@@ -43,165 +43,32 @@ query_job = client.query(QUERY)  # API request
 rows = query_job.result()  # Waits for query to finish
 
 for row in rows:
-    get_sku_list(str(row.id),headers)
-    break
-    #for i in temp:
-    #    productList.append(i)
-    #registro +=1
-    #if registro == 5:
-        
-    #print("Registros almacenados en archivo temporal: "+ str(registro))
+    temp = get_RefId(str(row.RefId))
+    productList.append(temp)
 
 for order in productList:
     for k, v in order.items():
         order[k] = replace_blank_dict(v)
 
 
-#def listToString(lista): 
-#    str1 = "" 
-#    for ele in lista: 
-#        str1 += ele  
-#    return str1 
-             
-#string = listToString(temp)
- 
-#columns = listToStringWithoutBrackets(temp)
-
-#def listToStringWithoutBrackets(list1):
-#    return str(list1).replace('}','},').replace(']','').replace("'{","{").replace("}'","}")
-'''
-my_schema = [
-  {
-    "name": "Id",
-    "type": "STRING"
-  },{
-    "name": "ProductId",
-    "type": "STRING"
-  },{
-    "name": "IsActive",
-    "type": "STRING"
-  },{
-    "name": "Name",
-    "type": "STRING"
-  },{
-    "name": "Height",
-    "type": "STRING"
-  },{
-    "name": "RealHeight",
-    "type": "STRING"
-  },{
-    "name": "Width",
-    "type": "STRING"
-  },{
-    "name": "RealWidth",
-    "type": "STRING"
-  },{
-    "name": "Length",
-    "type": "STRING"
-  },{
-    "name": "RealLength",
-    "type": "STRING"
-  },{
-    "name": "WeightKg",
-    "type": "STRING"
-  },{
-    "name": "RealWeightKg",
-    "type": "STRING"
-  },{
-    "name": "ModalId",
-    "type": "STRING"
-  },{
-    "name": "RefId",
-    "type": "STRING"
-  },{
-    "name": "CubicWeight",
-    "type": "STRING"
-  },{
-    "name": "IsKit",
-    "type": "STRING"
-  },{
-    "name": "IsDynamicKit",
-    "type": "STRING"
-  },{
-    "name": "InternalNote",
-    "type": "STRING"
-  },{
-    "name": "DateUpdated",
-    "type": "STRING"
-  },{
-    "name": "RewardValue",
-    "type": "STRING"
-  },{
-    "name": "CommercialConditionId",
-    "type": "STRING"
-  },{
-    "name": "EstimatedDateArrival",
-    "type": "STRING"
-  },{
-    "name": "FlagKitItensSellApart",
-    "type": "STRING"
-  },{
-    "name": "ManufacturerCode",
-    "type": "STRING"
-  },{
-    "name": "ReferenceStockKeepingUnitId",
-    "type": "STRING"
-  },{
-    "name": "Position",
-    "type": "STRING"
-  },{
-    "name": "EditionSkuId",
-    "type": "STRING"
-  },{
-    "name": "ApprovedAdminId",
-    "type": "STRING"
-  },{
-    "name": "EditionAdminId",
-    "type": "STRING"
-  },{
-    "name": "ActivateIfPossible",
-    "type": "STRING"
-  },{
-    "name": "SupplierCode",
-    "type": "STRING"
-  },{
-    "name": "MeasurementUnit",
-    "type": "STRING"
-  },{
-    "name": "UnitMultiplier",
-    "type": "STRING"
-  },{
-    "name": "IsInventoried",
-    "type": "STRING"
-  },{
-    "name": "IsTransported",
-    "type": "STRING"
-  },{
-    "name": "IsGiftCardRecharge",
-    "type": "STRING"
-  },{
-    "name": "ModalType",
-    "type": "STRING"
-  }
-]
-
 print("Comenzando la conversión")
 columns = json.dumps(productList)
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/context.json", "w")
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/context.json", "w")
 text_file.write(columns)
 text_file.close() 
 system("cat context.json | jq -c '.[]' > table.json")
 
 print("Cargando a BigQuery")
 client = bigquery.Client()
-filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/context.json'
+filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/table.json'
 dataset_id = 'landing_zone'
 table_id = 'shopstar_vtex_sku_list_by_productid'
 dataset_ref = client.dataset(dataset_id)
 table_ref = dataset_ref.table(table_id)
-job_config = bigquery.LoadJobConfig(schema=my_schema)
+job_config = bigquery.LoadJobConfig()
 job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-with open(filename, "rb") as source_file: 
+job_config.autodetect = True
+with open(filename, "rb") as source_file:
     job = client.load_table_from_file(
         source_file,
         table_ref,
@@ -209,5 +76,6 @@ with open(filename, "rb") as source_file:
     job_config=job_config,)  # API request
 job.result()  # Waits for table load to complete.
 print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
+system("rm context.json")
+system("rm table.json")
 print("finalizado")
-'''
