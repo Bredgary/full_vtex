@@ -11,20 +11,30 @@ from google.cloud import bigquery
 
 client = bigquery.Client()
 columns = ""
-productList = [] 
-temp = []
+productList = []
 registro = 0
 temp2 = "" 
 list1 = ""
 headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
+def replace_blank_dict(d):
+    if not d:
+        return None
+    if type(d) is list:
+        for list_item in d:
+            if type(list_item) is dict:
+                for k, v in list_item.items():
+                    list_item[k] = replace_blank_dict(v)
+    if type(d) is dict:
+        for k, v in d.items():
+            d[k] = replace_blank_dict(v)
+    return d
 
 def get_sku_list(id,headers):
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitByProductId/"""+(str(id))+""
     response = requests.request("GET", url, headers=headers) 
-    formatoJson = json.loads(response.text)
-    for i in formatoJson:
-        columns = json.dumps(i)
+    jsonF = json.loads(response.text)
+    return jsonF
 
 QUERY = (
     'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_product` ')
@@ -32,13 +42,18 @@ query_job = client.query(QUERY)  # API request
 rows = query_job.result()  # Waits for query to finish
 
 for row in rows:
-    get_sku_list(str(row.id),headers)
+    temp = get_productIFD(str(row.id))
+    for i in temp:
+        lost = get_product(i)
+        productList.append(lost)
     registro +=1
     if registro == 5:
         break
     print("Registros almacenados en archivo temporal: "+ str(registro))
 
- 
+for order in productList:
+    for k, v in order.items():
+        order[k] = replace_blank_dict(v)
 #def listToString(lista): 
 #    str1 = "" 
 #    for ele in lista: 
@@ -54,7 +69,7 @@ for row in rows:
 
 
 print("Comenzando la conversión")
-
+columns = json.dumps(productList)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/context.json", "w")
 text_file.write(columns)
 text_file.close() 
