@@ -42,7 +42,7 @@ query_job = client.query(QUERY)  # API request
 rows = query_job.result()  # Waits for query to finish
 
 for row in rows:
-    temp = get_sku_list(str(row.id))
+    temp = get_sku_list(str(row.id),headers)
     for i in temp:
         lost = get_product(i)
         productList.append(lost)
