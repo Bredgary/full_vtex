@@ -18,7 +18,6 @@ tableDetails = []
 dataorderDe=[]
 OrderF = []
 
-
 contador = 0
 #================================================TOTAL DE PAGINAS===============================================================
 
@@ -45,7 +44,7 @@ def insertar(ids,headers):
   return data
 #================================================Obtener Orden Por ID============================================================
 
-system("touch /home/bred_valenzuela/full_vtex/vtex/orders/respaldo.json")
+
 for i in range(total):
   i =+1
   OrderId = []
@@ -62,19 +61,7 @@ for i in range(total):
     OrderF.append(orderDe)
     contador = contador + 1
     string =  json.dumps(OrderF)
-    print("Registros almacenados "+str(contador))
-    if contador == 100:
-        text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders/Llevo_100_registros", "w")
-        text_file.write(string)
-        text_file.close() 
-    if contador == 500:
-        text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders/Llevo_1000_registros", "w")
-        text_file.write(string)
-        text_file.close()
-    if contador == 2500:
-        text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders/Llevo_mas_de_10000_registros", "w")
-        text_file.write(string)
-        text_file.close() 
+    print("Registros almacenados "+str(contador)+" de "+str(total))
     for order in OrderF:
         for k, v in order.items():
             order[k] = replace_blank_dict(v)
