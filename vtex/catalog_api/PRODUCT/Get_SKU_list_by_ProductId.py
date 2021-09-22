@@ -51,7 +51,7 @@ for row in rows:
 #    return str(list1).replace('}','},').replace(']','').replace("'{","{").replace("}'","}")
 columns = json.dumps(temp)
 print(columns)
-'''
+
 print("Comenzando la conversión")
 
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/context.json", "w")
@@ -59,7 +59,7 @@ text_file.write(columns)
 text_file.close() 
 
 system("cat context.json | jq -c '.[]' > table.json")
-
+'''
 print("Cargando a BigQuery")
 client = bigquery.Client()
 filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/table.json'
