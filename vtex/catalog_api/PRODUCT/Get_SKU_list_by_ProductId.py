@@ -33,6 +33,8 @@ rows = query_job.result()  # Waits for query to finish
 for row in rows:
     get_sku_list(str(row.id),headers)
     registro +=1
+    for i in temp:
+        columns = json.dumps(i)
     print("Registros almacenados en archivo temporal: "+ str(registro))
 
  
@@ -48,8 +50,7 @@ for row in rows:
 
 #def listToStringWithoutBrackets(list1):
 #    return str(list1).replace('}','},').replace(']','').replace("'{","{").replace("}'","}")
-for i in temp:
-    columns = json.dumps(i)
+
 
 print("Comenzando la conversión")
 
