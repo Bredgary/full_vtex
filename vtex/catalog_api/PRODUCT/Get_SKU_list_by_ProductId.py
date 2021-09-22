@@ -35,7 +35,8 @@ for row in rows:
     get_sku_list(str(row.id),headers)
     registro +=1
     print("Registros almacenados en archivo temporal: "+ str(registro))
-    
+print(temp)
+ '''   
 def listToString(lista): 
     str1 = "" 
     for ele in lista: 
@@ -56,7 +57,7 @@ text_file.write(columns)
 text_file.close() 
 
 system("cat context.json | jq -c '.[]' > table.json")
-'''
+
 print("Cargando a BigQuery")
 client = bigquery.Client()
 filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/table.json'
