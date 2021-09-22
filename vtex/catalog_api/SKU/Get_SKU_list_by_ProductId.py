@@ -38,12 +38,12 @@ def get_sku_list(id,headers):
     return jsonF
 
 QUERY = (
-    'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_product` ')
+    'SELECT Id FROM `shopstar-datalake.landing_zone.shopstar_vtex_product` ')
 query_job = client.query(QUERY)  # API request
 rows = query_job.result()  # Waits for query to finish
 
 for row in rows:
-    temp = get_RefId(str(row.RefId))
+    temp = get_sku_list(str(row.Id))
     productList.append(temp)
 
 for order in productList:
