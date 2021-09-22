@@ -44,7 +44,7 @@ rows = query_job.result()  # Waits for query to finish
 for row in rows:
     temp = get_sku_list(str(row.id),headers)
     for i in temp:
-        productList.append(lost)
+        productList.append(i)
     registro +=1
     if registro == 5:
         break
