@@ -10,7 +10,7 @@ from os import system
 from google.cloud import bigquery
 
 client = bigquery.Client()
-
+columns = ""
 productList = [] 
 temp = []
 registro = 0
@@ -49,8 +49,8 @@ for row in rows:
 
 #def listToStringWithoutBrackets(list1):
 #    return str(list1).replace('}','},').replace(']','').replace("'{","{").replace("}'","}")
-columns = json.dumps(temp)
-print(columns)
+for i in temp:
+    columns = json.dumps(i)
 
 print("Comenzando la conversión")
 
