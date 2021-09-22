@@ -33,7 +33,7 @@ def replace_blank_dict(d):
 def get_sku_list(id,headers):
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitByProductId/"""+(str(id))+""
     response = requests.request("GET", url, headers=headers) 
-    print(list(map(int, response.text)))
+    print(list(map(int, response.content)))
     #jsonF = json.loads(response.text)
     #return jsonF
 
