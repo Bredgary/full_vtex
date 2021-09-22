@@ -22,8 +22,9 @@ headers = {"Content-Type": "application/json","Accept": "application/json","X-VT
 def get_sku_list(id,headers):
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitByProductId/"""+(str(id))+""
     response = requests.request("GET", url, headers=headers) 
-    temp.append(response.text)
-    
+    formatoJson = json.loads(response.text)
+    for i in formatoJson:
+        temp.append(i)
 
 QUERY = (
     'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_product` ')
@@ -42,7 +43,6 @@ def listToString(lista):
     return str1 
              
 string = listToString(temp)
-columns = json.dumps(string)
  
 #columns = listToStringWithoutBrackets(string)
 
