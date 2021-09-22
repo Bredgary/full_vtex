@@ -18,10 +18,6 @@ total = paging["total"]
 tableDetails = []
 dataorderDe=[]
 OrderF = []
-xx1 = "Llevo 100 registros"
-xx2 = "Llevo 1000 registros"
-xx3 = "Llevo mas de 10000 registros"
-xx4 = "Comenzando ingesta"
 
 
 contador = 0
