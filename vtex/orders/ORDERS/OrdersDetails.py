@@ -9,7 +9,7 @@ from google.cloud import bigquery
 print("comenzando_trabajo")
 #================================================TOTAL DE PAGINAS===============================================================
 headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-querystring = {"f_creationDate":"creationDate:[2021-01-01T02:00:00.000Z TO 2021-02-28T01:59:59.999Z]","f_hasInputInvoice":"false"}
+querystring = {"f_creationDate":"creationDate:[2021-01-01T02:00:00.000Z TO 2021-03-31T01:59:59.999Z]","f_hasInputInvoice":"false"}
 urlPag = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders"
 responsePag = requests.request("GET", urlPag, headers=headers, params=querystring)
 formJson = json.loads(responsePag.text)
@@ -20,7 +20,7 @@ dataorderDe=[]
 OrderF = []
 xx1 = "Llevo 100 registros"
 xx2 = "Llevo 1000 registros"
-xx3 = "Llevo mas de 3000 registros"
+xx3 = "Llevo mas de 10000 registros"
 xx4 = "Comenzando ingesta"
 
 
@@ -66,30 +66,26 @@ for i in range(total):
     orderDe = insertar(str(x),headers)
     OrderF.append(orderDe)
     contador = contador + 1
+    string =  json.dumps(OrderF)
     print("Registros almacenados "+str(contador))
     if contador == 100:
-        text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders/Proceso_1", "w")
-        text_file.write(xx1)
-        text_file.close()
+        text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders/Llevo_100_registros", "w")
+        text_file.write(string)
+        text_file.close() 
     if contador == 500:
-        text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders/Proceso_2", "w")
-        text_file.write(xx2)
+        text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders/Llevo_1000_registros", "w")
+        text_file.write(string)
         text_file.close()
     if contador == 2500:
-        text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders/Proceso_3", "w")
-        text_file.write(xx3)
-        text_file.close()
+        text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders/Llevo_mas_de_10000_registros", "w")
+        text_file.write(string)
+        text_file.close() 
     for order in OrderF:
         for k, v in order.items():
             order[k] = replace_blank_dict(v)
-    string =  json.dumps(OrderF)
     text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders/respaldo.json", "w")
     text_file.write(string)
     text_file.close() 
-
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders/Proceso_4.json", "w")
-text_file.write(x4)
-text_file.close() 
 
 formatoOrder =  json.dumps(OrderF)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders/temp.json", "w")
@@ -97,11 +93,11 @@ text_file.write(formatoOrder)
 text_file.close() 
 system("cat temp.json | jq -c '.[]' > DetailOrdersFinal.json")
 
-
+print("Comenzando la ingesta")
 client = bigquery.Client()
 filename = '/home/bred_valenzuela/full_vtex/vtex/orders/DetailOrdersFinal.json'
 dataset_id = 'landing_zone'
-table_id = 'shopstar_vtex_orders_detail'
+table_id = 'shopstar_vtex_orders_details'
 dataset_ref = client.dataset(dataset_id)
 table_ref = dataset_ref.table(table_id)
 job_config = bigquery.LoadJobConfig()
