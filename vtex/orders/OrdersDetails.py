@@ -6,10 +6,10 @@ from datetime import datetime
 from os import system
 from google.cloud import bigquery
 #import subprocess  
-
+system("touch comenzando trabajo")
 #================================================TOTAL DE PAGINAS===============================================================
 headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-querystring = {"f_creationDate":"creationDate:[2021-08-30T01:00:00.000Z TO 2021-08-31T01:59:59.999Z]","f_hasInputInvoice":"false"}
+querystring = {"f_creationDate":"creationDate:[2021-01-01T01:00:00.000Z TO 2021-02-28T01:59:59.999Z]","f_hasInputInvoice":"false"}
 urlPag = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders"
 responsePag = requests.request("GET", urlPag, headers=headers, params=querystring)
 formJson = json.loads(responsePag.text)
@@ -63,6 +63,15 @@ for i in range(total):
     contador = contador + 1
     print("Pagina: "+str(numeroPaginas) +" de: "+str(total))
     print("Registros almacenados "+str(contador) +" de: "+str(total*15))
+    if contador == 100:
+        system("touch llevo_100_registros")
+    if contador == 1000:
+        system("touch llevo_1000_registros")
+    if contador == 2500:
+        system("touch voy_por_la_mitad")
+        print("Llevo 40")
+    if contador == 5652:
+        system("touch Termine_mes_de_enero")
     for order in OrderF:
         for k, v in order.items():
             order[k] = replace_blank_dict(v)
@@ -81,7 +90,7 @@ system("cat temp.json | jq -c '.[]' > DetailOrdersFinal.json")
 client = bigquery.Client()
 filename = '/home/bred_valenzuela/full_vtex/vtex/orders/DetailOrdersFinal.json'
 dataset_id = 'landing_zone'
-table_id = 'shopstar_orders_detail'
+table_id = 'shopstar_vtex_orders_detail'
 dataset_ref = client.dataset(dataset_id)
 table_ref = dataset_ref.table(table_id)
 job_config = bigquery.LoadJobConfig()
