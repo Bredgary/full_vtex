@@ -64,7 +64,7 @@ for i in range(total):
     for order in OrderF:
         for k, v in order.items():
             order[k] = replace_blank_dict(v)
-    text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders/respaldo.json", "w")
+    text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders/ORDERS/respaldo.json", "w")
     text_file.write(string)
     text_file.close() 
 
