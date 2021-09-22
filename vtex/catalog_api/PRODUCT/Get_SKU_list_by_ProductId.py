@@ -53,6 +53,7 @@ for row in rows:
 for order in productList:
     for k, v in order.items():
         order[k] = replace_blank_dict(v)
+
 #def listToString(lista): 
 #    str1 = "" 
 #    for ele in lista: 
@@ -72,9 +73,8 @@ columns = json.dumps(productList)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/context.json", "w")
 text_file.write(columns)
 text_file.close() 
-
 system("cat context.json | jq -c '.[]' > table.json")
-'''
+
 print("Cargando a BigQuery")
 client = bigquery.Client()
 filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/table.json'
@@ -94,4 +94,3 @@ with open(filename, "rb") as source_file:
 job.result()  # Waits for table load to complete.
 print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 print("finalizado")
-'''
