@@ -36,7 +36,7 @@ def get_list_order(creationDateFrom,creationDateTo):
 		"X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA",
 		"X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 	response = requests.request("GET", url, headers=headers, params=querystring)
-	animate()
+	animate() 
 	cv.destroyAllWindows()
 	text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders/ORDERS/JsonHistory/ordenes-"+creationDateFrom+"-"+creationDateTo+".json", "w")
 	text_file.write(response.text)
