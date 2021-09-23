@@ -6,17 +6,23 @@ import os
 import re
 from datetime import datetime
 from os import system
-from google.cloud import bigquery
-import numpy as np
-import cv2 as cv
+import time
+import sys
 
-img = np.zeros ((320, 320, 3), np.uint8)
-#imprimir img.shape
-
-point_size = 1
-point_color = (0, 0, 255) 
-espesor = 4 
-points_list = [(160, 160), (136, 160), (150, 200), (200, 180), (120, 150), (145, 180)]
+done = 'false'
+def animate():
+    while done == 'false':
+        sys.stdout.write('\rloading |')
+        time.sleep(0.1)
+        sys.stdout.write('\rloading /')
+        time.sleep(0.1)
+        sys.stdout.write('\rloading -')
+        time.sleep(0.1)
+        sys.stdout.write('\rloading \\')
+        time.sleep(0.1)
+    sys.stdout.write('\rDone!     ')
+animate()
+done = 'false'
 
 
 print("comenzando_trabajo") 
@@ -30,12 +36,7 @@ def get_list_order(creationDateFrom,creationDateTo):
 		"X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA",
 		"X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 	response = requests.request("GET", url, headers=headers, params=querystring)
-	for point in points_list:
-		cv.circle(img, point, point_size, point_color, thickness)
-		cv.circle(img, (160, 160), 60, point_color, 0)
-		cv.namedWindow("image")
-		cv.imshow('image', img)
-		cv.waitKey (10000) 
+	animate()
 	cv.destroyAllWindows()
 	text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders/ORDERS/JsonHistory/ordenes-"+creationDateFrom+"-"+creationDateTo+".json", "w")
 	text_file.write(response.text)
