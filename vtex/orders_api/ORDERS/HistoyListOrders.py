@@ -38,10 +38,16 @@ def get_list_order(creationDateFrom,creationDateTo):
 		"X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 	response = requests.request("GET", url, headers=headers, params=querystring)
 	animate() 
-	text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders/ORDERS/JsonHistory/ordenes-"+creationDateFrom+"-"+creationDateTo+".json", "w")
+	contado +=1
+	#Registro de json
+	text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders/ORDERS/JsonHistory/ordenes-"+creationDateFrom+"-"+creationDateTo+"_"+contador+".json", "w")
 	text_file.write(response.text)
 	text_file.close()
-	print("Dia: " + str(contador + 1))
+    #Ultimo día referencia
+	text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders/ORDERS/JsonHistory/ultimoDiaReg.txt" ,"w")
+	text_file.write(creationDateTo)
+	text_file.close()
+	print("Dia: " + str(contador))
 
 print("Primera Semana")
 get_list_order("2021-01-01","2021-01-02")
@@ -53,5 +59,5 @@ get_list_order("2021-01-06","2021-01-07")
 get_list_order("2021-01-07","2021-01-08")
 get_list_order("2021-01-08","2021-01-09")
 
-print("Estado Finalizado")
+print("Estado Finalizado!!")
 
