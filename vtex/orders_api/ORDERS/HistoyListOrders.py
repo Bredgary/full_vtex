@@ -23,11 +23,12 @@ def animate():
     sys.stdout.write('\rDone!     ')
 animate()
 done = 'false'
-
-
+contador = 0
 print("comenzando_trabajo") 
 
 def get_list_order(creationDateFrom,creationDateTo):
+	print("Desde: "+creationDateFrom)
+	print("Hasta: "+creationDateTo)
 	url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders"
 	querystring = {"f_creationDate":"creationDate:[creationDate:["+creationDateFrom+"T02:00:00.000Z TO "+creationDateTo+"T01:59:59.999Z]]","f_hasInputInvoice":"false"}
 	headers = {
@@ -37,18 +38,20 @@ def get_list_order(creationDateFrom,creationDateTo):
 		"X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 	response = requests.request("GET", url, headers=headers, params=querystring)
 	animate() 
-	cv.destroyAllWindows()
 	text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders/ORDERS/JsonHistory/ordenes-"+creationDateFrom+"-"+creationDateTo+".json", "w")
 	text_file.write(response.text)
-	text_file.close() 
+	text_file.close()
+	print("Dia: " + str(contador + 1))
 
-get_list_order("2021-01-01","2021-01-10")
-print("Primera semana finalizada")
-get_list_order("2021-01-10","2021-01-17")
-print("Segunda semana finalizada")
-get_list_order("2021-01-17","2021-01-24")
-print("Tercera semana finalizada")
-get_list_order("2021-01-24","2021-01-31")
+print("Primera Semana")
+get_list_order("2021-01-01","2021-01-02")
+get_list_order("2021-01-02","2021-01-03")
+get_list_order("2021-01-03","2021-01-04")
+get_list_order("2021-01-04","2021-01-05")
+get_list_order("2021-01-05","2021-01-06")
+get_list_order("2021-01-06","2021-01-07")
+get_list_order("2021-01-07","2021-01-08")
+get_list_order("2021-01-08","2021-01-09")
 
 print("Estado Finalizado")
 
