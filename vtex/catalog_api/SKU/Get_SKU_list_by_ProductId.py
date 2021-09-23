@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# -*- coding: latin-1 -*-
+# -*- coding: UTF-8 -*-
 import os, sys
 import requests
 import json
