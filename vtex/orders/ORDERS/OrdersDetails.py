@@ -8,7 +8,7 @@ from google.cloud import bigquery
 print("comenzando_trabajo") 
 #================================================TOTAL DE PAGINAS===============================================================
 headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-querystring = {"f_creationDate":"creationDate:[2021-01-01T02:00:00.000Z TO 2021-03-31T01:59:59.999Z]","f_hasInputInvoice":"false"}
+querystring = {"f_creationDate":"creationDate:[2021-01-01T01:00:00.000Z TO 2021-01-31T01:59:59.999Z]","f_hasInputInvoice":"false"}
 urlPag = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders"
 responsePag = requests.request("GET", urlPag, headers=headers, params=querystring)
 formJson = json.loads(responsePag.text)
