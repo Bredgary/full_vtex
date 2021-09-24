@@ -9,21 +9,6 @@ from os import system
 import time
 import sys
 
-done = 'false'
-def animate():
-    while done == 'false':
-        sys.stdout.write('\rloading |')
-        time.sleep(0.1)
-        sys.stdout.write('\rloading /')
-        time.sleep(0.1)
-        sys.stdout.write('\rloading -')
-        time.sleep(0.1)
-        sys.stdout.write('\rloading \\')
-        time.sleep(0.1)
-    sys.stdout.write('\rDone!     ')
-animate()
-done = 'false'
-contador = 0
 print("comenzando_trabajo") 
 
 def get_list_order(creationDateFrom,creationDateTo):
@@ -49,14 +34,21 @@ def get_list_order(creationDateFrom,creationDateTo):
 	text_file.close()
 	print("Dia: " + str(contador))
 
-print("Primera Semana")
+print("Primer Dia")
 get_list_order("2021-01-01","2021-01-02")
+print("Segundo Dia")
 get_list_order("2021-01-02","2021-01-03")
+print("Tercer Dia")
 get_list_order("2021-01-03","2021-01-04")
+print("Cuarto Dia")
 get_list_order("2021-01-04","2021-01-05")
+print("Quinto Dia")
 get_list_order("2021-01-05","2021-01-06")
+print("Sexto Dia")
 get_list_order("2021-01-06","2021-01-07")
+print("Noveno Dia")
 get_list_order("2021-01-07","2021-01-08")
+print("Decimo Dia")
 get_list_order("2021-01-08","2021-01-09")
 
 print("Estado Finalizado!!")
