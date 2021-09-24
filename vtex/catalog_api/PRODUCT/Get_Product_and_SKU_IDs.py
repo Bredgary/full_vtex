@@ -20,7 +20,7 @@ def get_productIFD(id,data_from,data_to):
 	jsonF = json.loads(response.text)
 	data = jsonF["data"]
 	text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/"+str(ids+1)+"_productFrom_"+str(data_from)+"_ProductTo_"+str(data_to)+"_categoryID_"+str(id)+".json", "w")
-	text_file.write(data)
+	text_file.write(data.text)
 	text_file.close()
 	if data is not None:
 		data_from = data_from + 50
