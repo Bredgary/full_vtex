@@ -14,13 +14,12 @@ client = bigquery.Client()
 
 def get_productIFD(id,data_from,data_to):
 	url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/GetProductAndSkuIds"
-	querystring = {"categoryId":"441","_from":"1","_to":"50"}
+	querystring = {"categoryId":""+str(id)+"","_from":""+str(data_from)+"","_to":""+str(data_from)+""}
 	headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 	response = requests.request("GET", url, headers=headers, params=querystring)
 	jsonF = json.loads(response.text)
 	product = jsonF["data"]
 	print(data_from)
-	print(data_to)
     #url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/GetProductAndSkuIds"
     #querystring = {"categoryId":""+str(id)+"","_from":""+str(data_from)+"","_to":""+str(data_to)+""}
     #response = requests.request("GET", url, headers=headers, params=querystring)
