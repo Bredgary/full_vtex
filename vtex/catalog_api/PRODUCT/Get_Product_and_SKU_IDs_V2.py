@@ -9,7 +9,6 @@ from os import system
 import time
 import sys
 import uuid
-import self
 import tools.ngram
 
 credentials = GoogleCredentials.get_application_default()
