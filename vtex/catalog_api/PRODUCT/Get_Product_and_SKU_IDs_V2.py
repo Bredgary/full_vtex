@@ -13,6 +13,9 @@ import self
 
 table = "prueba"
 data = "test"
+project_id = "shopstar-datalake"
+dataset_id = "landing_zone"
+
 my_schema = [
   {
     "name": "Id",
@@ -32,8 +35,8 @@ def stream_data(self, table, data, schema):
         body = {
             'tableReference': {
                 'tableId': table,
-                'projectId': your_project_id,
-                'datasetId': your_dataset_id
+                'projectId': project_id,
+                'datasetId': dataset_id
             },
             'schema': schema
         }
