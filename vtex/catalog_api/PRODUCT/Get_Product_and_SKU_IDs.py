@@ -6,10 +6,19 @@ from datetime import datetime
 from os import system
 from google.cloud import bigquery
 
-data_from = 1
-data_to = 50
 ids = 1
+data_from = ""
+data_to = ""
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/ultimoRegistroCargado_from.txt", "w")
+text_file.read(data_from)
+text_file.close()
 
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/ultimoRegistroCargado_to.txt", "w")
+text_file.read(data_to)
+text_file.close()
+print(data_from)
+print(data_to)
+'''
 client = bigquery.Client()
 
 def get_productIFD(id,data_from,data_to,ids):
@@ -25,10 +34,10 @@ def get_productIFD(id,data_from,data_to,ids):
 	text_file.close()
 	u_data_from = str(data_from)
 	u_data_to = str(data_to)
-	text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/ultimoRegistroFromCargado_from.json", "w")
+	text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/ultimoRegistroFromCargado_from.txt", "w")
 	text_file.write(u_data_from)
 	text_file.close()
-	text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/ultimoRegistroFromCargado_to.json", "w")
+	text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/ultimoRegistroFromCargado_to.txt", "w")
 	text_file.write(u_data_to)
 	text_file.close()
 	if data is not None:
@@ -40,10 +49,10 @@ def get_productIFD(id,data_from,data_to,ids):
 	else:
 		u_data_from = str(data_from)
 		u_data_to = str(data_to)
-		text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/ultimoRegistroFromCargado_from.json", "w")
+		text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/ultimoRegistroFromCargado_from.txt", "w")
 		text_file.write(u_data_from)
 		text_file.close()
-		text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/ultimoRegistroFromCargado_to.json", "w")
+		text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/ultimoRegistroFromCargado_to.txt", "w")
 		text_file.write(u_data_to)
 		text_file.close()
 
@@ -54,4 +63,4 @@ rows = query_job.result()
 
 for row in rows:
 	get_productIFD(str(row.id),data_from,data_to,ids)
-  
+'''
