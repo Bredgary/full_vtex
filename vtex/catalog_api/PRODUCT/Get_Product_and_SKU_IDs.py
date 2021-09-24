@@ -24,8 +24,8 @@ def get_productIFD(id,data_from,data_to):
 	text_file.close()
     if data:
 		data_from = data_from + 50
-    	data_to = data_to +50
-		get_productIFD(id,data_from,data_to,headers)
+		data_to = data_to +50
+		get_productIFD(id,data_from,data_to)
     else:
 		u_data_from = str(data_from)
 		u_data_to str(data_to)
