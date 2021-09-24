@@ -15,10 +15,10 @@ def get_productIFD(id,data_from,data_to,headers):
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/GetProductAndSkuIds"
     querystring = {"categoryId":""+str(id)+"","_from":""+str(data_from)+"","_to":""+str(data_to)+""}
     response = requests.request("GET", url, headers=headers, params=querystring)
-	text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/"+str(ids+1)+"_productFrom_"+str(data_from)+"_ProductTo_"+str(data_to)+"_categoryID_"+str(id)+".json", "w")
-	text_file.write(response.text)
-	text_file.close()
 	formatoJson = json.loads(response.text)
+	text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/"+str(ids+1)+"_productFrom_"+str(data_from)+"_ProductTo_"+str(data_to)+"_categoryID_"+str(id)+".json", "w")
+	text_file.write(formatoJson)
+	text_file.close()
     data = formatoJson["data"]
     if data:
 		data_from = data_from + 50
