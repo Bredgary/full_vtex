@@ -28,7 +28,7 @@ def get_productIFD(id,data_from,data_to):
 		get_productIFD(id,data_from,data_to)
 	else:
 		u_data_from = str(data_from)
-		u_data_to str(data_to)
+		u_data_to = str(data_to)
 		text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/ultimoRegistroFromCargado__"+u_data_from+".json", "w")
 		text_file.write(u_data_from)
 		text_file.close()
