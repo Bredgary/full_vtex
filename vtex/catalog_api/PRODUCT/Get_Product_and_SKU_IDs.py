@@ -26,7 +26,7 @@ def get_productIFD(id,data_from,data_to):
 	if data is not None:
 		data_from = data_from + 50
 		data_to = data_to +50
-		print(str(ids)" ID de producto agregado, categoryID= "str(id))
+		print(str(ids)+" ID de producto agregado, categoryID= "+str(id))
 		get_productIFD(id,data_from,data_to)
 	else:
 		u_data_from = str(data_from)
