@@ -17,8 +17,7 @@ def get_productIFD(id,data_from,data_to,headers):
     querystring = {"categoryId":""+str(id)+"","_from":""+str(data_from)+"","_to":""+str(data_to)+""}
     response = requests.request("GET", url, headers=headers, params=querystring)
     jsonF = json.loads(response.text)
-    product = jsonF["data"]
-	'''
+    data = jsonF["data"]
 	text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/"+str(ids+1)+"_productFrom_"+str(data_from)+"_ProductTo_"+str(data_to)+"_categoryID_"+str(id)+".json", "w")
 	text_file.write(data)
 	text_file.close()
@@ -35,7 +34,6 @@ def get_productIFD(id,data_from,data_to,headers):
 		text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/ultimoRegistroToCargado__"+u_data_to+".json", "w")
 		text_file.write(u_data_to)
 		text_file.close()
-	'''
 
 QUERY = (
     'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_detail_category` ')
@@ -44,5 +42,4 @@ rows = query_job.result()
 
 for row in rows:
     get_productIFD(str(row.id),data_from,data_to,headers)
-	break
   
