@@ -34,8 +34,7 @@ def stream_data(self, table, data, schema):
                 'tableId': table,
                 'projectId': project_id,
                 'datasetId': dataset_id
-            },
-            schema': schema
+            },'schema': schema
         }
         self.service.tables().insert(projectId=project_id,datasetId=dataset_id,body=body).execute()
         
@@ -45,4 +44,3 @@ def stream_data(self, table, data, schema):
 
 
 
-    
