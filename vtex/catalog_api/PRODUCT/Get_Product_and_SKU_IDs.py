@@ -21,7 +21,6 @@ def get_productIFD(id,data_from,data_to):
 	product = jsonF["data"]
 	print(data_from)
 	print(data_to)
-	return product
     #url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/GetProductAndSkuIds"
     #querystring = {"categoryId":""+str(id)+"","_from":""+str(data_from)+"","_to":""+str(data_to)+""}
     #response = requests.request("GET", url, headers=headers, params=querystring)
@@ -51,6 +50,6 @@ query_job = client.query(QUERY)
 rows = query_job.result()  
 
 for row in rows:
-	get_productIFD(str(row.id),data_from,data_to,headers)
+	get_productIFD(str(row.id),data_from,data_to)
 	break
   
