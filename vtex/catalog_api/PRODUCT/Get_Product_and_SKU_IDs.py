@@ -12,8 +12,13 @@ f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGe
 data_from_string = f_01.read()
 f_02 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/ultimoRegistroCargado_to.txt','r')
 data_to_string = f_02.read()
+f_03 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/ids.txt','r')
+ids_string = f_03.read()
+
+
 data_from = int(data_from_string)
 data_to = int(data_to_string)
+ids = int(ids_string)
 
 client = bigquery.Client()
 
@@ -40,6 +45,9 @@ def get_productIFD(id,data_from,data_to,ids):
 		data_from = data_from + 50
 		data_to = data_to +50
 		ids = ids + 1
+		text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/ids.txt", "w")
+		text_file.write(str(ids))
+		text_file.close()
 		print(str(ids)+" ID de producto agregado, categoryID= "+str(id))
 		get_productIFD(id,data_from,data_to,ids)
 	else:
