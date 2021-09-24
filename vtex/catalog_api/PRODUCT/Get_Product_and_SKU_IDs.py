@@ -22,11 +22,11 @@ def get_productIFD(id,data_from,data_to):
 	text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/"+str(ids+1)+"_productFrom_"+str(data_from)+"_ProductTo_"+str(data_to)+"_categoryID_"+str(id)+".json", "w")
 	text_file.write(data)
 	text_file.close()
-    if data:
+	if data is not None:
 		data_from = data_from + 50
 		data_to = data_to +50
 		get_productIFD(id,data_from,data_to)
-    else:
+	else:
 		u_data_from = str(data_from)
 		u_data_to str(data_to)
 		text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/ultimoRegistroFromCargado__"+u_data_from+".json", "w")
