@@ -9,16 +9,12 @@ from google.cloud import bigquery
 ids = 1
 
 f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/ultimoRegistroCargado_from.txt','r')
-data_from = f_01.read()
-
+data_from_string = f_01.read()
 f_02 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/ultimoRegistroCargado_to.txt','r')
-data_to = f_02.read()
+data_to_string = f_02.read()
+data_from = int(data_from_string)
+data_to = int(data_to_string)
 
-print(data_from)
-print(data_to)
-print(type(data_from))
-print(type(data_to))
-'''
 client = bigquery.Client()
 
 def get_productIFD(id,data_from,data_to,ids):
@@ -49,10 +45,10 @@ def get_productIFD(id,data_from,data_to,ids):
 	else:
 		u_data_from = str(data_from)
 		u_data_to = str(data_to)
-		text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/ultimoRegistroFromCargado_from.txt", "w")
+		text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/ultimoRegistroFromCargado_from_categoryID_"+str(id)+".txt", "w")
 		text_file.write(u_data_from)
 		text_file.close()
-		text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/ultimoRegistroFromCargado_to.txt", "w")
+		text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/ultimoRegistroFromCargado_to_categoryID_"+str(id)+".txt", "w")
 		text_file.write(u_data_to)
 		text_file.close()
 
@@ -63,4 +59,3 @@ rows = query_job.result()
 
 for row in rows:
 	get_productIFD(str(row.id),data_from,data_to,ids)
-'''
