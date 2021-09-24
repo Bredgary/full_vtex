@@ -20,12 +20,13 @@ def get_productIFD(id,data_from,data_to):
 	jsonF = json.loads(response.text)
 	data = jsonF["data"]
 	idsProducts = json.dumps(data)
-	text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/"+str(ids+1)+"_productFrom_"+str(data_from)+"_ProductTo_"+str(data_to)+"_categoryID_"+str(id)+".json", "w")
+	text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/"+str(ids)+"_productID_From_"+str(data_from)+"_ProductID_To_"+str(data_to)+"_categoryID_"+str(id)+".json", "w")
 	text_file.write(idsProducts)
 	text_file.close()
 	if data is not None:
 		data_from = data_from + 50
 		data_to = data_to +50
+		print(str(ids)" ID de producto agregado, categoryID= "str(id))
 		get_productIFD(id,data_from,data_to)
 	else:
 		u_data_from = str(data_from)
@@ -43,5 +44,6 @@ query_job = client.query(QUERY)
 rows = query_job.result()  
 
 for row in rows:
+	ids = ids + 1
 	get_productIFD(str(row.id),data_from,data_to)
   
