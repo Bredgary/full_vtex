@@ -41,7 +41,7 @@ def get_productIFD(id,data_from,data_to,ids):
 	text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/ultimoRegistroCargado_to.txt", "w")
 	text_file.write(u_data_to)
 	text_file.close()
-	if data is not None:
+	if bool(data):
 		data_from = data_from + 50
 		data_to = data_to +50
 		ids = ids + 1
