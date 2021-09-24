@@ -1,4 +1,26 @@
+#!/usr/bin/python
+# -*- coding: UTF-8 -*-
+import requests
+import json
+import os
+import re
+from datetime import datetime
+from os import system
+import time
+import sys
 import uuid
+import self
+
+table = "prueba"
+data = "test"
+my_schema = [
+  {
+    "name": "Id",
+    "type": "STRING"
+  }
+]
+stream_data(self,table,table,my_schema)
+
 def stream_data(self, table, data, schema):
     # first checks if table already exists. If it doesn't, then create it
     r = self.service.tables().list(projectId=your_project_id,
