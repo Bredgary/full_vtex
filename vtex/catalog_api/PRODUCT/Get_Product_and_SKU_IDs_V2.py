@@ -35,7 +35,7 @@ def stream_data(self, table, data, schema):
                 'projectId': project_id,
                 'datasetId': dataset_id
             },'schema': schema
-        }|
+        }
         self.service.tables().insert(projectId=project_id,datasetId=dataset_id,body=body).execute()
         
         body = {'rows': [{'json': data,'insertId': str(uuid.uuid4())}]
