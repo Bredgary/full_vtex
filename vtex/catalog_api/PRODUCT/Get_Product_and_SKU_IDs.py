@@ -7,17 +7,17 @@ from os import system
 from google.cloud import bigquery
 
 ids = 1
-data_from = 0
-data_to = 0
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/ultimoRegistroCargado_from.txt", "r")
-text_file.read(data_from)
-text_file.close()
 
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/ultimoRegistroCargado_to.txt", "r")
-text_file.read(data_to)
-text_file.close()
+f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/ultimoRegistroCargado_from.txt','r')
+data_from = f_01.read()
+
+f_02 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/ultimoRegistroCargado_to.txt','r')
+data_to = f_02.read()
+
 print(data_from)
 print(data_to)
+print(type(data_from))
+print(type(data_to))
 '''
 client = bigquery.Client()
 
