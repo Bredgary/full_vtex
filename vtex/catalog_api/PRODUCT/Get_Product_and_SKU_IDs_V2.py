@@ -9,7 +9,6 @@ from os import system
 import time
 import sys
 import uuid
-import tools.ngram
 
 credentials = GoogleCredentials.get_application_default()
 service = build('bigquery', 'v2', credentials = credentials)
