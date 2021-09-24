@@ -18,6 +18,7 @@ def get_productIFD(id,data_from,data_to,headers):
     response = requests.request("GET", url, headers=headers, params=querystring)
     jsonF = json.loads(response.text)
     data = jsonF["data"]
+	print(data)
 	#text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/"+str(ids+1)+"_productFrom_"+str(data_from)+"_ProductTo_"+str(data_to)+"_categoryID_"+str(id)+".json", "w")
 	#text_file.write(data)
 	#text_file.close()
