@@ -8,11 +8,11 @@ from google.cloud import bigquery
 
 data_from = 1
 data_to = 50
-ids = 0
+ids = 1
 
 client = bigquery.Client()
 
-def get_productIFD(id,data_from,data_to):
+def get_productIFD(id,data_from,data_to,ids):
 	url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/GetProductAndSkuIds"
 	querystring = {"categoryId":""+str(id)+"","_from":""+str(data_from)+"","_to":""+str(data_from)+""}
 	headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
@@ -26,8 +26,9 @@ def get_productIFD(id,data_from,data_to):
 	if data is not None:
 		data_from = data_from + 50
 		data_to = data_to +50
+		ids = ids + 1
 		print(str(ids)+" ID de producto agregado, categoryID= "+str(id))
-		get_productIFD(id,data_from,data_to)
+		get_productIFD(id,data_from,data_to,ids)
 	else:
 		u_data_from = str(data_from)
 		u_data_to = str(data_to)
@@ -44,6 +45,5 @@ query_job = client.query(QUERY)
 rows = query_job.result()  
 
 for row in rows:
-	ids = ids + 1
-	get_productIFD(str(row.id),data_from,data_to)
+	get_productIFD(str(row.id),data_from,data_to,ids)
   
