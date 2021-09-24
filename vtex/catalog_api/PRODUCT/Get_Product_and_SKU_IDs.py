@@ -59,3 +59,4 @@ rows = query_job.result()
 
 for row in rows:
 	get_productIFD(str(row.id),data_from,data_to,ids)
+	break
