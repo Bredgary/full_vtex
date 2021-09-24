@@ -30,7 +30,7 @@ def get_productIFD(id,data_from,data_to,ids):
 	jsonF = json.loads(response.text)
 	data = jsonF["data"]
 	idsProducts = json.dumps(data)
-	text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/"+str(ids)+"_productID_From_"+str(data_from)+"_ProductID_To_"+str(data_to)+"_categoryID_"+str(id)+".json", "w")
+	text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/"+str(ids)+"_productID_categoryID_"+str(id)+".json", "w")
 	text_file.write(idsProducts)
 	text_file.close()
 	u_data_from = str(data_from)
@@ -53,10 +53,10 @@ def get_productIFD(id,data_from,data_to,ids):
 	else:
 		u_data_from = str(data_from)
 		u_data_to = str(data_to)
-		text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/ultimoRegistroFromCargado_from_categoryID_"+str(id)+".txt", "w")
+		text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/ultimoRegistroCargado_from_categoryID_"+str(id)+".txt", "w")
 		text_file.write(u_data_from)
 		text_file.close()
-		text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/ultimoRegistroFromCargado_to_categoryID_"+str(id)+".txt", "w")
+		text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/ultimoRegistroCargado_to_categoryID_"+str(id)+".txt", "w")
 		text_file.write(u_data_to)
 		text_file.close()
 
