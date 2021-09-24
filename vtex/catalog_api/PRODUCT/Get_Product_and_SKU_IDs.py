@@ -10,7 +10,7 @@ ids = 1
 
 f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/ultimoRegistroCargado_from.txt','r')
 data_from_string = f_01.read()
-f_02 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/ultimoRegistroCargado_to.txt','r')
+f_02 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/ultimoRegistroFromCargado_to.txt','r')
 data_to_string = f_02.read()
 data_from = int(data_from_string)
 data_to = int(data_to_string)
@@ -33,7 +33,7 @@ def get_productIFD(id,data_from,data_to,ids):
 	text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/ultimoRegistroCargado_from.txt", "w")
 	text_file.write(u_data_from)
 	text_file.close()
-	text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/ultimoRegistroFromCargado_to.txt", "w")
+	text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductIDultimoRegistroFromCargado_to.txt", "w")
 	text_file.write(u_data_to)
 	text_file.close()
 	if data is not None:
