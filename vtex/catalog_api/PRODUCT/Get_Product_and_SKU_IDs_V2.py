@@ -14,7 +14,7 @@ from google.cloud import bigquery
 client = bigquery.Client()
 
 
-table_id = "shopstar-datalake:landing_zone.prueba"
+table_id = "shopstar-datalake.landing_zone.prueba"
 
 rows_to_insert = [
     {u"full_name": u"Phred Phlyntstone", u"age": 32},
