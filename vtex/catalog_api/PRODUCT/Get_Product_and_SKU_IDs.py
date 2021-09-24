@@ -8,17 +8,30 @@ from google.cloud import bigquery
 
 data_from = 1
 data_to = 50
-headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 ids = 0
 
 
 def get_productIFD(id,data_from,data_to,headers):
-    url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/GetProductAndSkuIds"
-    querystring = {"categoryId":""+str(id)+"","_from":""+str(data_from)+"","_to":""+str(data_to)+""}
+	url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/GetProductAndSkuIds"
+    querystring = {"categoryId":""+str(id)+"","_from":"0","_to":"50"}
+    headers = {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA",
+        "X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"
+        }
     response = requests.request("GET", url, headers=headers, params=querystring)
     jsonF = json.loads(response.text)
-    data = jsonF["data"]
-	print(data)
+    product = jsonF["data"]
+	print(data_from)
+	print(data_to)
+    return product
+    #url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/GetProductAndSkuIds"
+    #querystring = {"categoryId":""+str(id)+"","_from":""+str(data_from)+"","_to":""+str(data_to)+""}
+    #response = requests.request("GET", url, headers=headers, params=querystring)
+    #jsonF = json.loads(response.text)
+    #data = jsonF["data"]
+	#print(data)
 	#text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/"+str(ids+1)+"_productFrom_"+str(data_from)+"_ProductTo_"+str(data_to)+"_categoryID_"+str(id)+".json", "w")
 	#text_file.write(data)
 	#text_file.close()
