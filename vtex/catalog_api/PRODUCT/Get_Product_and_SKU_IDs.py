@@ -10,6 +10,7 @@ data_from = 1
 data_to = 50
 ids = 0
 
+client = bigquery.Client()
 
 def get_productIFD(id,data_from,data_to):
 	url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/GetProductAndSkuIds"
