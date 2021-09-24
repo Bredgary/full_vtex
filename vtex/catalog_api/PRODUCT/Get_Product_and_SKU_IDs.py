@@ -65,7 +65,9 @@ QUERY = (
 query_job = client.query(QUERY) 
 rows = query_job.result()  
 
-for row in rows:
-	get_productIFD(str(row.id),data_from,data_to,ids)
-	print("Lista De IDS Cargados")
-	break
+get_productIFD("441",data_from,data_to,ids)
+
+#for row in rows:
+#	get_productIFD(str(row.id),data_from,data_to,ids)
+#	print("Lista De IDS Cargados")
+#	break
