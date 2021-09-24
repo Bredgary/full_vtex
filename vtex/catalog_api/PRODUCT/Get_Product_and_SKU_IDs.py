@@ -7,8 +7,8 @@ from os import system
 from google.cloud import bigquery
 
 ids = 1
-data_from = ""
-data_to = ""
+data_from = 0
+data_to = 0
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/ultimoRegistroCargado_from.txt", "w")
 text_file.read(data_from)
 text_file.close()
