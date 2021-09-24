@@ -40,4 +40,4 @@ def stream_data(self, table, data, schema):
         
         body = {'rows': [{'json': data,'insertId': str(uuid.uuid4())}]
     }
-    self.service.tabledata().insertAll(projectId=project_id),datasetId=dataset_id,tableId=table,body=body).execute()
+   # self.service.tabledata().insertAll(projectId=project_id),datasetId=dataset_id,tableId=table,body=body).execute()
