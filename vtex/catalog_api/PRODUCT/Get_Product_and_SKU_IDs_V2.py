@@ -40,8 +40,8 @@ def stream_data(self, table, data, schema):
             },
             'schema': schema
         }
-        self.service.tables().insert(projectId=your_project_id,
-                                     datasetId=your_dataset_id,
+        self.service.tables().insert(projectId=project_id,
+                                     datasetId=dataset_id,
                                      body=body).execute()
 
     # with table created, now we can stream the data
@@ -54,7 +54,7 @@ def stream_data(self, table, data, schema):
             }
         ]
     }
-    self.service.tabledata().insertAll(projectId=your_project_id),
-                                       datasetId=your_dataset_id,
+    self.service.tabledata().insertAll(projectId=project_id),
+                                       datasetId=dataset_id,
                                        tableId=table,
                                          body=body).execute(num_retries=5)
