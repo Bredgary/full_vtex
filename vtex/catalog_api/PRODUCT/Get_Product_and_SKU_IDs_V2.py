@@ -27,4 +27,4 @@ errors = client.insert_rows_json(
 if errors == []:
     print("New rows have been added.")
 else:
-    print("Encountered errors while inserting rows: {}".format(errors))
+    print("Encountered errors while inserting rows: {}")
