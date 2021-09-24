@@ -10,8 +10,8 @@ import time
 import sys
 import uuid
 
-credentials = GoogleCredentials.get_application_default()
-service = build('bigquery', 'v2', credentials = credentials)
+#credentials = GoogleCredentials.get_application_default()
+#service = build('bigquery', 'v2', credentials = credentials)
 
 table = "prueba"
 data = "test"
