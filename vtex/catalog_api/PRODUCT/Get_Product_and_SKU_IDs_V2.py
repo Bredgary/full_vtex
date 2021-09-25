@@ -9,14 +9,16 @@ dataset_id = 'landing_zone'
 dataset_ref = client.dataset(dataset_id)
 table_ref = dataset_ref.table(table_id)
 
-client.load_table_from_file(body, table_id, job_config=job_config).result()
-previous_rows = client.get_table(table_id).num_rows
-assert previous_rows > 0
-
 job_config = bigquery.LoadJobConfig(
     write_disposition=bigquery.WriteDisposition.WRITE_TRUNCATE,
     source_format=bigquery.SourceFormat.NEWLINE_DELIMITED_JSON,
 )
+
+client.load_table_from_file(body, table_id, job_config=job_config).result()
+previous_rows = client.get_table(table_id).num_rows
+assert previous_rows > 0
+
+
 
 job_config.autodetect = True
 with open(filename, "rb") as source_file:
