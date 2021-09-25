@@ -1,21 +1,20 @@
 import requests
 import json
-import os
+import os, os.path
 import re
 from datetime import datetime
 from os import system
 from google.cloud import bigquery
 
-
 client = bigquery.Client()
-listIdCategory = []
-productF = []
-productList = []
-cargandoIdProducto = []
-productoID = []
-cargaProduct = []
-load = []
 
+
+print len([name for name in os.listdir('.') if os.path.isfile(name)])
+
+DIR = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/'
+print len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])
+
+'''
 def replace_blank_dict(d):
     if not d:
         return None
@@ -42,30 +41,6 @@ def get_product(id):
     return jsonF
 
 
-def get_productIFD(id):
-    url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/GetProductAndSkuIds"
-    querystring = {"categoryId":""+str(id)+"","_from":"0","_to":"50"}
-    headers = {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-        "X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA",
-        "X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"
-        }
-    response = requests.request("GET", url, headers=headers, params=querystring)
-    jsonF = json.loads(response.text)
-    product = jsonF["data"]
-    return product
-
-QUERY = (
-    'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_detail_category` ')
-query_job = client.query(QUERY)  # API request
-rows = query_job.result()  # Waits for query to finish
-
-for row in rows:
-    temp = get_productIFD(str(row.id))
-    for i in temp:
-        lost = get_product(i)
-        productList.append(lost)
     
 for order in productList:
     for k, v in order.items():
@@ -83,7 +58,7 @@ print("Cargando a BigQuery")
 client = bigquery.Client()
 filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/context.json'
 dataset_id = 'landing_zone'
-table_id = 'shopstar_vtex_product'
+table_id = 'shopstar_vtex_product_v2'
 dataset_ref = client.dataset(dataset_id)
 table_ref = dataset_ref.table(table_id)
 job_config = bigquery.LoadJobConfig()
@@ -99,4 +74,4 @@ job.result()  # Waits for table load to complete.
 print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 print("finalizado")
 
-
+'''

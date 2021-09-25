@@ -1,13 +1,23 @@
 from google.cloud import bigquery
 
-
+# Construct a BigQuery client object.
 client = bigquery.Client()
-table_id = "shopstar-datalake.landing_zone.test"
 
+# TODO(developer): Set table_id to the ID of the table to create.
+# table_id = "your-project.your_dataset.your_table_name"
 
-job_config = bigquery.LoadJobConfig(autodetect=True, source_format=bigquery.SourceFormat.NEWLINE_DELIMITED_JSON)
-uri = "gs://vtex/CATALOG_API/list_product_id/HistoryGetProductID/prueba.json"
-load_job = client.load_table_from_uri(uri, table_id, job_config=job_config)
-load_job.result() 
-destination_table = client.get_table(table_id)
-print("Loaded {} rows.".format(destination_table.num_rows)) 
+job_config = bigquery.LoadJobConfig(
+    source_format=bigquery.SourceFormat.CSV, skip_leading_rows=1, autodetect=True,
+)
+
+with open(file_path, "rb") as source_file:
+    job = client.load_table_from_file(source_file, table_id, job_config=job_config)
+
+job.result()  # Waits for the job to complete.
+
+table = client.get_table(table_id)  # Make an API request.
+print(
+    "Loaded {} rows and {} columns to {}".format(
+        table.num_rows, len(table.schema), table_id
+    )
+)
