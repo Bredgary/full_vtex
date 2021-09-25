@@ -23,11 +23,6 @@ def get_list_order():
 	with open('/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/HistoryListOrders/ListaOrdenesEnero.json', 'wb') as fp:
 		pickle.dump(data,fp)
 
-	with open ('/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/HistoryListOrders/ListaOrdenesEnero.json', 'rb') as fp:
-		itemlist = pickle.load(fp)
-	
-	print(itemlist)
-
 get_list_order()
 
 print("Estado Finalizado!!")
