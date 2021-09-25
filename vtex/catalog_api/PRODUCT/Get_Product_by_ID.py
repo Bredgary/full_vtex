@@ -9,6 +9,7 @@ from google.cloud import bigquery
 client = bigquery.Client()
 listaID = []
 formatoJson = {}
+listaProductID = []
 
 DIR = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/'
 countDir = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])
@@ -22,7 +23,14 @@ for x in range(rangoDir):
     listaID.append(ids_string)
 
 for x in listaID:
-    print(int(x))
+    integers = ["1"]
+    strings = [str(x) for integer in x]
+    a_string = "".join(strings)
+    an_integer = int(a_string)
+    listaProductID.append(an_integer)
+
+print(listaProductID)
+
 
 '''
 def replace_blank_dict(d):
