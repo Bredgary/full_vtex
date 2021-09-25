@@ -13,6 +13,7 @@ countDir = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(
 
 for x in range(countDir):
     print(x)
+    break
     #f_03 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/"+str(ids)+"_productID_categoryID_"+str(id)+".json','r')
     #ids_string = f_03.read()
 
