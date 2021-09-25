@@ -15,18 +15,14 @@ countDir = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(
 rangoDir = countDir - 6
 
 for x in range(rangoDir):
+    
     uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/"+str(x)+"_productID_categoryID_441.json"
     f_03 = open (uri,'r')
     ids_string = f_03.read()
-    cadena = ids_string
-    separador = " "
-    separado_por_espacios = cadena.split(separador)
-    print("Separado por espacios es:", separado_por_espacios)
+    listaID.append(ids_string)
 
-    #listaID.append(ids_string)
-
-#for x in listaID:
-#    print(x)
+for x in listaID:
+    print(x)
 
 '''
 def replace_blank_dict(d):
