@@ -14,7 +14,7 @@ countDir = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(
 
 for x in range(countDir):
     uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/"+str(x)+"_productID_categoryID_441.json"
-    f_03 = open ('uri','r')
+    f_03 = open (uri,'r')
     ids_string = f_03.read()
     listaID=(ids_string)
 
