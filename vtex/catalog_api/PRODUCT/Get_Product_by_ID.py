@@ -20,14 +20,14 @@ for x in range(rangoDir):
     f_03 = open (uri,'r')
     ids_string = f_03.read()
     listaID.append(ids_string)
-    for i in x:
+    for i in listaID:
         print(i)
     #strings = [str(listaID) for integer in listaID]
     #a_string = "".join(strings)
     #an_integer = int(a_string)
     #listaProductID.append(an_integer)
     break
-
+ 
 #print(listaID)
 
 #for x in listaID:
