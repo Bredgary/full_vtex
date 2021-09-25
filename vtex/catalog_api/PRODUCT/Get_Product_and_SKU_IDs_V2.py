@@ -1,34 +1,13 @@
-#import io
 from google.cloud import bigquery
+
+
 client = bigquery.Client()
-
-#body = io.BytesIO(b"Washington,WA")
-body = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/0_productID_categoryID_441.json'
-table_id = 'shopstar-datalake.landing_zone.test'
-dataset_id = 'landing_zone'
-dataset_ref = client.dataset(dataset_id)
-table_ref = dataset_ref.table(table_id)
-
-job_config = bigquery.LoadJobConfig(
-    write_disposition=bigquery.WriteDisposition.WRITE_TRUNCATE,
-    source_format=bigquery.SourceFormat.NEWLINE_DELIMITED_JSON,
-)
-
-client.load_table_from_file(body, table_id, job_config=job_config).result()
-previous_rows = client.get_table(table_id).num_rows
-assert previous_rows > 0
+table_id = "shopstar-datalake.landing_zone.test"
 
 
-
-job_config.autodetect = True
-with open(filename, "rb") as source_file:
-    client.load_table_from_file(body, table_id, job_config=job_config).result()
-    #load_job = client.load_table_from_file(
-    #   source_file,
-    #  table_ref,
-    # location="southamerica-east1",job_config=job_config,)
-
-load_job.result()  # Waits for the job to complete.
-
+job_config = bigquery.LoadJobConfig(autodetect=True, source_format=bigquery.SourceFormat.NEWLINE_DELIMITED_JSON)
+uri = "gs://vtex/CATALOG_API/list_product_id/HistoryGetProductID/prueba.json"
+load_job = client.load_table_from_uri(uri, table_id, job_config=job_config)
+load_job.result() 
 destination_table = client.get_table(table_id)
 print("Loaded {} rows.".format(destination_table.num_rows))
