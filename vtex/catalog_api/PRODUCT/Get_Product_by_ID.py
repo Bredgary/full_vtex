@@ -12,6 +12,7 @@ formatoJson = {}
 listaProductID = []
 formatoJson = {}
 formJson = {}
+count = 0
 
 DIR = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/'
 countDir = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])
@@ -22,20 +23,8 @@ for x in range(rangoDir):
     f_03 = open (uri,'r')
     ids_string = f_03.read()
     formatoJson = json.loads(ids_string)
-    break
+    listaProductID.append(formatoJson)
 
-def replace_blank_dict(d):
-    if not d:
-        return None
-    if type(d) is list:
-        for list_item in d:
-            if type(list_item) is dict:
-                for k, v in list_item.items():
-                    list_item[k] = replace_blank_dict(v)
-    if type(d) is dict:
-        for k, v in d.items():
-            d[k] = replace_blank_dict(v)
-    return d
 
 def get_product(id):
     url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/product/"""+str(id)+""
@@ -49,9 +38,11 @@ def get_product(id):
     jsonF = json.loads(response.text)
     return jsonF
 
-for x in formatoJson:
+for x in listaProductID:
     producto = get_product(x)
     listaID.append(producto)
+    count = count + 1
+    print("Producto Almacenados" +str(count))
 
 string = json.dumps(listaID)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/lista.json", "w")
