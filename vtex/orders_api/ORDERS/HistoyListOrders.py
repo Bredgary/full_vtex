@@ -8,6 +8,7 @@ from datetime import datetime
 from os import system
 import time
 import sys
+import pickle
 
 
 print("comenzando_trabajo") 
