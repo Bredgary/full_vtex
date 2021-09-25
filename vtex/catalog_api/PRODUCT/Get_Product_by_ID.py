@@ -16,13 +16,19 @@ countDir = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(
 rangoDir = countDir - 6
 
 for x in range(rangoDir):
-    
     uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/"+str(x)+"_productID_categoryID_441.json"
     f_03 = open (uri,'r')
     ids_string = f_03.read()
     listaID.append(ids_string)
+    for i in x:
+        print(i)
+    #strings = [str(listaID) for integer in listaID]
+    #a_string = "".join(strings)
+    #an_integer = int(a_string)
+    #listaProductID.append(an_integer)
+    break
 
-print(listaID)
+#print(listaID)
 
 #for x in listaID:
     #strings = [str(x) for integer in x]
