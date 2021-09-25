@@ -20,8 +20,8 @@ for x in range(rangoDir):
     ids_string = f_03.read()
     listaID.append(ids_string)
 
-for x in listaID[0]:
-    print(x)
+for x in listaID:
+    print(x[0])
 
 '''
 def replace_blank_dict(d):
