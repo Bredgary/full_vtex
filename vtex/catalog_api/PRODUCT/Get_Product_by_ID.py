@@ -24,22 +24,6 @@ for x in range(rangoDir):
     formatoJson = json.loads(ids_string)
     break
 
-for x in formatoJson:
-    print(type(x))
-    break
- 
-#print(listaID)
-
-#for x in listaID:
-    #strings = [str(x) for integer in x]
-    #a_string = "".join(strings)
-    #an_integer = int(a_string)
-    #listaProductID.append(an_integer)
-
-#print(listaProductID)
-
-
-'''
 def replace_blank_dict(d):
     if not d:
         return None
@@ -65,11 +49,14 @@ def get_product(id):
     jsonF = json.loads(response.text)
     return jsonF
 
+for x in formatoJson:
+    producto = get_product(x)
 
-    
-for order in productList:
+for order in producto:
     for k, v in order.items():
         order[k] = replace_blank_dict(v)
+        
+'''
 
 string = json.dumps(productList)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/lista.json", "w")
