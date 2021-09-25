@@ -22,11 +22,13 @@ for x in range(rangoDir):
     ids_string = f_03.read()
     listaID.append(ids_string)
 
-for x in listaID:
-    strings = [str(x) for integer in x]
-    a_string = "".join(strings)
-    an_integer = int(a_string)
-    listaProductID.append(an_integer)
+print(listaID)
+
+#for x in listaID:
+    #strings = [str(x) for integer in x]
+    #a_string = "".join(strings)
+    #an_integer = int(a_string)
+    #listaProductID.append(an_integer)
 
 #print(listaProductID)
 
