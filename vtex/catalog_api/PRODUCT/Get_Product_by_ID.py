@@ -11,6 +11,7 @@ listaID = []
 formatoJson = {}
 listaProductID = []
 formatoJson = {}
+formJson = {}
 
 DIR = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/'
 countDir = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])
@@ -53,7 +54,9 @@ def get_product(id):
 
 for x in formatoJson:
     producto = get_product(x)
-    type(producto)
+    formJson = json.loads(producto)
+    print(formJson)
+    print(type(formJson))
 
 #string = json.dumps(producto)
 #text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/lista.json", "w")
