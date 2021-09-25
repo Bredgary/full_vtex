@@ -15,7 +15,7 @@ table_ref = dataset_ref.table(table_id)
 
 job_config = bigquery.LoadJobConfig(
     write_disposition=bigquery.WriteDisposition.WRITE_TRUNCATE,
-    source_format=bigquery.SourceFormat.NEWLINE_DELIMITED_JSON,
+    #source_format=bigquery.SourceFormat.NEWLINE_DELIMITED_JSON,
 )
 
 job_config.autodetect = True
