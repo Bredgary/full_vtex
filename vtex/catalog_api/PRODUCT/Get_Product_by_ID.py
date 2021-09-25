@@ -21,7 +21,7 @@ for x in range(rangoDir):
     listaID.append(ids_string)
 
 for x in listaID:
-    print(x[0])
+    print(x)
 
 '''
 def replace_blank_dict(d):
