@@ -17,12 +17,12 @@ data_from_string = f_01.read()
 temp = json.loads(data_from_string)
 print(type(temp))
 
-'''
+
 
 table_id = "shopstar-datalake.landing_zone.prueba2"
 
 client = bigquery.Client()
-filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/0_productID_categoryID_441.json'
+filename = temp
 dataset_id = 'landing_zone'
 table_id = 'prueba2'
 dataset_ref = client.dataset(dataset_id)
@@ -39,4 +39,3 @@ with open(filename, "rb") as source_file:
 job.result()  # Waits for table load to complete.
 print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 print("finalizado")
-'''
