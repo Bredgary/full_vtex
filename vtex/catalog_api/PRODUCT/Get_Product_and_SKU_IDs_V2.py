@@ -8,6 +8,15 @@ client = bigquery.Client()
 #kms_key_name = "projects/{}/locations/{}/keyRings/{}/cryptoKeys/{}".format(
 #     "cloud-samples-tests", "us", "test", "test"
 # )
+
+
+f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/0_productID_categoryID_441.json','r')
+data_from_string = f_01.read()
+
+print(type(data_from_string))
+
+'''
+
 table_id = "shopstar-datalake.landing_zone.prueba2"
 
 client = bigquery.Client()
@@ -28,3 +37,4 @@ with open(filename, "rb") as source_file:
 job.result()  # Waits for table load to complete.
 print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 print("finalizado")
+'''
