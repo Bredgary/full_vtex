@@ -2,10 +2,6 @@
 from google.cloud import bigquery
 client = bigquery.Client()
 
-
-shopstar-datalake.landing_zone.test
-
-
 #body = io.BytesIO(b"Washington,WA")
 filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/0_productID_categoryID_441.json'
 table_id = 'shopstar_vtex_prueba'
