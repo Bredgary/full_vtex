@@ -8,6 +8,7 @@ from google.cloud import bigquery
 
 client = bigquery.Client()
 listaID = []
+formatoJson = {}
 
 DIR = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/'
 countDir = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])
@@ -17,9 +18,11 @@ for x in range(rangoDir):
     uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/"+str(x)+"_productID_categoryID_441.json"
     f_03 = open (uri,'r')
     ids_string = f_03.read()
-    listaID.append(ids_string)
+    print(ids_string)
+    #Fjson = json.loands(ids_string)
+    #listaID.append(Fjson)
 
-print(listaID)
+#print(listaID)
 
 '''
 def replace_blank_dict(d):
