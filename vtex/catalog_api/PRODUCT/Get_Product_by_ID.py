@@ -20,7 +20,6 @@ for x in range(rangoDir):
     uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/"+str(x)+"_productID_categoryID_441.json"
     f_03 = open (uri,'r')
     ids_string = f_03.read()
-    #listaID.append(ids_string)
     formatoJson = json.loads(ids_string)
     break
 
@@ -54,13 +53,17 @@ def get_product(id):
 
 for x in formatoJson:
     producto = get_product(x)
+    listaID.append(producto)
 
-string = json.dumps(producto)
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/lista.json", "w")
-text_file.write(string)
-text_file.close() 
 
-system("cat lista.json | jq -c '.[]' > tabla.json")
+print(listaID)
+print(type(listaID))
+#string = json.dumps(producto)
+#text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/lista.json", "w")
+#text_file.write(string)
+#text_file.close() 
+
+#system("cat lista.json | jq -c '.[]' > tabla.json")
 
 '''
 print("Cargando a BigQuery")
