@@ -25,7 +25,7 @@ for x in range(rangoDir):
     break
 
 for x in formatoJson:
-    print(x)
+    print(type(x))
     break
  
 #print(listaID)
