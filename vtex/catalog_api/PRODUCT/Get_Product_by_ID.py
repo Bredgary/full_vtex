@@ -22,6 +22,7 @@ for x in range(rangoDir):
     listaID.append(ids_string)
     for i in listaID:
         print(str(i))
+        break
     #strings = [str(listaID) for integer in listaID]
     #a_string = "".join(strings)
     #an_integer = int(a_string)
