@@ -12,17 +12,17 @@ formatoJson = {}
 
 DIR = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/'
 countDir = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])
-rangoDir = countDir - 5
+rangoDir = countDir - 6
 
 for x in range(rangoDir):
     uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/"+str(x)+"_productID_categoryID_441.json"
     f_03 = open (uri,'r')
     ids_string = f_03.read()
     print(uri)
-    #Fjson = json.loands(ids_string)
-    #listaID.append(Fjson)
+    Fjson = json.loands(ids_string)
+    listaID.append(Fjson)
 
-#print(listaID)
+print(listaID)
 
 '''
 def replace_blank_dict(d):
