@@ -54,12 +54,11 @@ def get_product(id):
 
 for x in formatoJson:
     producto = get_product(x)
-    formJson = json.loads(producto)
-    listaID.append(formJson)
-    print(type(formJson))
+    #formJson = json.loads(producto)
+    listaID.append(producto)
+    print(type(producto))
 
-
-#string = json.dumps(producto)
+string = json.dumps(listaID)
 #text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/lista.json", "w")
 #text_file.write(string)
 #text_file.close() 
