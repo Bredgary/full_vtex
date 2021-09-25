@@ -19,7 +19,7 @@ for x in range(rangoDir):
     f_03 = open (uri,'r')
     ids_string = f_03.read()
     print(uri)
-    Fjson = json.loands(ids_string)
+    Fjson = json.loads(ids_string)
     listaID.append(Fjson)
 
 print(listaID)
