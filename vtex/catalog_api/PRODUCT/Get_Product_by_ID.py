@@ -11,8 +11,10 @@ client = bigquery.Client()
 DIR = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/'
 countDir = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])
 
-print(countDir)
-print(type(countDir))
+for x in range(countDir):
+    print(x)
+    #f_03 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/"+str(ids)+"_productID_categoryID_"+str(id)+".json','r')
+    #ids_string = f_03.read()
 
 '''
 def replace_blank_dict(d):
