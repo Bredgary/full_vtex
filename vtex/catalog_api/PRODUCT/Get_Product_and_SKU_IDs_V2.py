@@ -2,7 +2,7 @@ import io
 from google.cloud import bigquery
 client = bigquery.Client()
 
-table_id = "shopstar-datalake.landing_zone.prueba2
+table_id = "shopstar-datalake.landing_zone.prueba2"
 
 job_config = bigquery.LoadJobConfig(
     schema=[
