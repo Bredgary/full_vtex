@@ -15,7 +15,7 @@ print("comenzando_trabajo")
 def get_list_order(creationDateFrom,creationDateTo):
 	#registro += 1
 	url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders"
-	querystring = {"f_creationDate":"creationDate:[creationDate:["+creationDateFrom+"T02:00:00.000Z TO "+creationDateTo+"T01:59:59.999Z]]","f_hasInputInvoice":"false"}
+	querystring = {"f_creationDate":"creationDate:[creationDate:[2021-01-01T02:00:00.000Z TO 2021-01-31+T01:59:59.999Z]]","f_hasInputInvoice":"false"}
 	headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 	response = requests.request("GET", url, headers=headers, params=querystring)
 	jsonF = json.loads(response.text)
@@ -27,6 +27,7 @@ def get_list_order(creationDateFrom,creationDateTo):
 	#text_file.write(idsProducts)
 	#text_file.close()
 
-get_list_order("2021-01-01","2021-01-31")
+get_list_order()
+
 print("Estado Finalizado!!")
 
