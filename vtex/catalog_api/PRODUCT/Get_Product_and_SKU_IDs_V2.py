@@ -1,4 +1,5 @@
 from google.cloud import bigquery
+import json
 
 client = bigquery.Client()
 
