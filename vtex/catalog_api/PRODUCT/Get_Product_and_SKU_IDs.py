@@ -28,8 +28,11 @@ def get_productIFD(id,data_from,data_to,ids):
 	headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 	response = requests.request("GET", url, headers=headers, params=querystring)
 	jsonF = json.loads(response.text)
-	data = jsonF["data"]
-	idsProducts = json.dumps(data)
+	datos = jsonF["data"]
+	data.append(datos)
+	for x in data[0]:
+		data2.append(x)
+	idsProducts = json.dumps(data2)
 	text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/"+str(ids)+"_productID_categoryID_"+str(id)+".json", "w")
 	text_file.write(idsProducts)
 	text_file.close()
@@ -65,7 +68,7 @@ QUERY = (
 query_job = client.query(QUERY) 
 rows = query_job.result()  
 
-get_productIFD("273",data_from,data_to,ids)
+get_productIFD("441",data_from,data_to,ids)
 
 #for row in rows:
 #	get_productIFD(str(row.id),data_from,data_to,ids)
