@@ -40,7 +40,7 @@ for x in range(rangoDir):
         producto = get_product(x)
         listaID.append(producto)
         count = count + 1
-        print("Producto Almacenados" +str(count))
+        print("Producto Almacenados: " +str(count))
 
 string = json.dumps(listaID)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/lista.json", "w")
