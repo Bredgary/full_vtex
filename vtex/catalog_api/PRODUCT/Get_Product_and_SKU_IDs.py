@@ -25,6 +25,7 @@ ids = int(ids_string)
 client = bigquery.Client()
 
 def get_productIFD(id,data_from,data_to,ids):
+	datatemp2 = []
 	url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/GetProductAndSkuIds"
 	querystring = {"categoryId":""+str(id)+"","_from":""+str(data_from)+"","_to":""+str(data_from)+""}
 	headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
