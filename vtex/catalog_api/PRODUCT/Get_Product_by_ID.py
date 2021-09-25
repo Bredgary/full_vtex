@@ -53,11 +53,8 @@ def get_product(id):
 
 for x in formatoJson:
     producto = get_product(x)
-    listaID.append(producto)
+    type(producto)
 
-
-print(listaID)
-print(type(listaID))
 #string = json.dumps(producto)
 #text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/lista.json", "w")
 #text_file.write(string)
