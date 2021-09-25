@@ -22,7 +22,7 @@ print(type(temp))
 table_id = "shopstar-datalake.landing_zone.prueba2"
 
 client = bigquery.Client()
-filename = temp
+filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/0_productID_categoryID_441.json'
 dataset_id = 'landing_zone'
 table_id = 'prueba2'
 dataset_ref = client.dataset(dataset_id)
