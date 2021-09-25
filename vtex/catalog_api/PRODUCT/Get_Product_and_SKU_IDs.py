@@ -33,7 +33,7 @@ def get_productIFD(id,data_from,data_to,ids):
 	data = jsonF["data"]
 	datos = jsonF["data"]
 	datatemp.append(datos)
-	for x in data[0]:
+	for x in datatemp[0]:
 		datatemp2.append(x)
 	idsProducts = json.dumps(data2)
 	text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/"+str(ids)+"_productID_categoryID_"+str(id)+".json", "w")
