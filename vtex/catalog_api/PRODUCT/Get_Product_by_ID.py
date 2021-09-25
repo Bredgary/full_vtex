@@ -51,16 +51,12 @@ def get_product(id):
 
 for x in formatoJson:
     producto = get_product(x)
-    for order in producto:
-        for k, v in order.items():
-            order[k] = replace_blank_dict(v)
     listaID.append(producto)
-    print(type(producto))
 
 string = json.dumps(listaID)
-#text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/lista.json", "w")
-#text_file.write(string)
-#text_file.close() 
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/lista.json", "w")
+text_file.write(string)
+text_file.close() 
 
 #system("cat lista.json | jq -c '.[]' > tabla.json")
 
