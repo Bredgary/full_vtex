@@ -11,7 +11,7 @@ listaId = []
 
 DIR = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/'
 countDir = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])
-rangoDir = countDir - 1
+rangoDir = countDir - 5
 
 for x in range(rangoDir):
     print(x)
