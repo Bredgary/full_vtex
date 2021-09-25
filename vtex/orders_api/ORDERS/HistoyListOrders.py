@@ -21,7 +21,7 @@ def get_list_order():
 	jsonF = json.loads(response.text)
 	data = jsonF["list"]
 	idsProducts = json.dumps(data)
-	print(idsProducts)
+	print(response.text)
 	#text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/HistoryListOrders/"+str(registro)+"_mes_enero.json", "w")
 	#text_file.write(idsProducts)
 	#text_file.close()
