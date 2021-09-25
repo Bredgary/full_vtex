@@ -13,7 +13,8 @@ client = bigquery.Client()
 f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/0_productID_categoryID_441.json','r')
 data_from_string = f_01.read()
 
-print(type(data_from_string))
+temp = json.loads(data_from_string)
+print(type(temp))
 
 '''
 
