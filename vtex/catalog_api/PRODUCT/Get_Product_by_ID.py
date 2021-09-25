@@ -9,7 +9,7 @@ from google.cloud import bigquery
 client = bigquery.Client()
 
 
-print len([name for name in os.listdir('.') if os.path.isfile(name)])
+print(len([name for name in os.listdir('.') if os.path.isfile(name)]))
 
 DIR = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/'
 print(len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))]))
