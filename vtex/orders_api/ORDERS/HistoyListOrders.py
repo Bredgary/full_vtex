@@ -19,11 +19,13 @@ def get_list_order(creationDateFrom,creationDateTo):
 	headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 	response = requests.request("GET", url, headers=headers, params=querystring)
 	jsonF = json.loads(response.text)
-	data = jsonF['list']
-	idsProducts = json.dumps(data)
-	text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/HistoryListOrders/"+str(registro)+"_mes_enero.json", "w")
-	text_file.write(idsProducts)
-	text_file.close()
+	print(jsonF)
+	print(type(jsonF))
+	#data = jsonF['list']
+	#idsProducts = json.dumps(data)
+	#text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/HistoryListOrders/"+str(registro)+"_mes_enero.json", "w")
+	#text_file.write(idsProducts)
+	#text_file.close()
 
 get_list_order("2021-01-01","2021-01-31")
 print("Estado Finalizado!!")
