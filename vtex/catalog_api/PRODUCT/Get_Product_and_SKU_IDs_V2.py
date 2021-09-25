@@ -1,22 +1,33 @@
-#!/usr/bin/python
-# -*- coding: UTF-8 -*-
-import requests
+import io
 from google.cloud import bigquery
-
 client = bigquery.Client()
 
+table_id = "shopstar-datalake.landing_zone.prueba2
 
-table_id = "shopstar-datalake.landing_zone.prueba"
+job_config = bigquery.LoadJobConfig(
+    schema=[
+        bigquery.SchemaField("name", "STRING"),
+        bigquery.SchemaField("post_abbr", "STRING"),
+    ],
+)
 
-rows_to_insert = [
-    {u"full_name": u"Phred Phlyntstone", u"age": 32},
-    {u"full_name": u"Wylma Phlyntstone", u"age": 29},
-]
+body = io.BytesIO(b"Washington,WA")
 
-errors = client.insert_rows_json(
-    table_id, rows_to_insert, row_ids=[None] * len(rows_to_insert)
+client.load_table_from_file(body, table_id, job_config=job_config).result()
+previous_rows = client.get_table(table_id).num_rows
+assert previous_rows > 0
+
+job_config = bigquery.LoadJobConfig(
+    write_disposition=bigquery.WriteDisposition.WRITE_TRUNCATE,
+    source_format=bigquery.SourceFormat.NEWLINE_DELIMITED_JSON,
+)
+
+uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/0_productID_categoryID_441.json"
+load_job = client.load_table_from_uri(
+    uri, table_id, job_config=job_config
 ) 
-if errors == []:
-    print("New rows have been added.")
-else:
-    print("Encountered errors while inserting rows: {}")
+
+load_job.result() 
+
+destination_table = client.get_table(table_id)
+print("Loaded {} rows.".format(destination_table.num_rows))
