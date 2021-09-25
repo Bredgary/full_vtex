@@ -47,16 +47,16 @@ def get_product(id):
         }
     response = requests.request("GET", url, headers=headers)
     jsonF = json.loads(response.text)
-    print(type(jsonF))
+    for order in jsonF:
+        for k, v in order.items():
+            order[k] = replace_blank_dict(v)
     return jsonF
 
-for x in formatoJson:
-    producto = get_product(x)
-    print(type(producto))
+#for x in formatoJson:
+#    producto = get_product(x)
+#    print(type(producto))
 
-#for order in producto:
-#    for k, v in order.items():
-#        order[k] = replace_blank_dict(v)
+
 
 '''
 
