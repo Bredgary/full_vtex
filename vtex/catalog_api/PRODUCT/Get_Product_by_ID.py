@@ -7,12 +7,12 @@ from os import system
 from google.cloud import bigquery
 
 client = bigquery.Client()
-
-
-print(len([name for name in os.listdir('.') if os.path.isfile(name)]))
-
+#print(len([name for name in os.listdir('.') if os.path.isfile(name)]))
 DIR = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/'
-print(len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))]))
+countDir = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])
+
+print(countDir)
+print(type(countDir))
 
 '''
 def replace_blank_dict(d):
