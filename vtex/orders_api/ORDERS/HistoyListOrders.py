@@ -9,8 +9,8 @@ from os import system
 import time
 import sys
 
+
 print("comenzando_trabajo") 
-#registro = 0
 
 def get_list_order():
 	#registro += 1
@@ -20,12 +20,8 @@ def get_list_order():
 	response = requests.request("GET", url, headers=headers, params=querystring)
 	jsonF = json.loads(response.text)
 	data = jsonF["list"]
-	idsProducts = json.dumps(data)
-	print(data)
-	print(type(data))
-	#text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/HistoryListOrders/"+str(registro)+"_mes_enero.json", "w")
-	#text_file.write(idsProducts)
-	#text_file.close()
+	with open('/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/HistoryListOrders/ListaOrdenesEnero.json', 'wb') as fp:
+    pickle.dump(data, fp)
 
 get_list_order()
 
