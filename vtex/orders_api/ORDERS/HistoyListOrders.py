@@ -13,7 +13,6 @@ import sys
 print("comenzando_trabajo") 
 
 def get_list_order():
-	#registro += 1
 	url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders"
 	querystring = {"f_creationDate":"creationDate:[2021-01-01T02:00:00.000Z TO 2021-01-31T01:59:59.999Z]","f_hasInputInvoice":"false"}
 	headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
