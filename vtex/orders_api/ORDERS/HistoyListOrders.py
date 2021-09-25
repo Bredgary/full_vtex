@@ -20,7 +20,7 @@ def get_list_order():
 	jsonF = json.loads(response.text)
 	data = jsonF["list"]
 	with open('/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/HistoryListOrders/ListaOrdenesEnero.json', 'wb') as fp:
-    pickle.dump(data, fp)
+		pickle.dump(data,fp)
 
 get_list_order()
 
