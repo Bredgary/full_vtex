@@ -7,8 +7,8 @@ from os import system
 from google.cloud import bigquery
 
 ids = 1
-data = []
-data2 = []
+datatemp = []
+datatemp2 = []
 
 f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/ultimoRegistroCargado_from.txt','r')
 data_from_string = f_01.read()
@@ -30,10 +30,10 @@ def get_productIFD(id,data_from,data_to,ids):
 	headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 	response = requests.request("GET", url, headers=headers, params=querystring)
 	jsonF = json.loads(response.text)
-	datos = jsonF["data"]
-	data.append(datos)
+	data = jsonF["data"]
+	datatemp.append(datos)
 	for x in data[0]:
-		data2.append(x)
+		datatemp2.append(x)
 	idsProducts = json.dumps(data2)
 	text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/"+str(ids)+"_productID_categoryID_"+str(id)+".json", "w")
 	text_file.write(idsProducts)
