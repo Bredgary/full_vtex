@@ -18,10 +18,10 @@ for x in range(rangoDir):
     uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/"+str(x)+"_productID_categoryID_441.json"
     f_03 = open (uri,'r')
     ids_string = f_03.read()
-    Fjson = json.dumps(ids_string)
-    listaID.append(Fjson)
+    listaID.append(ids_string)
 
-print(listaID)
+for x in listaID:
+    print(x)
 
 '''
 def replace_blank_dict(d):
