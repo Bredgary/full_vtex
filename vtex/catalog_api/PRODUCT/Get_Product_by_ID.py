@@ -20,7 +20,7 @@ for x in range(rangoDir):
     f_03 = open (uri,'r')
     ids_string = f_03.read()
     listaID.append(ids_string)
-    for i in listaID:
+    for i in x:
         print(i)
         break
     #strings = [str(listaID) for integer in listaID]
