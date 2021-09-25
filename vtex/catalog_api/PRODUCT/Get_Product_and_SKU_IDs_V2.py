@@ -1,14 +1,6 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
 import requests
-import json
-import os
-import re
-from datetime import datetime
-from os import system
-import time
-import sys
-import uuid
 from google.cloud import bigquery
 
 client = bigquery.Client()
