@@ -22,7 +22,7 @@ job_config = bigquery.LoadJobConfig(
     source_format=bigquery.SourceFormat.NEWLINE_DELIMITED_JSON,
 )
 
-uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/0_productID_categoryID_441.json"
+uri = "gs://vtex/CATALOG_API/list_product_id/HistoryGetProductID/0_productID_categoryID_441.json"
 load_job = client.load_table_from_uri(
     uri, table_id, job_config=job_config
 ) 
