@@ -31,6 +31,7 @@ def get_productIFD(id,data_from,data_to,ids):
 	response = requests.request("GET", url, headers=headers, params=querystring)
 	jsonF = json.loads(response.text)
 	data = jsonF["data"]
+	datos = jsonF["data"]
 	datatemp.append(datos)
 	for x in data[0]:
 		datatemp2.append(x)
