@@ -4,7 +4,7 @@ client = bigquery.Client()
 
 #body = io.BytesIO(b"Washington,WA")
 body = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/0_productID_categoryID_441.json'
-table_id = 'shopstar_vtex_prueba'
+table_id = 'shopstar-datalake.landing_zone.test'
 dataset_id = 'landing_zone'
 dataset_ref = client.dataset(dataset_id)
 table_ref = dataset_ref.table(table_id)
