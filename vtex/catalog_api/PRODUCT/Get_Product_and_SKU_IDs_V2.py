@@ -27,8 +27,7 @@ with open(filename, "rb") as source_file:
     load_job = client.load_table_from_file(
         source_file,
         table_ref,
-        location="southamerica-east1",  # Must match the destination dataset location.
-    job_config=job_config,).
+        location="southamerica-east1",job_config=job_config,)
 
 load_job.result()  # Waits for the job to complete.
 
