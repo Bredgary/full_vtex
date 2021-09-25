@@ -25,7 +25,6 @@ ids = int(ids_string)
 client = bigquery.Client()
 
 def get_productIFD(id,data_from,data_to,ids):
-	datatemp2 = []
 	datatemp = []
 	url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/GetProductAndSkuIds"
 	querystring = {"categoryId":""+str(id)+"","_from":""+str(data_from)+"","_to":""+str(data_from)+""}
@@ -33,10 +32,9 @@ def get_productIFD(id,data_from,data_to,ids):
 	response = requests.request("GET", url, headers=headers, params=querystring)
 	jsonF = json.loads(response.text)
 	data = jsonF["data"]
-	datatemp.append(data)
-	for x in datatemp[0]:
-		datatemp2.append(x)
-	idsProducts = json.dumps(datatemp2)
+	for total in data:
+		datatemp.append(total)
+	idsProducts = json.dumps(datatemp)
 	text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/"+str(ids)+"_productID_categoryID_"+str(id)+".json", "w")
 	text_file.write(idsProducts)
 	text_file.close()
