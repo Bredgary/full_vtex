@@ -22,12 +22,9 @@ for x in range(rangoDir):
     listaID.append(ids_string)
     break
 
-strings = [str(listaID) for integer in listaID]
-a_string = "".join(strings)
-an_integer = int(a_string)
-listaProductID.append(an_integer)
-print(listaProductID)
-print(listaID)
+for x in listaID:
+    print(x)
+    break
  
 #print(listaID)
 
