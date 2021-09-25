@@ -7,6 +7,8 @@ from os import system
 from google.cloud import bigquery
 
 ids = 1
+data = []
+data2 = []
 
 f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/ultimoRegistroCargado_from.txt','r')
 data_from_string = f_01.read()
