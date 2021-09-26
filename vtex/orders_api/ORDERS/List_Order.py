@@ -28,12 +28,12 @@ def get_list(pag):
 for i in limite:
     x = get_list(i)
     if x is not None:
-        print("Tengo elementos")
+        print(x)
         #dict = defaultdict(list)
         #for k, v in chain(dict1.items(), dic.items()):
         #    dict3[k].append(v)
     else:
-        print("no tengo elementos")
+        print(x)
         break
 
 
