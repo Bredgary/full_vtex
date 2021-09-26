@@ -38,11 +38,12 @@ for i in limite:
         break
     break
 
-string = json.dumps(formatoList)
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order_list.json", "w")
-text_file.write(string)
-text_file.close()
-system("cat order_list.json | jq -c '.[]' > tabla.json")
+print(formatoList)
+#string = json.dumps(formatoList)
+#text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order_list.json", "w")
+#text_file.write(string)
+#text_file.close()
+#system("cat order_list.json | jq -c '.[]' > tabla.json")
 #system("cat order_list.json | jq -c '.[]' > tabla.json")
 
 '''
