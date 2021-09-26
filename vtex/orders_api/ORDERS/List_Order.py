@@ -31,15 +31,17 @@ def get_list(pag):
 for i in limite:
     x = get_list(i)
     if bool(x["list"]):
-        for k, v in chain(x.items()):
+        lista = x["list"]
+        facets = x["facets"]
+        paging = x["paging"]
+        stats = x["stats"]
+        for k, v in chain(lista.items(),facets.items(),paging.items(),stats.items()):
             dict[k].append(v)
     else:
         break
 
 formatoDict.update(dict)
-
-formatoJson = json.loads(formatoDict)
-string = json.dumps(formatoJson)
+string = json.dumps(formatoDict)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/dictCompuesto.json", "w")
 text_file.write(string)
 text_file.close()
