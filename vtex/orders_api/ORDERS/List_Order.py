@@ -7,7 +7,7 @@ from os import system
 from google.cloud import bigquery
 from itertools import chain
 from collections import defaultdict
-'''
+
 dia = datetime.today().strftime('%d')
 dia1 = int(dia) - 25
 dia2 = int(dia) - 24
@@ -33,18 +33,8 @@ for i in limite:
     if bool(x["list"]):
         lista = x["list"]
         formatoList.append(lista)
-    if bool(x["facets"]):
-        facets = x["facets"]
-        formatoList.append(facets)
-    if bool(x["paging"]):
-        paging = x["paging"]
-        formatoList.append(paging)
-    if bool(x["stats"]):
-        stats = x["stats"]
-        formatoList.append(stats)
     else:
         break
-    break
 
 string = json.dumps(formatoList)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order_list.json", "w")
@@ -52,7 +42,7 @@ text_file.write(string)
 text_file.close()
 
 system("cat order_list.json | jq -c '.[]' > tabla.json")
-'''
+
 print("Cargando a BigQuery")
 client = bigquery.Client()
 filename = '/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/tabla.json'
