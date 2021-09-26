@@ -32,7 +32,6 @@ for i in limite:
     x = get_list(i)
     if bool(x["list"]):
         lista = x["list"]
-        temp = json.dumps(lista)
         formatoList.append(temp)
     else:
         break
