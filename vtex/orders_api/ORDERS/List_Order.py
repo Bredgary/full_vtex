@@ -32,6 +32,7 @@ for i in limite:
     x = get_list(i)
     if bool(x["list"]):
         lista = x["list"]
+        temp = print("".join(lista))
         formatoList.append(lista)
     else:
         break
@@ -42,6 +43,7 @@ text_file.write(string)
 text_file.close()
 
 system("cat order_list.json | jq -c '.[]' > tabla.json")
+
 '''
 print("Cargando a BigQuery")
 client = bigquery.Client()
