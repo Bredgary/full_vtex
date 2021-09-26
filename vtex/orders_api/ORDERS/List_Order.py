@@ -31,14 +31,14 @@ for i in limite:
         dict = defaultdict(list)
         for k, v in chain(x.items()):
             dict[k].append(v)
-        string = json.dumps(dict.text)
+        string = json.dumps(dict)
         text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/dictCompuesto.json", "w")
         text_file.write(string)
         text_file.close()
     else:
         break
 
-string = json.dumps(x.text)
+string = json.dumps(x)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/dictNoCompuesto.json", "w")
 text_file.write(string)
 text_file.close()
