@@ -39,19 +39,9 @@ text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/dictCom
 text_file.write(string)
 text_file.close()
 
-
-
-#for k, v in chain(dict1.items(), dict2.items()):
-#    dict3[k].append(v)
- 
-#for k, v in dict3.items():
-#    print(k, v)
+system("cat dictCompuesto.json | jq -c '.[]' > tabla.json")
 
 '''
-data_from = int(data_from_string)
-data_to = int(data_to_string)
-ids = int(ids_string)
-
 client = bigquery.Client()
 
 def get_productIFD(id,data_from,data_to,ids):
