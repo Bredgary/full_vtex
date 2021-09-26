@@ -6,14 +6,33 @@ from datetime import datetime
 from os import system
 from google.cloud import bigquery
 
-ids = 1
-datatemp = []
-datatemp2 = []
+import requests
+import json
+import os
+from datetime import datetime
+from google.cloud import bigquery
 
-f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/HistoryListOrders/ListaOrdenesEnero.json','r')
-data_from_string = f_01.read()
+dia = datetime.today().strftime('%d')
+dia1 = int(dia) - 25
+dia2 = int(dia) - 24
 
-print(data_from_string)
+limite = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30]
+temporal = []
+list_orders=[]
+count = 0
+
+def get_list(pag):
+	url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/?page="+str(pag)+""
+	querystring = {"f_creationDate":"creationDate:[2021-09-"+str(dia1)+"T02:00:00.000Z TO 2021-09-"+str(dia2)+"T01:59:59.999Z]","f_hasInputInvoice":"false"}
+	headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
+	response = requests.request("GET", url, headers=headers, params=querystring)
+	formatoJson = json.loads(response.text)
+	return formatoJson
+
+for i in limite:
+    x = get_list(i)
+    print(x)
+    print(type(x))
 
 '''
 data_from = int(data_from_string)
