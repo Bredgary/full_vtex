@@ -37,10 +37,10 @@ for i in limite:
         break
 
 
-string = json.dumps(formatoList)
-temp = print("".join(string))
+string1 = json.dumps(formatoList)
+string = str(string1)[1:-1]
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order_list.json", "w")
-text_file.write(temp)
+text_file.write(string)
 text_file.close()
 
 system("cat order_list.json | jq -c '.[]' > tabla.json")
