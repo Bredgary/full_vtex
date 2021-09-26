@@ -35,7 +35,8 @@ for i in limite:
         lista = x["list"]
         formatoList.append(lista)
         string = str(formatoList)[1:-1]
-        print(string)
+        string1 = json.dumps(string)
+        print(string1)
         #text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order_list.json", "w")
         #text_file.write(string)
         #text_file.close()
