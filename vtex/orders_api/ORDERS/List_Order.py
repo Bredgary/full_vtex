@@ -44,13 +44,12 @@ for i in limite:
     else:
         break
 
-#formatoDict.update(dict)
-#string = json.dumps(formatoDict)
-#text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/dictCompuesto.json", "w")
-#text_file.write(string)
-#text_file.close()
+string = json.dumps(formatoList)
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/dictCompuesto.json", "w")
+text_file.write(string)
+text_file.close()
 
-#system("cat dictCompuesto.json | jq -c '.[]' > tabla.json")
+system("cat dictCompuesto.json | jq -c '.[]' > tabla.json")
 
 '''
 client = bigquery.Client()
