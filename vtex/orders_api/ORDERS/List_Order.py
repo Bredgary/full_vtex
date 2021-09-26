@@ -5,12 +5,8 @@ import re
 from datetime import datetime
 from os import system
 from google.cloud import bigquery
-
-import requests
-import json
-import os
-from datetime import datetime
-from google.cloud import bigquery
+from itertools import chain
+from collections import defaultdict
 
 dia = datetime.today().strftime('%d')
 dia1 = int(dia) - 25
@@ -31,10 +27,23 @@ def get_list(pag):
 
 for i in limite:
     x = get_list(i)
-    temporal.update(x)
+    if x is not None:
+        print("Tengo elementos")
+        #dict = defaultdict(list)
+        #for k, v in chain(dict1.items(), dic.items()):
+        #    dict3[k].append(v)
+    else:
+        print("no tengo elementos")
+        break
 
-print(temporal)
-print(type(temporal))
+
+
+
+for k, v in chain(dict1.items(), dict2.items()):
+    dict3[k].append(v)
+ 
+for k, v in dict3.items():
+    print(k, v)
 
 '''
 data_from = int(data_from_string)
