@@ -35,8 +35,12 @@ for i in limite:
         facets = x["facets"]
         paging = x["paging"]
         stats = x["stats"]
-        for k, v in chain(lista.items(),facets.items(),paging.items(),stats.items()):
-            dict[k].append(v)
+        print(type(lista))
+        print(type(facets))
+        print(type(paging))
+        print(type(stats))
+        #for k, v in chain(lista.items(),facets.items(),paging.items(),stats.items()):
+        #    dict[k].append(v)
     else:
         break
 
