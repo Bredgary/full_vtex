@@ -32,7 +32,8 @@ for i in limite:
     x = get_list(i)
     if bool(x["list"]):
         lista = x["list"]
-        formatoList.append(lista)
+        temp = json.dumps(lista)
+        formatoList.append(temp)
     else:
         break
 
@@ -42,7 +43,7 @@ text_file.write(string)
 text_file.close()
 
 system("cat order_list.json | jq -c '.[]' > tabla.json")
-
+'''
 print("Cargando a BigQuery")
 client = bigquery.Client()
 filename = '/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/tabla.json'
@@ -62,3 +63,4 @@ with open(filename, "rb") as source_file:
 job.result()  # Waits for table load to complete.
 print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 print("finalizado")
+'''
