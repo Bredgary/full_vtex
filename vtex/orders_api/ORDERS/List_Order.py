@@ -36,15 +36,14 @@ for i in limite:
         formatoList.append(lista)
         string = str(formatoList)[1:-1]
         string1 = json.dumps(string)
-        print(string1)
-        #text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order_list.json", "w")
-        #text_file.write(string)
-        #text_file.close()
+        text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order_list.json", "w")
+        text_file.write(string1)
+        text_file.close()
     else:
         break
     break
 
-#system("cat order_list.json | jq -c '.[]' > tabla.json")
+system("cat order_list.json | jq -c '.[]' > tabla.json")
 
 '''
 print("Cargando a BigQuery")
