@@ -47,7 +47,6 @@ system("cat temp.json | jq -c '.[]' > tabla.json")
 system("rm temp.json")
 system("rm order_list.json")
 
-'''
 print("Cargando a BigQuery")
 client = bigquery.Client()
 filename = '/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/tabla.json'
@@ -67,4 +66,3 @@ with open(filename, "rb") as source_file:
 job.result()  # Waits for table load to complete.
 print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 print("finalizado")
-'''
