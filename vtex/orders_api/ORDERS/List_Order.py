@@ -36,15 +36,18 @@ for i in limite:
         #formatoList.append(lista)
     if bool(x["facets"]):
         facets = x["facets"]
-        print(type(facets))
+        temp = facets.items()
+        print(type(temp))
         #formatoList.append(facets)
     if bool(x["paging"]):
         paging = x["paging"]
-        print(type(paging))
+        temp = paging.items()
+        print(type(temp))
         #formatoList.append(paging)
     if bool(x["stats"]):
         stats = x["stats"]
-        print(type(stats))
+        temp = stats.items()
+        print(type(temp))
         #formatoList.append(stats)
     else:
         break
