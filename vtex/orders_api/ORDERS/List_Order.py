@@ -36,8 +36,9 @@ for i in limite:
     else:
         break
 
-temp = print("".join(formatoList))
-#string = json.dumps(formatoList)
+
+string = json.dumps(formatoList)
+temp = print("".join(string))
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order_list.json", "w")
 text_file.write(temp)
 text_file.close()
