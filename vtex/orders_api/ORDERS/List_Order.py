@@ -29,12 +29,13 @@ for i in limite:
     x = get_list(i)
     if bool(x["list"]):
         print("Tengo datos")
-        #dict = defaultdict(list)
-        #for k, v in chain(dict1.items(), dic.items()):
-        #    dict3[k].append(v)
+        dict = defaultdict(list)
+        for k, v in chain(x.items()):
+            dict[k].append(v)
     else:
-        print("No tengo datos")
         break
+
+
 
 
 
