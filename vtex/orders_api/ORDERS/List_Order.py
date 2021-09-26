@@ -45,65 +45,28 @@ for i in limite:
         break
 
 string = json.dumps(formatoList)
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/dictCompuesto.json", "w")
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order_list.json", "w")
 text_file.write(string)
 text_file.close()
 
-system("cat dictCompuesto.json | jq -c '.[]' > tabla.json")
+system("cat order_list.json | jq -c '.[]' > tabla.json")
 
-'''
+print("Cargando a BigQuery")
 client = bigquery.Client()
-
-def get_productIFD(id,data_from,data_to,ids):
-	datatemp = []
-	url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/GetProductAndSkuIds"
-	querystring = {"categoryId":""+str(id)+"","_from":""+str(data_from)+"","_to":""+str(data_to)+""}
-	headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-	response = requests.request("GET", url, headers=headers, params=querystring)
-	jsonF = json.loads(response.text)
-	data = jsonF["data"]
-	for total in data:
-		datatemp.append(total)
-	idsProducts = json.dumps(datatemp)
-	text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/"+str(ids)+"_productID_categoryID_"+str(id)+".json", "w")
-	text_file.write(idsProducts)
-	text_file.close()
-	u_data_from = str(data_from)
-	u_data_to = str(data_to)
-	text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/ultimoRegistroCargado_from.txt", "w")
-	text_file.write(u_data_from)
-	text_file.close()
-	text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/ultimoRegistroCargado_to.txt", "w")
-	text_file.write(u_data_to)
-	text_file.close()
-	if bool(data):
-		data_from = data_from + 50
-		data_to = data_to +50
-		ids = ids + 1
-		text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/ids.txt", "w")
-		text_file.write(str(ids))
-		text_file.close()
-		print(str(ids)+" ID de producto agregado, categoryID= "+str(id))
-		get_productIFD(id,data_from,data_to,ids)
-	else:
-		u_data_from = str(data_from)
-		u_data_to = str(data_to)
-		text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/ultimoRegistroCargado_from_categoryID_"+str(id)+".txt", "w")
-		text_file.write(u_data_from)
-		text_file.close()
-		text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/ultimoRegistroCargado_to_categoryID_"+str(id)+".txt", "w")
-		text_file.write(u_data_to)
-		text_file.close()
-
-QUERY = (
-    'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_detail_category` ')
-query_job = client.query(QUERY) 
-rows = query_job.result()  
-
-get_productIFD("703",data_from,data_to,ids)
-
-#for row in rows:
-#	get_productIFD(str(row.id),data_from,data_to,ids)
-#	print("Lista De IDS Cargados")
-#	break
-'''
+filename = '/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/tabla.json'
+dataset_id = 'landing_zone'
+table_id = 'shopstar_vtex_list_orders_v2'
+dataset_ref = client.dataset(dataset_id)
+table_ref = dataset_ref.table(table_id)
+job_config = bigquery.LoadJobConfig()
+job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+job_config.autodetect = True
+with open(filename, "rb") as source_file:
+    job = client.load_table_from_file(
+        source_file,
+        table_ref,
+        location="southamerica-east1",  # Must match the destination dataset location.
+    job_config=job_config,)  # API request
+job.result()  # Waits for table load to complete.
+print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
+print("finalizado")
