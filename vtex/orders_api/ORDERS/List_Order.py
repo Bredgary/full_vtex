@@ -38,8 +38,8 @@ for i in limite:
         break
     break
 
-print(formatoList)
-#string = json.dumps(formatoList)
+string = json.dumps(formatoList)
+print(string)
 #text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order_list.json", "w")
 #text_file.write(string)
 #text_file.close()
