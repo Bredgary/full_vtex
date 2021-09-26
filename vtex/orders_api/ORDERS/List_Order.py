@@ -15,6 +15,7 @@ dia2 = int(dia) - 24
 limite = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30]
 temporal = {}
 list_orders=[]
+dict = defaultdict(list)
 count = 0
 
 def get_list(pag):
@@ -28,21 +29,15 @@ def get_list(pag):
 for i in limite:
     x = get_list(i)
     if bool(x["list"]):
-        dict = defaultdict(list)
         for k, v in chain(x.items()):
             dict[k].append(v)
-        string = json.dumps(dict)
-        text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/dictCompuesto.json", "w")
-        text_file.write(string)
-        text_file.close()
     else:
         break
 
-string = json.dumps(x)
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/dictNoCompuesto.json", "w")
+string = json.dumps(dict)
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/dictCompuesto.json", "w")
 text_file.write(string)
 text_file.close()
-
 
 
 
