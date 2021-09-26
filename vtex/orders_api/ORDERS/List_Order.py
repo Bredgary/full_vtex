@@ -17,7 +17,7 @@ temporal = {}
 list_orders=[]
 dict = defaultdict(list)
 formatoJson = {}
-formatoDict = {}
+formatoList = []
 count = 0
 
 def get_list(pag):
@@ -35,10 +35,10 @@ for i in limite:
         facets = x["facets"]
         paging = x["paging"]
         stats = x["stats"]
-        print(type(lista))
-        print(type(facets))
-        print(type(paging))
-        print(type(stats))
+        formatoList.append(lista)
+        formatoList.append(facets)
+        formatoList.append(paging)
+        formatoList.append(stats)
         #for k, v in chain(lista.items(),facets.items(),paging.items(),stats.items()):
         #    dict[k].append(v)
     else:
