@@ -32,19 +32,24 @@ for i in limite:
     x = get_list(i)
     if bool(x["list"]):
         lista = x["list"]
-        formatoList.append(lista)
+        print(type(lista))
+        #formatoList.append(lista)
     if bool(x["facets"]):
         facets = x["facets"]
-        formatoList.append(facets)
+        print(type(facets))
+        #formatoList.append(facets)
     if bool(x["paging"]):
         paging = x["paging"]
-        formatoList.append(paging)
+        print(type(paging))
+        #formatoList.append(paging)
     if bool(x["stats"]):
         stats = x["stats"]
-        formatoList.append(stats)
+        print(type(stats))
+        #formatoList.append(stats)
     else:
         break
-
+    break
+'''
 string = json.dumps(formatoList)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order_list.json", "w")
 text_file.write(string)
@@ -71,3 +76,4 @@ with open(filename, "rb") as source_file:
 job.result()  # Waits for table load to complete.
 print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 print("finalizado")
+'''
