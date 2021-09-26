@@ -16,6 +16,7 @@ limite = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,2
 temporal = {}
 list_orders=[]
 dict = defaultdict(list)
+formatoJson = {}
 count = 0
 
 def get_list(pag):
@@ -34,7 +35,8 @@ for i in limite:
     else:
         break
 
-string = json.dumps(dict)
+formatoJson = json.loads(dict)
+string = json.dumps(formatoJson)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/dictCompuesto.json", "w")
 text_file.write(string)
 text_file.close()
