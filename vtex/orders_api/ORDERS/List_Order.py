@@ -7,7 +7,7 @@ from os import system
 from google.cloud import bigquery
 from itertools import chain
 from collections import defaultdict
-
+'''
 dia = datetime.today().strftime('%d')
 dia1 = int(dia) - 25
 dia2 = int(dia) - 24
@@ -72,4 +72,3 @@ with open(filename, "rb") as source_file:
 job.result()  # Waits for table load to complete.
 print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 print("finalizado")
-'''
