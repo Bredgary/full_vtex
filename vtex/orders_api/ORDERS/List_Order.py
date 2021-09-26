@@ -28,14 +28,18 @@ def get_list(pag):
 for i in limite:
     x = get_list(i)
     if bool(x["list"]):
-        print("Tengo datos")
         dict = defaultdict(list)
         for k, v in chain(x.items()):
             dict[k].append(v)
+        text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/dictCompuesto.json", "w")
+	    text_file.write(dict.text)
+	    text_file.close()
     else:
         break
 
-
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/dictNoCompuesto.json", "w")
+text_file.write(x.text)
+text_file.close()
 
 
 
