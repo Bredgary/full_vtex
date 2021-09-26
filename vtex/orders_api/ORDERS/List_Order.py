@@ -32,15 +32,16 @@ for i in limite:
     x = get_list(i)
     if bool(x["list"]):
         lista = x["list"]
-        facets = x["facets"]
-        paging = x["paging"]
-        stats = x["stats"]
         formatoList.append(lista)
+    if bool(x["facets"]):
+        facets = x["facets"]
         formatoList.append(facets)
+    if bool(x["paging"]):
+        paging = x["paging"]
         formatoList.append(paging)
+    if bool(x["stats"]):
+        stats = x["stats"]
         formatoList.append(stats)
-        #for k, v in chain(lista.items(),facets.items(),paging.items(),stats.items()):
-        #    dict[k].append(v)
     else:
         break
 
