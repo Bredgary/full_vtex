@@ -32,13 +32,13 @@ for i in limite:
     x = get_list(i)
     if bool(x["list"]):
         lista = x["list"]
-        formatoList.append(lista)
+        string = str(lista)[1:-1]
+        formatoList.append(string)
     else:
         break
 
 
-string1 = json.dumps(formatoList)
-string = str(string1)[1:-1]
+string = json.dumps(formatoList)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order_list.json", "w")
 text_file.write(string)
 text_file.close()
