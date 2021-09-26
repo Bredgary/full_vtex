@@ -35,7 +35,7 @@ for i in limite:
     else:
         break
 
-formatoJson = json.loads(dict)
+formatoJson = json.loads(dict.text)
 string = json.dumps(formatoJson)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/dictCompuesto.json", "w")
 text_file.write(string)
