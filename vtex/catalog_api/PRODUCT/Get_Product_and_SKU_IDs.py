@@ -70,7 +70,7 @@ QUERY = (
 query_job = client.query(QUERY) 
 rows = query_job.result()  
 
-get_productIFD("1458",data_from,data_to,ids)
+get_productIFD("1476",data_from,data_to,ids)
 
 #for row in rows:
 #	get_productIFD(str(row.id),data_from,data_to,ids)
