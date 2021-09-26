@@ -32,7 +32,7 @@ def get_product(id):
     return jsonF
 
 for x in range(rangoDir):
-    uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/"+str(x)+"_productID_categoryID_539.json"
+    uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/"+str(x)+"_productID_categoryID_577.json"
     f_03 = open (uri,'r')
     ids_string = f_03.read()
     formatoJson = json.loads(ids_string)
