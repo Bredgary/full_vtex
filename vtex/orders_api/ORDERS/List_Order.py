@@ -27,7 +27,7 @@ def get_list(pag):
 
 for i in limite:
     x = get_list(i)
-    if x is not None:
+    if x["list"] is not None:
         print(x)
         #dict = defaultdict(list)
         #for k, v in chain(dict1.items(), dic.items()):
