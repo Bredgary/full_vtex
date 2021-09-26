@@ -32,34 +32,27 @@ for i in limite:
     x = get_list(i)
     if bool(x["list"]):
         lista = x["list"]
-        print(type(lista))
-        #formatoList.append(lista)
+        formatoList.append(lista)
     if bool(x["facets"]):
         facets = x["facets"]
-        temp = facets.items()
-        print(type(temp))
-        #formatoList.append(facets)
+        formatoList.append(facets)
     if bool(x["paging"]):
         paging = x["paging"]
-        temp = paging.items()
-        print(type(temp))
-        #formatoList.append(paging)
+        formatoList.append(paging)
     if bool(x["stats"]):
         stats = x["stats"]
-        temp = stats.items()
-        print(type(temp))
-        #formatoList.append(stats)
+        formatoList.append(stats)
     else:
         break
     break
-'''
+
 string = json.dumps(formatoList)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order_list.json", "w")
 text_file.write(string)
 text_file.close()
 
 system("cat order_list.json | jq -c '.[]' > tabla.json")
-
+'''
 print("Cargando a BigQuery")
 client = bigquery.Client()
 filename = '/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/tabla.json'
