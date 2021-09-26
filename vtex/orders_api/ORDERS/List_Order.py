@@ -39,11 +39,11 @@ for i in limite:
 
 
 
-for k, v in chain(dict1.items(), dict2.items()):
-    dict3[k].append(v)
+#for k, v in chain(dict1.items(), dict2.items()):
+#    dict3[k].append(v)
  
-for k, v in dict3.items():
-    print(k, v)
+#for k, v in dict3.items():
+#    print(k, v)
 
 '''
 data_from = int(data_from_string)
