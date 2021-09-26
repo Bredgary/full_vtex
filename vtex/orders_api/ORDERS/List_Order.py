@@ -9,8 +9,8 @@ from itertools import chain
 from collections import defaultdict
 
 dia = datetime.today().strftime('%d')
-dia1 = int(dia) - 25
-dia2 = int(dia) - 24
+dia1 = int(dia) - 24
+dia2 = int(dia) - 23
 
 limite = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30]
 temporal = {}
