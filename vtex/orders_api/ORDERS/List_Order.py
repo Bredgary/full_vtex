@@ -33,8 +33,8 @@ for i in limite:
             dict[k].append(v)
         string = json.dumps(dict.text)
         text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/dictCompuesto.json", "w")
-	    text_file.write(string)
-	    text_file.close()
+        text_file.write(string)
+        text_file.close()
     else:
         break
 
