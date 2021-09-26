@@ -28,12 +28,12 @@ def get_list(pag):
 for i in limite:
     x = get_list(i)
     if bool(x["list"]):
-        print(x)
+        print("Tengo datos")
         #dict = defaultdict(list)
         #for k, v in chain(dict1.items(), dic.items()):
         #    dict3[k].append(v)
     else:
-        print(x)
+        print("No tengo datos")
         break
 
 
