@@ -38,7 +38,7 @@ for i in limite:
 
 formatoDict.update(dict)
 
-formatoJson = json.loads(formatoDict.text)
+formatoJson = json.loads(formatoDict)
 string = json.dumps(formatoJson)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/dictCompuesto.json", "w")
 text_file.write(string)
