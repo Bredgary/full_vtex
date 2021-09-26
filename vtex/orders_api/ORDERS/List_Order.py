@@ -18,6 +18,7 @@ list_orders=[]
 dict = defaultdict(list)
 formatoJson = {}
 formatoList = []
+listTemp = []
 count = 0
 
 def get_list(pag):
@@ -32,16 +33,13 @@ for i in limite:
     x = get_list(i)
     if bool(x["list"]):
         lista = x["list"]
-        string = str(lista)[1:-1]
-        formatoList.append(string)
+        formatoList.append(lista)
+        string = str(formatoList)[1:-1]
+        text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order_list.json", "w")
+        text_file.write(string)
+        text_file.close()
     else:
         break
-
-
-string = json.dumps(formatoList)
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order_list.json", "w")
-text_file.write(string)
-text_file.close()
 
 system("cat order_list.json | jq -c '.[]' > tabla.json")
 
