@@ -41,7 +41,6 @@ for i in limite:
     x = get_list(i)
     if bool(x["list"]):
         lista = x["list"]
-        print(lista["orderId"])
         formatoList.append(lista)
     else:
         break
