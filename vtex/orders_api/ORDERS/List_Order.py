@@ -34,16 +34,6 @@ for i in limite:
     x = get_list(i)
     if bool(x["list"]):
         lista = x["list"]
-        formatoList.append(lista)
-    if bool(x["facets"]):
-        lista = x["facets"]
-        formatoList.append(lista)
-    if bool(x["paging"]):
-        lista = x["paging"]
-        formatoList.append(lista)
-    if bool(x["stats"]):
-        lista = x["stats"]
-        formatoList.append(lista)
     else:
         break
 
