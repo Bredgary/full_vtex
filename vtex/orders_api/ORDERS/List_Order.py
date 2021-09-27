@@ -48,6 +48,7 @@ for i in limite:
     else:
         break
 
+
 string = json.dumps(formatoList)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order_list.json", "w")
 text_file.write(string)
