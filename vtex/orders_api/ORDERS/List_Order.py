@@ -85,8 +85,6 @@ text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order_d
 text_file.write(string2)
 text_file.close()
 system("cat order_details.json | jq -c '.[]' > tablaDetail.json")
-#system("cat temp2.json | jq -c '.[]' > tablaDetail.json")
-#system("rm temp2.json")
 system("rm tablaDetail.json")
 
 print("Cargando a BigQuery Details Orders")
