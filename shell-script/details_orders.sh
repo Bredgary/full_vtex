@@ -1,3 +1,4 @@
 #!/bin/bash
+python3 /home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/List_Order.py 
+#python3 /home/bred_valenzuela/full_vtex/shell-script/stop_compute_engine.py 
 echo "Finalizado"
-python3 stop_compute_engine.py 
