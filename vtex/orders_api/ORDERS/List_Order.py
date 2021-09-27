@@ -36,7 +36,7 @@ def get_list(pag):
 	response = requests.request("GET", url, headers=headers, params=querystring)
 	formatoJson = json.loads(response.text)
     for x in formatoJson["list"]:
-        t = get_order(x["orderId"])
+            t = get_order(x["orderId"])
 	return formatoJson
 
 for i in limite:
