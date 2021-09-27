@@ -8,14 +8,15 @@ from google.cloud import bigquery
 from itertools import chain
 from collections import defaultdict
 
-dia = datetime.today().strftime('%d')
-dia1 = int(dia) - 21
-dia2 = int(dia) - 20
+day = datetime.today().strftime('%d')
+mouth = datetime.today().strftime('%m')
+year = datetime.today().strftime('%y')
+dayFrom = int(day) - 25
+dayTo = int(day) - 24
 
 limite = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30]
 temporal = {}
 list_orders=[]
-dict = defaultdict(list)
 formatoJson = {}
 formatoList = []
 listTemp = []
@@ -23,7 +24,7 @@ count = 0
 
 def get_list(pag):
 	url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/?page="+str(pag)+""
-	querystring = {"f_creationDate":"creationDate:[2021-09-"+str(dia1)+"T02:00:00.000Z TO 2021-09-"+str(dia2)+"T01:59:59.999Z]","f_hasInputInvoice":"false"}
+	querystring = {"f_creationDate":"creationDate:[20"+str(year)+"-"+str(mouth)+"-"+str(dayFrom)+"T02:00:00.000Z TO 20"+str(year)+"-"+str(mouth)+"-"+str(dayTo)+"T01:59:59.999Z]","f_hasInputInvoice":"false"}
 	headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 	response = requests.request("GET", url, headers=headers, params=querystring)
 	formatoJson = json.loads(response.text)
@@ -33,6 +34,15 @@ for i in limite:
     x = get_list(i)
     if bool(x["list"]):
         lista = x["list"]
+        formatoList.append(lista)
+    if bool(x["facets"]):
+        lista = x["facets"]
+        formatoList.append(lista)
+    if bool(x["paging"]):
+        lista = x["paging"]
+        formatoList.append(lista)
+    if bool(x["stats"]):
+        lista = x["stats"]
         formatoList.append(lista)
     else:
         break
@@ -65,4 +75,4 @@ with open(filename, "rb") as source_file:
 job.result()  # Waits for table load to complete.
 print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 print("finalizado")
-system("rm tabla.json")
+#system("rm tabla.json")
