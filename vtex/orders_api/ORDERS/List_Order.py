@@ -19,6 +19,7 @@ temporal = {}
 list_orders=[]
 formatoJson = {}
 formatoList = []
+listDetails = []
 listTemp = []
 count = 0
 
@@ -44,7 +45,8 @@ for i in limite:
         lista = x["list"]
         formatoList.append(lista)
         for s in x["list"]:
-            print(s["orderId"])
+            details = s["orderId"]
+            listDetails.append(details)
     else:
         break
 
