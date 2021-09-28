@@ -54,41 +54,39 @@ def load_big_query(tableName,fileN):
         job_config=job_config,)  # API request
     job.result()  # Waits for table load to complete.
     print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
-
-def orderDetails_and_list():
-    for i in limite:
-        x = get_list(i)
-        if bool(x["list"]):
-            lista = x["list"]
-            formatoList.append(lista)
-            for s in x["list"]:
-                details = s["orderId"]
-                listDetails.append(details)
-            list_order.append(x["list"])
-        else:
-            break
-    
-    string = json.dumps(listDetails)
-    text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order.json", "w")
-    text_file.write(string)
-    text_file.close()
-    system("cat order.json | jq -c '.[]' > tabla_order.json")
-    
-    string = json.dumps(list_order)
-    text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order_list.json", "w")
-    text_file.write(string)
-    text_file.close()
-    system("cat order_list.json | jq -c '.[]' > temp.json")
-    system("cat temp.json | jq -c '.[]' > tabla_order_list.json")
-
-def main():
-    orderDetails_and_list()
-    load_big_query('order','tabla_order.json')
-    load_big_query('list_order','tabla_order_list.json')
     system("rm order.json")
     system("rm tabla_order.json")
     system("rm order_list.json")
     system("rm temp.json")
     system("rm tabla_order_list.json")
+
+for i in limite:
+    x = get_list(i)
+    if bool(x["list"]):
+        lista = x["list"]
+        formatoList.append(lista)
+        for s in x["list"]:
+            details = s["orderId"]
+            listDetails.append(details)
+        list_order.append(x["list"])
+    else:
+        break
+    
+string = json.dumps(listDetails)
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order.json", "w")
+text_file.write(string)
+text_file.close()
+system("cat order.json | jq -c '.[]' > tabla_order.json")
+
+string = json.dumps(list_order)
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order_list.json", "w")
+text_file.write(string)
+text_file.close()
+system("cat order_list.json | jq -c '.[]' > temp.json")
+system("cat temp.json | jq -c '.[]' > tabla_order_list.json")
+
+def main():
+    load_big_query('order','tabla_order.json')
+    load_big_query('list_order','tabla_order_list.json')
     
 main()
