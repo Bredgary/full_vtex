@@ -47,9 +47,6 @@ for i in limite:
     else:
         break
 
-print(listDetails)
-print(list_order)
-
 string = json.dumps(listDetails)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order.json", "w")
 text_file.write(string)
