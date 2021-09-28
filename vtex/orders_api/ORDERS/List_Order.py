@@ -59,8 +59,8 @@ def load_big_query(lista,tableName):
         job_config=job_config,)  # API request
     job.result()  # Waits for table load to complete.
     print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
-    system("rm tabla.json")
-    system("rm order_list.json")
+    system("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/rm tabla.json")
+    system("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/rm order_list.json")
 
 def orderDetails_and_list():
     for i in limite:
