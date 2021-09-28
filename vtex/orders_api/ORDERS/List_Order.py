@@ -51,7 +51,7 @@ def get_list(pag):
     response = requests.request("GET", url, headers=headers, params=querystring)
     formatoJson = json.loads(response.text)
     lista = formatoJson["list"]
-    for i lista["orderId"]:
+    for i in lista:
         print(i)
     count += 1
     get_order(orderId)
