@@ -46,7 +46,10 @@ for i in limite:
         list_order.append(x["list"])
     else:
         break
-    
+
+print(listDetails)
+print(list_order)
+'''
 string = json.dumps(listDetails)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order.json", "w")
 text_file.write(string)
@@ -103,4 +106,4 @@ print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id)
 system("rm order_list.json")
 system("rm temp.json")
 system("rm tabla_order_list.json")
-  
+'''
