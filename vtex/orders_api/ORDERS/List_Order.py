@@ -20,6 +20,7 @@ formatoList = []
 listDetails = []
 list_order = []
 order = {}
+count = 0
 
 def replace_blank_dict(d):
     if not d:
@@ -56,8 +57,9 @@ for i in limite:
     if bool(x["list"]):
         for s in x["list"]:
             get_order(s["orderId"])
-            print("Un Detallle de orden almacenado")
-        #list_order.append(x["list"])
+            count += 1
+            print(str(count)+" Detallle de orden almacenado")
+        list_order.append(x["list"])
     else:
         break
 
@@ -92,7 +94,7 @@ job.result()  # Waits for table load to complete.
 print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 system("rm order.json")
 system("rm tabla_order.json")
-'''
+
 string = json.dumps(list_order)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order_list.json", "w")
 text_file.write(string)
@@ -123,4 +125,3 @@ print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id)
 system("rm order_list.json")
 system("rm temp.json")
 system("rm tabla_order_list.json")
-'''
