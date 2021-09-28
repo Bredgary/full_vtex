@@ -55,7 +55,8 @@ text_file.write(string)
 text_file.close()
 
 #system("./convert.py < temp.json > order.json")
-system("cat temp.json | jq -c '.[]' > order.json")
+system("cat temp.json | jq -c '.[]' > temp2.json")
+system("cat temp2.json | jq -c '.[]' > order.json")
 
 
 print("Cargando a BigQuery order")
