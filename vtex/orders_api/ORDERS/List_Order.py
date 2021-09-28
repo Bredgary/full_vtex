@@ -56,6 +56,7 @@ for i in limite:
     if bool(x["list"]):
         for s in x["list"]:
             get_order(s["orderId"])
+            print("Un Detallle de orden almacenado")
         #list_order.append(x["list"])
     else:
         break
@@ -66,10 +67,9 @@ string = json.dumps(listDetails)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/temp.json", "w")
 text_file.write(string)
 text_file.close()
-'''
+
 #system("./convert.py < temp.json > order.json")
 system("cat temp.json | jq -c '.[]' > order.json")
-
 
 
 print("Cargando a BigQuery order")
@@ -100,7 +100,7 @@ text_file.close()
 system("cat order_list.json | jq -c '.[]' > temp.json")
 system("cat temp.json | jq -c '.[]' > tabla_order_list.json")
 
-
+'''
 print("Cargando a BigQuery list order")
 client = bigquery.Client()
 filename = '/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/tabla_order_list.json'
