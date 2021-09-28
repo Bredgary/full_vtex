@@ -22,6 +22,10 @@ formatoList = []
 listDetails = []
 listTemp = []
 count = 0
+data={?}?
+data['list_orders']
+    
+
 
 def get_order(ids):
     url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(ids)+""
@@ -47,11 +51,16 @@ for i in limite:
         for s in x["list"]:
             details = s["orderId"]
             listDetails.append(details)
+        data['list_orders'].append({
+            'list': x["list"],
+            'facets': x["facets"],
+            'paging': x["paging"],
+            'stats': x["stats"]})
     else:
         break
 
 
-string = json.dumps(formatoList)
+string = json.dumps(data)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order_list.json", "w")
 text_file.write(string)
 text_file.close()
@@ -91,7 +100,7 @@ print("Cargando a BigQuery Details Orders")
 client = bigquery.Client()
 filename = '/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/tabla.json'
 dataset_id = 'landing_zone'
-table_id = 'shopstar_vtex_orders_details'
+table_id = 'shopstar_vtex_order'
 dataset_ref = client.dataset(dataset_id)
 table_ref = dataset_ref.table(table_id)
 job_config = bigquery.LoadJobConfig()
