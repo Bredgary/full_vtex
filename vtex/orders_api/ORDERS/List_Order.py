@@ -22,9 +22,7 @@ formatoList = []
 listDetails = []
 listTemp = []
 count = 0
-data = []
-list_order = {}
-data = ['list_orders']
+list_order = []
 
 
 def get_order(ids):
@@ -77,7 +75,7 @@ def orderDetails_and_list():
             for s in x["list"]:
                 details = s["orderId"]
                 listDetails.append(details)
-            list_order = data['list_orders'].append({'list': x["list"],'facets': x["facets"],'paging': x["paging"],'stats': x["stats"]})
+            list_order.append(x["list"])
         else:
             break
 
