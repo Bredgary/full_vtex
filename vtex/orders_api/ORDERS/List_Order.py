@@ -22,8 +22,9 @@ formatoList = []
 listDetails = []
 listTemp = []
 count = 0
-list_order = []
-data['list_orders'] = []
+data = []
+list_order = data['list_orders']
+
 
 def get_order(ids):
     url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(ids)+""
