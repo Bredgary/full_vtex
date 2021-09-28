@@ -52,8 +52,8 @@ def get_list(pag):
     formatoJson = json.loads(response.text)
     lista = formatoJson["list"]
     for i in lista:
-        print(i)
-    count += 1
+        print(i["orderId"])
+    #count += 1
     #get_order(orderId)
     #print(str(count)+" Detallle de orden almacenado")
     return formatoJson
