@@ -60,7 +60,8 @@ print("Cargando a BigQuery order")
 client = bigquery.Client()
 filename = '/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/tabla_order.json'
 dataset_id = 'landing_zone'
-table_id = 'shopstar_vtex_order'
+#table_id = 'shopstar_vtex_order'
+table_id = "shopstar-datalake.landing_zone.shopstar_vtex_order"
 dataset_ref = client.dataset(dataset_id)
 table_ref = dataset_ref.table(table_id)
 job_config = bigquery.QueryJobConfig(
