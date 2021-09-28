@@ -63,7 +63,7 @@ for i in limite:
         list_order.append(x["list"])
     else:
         break
-
+'''
 string = json.dumps(listDetails)
 characters = "@"
 string = ''.join( x for x in string if x not in characters)
@@ -126,3 +126,4 @@ print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id)
 system("rm order_list.json")
 system("rm temp.json")
 system("rm tabla_order_list.json")
+'''
