@@ -12,8 +12,8 @@ from collections import defaultdict
 day = datetime.today().strftime('%d')
 mouth = datetime.today().strftime('%m')
 year = datetime.today().strftime('%y')
-dayFrom = int(day) - 27
-dayTo = int(day) - 26
+dayFrom = int(day) - 26
+dayTo = int(day) - 25
 limite = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30]
 formatoJson = {}
 formatoList = []
@@ -74,7 +74,7 @@ text_file.close()
 system("cat temp.json | jq -c '.[]' > order.json")
 
 
-print("Cargando a BigQuery order")
+print("Cargando a BigQuery order Fecha: 20"+str(year)+"-"+str(mouth)+"-"++str(dayFrom)" al 20"+str(year)+"-"+str(mouth)+"-"++str(dayTo)"")
 client = bigquery.Client()
 filename = '/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order.json'
 dataset_id = 'landing_zone'
@@ -103,7 +103,7 @@ system("cat order_list.json | jq -c '.[]' > temp.json")
 system("cat temp.json | jq -c '.[]' > tabla_order_list.json")
 
 
-print("Cargando a BigQuery list order")
+print("Cargando a BigQuery list order Fecha: 20"+str(year)+"-"+str(mouth)+"-"++str(dayFrom)" al 20"+str(year)+"-"+str(mouth)+"-"++str(dayTo)"")
 client = bigquery.Client()
 filename = '/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/tabla_order_list.json'
 dataset_id = 'landing_zone'
