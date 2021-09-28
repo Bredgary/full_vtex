@@ -40,7 +40,7 @@ def load_big_query(lista,tableName):
     text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order_list.json", "w")
     text_file.write(string)
     text_file.close()
-    system("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/cat order_list.json | jq -c '.[]' > tabla.json")
+    system("cat order_list.json | jq -c '.[]' > tabla.json")
 
     print("Cargando a BigQuery "+tableName+"")
     client = bigquery.Client()
@@ -60,8 +60,8 @@ def load_big_query(lista,tableName):
         job_config=job_config,)  # API request
     job.result()  # Waits for table load to complete.
     print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
-    system("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/rm tabla.json")
-    system("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/rm order_list.json")
+    #system("rm tabla.json")
+    #system("rm order_list.json")
 
 def orderDetails_and_list():
     for i in limite:
@@ -77,8 +77,6 @@ def orderDetails_and_list():
             break
 
 def main():
-    system("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/touch tabla.json")
-    system("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/touch order_list.json")
     orderDetails_and_list()
     load_big_query(listDetails,'order')
     load_big_query(list_order,'list_order')
