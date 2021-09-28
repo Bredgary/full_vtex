@@ -42,7 +42,7 @@ def get_order(ids):
     formatoJ = json.loads(response.text)
     for k, v in formatoJ.items():
         order[k] = replace_blank_dict(v)
-    listDetails.append(order)
+    listDetails.append(formatoJ)
 
 def get_list(pag):
     url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/?page="+str(pag)+""
