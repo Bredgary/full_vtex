@@ -60,9 +60,6 @@ text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order_l
 text_file.write(string)
 text_file.close()
 system("cat order_list.json | jq -c '.[]' > tabla.json")
-#system("cat temp.json | jq -c '.[]' > tabla.json")
-system("rm temp.json")
-system("rm order_list.json")
 
 print("Cargando a BigQuery List Orders")
 client = bigquery.Client()
@@ -89,7 +86,6 @@ text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order_d
 text_file.write(string2)
 text_file.close()
 system("cat order_details.json | jq -c '.[]' > tablaDetail.json")
-system("rm tablaDetail.json")
 
 print("Cargando a BigQuery Details Orders")
 client = bigquery.Client()
@@ -109,4 +105,3 @@ with open(filename, "rb") as source_file:
     job_config=job_config,)  # API request
 job.result()  # Waits for table load to complete.
 print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
-#system("rm tabla.json")
