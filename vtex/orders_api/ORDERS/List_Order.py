@@ -35,10 +35,10 @@ def get_list(pag):
     formatoJson = json.loads(response.text)
     return formatoJson
 
-def load_big_query(tableName):
+def load_big_query(tableName,fileN):
     print("Cargando a BigQuery "+tableName+"")
     client = bigquery.Client()
-    filename = '/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/tabla.json'
+    filename = '/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/'+fileN+''
     dataset_id = 'landing_zone'
     table_id = 'shopstar_vtex_'+tableName+''
     dataset_ref = client.dataset(dataset_id)
@@ -68,13 +68,13 @@ def orderDetails_and_list():
         else:
             break
     
-    string = json.dumps(details)
+    string = json.dumps(listDetails)
     text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order.json", "w")
     text_file.write(string)
     text_file.close()
     system("cat order.json | jq -c '.[]' > tabla_order.json")
     
-    string = json.dumps(lista)
+    string = json.dumps(list_order)
     text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order_list.json", "w")
     text_file.write(string)
     text_file.close()
