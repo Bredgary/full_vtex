@@ -56,8 +56,8 @@ text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/data.js
 text_file.write(string)
 text_file.close()
 
-system("./convert.py < order.json > data.json")
-system("cat order.json | jq -c '.[]' > order.json")
+system("./convert.py < data.json > temp.json")
+system("cat temp.json | jq -c '.[]' > order.json")
 
 
 print("Cargando a BigQuery order")
