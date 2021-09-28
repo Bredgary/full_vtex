@@ -51,7 +51,8 @@ def get_list(pag):
     response = requests.request("GET", url, headers=headers, params=querystring)
     formatoJson = json.loads(response.text)
     lista = formatoJson["list"]
-    orderId = lista["orderId"]
+    for i lista["orderId"]:
+        print(i)
     count += 1
     get_order(orderId)
     print(str(count)+" Detallle de orden almacenado")
