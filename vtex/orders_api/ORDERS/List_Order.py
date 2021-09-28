@@ -53,6 +53,7 @@ text_file.write(string)
 text_file.close()
 system("cat order.json | jq -c '.[]' > tabla_order.json")
 
+
 print("Cargando a BigQuery order")
 client = bigquery.Client()
 filename = '/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/tabla_order.json'
