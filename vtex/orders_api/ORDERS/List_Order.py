@@ -25,6 +25,7 @@ count = 0
 data = {}
 data['list_orders'] = []
 
+main()
 
 def get_order(ids):
     url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(ids)+""
@@ -67,19 +68,25 @@ def load_big_query(lista,tableName):
     job.result()  # Waits for table load to complete.
     print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 
-for i in limite:
-    x = get_list(i)
-    if bool(x["list"]):
-        lista = x["list"]
-        formatoList.append(lista)
-        for s in x["list"]:
-            details = s["orderId"]
-            listDetails.append(details)
-            load_big_query(listDetails,'order')
-        list_order = data['list_orders'].append({'list': x["list"],'facets': x["facets"],'paging': x["paging"],'stats': x["stats"]})
-        load_big_query(list_order,'list_order')
-    else:
-        break
+def orderDetails_and_list():
+    for i in limite:
+        x = get_list(i)
+        if bool(x["list"]):
+            lista = x["list"]
+            formatoList.append(lista)
+            for s in x["list"]:
+                details = s["orderId"]
+                listDetails.append(details)
+            list_order = data['list_orders'].append({'list': x["list"],'facets': x["facets"],'paging': x["paging"],'stats': x["stats"]})
+        else:
+            break
+
+def main():
+    orderDetails_and_list()
+    load_big_query(listDetails,'order')
+    load_big_query(list_order,'list_order')
+
+
 
 '''
 string2 = json.dumps(listDetails)
