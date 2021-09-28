@@ -48,11 +48,11 @@ for i in limite:
         break
 
 string = json.dumps(listDetails)
+string2 = re.fullmatch("^[\w-]+$", string) 
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order.json", "w")
-text_file.write(string)
+text_file.write(string2)
 text_file.close()
 system("python3 convert.py < order.json > converted.data.json")
-system("cat converted.data.json | jq -c '.[]' > tabla_order.json")
 
 
 print("Cargando a BigQuery order")
