@@ -43,11 +43,8 @@ def get_order(ids):
     for k, v in formatoJ.items():
         order[k] = replace_blank_dict(v)
     listDetails.append(formatoJ)
-    count = count + 1
-    print(str(count)+" Detallle de orden almacenado")
 
 def get_list(pag):
-    count = 0
     url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/?page="+str(pag)+""
     querystring = {"f_creationDate":"creationDate:[20"+str(year)+"-"+str(mouth)+"-"+str(dayFrom)+"T02:00:00.000Z TO 20"+str(year)+"-"+str(mouth)+"-"+str(dayTo)+"T01:59:59.999Z]","f_hasInputInvoice":"false"}
     headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
@@ -56,12 +53,11 @@ def get_list(pag):
     lista = formatoJson["list"]
     for i in lista:
         get_order(i["orderId"])
-    #count += 1
-    #get_order(orderId)
-    #print(str(count)+" Detallle de orden almacenado")
     return formatoJson
 
 for i in limite:
+    count = count + 1
+    print(str(count)+" Detallle de orden almacenado")
     x = get_list(i)
     if bool(x["list"]):
         list_order.append(x["list"])
