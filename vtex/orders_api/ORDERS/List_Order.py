@@ -11,8 +11,8 @@ from collections import defaultdict
 day = datetime.today().strftime('%d')
 mouth = datetime.today().strftime('%m')
 year = datetime.today().strftime('%y')
-dayFrom = int(day) - 23
-dayTo = int(day) - 22
+dayFrom = int(day) - 26
+dayTo = int(day) - 27
 limite = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30]
 formatoJson = {}
 formatoList = []
@@ -59,6 +59,8 @@ def load_big_query(lista,tableName):
         job_config=job_config,)  # API request
     job.result()  # Waits for table load to complete.
     print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
+    system("rm tabla.json")
+    system("rm order_list.json")
 
 def orderDetails_and_list():
     for i in limite:
