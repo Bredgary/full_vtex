@@ -25,11 +25,8 @@ def get_order(ids):
     headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
     response = requests.request("GET", url, headers=headers)
     formatoJ = json.loads(response.text)
-    print(type(formatoJ))
-    for order in formatoJ:
-        print(type(order))
-        #for k, v in order.items():
-        #    order[k] = replace_blank_dict(v)
+    for k, v in formatoJ.items():
+        order[k] = replace_blank_dict(v)
 
 def get_list(pag):
     url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/?page="+str(pag)+""
