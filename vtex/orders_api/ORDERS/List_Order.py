@@ -22,7 +22,7 @@ formatoList = []
 listDetails = []
 listTemp = []
 count = 0
-data={?}?
+data={}
 data['list_orders']
     
 
