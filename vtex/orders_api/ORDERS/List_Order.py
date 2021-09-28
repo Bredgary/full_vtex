@@ -43,7 +43,7 @@ def get_order(ids):
     for k, v in formatoJ.items():
         order[k] = replace_blank_dict(v)
     listDetails.append(formatoJ)
-    count += 1
+    count = count + 1
     print(str(count)+" Detallle de orden almacenado")
 
 def get_list(pag):
