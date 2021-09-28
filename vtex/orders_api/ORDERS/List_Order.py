@@ -51,7 +51,7 @@ for i in limite:
         for s in x["list"]:
             details = s["orderId"]
             listDetails.append(details)
-        data['list_orders'].append({
+            data['list_orders'].append({
             'list': x["list"],
             'facets': x["facets"],
             'paging': x["paging"],
