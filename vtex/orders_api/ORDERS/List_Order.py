@@ -73,7 +73,7 @@ text_file.close()
 #system("./convert.py < temp.json > order.json")
 system("cat temp.json | jq -c '.[]' > order.json")
 
-
+'''
 
 print("Cargando a BigQuery order")
 client = bigquery.Client()
@@ -95,7 +95,7 @@ job.result()  # Waits for table load to complete.
 print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 system("rm order.json")
 system("rm tabla_order.json")
-'''
+
 string = json.dumps(list_order)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order_list.json", "w")
 text_file.write(string)
