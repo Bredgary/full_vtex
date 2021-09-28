@@ -8,17 +8,7 @@ from google.cloud import bigquery
 from itertools import chain
 from collections import defaultdict
 
-def init():
-    day = datetime.today().strftime('%d')
-    mouth = datetime.today().strftime('%m')
-    year = datetime.today().strftime('%y')
-    dayFrom = int(day) - 24
-    dayTo = int(day) - 23
-    limite = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30]
-    formatoJson = {}
-    formatoList = []
-    listDetails = []
-    list_order = []
+
 
 def get_order(ids):
     url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(ids)+""
@@ -80,4 +70,15 @@ def main():
     load_big_query(listDetails,'order')
     load_big_query(list_order,'list_order')
 
+def init():
+    day = datetime.today().strftime('%d')
+    mouth = datetime.today().strftime('%m')
+    year = datetime.today().strftime('%y')
+    dayFrom = int(day) - 24
+    dayTo = int(day) - 23
+    limite = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30]
+    formatoJson = {}
+    formatoList = []
+    listDetails = []
+    list_order = []
 main()
