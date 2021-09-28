@@ -41,6 +41,31 @@ def get_list(pag):
     formatoJson = json.loads(response.text)
     return formatoJson
 
+def load_big_query(lista,tableName):
+    string = json.dumps(lista)
+    text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order_list.json", "w")
+    text_file.write(string)
+    text_file.close()
+    system("cat order_list.json | jq -c '.[]' > tabla.json")
+
+    print("Cargando a BigQuery "+tableName+"")
+    client = bigquery.Client()
+    filename = '/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/tabla.json'
+    dataset_id = 'landing_zone'
+    table_id = 'shopstar_vtex_'+tableName+''
+    dataset_ref = client.dataset(dataset_id)
+    table_ref = dataset_ref.table(table_id)
+    job_config = bigquery.LoadJobConfig()
+    job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+    job_config.autodetect = True
+    with open(filename, "rb") as source_file:
+        job = client.load_table_from_file(
+            source_file,
+            table_ref,
+            location="southamerica-east1",  # Must match the destination dataset location.
+        job_config=job_config,)  # API request
+    job.result()  # Waits for table load to complete.
+    print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 
 for i in limite:
     x = get_list(i)
@@ -50,37 +75,13 @@ for i in limite:
         for s in x["list"]:
             details = s["orderId"]
             listDetails.append(details)
+            load_big_query(listDetails,'order')
         list_order = data['list_orders'].append({'list': x["list"],'facets': x["facets"],'paging': x["paging"],'stats': x["stats"]})
+        load_big_query(list_order,'list_order')
     else:
         break
 
-
-string = json.dumps(list_order)
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order_list.json", "w")
-text_file.write(string)
-text_file.close()
-system("cat order_list.json | jq -c '.[]' > tabla.json")
-
-print("Cargando a BigQuery List Orders")
-client = bigquery.Client()
-filename = '/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/tabla.json'
-dataset_id = 'landing_zone'
-table_id = 'shopstar_vtex_list_orders'
-dataset_ref = client.dataset(dataset_id)
-table_ref = dataset_ref.table(table_id)
-job_config = bigquery.LoadJobConfig()
-job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-job_config.autodetect = True
-with open(filename, "rb") as source_file:
-    job = client.load_table_from_file(
-        source_file,
-        table_ref,
-        location="southamerica-east1",  # Must match the destination dataset location.
-    job_config=job_config,)  # API request
-job.result()  # Waits for table load to complete.
-print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
-
-
+'''
 string2 = json.dumps(listDetails)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order_details.json", "w")
 text_file.write(string2)
@@ -105,3 +106,4 @@ with open(filename, "rb") as source_file:
     job_config=job_config,)  # API request
 job.result()  # Waits for table load to complete.
 print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
+'''
