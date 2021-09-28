@@ -42,21 +42,24 @@ for i in limite:
         formatoList.append(lista)
         for s in x["list"]:
             details = get_order(s["orderId"])
-            listDetails.append(details)
-        list_order.append(x["list"])
+            break
+            #listDetails.append(details)
+        #list_order.append(x["list"])
     else:
         break
 
-string = json.dumps(listDetails)
-characters = "@"
-string = ''.join( x for x in string if x not in characters)
+
+string = json.dumps(details)
+#characters = "@"
+#string = ''.join( x for x in string if x not in characters)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order.json", "w")
 text_file.write(string)
 text_file.close()
+'''
 #./convert.py < order.json > data.json
 #system("cat order.json | jq -c '.[]' > tabla_order.json")
 
-'''
+
 print("Cargando a BigQuery order")
 client = bigquery.Client()
 filename = '/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/tabla_order.json'
