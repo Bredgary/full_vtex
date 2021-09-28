@@ -25,6 +25,10 @@ def get_order(ids):
     headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
     response = requests.request("GET", url, headers=headers)
     formatoJ = json.loads(response.text)
+    print(type(formatoJ))
+    #for order in formatoJ:
+    #    for k, v in order.items():
+    #        order[k] = replace_blank_dict(v)
     return formatoJ
 
 def get_list(pag):
@@ -47,6 +51,19 @@ for i in limite:
         break
 
 
+def replace_blank_dict(d):
+    if not d:
+        return None
+    if type(d) is list:
+        for list_item in d:
+            if type(list_item) is dict:
+                for k, v in list_item.items():
+                    list_item[k] = replace_blank_dict(v)
+    if type(d) is dict:
+        for k, v in d.items():
+            d[k] = replace_blank_dict(v)
+    return d
+'''
 string = json.dumps(listDetails)
 characters = "@"
 string = ''.join( x for x in string if x not in characters)
@@ -56,7 +73,7 @@ text_file.close()
 
 #system("./convert.py < temp.json > order.json")
 system("cat temp.json | jq -c '.[]' > temp2.json")
-system("cat temp2.json | jq -c '.[]' > order.json")
+
 
 
 print("Cargando a BigQuery order")
@@ -87,7 +104,7 @@ text_file.close()
 system("cat order_list.json | jq -c '.[]' > temp.json")
 system("cat temp.json | jq -c '.[]' > tabla_order_list.json")
 
-'''
+
 print("Cargando a BigQuery list order")
 client = bigquery.Client()
 filename = '/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/tabla_order_list.json'
