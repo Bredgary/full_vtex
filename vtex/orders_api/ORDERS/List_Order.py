@@ -54,8 +54,8 @@ def get_list(pag):
     for i in lista:
         print(i)
     count += 1
-    get_order(orderId)
-    print(str(count)+" Detallle de orden almacenado")
+    #get_order(orderId)
+    #print(str(count)+" Detallle de orden almacenado")
     return formatoJson
 
 for i in limite:
