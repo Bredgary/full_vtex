@@ -12,8 +12,8 @@ from collections import defaultdict
 day = datetime.today().strftime('%d')
 mouth = datetime.today().strftime('%m')
 year = datetime.today().strftime('%y')
-dayFrom = int(day) - 24
-dayTo = int(day) - 23
+dayFrom = int(day) - 27
+dayTo = int(day) - 26
 limite = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30]
 formatoJson = {}
 formatoList = []
@@ -84,11 +84,10 @@ table_id = 'shopstar_vtex_order'
 dataset_ref = client.dataset(dataset_id)
 table_ref = dataset_ref.table(table_id)
 job_config = bigquery.LoadJobConfig()
-job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-job_config.schema_update_options = [
-    bigquery.SchemaUpdateOption.ALLOW_FIELD_ADDITION
-    ]
 job_config.autodetect = True
+job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+job_config.schema_update_options = [bigquery.SchemaUpdateOption.ALLOW_FIELD_ADDITION]
+job_config.skip_leading_rows = 1
 with open(filename, "rb") as source_file:
     job = client.load_table_from_file(
         source_file,
