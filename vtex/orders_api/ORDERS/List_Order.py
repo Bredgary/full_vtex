@@ -23,7 +23,8 @@ listDetails = []
 listTemp = []
 count = 0
 data = []
-list_order = data['list_orders']
+list_order = {}
+data['list_orders'] = []
 
 
 def get_order(ids):
