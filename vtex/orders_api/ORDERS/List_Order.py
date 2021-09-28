@@ -50,8 +50,8 @@ def get_list(pag):
     headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
     response = requests.request("GET", url, headers=headers, params=querystring)
     formatoJson = json.loads(response.text)
-    lista = formatoJson["lista"]
-    orderId = list["orderId"]
+    lista = formatoJson["list"]
+    orderId = lista["orderId"]
     count += 1
     get_order(orderId)
     print(str(count)+" Detallle de orden almacenado")
