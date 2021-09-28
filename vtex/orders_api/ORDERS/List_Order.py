@@ -60,12 +60,9 @@ for i in limite:
     else:
         break
 
-
-
-
 string = json.dumps(listDetails)
-characters = "@"
-string = ''.join( x for x in string if x not in characters)
+#characters = "@"
+#string = ''.join( x for x in string if x not in characters)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/temp.json", "w")
 text_file.write(string)
 text_file.close()
