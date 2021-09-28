@@ -41,8 +41,7 @@ def get_order(ids):
     formatoJ = json.loads(response.text)
     for k, v in formatoJ.items():
         order[k] = replace_blank_dict(v)
-    print(order)
-        #listDetails.append(order)
+    listDetails.append(order)
 
 def get_list(pag):
     url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/?page="+str(pag)+""
@@ -67,11 +66,11 @@ string = json.dumps(listDetails)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/temp.json", "w")
 text_file.write(string)
 text_file.close()
-
+'''
 #system("./convert.py < temp.json > order.json")
 system("cat temp.json | jq -c '.[]' > order.json")
 
-'''
+
 
 print("Cargando a BigQuery order")
 client = bigquery.Client()
