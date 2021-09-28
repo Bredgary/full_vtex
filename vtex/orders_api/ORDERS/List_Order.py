@@ -48,7 +48,8 @@ for i in limite:
         break
 
 string = json.dumps(listDetails)
-string2 = re.fullmatch("^[\w-]+$", string) 
+characters = "|"
+string = ' '.join( x for x in string if x not in characters)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order.json", "w")
 text_file.write(string2)
 text_file.close()
