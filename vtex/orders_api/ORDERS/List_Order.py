@@ -8,8 +8,7 @@ from google.cloud import bigquery
 from itertools import chain
 from collections import defaultdict
 
-system("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/touch tabla.json")
-system("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/touch order_list.json")
+
 day = datetime.today().strftime('%d')
 mouth = datetime.today().strftime('%m')
 year = datetime.today().strftime('%y')
@@ -37,6 +36,8 @@ def get_list(pag):
     return formatoJson
 
 def load_big_query(lista,tableName):
+    system("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/touch tabla.json")
+    system("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/touch order_list.json")
     string = json.dumps(lista)
     text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order_list.json", "w")
     text_file.write(string)
