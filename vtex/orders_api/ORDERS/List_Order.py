@@ -35,13 +35,7 @@ def get_list(pag):
     formatoJson = json.loads(response.text)
     return formatoJson
 
-def load_big_query(lista,tableName):
-    string = json.dumps(lista)
-    text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order_list.json", "w")
-    text_file.write(string)
-    text_file.close()
-    system("cat order_list.json | jq -c '.[]' > tabla.json")
-
+def load_big_query(tableName):
     print("Cargando a BigQuery "+tableName+"")
     client = bigquery.Client()
     filename = '/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/tabla.json'
@@ -60,8 +54,6 @@ def load_big_query(lista,tableName):
         job_config=job_config,)  # API request
     job.result()  # Waits for table load to complete.
     print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
-    #system("rm tabla.json")
-    #system("rm order_list.json")
 
 def orderDetails_and_list():
     for i in limite:
@@ -75,11 +67,28 @@ def orderDetails_and_list():
             list_order.append(x["list"])
         else:
             break
+    
+    string = json.dumps(details)
+    text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order.json", "w")
+    text_file.write(string)
+    text_file.close()
+    system("cat order.json | jq -c '.[]' > tabla_order.json")
+    
+    string = json.dumps(lista)
+    text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order_list.json", "w")
+    text_file.write(string)
+    text_file.close()
+    system("cat order_list.json | jq -c '.[]' > temp.json")
+    system("cat temp.json | jq -c '.[]' > tabla_order_list.json")
 
 def main():
     orderDetails_and_list()
-    load_big_query(listDetails,'order')
-    load_big_query(list_order,'list_order')
-
+    load_big_query('order','tabla_order.json')
+    load_big_query('list_order','tabla_order_list.json')
+    system("rm order.json")
+    system("rm tabla_order.json")
+    system("rm order_list.json")
+    system("rm temp.json")
+    system("rm tabla_order_list.json")
     
 main()
