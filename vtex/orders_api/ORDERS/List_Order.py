@@ -25,6 +25,7 @@ def get_order(ids):
     headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
     response = requests.request("GET", url, headers=headers)
     formatoJ = json.loads(response.text)
+    print(type(formatoJ))
     for order in formatoJ:
         for k, v in order.items():
             order[k] = replace_blank_dict(v)
@@ -43,7 +44,7 @@ for i in limite:
     if bool(x["list"]):
         for s in x["list"]:
             details = get_order(s["orderId"])
-            listDetails.append(details)
+            #listDetails.append(details)
             #listDetails.append(details)
         #list_order.append(x["list"])
     else:
