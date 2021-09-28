@@ -12,8 +12,8 @@ from collections import defaultdict
 day = datetime.today().strftime('%d')
 mouth = datetime.today().strftime('%m')
 year = datetime.today().strftime('%y')
-dayFrom = int(day) - 26
-dayTo = int(day) - 25
+dayFrom = int(day) - 25
+dayTo = int(day) - 24
 limite = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30]
 formatoJson = {}
 formatoList = []
@@ -57,7 +57,7 @@ def get_list(pag):
 
 for i in limite:
     count = count + 1
-    print(str(count)+" Detallle de orden almacenado")
+    print(str(count)+" Pagina recorrida")
     x = get_list(i)
     if bool(x["list"]):
         list_order.append(x["list"])
