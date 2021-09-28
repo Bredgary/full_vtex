@@ -12,8 +12,8 @@ from collections import defaultdict
 day = datetime.today().strftime('%d')
 mouth = datetime.today().strftime('%m')
 year = datetime.today().strftime('%y')
-dayFrom = int(day) - 25
-dayTo = int(day) - 24
+dayFrom = int(day) - 27
+dayTo = int(day) - 26
 limite = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30]
 formatoJson = {}
 formatoList = []
@@ -93,7 +93,7 @@ with open(filename, "rb") as source_file:
 job.result()  # Waits for table load to complete.
 print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 system("rm order.json")
-system("rm tabla_order.json")
+system("rm temp.json")
 
 string = json.dumps(list_order)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order_list.json", "w")
