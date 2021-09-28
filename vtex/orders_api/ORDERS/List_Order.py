@@ -25,8 +25,6 @@ count = 0
 data = {}
 data['list_orders'] = []
 
-main()
-
 def get_order(ids):
     url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(ids)+""
     headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
@@ -86,7 +84,7 @@ def main():
     load_big_query(listDetails,'order')
     load_big_query(list_order,'list_order')
 
-
+main()
 
 '''
 string2 = json.dumps(listDetails)
