@@ -19,6 +19,7 @@ formatoJson = {}
 formatoList = []
 listDetails = []
 list_order = []
+order = {}
 
 def replace_blank_dict(d):
     if not d:
