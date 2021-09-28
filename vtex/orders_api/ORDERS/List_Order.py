@@ -62,8 +62,8 @@ for i in limite:
         break
 
 string = json.dumps(listDetails)
-#characters = "@"
-#string = ''.join( x for x in string if x not in characters)
+characters = "@"
+string = ''.join( x for x in string if x not in characters)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/temp.json", "w")
 text_file.write(string)
 text_file.close()
@@ -92,7 +92,7 @@ job.result()  # Waits for table load to complete.
 print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 system("rm order.json")
 system("rm tabla_order.json")
-
+'''
 string = json.dumps(list_order)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order_list.json", "w")
 text_file.write(string)
@@ -100,7 +100,7 @@ text_file.close()
 system("cat order_list.json | jq -c '.[]' > temp.json")
 system("cat temp.json | jq -c '.[]' > tabla_order_list.json")
 
-'''
+
 print("Cargando a BigQuery list order")
 client = bigquery.Client()
 filename = '/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/tabla_order_list.json'
