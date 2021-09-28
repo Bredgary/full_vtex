@@ -22,7 +22,7 @@ formatoList = []
 listDetails = []
 listTemp = []
 count = 0
-data = []
+list_order = {}
 
 
 def get_order(ids):
