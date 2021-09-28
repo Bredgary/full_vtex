@@ -23,7 +23,7 @@ listDetails = []
 listTemp = []
 count = 0
 data={}
-data['list_orders']
+data=['list_orders']
     
 
 
