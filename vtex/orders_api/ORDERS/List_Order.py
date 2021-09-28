@@ -22,8 +22,7 @@ formatoList = []
 listDetails = []
 listTemp = []
 count = 0
-list_order = {}
-data = {}
+data['list_orders'] = []
 
 
 def get_order(ids):
