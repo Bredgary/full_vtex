@@ -40,7 +40,7 @@ for i in limite:
     if bool(x["list"]):
         for s in x["list"]:
             details = get_order(s["orderId"])
-            break
+            listDetails.append(details)
             #listDetails.append(details)
         #list_order.append(x["list"])
     else:
