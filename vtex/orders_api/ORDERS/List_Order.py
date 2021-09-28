@@ -41,8 +41,9 @@ for i in limite:
         lista = x["list"]
         formatoList.append(lista)
         for s in x["list"]:
-            details = get_order(s["orderId"])
-            break
+            if bool(s["orderId"]):
+                details = get_order(s["orderId"])
+                break
             #listDetails.append(details)
         #list_order.append(x["list"])
     else:
