@@ -82,23 +82,23 @@ system("cat order_list.json | jq -c '.[]' > temp.json")
 system("cat temp.json | jq -c '.[]' > tabla_order_list.json")
 
 print("Cargando a BigQuery list order")
-    client = bigquery.Client()
-    filename = '/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/tabla_order_list.json'
-    dataset_id = 'landing_zone'
-    table_id = 'shopstar_vtex_list_order'
-    dataset_ref = client.dataset(dataset_id)
-    table_ref = dataset_ref.table(table_id)
-    job_config = bigquery.LoadJobConfig()
-    job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-    job_config.autodetect = True
-    with open(filename, "rb") as source_file:
-        job = client.load_table_from_file(
-            source_file,
-            table_ref,
-            location="southamerica-east1",  # Must match the destination dataset location.
-        job_config=job_config,)  # API request
-    job.result()  # Waits for table load to complete.
-    print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
+client = bigquery.Client()
+filename = '/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/tabla_order_list.json'
+dataset_id = 'landing_zone'
+table_id = 'shopstar_vtex_list_order'
+dataset_ref = client.dataset(dataset_id)
+table_ref = dataset_ref.table(table_id)
+job_config = bigquery.LoadJobConfig()
+job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+job_config.autodetect = True
+with open(filename, "rb") as source_file:
+    job = client.load_table_from_file(
+        source_file,
+        table_ref,
+        location="southamerica-east1",  # Must match the destination dataset location.
+    job_config=job_config,)  # API request
+job.result()  # Waits for table load to complete.
+print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 
 system("rm order_list.json")
 system("rm temp.json")
