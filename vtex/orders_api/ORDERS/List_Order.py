@@ -48,15 +48,11 @@ for i in limite:
         break
 
 string = json.dumps(listDetails)
-characters = "|"
-for x in range(len(characters)):
-    string = string.replace(characters[x]," ")
-
-print(string)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order.json", "w")
 text_file.write(string)
 text_file.close()
-system("cat order.json | jq -c '.[]' > tabla_order.json")
+system("python3 convert.py < order.json > converted.data.json")
+system("cat converted.data.json | jq -c '.[]' > tabla_order.json")
 
 
 print("Cargando a BigQuery order")
