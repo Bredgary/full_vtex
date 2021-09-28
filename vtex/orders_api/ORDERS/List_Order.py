@@ -38,12 +38,9 @@ def get_list(pag):
 for i in limite:
     x = get_list(i)
     if bool(x["list"]):
-        lista = x["list"]
-        formatoList.append(lista)
         for s in x["list"]:
-            if bool(s["orderId"]):
-                details = get_order(s["orderId"])
-                break
+            details = get_order(s["orderId"])
+            break
             #listDetails.append(details)
         #list_order.append(x["list"])
     else:
@@ -57,8 +54,8 @@ text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/temp.js
 text_file.write(string)
 text_file.close()
 
-system("./convert.py < temp.json > order.json")
-#system("cat temp.json | jq -c '.[]' > order.json")
+#system("./convert.py < temp.json > order.json")
+system("cat temp.json | jq -c '.[]' > order.json")
 
 
 print("Cargando a BigQuery order")
