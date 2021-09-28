@@ -53,7 +53,7 @@ string = ' '.join( x for x in string if x not in characters)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order.json", "w")
 text_file.write(string)
 text_file.close()
-system("python3 convert.py < order.json > converted.data.json")
+system("cat order.json | jq -c '.[]' > tabla_order.json")
 
 
 print("Cargando a BigQuery order")
