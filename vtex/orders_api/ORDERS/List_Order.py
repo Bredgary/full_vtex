@@ -75,8 +75,9 @@ text_file.close()
 #system("./convert.py < temp.json > order.json")
 system("cat temp.json | jq -c '.[]' > order.json")
 
-'''
+
 print("Cargando a BigQuery order Fecha: 20"+str(year)+"-"+str(mouth)+"-"++str(dayFrom)" al 20"+str(year)+"-"+str(mouth)+"-"++str(dayTo)"")
+'''
 client = bigquery.Client()
 filename = '/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order.json'
 dataset_id = 'landing_zone'
