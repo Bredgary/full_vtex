@@ -55,14 +55,14 @@ string = json.dumps(details)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order.json", "w")
 text_file.write(string)
 text_file.close()
-'''
+
 #./convert.py < order.json > data.json
 #system("cat order.json | jq -c '.[]' > tabla_order.json")
 
 
 print("Cargando a BigQuery order")
 client = bigquery.Client()
-filename = '/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/tabla_order.json'
+filename = '/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order.json'
 dataset_id = 'landing_zone'
 table_id = 'shopstar_vtex_order'
 dataset_ref = client.dataset(dataset_id)
@@ -88,6 +88,7 @@ text_file.close()
 system("cat order_list.json | jq -c '.[]' > temp.json")
 system("cat temp.json | jq -c '.[]' > tabla_order_list.json")
 
+'''
 print("Cargando a BigQuery list order")
 client = bigquery.Client()
 filename = '/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/tabla_order_list.json'
