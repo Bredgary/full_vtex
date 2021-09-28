@@ -77,7 +77,7 @@ system("cat temp.json | jq -c '.[]' > order.json")
 
 
 print("Cargando a BigQuery order Fecha: 20"+str(year)+"-"+str(mouth)+"-"+str(dayFrom)+" al 20"+str(year)+"-"+str(mouth)+"-"+str(dayTo)+"")
-'''
+
 client = bigquery.Client()
 filename = '/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order.json'
 dataset_id = 'landing_zone'
@@ -128,4 +128,4 @@ print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id)
 system("rm order_list.json")
 system("rm temp.json")
 system("rm tabla_order_list.json")
-'''
+
