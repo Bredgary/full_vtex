@@ -27,8 +27,9 @@ def get_order(ids):
     formatoJ = json.loads(response.text)
     print(type(formatoJ))
     for order in formatoJ:
-        for k, v in order.items():
-            order[k] = replace_blank_dict(v)
+        print(type(order))
+        #for k, v in order.items():
+        #    order[k] = replace_blank_dict(v)
 
 def get_list(pag):
     url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/?page="+str(pag)+""
