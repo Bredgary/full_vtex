@@ -20,6 +20,7 @@ formatoList = []
 listDetails = []
 list_order = []
 order = {}
+count = 0
 
 def replace_blank_dict(d):
     if not d:
