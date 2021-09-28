@@ -55,7 +55,7 @@ for i in limite:
         break
 
 
-string = json.dumps(data)
+string = json.dumps(list_order)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order_list.json", "w")
 text_file.write(string)
 text_file.close()
