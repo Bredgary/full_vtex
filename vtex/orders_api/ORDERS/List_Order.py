@@ -87,7 +87,6 @@ job_config = bigquery.LoadJobConfig()
 job_config.autodetect = True
 job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
 job_config.schema_update_options = [bigquery.SchemaUpdateOption.ALLOW_FIELD_ADDITION]
-job_config.skip_leading_rows = 1
 with open(filename, "rb") as source_file:
     job = client.load_table_from_file(
         source_file,
