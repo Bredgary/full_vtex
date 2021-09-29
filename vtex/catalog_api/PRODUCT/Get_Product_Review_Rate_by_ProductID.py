@@ -39,13 +39,12 @@ rows = query_job.result()  # Waits for query to finish
 
 for row in rows:
 	temp = get_Review(str(row.id))
-	print(type(temp))
-	#if temp is None:
-	#	print("Objeto Vacio")
-	#else:
-	#	productList.append(temp)
-	#	count +=1
-	#	print(str(count)+" Registro almacenado")
+	if not temp:
+		print("Objeto Vacio")
+	else:
+		productList.append(temp)
+		count +=1
+		print(str(count)+" Registro almacenado")
 '''
 for order in productList:
     for k, v in order.items():
