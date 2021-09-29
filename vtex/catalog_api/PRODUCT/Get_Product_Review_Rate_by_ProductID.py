@@ -15,7 +15,7 @@ def get_Review(id):
 	headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 	response = requests.request("GET", url, headers=headers)
 	jsonF = json.loads(response.text)
-    return jsonF
+	return jsonF
 
 
 def replace_blank_dict(d):
@@ -37,7 +37,7 @@ query_job = client.query(QUERY)  # API request
 rows = query_job.result()  # Waits for query to finish
 
 for row in rows:
-    temp = get_RefId(str(row.RefId))
+    temp = get_Review(str(row.RefId))
 	if temp is not None:
 		productList.append(temp)
 		count +=1
