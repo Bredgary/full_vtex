@@ -13,7 +13,7 @@ day = datetime.today().strftime('%d')
 mouth = datetime.today().strftime('%m')
 year = datetime.today().strftime('%y')
 dayFrom = int(day) - 20
-dayTo = int(day) - 17 
+dayTo = int(day) - 18
 
 print("Cargando Fecha: 20"+str(year)+"-"+str(mouth)+"-"+str(dayFrom)+" al 20"+str(year)+"-"+str(mouth)+"-"+str(dayTo)+"")
 
