@@ -8,10 +8,10 @@ from google.cloud import bigquery
 
 client = bigquery.Client()
 productList = []
-count = 0
 listIdProductAndContext = []
 listaIDS = []
 
+count += 0
 def get_contex(id,count):
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/ProductGet/"""+str(id)+""
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
@@ -29,7 +29,6 @@ data_from_string = f_01.read()
 formatoJSon = json.loads(data_from_string)
 
 for i in formatoJSon:
-    count += 1
     print("Comenzando: "+str(count))
     xx = get_contex(i,count)
     print("Terminando: "+str(count))
