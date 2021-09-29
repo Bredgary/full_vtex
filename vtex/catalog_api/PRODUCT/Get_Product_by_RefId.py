@@ -8,7 +8,7 @@ from google.cloud import bigquery
 
 client = bigquery.Client()
 productList = [] 
-
+count = 0
 
 def get_RefId(id):
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/productgetbyrefid/"""+str(id)+""
@@ -37,13 +37,15 @@ def replace_blank_dict(d):
     return d
 
 QUERY = (
-    'SELECT RefId FROM `shopstar-datalake.landing_zone.shopstar_vtex_product` WHERE RefId is not null ')
+    'SELECT RefId FROM `shopstar-datalake.landing_zone.shopstar_vtex_product_v2` WHERE RefId is not null ')
 query_job = client.query(QUERY)  # API request
 rows = query_job.result()  # Waits for query to finish
 
 for row in rows:
     temp = get_RefId(str(row.RefId))
     productList.append(temp)
+    count +=1
+    print(str(count)+" Registro almacenado")
 
 for order in productList:
     for k, v in order.items():
