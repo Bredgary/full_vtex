@@ -10,7 +10,7 @@ client = bigquery.Client()
 productList = []
 count = 0
 listIdProductAndContext = []
-
+listaIDS = []
 def get_contex(id):
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/ProductGet/"""+str(id)+""
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
@@ -25,7 +25,9 @@ formatoJSon = json.loads(data_from_string)
 
 for i in formatoJSon:
     count += 1
-    print(str(count)+" ID Producto: "+str(i))
+    listaIDS.append(str(count),str(i)))
+
+    #print(str(count)+" ID Producto: "+str(i))
 
 #def replace_blank_dict(d):
 #    if not d:
