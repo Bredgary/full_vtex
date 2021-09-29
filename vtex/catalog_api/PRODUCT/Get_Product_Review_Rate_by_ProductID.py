@@ -36,8 +36,9 @@ QUERY = (
 query_job = client.query(QUERY)  # API request
 rows = query_job.result()  # Waits for query to finish
 
+
 for row in rows:
-    temp = get_Review(str(row.RefId))
+	temp = get_Review(str(row.RefId))
 	print(type(temp))
 	#if temp is None:
 	#	print("Objeto Vacio")
