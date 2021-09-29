@@ -96,15 +96,15 @@ with open(filename, "rb") as source_file:
     job_config=job_config,)  # API request
 job.result()  # Waits for table load to complete.
 print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
-system("rm order.json")
-system("rm temp.json")
+#system("rm order.json")
+#system("rm temp.json")
 
 string = json.dumps(list_order)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order_list.json", "w")
 text_file.write(string)
 text_file.close()
-system("cat order_list.json | jq -c '.[]' > temp.json")
-system("cat temp.json | jq -c '.[]' > tabla_order_list.json")
+system("cat order_list.json | jq -c '.[]' > temp2.json")
+system("cat temp2.json | jq -c '.[]' > tabla_order_list.json")
 
 
 print("Cargando a BigQuery list order Fecha: 20"+str(year)+"-"+str(mouth)+"-"+str(dayFrom)+" al 20"+str(year)+"-"+str(mouth)+"-"+str(dayTo)+"")
@@ -126,6 +126,6 @@ with open(filename, "rb") as source_file:
 job.result()  # Waits for table load to complete.
 print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 
-system("rm order_list.json")
-system("rm temp.json")
-system("rm tabla_order_list.json")
+#system("rm order_list.json")
+#system("rm temp2.json")
+#system("rm tabla_order_list.json")
