@@ -36,6 +36,9 @@ query_job = client.query(QUERY)  # API request
 rows = query_job.result()  # Waits for query to finish
 
 for row in rows:
+    text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/lista.json", "w")
+    text_file.write(str(row.id))
+    text_file.close() 
     temp = get_contex(str(row.id))
     productList.append(temp)
     count +=1
