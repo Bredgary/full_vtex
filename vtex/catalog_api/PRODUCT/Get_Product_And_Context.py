@@ -11,6 +11,7 @@ productList = []
 count = 0
 listIdProductAndContext = []
 listaIDS = []
+
 def get_contex(id):
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/ProductGet/"""+str(id)+""
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
@@ -24,23 +25,29 @@ data_from_string = f_01.read()
 formatoJSon = json.loads(data_from_string)
 
 for i in formatoJSon:
-    count += 1
-    listaIDS.append(str(count),str(i)))
+    try:
+        xx = get_context(i)
+        listaIDS.append(xx)
+        print(str(count)+" registro almacenado "+str(i))
+    except:
+        print(str(count)+" ID Producto: "+str(i))
+        string = json.dumps(listaIDS)
+        text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/respaldo.json", "w")
+        text_file.write(string)
+        text_file.close()
+        text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/count.txt", "w")
+        text_file.write(str(count))
+        text_file.close() 
+        text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/ids.txt", "w")
+        text_file.write(str(i))
+        text_file.close() 
 
-    #print(str(count)+" ID Producto: "+str(i))
 
-#def replace_blank_dict(d):
-#    if not d:
-#        return None
-#    if type(d) is list:
-#        for list_item in d:
-#            if type(list_item) is dict:
-#                for k, v in list_item.items():
-#                    list_item[k] = replace_blank_dict(v)
-#    if type(d) is dict:
-#        for k, v in d.items():
-#            d[k] = replace_blank_dict(v)
-#    return d
+string = json.dumps(listaIDS)
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/lista2.json", "w")
+text_file.write(string)
+text_file.close() 
+print("Finalizado")
 
 #QUERY = (
 #    'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_product_v2` ')
@@ -60,15 +67,8 @@ for i in formatoJSon:
 #text_file.close() 
 
 '''
-for order in productList:
-    for k, v in order.items():
-        order[k] = replace_blank_dict(v)
 
 
-string = json.dumps(productList)
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/lista.json", "w")
-text_file.write(string)
-text_file.close() 
 
 
 
