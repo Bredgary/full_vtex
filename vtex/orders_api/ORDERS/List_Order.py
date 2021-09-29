@@ -20,6 +20,8 @@ listDetails = []
 list_order = []
 order = {}
 count = 0
+dayFrom = 0
+dayTo = 0
 
 def replace_blank_dict(d):
     if not d:
