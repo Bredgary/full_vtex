@@ -25,6 +25,18 @@ data_from_string = f_01.read()
 formatoJSon = json.loads(data_from_string)
 
 for i in formatoJSon:
+        xx = get_context(i)
+        listaIDS.append(xx)
+        count += 1
+        print(str(count)+" registro almacenado "+str(i))
+        
+string = json.dumps(listaIDS)
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/respaldo.json", "w")
+text_file.write(string)
+text_file.close()        
+'''
+
+for i in formatoJSon:
     try:
         xx = get_context(i)
         listaIDS.append(xx)
@@ -66,7 +78,7 @@ print("Finalizado")
 #text_file.write(string)
 #text_file.close() 
 
-'''
+
 
 
 
