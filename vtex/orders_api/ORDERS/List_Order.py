@@ -46,8 +46,8 @@ def get_order(ids):
     listDetails.append(formatoJ)
 
 def get_list(pag):
-    dayFrom = int(day) - 19
-    dayTo = int(day) - 18
+    dayFrom = int(day) - 18
+    dayTo = int(day) - 17
     url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/?page="+str(pag)+""
     querystring = {"f_creationDate":"creationDate:[20"+str(year)+"-"+str(mouth)+"-"+str(dayFrom)+"T02:00:00.000Z TO 20"+str(year)+"-"+str(mouth)+"-"+str(dayTo)+"T01:59:59.999Z]","f_hasInputInvoice":"false"}
     print("Cargando Fecha: 20"+str(year)+"-"+str(mouth)+"-"+str(dayFrom)+" al 20"+str(year)+"-"+str(mouth)+"-"+str(dayTo)+"")
