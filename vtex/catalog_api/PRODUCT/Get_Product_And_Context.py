@@ -18,7 +18,7 @@ def get_contex(id):
     jsonF = json.loads(response.text)
     return jsonF
 
-f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/ultimoRegistroCargado_from.txt','r')
+f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/lista.json','r')
 data_from_string = f_01.read()
 
 formatoJSon = json.loads(data_from_string)
