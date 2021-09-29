@@ -8,6 +8,7 @@ from google.cloud import bigquery
 from itertools import chain
 from collections import defaultdict
 
+limite = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30]
 formatoJson = {}
 formatoList = []
 listDetails = []
@@ -39,7 +40,7 @@ def get_list(page):
         lista = x["list"]
         formatoList.append(lista)
         for s in x["list"]:
-            details = get_sku(s["orderId"])
+            details = get_sku(s["skuId"])
             listDetails.append(details)
         list_sku.append(x["list"])
     else:
