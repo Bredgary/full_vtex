@@ -19,6 +19,24 @@ def get_contex(id):
     jsonF = json.loads(response.text)
     return jsonF
 
+QUERY = (
+    'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_product_v2` ')
+query_job = client.query(QUERY)  # API request
+rows = query_job.result()  # Waits for query to finish
+
+
+for row in rows:
+    listIdProductAndContext.append(row.id)
+    #temp = get_contex(str(row.id))
+    #productList.append(temp)
+    #count +=1
+    #print(str(count)+" Registro almacenado")
+string = json.dumps(listIdProductAndContext)
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/lista.json", "w")
+text_file.write(string)
+text_file.close() 
+
+'''  
 f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/lista.json','r')
 data_from_string = f_01.read()
 
@@ -29,12 +47,13 @@ for i in formatoJSon:
         listaIDS.append(xx)
         count += 1
         print(str(count)+" registro almacenado "+str(i))
-        
+
+     
 string = json.dumps(listaIDS)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/respaldo.json", "w")
 text_file.write(string)
 text_file.close()        
-'''
+
 
 for i in formatoJSon:
     try:
