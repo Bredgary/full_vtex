@@ -18,7 +18,7 @@ def get_contex(id,count):
     response = requests.request("GET", url, headers=headers)
     jsonF = json.loads(response.text)
     string = json.dumps(jsonF)
-    text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/temp/"+count+"_context.json", "w")
+    text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/temp/"+str(count)+"_context.json", "w")
     text_file.write(string)
     text_file.close() 
 
