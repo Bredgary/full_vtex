@@ -82,7 +82,7 @@ print("Cargando a BigQuery order Fecha: 20"+str(year)+"-"+str(mouth)+"-"+str(day
 client = bigquery.Client()
 filename = '/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order.json'
 dataset_id = 'landing_zone'
-table_id = 'shopstar_vtex_order'
+table_id = 'shopstar_vtex_order_v2'
 dataset_ref = client.dataset(dataset_id)
 table_ref = dataset_ref.table(table_id)
 job_config = bigquery.LoadJobConfig()
@@ -113,7 +113,7 @@ print("Cargando a BigQuery list order Fecha: 20"+str(year)+"-"+str(mouth)+"-"+st
 client = bigquery.Client()
 filename = '/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/tabla_order_list.json'
 dataset_id = 'landing_zone'
-table_id = 'shopstar_vtex_list_order'
+table_id = 'shopstar_vtex_list_order_v2'
 dataset_ref = client.dataset(dataset_id)
 table_ref = dataset_ref.table(table_id)
 job_config = bigquery.LoadJobConfig()
