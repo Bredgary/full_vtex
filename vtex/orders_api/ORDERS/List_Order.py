@@ -98,7 +98,7 @@ job.result()  # Waits for table load to complete.
 print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 system("rm order.json")
 system("rm temp.json")
-'''
+
 string = json.dumps(list_order)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order_list.json", "w")
 text_file.write(string)
@@ -129,5 +129,3 @@ print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id)
 system("rm order_list.json")
 system("rm temp.json")
 system("rm tabla_order_list.json")
-
-'''
