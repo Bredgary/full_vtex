@@ -45,11 +45,9 @@ for row in rows:
 		productList.append(temp)
 		count +=1
 		print(str(count)+" Registro almacenado")
-'''
-for order in productList:
-    for k, v in order.items():
-        order[k] = replace_blank_dict(v)
 
+print(productList)
+'''
 string = json.dumps(productList)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/lista.json", "w")
 text_file.write(string)
