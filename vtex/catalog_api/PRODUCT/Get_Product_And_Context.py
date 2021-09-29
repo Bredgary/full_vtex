@@ -8,6 +8,7 @@ from google.cloud import bigquery
 
 client = bigquery.Client()
 productList = []
+count = 0
 
 def get_contex(id):
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/ProductGet/"""+str(id)+""
@@ -37,6 +38,8 @@ rows = query_job.result()  # Waits for query to finish
 for row in rows:
     temp = get_contex(str(row.id))
     productList.append(temp)
+    count +=1
+    print(str(count)+" Registro almacenado")
 
 for order in productList:
     for k, v in order.items():
