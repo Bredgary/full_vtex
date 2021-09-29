@@ -8,7 +8,6 @@ from google.cloud import bigquery
 from itertools import chain
 from collections import defaultdict
 
-
 day = datetime.today().strftime('%d')
 mouth = datetime.today().strftime('%m')
 year = datetime.today().strftime('%y')
