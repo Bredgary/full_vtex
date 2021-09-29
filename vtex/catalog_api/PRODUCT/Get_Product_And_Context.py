@@ -25,7 +25,7 @@ data_from_string = f_01.read()
 formatoJSon = json.loads(data_from_string)
 
 for i in formatoJSon:
-        xx = get_context(i)
+        xx = get_contex(i)
         listaIDS.append(xx)
         count += 1
         print(str(count)+" registro almacenado "+str(i))
