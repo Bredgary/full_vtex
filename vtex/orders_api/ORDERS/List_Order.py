@@ -20,8 +20,8 @@ listDetails = []
 list_order = []
 order = {}
 count = 0
-dayFrom = int(day) - 14
-dayTo = int(day) - 13
+dayFrom = int(day) - 13
+dayTo = int(day) - 12
 
 def replace_blank_dict(d):
     if not d:
