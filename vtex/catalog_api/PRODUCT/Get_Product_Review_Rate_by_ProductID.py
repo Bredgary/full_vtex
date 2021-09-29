@@ -38,13 +38,14 @@ rows = query_job.result()  # Waits for query to finish
 
 for row in rows:
     temp = get_Review(str(row.RefId))
-	if temp is None:
-		print("Objeto Vacio")
-	else:
-		productList.append(temp)
-		count +=1
-		print(str(count)+" Registro almacenado")
-
+	print(type(temp))
+	#if temp is None:
+	#	print("Objeto Vacio")
+	#else:
+	#	productList.append(temp)
+	#	count +=1
+	#	print(str(count)+" Registro almacenado")
+'''
 for order in productList:
     for k, v in order.items():
         order[k] = replace_blank_dict(v)
@@ -77,3 +78,4 @@ print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id)
 system("rm table.json")
 system("rm lista.json")
 print("finalizado")
+'''
