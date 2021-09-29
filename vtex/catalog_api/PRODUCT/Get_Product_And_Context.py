@@ -18,35 +18,44 @@ def get_contex(id):
     jsonF = json.loads(response.text)
     return jsonF
 
-def replace_blank_dict(d):
-    if not d:
-        return None
-    if type(d) is list:
-        for list_item in d:
-            if type(list_item) is dict:
-                for k, v in list_item.items():
-                    list_item[k] = replace_blank_dict(v)
-    if type(d) is dict:
-        for k, v in d.items():
-            d[k] = replace_blank_dict(v)
-    return d
+f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/ultimoRegistroCargado_from.txt','r')
+data_from_string = f_01.read()
 
-QUERY = (
-    'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_product_v2` ')
-query_job = client.query(QUERY)  # API request
-rows = query_job.result()  # Waits for query to finish
+formatoJSon = json.loads(data_from_string)
 
-for row in rows:
-    listIdProductAndContext.append(row.id)
+for i in formatoJSon:
+    count += 1
+    print(str(count)+" ID Producto: "+str(i))
+
+#def replace_blank_dict(d):
+#    if not d:
+#        return None
+#    if type(d) is list:
+#        for list_item in d:
+#            if type(list_item) is dict:
+#                for k, v in list_item.items():
+#                    list_item[k] = replace_blank_dict(v)
+#    if type(d) is dict:
+#        for k, v in d.items():
+#            d[k] = replace_blank_dict(v)
+#    return d
+
+#QUERY = (
+#    'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_product_v2` ')
+#query_job = client.query(QUERY)  # API request
+#rows = query_job.result()  # Waits for query to finish
+
+#for row in rows:
+#    listIdProductAndContext.append(row.id)
     #temp = get_contex(str(row.id))
     #productList.append(temp)
     #count +=1
     #print(str(count)+" Registro almacenado")
 
-string = json.dumps(listIdProductAndContext)
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/lista.json", "w")
-text_file.write(string)
-text_file.close() 
+#string = json.dumps(listIdProductAndContext)
+#text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/lista.json", "w")
+#text_file.write(string)
+#text_file.close() 
 
 '''
 for order in productList:
