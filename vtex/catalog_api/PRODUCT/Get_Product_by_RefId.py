@@ -8,7 +8,6 @@ from google.cloud import bigquery
 
 client = bigquery.Client()
 productList = [] 
-temp = ""
 
 
 def get_RefId(id):

@@ -59,7 +59,7 @@ print("Cargando a BigQuery")
 client = bigquery.Client()
 filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/context.json'
 dataset_id = 'landing_zone'
-table_id = 'shopstar_vtex_skubyproduct_v2'
+table_id = 'shopstar_vtex_sku_by_product_v2'
 dataset_ref = client.dataset(dataset_id)
 table_ref = dataset_ref.table(table_id)
 job_config = bigquery.LoadJobConfig()
