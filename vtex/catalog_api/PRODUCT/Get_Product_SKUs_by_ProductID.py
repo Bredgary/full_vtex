@@ -9,6 +9,7 @@ from google.cloud import bigquery
 client = bigquery.Client()
 productList = [] 
 temp = ""
+count = 0
 
 
 def replace_blank_dict(d):
@@ -33,13 +34,15 @@ def skuandproduct(id):
 
 
 QUERY = (
-    'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_product` ')
+    'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_product_v2` ')
 query_job = client.query(QUERY)  # API request
 rows = query_job.result()  # Waits for query to finish
 
 for row in rows:
     temp = skuandproduct(str(row.id))
     productList.append(temp)
+    count +=1
+    print(str(count)+" Registros almacenados")
 
 
 for order in productList:

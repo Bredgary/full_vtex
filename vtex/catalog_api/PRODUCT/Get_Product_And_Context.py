@@ -9,6 +9,7 @@ from google.cloud import bigquery
 client = bigquery.Client()
 productList = []
 count = 0
+listIdProductAndContext = []
 
 def get_contex(id):
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/ProductGet/"""+str(id)+""
@@ -36,22 +37,29 @@ query_job = client.query(QUERY)  # API request
 rows = query_job.result()  # Waits for query to finish
 
 for row in rows:
-    text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/lista.json", "w")
-    text_file.write(str(row.id))
-    text_file.close() 
-    temp = get_contex(str(row.id))
-    productList.append(temp)
-    count +=1
-    print(str(count)+" Registro almacenado")
+    listIdProductAndContext.append(row.id)
+    #temp = get_contex(str(row.id))
+    #productList.append(temp)
+    #count +=1
+    #print(str(count)+" Registro almacenado")
 
+string = json.dumps(listIdProductAndContext)
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/lista.json", "w")
+text_file.write(string)
+text_file.close() 
+
+'''
 for order in productList:
     for k, v in order.items():
         order[k] = replace_blank_dict(v)
+
 
 string = json.dumps(productList)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/lista.json", "w")
 text_file.write(string)
 text_file.close() 
+
+
 
 system("cat lista.json | jq -c '.[]' > table.json")
 
@@ -77,5 +85,5 @@ print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id)
 system("rm lista.json")
 system("rm table.json")
 print("finalizado")
-
+'''
 
