@@ -13,7 +13,7 @@ listaIDS = []
 count = 0
 
 def get_specification(id,count):
-    if count >= 14181:
+    if count >= 15145:
         print("Comenzando: "+str(count))
         url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/"""+str(id)+"""/specification"""
         headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
