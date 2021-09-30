@@ -79,7 +79,8 @@ for x in range(countDir):
     uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/temp4/"+str(count)+"_get_RefId.json"
     f_03 = open (uri,'r')
     ids_string = f_03.read()
-    listaID.append(ids_string)
+    formatoJson = json.loads(ids_string)
+    listaID.append(formatoJson)
     print("Producto Almacenados: " +str(count))
 
 string = json.dumps(listaID)
