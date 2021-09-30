@@ -32,7 +32,7 @@ formatoJSon = json.loads(data_from_string)
 
 for i in formatoJSon:
     count +=1
-    get_policy(i,count)
+    get_specification(i,count)
     
 
 print(str(count)+" registro almacenado "+str(i))
