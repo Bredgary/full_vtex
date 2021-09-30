@@ -39,6 +39,7 @@ print(str(count)+" registro almacenado "+str(i))
 print("Finalizado")
 
 
+
 #QUERY = (
 #    'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_product_v2` ')
 #query_job = client.query(QUERY)  # API request
