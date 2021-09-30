@@ -14,7 +14,7 @@ count = 0
 
 
 def get_RefId(id,count):
-    if count >= 0:
+    if count >= 6675:
         print("Comenzando: "+str(count))
         url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/productgetbyrefid/"""+str(id)+""
         headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
