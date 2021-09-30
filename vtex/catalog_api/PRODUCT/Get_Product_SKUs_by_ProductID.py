@@ -25,7 +25,7 @@ def skuandproduct(id,count,delimitador):
             response = requests.request("GET", url, headers=headers)
             jsonF = json.loads(response.text)
             string = json.dumps(jsonF)
-            text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/Skus_by_id/"+str(count)+"_skus_by_Product.json", "w")
+            text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/SKUs_by_id/"+str(count)+"_skus_by_Product.json", "w")
             text_file.write(string)
             text_file.close()
             print("Terminando: "+str(count))
