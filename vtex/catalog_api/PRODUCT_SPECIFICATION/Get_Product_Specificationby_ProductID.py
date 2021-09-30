@@ -7,24 +7,38 @@ from os import system
 from google.cloud import bigquery
 
 client = bigquery.Client()
-productList = [] 
-temp = ""
+productList = []
+listIdProductAndContext = []
+listaIDS = []
+count = 0
 
-def get_specification(id):
-	url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/"""+str(id)+"""/specification"""
+def get_specification(id,count):
+    if count >= 0:
+        print("Comenzando: "+str(count))
+        url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/"""+str(id)+"""/specification"""
+        headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
+        response = requests.request("GET", url, headers=headers)
+        jsonF = json.loads(response.text)
+        string = json.dumps(jsonF)
+        text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/temp5/"+str(count)+"_get_specification.json", "w")
+        text_file.write(string)
+        text_file.close()
+        print("Terminando: "+str(count)) 
 
-	headers = {
-		"Content-Type": "application/json",
-		"Accept": "application/json",
-		"X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA",
-		"X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"
-	}
-	response = requests.request("GET", url, headers=headers)
-    jsonF = json.loads(response.text)
-    productList.append(jsonF)
-    return jsonF
+f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/lista.json','r')
+data_from_string = f_01.read()
 
+formatoJSon = json.loads(data_from_string)
 
+for i in formatoJSon:
+    count +=1
+    get_policy(i,count)
+    
+
+print(str(count)+" registro almacenado "+str(i))
+print("Finalizado")
+
+'''
 def replace_blank_dict(d):
     if not d:
         return None
@@ -39,7 +53,7 @@ def replace_blank_dict(d):
     return d
 
 QUERY = (
-    'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_product`')
+    'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_product_v2`')
 query_job = client.query(QUERY)  # API request
 rows = query_job.result()  # Waits for query to finish
 
@@ -78,3 +92,4 @@ print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id)
 system("rm context.json")
 system("rm lista.json")
 print("finalizado")
+'''
