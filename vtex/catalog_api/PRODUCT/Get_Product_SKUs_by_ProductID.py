@@ -18,22 +18,23 @@ count = 0
 
 def skuandproduct(id,count,delimitador):
     if count >= delimitador:
-        print("delimitador: "+str(delimitador))
-        url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pub/products/variations/"""+str(id)+""
-        headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-        response = requests.request("GET", url, headers=headers)
-        jsonF = json.loads(response.text)
-        string = json.dumps(jsonF)
-        text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/SKUs_by_id/"+str(count)+"_skus_by_Product.json", "w")
-        text_file.write(string)
-        text_file.close()
-        print("Terminando: "+str(count))
-#        except:
-#            delimitador = count
-#            text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/delimitador2.txt", "w")
-#            text_file.write(str(delimitador))
-#            text_file.close()
-            #system("python3 Get_Product_SKUs_by_ProductID.py")
+        try:
+            print("delimitador: "+str(delimitador))
+            url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pub/products/variations/"""+str(id)+""
+            headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
+            response = requests.request("GET", url, headers=headers)
+            jsonF = json.loads(response.text)
+            string = json.dumps(jsonF)
+            text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/SKUs_by_id/"+str(count)+"_skus_by_Product.json", "w")
+            text_file.write(string)
+            text_file.close()
+            print("Terminando: "+str(count))
+        except:
+            delimitador = count
+            text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/delimitador2.txt", "w")
+            text_file.write(str(delimitador))
+            text_file.close()
+            system("python3 Get_Product_SKUs_by_ProductID.py")
 
 f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/id_producto.json','r')
 data_from_string = f_01.read()
