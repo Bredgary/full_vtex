@@ -15,19 +15,25 @@ formatoJson = {}
 formJson = {}
 count = 0
 
-'''
+f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT_SPECIFICATION/delimitador.txt','r')
+data_from_string = f_01.read()
+
+delimitador = int(data_from_string)
+
 def get_RefId(id,count):
-    if count >= 15080:
-        print("Comenzando: "+str(count))
-        url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/productgetbyrefid/"""+str(id)+""
-        headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-        response = requests.request("GET", url, headers=headers)
-        jsonF = json.loads(response.text)
-        string = json.dumps(jsonF)
-        text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/temp4/"+str(count)+"_get_RefId.json", "w")
-        text_file.write(string)
-        text_file.close()
-        print("Terminando: "+str(count)) 
+    if count >= delimitador:
+        print("Comenzando: "+str(delimitador))
+        try:
+            print("Comenzando: "+str(count))
+            url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/productgetbyrefid/"""+str(id)+""
+            headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
+            response = requests.request("GET", url, headers=headers)
+            jsonF = json.loads(response.text)
+            string = json.dumps(jsonF)
+            text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/temp4/"+str(count)+"_get_RefId.json", "w")
+            text_file.write(string)
+            text_file.close()
+            print("Terminando: "+str(count)) 
 
 f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/listaIdRef.json','r')
 data_from_string = f_01.read()
