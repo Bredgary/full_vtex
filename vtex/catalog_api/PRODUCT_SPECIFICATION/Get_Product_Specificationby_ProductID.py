@@ -14,7 +14,7 @@ data_from_string = f_01.read()
 delimitador = int(data_from_string)
 count = 0
 
-def get_RefId(id,count):
+def get_specification(id,count):
     if count >= delimitador:
         print("Comenzando: "+str(delimitador))
         try:
