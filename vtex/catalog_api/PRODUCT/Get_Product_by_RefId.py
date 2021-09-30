@@ -87,9 +87,10 @@ text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/listaRefId.js
 text_file.write(string)
 text_file.close() 
 
+'''
 system("cat listaRefId.json | jq -c '.[]' > table_listaRedId.json")
 
-'''
+
 print("Cargando a BigQuery")
 client = bigquery.Client()
 filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/table_listaRedId.json'
