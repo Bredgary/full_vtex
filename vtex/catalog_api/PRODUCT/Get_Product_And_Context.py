@@ -31,7 +31,7 @@ formatoJSon = json.loads(data_from_string)
 for i in formatoJSon:
     count +=1
     print(count)
-    if count == 3781:
+    if count == 3782:
         print("Comenzando: "+str(count))
         xx = get_contex(i,count)
         print("Terminando: "+str(count))
