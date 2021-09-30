@@ -88,7 +88,7 @@ text_file.write(string)
 text_file.close() 
 
 
-system("cat listaRefId.json | jq -c '.[]' > table_listaRedId.json")
+system("cat listaRefId.json | jq -c '.[]' > table_listaRefId.json")
 '''
 
 print("Cargando a BigQuery")
