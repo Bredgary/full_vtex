@@ -32,10 +32,9 @@ for i in formatoJSon:
     count +=1
     print(count)
     if count == 3782:
-        break
-        #print("Comenzando: "+str(count))
-        #xx = get_contex(i,count)
-        #print("Terminando: "+str(count))
+        print("Comenzando: "+str(count))
+        xx = get_contex(i,count)
+        print("Terminando: "+str(count))
 
 
 print(str(count)+" registro almacenado "+str(i))
