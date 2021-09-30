@@ -74,7 +74,7 @@ print("Finalizado")
 '''
 DIR = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/temp4/'
 countDir = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])
-'''
+
 for x in range(countDir):
     count +=1
     uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/temp4/"+str(count)+"_get_RefId.json"
@@ -91,8 +91,8 @@ text_file.close()
 
 
 system("cat listaRefId.json | jq -c '.[]' > table_listaRefId.json")
-'''
 
+'''
 print("Cargando a BigQuery")
 client = bigquery.Client()
 filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/table_listaRefId.json'
@@ -113,4 +113,4 @@ with open(filename, "rb") as source_file:
     job_config=job_config,)  # API request
 job.result()  # Waits for table load to complete.
 print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
-
+'''
