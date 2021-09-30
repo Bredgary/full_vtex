@@ -83,13 +83,13 @@ for x in range(countDir):
     print("Producto Almacenados: " +str(count))
 
 string = json.dumps(listaID)
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/listaRefId.json", "w")
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/listaRefId.json", "w")
 text_file.write(string)
 text_file.close() 
 
-'''
-system("cat listaRefId.json | jq -c '.[]' > table_listaRedId.json")
 
+system("cat listaRefId.json | jq -c '.[]' > table_listaRedId.json")
+'''
 
 print("Cargando a BigQuery")
 client = bigquery.Client()
