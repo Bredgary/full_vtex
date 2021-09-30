@@ -1,18 +1,20 @@
 import requests
 import json
-import os
+import os, os.path
 import re
 from datetime import datetime
 from os import system
 from google.cloud import bigquery
 
 client = bigquery.Client()
-productList = []
-listIdRef= []
-listaIDS = []
+listaID = []
+formatoJson = {}
+listaProductID = []
+formatoJson = {}
+formJson = {}
 count = 0
 
-
+'''
 def get_RefId(id,count):
     if count >= 15080:
         print("Comenzando: "+str(count))
@@ -40,7 +42,7 @@ print(str(count)+" registro almacenado "+str(i))
 print("Finalizado")
 
 
-'''
+
 QUERY = (
     'SELECT RefId FROM `shopstar-datalake.landing_zone.shopstar_vtex_product_v2` WHERE RefId is not null AND RefId != ""')
 query_job = client.query(QUERY)  # API request
@@ -68,20 +70,29 @@ for i in formatoJSon:
 
 print(str(count)+" registro almacenado "+str(i))
 print("Finalizado")
+'''
+DIR = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/temp4/'
+countDir = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])
 
+for x in range(rangoDir):
+    uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/temp4/"+str(x)+"_get_RefId.json"
+    f_03 = open (uri,'r')
+    ids_string = f_03.read()
+    listaID.append(ids_string)
+    count = count + 1
+    print("Producto Almacenados: " +str(count))
 
-
-
-string = json.dumps(productList)
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/lista.json", "w")
+string = json.dumps(listaID)
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/listaRefId.json", "w")
 text_file.write(string)
 text_file.close() 
 
-system("cat lista.json | jq -c '.[]' > table.json")
+system("cat listaRefId.json | jq -c '.[]' > table_listaRedId.json")
 
+'''
 print("Cargando a BigQuery")
 client = bigquery.Client()
-filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/table.json'
+filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/table_listaRedId.json'
 dataset_id = 'landing_zone'
 table_id = 'shopstar_vtex_refid_product_v2'
 dataset_ref = client.dataset(dataset_id)
