@@ -7,46 +7,38 @@ from os import system
 from google.cloud import bigquery
 
 client = bigquery.Client()
-productList = [] 
-temp = ""
+productList = []
+listIdProductAndContext = []
+listaIDS = []
+count = 0
 
-def get_policy(id):
-    url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/productget/"""+str(id)+""
-    headers = {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-        "X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA",
-        "X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"
-        }
-    response = requests.request("GET", url, headers=headers)
-    jsonF = json.loads(response.text)
-    return jsonF
+def get_policy(id,count):
+    if count >= 0:
+        print("Comenzando: "+str(count))
+        url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/productget/"""+str(id)+""
+        headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
+        response = requests.request("GET", url, headers=headers)
+        jsonF = json.loads(response.text)
+        string = json.dumps(jsonF)
+        text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/temp3/"+str(count)+"_get_policy.json", "w")
+        text_file.write(string)
+        text_file.close()
+        print("Terminando: "+str(count)) 
 
-def replace_blank_dict(d):
-    if not d:
-        return None
-    if type(d) is list:
-        for list_item in d:
-            if type(list_item) is dict:
-                for k, v in list_item.items():
-                    list_item[k] = replace_blank_dict(v)
-    if type(d) is dict:
-        for k, v in d.items():
-            d[k] = replace_blank_dict(v)
-    return d
+f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/lista.json','r')
+data_from_string = f_01.read()
 
-QUERY = (
-    'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_product` ')
-query_job = client.query(QUERY)  # API request
-rows = query_job.result()  # Waits for query to finish
+formatoJSon = json.loads(data_from_string)
 
-for row in rows:
-    temp = get_policy(str(row.id))
-    productList.append(temp)
+for i in formatoJSon:
+    count +=1
+    get_policy(i,count)
+    
 
-for order in productList:
-    for k, v in order.items():
-        order[k] = replace_blank_dict(v)
+print(str(count)+" registro almacenado "+str(i))
+print("Finalizado")
+
+'''
 
 string = json.dumps(productList)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/lista.json", "w")
@@ -76,3 +68,4 @@ print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id)
 system("rm table.json")
 system("rm lista.json")
 print("finalizado")
+'''

@@ -7,32 +7,39 @@ from os import system
 from google.cloud import bigquery
 
 client = bigquery.Client()
-productList = [] 
-temp = ""
+productList = []
+listIdProductAndContext = []
+listaIDS = []
 count = 0
 
+def skuandproduct(id,count):
+    if count >= 0:
+        print("Comenzando: "+str(count))
+        url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pub/products/variations/"""+str(id)+""
+        headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
+        response = requests.request("GET", url, headers=headers)
+        jsonF = json.loads(response.text)
+        string = json.dumps(jsonF)
+        text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/temp2/"+str(count)+"_skus_by_Product.json", "w")
+        text_file.write(string)
+        text_file.close()
+        print("Terminando: "+str(count)) 
 
-def replace_blank_dict(d):
-    if not d:
-        return None
-    if type(d) is list:
-        for list_item in d:
-            if type(list_item) is dict:
-                for k, v in list_item.items():
-                    list_item[k] = replace_blank_dict(v)
-    if type(d) is dict:
-        for k, v in d.items():
-            d[k] = replace_blank_dict(v)
-    return d
+f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/lista.json','r')
+data_from_string = f_01.read()
 
-def skuandproduct(id):
-    url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pub/products/variations/"""+str(id)+""
-    headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-    response = requests.request("GET", url, headers=headers)
-    jsonF = json.loads(response.text)
-    return jsonF 
+formatoJSon = json.loads(data_from_string)
+
+for i in formatoJSon:
+    count +=1
+    skuandproduct(i,count)
+    
+
+print(str(count)+" registro almacenado "+str(i))
+print("Finalizado")
 
 
+'''
 QUERY = (
     'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_product_v2` ')
 query_job = client.query(QUERY)  # API request
@@ -79,3 +86,4 @@ print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id)
 system("rm table.json")
 system("rm lista.json")
 print("finalizado")
+'''
