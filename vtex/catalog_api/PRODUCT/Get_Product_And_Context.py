@@ -13,14 +13,17 @@ listaIDS = []
 
 count = 0
 def get_contex(id,count):
-    url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/ProductGet/"""+str(id)+""
-    headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-    response = requests.request("GET", url, headers=headers)
-    jsonF = json.loads(response.text)
-    string = json.dumps(jsonF)
-    text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/temp/"+str(count)+"_context.json", "w")
-    text_file.write(string)
-    text_file.close() 
+    if count == 3782:
+        prin("Ingestando")
+        url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/ProductGet/"""+str(id)+""
+        headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}response = requests.request("GET", url, headers=headers)
+        jsonF = json.loads(response.text)
+        string = json.dumps(jsonF)
+        text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/temp/"+str(count)+"_context.json", "w")
+        text_file.write(string)
+        text_file.close() 
+    else:
+        print("Fin de la ingesta")
 
 
 f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/lista.json','r')
@@ -30,12 +33,9 @@ formatoJSon = json.loads(data_from_string)
 
 for i in formatoJSon:
     count +=1
-    print(count)
-    if count == 3782:
-        print("Comenzando: "+str(count))
-        #xx = get_contex(i,count)
-        #print("Terminando: "+str(count))
-        break
+    print("Comenzando: "+str(count))
+    get_contex(i,count)
+    print("Terminando: "+str(count))
 
 
 print(str(count)+" registro almacenado "+str(i))
