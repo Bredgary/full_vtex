@@ -1,12 +1,13 @@
 import requests
 import json
-import os, os.path
+import os
 import re
 from datetime import datetime
 from os import system
 from google.cloud import bigquery
+from itertools import chain
+from collections import defaultdict
 
-client = bigquery.Client()
 listaID = []
 formatoJson = {}
 listaProductID = []
@@ -100,6 +101,8 @@ table_id = 'shopstar_vtex_refid_product_v2'
 dataset_ref = client.dataset(dataset_id)
 table_ref = dataset_ref.table(table_id)
 job_config = bigquery.LoadJobConfig()
+job_config.write_disposition = bigquery.WriteDisposition.WRITE_APPEND
+job_config.schema_update_options = [bigquery.SchemaUpdateOption.ALLOW_FIELD_ADDITION]
 job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
 job_config.autodetect = True
 with open(filename, "rb") as source_file:
@@ -110,5 +113,4 @@ with open(filename, "rb") as source_file:
     job_config=job_config,)  # API request
 job.result()  # Waits for table load to complete.
 print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
-print("finalizado")
 
