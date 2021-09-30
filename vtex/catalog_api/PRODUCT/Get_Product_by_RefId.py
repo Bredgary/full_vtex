@@ -26,8 +26,21 @@ def get_RefId(id,count):
         text_file.close()
         print("Terminando: "+str(count)) 
 
+f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/listaIdRef.json','r')
+data_from_string = f_01.read()
+
+formatoJSon = json.loads(data_from_string)
+
+for i in formatoJSon:
+    count +=1
+    get_RefId(i,count)
+    
+
+print(str(count)+" registro almacenado "+str(i))
+print("Finalizado")
 
 
+'''
 QUERY = (
     'SELECT RefId FROM `shopstar-datalake.landing_zone.shopstar_vtex_product_v2` WHERE RefId is not null AND RefId != ""')
 query_job = client.query(QUERY)  # API request
@@ -42,7 +55,7 @@ text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/lista
 text_file.write(string)
 text_file.close() 
 
-'''
+
 f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/lista2.json','r')
 data_from_string = f_01.read()
 
