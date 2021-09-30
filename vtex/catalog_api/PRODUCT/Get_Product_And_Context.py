@@ -15,20 +15,27 @@ data_from_string = f_01.read()
 delimitador = int(data_from_string)
 count = 0
 
-def get_contex(id,count):
-    if count >= 122804:
-        print("Comenzando: "+str(count))
-        url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/ProductGet/"""+str(id)+""
-        headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-        response = requests.request("GET", url, headers=headers)
-        jsonF = json.loads(response.text)
-        string = json.dumps(jsonF)
-        text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/temp/"+str(count)+"_context.json", "w")
-        text_file.write(string)
-        text_file.close()
-        print("Terminando: "+str(count))
+def get_contex(id,count,delimitador):
+    if count >= delimitador:
+        try:
+            print("delimitador: "+str(delimitador))
+            url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/ProductGet/"""+str(id)+""
+            headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
+            response = requests.request("GET", url, headers=headers)
+            jsonF = json.loads(response.text)
+            string = json.dumps(jsonF)
+            text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/contextJson/"+str(count)+"_context.json", "w")
+            text_file.write(string)
+            text_file.close()
+            print("Terminando: "+str(count))
+        except:
+            delimitador = count
+            text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/delimitador.txt", "w")
+            text_file.write(str(delimitador))
+            text_file.close()
+            system("python3 Get_Product_And_Context.py")
 
-'''
+
 f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/lista.json','r')
 data_from_string = f_01.read()
 
@@ -36,7 +43,7 @@ formatoJSon = json.loads(data_from_string)
 
 for i in formatoJSon:
     count +=1
-    get_contex(i,count)
+    get_contex(i,count,delimitador)
     
 
 print(str(count)+" registro almacenado "+str(i))
@@ -57,7 +64,7 @@ text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/id_pr
 text_file.write(string)
 text_file.close() 
 
-'''
+
 f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/lista.json','r')
 data_from_string = f_01.read()
 
