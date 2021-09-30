@@ -36,7 +36,7 @@ def get_contex(id,count,delimitador):
             system("python3 Get_Product_And_Context.py")
 
 
-f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/lista.json','r')
+f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/id_producto.json','r')
 data_from_string = f_01.read()
 
 formatoJSon = json.loads(data_from_string)
