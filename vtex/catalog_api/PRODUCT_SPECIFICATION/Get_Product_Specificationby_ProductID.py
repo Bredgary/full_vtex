@@ -6,7 +6,7 @@ from datetime import datetime
 from os import system
 from google.cloud import bigquery
 
-
+client = bigquery.Client()
 listaIDS = []
 
 f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT_SPECIFICATION/delimitador.txt','r')
