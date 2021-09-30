@@ -7,11 +7,13 @@ from os import system
 from google.cloud import bigquery
 
 client = bigquery.Client()
-productList = []
-listIdProductAndContext = []
 listaIDS = []
 
+f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/delimitador.txt','r')
+data_from_string = f_01.read()
+delimitador = int(data_from_string)
 count = 0
+
 def get_contex(id,count):
     if count >= 122804:
         print("Comenzando: "+str(count))
@@ -25,7 +27,7 @@ def get_contex(id,count):
         text_file.close()
         print("Terminando: "+str(count))
 
-
+'''
 f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/lista.json','r')
 data_from_string = f_01.read()
 
@@ -38,22 +40,23 @@ for i in formatoJSon:
 
 print(str(count)+" registro almacenado "+str(i))
 print("Finalizado")
-
-
-#QUERY = (
-#    'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_product_v2` ')
-#query_job = client.query(QUERY)  # API request
-#rows = query_job.result()  # Waits for query to finish
-
 '''
+
+QUERY = (
+    'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_product_v2` ')
+query_job = client.query(QUERY)  # API request
+rows = query_job.result()  # Waits for query to finish
+
+
 for row in rows:
+    listIdProductAndContext.append(row.id)
     
 string = json.dumps(listIdProductAndContext)
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/temp/lista.json", "w")
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/id_producto.json", "w")
 text_file.write(string)
 text_file.close() 
 
-
+'''
 f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/lista.json','r')
 data_from_string = f_01.read()
 

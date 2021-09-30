@@ -8,7 +8,6 @@ from google.cloud import bigquery
 
 client = bigquery.Client()
 listaIDS = []
-
 f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT_SPECIFICATION/delimitador.txt','r')
 data_from_string = f_01.read()
 delimitador = int(data_from_string)
