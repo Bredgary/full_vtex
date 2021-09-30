@@ -14,9 +14,9 @@ data_from_string = f_01.read()
 delimitador = int(data_from_string)
 count = 0
 
-def get_specification(id,count):
+def get_specification(id,count,delimitador):
     if count >= delimitador:
-        print("Comenzando: "+str(delimitador))
+        print("Comenzando: "+str(count))
         try:
             url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/"""+str(id)+"""/specification"""
             headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
@@ -39,7 +39,7 @@ rows = query_job.result()  # Waits for query to finish
 
 for row in rows:
     count += 1
-    get_specification(str(row.id),count)
+    get_specification(str(row.id),count,delimitador)
 
 
 string = json.dumps(listaIDS)
