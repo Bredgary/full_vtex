@@ -41,7 +41,7 @@ def operacion_fenix(count):
     formatoJSon = json.loads(data_from_string)
     for i in formatoJSon:
         count +=1
-        policy = get_contex(i,count,delimitador)
+        policy = get_policy(i,count,delimitador)
     print(str(count)+" registro almacenado.")
     print(policy)
 
