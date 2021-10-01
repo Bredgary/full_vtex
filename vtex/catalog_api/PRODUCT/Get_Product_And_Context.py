@@ -24,6 +24,7 @@ def get_contex(id,count,delimitador):
             response = requests.request("GET", url, headers=headers)
             jsonF = json.loads(response.text)
             string = json.dumps(jsonF)
+            count +=1
             text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/contextJson/"+str(count)+"_context.json", "w")
             text_file.write(string)
             text_file.close()
@@ -42,7 +43,6 @@ data_from_string = f_01.read()
 formatoJSon = json.loads(data_from_string)
 
 for i in formatoJSon:
-    count +=1
     get_contex(i,count,delimitador)
     
 
