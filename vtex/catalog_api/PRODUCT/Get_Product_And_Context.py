@@ -23,7 +23,6 @@ def get_contex(id,count,delimitador):
             response = requests.request("GET", url, headers=headers)
             jsonF = json.loads(response.text)
             string = json.dumps(jsonF)
-            count +=1
             text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/contextJson/"+str(count)+"_context.json", "w")
             text_file.write(string)
             text_file.close()
@@ -35,18 +34,19 @@ def get_contex(id,count,delimitador):
             text_file.close()
             system("python3 Get_Product_And_Context.py")
 
+def operacion_fenix():
+    f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/id_producto.json','r')
+    data_from_string = f_01.read()
+    formatoJSon = json.loads(data_from_string)
+    for i in formatoJSon:
+        count +=1
+        get_contex(i,count,delimitador)
+    print(str(count)+" registro almacenado.")
+    print("Finalizado")
 
-f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/id_producto.json','r')
-data_from_string = f_01.read()
+operacion_fenix()
 
-formatoJSon = json.loads(data_from_string)
 
-for i in formatoJSon:
-    get_contex(i,count,delimitador)
-    
-
-print(str(count)+" registro almacenado "+str(i))
-print("Finalizado")
 '''
 
 QUERY = (
