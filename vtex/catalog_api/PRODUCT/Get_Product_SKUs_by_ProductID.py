@@ -19,7 +19,6 @@ count = 0
 def skuandproduct(id,count,delimitador):
     if count >= delimitador:
         try:
-            print("delimitador: "+str(delimitador))
             url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pub/products/variations/"""+str(id)+""
             headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
             response = requests.request("GET", url, headers=headers)
@@ -35,19 +34,19 @@ def skuandproduct(id,count,delimitador):
             text_file.write(str(delimitador))
             text_file.close()
             system("python3 Get_Product_SKUs_by_ProductID.py")
+    return "Finalizado"
 
-f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/id_producto.json','r')
-data_from_string = f_01.read()
+def operacion_fenix(count):
+    f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/id_producto.json','r')
+    data_from_string = f_01.read()
+    formatoJSon = json.loads(data_from_string)
+    for i in formatoJSon:
+        count +=1
+        sku = get_contex(i,count,delimitador)
+    print(str(count)+" registro almacenado.")
+    print(sku)
 
-formatoJSon = json.loads(data_from_string)
-
-for i in formatoJSon:
-    count +=1
-    skuandproduct(i,count,delimitador)
-    
-
-print(str(count)+" registro almacenado "+str(i))
-print("Finalizado")
+operacion_fenix(count)
 
 
 '''

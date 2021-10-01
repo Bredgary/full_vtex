@@ -18,7 +18,6 @@ count = 0
 def get_policy(id,count,delimitador):
     if count >= delimitador:
         try:
-            print("delimitador: "+str(delimitador))
             url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/productget/"""+str(id)+""
             headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
             response = requests.request("GET", url, headers=headers)
@@ -34,19 +33,19 @@ def get_policy(id,count,delimitador):
             text_file.write(str(delimitador))
             text_file.close()
             system("python3 Get_Product_and_its_Trade_Policy.py")
+    return "Finalizado"
 
-f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/id_producto.json','r')
-data_from_string = f_01.read()
+def operacion_fenix(count):
+    f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/id_producto.json','r')
+    data_from_string = f_01.read()
+    formatoJSon = json.loads(data_from_string)
+    for i in formatoJSon:
+        count +=1
+        policy = get_contex(i,count,delimitador)
+    print(str(count)+" registro almacenado.")
+    print(policy)
 
-formatoJSon = json.loads(data_from_string)
-
-for i in formatoJSon:
-    count +=1
-    get_policy(i,count,delimitador)
-    
-
-print(str(count)+" registro almacenado "+str(i))
-print("Finalizado")
+operacion_fenix(count)
 
 '''
 
