@@ -34,6 +34,7 @@ def get_contex(id,count,delimitador):
             text_file.close()
             system("python3 Get_Product_And_Context.py")
 
+
 def operacion_fenix():
     f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/id_producto.json','r')
     data_from_string = f_01.read()
