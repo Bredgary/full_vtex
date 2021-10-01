@@ -14,7 +14,7 @@ f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/delimitad
 data_from_string = f_01.read()
 delimitador = int(data_from_string)
 count = 0
-
+ 
 def get_policy(id,count,delimitador):
     if count >= delimitador:
         try:
