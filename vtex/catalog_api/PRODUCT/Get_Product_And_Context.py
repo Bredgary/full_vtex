@@ -45,7 +45,7 @@ def operacion_fenix(count):
     print(str(count)+" registro almacenado.")
     print("Finalizado")
 
-operacion_fenix()
+operacion_fenix(count)
 
 
 '''
