@@ -18,7 +18,6 @@ count = 0
 def get_contex(id,count,delimitador):
     if count >= delimitador:
         try:
-            print("delimitador: "+str(delimitador))
             url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/ProductGet/"""+str(id)+""
             headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
             response = requests.request("GET", url, headers=headers)
@@ -28,7 +27,7 @@ def get_contex(id,count,delimitador):
             text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/contextJson/"+str(count)+"_context.json", "w")
             text_file.write(string)
             text_file.close()
-            print("Terminando: "+str(count))
+            print("Numero de registro: "+str(count))
         except:
             delimitador = count
             text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/delimitador.txt", "w")
