@@ -10,7 +10,7 @@ client = bigquery.Client()
 listaID = []
 listIdProductAndContext =[]
 count = 0
-
+'''
 f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/delimitador.txt','r')
 data_from_string = f_01.read()
 delimitador = int(data_from_string)
@@ -61,14 +61,13 @@ for x in range(countDir):
     uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/IdSku/"+str(count)+"_IdSku.json"
     f_03 = open (uri,'r')
     ids_string = f_03.read()
-    ids_string.replace('[','').replace(']','')
     #listaID.append(ids_string)
     #print("ID type: " +type(listaID))
-    print("ID: " +str(strg))
+    print("ID: " +ids_string)
     break
 
 #string = json.dumps(listaID)
 #text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/listaRefId.json", "w")
 #text_file.write(string)
 #text_file.close() 
-'''
+
