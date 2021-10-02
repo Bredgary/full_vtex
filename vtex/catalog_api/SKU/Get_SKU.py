@@ -17,28 +17,12 @@ count = 0
 mensajeError = {'Message': 'The request is invalid.'}
 
 
-def get_sku(id,count,delimitador):
-	if count >= delimitador:
-		#try:
-		url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/stockkeepingunit/"""+str(id)+""
-		headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-		response = requests.request("GET", url, headers=headers)
-		jsonF = json.loads(response.text)
-		if jsonF != mensajeError:
-			string = json.dumps(jsonF)
-			text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/SKU/"+str(count)+"_sku.json", "w")
-			text_file.write(string)
-			text_file.close()
-			print("Numero de registro: "+str(count))
-		else:
-			print("Vacio")
-		#except:
-		#	delimitador = count
-		#	text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/delimitador.txt", "w")
-		#	text_file.write(str(delimitador))
-		#	text_file.close()
-		#	system("python3 Get_SKU.py")
-	return "Finalizado"
+def get_sku(id):
+  url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/stockkeepingunit/"""+str(id)+""
+  headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
+  response = requests.request("GET", url, headers=headers)
+  jsonF = json.loads(response.text)
+  return jsonF
 
 
 def operacion_fenix(count):
@@ -47,10 +31,9 @@ def operacion_fenix(count):
 	formatoJSon = json.loads(data_from_string)
 	for i in formatoJSon:
 		count += 1
-		sku = get_sku(i,count,delimitador)
+		sku = get_sku(i)
 	print(str(count)+" registro almacenado.")
 	print(sku)
-
 
 operacion_fenix(count)
 
