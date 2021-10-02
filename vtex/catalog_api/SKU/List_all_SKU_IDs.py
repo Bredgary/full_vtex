@@ -9,11 +9,11 @@ from google.cloud import bigquery
 client = bigquery.Client()
 listaIDS = []
 listIdProductAndContext =[]
-
+count = 0
+'''
 f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/delimitador.txt','r')
 data_from_string = f_01.read()
 delimitador = int(data_from_string)
-count = 0
 
 def get_list_sku(count,delimitador):
   if count >= delimitador:
@@ -47,3 +47,24 @@ def operacion_fenix(count):
     print(list_sku)
 
 operacion_fenix(count)
+
+'''
+
+DIR = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/IdSku/'
+countDir = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])
+
+for x in range(countDir):
+    count +=1
+    uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/IdSku/"+str(count)+"_IdSku.json"
+    f_03 = open (uri,'r')
+    ids_string = f_03.read()
+    #formatoJson = json.loads(ids_string)
+    #listaID.append(formatoJson)
+    print("ID type: " +type(ids_string))
+    print("ID: " +ids_string)
+    break
+
+#string = json.dumps(listaID)
+#text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/listaRefId.json", "w")
+#text_file.write(string)
+#text_file.close() 
