@@ -61,7 +61,7 @@ for x in range(countDir):
     formatoJson = json.loads(ids_string)
     listaID.append(formatoJson)
     #print("ID type: " +type(listaID))
-    print("ID: " +listaID)
+    print("ID: " +str(listaID))
     break
 
 #string = json.dumps(listaID)
