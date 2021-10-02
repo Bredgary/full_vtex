@@ -45,7 +45,7 @@ def operacion_fenix(count):
     formatoJSon = json.loads(data_from_string)
     for i in formatoJSon:
 		count += 1
-		#sku = get_sku(i,count,delimitador)
+		sku = get_sku(i,count,delimitador)
 		print(i)
 	print(str(count)+" registro almacenado.")
 	print(sku)
