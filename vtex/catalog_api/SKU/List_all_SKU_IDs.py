@@ -10,7 +10,7 @@ client = bigquery.Client()
 listaID = []
 listIdProductAndContext =[]
 count = 0
-'''
+
 f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/delimitador.txt','r')
 data_from_string = f_01.read()
 delimitador = int(data_from_string)
@@ -18,16 +18,19 @@ delimitador = int(data_from_string)
 def get_list_sku(count,delimitador):
   if count >= delimitador:
     try:
-      url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitids"
-      querystring = {"page":""+str(count)+"","pagesize":"100"}
-      headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-      response = requests.request("GET", url, headers=headers, params=querystring)
-      jsonF = json.loads(response.text)
-      string = json.dumps(jsonF)
-      text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/IdSku/"+str(count)+"_IdSku.json", "w")
-      text_file.write(string)
-      text_file.close()
-      print("Numero de registro: "+str(count))
+        url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitids"
+        querystring = {"page":""+str(count)+"","pagesize":"100"}
+        headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
+        response = requests.request("GET", url, headers=headers, params=querystring)
+        jsonF = json.loads(response.text)
+        if jsonF:
+            string = str(jsonF).replace('[','').replace(']','')
+            text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/IdSku/"+str(count)+"_IdSku.json", "w")
+            text_file.write(string)
+            text_file.close()
+            print("Numero de registro: "+str(count))
+        else:
+            print("Lista Vacia")
     except:
       delimitador = count
       text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/delimitador.txt", "w")
@@ -58,8 +61,7 @@ for x in range(countDir):
     uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/IdSku/"+str(count)+"_IdSku.json"
     f_03 = open (uri,'r')
     ids_string = f_03.read()
-    strg=str(ids_string)
-    strg.replace('[','').replace(']','')
+    ids_string.replace('[','').replace(']','')
     #listaID.append(ids_string)
     #print("ID type: " +type(listaID))
     print("ID: " +str(strg))
@@ -69,3 +71,4 @@ for x in range(countDir):
 #text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/listaRefId.json", "w")
 #text_file.write(string)
 #text_file.close() 
+'''
