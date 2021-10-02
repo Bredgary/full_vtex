@@ -22,7 +22,7 @@ def get_sku(id,count,delimitador):
 			url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/stockkeepingunit/"+id+""
 			headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 			response = requests.request("GET", url, headers=headers)
-            jsonF = json.loads(response.text)
+			jsonF = json.loads(response.text)
 			if jsonF != mensajeError:
 				string = json.dumps(jsonF)
 				text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/SKU/"+str(count)+"_sku.json", "w")
