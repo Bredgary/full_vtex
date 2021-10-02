@@ -52,7 +52,6 @@ def operacion_fenix(count):
 
 operacion_fenix(count)
 
-
 '''
 
 QUERY = (
