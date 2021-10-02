@@ -62,7 +62,7 @@ for x in range(countDir):
     f_03 = open (uri,'r')
     ids_string = f_03.read()
     listaID.append(ids_string)
-    print("ID: " +listaID)
+    print("ID: " +str(listaID))
     break
 
 #string = json.dumps(listaID)
