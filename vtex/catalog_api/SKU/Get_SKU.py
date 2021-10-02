@@ -19,22 +19,25 @@ mensajeError = {'Message': 'The request is invalid.'}
 
 def get_sku(id,count,delimitador):
 	if count >= delimitador:
-		try:
-			url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/stockkeepingunit/"""+str(id)+""
-			headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-			response = requests.request("GET", url, headers=headers)
-			jsonF = json.loads(response.text)
+		#try:
+		url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/stockkeepingunit/"""+str(id)+""
+		headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
+		response = requests.request("GET", url, headers=headers)
+		jsonF = json.loads(response.text)
+		if jsonF != mensajeError:
 			string = json.dumps(jsonF)
 			text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/SKU/"+str(count)+"_sku.json", "w")
 			text_file.write(string)
 			text_file.close()
 			print("Numero de registro: "+str(count))
-		except:
-			delimitador = count
-			text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/delimitador.txt", "w")
-			text_file.write(str(delimitador))
-			text_file.close()
-			#system("python3 Get_SKU.py")
+		else:
+			print("Vacio")
+		#except:
+		#	delimitador = count
+		#	text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/delimitador.txt", "w")
+		#	text_file.write(str(delimitador))
+		#	text_file.close()
+		#	system("python3 Get_SKU.py")
 	return "Finalizado"
 
 
