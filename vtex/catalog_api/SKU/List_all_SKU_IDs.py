@@ -4,13 +4,9 @@ import os
 import re
 from datetime import datetime
 from os import system
-from google.cloud import bigquery
 
-client = bigquery.Client()
 listaID = []
-listIdProductAndContext =[]
 count = 0
-'''
 f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/delimitador.txt','r')
 data_from_string = f_01.read()
 delimitador = int(data_from_string)
@@ -51,8 +47,6 @@ def operacion_fenix(count):
 
 operacion_fenix(count)
 
-'''
-
 DIR = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/IdSku/'
 countDir = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])
 
@@ -65,7 +59,7 @@ for x in range(countDir):
     
 print("ID: " +str(listaID))
 string = json.dumps(listaID)
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/id_product.json", "w")
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/id_sku.json", "w")
 text_file.write(string)
 text_file.close() 
 
