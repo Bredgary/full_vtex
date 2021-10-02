@@ -33,6 +33,7 @@ def get_contex(id,count,delimitador):
             text_file.write(str(delimitador))
             text_file.close()
             system("python3 Get_Product_And_Context.py")
+    return "Finalizado"
 
 
 def operacion_fenix(count):
@@ -41,9 +42,9 @@ def operacion_fenix(count):
     formatoJSon = json.loads(data_from_string)
     for i in formatoJSon:
         count +=1
-        get_contex(i,count,delimitador)
+        policy = get_contex(i,count,delimitador)
     print(str(count)+" registro almacenado.")
-    print("Finalizado")
+    print(policy)
 
 operacion_fenix(count)
 
