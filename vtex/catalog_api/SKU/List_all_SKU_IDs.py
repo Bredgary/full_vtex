@@ -58,10 +58,10 @@ for x in range(countDir):
     uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/IdSku/"+str(count)+"_IdSku.json"
     f_03 = open (uri,'r')
     ids_string = f_03.read()
-    #formatoJson = json.loads(ids_string)
-    #listaID.append(formatoJson)
-    print("ID type: " +type(ids_string))
-    print("ID: " +ids_string)
+    formatoJson = json.loads(ids_string)
+    listaID.append(formatoJson)
+    print("ID type: " +type(listaID))
+    print("ID: " +listaID)
     break
 
 #string = json.dumps(listaID)
