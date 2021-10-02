@@ -59,9 +59,9 @@ for x in range(countDir):
     f_03 = open (uri,'r')
     ids_string = f_03.read()
     ids_string.replace('[','').replace(']','')
-    listaID.append(ids_string)
+    #listaID.append(ids_string)
     #print("ID type: " +type(listaID))
-    print("ID: " +str(listaID))
+    print("ID: " +str(ids_string))
     break
 
 #string = json.dumps(listaID)
