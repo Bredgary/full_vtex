@@ -42,8 +42,8 @@ def get_sku(id,count,delimitador):
 def operacion_fenix(count):
 	f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/id_sku.json','r')
 	data_from_string = f_01.read()
-	print(type(data_from_string))
-	#formatoJSon = json.loads(data_from_string)
+	formatoJSon.append(data_from_string)
+	print(type(formatoJSon))
 	#for i in formatoJSon:
 	#	count += 1
 		#sku = get_sku(i,count,delimitador)
