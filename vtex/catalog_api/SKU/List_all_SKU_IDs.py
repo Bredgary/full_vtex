@@ -62,9 +62,8 @@ for x in range(countDir):
     f_03 = open (uri,'r')
     ids_string = f_03.read()
     listaID.append(ids_string)
-    print("ID: " +str(listaID))
-    break
-
+    
+print("ID: " +str(listaID))
 #string = json.dumps(listaID)
 #text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/listaRefId.json", "w")
 #text_file.write(string)
