@@ -48,7 +48,6 @@ def operacion_fenix(count):
 	for i in formatoJSon:
 		count += 1
 		sku = get_sku(i,count,delimitador)
-		print(i)
 	print(str(count)+" registro almacenado.")
 	print(sku)
 
