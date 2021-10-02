@@ -34,7 +34,7 @@ def get_sku(id,count,delimitador):
 			text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/delimitador.txt", "w")
 			text_file.write(str(delimitador))
 			text_file.close()
-			system("python3 Get_SKU.py")
+			#system("python3 Get_SKU.py")
 	return "Finalizado"
 
 
