@@ -36,7 +36,7 @@ def get_sku(id,count,delimitador):
 			text_file.write(str(delimitador))
 			text_file.close()
 			system("python3 Get_SKU.py")
-	return "Finalizado"
+	return jsonF
 
 
 def operacion_fenix(count):
@@ -44,12 +44,12 @@ def operacion_fenix(count):
 	data_from_string = f_01.read()
 	listaIDS.append(data_from_string)
 	print(type(listaIDS))
-	#for i in formatoJSon:
+	for i in formatoJSon:
 	#	count += 1
-		#sku = get_sku(i,count,delimitador)
-	#	print(i)
-	#print(str(count)+" registro almacenado.")
-	#print(sku)
+		sku = get_sku(i,count,delimitador)
+		break
+	print(str(count)+" registro almacenado.")
+	print(sku)
 
 operacion_fenix(count)
 
