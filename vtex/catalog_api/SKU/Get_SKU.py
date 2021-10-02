@@ -43,9 +43,8 @@ def operacion_fenix(count):
 	f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/id_sku.json','r')
 	data_from_string = f_01.read()
 	listaIDS.append(data_from_string)
-	print(type(listaIDS))
-	for i in formatoJSon:
-	#	count += 1
+	for i in listaIDS:
+		count += 1
 		sku = get_sku(i,count,delimitador)
 		break
 	print(str(count)+" registro almacenado.")
