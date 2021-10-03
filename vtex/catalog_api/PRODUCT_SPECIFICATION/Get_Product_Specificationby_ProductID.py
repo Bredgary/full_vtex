@@ -32,7 +32,7 @@ def get_specification(id,count,delimitador):
         
 
 QUERY = (
-    'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_product_v2`')
+    'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_product`')
 query_job = client.query(QUERY)  # API request
 rows = query_job.result()  # Waits for query to finish
 
