@@ -32,12 +32,11 @@ def get_sku(id,count,delimitador):
 				text_file.close()
 				print("Numero de registro: "+str(count))
 		except:
-			print("ERROR")
-			#delimitador = count
-			#text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/delimitador.txt", "w")
-			#text_file.write(str(delimitador))
-			#text_file.close()
-			#system("python3 Get_SKU.py")
+			delimitador = count
+			text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/delimitador.txt", "w")
+			text_file.write(str(delimitador))
+			text_file.close()
+			system("python3 Get_SKU.py")
 	return jsonF
 
 
@@ -49,8 +48,7 @@ def operacion_fenix(count):
 	for i in listaIDS:
 		count += 1
 		print(i)
-		#sku = get_sku(i,count,delimitador)
-		#break
+		sku = get_sku(i,count,delimitador)
 	print(str(count)+" registro almacenado.")
 	print(sku)
 
