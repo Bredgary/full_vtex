@@ -15,10 +15,10 @@ data_from_string = f_01.read()
 delimitador = int(data_from_string)
 count = 0
 mensajeError = {'Message': 'The request is invalid.'}
-jsonF = {}
 
 
 def get_sku(id,count,delimitador):
+	jsonF = {}
 	if count >= delimitador:
 		try:
 			url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/stockkeepingunit/"""+str(id)+""
