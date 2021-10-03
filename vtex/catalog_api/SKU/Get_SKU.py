@@ -15,6 +15,7 @@ data_from_string = f_01.read()
 delimitador = int(data_from_string)
 count = 0
 mensajeError = {'Message': 'The request is invalid.'}
+jsonF = {}
 
 
 def get_sku(id,count,delimitador):
