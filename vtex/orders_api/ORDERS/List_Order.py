@@ -68,13 +68,11 @@ for i in limite:
         break
 
 string = json.dumps(listDetails)
-#characters = "brand@CatalogSystem"
-#string = 'brand_CatalogSystem'.join( x for x in string if x not in characters)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/temp.json", "w")
 text_file.write(string)
 text_file.close()
 system("find . -type f -print0 | xargs -0 sed -i 's/brand@CatalogSystem/brand_CatalogSystem/g'")
-#system("./convert.py < temp.json > order.json")
+system("find . -type f -print0 | xargs -0 sed -i 's/productCluster@CatalogSystem/productCluster_CatalogSystem/g'")
 system("cat temp.json | jq -c '.[]' > order.json")
 
 
