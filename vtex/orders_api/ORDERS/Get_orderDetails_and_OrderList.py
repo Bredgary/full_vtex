@@ -66,9 +66,11 @@ for i in limite:
         list_order.append(x["list"])
     else:
 
-string = json.dumps(listDetails)
+
+
+#string = json.dumps(listDetails)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/temp.json", "w")
-text_file.write(s)
+text_file.write(str(listDetails))
 text_file.close()
 
 system("find . -type f -print0 | xargs -0 sed -i 's/brand@CatalogSystem/brand_CatalogSystem/g'")
