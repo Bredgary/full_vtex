@@ -70,6 +70,14 @@ for i in limite:
 #=======================================Cargando order detail=============================================
 #=========================================================================================================
 
+
+
+
+
+
+
+
+
 string = json.dumps(listDetails)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/temp.json", "w")
 text_file.write(string)
