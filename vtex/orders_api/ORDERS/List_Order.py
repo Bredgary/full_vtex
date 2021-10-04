@@ -67,11 +67,15 @@ for i in limite:
         break
 
 string = json.dumps(listDetails)
+characters = "brand@CatalogSystem"
+string = 'brand_CatalogSystem'.join( x for x in string if x not in characters)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/temp.json", "w")
 text_file.write(string)
 text_file.close()
 
+#system("./convert.py < temp.json > order.json")
 system("cat temp.json | jq -c '.[]' > order.json")
+
 
 print("Cargando a BigQuery order Fecha: 20"+str(year)+"-"+str(mouth)+"-"+str(dayFrom)+" al 20"+str(year)+"-"+str(mouth)+"-"+str(dayTo)+"")
 
@@ -85,7 +89,7 @@ job_config = bigquery.LoadJobConfig()
 job_config.write_disposition = bigquery.WriteDisposition.WRITE_APPEND
 job_config.schema_update_options = [bigquery.SchemaUpdateOption.ALLOW_FIELD_ADDITION]
 job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-job_config.autodetect = True
+#job_config.autodetect = True
 with open(filename, "rb") as source_file:
     job = client.load_table_from_file(
         source_file,
@@ -96,7 +100,7 @@ job.result()  # Waits for table load to complete.
 print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 system("rm order.json")
 system("rm temp.json")
-'''
+
 string = json.dumps(list_order)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order_list.json", "w")
 text_file.write(string)
@@ -104,7 +108,7 @@ text_file.close()
 system("cat order_list.json | jq -c '.[]' > temp2.json")
 system("cat temp2.json | jq -c '.[]' > tabla_order_list.json")
 
-
+'''
 print("Cargando a BigQuery list order Fecha: 20"+str(year)+"-"+str(mouth)+"-"+str(dayFrom)+" al 20"+str(year)+"-"+str(mouth)+"-"+str(dayTo)+"")
 client = bigquery.Client()
 filename = '/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/tabla_order_list.json'
