@@ -67,6 +67,7 @@ for i in limite:
     else:
 
 
+'''
 
 #string = json.dumps(listDetails)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/temp.json", "w")
@@ -103,3 +104,4 @@ job.result()
 print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 system("rm order.json")
 system("rm temp.json")
+'''
