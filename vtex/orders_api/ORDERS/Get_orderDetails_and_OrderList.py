@@ -61,7 +61,6 @@ for i in limite:
     count = count + 1
     print(str(count)+" Pagina recorrida")
     x = get_list(i)
-    break
     if bool(x["list"]):
         list_order.append(x["list"])
 
