@@ -19,7 +19,7 @@ listDetails = []
 list_order = []
 order = {}
 count = 0
-mouth int(day) - 1
+mouth int(mouth) - 1
 dayFrom = int(day) - 32
 dayTo = int(day) - 31
 
