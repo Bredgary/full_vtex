@@ -64,5 +64,3 @@ for i in limite:
     break
     if bool(x["list"]):
         list_order.append(x["list"])
-    else:
-
