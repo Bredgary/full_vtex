@@ -29,7 +29,7 @@ def get_specification(id,count,delimitador):
                 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT_SPECIFICATION/Speci/"+str(count)+"_sku.json", "w")
                 text_file.write(string)
                 text_file.close()
-                print("Numero de registro: "+str(count))
+                print("Get_Product_Specificationby_ProductID.py Terminando: "+str(count))
         except:
             delimitador = count
             text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT_SPECIFICATION/delimitador.txt", "w")

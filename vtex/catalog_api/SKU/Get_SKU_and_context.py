@@ -31,13 +31,13 @@ def get_sku(id,count,delimitador):
 				text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/SKUContext/"+str(count)+"_sku.json", "w")
 				text_file.write(string)
 				text_file.close()
-				print("Numero de registro: "+str(count))
+				print("Get_SKU_and_context.py Terminando: "+str(count))
 		except:
 			delimitador = count
 			text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/delimitador1.txt", "w")
 			text_file.write(str(delimitador))
 			text_file.close()
-			system("python3 Get_SKU.py")
+			system("python3 Get_SKU_and_context.py")
 
 
 def operacion_fenix(count):

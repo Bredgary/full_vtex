@@ -27,7 +27,7 @@ def skuandproduct(id,count,delimitador):
             text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/SKUs_by_id/"+str(count)+"_skus_by_Product.json", "w")
             text_file.write(string)
             text_file.close()
-            print("Terminando: "+str(count))
+            print("Get_Product_SKUs_by_ProductID Terminando: "+str(count))
         except:
             delimitador = count
             text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/delimitador2.txt", "w")

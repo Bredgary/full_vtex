@@ -30,7 +30,7 @@ def get_sku(id,count,delimitador):
 				text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/SKU/"+str(count)+"_sku.json", "w")
 				text_file.write(string)
 				text_file.close()
-				print("Numero de registro: "+str(count))
+				print("Get_SKU Terminando: "+str(count))
 		except:
 			delimitador = count
 			text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/delimitador.txt", "w")
