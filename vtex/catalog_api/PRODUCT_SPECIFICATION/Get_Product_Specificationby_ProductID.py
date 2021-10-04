@@ -17,9 +17,9 @@ count = 0
 
 
 def get_specification(id,count,delimitador):
-	jsonF = {}
-	if count >= delimitador:
-		try:
+    jsonF = {}
+    if count >= delimitador:
+        try:
             url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/"""+str(id)+"""/specification"""
             headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
             response = requests.request("GET", url, headers=headers)
@@ -36,7 +36,8 @@ def get_specification(id,count,delimitador):
             text_file.write(str(delimitador))
             text_file.close()
             system("python3 Get_Product_Specificationby_ProductID.py")
-        
+
+
 
 def operacion_fenix(count):
     f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT_SPECIFICATION/id_producto.json','r')
