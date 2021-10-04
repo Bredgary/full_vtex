@@ -74,6 +74,7 @@ string = json.dumps(listDetails)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/temp.json", "w")
 text_file.write(string)
 text_file.close()
+
 system("find . -type f -print0 | xargs -0 sed -i 's/brand@CatalogSystem/brand_CatalogSystem/g'")
 system("find . -type f -print0 | xargs -0 sed -i 's/productCluster@CatalogSystem/productCluster_CatalogSystem/g'")
 system("find . -type f -print0 | xargs -0 sed -i 's/product@CatalogSystem/product_CatalogSystem/g'")
@@ -118,6 +119,8 @@ text_file.write(string)
 text_file.close()
 system("cat order_list.json | jq -c '.[]' > temp2.json")
 system("cat temp2.json | jq -c '.[]' > tabla_order_list.json")
+
+
 print("Cargando a BigQuery list order Fecha: 20"+str(year)+"-"+str(mouth)+"-"+str(dayFrom)+" al 20"+str(year)+"-"+str(mouth)+"-"+str(dayTo)+"")
 client = bigquery.Client()
 filename = '/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/tabla_order_list.json'
