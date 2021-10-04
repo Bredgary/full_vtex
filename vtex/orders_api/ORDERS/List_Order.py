@@ -61,14 +61,15 @@ for i in limite:
     count = count + 1
     print(str(count)+" Pagina recorrida")
     x = get_list(i)
+    break
     if bool(x["list"]):
         list_order.append(x["list"])
     else:
         break
 
 string = json.dumps(listDetails)
-characters = "brand@CatalogSystem"
-string = 'brand_CatalogSystem'.join( x for x in string if x not in characters)
+#characters = "brand@CatalogSystem"
+#string = 'brand_CatalogSystem'.join( x for x in string if x not in characters)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/temp.json", "w")
 text_file.write(string)
 text_file.close()
