@@ -57,6 +57,7 @@ def get_list(pag):
         get_order(i["orderId"])
     return formatoJson
 
+
 def load_order_detail():
     string = json.dumps(listDetails)
     text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/temp.json", "w")
