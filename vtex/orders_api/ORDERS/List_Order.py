@@ -75,6 +75,7 @@ system("find . -type f -print0 | xargs -0 sed -i 's/brand@CatalogSystem/brand_Ca
 system("find . -type f -print0 | xargs -0 sed -i 's/productCluster@CatalogSystem/productCluster_CatalogSystem/g'")
 system("find . -type f -print0 | xargs -0 sed -i 's/product@CatalogSystem/product_CatalogSystem/g'")
 system("find . -type f -print0 | xargs -0 sed -i 's/couponCode@Marketingm/couponCode_Marketing/g'")
+system("find . -type f -print0 | xargs -0 sed -i 's/couponCode@Marketing/couponCode_Marketing/g'")
 system("cat temp.json | jq -c '.[]' > order.json")
 
 
