@@ -30,7 +30,6 @@ def get_specification(id,count,delimitador):
                 text_file.write(string)
                 text_file.close()
                 print("Numero de registro: "+str(count))
-            print(str(count)+" registro almacenado")
         except:
             delimitador = count
             text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT_SPECIFICATION/delimitador.txt", "w")
