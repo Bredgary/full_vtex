@@ -52,9 +52,9 @@ def get_list(pag):
     headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
     response = requests.request("GET", url, headers=headers, params=querystring)
     formatoJson = json.loads(response.text)
-    lista = formatoJson["list"]
-    for i in lista:
-        get_order(i["orderId"])
+    #lista = formatoJson["list"]
+    #for i in lista:
+    #    get_order(i["orderId"])
     return formatoJson
 
 for i in limite:
