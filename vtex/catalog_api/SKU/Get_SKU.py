@@ -53,94 +53,35 @@ operacion_fenix(count)
 
 '''
 
-QUERY = (
-    'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_product_v2` ')
-query_job = client.query(QUERY)  # API request
-rows = query_job.result()  # Waits for query to finish
+DIR = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/SKU/'
+countDir = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])
 
+for x in range(countDir):
+    uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/SKU/"+str(x)+"_get_SKU.json"
+    if os.path.exists(uri):
+        f_03 = open (uri,'r')
+        ids_string = f_03.read()
+        formatoJson = json.loads(ids_string)
+        listaID.append(formatoJson)
+        print("Producto Almacenados: " +str(count))
+    else:
+        print("Json no existe")
 
-for row in rows:
-    listIdProductAndContext.append(row.id)
-    
-string = json.dumps(listIdProductAndContext)
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/id_producto.json", "w")
+string = json.dumps(listaID)
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/sku.json", "w")
 text_file.write(string)
 text_file.close() 
 
-
-f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/lista.json','r')
-data_from_string = f_01.read()
-
-formatoJSon = json.loads(data_from_string)
-
-for i in formatoJSon:
-        xx = get_contex(i)
-        listaIDS.append(xx)
-        count += 1
-        print(str(count)+" registro almacenado "+str(i))
-
-     
-string = json.dumps(listaIDS)
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/respaldo.json", "w")
-text_file.write(string)
-text_file.close()        
-
-
-for i in formatoJSon:
-    try:
-        xx = get_context(i)
-        listaIDS.append(xx)
-        print(str(count)+" registro almacenado "+str(i))
-    except:
-        print(str(count)+" ID Producto: "+str(i))
-        string = json.dumps(listaIDS)
-        text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/respaldo.json", "w")
-        text_file.write(string)
-        text_file.close()
-        text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/count.txt", "w")
-        text_file.write(str(count))
-        text_file.close() 
-        text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/ids.txt", "w")
-        text_file.write(str(i))
-        text_file.close() 
-
-
-string = json.dumps(listaIDS)
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/lista2.json", "w")
-text_file.write(string)
-text_file.close() 
-print("Finalizado")
-
-#QUERY = (
-#    'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_product_v2` ')
-#query_job = client.query(QUERY)  # API request
-#rows = query_job.result()  # Waits for query to finish
-
-#for row in rows:
-#    listIdProductAndContext.append(row.id)
-    #temp = get_contex(str(row.id))
-    #productList.append(temp)
-    #count +=1
-    #print(str(count)+" Registro almacenado")
-
-#string = json.dumps(listIdProductAndContext)
-#text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/lista.json", "w")
-#text_file.write(string)
-#text_file.close() 
-
-
-
-system("cat lista.json | jq -c '.[]' > table.json")
+system("cat sku.json | jq -c '.[]' > tableSku.json")
 
 print("Cargando a BigQuery")
 client = bigquery.Client()
-filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/table.json'
+filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/tableSku.json'
 dataset_id = 'landing_zone'
 table_id = 'shopstar_vtex_sku'
 dataset_ref = client.dataset(dataset_id)
 table_ref = dataset_ref.table(table_id)
 job_config = bigquery.LoadJobConfig()
-
 job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
 job_config.autodetect = True
 with open(filename, "rb") as source_file:
@@ -151,8 +92,7 @@ with open(filename, "rb") as source_file:
     job_config=job_config,)  # API request
 job.result()  # Waits for table load to complete.
 print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
-system("rm lista.json")
-system("rm table.json")
+system("rm sku.json")
 print("finalizado")
 '''
 

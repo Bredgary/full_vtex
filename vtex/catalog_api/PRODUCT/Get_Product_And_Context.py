@@ -51,11 +51,6 @@ operacion_fenix(count)
 
 '''
 
-QUERY = (
-    'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_product_v2` ')
-query_job = client.query(QUERY)  # API request
-rows = query_job.result()  # Waits for query to finish
-
 
 for row in rows:
     listIdProductAndContext.append(row.id)

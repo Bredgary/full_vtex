@@ -49,35 +49,6 @@ print(str(count)+" registro almacenado "+str(i))
 print("Finalizado")
 
 
-
-QUERY = (
-    'SELECT RefId FROM `shopstar-datalake.landing_zone.shopstar_vtex_product_v2` WHERE RefId is not null AND RefId != ""')
-query_job = client.query(QUERY)  # API request
-rows = query_job.result()  # Waits for query to finish
-
-for row in rows:
-    listIdRef.append(row.RefId)
-
-
-string = json.dumps(listIdRef)
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/listaIdRef.json", "w")
-text_file.write(string)
-text_file.close() 
-
-
-f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/lista2.json','r')
-data_from_string = f_01.read()
-
-formatoJSon = json.loads(data_from_string)
-
-for i in formatoJSon:
-    count +=1
-    get_policy(i,count)
-    
-
-print(str(count)+" registro almacenado "+str(i))
-print("Finalizado")
-'''
 DIR = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/temp4/'
 countDir = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])
 
@@ -98,7 +69,7 @@ text_file.close()
 
 system("cat listaRefId.json | jq -c '.[]' > table_listaRefId.json")
 
-'''
+
 print("Cargando a BigQuery")
 client = bigquery.Client()
 filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/table_listaRefId.json'
