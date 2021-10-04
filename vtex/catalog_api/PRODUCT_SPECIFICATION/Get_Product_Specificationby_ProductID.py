@@ -8,20 +8,28 @@ from google.cloud import bigquery
 
 client = bigquery.Client()
 listaIDS = []
+listIdSkuAndContext =[]
+
 f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT_SPECIFICATION/delimitador.txt','r')
 data_from_string = f_01.read()
 delimitador = int(data_from_string)
 count = 0
 
+
 def get_specification(id,count,delimitador):
-    if count >= delimitador:
-        print("Comenzando: "+str(count))
-        try:
+	jsonF = {}
+	if count >= delimitador:
+		try:
             url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/"""+str(id)+"""/specification"""
             headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
             response = requests.request("GET", url, headers=headers)
             jsonF = json.loads(response.text)
-            listaIDS.append(jsonF)
+            if bool(jsonF):
+                string = json.dumps(jsonF)
+                text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT_SPECIFICATION/Speci/"+str(count)+"_sku.json", "w")
+                text_file.write(string)
+                text_file.close()
+                print("Numero de registro: "+str(count))
             print(str(count)+" registro almacenado")
         except:
             delimitador = count
@@ -31,20 +39,17 @@ def get_specification(id,count,delimitador):
             system("python3 Get_Product_Specificationby_ProductID.py")
         
 
-QUERY = (
-    'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_product`')
-query_job = client.query(QUERY)  # API request
-rows = query_job.result()  # Waits for query to finish
+def operacion_fenix(count):
+    f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT_SPECIFICATION/id_producto.json','r')
+    data_from_string = f_01.read()
+    formatoJSon = json.loads(data_from_string)
+    for i in formatoJSon:
+        count +=1
+        specification = get_specification(i,count,delimitador)
+    print(str(count)+" registro almacenado.")
+    print(specification)
 
-for row in rows:
-    count += 1
-    get_specification(str(row.id),count,delimitador)
-
-
-string = json.dumps(listaIDS)
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT_SPECIFICATION/lista.json", "w")
-text_file.write(string)
-text_file.close() 
+operacion_fenix(count)
 
 '''
 system("cat lista.json | jq -c '.[]' > context.json")
