@@ -94,6 +94,7 @@ def load_order_detail():
     system("rm order.json")
     system("rm temp.json")
 
+
 def load_order_list():
     string = json.dumps(list_order)
     text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order_list.json", "w")
