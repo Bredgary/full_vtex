@@ -76,7 +76,7 @@ text_file.close()
 #system("./convert.py < temp.json > order.json")
 system("cat temp.json | jq -c '.[]' > order.json")
 
-
+'''
 print("Cargando a BigQuery order Fecha: 20"+str(year)+"-"+str(mouth)+"-"+str(dayFrom)+" al 20"+str(year)+"-"+str(mouth)+"-"+str(dayTo)+"")
 
 client = bigquery.Client()
@@ -131,3 +131,4 @@ print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id)
 system("rm order_list.json")
 system("rm temp2.json")
 system("rm tabla_order_list.json")
+'''
