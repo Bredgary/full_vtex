@@ -47,7 +47,7 @@ def get_order(ids):
 
 def get_list(pag):
     url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/?page="+str(pag)+""
-    querystring = {"f_creationDate":"creationDate:[2021-09-24T02:00:00.000Z TO 2021-09-25T01:59:59.999Z]","f_hasInputInvoice":"false"}
+    querystring = {"f_creationDate":"creationDate:[2021-09-25T02:00:00.000Z TO 2021-09-26T01:59:59.999Z]","f_hasInputInvoice":"false"}
     headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
     response = requests.request("GET", url, headers=headers, params=querystring)
     formatoJson = json.loads(response.text)
