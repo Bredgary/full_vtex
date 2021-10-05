@@ -14,9 +14,8 @@ f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_COMPLEMENT/de
 data_from_string = f_01.read()
 delimitador = int(data_from_string)
 count = 0
-nSkuComplements = 0
 
-def get_sku_complements(id,count,delimitador,nSkuComplements):
+def get_sku_complements(id,count,delimitador):
 	jsonF = {}
 	if count >= delimitador:
 		try:
@@ -26,11 +25,10 @@ def get_sku_complements(id,count,delimitador,nSkuComplements):
 			if response.text:
 				jsonF = json.loads(response.text)
 				string = json.dumps(jsonF)
-				nSkuComplements +=1
-				text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_COMPLEMENT/SKU_COMPLEMENT/"+str(nSkuComplements)+"_sku_complements.json", "w")
+				text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_COMPLEMENT/SKU_COMPLEMENT/"+str(count)+"_sku_complements.json", "w")
 				text_file.write(string)
 				text_file.close()
-				print("get_sku_complements Terminando: "+str(nSkuComplements))
+				print("get_sku_complements Terminando: "+str(count))
 		except:
 			delimitador = count
 			text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/delimitador.txt", "w")
@@ -39,18 +37,18 @@ def get_sku_complements(id,count,delimitador,nSkuComplements):
 			system("python3 Get_SKU_Complement_by_SKUID.py")
 
 
-def operacion_fenix(count,nSkuComplements):
+def operacion_fenix(count):
 	f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_COMPLEMENT/id_sku.json','r')
 	data_from_string = f_01.read()
 	data_from_string = data_from_string.replace('"', '')
 	listaIDS = json.loads(data_from_string)
 	for i in listaIDS:
 		count += 1
-		get_sku_complements(i,count,delimitador,nSkuComplements)
+		get_sku_complements(i,count,delimitador)
 		print(count)
 	print(str(count)+" registro almacenado.")
 
-operacion_fenix(count,nSkuComplements)
+operacion_fenix(count)
 
 '''
 
