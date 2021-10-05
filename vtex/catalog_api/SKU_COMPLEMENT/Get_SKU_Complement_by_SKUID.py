@@ -19,17 +19,24 @@ nSkuComplements = 0
 def get_sku_complements(id,count,delimitador,nSkuComplements):
 	jsonF = {}
 	if count >= delimitador:
-		url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/stockkeepingunit/"+str(id)+"/complement"
-		headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-		response = requests.request("GET", url, headers=headers)
-		if response.text:
-			jsonF = json.loads(response.text)
-			string = json.dumps(jsonF)
-			nSkuComplements +=1
-			text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_COMPLEMENT/SKU_COMPLEMENT/"+str(nSkuComplements)+"_sku_complements.json", "w")
-			text_file.write(string)
+		try:
+			url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/stockkeepingunit/"+str(id)+"/complement"
+			headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
+			response = requests.request("GET", url, headers=headers)
+			if response.text:
+				jsonF = json.loads(response.text)
+				string = json.dumps(jsonF)
+				nSkuComplements +=1
+				text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_COMPLEMENT/SKU_COMPLEMENT/"+str(nSkuComplements)+"_sku_complements.json", "w")
+				text_file.write(string)
+				text_file.close()
+				print("get_sku_complements Terminando: "+str(nSkuComplements))
+		except:
+			delimitador = count
+			text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/delimitador.txt", "w")
+			text_file.write(str(delimitador))
 			text_file.close()
-			print("get_sku_complements Terminando: "+str(nSkuComplements))
+			system("python3 Get_SKU_Complement_by_SKUID.py")
 
 
 def operacion_fenix(count,nSkuComplements):
