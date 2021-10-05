@@ -20,8 +20,8 @@ list_order = []
 order = {}
 count = 0
 mouth = int(mouth) - 1
-dayFrom = int(day) - 32
-dayTo = int(day) - 31
+dayFrom = int(day) - 33
+dayTo = int(day) - 32
 
 def replace_blank_dict(d):
     if not d:
@@ -61,8 +61,7 @@ for i in limite:
     count = count + 1
     print(str(count)+" Pagina recorrida")
     x = get_list(i)
-    #if bool(x["list"]):
-    #    list_order.append(x["list"])
+    list_order.append(x["list"])
 
 
 string = json.dumps(listDetails)
