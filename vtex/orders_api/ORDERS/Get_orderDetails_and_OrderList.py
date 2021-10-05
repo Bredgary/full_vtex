@@ -19,8 +19,8 @@ listDetails = []
 list_order = []
 order = {}
 count = 0
-dayFrom = int(day) - 2
-dayTo = int(day) - 1
+dayFrom = int(day) - 3
+dayTo = int(day) - 2
 
 def replace_blank_dict(d):
     if not d:
@@ -46,7 +46,7 @@ def get_order(ids):
 
 def get_list(pag):
     url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/?page="+str(pag)+""
-    querystring = {"f_creationDate":"creationDate:[2021-09-01T02:00:00.000Z TO 2021-09-02T01:59:59.999Z]","f_hasInputInvoice":"false"}
+    querystring = {"f_creationDate":"creationDate:[2021-09-02T02:00:00.000Z TO 2021-09-03T01:59:59.999Z]","f_hasInputInvoice":"false"}
     headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
     response = requests.request("GET", url, headers=headers, params=querystring)
     formatoJson = json.loads(response.text)
@@ -91,7 +91,7 @@ job_config = bigquery.LoadJobConfig()
 job_config.write_disposition = bigquery.WriteDisposition.WRITE_APPEND
 job_config.schema_update_options = [bigquery.SchemaUpdateOption.ALLOW_FIELD_ADDITION]
 job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-job_config.autodetect = True
+#job_config.autodetect = True
 with open(filename, "rb") as source_file:
     job = client.load_table_from_file(
         source_file,
@@ -125,7 +125,7 @@ dataset_ref = client.dataset(dataset_id)
 table_ref = dataset_ref.table(table_id)
 job_config = bigquery.LoadJobConfig()
 job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-job_config.autodetect = True
+#job_config.autodetect = True
 with open(filename, "rb") as source_file:
     job = client.load_table_from_file(
         source_file,
