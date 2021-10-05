@@ -11,6 +11,8 @@ from collections import defaultdict
 day = datetime.today().strftime('%d')
 mouth = datetime.today().strftime('%m')
 year = datetime.today().strftime('%y')
+dayFrom = int(day) - 3
+dayTo = int(day) - 2
 
 limite = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30]
 formatoJson = {}
@@ -19,8 +21,7 @@ listDetails = []
 list_order = []
 order = {}
 count = 0
-dayFrom = int(day) - 3
-dayTo = int(day) - 2
+
 
 def replace_blank_dict(d):
     if not d:
@@ -67,73 +68,78 @@ for i in limite:
 #=======================================Cargando order Detail=============================================
 #=========================================================================================================
 
-string = json.dumps(listDetails)
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/temp.json", "w")
-text_file.write(string)
-text_file.close()
+try:
+    string = json.dumps(listDetails)
+    text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/temp.json", "w")
+    text_file.write(string)
+    text_file.close()
 
-system("find . -type f -print0 | xargs -0 sed -i 's/brand@CatalogSystem/brand_CatalogSystem/g'")
-system("find . -type f -print0 | xargs -0 sed -i 's/productCluster@CatalogSystem/productCluster_CatalogSystem/g'")
-system("find . -type f -print0 | xargs -0 sed -i 's/product@CatalogSystem/product_CatalogSystem/g'")
-system("find . -type f -print0 | xargs -0 sed -i 's/couponCode@Marketingm/couponCode_Marketing/g'")
-system("find . -type f -print0 | xargs -0 sed -i 's/couponCode@Marketing/couponCode_Marketing/g'")
-system("find . -type f -print0 | xargs -0 sed -i 's/category@CatalogSystem/category_CatalogSystem/g'")
-system("find . -type f -print0 | xargs -0 sed -i 's/brand@CatalogSystem/brand_CatalogSystem/g'")
-system("cat temp.json | jq -c '.[]' > order.json")
-print("Cargando a BigQuery order Fecha: 20"+str(year)+"-"+str(mouth)+"-"+str(dayFrom)+" al 20"+str(year)+"-"+str(mouth)+"-"+str(dayTo)+"")
-client = bigquery.Client()
-filename = '/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order.json'
-dataset_id = 'landing_zone'
-table_id = 'shopstar_vtex_order'
-dataset_ref = client.dataset(dataset_id)
-table_ref = dataset_ref.table(table_id)
-job_config = bigquery.LoadJobConfig()
-job_config.write_disposition = bigquery.WriteDisposition.WRITE_APPEND
-job_config.schema_update_options = [bigquery.SchemaUpdateOption.ALLOW_FIELD_ADDITION]
-job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-#job_config.autodetect = True
-with open(filename, "rb") as source_file:
-    job = client.load_table_from_file(
-        source_file,
-        table_ref,
-        location="southamerica-east1", 
-        job_config=job_config,)
-job.result()
-print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
-system("rm order.json")
-system("rm temp.json")
+    system("find . -type f -print0 | xargs -0 sed -i 's/brand@CatalogSystem/brand_CatalogSystem/g'")
+    system("find . -type f -print0 | xargs -0 sed -i 's/productCluster@CatalogSystem/productCluster_CatalogSystem/g'")
+    system("find . -type f -print0 | xargs -0 sed -i 's/product@CatalogSystem/product_CatalogSystem/g'")
+    system("find . -type f -print0 | xargs -0 sed -i 's/couponCode@Marketingm/couponCode_Marketing/g'")
+    system("find . -type f -print0 | xargs -0 sed -i 's/couponCode@Marketing/couponCode_Marketing/g'")
+    system("find . -type f -print0 | xargs -0 sed -i 's/category@CatalogSystem/category_CatalogSystem/g'")
+    system("find . -type f -print0 | xargs -0 sed -i 's/brand@CatalogSystem/brand_CatalogSystem/g'")
+    system("cat temp.json | jq -c '.[]' > order.json")
+    print("Cargando a BigQuery order Fecha: 20"+str(year)+"-"+str(mouth)+"-"+str(dayFrom)+" al 20"+str(year)+"-"+str(mouth)+"-"+str(dayTo)+"")
+    client = bigquery.Client()
+    filename = '/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order.json'
+    dataset_id = 'landing_zone'
+    table_id = 'shopstar_vtex_order'
+    dataset_ref = client.dataset(dataset_id)
+    table_ref = dataset_ref.table(table_id)
+    job_config = bigquery.LoadJobConfig()
+    job_config.write_disposition = bigquery.WriteDisposition.WRITE_APPEND
+    job_config.schema_update_options = [bigquery.SchemaUpdateOption.ALLOW_FIELD_ADDITION]
+    job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+    #job_config.autodetect = True
+    with open(filename, "rb") as source_file:
+        job = client.load_table_from_file(
+            source_file,
+            table_ref,
+            location="southamerica-east1", 
+            job_config=job_config,)
+    job.result()
+    print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
+    system("rm order.json")
+    system("rm temp.json")
+except:
+    print("Error")
 
 #=========================================================================================================
 #=======================================Cargando order list===============================================
 #=========================================================================================================
 
+try:
+    string = json.dumps(list_order)
+    text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order_list.json", "w")
+    text_file.write(string)
+    text_file.close()
+    system("cat order_list.json | jq -c '.[]' > temp2.json")
+    system("cat temp2.json | jq -c '.[]' > tabla_order_list.json")
 
-string = json.dumps(list_order)
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/order_list.json", "w")
-text_file.write(string)
-text_file.close()
-system("cat order_list.json | jq -c '.[]' > temp2.json")
-system("cat temp2.json | jq -c '.[]' > tabla_order_list.json")
 
-
-print("Cargando a BigQuery list order Fecha: 20"+str(year)+"-"+str(mouth)+"-"+str(dayFrom)+" al 20"+str(year)+"-"+str(mouth)+"-"+str(dayTo)+"")
-client = bigquery.Client()
-filename = '/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/tabla_order_list.json'
-dataset_id = 'landing_zone'
-table_id = 'shopstar_vtex_list_order'
-dataset_ref = client.dataset(dataset_id)
-table_ref = dataset_ref.table(table_id)
-job_config = bigquery.LoadJobConfig()
-job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-#job_config.autodetect = True
-with open(filename, "rb") as source_file:
-    job = client.load_table_from_file(
-        source_file,
-        table_ref,
-        location="southamerica-east1", 
-        job_config=job_config,) 
-job.result()
-print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
-system("rm order_list.json")
-system("rm temp2.json")
-system("rm tabla_order_list.json")
+    print("Cargando a BigQuery list order Fecha: 20"+str(year)+"-"+str(mouth)+"-"+str(dayFrom)+" al 20"+str(year)+"-"+str(mouth)+"-"+str(dayTo)+"")
+    client = bigquery.Client()
+    filename = '/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/tabla_order_list.json'
+    dataset_id = 'landing_zone'
+    table_id = 'shopstar_vtex_list_order'
+    dataset_ref = client.dataset(dataset_id)
+    table_ref = dataset_ref.table(table_id)
+    job_config = bigquery.LoadJobConfig()
+    job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+    #job_config.autodetect = True
+    with open(filename, "rb") as source_file:
+        job = client.load_table_from_file(
+            source_file,
+            table_ref,
+            location="southamerica-east1", 
+            job_config=job_config,) 
+    job.result()
+    print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
+    system("rm order_list.json")
+    system("rm temp2.json")
+    system("rm tabla_order_list.json")
+except:
+    print("Error")
