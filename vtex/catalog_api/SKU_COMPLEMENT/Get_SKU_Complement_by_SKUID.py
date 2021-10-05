@@ -19,7 +19,7 @@ nSkuComplements = 0
 def get_sku_complements(id,count,delimitador,nSkuComplements):
 	jsonF = {}
 	if count >= delimitador:
-		url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/stockkeepingunit/"+id+"/complement"
+		url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/stockkeepingunit/"+str(id)+"/complement"
 		headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 		response = requests.request("GET", url, headers=headers)
 		if response.text:
