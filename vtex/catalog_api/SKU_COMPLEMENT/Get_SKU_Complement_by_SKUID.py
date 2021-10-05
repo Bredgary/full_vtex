@@ -46,6 +46,7 @@ def operacion_fenix(count):
 	for i in listaIDS:
 		count += 1
 		get_sku_complements(i,count,delimitador)
+		print(count)
 	print(str(count)+" registro almacenado.")
 
 operacion_fenix(count)
