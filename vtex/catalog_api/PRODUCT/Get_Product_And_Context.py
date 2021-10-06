@@ -26,7 +26,7 @@ def get_contex(id,count,delimitador):
             text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/contextJson/"+str(count)+"_context.json", "w")
             text_file.write(string)
             text_file.close()
-            print("Numero de registro: "+str(count))
+            print("get_contex Terminando: "+str(count))
         except:
             delimitador = count
             text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/delimitador.txt", "w")

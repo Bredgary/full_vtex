@@ -26,7 +26,7 @@ def get_policy(id,count,delimitador):
             text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/Trade_policy/"+str(count)+"_get_policy.json", "w")
             text_file.write(string)
             text_file.close()
-            print("Terminando: "+str(count)) 
+            print("get_policy Terminando: "+str(count))
         except:
             delimitador = count
             text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/delimitador3.txt", "w")
