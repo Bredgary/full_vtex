@@ -55,13 +55,13 @@ DIR = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/Trade_policy/'
 countDir = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])
 
 for x in range(countDir):
-	registro +=1
-	uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/SKU/"+str(registro)+"_get_policy.json"
-	f_03 = open (uri,'r')
-	ids_string = f_03.read()
-    print(ids_string)
-    if x = 50:
+    if x == 50:
         break
+    registro +=1
+    uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/SKU/"+str(registro)+"_get_policy.json"
+    f_03 = open (uri,'r')
+    ids_string = f_03.read()
+    print(ids_string)
 	#formatoJson = json.loads(ids_string)
 	#listaID.append(formatoJson)
 	#print("SKU Almacenados: " +str(registro))
