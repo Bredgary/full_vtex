@@ -23,7 +23,7 @@ def get_sku_Attachment_by_SKUID(id,count,delimitador):
 		url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/stockkeepingunit/"+str(id)+"/attachment"
 		headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 		response = requests.request("GET", url, headers=headers)
-		jsonF = json.loads(response.text)
+		#jsonF = json.loads(response.text)
 		#string = json.dumps(jsonF)
 		#text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_ATTACHMENT/SKU_ATTACHMENT/"+str(count)+"_attachment.json", "w")
 		#text_file.write(string)
@@ -45,6 +45,7 @@ def operacion_fenix(count):
 	for i in listaIDS:
 		count += 1
 		get_sku_Attachment_by_SKUID(i,count,delimitador)
+		break
 	print(str(count)+" registro almacenado.")
 
 operacion_fenix(count)
