@@ -10,6 +10,9 @@ client = bigquery.Client()
 productList = []
 listIdProductAndContext = []
 listaIDS = []
+registro = 0
+
+'''
 
 f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/delimitador2.txt','r')
 data_from_string = f_01.read()
@@ -50,36 +53,37 @@ operacion_fenix(count)
 
 
 '''
-QUERY = (
-    'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_product_v2` ')
-query_job = client.query(QUERY)  # API request
-rows = query_job.result()  # Waits for query to finish
 
-for row in rows:
-    temp = skuandproduct(str(row.id))
-    productList.append(temp)
-    count +=1
-    print(str(count)+" Registros almacenados")
+DIR = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/SKUs_by_id/'
+countDir = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])
+
+for x in range(countDir):
+    try:
+        registro +=1
+        uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/SKUs_by_id/"+str(registro)+"_skus_by_Product.json"
+        f_03 = open (uri,'r')
+        ids_string = f_03.read()
+        formatoJson = json.loads(ids_string)
+        listaID.append(formatoJson)
+    except:
+        continue
+    
+print("SKU Almacenados: " +str(registro))
 
 
-for order in productList:
-    for k, v in order.items():
-        order[k] = replace_blank_dict(v)
-
-
-
-string = json.dumps(productList)
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/lista.json", "w")
+string = json.dumps(listaID)
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/temp.json", "w")
 text_file.write(string)
 text_file.close() 
 
-system("cat lista.json | jq -c '.[]' > table.json")
+system("cat temp.json | jq -c '.[]' > tableSku.json")
+
 
 print("Cargando a BigQuery")
 client = bigquery.Client()
-filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/context.json'
+filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/tableSku.json'
 dataset_id = 'landing_zone'
-table_id = 'shopstar_vtex_sku_by_product_v2'
+table_id = 'shopstar_vtex_sku_by_product'
 dataset_ref = client.dataset(dataset_id)
 table_ref = dataset_ref.table(table_id)
 job_config = bigquery.LoadJobConfig()
@@ -96,4 +100,3 @@ print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id)
 system("rm table.json")
 system("rm lista.json")
 print("finalizado")
-'''
