@@ -58,7 +58,7 @@ countDir = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(
 for x in range(countDir):
     try:
         registro +=1
-        uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/contextJson/"+str(registro)+"_get_policy.json"
+        uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/contextJson/"+str(registro)+"_context.json"
         f_03 = open (uri,'r')
         ids_string = f_03.read()
         formatoJson = json.loads(ids_string)
@@ -74,12 +74,11 @@ text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/temp.
 text_file.write(string)
 text_file.close() 
 
-system("cat temp.json | jq -c '.[]' > tableTrade.json")
+system("cat temp.json | jq -c '.[]' > tableContext.json")
 
 
 print("Cargando a BigQuery")
 client = bigquery.Client()
-filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/tableTrade.json'
 dataset_id = 'landing_zone'
 table_id = 'shopstar_vtex_policy_product_v2'
 dataset_ref = client.dataset(dataset_id)
