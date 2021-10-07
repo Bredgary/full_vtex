@@ -63,7 +63,7 @@ for x in range(countDir):
         uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/SKUs_by_id/"+str(registro)+"_skus_by_Product.json"
         f_03 = open (uri,'r')
         ids_string = f_03.read()
-        if ids_string is "ProductId not found":
+        if ids_string == "ProductId not found":
             print("hola")
         else:
             print("mal")
