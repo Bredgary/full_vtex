@@ -10,6 +10,8 @@ client = bigquery.Client()
 productList = []
 listIdProductAndContext = []
 listaIDS = []
+registro = 0
+'''
 f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/delimitador3.txt','r')
 data_from_string = f_01.read()
 delimitador = int(data_from_string)
@@ -49,16 +51,33 @@ operacion_fenix(count)
 
 '''
 
-string = json.dumps(productList)
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/lista.json", "w")
+DIR = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/Trade_policy/'
+countDir = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])
+
+for x in range(countDir):
+	registro +=1
+	uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/SKU/"+str(registro)+"_get_policy.json"
+	f_03 = open (uri,'r')
+	ids_string = f_03.read()
+    print(ids_string)
+    if x = 50:
+        break
+	#formatoJson = json.loads(ids_string)
+	#listaID.append(formatoJson)
+	#print("SKU Almacenados: " +str(registro))
+
+'''
+string = json.dumps(listaID)
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/temp.json", "w")
 text_file.write(string)
 text_file.close() 
 
-system("cat lista.json | jq -c '.[]' > table.json")
+system("cat temp.json | jq -c '.[]' > tableTrade.json")
+
 
 print("Cargando a BigQuery")
 client = bigquery.Client()
-filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/table.json'
+filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/tableTrade.json'
 dataset_id = 'landing_zone'
 table_id = 'shopstar_vtex_policy_product_v2'
 dataset_ref = client.dataset(dataset_id)
