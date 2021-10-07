@@ -48,7 +48,7 @@ def operacion_fenix(count):
 	listaIDS = json.loads(data_from_string)
 	for i in listaIDS:
 		count += 1
-		get_sku(i,count,delimitador)
+		get_list_group(i,count,delimitador)
 	print(str(count)+" registro almacenado.")
 
 operacion_fenix(count)
