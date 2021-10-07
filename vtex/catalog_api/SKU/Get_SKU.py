@@ -9,13 +9,13 @@ from google.cloud import bigquery
 client = bigquery.Client()
 listaIDS = []
 listIdSkuAndContext =[]
-
+'''
 f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/delimitador.txt','r')
 data_from_string = f_01.read()
 delimitador = int(data_from_string)
 count = 0
 mensajeError = {'Message': 'The request is invalid.'}
-'''
+
 
 def get_sku(id,count,delimitador):
 	jsonF = {}
