@@ -9,7 +9,7 @@ from google.cloud import bigquery
 client = bigquery.Client()
 productList = []
 listIdProductAndContext = []
-listaIDS = []
+listaID = []
 registro = 0
 
 '''
