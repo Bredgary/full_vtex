@@ -7,9 +7,10 @@ from os import system
 from google.cloud import bigquery
 
 client = bigquery.Client()
-listaIDS = []
+listaID = []
 listIdSkuAndContext =[]
-
+registro = 0
+'''
 f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT_SPECIFICATION/delimitador.txt','r')
 data_from_string = f_01.read()
 delimitador = int(data_from_string)
@@ -51,13 +52,37 @@ def operacion_fenix(count):
 operacion_fenix(count)
 
 '''
-system("cat lista.json | jq -c '.[]' > context.json")
+
+DIR = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT_SPECIFICATION/Speci/'
+countDir = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])
+
+for x in range(countDir):
+    try:
+        registro +=1
+        uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT_SPECIFICATION/Speci/"+str(registro)+"_sku.json"
+        f_03 = open (uri,'r')
+        ids_string = f_03.read()
+        formatoJson = json.loads(ids_string)
+        listaID.append(formatoJson)
+    except:
+        continue
+    
+print("SKU Almacenados: " +str(registro))
+
+
+string = json.dumps(listaID)
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT_SPECIFICATION/temp.json", "w")
+text_file.write(string)
+text_file.close() 
+
+system("cat temp.json | jq -c '.[]' > tableContext.json")
+
 
 print("Cargando a BigQuery")
 client = bigquery.Client()
-filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/context.json'
+filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT_SPECIFICATION//tableContext.json'
 dataset_id = 'landing_zone'
-table_id = 'shopstar_vtex_specification_product'
+table_id = 'shopstar_vtex_product_and_context'
 dataset_ref = client.dataset(dataset_id)
 table_ref = dataset_ref.table(table_id)
 job_config = bigquery.LoadJobConfig()
@@ -71,7 +96,6 @@ with open(filename, "rb") as source_file:
     job_config=job_config,)  # API request
 job.result()  # Waits for table load to complete.
 print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
-system("rm context.json")
+system("rm table.json")
 system("rm lista.json")
 print("finalizado")
-'''
