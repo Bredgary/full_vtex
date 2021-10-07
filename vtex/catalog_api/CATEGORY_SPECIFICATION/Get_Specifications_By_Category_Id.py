@@ -39,7 +39,7 @@ def get_specifications(id,count,delimitador):
 
 
 def operacion_fenix(count):
-	f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/CATEGORY_SPECIFICATION/id_category.json.json','r')
+	f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/CATEGORY_SPECIFICATION/id_category.json','r')
 	data_from_string = f_01.read()
 	data_from_string = data_from_string.replace('"', '')
 	listaIDS = json.loads(data_from_string)
