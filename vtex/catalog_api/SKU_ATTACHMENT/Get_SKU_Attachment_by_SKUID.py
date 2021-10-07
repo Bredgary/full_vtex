@@ -22,14 +22,12 @@ def get_sku_Attachment_by_SKUID(id,count,delimitador):
 		try:
 			url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/stockkeepingunit/1/attachment"
 			headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-			if response.text:
-				string = json.dumps(jsonF)
-				text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_ATTACHMENT/SKU_ATTACHMENT/"+str(count)+"_sku.json", "w")
-				text_file.write(string)
-				text_file.close()
-				print("Get_SKU_Attachment_by_SKUID.py Terminando: "+str(count))
-			else:
-				print("No tengo data")
+			string = json.dumps(jsonF)
+			text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_ATTACHMENT/SKU_ATTACHMENT/"+str(count)+"_sku.json", "w")
+			text_file.write(string)
+			text_file.close()
+			print("Get_SKU_Attachment_by_SKUID.py Terminando: "+str(count))
+			print("No tengo data")
 		except:
 			delimitador = count
 			text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_ATTACHMENT/delimitador.txt", "w")

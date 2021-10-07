@@ -14,7 +14,6 @@ f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_EAN/delimitad
 data_from_string = f_01.read()
 delimitador = int(data_from_string)
 count = 0
-mensajeError = {'Message': 'The request is invalid.'}
 
 def get_ean(id,count,delimitador):
 	jsonF = {}
@@ -44,7 +43,6 @@ def operacion_fenix(count):
 	for i in listaIDS:
 		count += 1
 		get_ean(i,count,delimitador)
-		print(count)
 	print(str(count)+" registro almacenado.")
 
 operacion_fenix(count)

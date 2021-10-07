@@ -25,12 +25,11 @@ def get_sku(id,count,delimitador):
 			headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 			response = requests.request("GET", url, headers=headers)
 			jsonF = json.loads(response.text)
-			if jsonF != mensajeError:
-				string = json.dumps(jsonF)
-				text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_SELLER/SKU_SELLER/"+str(count)+"_sku.json", "w")
-				text_file.write(string)
-				text_file.close()
-				print("Get_SKU_seller.py Terminando: "+str(count))
+			string = json.dumps(jsonF)
+			text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_SELLER/SKU_SELLER/"+str(count)+"_sku.json", "w")
+			text_file.write(string)
+			text_file.close()
+			print("Get_SKU_seller.py Terminando: "+str(count))
 		except:
 			delimitador = count
 			text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_SELLER/delimitador.txt", "w")
