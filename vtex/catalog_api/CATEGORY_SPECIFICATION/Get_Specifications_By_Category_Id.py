@@ -62,7 +62,7 @@ for x in range(countDir):
 	ids_string = f_03.read()
 	formatoJson = json.loads(ids_string)
 	print(type(formatoJson))
-	if formatoJson:
+	if bool(formatoJson):
 		print("Hola")
 	else:
 		print("Error")
