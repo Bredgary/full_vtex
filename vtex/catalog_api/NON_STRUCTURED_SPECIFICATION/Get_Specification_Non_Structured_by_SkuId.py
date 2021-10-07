@@ -10,7 +10,7 @@ client = bigquery.Client()
 listaIDS = []
 listIdSkuAndContext =[]
 
-f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/delimitador.txt','r')
+f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/NON_STRUCTURED_SPECIFICATION/delimitador.txt','r')
 data_from_string = f_01.read()
 delimitador = int(data_from_string)
 count = 0
@@ -27,20 +27,20 @@ def get_sku(id,count,delimitador):
 			jsonF = json.loads(response.text)
 			if jsonF != mensajeError:
 				string = json.dumps(jsonF)
-				text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/SKU/"+str(count)+"_sku.json", "w")
+				text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/NON_STRUCTURED_SPECIFICATION/NON_STRUCTURED_SPECIFICATION/"+str(count)+"_sku.json", "w")
 				text_file.write(string)
 				text_file.close()
-				print("Get_SKU Terminando: "+str(count))
+				print("Get_Specification_Non_Structured_by_SkuId.py Terminando: "+str(count))
 		except:
 			delimitador = count
-			text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/delimitador.txt", "w")
+			text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/NON_STRUCTURED_SPECIFICATION/delimitador.txt", "w")
 			text_file.write(str(delimitador))
 			text_file.close()
-			system("python3 Get_SKU.py")
+			system("python3 Get_Specification_Non_Structured_by_SkuId.py")
 
 
 def operacion_fenix(count):
-	f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/id_sku.json','r')
+	f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/NON_STRUCTURED_SPECIFICATION/id_sku.json','r')
 	data_from_string = f_01.read()
 	data_from_string = data_from_string.replace('"', '')
 	listaIDS = json.loads(data_from_string)

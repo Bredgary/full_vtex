@@ -30,13 +30,13 @@ def get_sku(id,count,delimitador):
 				text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_KIT/SKU_KIT/"+str(count)+"_sku.json", "w")
 				text_file.write(string)
 				text_file.close()
-				print("Get_SKU Terminando: "+str(count))
+				print("Get_SKU_Kit_by_SKU_ID_or_Parent_SKU_ID.py Terminando: "+str(count))
 		except:
 			delimitador = count
 			text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_KIT/delimitador.txt", "w")
 			text_file.write(str(delimitador))
 			text_file.close()
-			system("python3 Get_SKU.py")
+			system("python3 Get_SKU_Kit_by_SKU_ID_or_Parent_SKU_ID.py")
 
 
 def operacion_fenix(count):

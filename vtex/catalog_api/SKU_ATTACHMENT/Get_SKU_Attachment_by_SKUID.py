@@ -16,7 +16,7 @@ delimitador = int(data_from_string)
 count = 0¿
 
 
-def get_sku(id,count,delimitador):
+def get_sku_Attachment_by_SKUID(id,count,delimitador):
 	jsonF = {}
 	if count >= delimitador:
 		try:
@@ -27,7 +27,7 @@ def get_sku(id,count,delimitador):
 				text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_ATTACHMENT/SKU_ATTACHMENT/"+str(count)+"_sku.json", "w")
 				text_file.write(string)
 				text_file.close()
-				print("Get_SKU Terminando: "+str(count))
+				print("Get_SKU_Attachment_by_SKUID.py Terminando: "+str(count))
 			else:
 				print("No tengo data")
 		except:
@@ -35,7 +35,7 @@ def get_sku(id,count,delimitador):
 			text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_ATTACHMENT/delimitador.txt", "w")
 			text_file.write(str(delimitador))
 			text_file.close()
-			system("python3 Get_SKU.py")
+			system("python3 Get_SKU_Attachment_by_SKUID.py")
 
 
 def operacion_fenix(count):
@@ -45,7 +45,7 @@ def operacion_fenix(count):
 	listaIDS = json.loads(data_from_string)
 	for i in listaIDS:
 		count += 1
-		get_sku(i,count,delimitador)
+		get_sku_Attachment_by_SKUID(i,count,delimitador)
 	print(str(count)+" registro almacenado.")
 
 operacion_fenix(count)
