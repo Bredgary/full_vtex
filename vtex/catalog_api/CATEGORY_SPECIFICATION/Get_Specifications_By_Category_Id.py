@@ -61,11 +61,10 @@ for x in range(countDir):
 	f_03 = open (uri,'r')
 	ids_string = f_03.read()
 	formatoJson = json.loads(ids_string)
-	print(type(formatoJson))
-	if bool(formatoJson):
-		print("Hola")
+	if formatoJson:
+		print("Lista vacia")
 	else:
-		print("Error")
+		print("Lista no vacia")
 	break
 	#listaID.append(formatoJson)
 	#print("SKU Almacenados: " +str(registro))
