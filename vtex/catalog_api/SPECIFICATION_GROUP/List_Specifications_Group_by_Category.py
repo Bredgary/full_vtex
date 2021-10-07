@@ -70,7 +70,7 @@ text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SPECIFICATION
 text_file.write(string)
 text_file.close()
 
-'''
+
 DIR = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/SPECIFICATION_GROUP/SPECIFICATION_GROUP/'
 countDir = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])
 
@@ -90,7 +90,7 @@ text_file.write(string)
 text_file.close() 
 
 system("cat temp.json | jq -c '.[]' > tableGroup.json")
-
+'''
 print("Cargando a BigQuery")
 client = bigquery.Client()
 filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/SPECIFICATION_GROUP/tableGroup.json'
