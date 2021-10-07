@@ -15,33 +15,31 @@ f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/delimitador.t
 data_from_string = f_01.read()
 delimitador = int(data_from_string)
 count = 0
-mensajeError = {'Message': 'The request is invalid.'}
 
 
 def get_sku(id,count,delimitador):
 	jsonF = {}
 	if count >= delimitador:
 		try:
-			url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/stockkeepingunit/"""+str(id)+""
+			url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pub/specification/field/listByCategoryId/441"
 			headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 			response = requests.request("GET", url, headers=headers)
 			jsonF = json.loads(response.text)
-			if jsonF != mensajeError:
-				string = json.dumps(jsonF)
-				text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/SKU/"+str(count)+"_sku.json", "w")
-				text_file.write(string)
-				text_file.close()
-				print("Get_SKU Terminando: "+str(count))
+			string = json.dumps(jsonF)
+			text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/CATEGORY_SPECIFICATION/CATEGORY_SPECIFICATION/"+str(count)+"category_specification.json", "w")
+			text_file.write(string)
+			text_file.close()
+			print("Get_Specifications_By_Category_Id.py Terminando: "+str(count))
 		except:
 			delimitador = count
 			text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/delimitador.txt", "w")
 			text_file.write(str(delimitador))
 			text_file.close()
-			system("python3 Get_SKU.py")
+			system("python3 Get_Specifications_By_Category_Id.py")
 
 
 def operacion_fenix(count):
-	f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/id_sku.json','r')
+	f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/id_category.json.json','r')
 	data_from_string = f_01.read()
 	data_from_string = data_from_string.replace('"', '')
 	listaIDS = json.loads(data_from_string)
