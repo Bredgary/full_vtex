@@ -65,7 +65,6 @@ for x in range(countDir):
 		print("Lista vacia")
 	else:
 		print("Lista no vacia")
-	break
 	#listaID.append(formatoJson)
 	#print("SKU Almacenados: " +str(registro))
 
