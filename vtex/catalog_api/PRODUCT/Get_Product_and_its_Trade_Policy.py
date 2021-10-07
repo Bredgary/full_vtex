@@ -57,7 +57,7 @@ countDir = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(
 for x in range(countDir):
     registro +=1
     try:
-        uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/SKU/"+str(registro)+"_get_policy.json"
+        uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/Trade_policy/"+str(registro)+"_get_policy.json"
         f_03 = open (uri,'r')
         ids_string = f_03.read()
         print(ids_string)
