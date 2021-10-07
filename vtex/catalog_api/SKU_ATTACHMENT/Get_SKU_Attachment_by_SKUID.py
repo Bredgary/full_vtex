@@ -19,21 +19,21 @@ count = 0
 def get_sku_Attachment_by_SKUID(id,count,delimitador):
 	jsonF = {}
 	if count >= delimitador:
-		#try:
-		url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/stockkeepingunit/"+str(id)+"/attachment"
-		headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-		response = requests.request("GET", url, headers=headers)
-		string = response.text
-		text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_ATTACHMENT/SKU_ATTACHMENT/"+str(count)+"_attachment.json", "w")
-		text_file.write(string)
-		text_file.close()
-		print("Get_SKU_Attachment_by_SKUID.py Terminando: "+str(count))
-		#except:
-		#	delimitador = count
-		#	text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_ATTACHMENT/delimitador.txt", "w")
-		#	text_file.write(str(delimitador))
-		#	text_file.close()
-		#	system("python3 Get_SKU_Attachment_by_SKUID.py")
+		try:
+			url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/stockkeepingunit/"+str(id)+"/attachment"
+			headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
+			response = requests.request("GET", url, headers=headers)
+			string = response.text
+			text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_ATTACHMENT/SKU_ATTACHMENT/"+str(count)+"_attachment.json", "w")
+			text_file.write(string)
+			text_file.close()
+			print("Get_SKU_Attachment_by_SKUID.py Terminando: "+str(count))
+		except:
+			delimitador = count
+			text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_ATTACHMENT/delimitador.txt", "w")
+			text_file.write(str(delimitador))
+			text_file.close()
+			system("python3 Get_SKU_Attachment_by_SKUID.py")
 
 
 def operacion_fenix(count):
