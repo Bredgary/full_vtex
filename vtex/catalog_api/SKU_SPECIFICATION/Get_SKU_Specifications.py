@@ -14,18 +14,16 @@ f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_SPECIFICATION
 data_from_string = f_01.read()
 delimitador = int(data_from_string)
 count = 0
-mensajeError = {'Message': 'The request is invalid.'}
 
 
 def get_sku(id,count,delimitador):
 	jsonF = {}
 	if count >= delimitador:
 		try:
-			url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/stockkeepingunit/"""+str(id)+""
+			url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/stockkeepingunit/"+str(id)+"/specification"
 			headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 			response = requests.request("GET", url, headers=headers)
-			jsonF = json.loads(response.text)
-			string = json.dumps(jsonF)
+			string = response.text
 			text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_SPECIFICATION/SKU_SPECIFICATION/"+str(count)+"_sku.json", "w")
 			text_file.write(string)
 			text_file.close()
