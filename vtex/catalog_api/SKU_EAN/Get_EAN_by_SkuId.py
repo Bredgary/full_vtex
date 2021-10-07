@@ -14,21 +14,24 @@ f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_EAN/delimitad
 data_from_string = f_01.read()
 delimitador = int(data_from_string)
 count = 0
+mensajeError = {'Message': 'The request is invalid.'}
 
 def get_ean(id,count,delimitador):
 	jsonF = {}
 	if count >= delimitador:
 		try:
-			url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/stockkeepingunit/"+str(id)+"/ean"
+			url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/stockkeepingunit/343894j1/ean"
 			headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 			response = requests.request("GET", url, headers=headers)
-			if response.text:
-				jsonF = json.loads(response.text)
+			jsonF = json.loads(response.text)
+			if jsonF != mensajeError:
 				string = json.dumps(jsonF)
-				text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_EAN/SKU_EAN/"+str(count)+"_sku_complements.json", "w")
+				text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/SKU/"+str(count)+"_sku.json", "w")
 				text_file.write(string)
 				text_file.close()
-				print("get_sku_complements Terminando: "+str(count))
+				print("Get_SKU Terminando: "+str(count))
+			else:
+				print("No tengo data")
 		except:
 			delimitador = count
 			text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_EAN/delimitador.txt", "w")
