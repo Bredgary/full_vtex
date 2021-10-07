@@ -20,7 +20,7 @@ def get_sku_Attachment_by_SKUID(id,count,delimitador):
 	jsonF = {}
 	if count >= delimitador:
 		try:
-			url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/stockkeepingunit/1/attachment"
+			url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/stockkeepingunit/"+str(id)+"/attachment"
 			headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 			string = json.dumps(jsonF)
 			text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_ATTACHMENT/SKU_ATTACHMENT/"+str(count)+"_sku.json", "w")
