@@ -8,7 +8,7 @@ from google.cloud import bigquery
 
 client = bigquery.Client()
 productList = []
-listIdProductAndContext = []
+listaID = []
 listaIDS = []
 registro = 0
 '''
@@ -55,20 +55,19 @@ DIR = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/Trade_policy/'
 countDir = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])
 
 for x in range(countDir):
-    registro +=1
     try:
+        registro +=1
         uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/Trade_policy/"+str(registro)+"_get_policy.json"
         f_03 = open (uri,'r')
         ids_string = f_03.read()
-        print(ids_string)
+        formatoJson = json.loads(ids_string)
+        listaID.append(formatoJson)
     except:
         continue
     
-	#formatoJson = json.loads(ids_string)
-	#listaID.append(formatoJson)
-	#print("SKU Almacenados: " +str(registro))
+print("SKU Almacenados: " +str(registro))
 
-'''
+
 string = json.dumps(listaID)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/temp.json", "w")
 text_file.write(string)
@@ -98,4 +97,4 @@ print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id)
 system("rm table.json")
 system("rm lista.json")
 print("finalizado")
-'''
+
