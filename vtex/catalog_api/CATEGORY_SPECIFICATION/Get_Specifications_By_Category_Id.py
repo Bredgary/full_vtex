@@ -67,6 +67,7 @@ for x in range(countDir):
 	else:
 		continue
 
+print(formatoJson)
 '''
 string = json.dumps(listaID)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/sku.json", "w")
