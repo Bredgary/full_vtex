@@ -62,11 +62,10 @@ for x in range(countDir):
 	ids_string = f_03.read()
 	formatoJson = json.loads(ids_string)
 	if not formatoJson:
-		print("Lista vacia")
+		listaID.append(formatoJson)
+		print("CATEGORY_SPECIFICATION Almacenados: " +str(registro))
 	else:
-		print("Lista no vacia")
-	#listaID.append(formatoJson)
-	#print("SKU Almacenados: " +str(registro))
+		continue
 
 '''
 string = json.dumps(listaID)
