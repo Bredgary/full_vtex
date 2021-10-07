@@ -63,11 +63,13 @@ for x in range(countDir):
         uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/SKUs_by_id/"+str(registro)+"_skus_by_Product.json"
         f_03 = open (uri,'r')
         ids_string = f_03.read()
-        formatoJson = json.loads(ids_string)
-        listaID.append(formatoJson)
+        print(ids_string)
+        #formatoJson = json.loads(ids_string)
+        #listaID.append(formatoJson)
+        break
     except:
         continue
-    
+'''
 print("SKU Almacenados: " +str(registro))
 
 
@@ -100,3 +102,4 @@ print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id)
 system("rm table.json")
 system("rm lista.json")
 print("finalizado")
+'''
