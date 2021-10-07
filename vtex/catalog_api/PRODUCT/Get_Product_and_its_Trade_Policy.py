@@ -55,8 +55,6 @@ DIR = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/Trade_policy/'
 countDir = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])
 
 for x in range(countDir):
-    if x == 50:
-        break
     registro +=1
     try:
         uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/SKU/"+str(registro)+"_get_policy.json"
