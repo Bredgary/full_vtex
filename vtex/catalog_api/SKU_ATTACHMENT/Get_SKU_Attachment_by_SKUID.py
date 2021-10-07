@@ -44,7 +44,6 @@ def operacion_fenix(count):
 	for i in listaIDS:
 		count += 1
 		get_sku_Attachment_by_SKUID(i,count,delimitador)
-		break
 	print(str(count)+" registro almacenado.")
 
 operacion_fenix(count)
