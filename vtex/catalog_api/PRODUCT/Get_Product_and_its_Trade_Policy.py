@@ -78,7 +78,7 @@ system("cat temp.json | jq -c '.[]' > tableTrade.json")
 
 print("Cargando a BigQuery")
 client = bigquery.Client()
-filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/tableTrade.json'
+filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/tableTrade.json'
 dataset_id = 'landing_zone'
 table_id = 'shopstar_vtex_policy_product_v2'
 dataset_ref = client.dataset(dataset_id)
