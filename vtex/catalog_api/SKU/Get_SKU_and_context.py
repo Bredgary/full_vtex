@@ -9,7 +9,7 @@ from google.cloud import bigquery
 client = bigquery.Client()
 listaIDS = []
 listIdSkuAndContext =[]
-'''
+
 f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/delimitador1.txt','r')
 data_from_string = f_01.read()
 delimitador = int(data_from_string)
@@ -96,3 +96,4 @@ print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id)
 system("rm sku.json")
 print("finalizado")
 
+'''
