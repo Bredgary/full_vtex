@@ -7,7 +7,7 @@ from os import system
 from google.cloud import bigquery
 
 client = bigquery.Client()
-listaIDS = []
+listaID = []
 listIdSkuAndContext =[]
 registro = 0
 '''
