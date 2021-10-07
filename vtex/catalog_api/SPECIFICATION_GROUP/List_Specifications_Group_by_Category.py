@@ -1,11 +1,25 @@
+#!/usr/bin/python
+# -*- coding: UTF-8 -*-
+import os, sys
+import requests
+import json
+import os
+import re
+from datetime import datetime
+from os import system
+from google.cloud import bigquery
+
+client = bigquery.Client()
+productList = []
+
 f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/delimitador.txt','r')
 data_from_string = f_01.read()
 delimitador = int(data_from_string)
 count = 0
 mensajeError = '"CategoryId Not Found"'
 
-
-def get_sku(id,count,delimitador):
+'''
+def get_list_group(id,count,delimitador):
 	jsonF = {}
 	if count >= delimitador:
 		try:
@@ -38,3 +52,20 @@ def operacion_fenix(count):
 	print(str(count)+" registro almacenado.")
 
 operacion_fenix(count)
+'''
+
+
+QUERY = (
+    'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_category`')
+query_job = client.query(QUERY)  # API request
+rows = query_job.result()  # Waits for query to finish
+
+for row in rows:
+    productList.append(row.id)
+
+string = json.dumps(productList)
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SPECIFICATION_GROUP/"+str(count)+"_id_group.json", "w")
+text_file.write(string)
+text_file.close()
+
+
