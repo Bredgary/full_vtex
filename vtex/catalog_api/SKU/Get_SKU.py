@@ -15,7 +15,7 @@ data_from_string = f_01.read()
 delimitador = int(data_from_string)
 count = 0
 mensajeError = {'Message': 'The request is invalid.'}
-
+'''
 
 def get_sku(id,count,delimitador):
 	jsonF = {}
@@ -58,14 +58,13 @@ countDir = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(
 
 for x in range(countDir):
     uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/SKU/"+str(x)+"_get_SKU.json"
-    if os.path.exists(uri):
-        f_03 = open (uri,'r')
-        ids_string = f_03.read()
-        formatoJson = json.loads(ids_string)
-        listaID.append(formatoJson)
-        print("Producto Almacenados: " +str(count))
-    else:
-        print("Json no existe")
+    f_03 = open (uri,'r')
+    ids_string = f_03.read()
+    formatoJson = json.loads(ids_string)
+    listaID.append(formatoJson)
+    print("SKU Almacenados: " +str(count))
+
+
 
 string = json.dumps(listaID)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/sku.json", "w")
@@ -94,5 +93,5 @@ job.result()  # Waits for table load to complete.
 print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 system("rm sku.json")
 print("finalizado")
-'''
+
 
