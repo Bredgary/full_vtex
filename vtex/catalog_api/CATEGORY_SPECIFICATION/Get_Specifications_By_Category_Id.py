@@ -61,7 +61,7 @@ for x in range(countDir):
 	f_03 = open (uri,'r')
 	ids_string = f_03.read()
 	formatoJson = json.loads(ids_string)
-	if formatoJson:
+	if not formatoJson:
 		print("Lista vacia")
 	else:
 		print("Lista no vacia")
