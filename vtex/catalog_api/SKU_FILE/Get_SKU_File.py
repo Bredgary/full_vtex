@@ -17,7 +17,7 @@ count = 0
 mensajeError = {'Message': 'The request is invalid.'}
 
 
-def get_sku(id,count,delimitador):
+def get_sku_file(id,count,delimitador):
 	jsonF = {}
 	if count >= delimitador:
 		try:
@@ -45,7 +45,7 @@ def operacion_fenix(count):
 	listaIDS = json.loads(data_from_string)
 	for i in listaIDS:
 		count += 1
-		get_sku(i,count,delimitador)
+		get_sku_file(i,count,delimitador)
 	print(str(count)+" registro almacenado.")
 
 operacion_fenix(count)
