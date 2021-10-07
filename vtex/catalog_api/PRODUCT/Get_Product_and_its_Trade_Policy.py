@@ -69,7 +69,7 @@ print("SKU Almacenados: " +str(registro))
 
 
 string = json.dumps(listaID)
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/temp.json", "w")
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/temp.json", "w")
 text_file.write(string)
 text_file.close() 
 
