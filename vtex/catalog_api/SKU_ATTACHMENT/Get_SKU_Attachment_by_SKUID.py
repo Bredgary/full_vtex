@@ -27,7 +27,6 @@ def get_sku_Attachment_by_SKUID(id,count,delimitador):
 			text_file.write(string)
 			text_file.close()
 			print("Get_SKU_Attachment_by_SKUID.py Terminando: "+str(count))
-			print("No tengo data")
 		except:
 			delimitador = count
 			text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_ATTACHMENT/delimitador.txt", "w")
