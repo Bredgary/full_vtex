@@ -9,7 +9,7 @@ from google.cloud import bigquery
 client = bigquery.Client()
 listaIDS = []
 listIdSkuAndContext =[]
-
+'''
 f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/delimitador1.txt','r')
 data_from_string = f_01.read()
 delimitador = int(data_from_string)
@@ -54,11 +54,11 @@ operacion_fenix(count)
 
 '''
 
-DIR = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/SKU/'
+DIR = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/contextJson/'
 countDir = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])
 
 for x in range(countDir):
-    uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/SKU/"+str(x)+"_get_SKU.json"
+    uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/contextJson/"+str(x)+"_get_SKU.json"
     if os.path.exists(uri):
         f_03 = open (uri,'r')
         ids_string = f_03.read()
@@ -95,5 +95,4 @@ job.result()  # Waits for table load to complete.
 print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 system("rm sku.json")
 print("finalizado")
-'''
 
