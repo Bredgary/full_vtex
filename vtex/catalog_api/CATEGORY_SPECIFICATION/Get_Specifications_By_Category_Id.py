@@ -11,13 +11,13 @@ listaID = []
 listIdSkuAndContext =[]
 registro = 0
 
-f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/delimitador.txt','r')
+f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/CATEGORY_SPECIFICATION/delimitador.txt','r')
 data_from_string = f_01.read()
 delimitador = int(data_from_string)
 count = 0
 
 
-def get_sku(id,count,delimitador):
+def get_specifications(id,count,delimitador):
 	jsonF = {}
 	if count >= delimitador:
 		try:
@@ -32,20 +32,20 @@ def get_sku(id,count,delimitador):
 			print("Get_Specifications_By_Category_Id.py Terminando: "+str(count))
 		except:
 			delimitador = count
-			text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/delimitador.txt", "w")
+			text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/CATEGORY_SPECIFICATION/delimitador.txt", "w")
 			text_file.write(str(delimitador))
 			text_file.close()
 			system("python3 Get_Specifications_By_Category_Id.py")
 
 
 def operacion_fenix(count):
-	f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/id_category.json.json','r')
+	f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/CATEGORY_SPECIFICATION/id_category.json.json','r')
 	data_from_string = f_01.read()
 	data_from_string = data_from_string.replace('"', '')
 	listaIDS = json.loads(data_from_string)
 	for i in listaIDS:
 		count += 1
-		get_sku(i,count,delimitador)
+		get_specifications(i,count,delimitador)
 	print(str(count)+" registro almacenado.")
 
 operacion_fenix(count)
