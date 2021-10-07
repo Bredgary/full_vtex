@@ -13,7 +13,7 @@ listIdSkuAndContext =[]
 f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_ATTACHMENT/delimitador.txt','r')
 data_from_string = f_01.read()
 delimitador = int(data_from_string)
-count = 0¿
+count = 0
 
 
 def get_sku_Attachment_by_SKUID(id,count,delimitador):
