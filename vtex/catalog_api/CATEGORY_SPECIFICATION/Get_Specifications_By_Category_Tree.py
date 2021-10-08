@@ -10,7 +10,7 @@ client = bigquery.Client()
 listaID = []
 listIdSkuAndContext =[]
 registro = 0
-
+'''
 f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/CATEGORY_SPECIFICATION/delimitador.txt','r')
 data_from_string = f_01.read()
 delimitador = int(data_from_string)
@@ -65,8 +65,8 @@ for x in range(countDir):
 	else:
 		continue
 
-print(formatoJson)
-
+print(listaID)
+'''
 string = json.dumps(listaID)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/sku.json", "w")
 text_file.write(string)
