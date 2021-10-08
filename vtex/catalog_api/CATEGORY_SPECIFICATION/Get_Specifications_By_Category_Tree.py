@@ -10,7 +10,7 @@ client = bigquery.Client()
 listaID = []
 listIdSkuAndContext =[]
 registro = 0
-'''
+
 f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/CATEGORY_SPECIFICATION/delimitador.txt','r')
 data_from_string = f_01.read()
 delimitador = int(data_from_string)
@@ -25,16 +25,17 @@ def get_specifications(id,count,delimitador):
 			headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 			response = requests.request("GET", url, headers=headers)
 			string = json.dumps(jsonF)
-			text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/CATEGORY_SPECIFICATION/CATEGORY_SPECIFICATION/"+str(count)+"category_specification.json", "w")
-			text_file.write(string)
-			text_file.close()
-			print("Get_Specifications_By_Category_Tree.py Terminando: "+str(count))
+			print(string)
+			#text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/CATEGORY_SPECIFICATION/CATEGORY_SPECIFICATION/"+str(count)+"category_specification.json", "w")
+			#text_file.write(string)
+			#text_file.close()
+			#print("Get_Specifications_By_Category_Tree.py Terminando: "+str(count))
 		except:
 			delimitador = count
-			text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/CATEGORY_SPECIFICATION/delimitador.txt", "w")
-			text_file.write(str(delimitador))
-			text_file.close()
-			system("python3 Get_Specifications_By_Category_Tree.py")
+			#text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/CATEGORY_SPECIFICATION/delimitador.txt", "w")
+			#text_file.write(str(delimitador))
+			#text_file.close()
+			#system("python3 Get_Specifications_By_Category_Tree.py")
 
 
 def operacion_fenix(count):
@@ -45,6 +46,7 @@ def operacion_fenix(count):
 	for i in listaIDS:
 		count += 1
 		get_specifications(i,count,delimitador)
+		break
 	print(str(count)+" registro almacenado.")
 
 operacion_fenix(count)
@@ -66,7 +68,7 @@ for x in range(countDir):
 		continue
 
 print(listaID)
-'''
+
 string = json.dumps(listaID)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/CATEGORY_SPECIFICATION/temp.json", "w")
 text_file.write(string)
