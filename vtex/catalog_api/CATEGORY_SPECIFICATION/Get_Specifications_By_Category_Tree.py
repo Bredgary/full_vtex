@@ -26,17 +26,16 @@ def get_specifications(id,count,delimitador):
 			response = requests.request("GET", url, headers=headers)
 			jsonF = json.loads(response.text)
 			string = json.dumps(jsonF)
-			print(string)
-			#text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/CATEGORY_SPECIFICATION/CATEGORY_SPECIFICATION/"+str(count)+"category_specification.json", "w")
-			#text_file.write(string)
-			#text_file.close()
-			#print("Get_Specifications_By_Category_Tree.py Terminando: "+str(count))
+			text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/CATEGORY_SPECIFICATION/CATEGORY_SPECIFICATION/"+str(count)+"category_specification.json", "w")
+			text_file.write(string)
+			text_file.close()
+			print("Get_Specifications_By_Category_Tree.py Terminando: "+str(count))
 		except:
 			delimitador = count
-			#text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/CATEGORY_SPECIFICATION/delimitador.txt", "w")
-			#text_file.write(str(delimitador))
-			#text_file.close()
-			#system("python3 Get_Specifications_By_Category_Tree.py")
+			text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/CATEGORY_SPECIFICATION/delimitador.txt", "w")
+			text_file.write(str(delimitador))
+			text_file.close()
+			system("python3 Get_Specifications_By_Category_Tree.py")
 
 
 def operacion_fenix(count):
@@ -63,7 +62,7 @@ for x in range(countDir):
 	f_03 = open (uri,'r')
 	ids_string = f_03.read()
 	formatoJson = json.loads(ids_string)
-	if formatoJson:
+	if not formatoJson:
 		listaID.append(formatoJson)
 	else:
 		continue
