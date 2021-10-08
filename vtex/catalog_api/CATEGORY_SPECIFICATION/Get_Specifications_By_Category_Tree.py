@@ -46,7 +46,6 @@ def operacion_fenix(count):
 	for i in listaIDS:
 		count += 1
 		get_specifications(i,count,delimitador)
-		break
 	print(str(count)+" registro almacenado.")
 
 operacion_fenix(count)
