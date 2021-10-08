@@ -68,17 +68,17 @@ for x in range(countDir):
 print(listaID)
 '''
 string = json.dumps(listaID)
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/sku.json", "w")
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/CATEGORY_SPECIFICATION/temp.json", "w")
 text_file.write(string)
 text_file.close() 
 
-system("cat sku.json | jq -c '.[]' > tableSku.json")
+system("cat temp.json | jq -c '.[]' > CategorySpecification.json")
 
 print("Cargando a BigQuery")
 client = bigquery.Client()
-filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/tableSku.json'
+filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/CATEGORY_SPECIFICATION/CategorySpecification.json'
 dataset_id = 'landing_zone'
-table_id = 'shopstar_vtex_sku'
+table_id = 'shopstar_vtex_category_specification'
 dataset_ref = client.dataset(dataset_id)
 table_ref = dataset_ref.table(table_id)
 job_config = bigquery.LoadJobConfig()
