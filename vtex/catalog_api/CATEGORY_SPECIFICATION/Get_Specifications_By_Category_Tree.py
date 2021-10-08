@@ -50,7 +50,7 @@ def operacion_fenix(count):
 
 operacion_fenix(count)
 
-'''
+
 
 DIR = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/CATEGORY_SPECIFICATION/CATEGORY_SPECIFICATION/'
 countDir = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])
@@ -73,7 +73,7 @@ text_file.write(string)
 text_file.close() 
 
 system("cat temp.json | jq -c '.[]' > CategorySpecification.json")
-
+'''
 print("Cargando a BigQuery")
 client = bigquery.Client()
 filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/CATEGORY_SPECIFICATION/CategorySpecification.json'
