@@ -26,6 +26,7 @@ def get_specifications(id,count,delimitador):
 			response = requests.request("GET", url, headers=headers)
 			string = json.dumps(jsonF)
 			print(string)
+			print(str(id))
 			#text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/CATEGORY_SPECIFICATION/CATEGORY_SPECIFICATION/"+str(count)+"category_specification.json", "w")
 			#text_file.write(string)
 			#text_file.close()
