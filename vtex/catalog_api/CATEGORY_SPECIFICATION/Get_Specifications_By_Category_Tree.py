@@ -21,7 +21,7 @@ def get_specifications(id,count,delimitador):
 	jsonF = {}
 	if count >= delimitador:
 		try:
-			url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pub/specification/field/listTreeByCategoryId/"+str(id)+""
+			url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pub/specification/field/listTreeByCategoryId/826"
 			headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 			response = requests.request("GET", url, headers=headers)
 			string = json.dumps(jsonF)
