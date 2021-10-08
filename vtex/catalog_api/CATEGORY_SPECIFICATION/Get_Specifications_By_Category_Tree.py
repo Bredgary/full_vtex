@@ -60,7 +60,7 @@ for x in range(countDir):
 	f_03 = open (uri,'r')
 	ids_string = f_03.read()
 	formatoJson = json.loads(ids_string)
-	if not formatoJson:
+	if formatoJson:
 		listaID.append(formatoJson)
 	else:
 		continue
