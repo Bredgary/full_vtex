@@ -66,8 +66,7 @@ for x in range(countDir):
 	else:
 		continue
 
-print(listaID)
-'''
+
 string = json.dumps(listaID)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/CATEGORY_SPECIFICATION/temp.json", "w")
 text_file.write(string)
@@ -93,6 +92,5 @@ with open(filename, "rb") as source_file:
     job_config=job_config,)  # API request
 job.result()  # Waits for table load to complete.
 print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
-system("rm sku.json")
 print("finalizado")
-'''
+
