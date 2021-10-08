@@ -8,7 +8,7 @@ from google.cloud import bigquery
 
 client = bigquery.Client()
 listaID = []
-listIdSkuAndContext =[]
+productList =[]
 registro = 0
 '''
 f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/delimitador.txt','r')
@@ -63,7 +63,7 @@ for row in rows:
     productList.append(row.Id)
 
 string = json.dumps(productList)
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SPECIFICATION_GROUP/id_group.json", "w")
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SPECIFICATION//id_specification_product.json", "w")
 text_file.write(string)
 text_file.close()
 
