@@ -14,7 +14,8 @@ f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_COMPLEMENT/SK
 data_from_string = f_01.read()
 delimitador = int(data_from_string)
 count = 0
-DIR = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_COMPLEMENT/SKU_COMPLEMENT'
+
+DIR = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_COMPLEMENT/SKU_COMPLEMENT/'
 delimitador = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])
 
 
