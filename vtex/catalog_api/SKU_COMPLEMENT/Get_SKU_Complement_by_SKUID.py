@@ -10,7 +10,7 @@ client = bigquery.Client()
 listaIDS = []
 listIdSkuAndContext =[]
 
-f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_COMPLEMENT/SKU_COMPLEMENT','r')
+f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_COMPLEMENT/SKU_COMPLEMENT/','r')
 data_from_string = f_01.read()
 delimitador = int(data_from_string)
 count = 0
