@@ -10,10 +10,12 @@ client = bigquery.Client()
 listaIDS = []
 listIdSkuAndContext =[]
 
-f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_COMPLEMENT/delimitador.txt','r')
+f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_COMPLEMENT/SKU_COMPLEMENT','r')
 data_from_string = f_01.read()
 delimitador = int(data_from_string)
 count = 0
+DIR = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_COMPLEMENT/SKU_COMPLEMENT'
+delimitador = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])
 
 
 def get_sku_complements(id,count,delimitador):
@@ -31,7 +33,6 @@ def get_sku_complements(id,count,delimitador):
 				text_file.close()
 				print("get_sku_complements Terminando: "+str(count))
 		except:
-			delimitador = count
 			text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/delimitador.txt", "w")
 			text_file.write(str(delimitador))
 			text_file.close()
