@@ -38,7 +38,7 @@ def get_trade_policy(id,count,delimitador):
 			system("python3 Get_Trade_Policy_by_Product_ID.py")
 
 
-def get_trade_policy(count):
+def operacion_fenix(count):
 	f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/TRADE_POLICY/id_producto.json','r')
 	data_from_string = f_01.read()
 	data_from_string = data_from_string.replace('"', '')
