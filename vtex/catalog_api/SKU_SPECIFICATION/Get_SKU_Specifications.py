@@ -10,9 +10,8 @@ client = bigquery.Client()
 listaIDS = []
 listIdSkuAndContext =[]
 
-f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_SPECIFICATION/delimitador.txt','r')
-data_from_string = f_01.read()
-delimitador = int(data_from_string)
+DIR = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_SPECIFICATION/SKU_SPECIFICATION/'
+delimitador = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])
 count = 0
 
 def get_sku(id,count,delimitador):
