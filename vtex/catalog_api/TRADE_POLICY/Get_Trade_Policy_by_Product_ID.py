@@ -11,10 +11,10 @@ listaID = []
 listIdSkuAndContext =[]
 registro = 0
 
-f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/TRADE_POLICY/delimitador.txt','r')
-data_from_string = f_01.read()
-delimitador = int(data_from_string)
+DIR = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/TRADE_POLICY/TRADE_POLICY/'
+delimitador = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])
 count = 0
+
 
 
 def get_trade_policy(id,count,delimitador):

@@ -10,11 +10,9 @@ client = bigquery.Client()
 listaIDS = []
 listIdSkuAndContext =[]
 
-f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/NON_STRUCTURED_SPECIFICATION/delimitador.txt','r')
-data_from_string = f_01.read()
-delimitador = int(data_from_string)
+DIR = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/NON_STRUCTURED_SPECIFICATION/NON_STRUCTURED_SPECIFICATION/'
+delimitador = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])
 count = 0
-mensajeError = {'Message': 'The request is invalid.'}
 
 
 def get_specification_non_structured(id,count,delimitador):
