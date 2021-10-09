@@ -35,7 +35,7 @@ def get_trade_policy(id,count,delimitador):
 			text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/TRADE_POLICY/delimitador.txt", "w")
 			text_file.write(str(delimitador))
 			text_file.close()
-			system("python3 Get_Trade_Policy_by_Product_ID.py")
+			#system("python3 Get_Trade_Policy_by_Product_ID.py")
 
 
 def operacion_fenix(count):
