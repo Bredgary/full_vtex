@@ -15,7 +15,6 @@ data_from_string = f_01.read()
 delimitador = int(data_from_string)
 count = 0
 
-
 def get_sku(id,count,delimitador):
 	jsonF = {}
 	if count >= delimitador:
