@@ -9,7 +9,7 @@ from google.cloud import bigquery
 client = bigquery.Client()
 listaID = []
 listIdSkuAndContext =[]
-
+registro=0
 '''
 f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/delimitador1.txt','r')
 data_from_string = f_01.read()
@@ -59,7 +59,8 @@ DIR = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/SKUContext'
 countDir = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])
 
 for x in range(countDir):
-	uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/SKUContext/"+str(x)+"_sku.json"
+	registro += 1
+	uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/SKUContext/"+str(registro)+"_sku.json"
 	f_03 = open (uri,'r')
 	ids_string = f_03.read()
 	formatoJson = json.loads(ids_string)
