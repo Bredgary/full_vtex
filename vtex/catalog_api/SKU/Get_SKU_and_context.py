@@ -9,7 +9,7 @@ from google.cloud import bigquery
 client = bigquery.Client()
 listaID = []
 listIdSkuAndContext =[]
-registro=100000
+registro=0
 '''
 f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/delimitador1.txt','r')
 data_from_string = f_01.read()
@@ -67,7 +67,7 @@ for x in range(countDir):
 		formatoJson = json.loads(ids_string)
 		listaID.append(formatoJson)
 		print("sku contexts Almacenados: " +str(registro))
-		if registro == 200000:
+		if registro == 50000:
 			break
 	except:
 		continue
@@ -98,5 +98,4 @@ with open(filename, "rb") as source_file:
     job_config=job_config,)  # API request
 job.result()  # Waits for table load to complete.
 print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
-system("rm sku.json")
 print("finalizado")
