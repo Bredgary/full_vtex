@@ -67,7 +67,7 @@ for x in range(countDir):
 		formatoJson = json.loads(ids_string)
 		listaID.append(formatoJson)
 		print("sku contexts Almacenados: " +str(registro))
-		if registro == 50000:
+		if registro == 100:
 			break
 	except:
 		continue
