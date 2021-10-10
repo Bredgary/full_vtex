@@ -65,7 +65,7 @@ for x in range(countDir):
 	ids_string = f_03.read()
 	formatoJson = json.loads(ids_string)
 	listaID.append(formatoJson)
-	print("sku contexts Almacenados: " +str(count))
+	print("sku contexts Almacenados: " +str(registro))
 
 
 string = json.dumps(listaID)
