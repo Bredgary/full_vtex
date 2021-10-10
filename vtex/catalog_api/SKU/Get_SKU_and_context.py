@@ -53,7 +53,7 @@ def operacion_fenix(count):
 
 operacion_fenix(count)
 
-'''
+
 
 DIR = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/SKUContext'
 countDir = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])
@@ -74,7 +74,7 @@ for x in range(countDir):
 
 
 string = json.dumps(listaID)
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/sku.json", "w")
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/temp.json", "w")
 text_file.write(string)
 text_file.close() 
 
@@ -100,4 +100,3 @@ job.result()  # Waits for table load to complete.
 print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 system("rm sku.json")
 print("finalizado")
-'''
