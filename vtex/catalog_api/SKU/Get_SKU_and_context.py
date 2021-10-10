@@ -80,6 +80,7 @@ text_file.close()
 
 system("cat temp.json | jq -c '.[]' > tableSku.json")
 
+system("find . -type f -print0 | xargs -0 sed -i 's/""1382""/""n_1382""/g'")
 print("Cargando a BigQuery")
 client = bigquery.Client()
 filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/tableSku.json'
