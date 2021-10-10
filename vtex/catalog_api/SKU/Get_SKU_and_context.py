@@ -78,7 +78,7 @@ text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/temp.json
 text_file.write(string)
 text_file.close() 
 
-system("cat sku.json | jq -c '.[]' > tableSku.json")
+system("cat temp.json | jq -c '.[]' > tableSku.json")
 
 print("Cargando a BigQuery")
 client = bigquery.Client()
