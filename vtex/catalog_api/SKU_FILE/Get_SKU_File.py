@@ -61,9 +61,10 @@ for x in range(countDir):
 	uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_FILE/SKU_FILE/"+str(registro)+"_sku_file.json"
 	f_03 = open (uri,'r')
 	ids_string = f_03.read()
-	formatoJson = json.loads(ids_string)
-	listaID.append(formatoJson)
-	print("Producto Almacenados: " +str(registro))
+	if ids_string != '"sku archives not found."':
+		formatoJson = json.loads(ids_string)
+		listaID.append(formatoJson)
+		print("Producto Almacenados: " +str(registro))
 
 
 string = json.dumps(listaID)
