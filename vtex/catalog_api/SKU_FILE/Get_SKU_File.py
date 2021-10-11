@@ -53,24 +53,25 @@ operacion_fenix(count)
 
 '''
 
-DIR = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/SKU/'
+DIR = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_FILE/SKU_FILE/'
 countDir = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])
 
 for x in range(countDir):
 	registro = registro + 1
-    uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/SKU/"+str(registro)+"_sku.json"
+	uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_FILE/SKU_FILE/"+str(registro)+"_sku.json"
 	f_03 = open (uri,'r')
 	ids_string = f_03.read()
 	formatoJson = json.loads(ids_string)
 	listaID.append(formatoJson)
 	print("Producto Almacenados: " +str(registro))
 
+
 string = json.dumps(listaID)
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/sku.json", "w")
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_FILE/temp.json", "w")
 text_file.write(string)
 text_file.close() 
 
-system("cat sku.json | jq -c '.[]' > tableSku.json")
+system("cat temp.json | jq -c '.[]' > tableSku.json")
 
 print("Cargando a BigQuery")
 client = bigquery.Client()
