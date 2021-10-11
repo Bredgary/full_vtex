@@ -62,9 +62,8 @@ for x in range(countDir):
 	print("Almacenados: " +str(registro))
 
 
-string = json.dumps(listaID)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_EAN/temp.json", "w")
-text_file.write(string)
+text_file.write(str(ids_string))
 text_file.close() 
 
 system("cat temp.json | jq -c '.[]' > tableSkuEan.json")
