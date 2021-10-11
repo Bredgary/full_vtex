@@ -8,7 +8,7 @@ from google.cloud import bigquery
 
 client = bigquery.Client()
 listaIDS = []
-listIdSkuAndContext =[]
+listaID =[]
 count = 0
 '''
 DIR = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_COMPLEMENT/SKU_COMPLEMENT/'
