@@ -10,7 +10,7 @@ client = bigquery.Client()
 listaID = []
 listIdSkuAndContext =[]
 registro = 0
-
+'''
 f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_FILE/delimitador.txt','r')
 data_from_string = f_01.read()
 delimitador = int(data_from_string)
@@ -93,4 +93,4 @@ job.result()  # Waits for table load to complete.
 print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 system("rm sku.json")
 print("finalizado")
-'''
+
