@@ -10,7 +10,7 @@ client = bigquery.Client()
 listaID = []
 listIdSkuAndContext =[]
 registro = 0
-'''
+
 f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_FILE/delimitador.txt','r')
 data_from_string = f_01.read()
 delimitador = int(data_from_string)
@@ -22,12 +22,12 @@ def get_sku_file(id,count,delimitador):
 	jsonF = {}
 	if count >= delimitador:
 		try:
-			url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/stockkeepingunit/"""+str(id)+""
+			url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/stockkeepingunit/"+str(id)+"/file"
 			headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 			response = requests.request("GET", url, headers=headers)
 			jsonF = json.loads(response.text)
 			string = json.dumps(jsonF)
-			text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_FILE/SKU_FILE/"+str(count)+"_sku.json", "w")
+			text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_FILE/SKU_FILE/"+str(count)+"_sku_file.json", "w")
 			text_file.write(string)
 			text_file.close()
 			print("Get_SKU_File.py Terminando: "+str(count))
@@ -58,7 +58,7 @@ countDir = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(
 
 for x in range(countDir):
 	registro = registro + 1
-	uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_FILE/SKU_FILE/"+str(registro)+"_sku.json"
+	uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_FILE/SKU_FILE/"+str(registro)+"_sku_file.json"
 	f_03 = open (uri,'r')
 	ids_string = f_03.read()
 	formatoJson = json.loads(ids_string)
@@ -93,4 +93,4 @@ job.result()  # Waits for table load to complete.
 print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 system("rm sku.json")
 print("finalizado")
-
+'''
