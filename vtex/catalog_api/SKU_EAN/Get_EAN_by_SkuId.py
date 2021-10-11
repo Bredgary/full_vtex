@@ -54,6 +54,7 @@ DIR = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_EAN/SKU_EAN/'
 countDir = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])
 
 for x in range(countDir):
+	registro =+ 1
 	uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_EAN/SKU_EAN/"+str(x)+"_sku.json"
 	f_03 = open (uri,'r')
 	ids_string = f_03.read()
