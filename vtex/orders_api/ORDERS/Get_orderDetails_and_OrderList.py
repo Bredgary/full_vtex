@@ -37,7 +37,7 @@ def replace_blank_dict(d):
     return d
 
 def get_order(ids):
-    url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(ids)+""
+    url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(ids)+"?emailMapping?an=mercury"
     headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
     response = requests.request("GET", url, headers=headers)
     formatoJ = json.loads(response.text)
@@ -94,7 +94,7 @@ job_config = bigquery.LoadJobConfig()
 job_config.write_disposition = bigquery.WriteDisposition.WRITE_APPEND
 job_config.schema_update_options = [bigquery.SchemaUpdateOption.ALLOW_FIELD_ADDITION]
 job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-#job_config.autodetect = True
+job_config.autodetect = True
 with open(filename, "rb") as source_file:
     job = client.load_table_from_file(
         source_file,
@@ -128,7 +128,7 @@ try:
     table_ref = dataset_ref.table(table_id)
     job_config = bigquery.LoadJobConfig()
     job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-    #job_config.autodetect = True
+    job_config.autodetect = True
     with open(filename, "rb") as source_file:
         job = client.load_table_from_file(
             source_file,
