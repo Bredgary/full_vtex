@@ -10,7 +10,7 @@ client = bigquery.Client()
 listaID = []
 listIdSkuAndContext =[]
 registro = 0
-'''
+
 f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_EAN/delimitador.txt','r')
 data_from_string = f_01.read()
 delimitador = int(data_from_string)
@@ -23,11 +23,11 @@ def get_ean(id,count,delimitador):
 			url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/stockkeepingunit/"+str(id)+"/ean"
 			headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 			response = requests.request("GET", url, headers=headers)
-			string = json.dumps(response.text)
-			text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_EAN/SKU_EAN/"+str(count)+"_sku.json", "w")
-			text_file.write(string)
-			text_file.close()
-			print("Get_EAN_by_SkuId.py Terminando: "+str(count))
+			if respose.text != '""':
+				text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_EAN/SKU_EAN/"+str(count)+"_sku_ean.json", "w")
+				text_file.write(response.text)
+				text_file.close()
+				print("Get_EAN_by_SkuId.py Terminando: "+str(count))
 		except:
 			delimitador = count
 			text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_EAN/delimitador.txt", "w")
@@ -49,13 +49,12 @@ def operacion_fenix(count):
 operacion_fenix(count)
 
 '''
-
 DIR = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_EAN/SKU_EAN/'
 countDir = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])
 
 for x in range(countDir):
 	registro = registro + 1
-	uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_EAN/SKU_EAN/"+str(registro)+"_sku.json"
+	uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_EAN/SKU_EAN/"+str(registro)+"_sku_ean.json"
 	f_03 = open (uri,'r')
 	ids_string = f_03.read()
 	if ids_string != '""':
@@ -63,7 +62,7 @@ for x in range(countDir):
 		listaID.append(ids_string)
 		#print("Almacenados: " +str(registro))
 
-'''
+
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_EAN/temp.json", "w")
 text_file.write(str(ids_string))
 text_file.close() 
