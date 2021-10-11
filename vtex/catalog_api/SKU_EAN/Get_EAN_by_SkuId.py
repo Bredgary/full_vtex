@@ -58,9 +58,10 @@ for x in range(countDir):
 	uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_EAN/SKU_EAN/"+str(registro)+"_sku.json"
 	f_03 = open (uri,'r')
 	ids_string = f_03.read()
-	print(ids_string)
-	listaID.append(ids_string)
-	#print("Almacenados: " +str(registro))
+	if ids_string != '""':
+		print(int(ids_string))
+		listaID.append(ids_string)
+		#print("Almacenados: " +str(registro))
 
 '''
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_EAN/temp.json", "w")
