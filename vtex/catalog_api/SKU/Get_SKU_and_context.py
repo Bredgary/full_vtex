@@ -80,10 +80,10 @@ text_file.write(string)
 text_file.close() 
 
 system("cat temp.json | jq -c '.[]' > tableSku.json")
-df = pd.read_json (r'/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/SKUContext/2_sku.json')
-df.to_csv (r'/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/tableSku.csv', index = None)
-'''
-system("find . -type f -print0 | xargs -0 sed -i 's/1382/n_1382/g'")
+#df = pd.read_json (r'/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/SKUContext/2_sku.json')
+#df.to_csv (r'/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/tableSku.csv', index = None)
+
+#system("find . -type f -print0 | xargs -0 sed -i 's/1382/n_1382/g'")
 print("Cargando a BigQuery")
 client = bigquery.Client()
 filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/tableSku.json'
@@ -103,4 +103,3 @@ with open(filename, "rb") as source_file:
 job.result()  # Waits for table load to complete.
 print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 print("finalizado")
-'''
