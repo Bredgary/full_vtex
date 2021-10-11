@@ -55,12 +55,13 @@ DIR = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_COMPLEMENT/SKU_COMPL
 countDir = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])
 
 for x in range(countDir):
-    uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_COMPLEMENT/SKU_COMPLEMENT/"+str(x)+"_sku_complements.json"
+	uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_COMPLEMENT/SKU_COMPLEMENT/"+str(x)+"_sku_complements.json"
 	f_03 = open (uri,'r')
 	ids_string = f_03.read()
 	formatoJson = json.loads(ids_string)
 	listaID.append(formatoJson)
 	print("Producto Almacenados: " +str(count))
+
 
 string = json.dumps(listaID)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_COMPLEMENT/temp.json", "w")
