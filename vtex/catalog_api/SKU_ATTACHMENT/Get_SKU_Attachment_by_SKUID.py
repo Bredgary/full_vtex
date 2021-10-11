@@ -74,7 +74,7 @@ system("cat temp.json | jq -c '.[]' > tableSkuAttachment.json")
 
 print("Cargando a BigQuery")
 client = bigquery.Client()
-filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_ATTACHMENT/tableSku.json'
+filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_ATTACHMENT/tableSkuAttachment.json'
 dataset_id = 'landing_zone'
 table_id = 'shopstar_vtex_sku_attachment'
 dataset_ref = client.dataset(dataset_id)
