@@ -60,7 +60,7 @@ for x in range(countDir):
 	ids_string = f_03.read()
 	print(ids_string)
 	listaID.append(ids_string)
-	print("Almacenados: " +str(registro))
+	#print("Almacenados: " +str(registro))
 
 '''
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_EAN/temp.json", "w")
