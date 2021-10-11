@@ -68,11 +68,11 @@ text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_EAN/temp.
 text_file.write(string)
 text_file.close() 
 
-system("cat temp.json | jq -c '.[]' > tableSku.json")
+system("cat temp.json | jq -c '.[]' > tableSkuEan.json")
 
 print("Cargando a BigQuery")
 client = bigquery.Client()
-filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/tableSku.json'
+filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_EAN/tableSkuEan.json'
 dataset_id = 'landing_zone'
 table_id = 'shopstar_vtex_sku_ean'
 dataset_ref = client.dataset(dataset_id)
