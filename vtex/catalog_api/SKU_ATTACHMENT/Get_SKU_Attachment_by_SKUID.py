@@ -49,19 +49,17 @@ def operacion_fenix(count):
 operacion_fenix(count)
 
 '''
-
 DIR = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_ATTACHMENT/SKU_ATTACHMENT/'
 countDir = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])
 
 for x in range(countDir):
 	registro = registro + 1
-    uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_ATTACHMENT/SKU_ATTACHMENT/"+str(registro)+"_attachment.json"
+	uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_ATTACHMENT/SKU_ATTACHMENT/"+str(registro)+"_attachment.json"
 	f_03 = open (uri,'r')
 	ids_string = f_03.read()
 	formatoJson = json.loads(ids_string)
 	listaID.append(formatoJson)
 	print("attachment Almacenados: " +str(count))
-
 
 
 string = json.dumps(listaID)
@@ -89,7 +87,6 @@ with open(filename, "rb") as source_file:
     job_config=job_config,)  # API request
 job.result()  # Waits for table load to complete.
 print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
-system("rm sku.json")
 print("finalizado")
 
 
