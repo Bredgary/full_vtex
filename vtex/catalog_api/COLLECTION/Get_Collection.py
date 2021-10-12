@@ -12,8 +12,9 @@ client = bigquery.Client()
 listaIDS = []
 start = 0
 
-def get_collection(id,headers):
+def get_collection(id):
 	url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/collection/"+id+""
+	headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 	response = requests.request("GET", url, headers=headers)
 	FJson = json.loads(response.text)
 	print(type(FJson))
@@ -48,16 +49,16 @@ def cargando_bigquery():
 	system("rm tableCollection.json")
 
 
-def operacion_fenix(headers):
+def operacion_fenix():
 	f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/COLLECTION/collection.json','r')
 	data_from_string = f_01.read()
 	listaIDS = json.loads(data_from_string)
 	for i in listaIDS:
-		get_collection(i,headers)
+		get_collection(i)
 		start +=1
 	print(str(start)+" registro almacenado.")
 
-operacion_fenix(headers)
+operacion_fenix()
 
 
 
