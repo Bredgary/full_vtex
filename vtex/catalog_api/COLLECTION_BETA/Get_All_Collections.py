@@ -21,12 +21,12 @@ def get_collection_beta(page,headers,total):
 	url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/collection/search"
 	querystring = {"page":"'"+str(page)+"'","pageSize":"'"+str(total)+"'","orderByAsc":"true"}
 	response = requests.request("GET", url, headers=headers, params=querystring)
-	FJson = json.loads(response.text)
-	items = FJson["items"]
-	return items
+	print(response.text)
+	#FJson = json.loads(response.text)
+	#items = FJson["items"]
+
 
 
 for x in range(pages):
-	itemCollection = get_collection_beta(x,headers,total)
-	print(itemCollection)
+	get_collection_beta(x,headers,total)
 
