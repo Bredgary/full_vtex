@@ -8,8 +8,9 @@ from google.cloud import bigquery
 
 client = bigquery.Client()
 listaIDS = []
-listIdSkuAndContext =[]
-
+listaID =[]
+registro = 0
+'''
 DIR = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_SPECIFICATION/SKU_SPECIFICATION/'
 delimitador = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])
 count = 0
@@ -48,32 +49,33 @@ operacion_fenix(count)
 
 '''
 
-DIR = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/SKU/'
+DIR = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_SPECIFICATION/SKU_SPECIFICATION'
 countDir = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])
 
 for x in range(countDir):
-    uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/SKU/"+str(x)+"_get_SKU.json"
-    if os.path.exists(uri):
-        f_03 = open (uri,'r')
-        ids_string = f_03.read()
-        formatoJson = json.loads(ids_string)
-        listaID.append(formatoJson)
-        print("Producto Almacenados: " +str(count))
-    else:
-        print("Json no existe")
+	try:
+		uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_SPECIFICATION/SKU_SPECIFICATION/"+str(x)+"_sku.json"
+		f_03 = open (uri,'r')
+		ids_string = f_03.read()
+		formatoJson = json.loads(ids_string)
+		listaID.append(formatoJson)
+		print("Producto Almacenados: " +str(registro))
+		registro = registro + 1
+	except:
+		continue
 
 string = json.dumps(listaID)
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/sku.json", "w")
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_SPECIFICATION/sku.json", "w")
 text_file.write(string)
 text_file.close() 
 
-system("cat sku.json | jq -c '.[]' > tableSku.json")
+system("cat sku.json | jq -c '.[]' > tableSkuSpecification.json")
 
 print("Cargando a BigQuery")
 client = bigquery.Client()
-filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/tableSku.json'
+filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_SPECIFICATION/tableSkuSpecification.json'
 dataset_id = 'landing_zone'
-table_id = 'shopstar_vtex_sku'
+table_id = 'shopstar_vtex_sku_specification'
 dataset_ref = client.dataset(dataset_id)
 table_ref = dataset_ref.table(table_id)
 job_config = bigquery.LoadJobConfig()
@@ -89,4 +91,3 @@ job.result()  # Waits for table load to complete.
 print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 system("rm sku.json")
 print("finalizado")
-'''
