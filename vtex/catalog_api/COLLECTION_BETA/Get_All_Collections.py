@@ -17,6 +17,7 @@ paging = Json["paging"]
 total = int(paging["total"])
 pages = int(paging["pages"])
 listItem = []
+start = 0
 
 def get_collection_beta(page,headers,total):
 	url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/collection/search"
@@ -29,5 +30,6 @@ def get_collection_beta(page,headers,total):
 
 
 for x in range(pages):
-	get_collection_beta(x,headers,total)
+	start += 1
+	get_collection_beta(start,headers,total)
 
