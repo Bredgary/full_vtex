@@ -8,7 +8,7 @@ from google.cloud import bigquery
 
 client = bigquery.Client()
 listaIDS = []
-listIdSkuAndContext =[]
+listaID =[]
 registro = 0
 '''
 DIR = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/NON_STRUCTURED_SPECIFICATION/NON_STRUCTURED_SPECIFICATION/'
