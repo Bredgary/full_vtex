@@ -71,13 +71,13 @@ text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/NON_STRUCTURE
 text_file.write(string)
 text_file.close() 
 
-system("cat temp.json | jq -c '.[]' > tableSku.json")
+system("cat temp.json | jq -c '.[]' > tableSkuNonStruct.json")
 
 print("Cargando a BigQuery")
 client = bigquery.Client()
-filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/NON_STRUCTURED_SPECIFICATION/tableSku.json'
+filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/NON_STRUCTURED_SPECIFICATION/tableSkuNonStruct.json'
 dataset_id = 'landing_zone'
-table_id = 'shopstar_vtex_sku'
+table_id = 'shopstar_vtex_sku_non_strtuctured'
 dataset_ref = client.dataset(dataset_id)
 table_ref = dataset_ref.table(table_id)
 job_config = bigquery.LoadJobConfig()
