@@ -62,9 +62,9 @@ for x in range(countDir):
 		formatoJson = json.loads(ids_string)
 		listaID.append(formatoJson)
 		print("Producto Almacenados: " +str(registro))
-		registro = registro + 1
 	except:
 		continue
+	registro = registro + 1
 
 string = json.dumps(listaID)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/NON_STRUCTURED_SPECIFICATION/temp.json", "w")
