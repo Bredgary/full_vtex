@@ -24,12 +24,20 @@ def get_collection_beta(page,headers,total):
 	querystring = {"page":""+str(page)+"","pageSize":""+str(total)+"","orderByAsc":"true"}
 	response = requests.request("GET", url, headers=headers, params=querystring)
 	FJson = json.loads(response.text)
-	print(FJson)
-	#listItem.append(FJson["items"])
+	listItem.append(FJson["items"])
 
 
 
 for x in range(pages):
 	start += 1
 	get_collection_beta(start,headers,total)
+
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/COLLECTION_BETA/items.json", "w")
+text_file.write(str(listItem))
+text_file.close()
+
+
+
+
+
 
