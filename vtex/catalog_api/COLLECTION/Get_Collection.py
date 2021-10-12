@@ -22,7 +22,7 @@ def get_collection(id):
 	text_file.write(str(FJson))
 	text_file.close()
 	print("collection: "+str(id))
-	#cargando_bigquery()
+	cargando_bigquery()
 
 def cargando_bigquery():
 	print("Cargando a BigQuery")
