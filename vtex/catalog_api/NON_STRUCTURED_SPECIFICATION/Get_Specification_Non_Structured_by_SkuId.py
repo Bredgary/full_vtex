@@ -56,12 +56,15 @@ countDir = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(
 
 for x in range(countDir):
 	registro = registro + 1
-	uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/NON_STRUCTURED_SPECIFICATION/NON_STRUCTURED_SPECIFICATION/"+str(registro)+"_sku.json"
-	f_03 = open (uri,'r')
-	ids_string = f_03.read()
-	formatoJson = json.loads(ids_string)
-	listaID.append(formatoJson)
-	print("Producto Almacenados: " +str(registro))
+	try:
+		uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/NON_STRUCTURED_SPECIFICATION/NON_STRUCTURED_SPECIFICATION/"+str(registro)+"_sku.json"
+		f_03 = open (uri,'r')
+		ids_string = f_03.read()
+		formatoJson = json.loads(ids_string)
+		listaID.append(formatoJson)
+		print("Producto Almacenados: " +str(registro))
+	except:
+		continue
 
 string = json.dumps(listaID)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/NON_STRUCTURED_SPECIFICATION/temp.json", "w")
