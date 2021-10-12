@@ -9,7 +9,59 @@ from google.cloud import bigquery
 
 productList = []
 client = bigquery.Client()
+listaIDS = []
+start = 0
 
+def get_collection(id,headers):
+	url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/collection/"+id+""
+	response = requests.request("GET", url, headers=headers)
+	FJson = json.loads(response.text)
+	print(type(FJson))
+	text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/COLLECTION/temp.json", "w")
+	text_file.write(str(FJson))
+	text_file.close()
+	print("collection: "+str(id))
+	#cargando_bigquery()
+
+def cargando_bigquery():
+	print("Cargando a BigQuery")
+	system("cat temp.json | jq -c '.[]' > tableCollection.json")
+	client = bigquery.Client()
+	filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/COLLECTION/tableCollection.json'
+	dataset_id = 'landing_zone'
+	table_id = 'shopstar_vtex_collection'
+	dataset_ref = client.dataset(dataset_id)
+	table_ref = dataset_ref.table(table_id)
+	job_config = bigquery.LoadJobConfig()
+	job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+	job_config.autodetect = True
+	with open(filename, "rb") as source_file:
+		job = client.load_table_from_file(
+			source_file,
+			table_ref,
+			location="southamerica-east1",  # Must match the destination dataset location.
+		job_config=job_config,)  # API request
+	job.result()  # Waits for table load to complete.
+	print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
+	print("finalizado")
+	system("rm temp.json")
+	system("rm tableCollection.json")
+
+
+def operacion_fenix(headers):
+	f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/COLLECTION/collection.json','r')
+	data_from_string = f_01.read()
+	listaIDS = json.loads(data_from_string)
+	for i in listaIDS:
+		get_collection(i,headers)
+		start +=1
+	print(str(start)+" registro almacenado.")
+
+operacion_fenix(headers)
+
+
+
+'''
 QUERY = (
     'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_collection_beta`')
 query_job = client.query(QUERY)  # API request
@@ -22,3 +74,4 @@ string = json.dumps(productList)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/COLLECTION/collection.json", "w")
 text_file.write(string)
 text_file.close()
+'''
