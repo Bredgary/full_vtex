@@ -19,7 +19,7 @@ pages = int(paging["pages"])
 
 def get_collection_beta(page,headers,total):
 	url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/collection/search"
-	querystring = {"page":"'"+str(page)+"'","pageSize":"'"+str(total)+"'","orderByAsc":"true"}
+	querystring = {"page":""+str(page)+"","pageSize":""+str(total)+"","orderByAsc":"true"}
 	response = requests.request("GET", url, headers=headers, params=querystring)
 	print(response.text)
 	#FJson = json.loads(response.text)
