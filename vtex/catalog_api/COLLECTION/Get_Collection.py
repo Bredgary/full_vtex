@@ -13,7 +13,7 @@ listaIDS = []
 start = 0
 
 def get_collection(id):
-	url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/collection/"+id+""
+	url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/collection/"+str(id)+""
 	headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 	response = requests.request("GET", url, headers=headers)
 	FJson = json.loads(response.text)
