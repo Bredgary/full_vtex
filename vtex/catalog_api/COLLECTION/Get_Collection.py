@@ -18,7 +18,7 @@ def get_collection(id):
 	response = requests.request("GET", url, headers=headers)
 	FJson = json.loads(response.text)
 	FJsonD = json.dumps(FJson)
-	text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/COLLECTION/temp.json", "w")
+	text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/COLLECTION/tableCollection.json", "w")
 	text_file.write(FJsonD)
 	text_file.close()
 	print("collection: "+str(id))
@@ -26,9 +26,8 @@ def get_collection(id):
 
 def cargando_bigquery():
 	print("Cargando a BigQuery")
-	#system("cat temp.json | jq -c '.[]' > tableCollection.json")
 	client = bigquery.Client()
-	filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/COLLECTION/temp.json'
+	filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/COLLECTION/tableCollection.json'
 	dataset_id = 'landing_zone'
 	table_id = 'shopstar_vtex_collection'
 	dataset_ref = client.dataset(dataset_id)
@@ -45,7 +44,6 @@ def cargando_bigquery():
 	job.result()  # Waits for table load to complete.
 	print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 	print("finalizado")
-	system("rm temp.json")
 	system("rm tableCollection.json")
 
 
