@@ -27,5 +27,6 @@ def get_collection_beta(page,headers,total):
 
 
 for x in range(pages):
-	print("Hola")
+	itemCollection = get_collection_beta(x,headers,total)
+	print(itemCollection)
 
