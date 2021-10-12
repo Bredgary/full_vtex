@@ -24,9 +24,9 @@ def get_collection_beta(page,headers,total):
 	querystring = {"page":""+str(page)+"","pageSize":""+str(total)+"","orderByAsc":"true"}
 	response = requests.request("GET", url, headers=headers, params=querystring)
 	FJson = json.loads(response.text)
-	listItem.append(FJson["items"])
+	result = json.dumps(FJson["items"])
 	text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/COLLECTION_BETA/items.json", "w")
-	text_file.write(str(listItem))
+	text_file.write(result)
 	text_file.close()
 	print("Pagina: "+str(page))
 
