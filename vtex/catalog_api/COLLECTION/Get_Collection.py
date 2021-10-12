@@ -17,9 +17,9 @@ def get_collection(id):
 	headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 	response = requests.request("GET", url, headers=headers)
 	FJson = json.loads(response.text)
-	print(type(FJson))
+	FJsonD = json.dumps(FJson)
 	text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/COLLECTION/temp.json", "w")
-	text_file.write(str(FJson))
+	text_file.write(FJsonD)
 	text_file.close()
 	print("collection: "+str(id))
 	cargando_bigquery()
