@@ -23,7 +23,8 @@ def get_collection_beta(page,headers,total):
 	querystring = {"page":""+str(page)+"","pageSize":""+str(total)+"","orderByAsc":"true"}
 	response = requests.request("GET", url, headers=headers, params=querystring)
 	FJson = json.loads(response.text)
-	listItem.append(FJson["items"])
+	print(FJson)
+	#listItem.append(FJson["items"])
 
 
 
