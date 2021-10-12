@@ -26,9 +26,9 @@ def get_collection(id):
 
 def cargando_bigquery():
 	print("Cargando a BigQuery")
-	system("cat temp.json | jq -c '.[]' > tableCollection.json")
+	#system("cat temp.json | jq -c '.[]' > tableCollection.json")
 	client = bigquery.Client()
-	filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/COLLECTION/tableCollection.json'
+	filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/COLLECTION/temp.json'
 	dataset_id = 'landing_zone'
 	table_id = 'shopstar_vtex_collection'
 	dataset_ref = client.dataset(dataset_id)
