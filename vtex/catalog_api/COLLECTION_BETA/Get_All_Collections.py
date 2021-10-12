@@ -7,7 +7,7 @@ from os import system
 from google.cloud import bigquery
 from itertools import chain
 from collections import defaultdict
-'''
+
 url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/collection/search"
 querystring = {"page":"1","pageSize":"100","orderByAsc":"true"}
 headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
@@ -25,6 +25,9 @@ def get_collection_beta(page,headers,total):
 	response = requests.request("GET", url, headers=headers, params=querystring)
 	FJson = json.loads(response.text)
 	listItem.append(FJson["items"])
+	text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/COLLECTION_BETA/items.json", "w")
+	text_file.write(str(listItem))
+	text_file.close()
 	print("Pagina: "+str(page))
 
 
@@ -32,11 +35,7 @@ def get_collection_beta(page,headers,total):
 for x in range(pages):
 	start += 1
 	get_collection_beta(start,headers,total)
-
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/COLLECTION_BETA/items.json", "w")
-text_file.write(str(listItem))
-text_file.close()
-'''
+	break
 
 system("cat items.json | jq -c '.[]' > tableCollectionBeta.json")
 
