@@ -29,7 +29,7 @@ def get_collection_beta(page,headers,total):
 	text_file.write(result)
 	text_file.close()
 	print("Pagina: "+str(page))
-	#cargando_bigquery()
+	cargando_bigquery()
 
 def cargando_bigquery():
 	print("Cargando a BigQuery")
@@ -58,7 +58,6 @@ def cargando_bigquery():
 for x in range(pages):
 	start += 1
 	get_collection_beta(start,headers,total)
-	break
 
 
 
