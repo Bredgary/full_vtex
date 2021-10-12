@@ -8,6 +8,7 @@ from os import system
 from google.cloud import bigquery
 
 productList = []
+client = bigquery.Client()
 
 QUERY = (
     'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_collection_beta`')
