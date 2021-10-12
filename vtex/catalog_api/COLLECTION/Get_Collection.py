@@ -49,7 +49,7 @@ def cargando_bigquery():
 	system("rm tableCollection.json")
 
 
-def operacion_fenix():
+def operacion_fenix(start):
 	f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/COLLECTION/collection.json','r')
 	data_from_string = f_01.read()
 	listaIDS = json.loads(data_from_string)
@@ -58,7 +58,7 @@ def operacion_fenix():
 		start +=1
 	print(str(start)+" registro almacenado.")
 
-operacion_fenix()
+operacion_fenix(start)
 
 
 
