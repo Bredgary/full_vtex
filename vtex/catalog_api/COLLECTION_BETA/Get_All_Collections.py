@@ -16,14 +16,14 @@ Json = json.loads(response.text)
 paging = Json["paging"]
 total = int(paging["total"])
 pages = int(paging["pages"])
+listItem = []
 
 def get_collection_beta(page,headers,total):
 	url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/collection/search"
 	querystring = {"page":""+str(page)+"","pageSize":""+str(total)+"","orderByAsc":"true"}
 	response = requests.request("GET", url, headers=headers, params=querystring)
-	print(response.text)
-	#FJson = json.loads(response.text)
-	#items = FJson["items"]
+	FJson = json.loads(response.text)
+	listItem.append(items = FJson["items"])
 
 
 
