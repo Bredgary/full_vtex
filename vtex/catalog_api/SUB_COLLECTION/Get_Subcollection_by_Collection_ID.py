@@ -55,6 +55,7 @@ def operacion_fenix():
 		count += 1
 		print(str(count)+" registro almacenado.")
 
+operacion_fenix()
 
 '''
 QUERY = (
