@@ -8,21 +8,22 @@ from google.cloud import bigquery
 
 client = bigquery.Client()
 productList = []
+count = 0
 
 
 def get_subcollection(id):
-	#try:
-	url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/collection/"+str(id)+"/subcollection"
-	headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-	response = requests.request("GET", url, headers=headers)
-	FJson = json.loads(response.text)
-	result = json.dumps(FJson)
-	text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SUB_COLLECTION/temp.json", "w")
-	text_file.write(result)
-	text_file.close()
-	cargando_bigquery()
-	#except:
-	#	print("Vacio")
+	try:
+		url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/collection/"+str(id)+"/subcollection"
+		headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
+		response = requests.request("GET", url, headers=headers)
+		FJson = json.loads(response.text)
+		result = json.dumps(FJson)
+		text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SUB_COLLECTION/temp.json", "w")
+		text_file.write(result)
+		text_file.close()
+		cargando_bigquery()
+	except:
+		print("Vacio")
 
 def cargando_bigquery():
 	system("cat temp.json | jq -c '.[]' > sub_collection.json")
@@ -46,7 +47,7 @@ def cargando_bigquery():
 	print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 	print("finalizado")
 
-def operacion_fenix():
+def operacion_fenix(count):
 	f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/SUB_COLLECTION/id_collecion.json','r')
 	data_from_string = f_01.read()
 	listaIDS = json.loads(data_from_string)
@@ -55,7 +56,7 @@ def operacion_fenix():
 		count += 1
 		print(str(count)+" registro almacenado.")
 
-operacion_fenix()
+operacion_fenix(count)
 
 '''
 QUERY = (
