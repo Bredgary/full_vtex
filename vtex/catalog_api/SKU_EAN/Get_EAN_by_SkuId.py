@@ -24,9 +24,9 @@ def get_ean(id,count,delimitador):
 		response = requests.request("GET", url, headers=headers)
 		temp = response.text
 		idEan = temp.replace("[", "").replace("]","")
-		idEanConvert = int(idEan)
+		listaID.append(idEan)
 		text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_EAN/SKU_EAN/"+str(count)+"_sku_ean.json", "w")
-		text_file.write(str(idEanConvert))
+		text_file.write(str(listaID))
 		text_file.close()
 		print("Get_EAN_by_SkuId.py Terminando: "+str(count))
 		#except:
