@@ -60,7 +60,6 @@ def operacion_fenix(count):
 
 operacion_fenix(count)
 '''
-
-for i in count(0):
-	print("Hola")
+for x in iter(int, 1):
+    print("Hola")
 
