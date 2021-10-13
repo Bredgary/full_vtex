@@ -29,12 +29,12 @@ def get_ean(id,count,delimitador):
 		text_file.close()
 		print("Get_EAN_by_SkuId.py Terminando: "+str(count))
 		cargando_bigquery()
-		#except:
-		#	delimitador = count
-		#	text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_EAN/delimitador.txt", "w")
-		#	text_file.write(str(delimitador))
-		#	text_file.close()
-		#	system("python3 Get_EAN_by_SkuId.py")
+		except:
+			delimitador = count
+			text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_EAN/delimitador.txt", "w")
+			text_file.write(str(delimitador))
+			text_file.close()
+			system("python3 Get_EAN_by_SkuId.py")
 
 
 def operacion_fenix(count):
@@ -45,7 +45,6 @@ def operacion_fenix(count):
 	for i in listaIDS:
 		count += 1
 		get_ean(i,count,delimitador)
-		break
 	print(str(count)+" registro almacenado.")
 
 
