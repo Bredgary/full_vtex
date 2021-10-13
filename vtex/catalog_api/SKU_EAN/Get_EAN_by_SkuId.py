@@ -11,7 +11,7 @@ listaID = []
 listIdSkuAndContext =[]
 registro = 0
 
-DIR = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/NON_STRUCTURED_SPECIFICATION/NON_STRUCTURED_SPECIFICATION/'
+DIR = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_EAN/SKU_EAN'
 delimitador = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])
 count = 0
 
