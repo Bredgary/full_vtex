@@ -11,8 +11,8 @@ client = bigquery.Client()
 productList = []
 count = 0
 x = ""
-num1=0
-num2=10
+num1=1
+num2=100
 rangoT = 10000
 def get_search_documents(x,rango1,rango2):
 	try:
@@ -54,9 +54,11 @@ def cargando_bigquery():
 def operacion_fenix(x,num1,num2):
 	for x in range(rangoT):
 		get_search_documents(x,num1,num2)
-		num1 +=10
-		num2 +=10
+		num1 +=100
+		num2 +=100
 		print("Rango del: "+str(num1)+" al "+str(num2))
+		if num2 >= 10000:
+			break
 
 operacion_fenix(x,num1,num2)
 
