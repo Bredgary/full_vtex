@@ -57,7 +57,7 @@ query_job = client.query(QUERY)  # API request
 rows = query_job.result()  # Waits for query to finish
 
 for row in rows:
-    productList.append(row.Id)
+    productList.append(row.id)
 
 string = json.dumps(productList)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SUB_COLLECTION//id_collecion.json", "w")
