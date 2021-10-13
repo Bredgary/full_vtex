@@ -57,7 +57,6 @@ def operacion_fenix(x,num1,num2):
 		num1 +=1
 		num2 +=1
 		print("Rango del: "+str(num1)+" al "+str(num2))
-		break
 
 operacion_fenix(x,num1,num2)
 
