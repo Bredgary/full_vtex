@@ -52,7 +52,7 @@ for x in range(pages):
 '''
 
 QUERY = (
-    'SELECT Id FROM `shopstar-datalake.landing_zone.shopstar_vtex_product_specification`')
+    'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_collection_beta`')
 query_job = client.query(QUERY)  # API request
 rows = query_job.result()  # Waits for query to finish
 
@@ -60,7 +60,7 @@ for row in rows:
     productList.append(row.Id)
 
 string = json.dumps(productList)
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SPECIFICATION/id_specification_product.json", "w")
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SUB_COLLECTION//id_collecion.json", "w")
 text_file.write(string)
 text_file.close()
 
