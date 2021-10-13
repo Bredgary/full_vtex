@@ -19,16 +19,16 @@ def get_ean(id,count,delimitador):
 	jsonF = {}
 	if count >= delimitador:
 		try:
-		url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/stockkeepingunit/"+str(id)+"/ean"
-		headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-		response = requests.request("GET", url, headers=headers)
-		temp = response.text
-		idEan = temp.replace("[", "{").replace("]","}")
-		text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_EAN/sku_ean.json", "w")
-		text_file.write(idEan)
-		text_file.close()
-		print("Get_EAN_by_SkuId.py Terminando: "+str(count))
-		cargando_bigquery()
+			url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/stockkeepingunit/"+str(id)+"/ean"
+			headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
+			response = requests.request("GET", url, headers=headers)
+			temp = response.text
+			idEan = temp.replace("[", "{").replace("]","}")
+			text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_EAN/sku_ean.json", "w")
+			text_file.write(idEan)
+			text_file.close()
+			print("Get_EAN_by_SkuId.py Terminando: "+str(count))
+			cargando_bigquery()
 		except:
 			delimitador = count
 			text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_EAN/delimitador.txt", "w")
