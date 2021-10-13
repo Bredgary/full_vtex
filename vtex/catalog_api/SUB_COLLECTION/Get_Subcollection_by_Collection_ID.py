@@ -23,7 +23,6 @@ def get_subcollection(id):
 		cargando_bigquery()
 	except:
 		print("Vacio")
-		continue
 
 def cargando_bigquery():
 	print("Cargando a BigQuery")
