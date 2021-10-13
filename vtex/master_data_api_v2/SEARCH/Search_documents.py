@@ -13,20 +13,21 @@ count = 0
 x = ""
 num1=0
 num2=1
+rangoT = 10000
 def get_search_documents(x,rango1,rango2):
-	#try:
-	url = "https://mercury.vtexcommercestable.com.br/api/dataentities/CL/search"
-	querystring = {"_fields":"id,firstName,lastName,email,accountId,accountName,dataEntityId","_where":"email is not null"}
-	headers = {"Content-Type": "application/json","Accept": "application/vnd.vtex.ds.v10+json","REST-Range": "resources="+str(num1)+"-"+str(num2)+"","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-	response = requests.request("GET", url, headers=headers, params=querystring)
-	FJson = json.loads(response.text)
-	result = json.dumps(FJson)
-	text_file = open("/home/bred_valenzuela/full_vtex/vtex/master_data_api_v2/SEARCH/temp.json", "w")
-	text_file.write(result)
-	text_file.close()
-	cargando_bigquery()
-	#except:
-	#	x = "Limite"
+	try:
+		url = "https://mercury.vtexcommercestable.com.br/api/dataentities/CL/search"
+		querystring = {"_fields":"id,firstName,lastName,email,accountId,accountName,dataEntityId","_where":"email is not null"}
+		headers = {"Content-Type": "application/json","Accept": "application/vnd.vtex.ds.v10+json","REST-Range": "resources="+str(num1)+"-"+str(num2)+"","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
+		response = requests.request("GET", url, headers=headers, params=querystring)
+		FJson = json.loads(response.text)
+		result = json.dumps(FJson)
+		text_file = open("/home/bred_valenzuela/full_vtex/vtex/master_data_api_v2/SEARCH/temp.json", "w")
+		text_file.write(result)
+		text_file.close()
+		cargando_bigquery()
+	except:
+		print("Vacio")
 
 def cargando_bigquery():
 	system("cat temp.json | jq -c '.[]' > search_documents.json")
@@ -51,12 +52,11 @@ def cargando_bigquery():
 	print("finalizado")
 
 def operacion_fenix(x,num1,num2):
-	for x in iter(int, 1):
+	for x in range(rangoT):
 		get_search_documents(x,num1,num2)
-		if x != "Limite":
-			continue
-		else:
-			break
+		num1 +=1
+		num2 +=1
+		print("Rango del: "+str(num1)+" al "+str(num2))
 		break
 
 operacion_fenix(x,num1,num2)
