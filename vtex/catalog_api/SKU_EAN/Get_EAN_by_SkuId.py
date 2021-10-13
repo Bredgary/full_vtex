@@ -11,9 +11,8 @@ listaID = []
 listIdSkuAndContext =[]
 registro = 0
 
-f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_EAN/delimitador.txt','r')
-data_from_string = f_01.read()
-delimitador = int(data_from_string)
+DIR = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/NON_STRUCTURED_SPECIFICATION/NON_STRUCTURED_SPECIFICATION/'
+delimitador = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])
 count = 0
 
 def get_ean(id,count,delimitador):
@@ -43,6 +42,7 @@ def operacion_fenix(count):
 	for i in listaIDS:
 		count += 1
 		get_ean(i,count,delimitador)
+		break
 	print(str(count)+" registro almacenado.")
 
 operacion_fenix(count)
