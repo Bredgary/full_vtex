@@ -8,27 +8,29 @@ from google.cloud import bigquery
 
 client = bigquery.Client()
 productList = []
-'''
 
-def get_collection_beta(page,headers,total):
-	url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/collection/search"
-	querystring = {"page":""+str(page)+"","pageSize":""+str(total)+"","orderByAsc":"true"}
-	response = requests.request("GET", url, headers=headers, params=querystring)
-	FJson = json.loads(response.text)
-	result = json.dumps(FJson["items"])
-	text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/COLLECTION_BETA/items.json", "w")
-	text_file.write(result)
-	text_file.close()
-	print("Pagina: "+str(page))
-	cargando_bigquery()
+
+def get_subcollection(id):
+	try:
+		url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/collection/"+id+"/subcollection"
+		headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
+		response = requests.request("GET", url, headers=headers)
+		FJson = json.loads(response.text)
+		result = json.dumps(FJson)
+		text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SUB_COLLECTION/sub_collection.json", "w")
+		text_file.write(result)
+		text_file.close()
+		cargando_bigquery()
+	except:
+		print("Vacio")
+		continue
 
 def cargando_bigquery():
 	print("Cargando a BigQuery")
-	system("cat items.json | jq -c '.[]' > tableCollectionBeta.json")
 	client = bigquery.Client()
-	filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/COLLECTION_BETA/tableCollectionBeta.json'
+	filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/SUB_COLLECTION/sub_collection.json'
 	dataset_id = 'landing_zone'
-	table_id = 'shopstar_vtex_collection_beta'
+	table_id = 'shopstar_vtex_sub_collection'
 	dataset_ref = client.dataset(dataset_id)
 	table_ref = dataset_ref.table(table_id)
 	job_config = bigquery.LoadJobConfig()
@@ -43,14 +45,18 @@ def cargando_bigquery():
 	job.result()  # Waits for table load to complete.
 	print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 	print("finalizado")
-	system("rm items.json")
-	system("rm tableCollectionBeta.json")
 
-for x in range(pages):
-	start += 1
-	get_collection_beta(start,headers,total)
+def operacion_fenix():
+	f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/SUB_COLLECTION/id_collecion.json','r')
+	data_from_string = f_01.read()
+	listaIDS = json.loads(data_from_string)
+	for i in listaIDS:
+		get_subcollection(i)
+		count += 1
+		print(str(count)+" registro almacenado.")
+
+
 '''
-
 QUERY = (
     'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_collection_beta`')
 query_job = client.query(QUERY)  # API request
@@ -60,7 +66,7 @@ for row in rows:
     productList.append(row.id)
 
 string = json.dumps(productList)
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SUB_COLLECTION//id_collecion.json", "w")
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SUB_COLLECTION/id_collecion.json", "w")
 text_file.write(string)
 text_file.close()
-
+'''
