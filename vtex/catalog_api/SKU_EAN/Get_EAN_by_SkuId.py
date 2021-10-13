@@ -23,10 +23,9 @@ def get_ean(id,count,delimitador):
 		headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 		response = requests.request("GET", url, headers=headers)
 		temp = response.text
-		idEan = temp.replace("[", "").replace("]","")
-		listaID.append(idEan)
+		idEan = temp.replace("[", "").replace("]","").replace('""',"")
 		text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_EAN/SKU_EAN/"+str(count)+"_sku_ean.json", "w")
-		text_file.write(str(listaID))
+		text_file.write(idEan)
 		text_file.close()
 		print("Get_EAN_by_SkuId.py Terminando: "+str(count))
 		#except:
