@@ -7,8 +7,7 @@ from os import system
 from google.cloud import bigquery
 
 
-DIR = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_EAN/SKU_EAN'
-delimitador = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])
+delimitador = 0
 count = 0
 
 def get_ean(id,count,delimitador):
@@ -21,6 +20,9 @@ def get_ean(id,count,delimitador):
 			idEan = temp.replace("[", "{id:").replace("]","}")
 			text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_EAN/sku_ean.json", "w")
 			text_file.write(idEan)
+			text_file.close()
+			text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_EAN/delimitador.txt", "w")
+			text_file.write(str(count))
 			text_file.close()
 			print("Get_EAN_by_SkuId.py Terminando: "+str(count))
 			cargando_bigquery()
