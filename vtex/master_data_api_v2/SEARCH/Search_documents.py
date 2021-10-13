@@ -53,7 +53,9 @@ def cargando_bigquery():
 def operacion_fenix(x,num1,num2):
 	for x in iter(int, 1):
 		get_search_documents(x,num1,num2)
-		if x = "Limite":
+		if x != "Limite":
+			continue
+		else:
 			break
 		break
 
