@@ -18,22 +18,22 @@ count = 0
 def get_ean(id,count,delimitador):
 	jsonF = {}
 	if count >= delimitador:
-		try:
-			url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/stockkeepingunit/"+str(id)+"/ean"
-			headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-			response = requests.request("GET", url, headers=headers)
-			temp = response.text
-			idEan = temp.replace("[", "").replace("]","")
-			text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_EAN/SKU_EAN/"+str(count)+"_sku_ean.json", "w")
-			text_file.write(FList)
-			text_file.close()
-			print("Get_EAN_by_SkuId.py Terminando: "+str(count))
-		except:
-			delimitador = count
-			text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_EAN/delimitador.txt", "w")
-			text_file.write(str(delimitador))
-			text_file.close()
-			system("python3 Get_EAN_by_SkuId.py")
+		#try:
+		url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/stockkeepingunit/"+str(id)+"/ean"
+		headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
+		response = requests.request("GET", url, headers=headers)
+		temp = response.text
+		idEan = temp.replace("[", "").replace("]","")
+		text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_EAN/SKU_EAN/"+str(count)+"_sku_ean.json", "w")
+		text_file.write(FList)
+		text_file.close()
+		print("Get_EAN_by_SkuId.py Terminando: "+str(count))
+		#except:
+		#	delimitador = count
+		#	text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_EAN/delimitador.txt", "w")
+		#	text_file.write(str(delimitador))
+		#	text_file.close()
+		#	system("python3 Get_EAN_by_SkuId.py")
 
 
 def operacion_fenix(count):
