@@ -7,7 +7,9 @@ from os import system
 from google.cloud import bigquery
 
 
-delimitador = 0
+f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_EAN/delimitador.txt','r')
+data_from_string = f_01.read()
+delimitador = int(data_from_string)
 count = 0
 
 def get_ean(id,count,delimitador):
