@@ -12,12 +12,12 @@ productList = []
 count = 0
 x = ""
 num1=0
-num2=1
+num2=10
 rangoT = 10000
 def get_search_documents(x,rango1,rango2):
 	try:
 		url = "https://mercury.vtexcommercestable.com.br/api/dataentities/CL/search"
-		querystring = {"_fields":"DISTINCT(id),firstName,lastName,email,accountId,accountName,dataEntityId","_where":"email is not null"}
+		querystring = {"_fields":"id,firstName,lastName,email,accountId,accountName,dataEntityId","_where":"firstName is not null"}
 		headers = {"Content-Type": "application/json","Accept": "application/vnd.vtex.ds.v10+json","REST-Range": "resources="+str(num1)+"-"+str(num2)+"","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 		response = requests.request("GET", url, headers=headers, params=querystring)
 		FJson = json.loads(response.text)
@@ -54,8 +54,8 @@ def cargando_bigquery():
 def operacion_fenix(x,num1,num2):
 	for x in range(rangoT):
 		get_search_documents(x,num1,num2)
-		num1 +=1
-		num2 +=1
+		num1 +=10
+		num2 +=10
 		print("Rango del: "+str(num1)+" al "+str(num2))
 
 operacion_fenix(x,num1,num2)
