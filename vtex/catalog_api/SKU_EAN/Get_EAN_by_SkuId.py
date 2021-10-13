@@ -25,7 +25,7 @@ def get_ean(id,count,delimitador):
 		temp = response.text
 		idEan = temp.replace("[", "{id:").replace("]","}")
 		text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_EAN/sku_ean.json", "w")
-		text_file.write(temp)
+		text_file.write(idEan)
 		text_file.close()
 		print("Get_EAN_by_SkuId.py Terminando: "+str(count))
 		cargando_bigquery()
