@@ -17,7 +17,7 @@ rangoT = 10000
 def get_search_documents(x,rango1,rango2):
 	try:
 		url = "https://mercury.vtexcommercestable.com.br/api/dataentities/CL/search"
-		querystring = {"_fields":"id,firstName,lastName,email,accountId,accountName,dataEntityId","_where":"email is not null"}
+		querystring = {"_fields":"DISTINCT(id),firstName,lastName,email,accountId,accountName,dataEntityId","_where":"email is not null"}
 		headers = {"Content-Type": "application/json","Accept": "application/vnd.vtex.ds.v10+json","REST-Range": "resources="+str(num1)+"-"+str(num2)+"","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 		response = requests.request("GET", url, headers=headers, params=querystring)
 		FJson = json.loads(response.text)
