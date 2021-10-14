@@ -9,7 +9,7 @@ from google.cloud import bigquery
 client = bigquery.Client()
 productList = []
 count = 0
-mensajeError = "SKU not found."
+mensajeError = '"SKU not found."'
 
 def get_aen(id):
 	url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitbyean/"+str(id)+""
