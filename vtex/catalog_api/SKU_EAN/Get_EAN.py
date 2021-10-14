@@ -25,10 +25,10 @@ def get_aen(id):
 		print("Vacio")
 
 def cargando_bigquery():
-	#system("cat temp.json | jq -c '.[]' > eat_table.json")
+	system("cat temp.json | jq -c '.[]' > eat_table.json")
 	print("Cargando a BigQuery")
 	client = bigquery.Client()
-	filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_EAN/temp.json'
+	filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_EAN/eat_table.json'
 	dataset_id = 'landing_zone'
 	table_id = 'shopstar_vtex_sku_ean'
 	dataset_ref = client.dataset(dataset_id)
@@ -53,7 +53,7 @@ def operacion_fenix(count):
 	for i in listaIDS:
 		get_aen(i)
 		count += 1
-		print(str(count)+" registro almacenado.")
+		#print(str(count)+" registro almacenado.")
 
 operacion_fenix(count)
 
