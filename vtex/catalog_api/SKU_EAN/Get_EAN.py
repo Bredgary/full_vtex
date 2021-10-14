@@ -26,10 +26,10 @@ def get_aen(id):
 		print("Vacio")
 
 def cargando_bigquery():
-	system("cat temp.json | jq -c '.[]' > eat_table.json")
+	#system("cat temp.json | jq -c '.[]' > eat_table.json")
 	print("Cargando a BigQuery")
 	client = bigquery.Client()
-	filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_EAN/eat_table.json'
+	filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_EAN/temp.json'
 	dataset_id = 'landing_zone'
 	table_id = 'shopstar_vtex_sku_ean'
 	dataset_ref = client.dataset(dataset_id)
