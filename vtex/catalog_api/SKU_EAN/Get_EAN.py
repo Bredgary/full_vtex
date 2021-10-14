@@ -23,7 +23,7 @@ def get_aen(id):
 		text_file.close()
 		cargando_bigquery()
 	else:
-		continue
+		print("Vacio")
 
 def cargando_bigquery():
 	system("cat temp.json | jq -c '.[]' > eat_table.json")
