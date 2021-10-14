@@ -15,13 +15,15 @@ def get_aen(id):
 	url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitbyean/"+str(id)+""
 	headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 	response = requests.request("GET", url, headers=headers)
-	FJson = json.loads(response.text)
-	result = json.dumps(FJson)
-	text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_EAN/temp.json", "w")
-	text_file.write(result)
-	text_file.close()
 	if response.text != mensajeError:
+		FJson = json.loads(response.text)
+		result = json.dumps(FJson)
+		text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_EAN/temp.json", "w")
+		text_file.write(result)
+		text_file.close()
 		cargando_bigquery()
+	else:
+		continue
 
 def cargando_bigquery():
 	system("cat temp.json | jq -c '.[]' > eat_table.json")
