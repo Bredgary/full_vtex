@@ -9,20 +9,20 @@ from google.cloud import bigquery
 client = bigquery.Client()
 productList = []
 count = 0
-mensajeError = '"SKU not found."'
-'''
+
 def get_aen(id):
-	url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitbyean/"+str(id)+""
-	headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-	response = requests.request("GET", url, headers=headers)
-	if response.text != mensajeError:
+	try:
+		url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/subcollection/"+str(id)+"/stockkeepingunit"
+		querystring = {"page":"1","size":"10000"}
+		headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
+		response = requests.request("GET", url, headers=headers, params=querystring)
 		FJson = json.loads(response.text)
 		result = json.dumps(FJson)
-		text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_EAN/temp.json", "w")
+		text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_SUBCOLLECTION/temp.json", "w")
 		text_file.write(result)
 		text_file.close()
 		cargando_bigquery()
-	else:
+	except:
 		print("Vacio")
 
 def cargando_bigquery():
@@ -31,7 +31,7 @@ def cargando_bigquery():
 	client = bigquery.Client()
 	filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_SUBCOLLECTION/temp.json'
 	dataset_id = 'landing_zone'
-	table_id = 'shopstar_vtex_sku_ean'
+	table_id = 'shopstar_vtex_sku_sub_collection'
 	dataset_ref = client.dataset(dataset_id)
 	table_ref = dataset_ref.table(table_id)
 	job_config = bigquery.LoadJobConfig()
@@ -57,9 +57,9 @@ def operacion_fenix(count):
 		#print(str(count)+" registro almacenado.")
 
 operacion_fenix(count)
+
+
 '''
-
-
 QUERY = (
     'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_sub_collection`')
 query_job = client.query(QUERY)  # API request
@@ -72,3 +72,4 @@ string = json.dumps(productList)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_SUBCOLLECTION/id_sub_collection.json", "w")
 text_file.write(string)
 text_file.close()
+'''
