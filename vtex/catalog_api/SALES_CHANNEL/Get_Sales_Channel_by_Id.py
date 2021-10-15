@@ -15,7 +15,7 @@ count = 0
 
 def get_field(id):
 	try:
-		url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pub/saleschannel/"+id+""
+		url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pub/saleschannel/"+str(id)+""
 		headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 		response = requests.request("GET", url, headers=headers)
 		FJson = json.loads(response.text)
@@ -50,7 +50,7 @@ def cargando_bigquery():
 	print("finalizado")
 
 def operacion_fenix(count):
-	f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/SALES_CHANNEL/sales_id.json.json','r')
+	f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/SALES_CHANNEL/sales_id.json','r')
 	data_from_string = f_01.read()
 	listaIDS = json.loads(data_from_string)
 	for i in listaIDS:
