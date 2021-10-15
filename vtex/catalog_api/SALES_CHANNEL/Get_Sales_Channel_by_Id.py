@@ -30,12 +30,12 @@ def cargando_bigquery():
 	client = bigquery.Client()
 	filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/SALES_CHANNEL/temp.json'
 	dataset_id = 'landing_zone'
-	table_id = 'test'
+	table_id = 'shopstar_vtex_sales_channel'
 	dataset_ref = client.dataset(dataset_id)
 	table_ref = dataset_ref.table(table_id)
 	job_config = bigquery.LoadJobConfig()
 	job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-	#job_config.autodetect = True
+	job_config.autodetect = True
 	with open(filename, "rb") as source_file:
 		job = client.load_table_from_file(
 			source_file,
