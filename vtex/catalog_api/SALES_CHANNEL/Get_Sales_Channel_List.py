@@ -20,9 +20,9 @@ def get_sales_channel_list():
 
 def cargando_bigquery():
 	print("Cargando a BigQuery")
-	system("cat temp.json | jq -c '.[]' > tableSales.json")
+	#system("cat temp.json | jq -c '.[]' > tableSales.json")
 	client = bigquery.Client()
-	filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/SALES_CHANNEL/tableSales.json'
+	filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/SALES_CHANNEL/temp.json'
 	dataset_id = 'landing_zone'
 	table_id = 'shopstar_vtex_sales_channel_list'
 	dataset_ref = client.dataset(dataset_id)
