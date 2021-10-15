@@ -18,7 +18,7 @@ query_job = client.query(QUERY)
 rows = query_job.result()  
 
 for row in rows:
-    productList.append(row.id)
+    productList.append(row.Id)
 
 string = json.dumps(productList)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SPECIFICATION_FIELD/SPECIFICATION_FIELD_ID.json", "w")
