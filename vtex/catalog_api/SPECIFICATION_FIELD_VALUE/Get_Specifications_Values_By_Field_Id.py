@@ -7,6 +7,9 @@ from os import system
 from google.cloud import bigquery
 from itertools import chain
 from collections import defaultdict
+
+productList = []
+
 '''
 url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/collection/search"
 querystring = {"page":"1","pageSize":"100","orderByAsc":"true"}
@@ -69,7 +72,7 @@ for row in rows:
     productList.append(row.FieldId)
 
 string = json.dumps(productList)
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SPECIFICATION_FIELD/SPECIFICATION_FIELD_ID_2.json", "w")
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SPECIFICATION_FIELD_VALUE/field_id.json", "w")
 text_file.write(string)
 text_file.close()
 
