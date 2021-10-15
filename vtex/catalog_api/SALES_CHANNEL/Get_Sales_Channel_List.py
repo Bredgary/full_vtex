@@ -14,7 +14,7 @@ def get_sales_channel_list():
 	response = requests.request("GET", url, headers=headers)
 	FJson = json.loads(response.text)
 	text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SALES_CHANNEL/temp.json", "w")
-	text_file.write(FJson)
+	text_file.write(str(FJson))
 	text_file.close()
 	cargando_bigquery()
 
