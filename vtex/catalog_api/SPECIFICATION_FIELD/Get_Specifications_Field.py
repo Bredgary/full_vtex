@@ -40,9 +40,9 @@ def cargando_bigquery():
 		job = client.load_table_from_file(
 			source_file,
 			table_ref,
-			location="southamerica-east1",  # Must match the destination dataset location.
-		job_config=job_config,)  # API request
-	job.result()  # Waits for table load to complete.
+			location="southamerica-east1",  
+		job_config=job_config,)  
+	job.result()  
 	print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 	print("finalizado")
 
