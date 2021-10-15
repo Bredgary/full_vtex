@@ -10,7 +10,7 @@ from collections import defaultdict
 
 
 
-def get_collection_beta():
+def get_sales_channel_list():
 	url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/saleschannel/list"
 	headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 	response = requests.request("GET", url, headers=headers)
@@ -44,6 +44,5 @@ def cargando_bigquery():
 	system("rm items.json")
 	system("rm tableCollectionBeta.json")
 
-for x in range(pages):
-	start += 1
-	get_collection_beta(start,headers,total)
+for x in range(10):
+	get_sales_channel_list()
