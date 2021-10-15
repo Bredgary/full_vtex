@@ -14,16 +14,19 @@ count = 0
 
 
 def field_value(id,count):
-	url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pub/specification/fieldvalue/"+str(id)+""
-	headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-	response = requests.request("GET", url, headers=headers)
-	FJson = json.loads(response.text)
-	result = json.dumps(FJson)
-	text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SPECIFICATION_FIELD_VALUE/field_value.json", "w")
-	text_file.write(result)
-	text_file.close()
-	print("Registro: "+str(count))
-	cargando_bigquery()
+	try:
+		url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pub/specification/fieldvalue/"+str(id)+""
+		headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
+		response = requests.request("GET", url, headers=headers)
+		FJson = json.loads(response.text)
+		result = json.dumps(FJson)
+		text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SPECIFICATION_FIELD_VALUE/field_value.json", "w")
+		text_file.write(result)
+		text_file.close()
+		print("Registro: "+str(count))
+		cargando_bigquery()
+	except:
+		print("Vacio")
 
 def cargando_bigquery():
 	print("Cargando a BigQuery")
