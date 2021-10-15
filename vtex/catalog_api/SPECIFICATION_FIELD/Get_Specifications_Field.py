@@ -30,7 +30,7 @@ def cargando_bigquery():
 	client = bigquery.Client()
 	filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/SPECIFICATION_FIELD/temp.json'
 	dataset_id = 'landing_zone'
-	table_id = 'shopstar_vtex__specification_field'
+	table_id = 'shopstar_vtex_specification_field'
 	dataset_ref = client.dataset(dataset_id)
 	table_ref = dataset_ref.table(table_id)
 	job_config = bigquery.LoadJobConfig()
