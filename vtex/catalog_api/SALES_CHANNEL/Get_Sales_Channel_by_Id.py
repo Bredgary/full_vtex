@@ -7,6 +7,9 @@ from os import system
 from google.cloud import bigquery
 from itertools import chain
 from collections import defaultdict
+
+
+client = bigquery.Client()
 '''
 url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/collection/search"
 querystring = {"page":"1","pageSize":"100","orderByAsc":"true"}
@@ -60,6 +63,7 @@ for x in range(pages):
 	get_collection_beta(start,headers,total)
 
 '''
+
 QUERY = (
     'SELECT Id FROM `shopstar-datalake.landing_zone.shopstar_vtex_sales_channel_list`')
 query_job = client.query(QUERY)  
