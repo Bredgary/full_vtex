@@ -19,13 +19,13 @@ pages = int(paging["pages"])
 listItem = []
 start = 0
 
-def get_collection_beta(page,headers,total):
+def get_brand(page,headers,total):
 	url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/brand/pagedlist"
 	querystring = {"pageSize":""+str(total)+"","page":""+str(page)+""}
 	response = requests.request("GET", url, headers=headers, params=querystring)
 	FJson = json.loads(response.text)
 	result = json.dumps(FJson["items"])
-	text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/COLLECTION_BETA/items.json", "w")
+	text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/BRAND/brand.json", "w")
 	text_file.write(result)
 	text_file.close()
 	print("Pagina: "+str(page))
@@ -33,11 +33,11 @@ def get_collection_beta(page,headers,total):
 
 def cargando_bigquery():
 	print("Cargando a BigQuery")
-	system("cat items.json | jq -c '.[]' > tableCollectionBeta.json")
+	system("cat brand.json | jq -c '.[]' > brandTable.json")
 	client = bigquery.Client()
-	filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/COLLECTION_BETA/tableCollectionBeta.json'
+	filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/BRAND/brandTable.json'
 	dataset_id = 'landing_zone'
-	table_id = 'shopstar_vtex_collection_beta'
+	table_id = 'shopstar_vtex_brand_list'
 	dataset_ref = client.dataset(dataset_id)
 	table_ref = dataset_ref.table(table_id)
 	job_config = bigquery.LoadJobConfig()
@@ -52,9 +52,7 @@ def cargando_bigquery():
 	job.result()  # Waits for table load to complete.
 	print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 	print("finalizado")
-	system("rm items.json")
-	system("rm tableCollectionBeta.json")
 
 for x in range(pages):
 	start += 1
-	get_collection_beta(start,headers,total)
+	get_brand(start,headers,total)
