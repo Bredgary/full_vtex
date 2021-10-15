@@ -14,19 +14,16 @@ productList = []
 count = 0
 
 def get_field(id):
-	try:
-		url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pub/saleschannel/"+str(id)+""
-		headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-		response = requests.request("GET", url, headers=headers)
-		FJson = json.loads(response.text)
-		result = json.dumps(FJson)
-		text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SALES_CHANNEL/temp.json", "w")
-		text_file.write(result)
-		text_file.close()
-		cargando_bigquery()
-	except:
-		print("Vacio")
-
+	url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pub/saleschannel/"+str(id)+""
+	headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
+	response = requests.request("GET", url, headers=headers)
+	FJson = json.loads(response.text)
+	result = json.dumps(FJson)
+	text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SALES_CHANNEL/temp.json", "w")
+	text_file.write(result)
+	text_file.close()
+	cargando_bigquery()
+	
 def cargando_bigquery():
 	print("Cargando a BigQuery")
 	#system("cat items.json | jq -c '.[]' > tableCollectionBeta.json")
