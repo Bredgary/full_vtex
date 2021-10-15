@@ -8,23 +8,21 @@ from google.cloud import bigquery
 from itertools import chain
 from collections import defaultdict
 
-
-
 def get_sales_channel_list():
 	url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/saleschannel/list"
 	headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 	response = requests.request("GET", url, headers=headers)
 	FJson = json.loads(response.text)
-	text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/COLLECTION_BETA/items.json", "w")
+	text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SALES_CHANNEL/temp.json", "w")
 	text_file.write(FJson)
 	text_file.close()
 	cargando_bigquery()
 
 def cargando_bigquery():
 	print("Cargando a BigQuery")
-	system("cat items.json | jq -c '.[]' > tableCollectionBeta.json")
+	system("cat temp.json | jq -c '.[]' > tableSales.json")
 	client = bigquery.Client()
-	filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/COLLECTION_BETA/tableCollectionBeta.json'
+	filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/SALES_CHANNEL/tableSales.json'
 	dataset_id = 'landing_zone'
 	table_id = 'shopstar_vtex_sales_channel_list'
 	dataset_ref = client.dataset(dataset_id)
@@ -41,8 +39,6 @@ def cargando_bigquery():
 	job.result()  # Waits for table load to complete.
 	print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 	print("finalizado")
-	system("rm items.json")
-	system("rm tableCollectionBeta.json")
 
 for x in range(10):
 	get_sales_channel_list()
