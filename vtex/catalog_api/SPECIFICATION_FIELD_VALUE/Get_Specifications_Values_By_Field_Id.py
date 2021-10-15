@@ -9,6 +9,7 @@ from itertools import chain
 from collections import defaultdict
 
 productList = []
+client = bigquery.Client()
 
 '''
 url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/collection/search"
