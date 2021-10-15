@@ -53,6 +53,6 @@ def cargando_bigquery():
 	print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 	print("finalizado")
 
-for x in range(pages):
+for x in range(1):
 	start += 1
 	get_brand(start,headers,total)
