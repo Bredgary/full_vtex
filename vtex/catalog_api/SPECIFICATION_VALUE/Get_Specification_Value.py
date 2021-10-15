@@ -58,9 +58,17 @@ def cargando_bigquery():
 	system("rm items.json")
 	system("rm tableCollectionBeta.json")
 
-for x in range(pages):
-	start += 1
-	get_collection_beta(start,headers,total)
+def operacion_fenix(count):
+	f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/SPECIFICATION/id_specification_product.json','r')
+	data_from_string = f_01.read()
+	data_from_string = data_from_string.replace('"', '')
+	listaIDS = json.loads(data_from_string)
+	for i in listaIDS:
+		count += 1
+		get_sku(i,count,delimitador)
+	print(str(count)+" registro almacenado.")
+
+operacion_fenix(count)
 
 '''
 QUERY = (
