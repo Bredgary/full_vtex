@@ -10,6 +10,7 @@ from collections import defaultdict
 
 
 client = bigquery.Client()
+productList = []
 '''
 url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/collection/search"
 querystring = {"page":"1","pageSize":"100","orderByAsc":"true"}
