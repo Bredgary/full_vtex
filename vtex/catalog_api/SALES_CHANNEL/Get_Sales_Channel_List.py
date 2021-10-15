@@ -42,3 +42,4 @@ def cargando_bigquery():
 
 for x in range(10):
 	get_sales_channel_list()
+	break
