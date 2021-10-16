@@ -13,16 +13,19 @@ paymentSystem = "204"
 
 
 def installments(id,paymentSystem):
-	url = "https://mercury.vtexcommercestable.com.br/api/checkout/pub/orderForm/"+str(id)+"/installments"
-	querystring = {"paymentSystem":""+paymentSystem+""}
-	headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-	response = requests.request("GET", url, headers=headers, params=querystring)
-	FJson = json.loads(response.text)
-	result = json.dumps(FJson)
-	text_file = open("/home/bred_valenzuela/full_vtex/vtex/checkout_api/SHOPPING_CART/cart_installments.json", "w")
-	text_file.write(result)
-	text_file.close()
-	cargando_bigquery()
+	try:
+		url = "https://mercury.vtexcommercestable.com.br/api/checkout/pub/orderForm/"+str(id)+"/installments"
+		querystring = {"paymentSystem":""+paymentSystem+""}
+		headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
+		response = requests.request("GET", url, headers=headers, params=querystring)
+		FJson = json.loads(response.text)
+		result = json.dumps(FJson)
+		text_file = open("/home/bred_valenzuela/full_vtex/vtex/checkout_api/SHOPPING_CART/cart_installments.json", "w")
+		text_file.write(result)
+		text_file.close()
+		cargando_bigquery()
+	except:
+		print("Vacio")
 
 def cargando_bigquery():
 	print("Cargando a BigQuery")
