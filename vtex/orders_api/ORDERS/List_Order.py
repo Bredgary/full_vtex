@@ -9,8 +9,8 @@ from itertools import chain
 from collections import defaultdict
 
 def get_order_list():
-	url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders"
-	querystring = {"f_creationDate":"creationDate:[2020-01-01T02:00:00.000Z TO 2021-10-01T01:59:59.999Z]","f_hasInputInvoice":"false","pages":"4927","total":"73902"}
+	url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders?f_creationDate=creationDate:[2020-01-01T02:00:00.000Z TO 2021-010-01T01:59:59.999Z]"
+	querystring = {"f_hasInputInvoice":"false","pages":"4927","total":"73902"}
 	headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 	response = requests.request("GET", url, headers=headers, params=querystring)
 	FJson = json.loads(response.text)
