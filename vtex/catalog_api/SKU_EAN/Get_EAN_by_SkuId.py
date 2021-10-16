@@ -6,7 +6,7 @@ from datetime import datetime
 from os import system
 from google.cloud import bigquery
 
-
+listaEan = []
 f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_EAN/delimitador.txt','r')
 data_from_string = f_01.read()
 delimitador = int(data_from_string)
@@ -18,16 +18,10 @@ def get_ean(id,count,delimitador):
 			url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/stockkeepingunit/"+str(id)+"/ean"
 			headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 			response = requests.request("GET", url, headers=headers)
-			temp = response.text
-			idEan = temp.replace("[", "{id:").replace("]","}")
-			text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_EAN/sku_ean.json", "w")
-			text_file.write(idEan)
-			text_file.close()
-			text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_EAN/delimitador.txt", "w")
-			text_file.write(str(count))
-			text_file.close()
-			print("Get_EAN_by_SkuId.py Terminando: "+str(count))
-			cargando_bigquery()
+			listaEan.append(response.text)
+			print("Num: "+count)
+			#idEan = temp.replace("[", "{id:").replace("]","}")
+			#cargando_bigquery()
 		except:
 			delimitador = count + 1                 
 			text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_EAN/delimitador.txt", "w")
