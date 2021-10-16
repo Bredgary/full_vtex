@@ -18,9 +18,9 @@ def get_ean(id,count,delimitador):
 			url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/stockkeepingunit/"+str(id)+"/ean"
 			headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 			response = requests.request("GET", url, headers=headers)
-			listaEan.append(response.text)
+			idEan = temp.replace("[", "{id:").replace("]","}")
+			listaEan.append(idEan)
 			print("Num: "+count)
-			#idEan = temp.replace("[", "{id:").replace("]","}")
 			#cargando_bigquery()
 		except:
 			delimitador = count + 1                 
@@ -63,3 +63,8 @@ def cargando_bigquery():
 	print("finalizado")
 
 operacion_fenix(count)
+
+
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_EAN/table_ean_f.txt", "w")
+text_file.write(str(listaEan))
+text_file.close(listaEan)
