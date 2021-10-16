@@ -40,7 +40,7 @@ def cargando_bigquery():
 	table_ref = dataset_ref.table(table_id)
 	job_config = bigquery.LoadJobConfig()
 	job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-	job_config.autodetect = True
+	#job_config.autodetect = True
 	with open(filename, "rb") as source_file:
 		job = client.load_table_from_file(
 			source_file,
