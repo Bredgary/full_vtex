@@ -68,4 +68,4 @@ operacion_fenix(count)
 
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_EAN/table_ean_f.txt", "w")
 text_file.write(str(listaEan))
-text_file.close(listaEan)
+text_file.close()
