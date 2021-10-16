@@ -13,7 +13,7 @@ geoCoordinates="-76.99398040771484"
 geoCoordinates1="-11.9689302444458"
 condigoPostal="150132"
 
-def address_by_postal(geoCoordinates,geoCoordinates1,condigoPostal):
+def list_pickup(geoCoordinates,geoCoordinates1,condigoPostal):
 	try:
 		url = "https://mercury.vtexcommercestable.com.br/api/checkout/pub/pickup-points"
 		querystring = {"geoCoordinates":""+str(geoCoordinates)+";"+str(geoCoordinates1)+"","postalCode":""+str(condigoPostal)+"","countryCode":"PER"}
@@ -52,4 +52,4 @@ def cargando_bigquery():
 	print("finalizado")
 
 for x in range(1):
-	address_by_postal(geoCoordinates,geoCoordinates1,condigoPostal)
+	list_pickup(geoCoordinates,geoCoordinates1,condigoPostal)
