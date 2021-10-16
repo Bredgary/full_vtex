@@ -10,23 +10,23 @@ from collections import defaultdict
 
 
 def retrieve_task():
-	url = "https://mercury.vtexcommercestable.com.br/api/do/notes"
+	url = "https://mercury.vtexcommercestable.com.br/api/do/tasks/"
 	headers = {"X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 	response = requests.request("GET", url, headers=headers)
 	FJson = json.loads(response.text)
 	result = json.dumps(FJson["items"])
-	text_file = open("/home/bred_valenzuela/full_vtex/vtex/vtex_do_api/NOTE/items.json", "w")
+	text_file = open("/home/bred_valenzuela/full_vtex/vtex/vtex_do_api/TASK/items.json", "w")
 	text_file.write(result)
 	text_file.close()
 	cargando_bigquery()
 
 def cargando_bigquery():
 	print("Cargando a BigQuery")
-	system("cat items.json | jq -c '.[]' > table_note.json")
+	system("cat items.json | jq -c '.[]' > table_retrive_task.json")
 	client = bigquery.Client()
-	filename = '/home/bred_valenzuela/full_vtex/vtex/vtex_do_api/NOTE/table_note.json'
+	filename = '/home/bred_valenzuela/full_vtex/vtex/vtex_do_api/TASK/table_retrive_task.json'
 	dataset_id = 'landing_zone'
-	table_id = 'shopstar_vtex_note_by_orderId'
+	table_id = 'shopstar_vtex_retrieve_task'
 	dataset_ref = client.dataset(dataset_id)
 	table_ref = dataset_ref.table(table_id)
 	job_config = bigquery.LoadJobConfig()
