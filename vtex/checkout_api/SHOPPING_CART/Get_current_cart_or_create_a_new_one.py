@@ -21,7 +21,7 @@ def current_cart():
 
 def cargando_bigquery():
 	print("Cargando a BigQuery")
-	system("cat SHOPPING_CART.json | jq -c '.[]' > SHOPPING_CART_TABLE.json")
+	#system("cat SHOPPING_CART.json | jq -c '.[]' > SHOPPING_CART_TABLE.json")
 	client = bigquery.Client()
 	filename = '/home/bred_valenzuela/full_vtex/vtex/checkout_api/SHOPPING_CART/SHOPPING_CART_TABLE.json'
 	dataset_id = 'landing_zone'
