@@ -21,7 +21,7 @@ def get_ean(id,count,delimitador):
 		temp = response.text
 		idEan = temp.replace("[", "{id:").replace("]","}")
 		listaEan.append(idEan)
-		print("Num: "+count)
+		print("Num: "+str(count))
 			#cargando_bigquery()
 		#except:
 		#	delimitador = count + 1                 
