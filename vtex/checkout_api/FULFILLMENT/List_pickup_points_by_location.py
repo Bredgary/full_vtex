@@ -22,7 +22,7 @@ def address_by_postal(geoCoordinates,geoCoordinates1,condigoPostal):
 		FJson = json.loads(response.text)
 		temp = FJson["items"]
 		result = json.dumps(temp)
-		text_file = open("/home/bred_valenzuela/full_vtex/vtex/checkout_api/FULFILLMENT/list_pickup.json", "w")
+		text_file = open("/home/bred_valenzuela/full_vtex/vtex/checkout_api/FULFILLMENT/temp.json", "w")
 		text_file.write(result)
 		text_file.close()
 		cargando_bigquery()
@@ -31,7 +31,7 @@ def address_by_postal(geoCoordinates,geoCoordinates1,condigoPostal):
 
 def cargando_bigquery():
 	print("Cargando a BigQuery")
-	#system("cat SHOPPING_CART.json | jq -c '.[]' > SHOPPING_CART_TABLE.json")
+	system("cat temp.json | jq -c '.[]' > list_pickup.json")
 	client = bigquery.Client()
 	filename = '/home/bred_valenzuela/full_vtex/vtex/checkout_api/FULFILLMENT/list_pickup.json'
 	dataset_id = 'landing_zone'
