@@ -13,6 +13,7 @@ def retrieve_note():
 	url = "https://mercury.vtexcommercestable.com.br/api/do/notes/"
 	headers = {"X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 	response = requests.request("GET", url, headers=headers)
+	FJson = json.loads(response.text)
 	result = json.dumps(FJson["items"])
 	text_file = open("/home/bred_valenzuela/full_vtex/vtex/vtex_do_api/NOTE/items_re.json", "w")
 	text_file.write(result)
