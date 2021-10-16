@@ -8,36 +8,25 @@ from google.cloud import bigquery
 from itertools import chain
 from collections import defaultdict
 
-url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/collection/search"
-querystring = {"page":"1","pageSize":"100","orderByAsc":"true"}
-headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-response = requests.request("GET", url, headers=headers, params=querystring)
-Json = json.loads(response.text)
-paging = Json["paging"]
-total = int(paging["total"])
-pages = int(paging["pages"])
-listItem = []
-start = 0
 
-def get_collection_beta(page,headers,total):
-	url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/collection/search"
-	querystring = {"page":""+str(page)+"","pageSize":""+str(total)+"","orderByAsc":"true"}
-	response = requests.request("GET", url, headers=headers, params=querystring)
+def retrieve_task():
+	url = "https://mercury.vtexcommercestable.com.br/api/do/notes"
+	headers = {"X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
+	response = requests.request("GET", url, headers=headers)
 	FJson = json.loads(response.text)
 	result = json.dumps(FJson["items"])
-	text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/COLLECTION_BETA/items.json", "w")
+	text_file = open("/home/bred_valenzuela/full_vtex/vtex/vtex_do_api/NOTE/items.json", "w")
 	text_file.write(result)
 	text_file.close()
-	print("Pagina: "+str(page))
 	cargando_bigquery()
 
 def cargando_bigquery():
 	print("Cargando a BigQuery")
-	system("cat items.json | jq -c '.[]' > tableCollectionBeta.json")
+	system("cat items.json | jq -c '.[]' > table_note.json")
 	client = bigquery.Client()
-	filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/COLLECTION_BETA/tableCollectionBeta.json'
+	filename = '/home/bred_valenzuela/full_vtex/vtex/vtex_do_api/NOTE/table_note.json'
 	dataset_id = 'landing_zone'
-	table_id = 'shopstar_vtex_collection_beta'
+	table_id = 'shopstar_vtex_note_by_orderId'
 	dataset_ref = client.dataset(dataset_id)
 	table_ref = dataset_ref.table(table_id)
 	job_config = bigquery.LoadJobConfig()
@@ -52,12 +41,9 @@ def cargando_bigquery():
 	job.result()  # Waits for table load to complete.
 	print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 	print("finalizado")
-	system("rm items.json")
-	system("rm tableCollectionBeta.json")
 
-for x in range(pages):
-	start += 1
-	get_collection_beta(start,headers,total)
+for x in range(1):
+	retrieve_task()
 
 '''
 QUERY = (
