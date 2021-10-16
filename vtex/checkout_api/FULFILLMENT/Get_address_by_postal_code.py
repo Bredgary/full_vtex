@@ -8,33 +8,36 @@ from google.cloud import bigquery
 from itertools import chain
 from collections import defaultdict
 
+url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/collection/search"
+querystring = {"page":"1","pageSize":"100","orderByAsc":"true"}
+headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
+response = requests.request("GET", url, headers=headers, params=querystring)
+Json = json.loads(response.text)
+paging = Json["paging"]
+total = int(paging["total"])
+pages = int(paging["pages"])
+listItem = []
+start = 0
 
-geoCoordinates="-76.99398040771484"
-geoCoordinates1="-11.9689302444458"
-condigoPostal="150132"
-
-def address_by_postal(geoCoordinates,geoCoordinates1,condigoPostal):
-	try:
-		url = "https://mercury.vtexcommercestable.com.br/api/checkout/pub/pickup-points"
-		querystring = {"geoCoordinates":""+str(geoCoordinates)+";"+str(geoCoordinates1)+"","postalCode":""+str(condigoPostal)+"","countryCode":"PER"}
-		headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-		response = requests.request("GET", url, headers=headers, params=querystring)
-		FJson = json.loads(response.text)
-		result = json.dumps(FJson)
-		text_file = open("/home/bred_valenzuela/full_vtex/vtex/checkout_api/FULFILLMENT/address_by_postal.json", "w")
-		text_file.write(result)
-		text_file.close()
-		cargando_bigquery()
-	except:
-		print("Vacio")
+def get_collection_beta(page,headers,total):
+	url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/collection/search"
+	querystring = {"page":""+str(page)+"","pageSize":""+str(total)+"","orderByAsc":"true"}
+	response = requests.request("GET", url, headers=headers, params=querystring)
+	FJson = json.loads(response.text)
+	result = json.dumps(FJson["items"])
+	text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/COLLECTION_BETA/items.json", "w")
+	text_file.write(result)
+	text_file.close()
+	print("Pagina: "+str(page))
+	cargando_bigquery()
 
 def cargando_bigquery():
 	print("Cargando a BigQuery")
-	#system("cat SHOPPING_CART.json | jq -c '.[]' > SHOPPING_CART_TABLE.json")
+	system("cat items.json | jq -c '.[]' > tableCollectionBeta.json")
 	client = bigquery.Client()
-	filename = '/home/bred_valenzuela/full_vtex/vtex/checkout_api/FULFILLMENT/address_by_postal.json'
+	filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/COLLECTION_BETA/tableCollectionBeta.json'
 	dataset_id = 'landing_zone'
-	table_id = 'shopstar_vtex_address_by_postal_code'
+	table_id = 'shopstar_vtex_collection_beta'
 	dataset_ref = client.dataset(dataset_id)
 	table_ref = dataset_ref.table(table_id)
 	job_config = bigquery.LoadJobConfig()
@@ -49,6 +52,25 @@ def cargando_bigquery():
 	job.result()  # Waits for table load to complete.
 	print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 	print("finalizado")
+	system("rm items.json")
+	system("rm tableCollectionBeta.json")
 
-for x in range(1):
-	address_by_postal(geoCoordinates,geoCoordinates1,condigoPostal)
+for x in range(pages):
+	start += 1
+	get_collection_beta(start,headers,total)
+
+'''
+QUERY = (
+    'SELECT FieldId FROM `shopstar-datalake.landing_zone.shopstar_vtex_sku_specification` WHERE FieldId is not null')
+query_job = client.query(QUERY)  
+rows = query_job.result()  
+
+for row in rows:
+    productList.append(row.FieldId)
+
+string = json.dumps(productList)
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SPECIFICATION_FIELD/SPECIFICATION_FIELD_ID_2.json", "w")
+text_file.write(string)
+text_file.close()
+'''
+

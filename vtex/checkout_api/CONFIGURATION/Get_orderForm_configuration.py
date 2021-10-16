@@ -29,7 +29,7 @@ def cargando_bigquery():
 	client = bigquery.Client()
 	filename = '/home/bred_valenzuela/full_vtex/vtex/checkout_api/CONFIGURATION/configuration.json'
 	dataset_id = 'landing_zone'
-	table_id = 'shopstar_vtex_order_form_covfiguration'
+	table_id = 'shopstar_vtex_order_form_configuration'
 	dataset_ref = client.dataset(dataset_id)
 	table_ref = dataset_ref.table(table_id)
 	job_config = bigquery.LoadJobConfig()
