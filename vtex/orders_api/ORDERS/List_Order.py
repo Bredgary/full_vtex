@@ -33,13 +33,14 @@ def get_order_list(fromD,toD,page):
 
 def cargando_bigquery():
 	print("Cargando a BigQuery")
+	table_id = "shopstar-datalake.landing_zone.shopstar_vtex_list_order_v1"
 	system("cat list.json | jq -c '.[]' > list_table.json")
 	client = bigquery.Client()
 	filename = '/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/list_table.json'
-	dataset_id = 'landing_zone'
-	table_id = 'shopstar_vtex_list_order_v1'
-	dataset_ref = client.dataset(dataset_id)
-	table_ref = dataset_ref.table(table_id)
+	#ataset_id = 'landing_zone'
+	#table_id = 'shopstar_vtex_list_order_v1'
+	#dataset_ref = client.dataset(dataset_id)
+	#table_ref = dataset_ref.table(table_id)
 	job_config = bigquery.LoadJobConfig(
 		schema=[
         bigquery.SchemaField("orderId", "STRING"),
@@ -82,15 +83,16 @@ def cargando_bigquery():
     ],
     source_format=bigquery.SourceFormat.NEWLINE_DELIMITED_JSON,
 	)
-	#job_config.autodetect = True
+	load_job.result() 
 	with open(filename, "rb") as source_file:
 		job = client.load_table_from_file(
 			source_file,
-			table_ref,
+			table_id,
 			location="southamerica-east1",  # Must match the destination dataset location.
 		job_config=job_config,)  # API request
-	job.result()  # Waits for table load to complete.
-	print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
+	load_job.result()  # Waits for table load to complete.
+	destination_table = client.get_table(table_id)
+	print("Loaded {} rows.".format(destination_table.num_rows))
 	print("finalizado")
 
 for x in range(31):
