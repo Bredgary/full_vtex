@@ -41,12 +41,41 @@ def cargando_bigquery():
 	client = bigquery.Client()
 	filename = '/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/list_table.json'
 	dataset_id = 'landing_zone'
-	table_id = 'shopstar_vtex_list_order_v3'
+	table_id = 'shopstar_vtex_list_order_v1'
 	dataset_ref = client.dataset(dataset_id)
 	table_ref = dataset_ref.table(table_id)
-	job_config = bigquery.LoadJobConfig()
-	job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-	job_config.autodetect = True
+	job_config = bigquery.LoadJobConfig(
+		schema=[
+        bigquery.SchemaField("orderId", "STRING"),
+        bigquery.SchemaField("creationDate", "DATE"),
+		bigquery.SchemaField("clientName", "STRING"),
+		bigquery.SchemaField("items", "STRING"),
+		bigquery.SchemaField("totalValue", "INTEGER"),
+		bigquery.SchemaField("paymentNames", "STRING"),
+		bigquery.SchemaField("status", "STRING"),
+		bigquery.SchemaField("statusDescription", "STRING"),
+		bigquery.SchemaField("marketPlaceOrderId", "STRING"),
+		bigquery.SchemaField("sequence", "INTEGER"),
+		bigquery.SchemaField("salesChannel", "INTEGER"),
+		bigquery.SchemaField("affiliateId", "FLOAT"),
+		bigquery.SchemaField("origin", "STRING"),
+		bigquery.SchemaField("workflowInErrorState", "BOOLEAN"),
+		bigquery.SchemaField("workflowInRetry", "BOOLEAN"),
+		bigquery.SchemaField("lastMessageUnread", "STRING"),
+		bigquery.SchemaField("ShippingEstimatedDate", "STRING"),
+		bigquery.SchemaField("ShippingEstimatedDateMax", "STRING"),
+		bigquery.SchemaField("ShippingEstimatedDateMin", "STRING"),
+		bigquery.SchemaField("orderIsComplete", "STRING"),
+		bigquery.SchemaField("listId", "STRING"),
+		bigquery.SchemaField("listType", "STRING"),
+		bigquery.SchemaField("authorizedDate", "DATE"),
+		bigquery.SchemaField("callCenterOperatorName", "STRING"),
+		bigquery.SchemaField("totalItems", "INTEGER"),
+		bigquery.SchemaField("currencyCode", "STRING"),
+    ],
+    source_format=bigquery.SourceFormat.NEWLINE_DELIMITED_JSON,
+	)
+	#job_config.autodetect = True
 	with open(filename, "rb") as source_file:
 		job = client.load_table_from_file(
 			source_file,
