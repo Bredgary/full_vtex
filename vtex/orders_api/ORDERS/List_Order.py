@@ -23,6 +23,8 @@ def get_order_list(fromD,toD,page):
 			response = requests.request("GET", url, headers=headers, params=querystring)
 			FJson = json.loads(response.text)
 			res = FJson['list']
+			if bool(res):
+				break
 			result = json.dumps(res)
 			text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/list.json", "w")
 			text_file.write(result)
