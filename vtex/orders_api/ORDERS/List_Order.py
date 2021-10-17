@@ -13,6 +13,7 @@ fromD = 1
 toD = 2
 page = 1
 
+
 def get_order_list(fromD,toD,page):
 	for x in range(30):
 		url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders?page="+str(page)+""
