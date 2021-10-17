@@ -23,15 +23,13 @@ def get_order_list(fromD,toD,page):
 			response = requests.request("GET", url, headers=headers, params=querystring)
 			FJson = json.loads(response.text)
 			res = FJson['list']
-			if not res:
-				break
 			result = json.dumps(res)
 			text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/list.json", "w")
 			text_file.write(result)
 			text_file.close() 
 			print("Pagina: "+str(page))
+			print("Dia: "+str(fromD)+" Al:"+str(toD))
 			cargando_bigquery()
-			page += 1
 		except:
 			print("Lista Vacia")
 			print("From: "+str(fromD)+" To:"+str(toD))
@@ -62,4 +60,5 @@ for x in range(31):
 	get_order_list(fromD,toD,page)
 	fromD += 1
 	toD += 1
+	page +=1
 
