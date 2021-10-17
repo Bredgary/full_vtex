@@ -15,28 +15,27 @@ page = 1
 
 def get_order_list(fromD,toD,page):
 	for x in range(30):
-		url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders?page="+str(page)+""
-		querystring = {"f_creationDate":"creationDate:[2020-01-"+str(fromD)+"T02:00:00.000Z TO 2020-01-"+str(toD)+"T01:59:59.999Z]","f_hasInputInvoice":"false"}
-		headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-		response = requests.request("GET", url, headers=headers, params=querystring)
-		FJson = json.loads(response.text)
-		res = FJson['list']
-		print(fromD)
-		print(toD)
-		print(page)
-		print(res)
-		if not res:
-			break
-		result = json.dumps(FJson['list'])
-		text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/list.json", "w")
-		text_file.write(result)
-		text_file.close() 
-		#cargando_bigquery()
-		page += 1
+		try:
+			url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders?page="+str(page)+""
+			querystring = {"f_creationDate":"creationDate:[2020-01-"+str(fromD)+"T02:00:00.000Z TO 2020-01-"+str(toD)+"T01:59:59.999Z]","f_hasInputInvoice":"false"}
+			headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
+			response = requests.request("GET", url, headers=headers, params=querystring)
+			FJson = json.loads(response.text)
+			res = FJson['list']
+			if not res:
+				break
+			result = json.dumps(res)
+			text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/list.json", "w")
+			text_file.write(result)
+			text_file.close() 
+			cargando_bigquery()
+			page += 1
+		except:
+			print("Terminado")
 
 def cargando_bigquery():
 	print("Cargando a BigQuery")
-	#system("cat list.json | jq -c '.[]' > list_table.json")
+	system("cat list.json | jq -c '.[]' > list_table.json")
 	client = bigquery.Client()
 	filename = '/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/list_table.json'
 	dataset_id = 'landing_zone'
