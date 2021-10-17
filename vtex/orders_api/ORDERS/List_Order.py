@@ -24,6 +24,7 @@ def get_order_list(fromD,toD,page):
 		print(fromD)
 		print(toD)
 		print(page)
+		print(res)
 		if not res:
 			break
 		result = json.dumps(FJson['list'])
