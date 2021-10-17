@@ -8,14 +8,26 @@ from google.cloud import bigquery
 from itertools import chain
 from collections import defaultdict
 
-def get_order_list():
-	url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders?f_creationDate=creationDate:[2020-01-01T02:00:00.000Z TO 2021-010-01T01:59:59.999Z]"
-	querystring = {"f_hasInputInvoice":"false","pages":"4927","total":"73902"}
+url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders"
+querystring = {"f_creationDate":"creationDate:[2020-01-01T02:00:00.000Z TO 2021-10-01T01:59:59.999Z]","f_hasInputInvoice":"false"}
+headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
+response = requests.request("GET", url, headers=headers, params=querystring)
+FJson = json.loads(response.text)
+paging = json.dumps(FJson["paging"])
+pag = json.loads(paging)
+pages = pag['pages']
+total = pag['total']
+start = 1
+
+
+def get_order_list(pages,total):
+	url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders"
+	querystring = {"page":""+str(pages)+"","pageSize":""+str(total)+"","orderByAsc":"true"}
 	headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 	response = requests.request("GET", url, headers=headers, params=querystring)
 	FJson = json.loads(response.text)
-	result = json.dumps(FJson)
-	text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/list.json", "w")
+	result = json.dumps(FJson["list"])
+	text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/COLLECTION_BETA/items.json", "w")
 	text_file.write(result)
 	text_file.close()
 	cargando_bigquery()
@@ -26,7 +38,7 @@ def cargando_bigquery():
 	client = bigquery.Client()
 	filename = '/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/list_table.json'
 	dataset_id = 'landing_zone'
-	table_id = 'test_list'
+	table_id = 'test_list_order_v2'
 	dataset_ref = client.dataset(dataset_id)
 	table_ref = dataset_ref.table(table_id)
 	job_config = bigquery.LoadJobConfig()
@@ -43,7 +55,7 @@ def cargando_bigquery():
 	print("finalizado")
 
 for x in range(1):
-	get_order_list()
+	get_order_list(pages,total)
 
 '''
 QUERY = (
