@@ -34,7 +34,7 @@ def get_order_list(pages,total):
 
 def cargando_bigquery():
 	print("Cargando a BigQuery")
-	#system("cat list.json | jq -c '.[]' > list_table.json")
+	system("cat list.json | jq -c '.[]' > list_table.json")
 	client = bigquery.Client()
 	filename = '/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/list.json'
 	dataset_id = 'landing_zone'
