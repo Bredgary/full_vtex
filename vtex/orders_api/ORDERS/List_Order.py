@@ -28,7 +28,7 @@ def get_order_list(fromD,toD,page):
 			text_file.write(result)
 			text_file.close() 
 			print("Pagina: "+str(page))
-			print("Dia: "+str(fromD)+" Al:"+str(toD))
+			print("Desde: "+str(fromD)+" Hasta: "+str(toD))
 			cargando_bigquery()
 			page +=1
 		except:
