@@ -22,8 +22,8 @@ def get_order_list(fromD,toD,page):
 			response = requests.request("GET", url, headers=headers, params=querystring)
 			FJson = json.loads(response.text)
 			res = FJson['list']
-			if not res:
-				break
+			if res:
+				print("Hola")
 			result = json.dumps(res)
 			text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/list.json", "w")
 			text_file.write(result)
@@ -39,7 +39,7 @@ def cargando_bigquery():
 	client = bigquery.Client()
 	filename = '/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/list_table.json'
 	dataset_id = 'landing_zone'
-	table_id = 'shopstar_vtex_list_order_v2'
+	table_id = 'shopstar_vtex_list_order_v3'
 	dataset_ref = client.dataset(dataset_id)
 	table_ref = dataset_ref.table(table_id)
 	job_config = bigquery.LoadJobConfig()
