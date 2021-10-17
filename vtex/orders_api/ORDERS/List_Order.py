@@ -20,16 +20,16 @@ def get_order_list(fromD,toD,page):
 		headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 		response = requests.request("GET", url, headers=headers, params=querystring)
 		FJson = json.loads(response.text)
+		res = FJson['list']
 		print(fromD)
 		print(toD)
 		print(page)
-		if not bool(FJson['list']):
+		if not res:
 			break
 		result = json.dumps(FJson['list'])
 		text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/list.json", "w")
 		text_file.write(result)
 		text_file.close() 
-		print(result)
 		#cargando_bigquery()
 		page += 1
 
