@@ -33,7 +33,7 @@ def cargando_bigquery():
 	print("Cargando a BigQuery")
 	system("cat list.json | jq -c '.[]' > list_table.json")
 	client = bigquery.Client()
-	filename = '/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/list.json'
+	filename = '/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/list_table.json'
 	dataset_id = 'landing_zone'
 	table_id = 'shopstar_vtex_list_order_v2'
 	dataset_ref = client.dataset(dataset_id)
