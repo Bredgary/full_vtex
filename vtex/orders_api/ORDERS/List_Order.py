@@ -32,6 +32,7 @@ def get_order_list(fromD,toD,page):
 			page += 1
 		except:
 			print("Lista Vacia")
+			print("From: "+str(fromD)+" To:"+str(toD))
 
 def cargando_bigquery():
 	print("Cargando a BigQuery")
