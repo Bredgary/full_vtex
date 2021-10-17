@@ -25,7 +25,7 @@ def get_order_list(fromD,toD,page):
 		result = json.dumps(FJson['list'])
 		text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/list.json", "w")
 		text_file.write(result)
-		text_file.close()
+		text_file.close() 
 		print(result)
 		#cargando_bigquery()
 		page += 1
