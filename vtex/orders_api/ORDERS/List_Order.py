@@ -22,7 +22,7 @@ start = 1
 
 def get_order_list(pages,total):
 	url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders"
-	querystring = {"page":""+str(pages)+"","pageSize":""+str(total)+"","orderByAsc":"true"}
+	querystring = {"page":"30","pageSize":""+str(total)+"","orderByAsc":"true"}
 	headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 	response = requests.request("GET", url, headers=headers, params=querystring)
 	FJson = json.loads(response.text)
