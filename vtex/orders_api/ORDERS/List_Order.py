@@ -15,7 +15,6 @@ page = 1
 
 def get_order_list(fromD,toD,page):
 	for x in range(30):
-		#try:
 		url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders?page="+str(page)+""
 		querystring = {"f_creationDate":"creationDate:[2020-01-"+str(fromD)+"T02:00:00.000Z TO 2020-01-"+str(toD)+"T01:59:59.999Z]","f_hasInputInvoice":"false"}
 		headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
@@ -31,15 +30,12 @@ def get_order_list(fromD,toD,page):
 		print("Pagina: "+str(page))
 		cargando_bigquery()
 		page += 1
-		#print(page)
-		#except:
-		#	print("Terminado")
 
 def cargando_bigquery():
 	print("Cargando a BigQuery")
-	#system("cat list.json | jq -c '.[]' > list_table.json")
+	system("cat list.json | jq -c '.[]' > list_table.json")
 	client = bigquery.Client()
-	filename = '/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/list.json'
+	filename = '/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/list_table.json'
 	dataset_id = 'landing_zone'
 	table_id = 'shopstar_vtex_list_order_v1'
 	dataset_ref = client.dataset(dataset_id)
