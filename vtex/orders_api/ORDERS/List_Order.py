@@ -83,9 +83,8 @@ def cargando_bigquery():
     ],
     source_format=bigquery.SourceFormat.NEWLINE_DELIMITED_JSON,
 	)
-	load_job.result() 
 	with open(filename, "rb") as source_file:
-		job = client.load_table_from_file(
+		load_job = client.load_table_from_file(
 			source_file,
 			table_id,
 			location="southamerica-east1",  # Must match the destination dataset location.
