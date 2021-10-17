@@ -27,7 +27,7 @@ def get_order_list(pages,total):
 	response = requests.request("GET", url, headers=headers, params=querystring)
 	FJson = json.loads(response.text)
 	result = json.dumps(FJson["list"])
-	text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/COLLECTION_BETA/items.json", "w")
+	text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/list.json", "w")
 	text_file.write(result)
 	text_file.close()
 	cargando_bigquery()
