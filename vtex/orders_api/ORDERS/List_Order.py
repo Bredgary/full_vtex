@@ -83,6 +83,7 @@ def cargando_bigquery():
     ],
     source_format=bigquery.SourceFormat.NEWLINE_DELIMITED_JSON,
 	)
+	job_config.autodetect = True
 	with open(filename, "rb") as source_file:
 		load_job = client.load_table_from_file(
 			source_file,
