@@ -30,6 +30,7 @@ def get_order_list(fromD,toD,page):
 			print("Pagina: "+str(page))
 			print("Dia: "+str(fromD)+" Al:"+str(toD))
 			cargando_bigquery()
+			page +=1
 		except:
 			print("Lista Vacia")
 			print("From: "+str(fromD)+" To:"+str(toD))
@@ -60,5 +61,4 @@ for x in range(31):
 	get_order_list(fromD,toD,page)
 	fromD += 1
 	toD += 1
-	page +=1
 
