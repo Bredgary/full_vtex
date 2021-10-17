@@ -28,10 +28,10 @@ def get_order_list(fromD,toD,page):
 		text_file = open("/home/bred_valenzuela/full_vtex/vtex/orders_api/ORDERS/list.json", "w")
 		text_file.write(result)
 		text_file.close() 
-		print(result)
+		print("Pagina: "+str(page))
 		cargando_bigquery()
 		page += 1
-		print(page)
+		#print(page)
 		#except:
 		#	print("Terminado")
 
