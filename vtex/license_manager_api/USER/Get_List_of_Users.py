@@ -16,22 +16,19 @@ Json = json.loads(response.text)
 paging = Json["paging"]
 total = int(paging["total"])
 pages = int(paging["pages"])
-start = 1
-page = 0
+start = 0
 
-def get_user(start,headers,page):
-	for x in range(total):
-		url = "https://mercury.vtexcommercestable.com.br/api/license-manager/site/pvt/logins/list/paged"
-		querystring = {"numItems":""+str(page)+"","pageNumber":""+str(start)+"","sort":"name","sortType":"ASC"}
-		response = requests.request("GET", url, headers=headers, params=querystring)
-		FJson = json.loads(response.text)
-		result = json.dumps(FJson["items"])
-		text_file = open("/home/bred_valenzuela/full_vtex/vtex/license_manager_api/USER/items.json", "w")
-		text_file.write(result)
-		text_file.close()
-		print("Pagina: "+str(page))
-		cargando_bigquery()
-		start += 1
+def get_user(start,headers,total):
+	url = "https://mercury.vtexcommercestable.com.br/api/license-manager/site/pvt/logins/list/paged"
+	querystring = {"numItems":""+str(total)+"","pageNumber":""+str(start)+"","sort":"name","sortType":"ASC"}
+	response = requests.request("GET", url, headers=headers, params=querystring)
+	FJson = json.loads(response.text)
+	result = json.dumps(FJson["items"])
+	text_file = open("/home/bred_valenzuela/full_vtex/vtex/license_manager_api/USER/items.json", "w")
+	text_file.write(result)
+	text_file.close()
+	print("Pagina: "+str(start))
+	cargando_bigquery()
 
 
 def cargando_bigquery():
@@ -61,8 +58,7 @@ def cargando_bigquery():
 
 for x in range(pages):
 	start += 1
-	page += 1
-	get_user(start,headers,page)
+	get_user(start,headers,total)
 
 '''
 QUERY = (
