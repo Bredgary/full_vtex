@@ -10,30 +10,19 @@ from collections import defaultdict
 
 productList =[]
 client = bigquery.Client()
+listaIDS = []
+count = 0
 
-'''
-url = "https://mercury.vtexcommercestable.com.br/api/license-manager/site/pvt/logins/list/paged"
-querystring = {"numItems":"10","pageNumber":"1","sort":"name","sortType":"ASC"}
-headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-response = requests.request("GET", url, headers=headers, params=querystring)
-Json = json.loads(response.text)
-paging = Json["paging"]
-total = int(paging["total"])
-pages = int(paging["pages"])
-listItem = []
-start = 0
-
-def get_user(page,headers,total):
+def get_user(id):
 	try:
-		url = "https://mercury.vtexcommercestable.com.br/api/license-manager/site/pvt/logins/list/paged"
-		querystring = {"numItems":""+str(page)+"","pageNumber":""+str(total)+"","sort":"name","sortType":"ASC"}
-		response = requests.request("GET", url, headers=headers, params=querystring)
+		url = "https://mercury.vtexcommercestable.com.br/api/license-manager/users/"+str(id)+""
+		headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
+		response = requests.request("GET", url, headers=headers)
 		FJson = json.loads(response.text)
-		result = json.dumps(FJson["items"])
-		text_file = open("/home/bred_valenzuela/full_vtex/vtex/license_manager_api/USER/items.json", "w")
+		result = json.dumps(FJson)
+		text_file = open("/home/bred_valenzuela/full_vtex/vtex/license_manager_api/USER/user_items.json", "w")
 		text_file.write(result)
 		text_file.close()
-		print("Pagina: "+str(page))
 		cargando_bigquery()
 	except:
 		print("Error")
@@ -41,8 +30,8 @@ def get_user(page,headers,total):
 def cargando_bigquery():
 	try:
 		print("Cargando a BigQuery")
-		system("cat items.json | jq -c '.[]' > table_user.json")
-		filename = '/home/bred_valenzuela/full_vtex/vtex/license_manager_api/USER/table_user.json'
+		#system("cat items.json | jq -c '.[]' > table_user.json")
+		filename = '/home/bred_valenzuela/full_vtex/vtex/license_manager_api/USER/user_items.json'
 		dataset_id = 'landing_zone'
 		table_id = 'shopstar_vtex_user_detail'
 		dataset_ref = client.dataset(dataset_id)
@@ -62,9 +51,16 @@ def cargando_bigquery():
 	except:
 		print("Error")
 
-for x in range(pages):
-	start += 1
-	get_user(start,headers,total)
+def operacion_fenix():
+	f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/license_manager_api/USER/user_id.json','r')
+	data_from_string = f_01.read()
+	data_from_string = data_from_string.replace('"', '')
+	listaIDS = json.loads(data_from_string)
+	for i in listaIDS:
+		get_user(i)
+	print(str(count)+" registro almacenado.")
+
+operacion_fenix()
 
 '''
 QUERY = (
@@ -79,3 +75,4 @@ string = json.dumps(productList)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/license_manager_api/USER/user_id.json", "w")
 text_file.write(string)
 text_file.close()
+'''
