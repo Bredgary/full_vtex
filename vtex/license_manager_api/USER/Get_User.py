@@ -8,6 +8,10 @@ from google.cloud import bigquery
 from itertools import chain
 from collections import defaultdict
 
+productList =[]
+client = bigquery.Client()
+
+'''
 url = "https://mercury.vtexcommercestable.com.br/api/license-manager/site/pvt/logins/list/paged"
 querystring = {"numItems":"10","pageNumber":"1","sort":"name","sortType":"ASC"}
 headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
@@ -38,10 +42,9 @@ def cargando_bigquery():
 	try:
 		print("Cargando a BigQuery")
 		system("cat items.json | jq -c '.[]' > table_user.json")
-		client = bigquery.Client()
 		filename = '/home/bred_valenzuela/full_vtex/vtex/license_manager_api/USER/table_user.json'
 		dataset_id = 'landing_zone'
-		table_id = 'shopstar_vtex_user'
+		table_id = 'shopstar_vtex_user_detail'
 		dataset_ref = client.dataset(dataset_id)
 		table_ref = dataset_ref.table(table_id)
 		job_config = bigquery.LoadJobConfig()
@@ -65,15 +68,14 @@ for x in range(pages):
 
 '''
 QUERY = (
-    'SELECT FieldId FROM `shopstar-datalake.landing_zone.shopstar_vtex_sku_specification` WHERE FieldId is not null')
+    'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_user`')
 query_job = client.query(QUERY)  
 rows = query_job.result()  
 
 for row in rows:
-    productList.append(row.FieldId)
+    productList.append(row.id)
 
 string = json.dumps(productList)
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SPECIFICATION_FIELD/SPECIFICATION_FIELD_ID_2.json", "w")
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/license_manager_api/USER/user_id.json", "w")
 text_file.write(string)
 text_file.close()
-'''
