@@ -37,9 +37,9 @@ def get_user(start,headers,total):
 def cargando_bigquery():
 	try:
 		print("Cargando a BigQuery")
-		#system("cat items.json | jq -c '.[]' > table_user.json")
+		system("cat items.json | jq -c '.[]' > table_roles.json")
 		client = bigquery.Client()
-		filename = '/home/bred_valenzuela/full_vtex/vtex/license_manager_api/ROLES/items.json'
+		filename = '/home/bred_valenzuela/full_vtex/vtex/license_manager_api/ROLES/table_roles.json'
 		dataset_id = 'landing_zone'
 		table_id = 'shopstar_vtex_list_roles'
 		dataset_ref = client.dataset(dataset_id)
