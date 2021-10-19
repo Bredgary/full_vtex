@@ -54,7 +54,6 @@ def cargando_bigquery():
 def operacion_fenix():
 	f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/license_manager_api/USER/user_id.json','r')
 	data_from_string = f_01.read()
-	data_from_string = data_from_string.replace('"', '')
 	listaIDS = json.loads(data_from_string)
 	for i in listaIDS:
 		get_user(i)
