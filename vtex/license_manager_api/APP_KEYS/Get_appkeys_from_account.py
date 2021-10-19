@@ -15,7 +15,7 @@ def get_appKeys():
 	response = requests.request("GET", url, headers=headers)
 	FJson = json.loads(response.text)
 	result = json.dumps(FJson)
-	text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/APP_KEYS/temp.json", "w")
+	text_file = open("/home/bred_valenzuela/full_vtex/vtex/license_manager_api/APP_KEYS/temp.json", "w")
 	text_file.write(result)
 	text_file.close()
 	cargando_bigquery()
@@ -24,7 +24,7 @@ def cargando_bigquery():
 	print("Cargando a BigQuery")
 	system("cat temp.json | jq -c '.[]' > appKeys.json")
 	client = bigquery.Client()
-	filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/APP_KEYS/appKeys.json'
+	filename = '/home/bred_valenzuela/full_vtex/vtex/license_manager_api/APP_KEYS/appKeys.json'
 	dataset_id = 'landing_zone'
 	table_id = 'shopstar_vtex_appKeys_from_account'
 	dataset_ref = client.dataset(dataset_id)
