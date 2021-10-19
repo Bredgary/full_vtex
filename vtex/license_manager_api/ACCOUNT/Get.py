@@ -24,7 +24,7 @@ def cargando_bigquery():
 	print("Cargando a BigQuery")
 	#system("cat account.json | jq -c '.[]' > table_account.json")
 	client = bigquery.Client()
-	filename = '/home/bred_valenzuela/full_vtex/vtex/license_manager_api/ACCOUNT/table_account.json'
+	filename = '/home/bred_valenzuela/full_vtex/vtex/license_manager_api/ACCOUNT/account.json'
 	dataset_id = 'landing_zone'
 	table_id = 'shopstar_vtex_get_account'
 	dataset_ref = client.dataset(dataset_id)
