@@ -16,7 +16,7 @@ Json = json.loads(response.text)
 paging = Json["paging"]
 total = int(paging["total"])
 pages = int(paging["pages"])
-start = 0
+start = 1
 page = 0
 
 def get_user(start,headers,page):
