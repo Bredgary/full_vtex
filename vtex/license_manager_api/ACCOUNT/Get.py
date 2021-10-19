@@ -22,7 +22,7 @@ def get_appKeys():
 
 def cargando_bigquery():
 	print("Cargando a BigQuery")
-	system("cat account.json | jq -c '.[]' > table_account.json")
+	#system("cat account.json | jq -c '.[]' > table_account.json")
 	client = bigquery.Client()
 	filename = '/home/bred_valenzuela/full_vtex/vtex/license_manager_api/ACCOUNT/table_account.json'
 	dataset_id = 'landing_zone'
