@@ -19,10 +19,10 @@ pages = int(paging["pages"])
 listItem = []
 start = 0
 
-def get_user(page,headers,total):
-	#try:
+def get_user(start,headers,total):
+	for x in range(total):
 		url = "https://mercury.vtexcommercestable.com.br/api/license-manager/site/pvt/logins/list/paged"
-		querystring = {"numItems":""+str(page)+"","pageNumber":""+str(total)+"","sort":"name","sortType":"ASC"}
+		querystring = {"numItems":""+str(page)+"","pageNumber":""+str(start)+"","sort":"name","sortType":"ASC"}
 		response = requests.request("GET", url, headers=headers, params=querystring)
 		FJson = json.loads(response.text)
 		result = json.dumps(FJson["items"])
@@ -31,8 +31,7 @@ def get_user(page,headers,total):
 		text_file.close()
 		print("Pagina: "+str(page))
 		cargando_bigquery()
-	#except:
-	#	print("Error")
+		start += 1
 
 def cargando_bigquery():
 	#try:
