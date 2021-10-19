@@ -20,7 +20,7 @@ listItem = []
 start = 0
 
 def get_user(page,headers,total):
-	try:
+	#try:
 		url = "https://mercury.vtexcommercestable.com.br/api/license-manager/site/pvt/logins/list/paged"
 		querystring = {"numItems":""+str(page)+"","pageNumber":""+str(total)+"","sort":"name","sortType":"ASC"}
 		response = requests.request("GET", url, headers=headers, params=querystring)
@@ -31,8 +31,8 @@ def get_user(page,headers,total):
 		text_file.close()
 		print("Pagina: "+str(page))
 		cargando_bigquery()
-	except:
-		print("Error")
+	#except:
+	#	print("Error")
 
 def cargando_bigquery():
 	#try:
