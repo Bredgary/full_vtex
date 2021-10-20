@@ -21,7 +21,7 @@ start = 0
 def get_user(start,headers,total):
 	try:
 		url = "https://mercury.vtexcommercestable.com.br/api/logistics/pvt/shipping-policies"
-		querystring = {"total":""+str(total)+"","pages":""+str(start)+""}
+		querystring = {"page":""+str(start)+"","total":""+str(total)+""}
 		response = requests.request("GET", url, headers=headers, params=querystring)
 		FJson = json.loads(response.text)
 		result = json.dumps(FJson["items"])
