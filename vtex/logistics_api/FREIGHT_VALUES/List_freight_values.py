@@ -8,7 +8,6 @@ from google.cloud import bigquery
 from itertools import chain
 from collections import defaultdict
 
-
 url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/collection/search"
 querystring = {"page":"1","pageSize":"100","orderByAsc":"true"}
 headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
