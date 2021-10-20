@@ -25,25 +25,27 @@ def get_retrieve(id,count):
 	cargando_bigquery()
 
 def cargando_bigquery():
-	print("Cargando a BigQuery")
-	system("cat items.json | jq -c '.[]' > tableRetrieve.json")
-	filename = '/home/bred_valenzuela/full_vtex/vtex/logistics_api/SHIPPING_POLICIES/items.json'
-	dataset_id = 'landing_zone'
-	table_id = 'shopstar_vtex_retrieve_shipping'
-	dataset_ref = client.dataset(dataset_id)
-	table_ref = dataset_ref.table(table_id)
-	job_config = bigquery.LoadJobConfig()
-	job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-	#job_config.autodetect = True
-	with open(filename, "rb") as source_file:
-		job = client.load_table_from_file(
-			source_file,
-			table_ref,
-			location="southamerica-east1",  # Must match the destination dataset location.
-		job_config=job_config,)  # API request
-	job.result()  # Waits for table load to complete.
-	print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
-	print("finalizado")
+	try:
+		print("Cargando a BigQuery")
+		filename = '/home/bred_valenzuela/full_vtex/vtex/logistics_api/SHIPPING_POLICIES/items.json'
+		dataset_id = 'landing_zone'
+		table_id = 'shopstar_vtex_retrieve_shipping'
+		dataset_ref = client.dataset(dataset_id)
+		table_ref = dataset_ref.table(table_id)
+		job_config = bigquery.LoadJobConfig()
+		job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+		job_config.autodetect = True
+		with open(filename, "rb") as source_file:
+			job = client.load_table_from_file(
+				source_file,
+				table_ref,
+				location="southamerica-east1",  # Must match the destination dataset location.
+			job_config=job_config,)  # API request
+		job.result()  # Waits for table load to complete.
+		print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
+		print("finalizado")
+	except:
+		print("Vacio")
 
 def operacion_fenix(count):
 	f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/logistics_api/SHIPPING_POLICIES/shipping_id.json','r')
