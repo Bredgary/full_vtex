@@ -10,7 +10,7 @@ from collections import defaultdict
 
 
 def get_user():
-	try:
+	#try:
 		url = "https://mercury.vtexcommercestable.com.br/api/logistics/pvt/shipping-policies"
 		querystring = {"page":"37","perPage":"1","total":"39","pages":"39"}
 		headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
@@ -21,8 +21,8 @@ def get_user():
 		text_file.write(result)
 		text_file.close()
 		cargando_bigquery()
-	except:
-		print("Error")
+	#except:
+	#	print("Error")
 
 def cargando_bigquery():
 	#try:
