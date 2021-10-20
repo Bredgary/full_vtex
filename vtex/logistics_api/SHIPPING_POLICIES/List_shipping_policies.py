@@ -24,7 +24,7 @@ def get_user(start,headers,total):
 		querystring = {"total":""+str(total)+"","pages":""+str(start)+""}
 		response = requests.request("GET", url, headers=headers, params=querystring)
 		FJson = json.loads(response.text)
-		result = json.dumps(FJson)
+		result = json.dumps(FJson["items"])
 		text_file = open("/home/bred_valenzuela/full_vtex/vtex/logistics_api/SHIPPING_POLICIES/temp.json", "w")
 		text_file.write(result)
 		text_file.close()
