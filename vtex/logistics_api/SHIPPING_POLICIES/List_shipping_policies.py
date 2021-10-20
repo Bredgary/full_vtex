@@ -20,7 +20,6 @@ def get_user():
 		text_file = open("/home/bred_valenzuela/full_vtex/vtex/logistics_api/SHIPPING_POLICIES/temp.json", "w")
 		text_file.write(result)
 		text_file.close()
-		print("Pagina: "+str(page))
 		cargando_bigquery()
 	except:
 		print("Error")
