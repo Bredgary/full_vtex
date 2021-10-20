@@ -9,19 +9,20 @@ from itertools import chain
 from collections import defaultdict
 
 url = "https://mercury.vtexcommercestable.com.br/api/logistics/pvt/shipping-policies"
-querystring = {"page":"1","perPage":"1","total":"39","pages":"1"}
+querystring = {"page":"1","perPage":"1","total":"1","pages":"1"}
 headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 response = requests.request("GET", url, headers=headers, params=querystring)
 Json = json.loads(response.text)
 paging = Json["paging"]
+page = int(paging["page"])
+perPage = int(paging["perPage"])
 total = int(paging["total"])
 pages = int(paging["pages"])
-start = 0
 
 def get_user(start,headers,total):
 	try:
 		url = "https://mercury.vtexcommercestable.com.br/api/logistics/pvt/shipping-policies"
-		querystring = {"page":""+str(start)+"","total":""+str(total)+""}
+		querystring = {"page":""+str(page)+"","perPage":""+str(perPage)+"","total":""+str(total)+"","pages":""+str(pages)+""}
 		response = requests.request("GET", url, headers=headers, params=querystring)
 		FJson = json.loads(response.text)
 		result = json.dumps(FJson["items"])
@@ -32,7 +33,6 @@ def get_user(start,headers,total):
 		cargando_bigquery()
 	except:
 		print("Error")
-
 
 def cargando_bigquery():
 	try:
@@ -60,5 +60,4 @@ def cargando_bigquery():
 		print("Error")
 
 for x in range(pages):
-	start += 1
 	get_user(start,headers,total)
