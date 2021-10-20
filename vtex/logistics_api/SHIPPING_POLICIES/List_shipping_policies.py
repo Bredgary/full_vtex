@@ -19,7 +19,7 @@ perPage = int(paging["perPage"])
 total = int(paging["total"])
 pages = int(paging["pages"])
 
-def get_user(start,headers,total):
+def get_user(pages,headers,total,perPage,page):
 	try:
 		url = "https://mercury.vtexcommercestable.com.br/api/logistics/pvt/shipping-policies"
 		querystring = {"page":""+str(page)+"","perPage":""+str(perPage)+"","total":""+str(total)+"","pages":""+str(pages)+""}
@@ -60,4 +60,4 @@ def cargando_bigquery():
 		print("Error")
 
 for x in range(pages):
-	get_user(start,headers,total)
+	get_user(pages,headers,total,perPage,page)
