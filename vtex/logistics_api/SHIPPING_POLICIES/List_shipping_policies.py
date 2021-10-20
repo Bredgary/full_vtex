@@ -12,7 +12,7 @@ from collections import defaultdict
 def get_user():
 	#try:
 		url = "https://mercury.vtexcommercestable.com.br/api/logistics/pvt/shipping-policies"
-		querystring = {"page":"1","perPage":"1","total":"39","pages":"39"}
+		querystring = {"page":"2","perPage":"1","total":"39","pages":"39"}
 		headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 		response = requests.request("GET", url, headers=headers, params=querystring)
 		FJson = json.loads(response.text)
@@ -36,7 +36,7 @@ def cargando_bigquery():
 	table_ref = dataset_ref.table(table_id)
 	job_config = bigquery.LoadJobConfig()
 	job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-	job_config.autodetect = True
+	#job_config.autodetect = True
 	with open(filename, "rb") as source_file:
 		job = client.load_table_from_file(
 			source_file,
