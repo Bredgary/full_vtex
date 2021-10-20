@@ -44,8 +44,6 @@ def cargando_bigquery():
 	job.result()  # Waits for table load to complete.
 	print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 	print("finalizado")
-	system("rm items.json")
-	system("rm tableCollectionBeta.json")
 
 def operacion_fenix(count):
 	f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/logistics_api/SHIPPING_POLICIES/shipping_id.json','r')
