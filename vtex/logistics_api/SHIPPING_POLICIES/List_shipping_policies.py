@@ -19,7 +19,7 @@ pages = int(paging["pages"])
 perPage = int(paging["perPage"])
 page = 0
 
-def get_user(page):
+def get_list_shipping(page):
 	try:
 		url = "https://mercury.vtexcommercestable.com.br/api/logistics/pvt/shipping-policies"
 		querystring = {"page":""+str(page)+"","perPage":"2"}
