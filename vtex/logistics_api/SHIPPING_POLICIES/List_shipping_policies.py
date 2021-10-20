@@ -20,19 +20,19 @@ total = int(paging["total"])
 pages = int(paging["pages"])
 
 def get_user(pages,headers,total,perPage,page):
-	try:
-		url = "https://mercury.vtexcommercestable.com.br/api/logistics/pvt/shipping-policies"
-		querystring = {"page":""+str(page)+"","perPage":""+str(perPage)+"","total":""+str(total)+"","pages":""+str(pages)+""}
-		response = requests.request("GET", url, headers=headers, params=querystring)
-		FJson = json.loads(response.text)
-		result = json.dumps(FJson["items"])
-		text_file = open("/home/bred_valenzuela/full_vtex/vtex/logistics_api/SHIPPING_POLICIES/temp.json", "w")
-		text_file.write(result)
-		text_file.close()
-		print("Pagina: "+str(start))
-		cargando_bigquery()
-	except:
-		print("Error")
+	#try:
+	url = "https://mercury.vtexcommercestable.com.br/api/logistics/pvt/shipping-policies"
+	querystring = {"page":""+str(page)+"","perPage":""+str(perPage)+"","total":""+str(total)+"","pages":""+str(pages)+""}
+	response = requests.request("GET", url, headers=headers, params=querystring)
+	FJson = json.loads(response.text)
+	result = json.dumps(FJson["items"])
+	text_file = open("/home/bred_valenzuela/full_vtex/vtex/logistics_api/SHIPPING_POLICIES/temp.json", "w")
+	text_file.write(result)
+	text_file.close()
+	print("Pagina: "+str(start))
+	cargando_bigquery()
+	#except:
+	#	print("Error")
 
 def cargando_bigquery():
 	try:
