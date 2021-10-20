@@ -27,7 +27,7 @@ def get_retrieve(id,count):
 def cargando_bigquery():
 	print("Cargando a BigQuery")
 	system("cat items.json | jq -c '.[]' > tableRetrieve.json")
-	filename = '/home/bred_valenzuela/full_vtex/vtex/logistics_api/SHIPPING_POLICIES/tableRetrieve.json'
+	filename = '/home/bred_valenzuela/full_vtex/vtex/logistics_api/SHIPPING_POLICIES/items.json'
 	dataset_id = 'landing_zone'
 	table_id = 'shopstar_vtex_retrieve_shipping'
 	dataset_ref = client.dataset(dataset_id)
