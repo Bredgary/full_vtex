@@ -18,7 +18,7 @@ def get_order_list(fromD,toD,page):
 	for x in range(30):
 		try:
 			url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders?page="+str(page)+""
-			querystring = {"f_creationDate":"creationDate:[2021-07-"+str(fromD)+"T02:00:00.000Z TO 2021-07-"+str(toD)+"T01:59:59.999Z]","f_hasInputInvoice":"false"}
+			querystring = {"f_creationDate":"creationDate:[2021-08-"+str(fromD)+"T02:00:00.000Z TO 2021-08-"+str(toD)+"T01:59:59.999Z]","f_hasInputInvoice":"false"}
 			headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 			response = requests.request("GET", url, headers=headers, params=querystring)
 			FJson = json.loads(response.text)
