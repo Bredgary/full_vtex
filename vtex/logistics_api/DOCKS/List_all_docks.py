@@ -17,7 +17,7 @@ def get_list_docks():
 	FJson = json.loads(response.text)
 	for x in FJson:
 		result.append(x)
-	result2 = json.loads(result)
+	result2 = json.loads(str(result))
 	result2 = json.dumps(result2)
 	text_file = open("/home/bred_valenzuela/full_vtex/vtex/logistics_api/DOCKS/temp.json", "w")
 	text_file.write(result2)
