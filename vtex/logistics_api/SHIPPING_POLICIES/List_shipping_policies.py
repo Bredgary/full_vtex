@@ -27,7 +27,7 @@ def get_list_shipping():
 def cargando_bigquery():
 	try:
 		print("Cargando a BigQuery")
-		system("cat temp.json | jq -c '.[]' > table_shipping_policies.json")
+		#system("cat temp.json | jq -c '.[]' > table_shipping_policies.json")
 		client = bigquery.Client()
 		filename = '/home/bred_valenzuela/full_vtex/vtex/logistics_api/SHIPPING_POLICIES/table_shipping_policies.json'
 		dataset_id = 'landing_zone'
