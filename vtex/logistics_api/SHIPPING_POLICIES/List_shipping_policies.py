@@ -8,21 +8,11 @@ from google.cloud import bigquery
 from itertools import chain
 from collections import defaultdict
 
-url = "https://mercury.vtexcommercestable.com.br/api/logistics/pvt/shipping-policies"
-querystring = {"page":"1","perPage":"2"}
-headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-response = requests.request("GET", url, headers=headers, params=querystring)
-Json = json.loads(response.text)
-paging = Json["paging"]
-total = int(paging["total"])
-pages = int(paging["pages"])
-perPage = int(paging["perPage"])
-page = 0
 
-def get_list_shipping(page):
+def get_list_shipping():
 	try:
 		url = "https://mercury.vtexcommercestable.com.br/api/logistics/pvt/shipping-policies"
-		querystring = {"page":""+str(page)+"","perPage":"2"}
+		querystring = {"page":"1","perPage":"39"}
 		headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 		response = requests.request("GET", url, headers=headers, params=querystring)
 		FJson = json.loads(response.text)
@@ -59,6 +49,5 @@ def cargando_bigquery():
 	except:
 		print("Error")
 
-for x in range(pages):
-	page += 1
-	get_user(page)
+for x in range(1):
+	get_list_shipping()

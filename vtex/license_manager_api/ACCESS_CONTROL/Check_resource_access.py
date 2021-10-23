@@ -8,15 +8,13 @@ from google.cloud import bigquery
 from itertools import chain
 from collections import defaultdict
 
-
-
-def get_collection_beta(page,headers,total):
+def access_control():
 	url = "https://mercury.vtexcommercestable.com.br/api/vlm/account"
 	headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 	response = requests.request("GET", url, headers=headers)
 	FJson = json.loads(response.text)
 	result = json.dumps(FJson)
-	text_file = open("/home/bred_valenzuela/full_vtex/vtex/license_manager_api/APP_KEYS/temp.json", "w")
+	text_file = open("/home/bred_valenzuela/full_vtex/vtex/license_manager_api/ACCESS_CONTROL/temp.json", "w")
 	text_file.write(result)
 	text_file.close()
 	cargando_bigquery()
@@ -24,11 +22,11 @@ def get_collection_beta(page,headers,total):
 
 def cargando_bigquery():
 	print("Cargando a BigQuery")
-	system("cat items.json | jq -c '.[]' > tableCollectionBeta.json")
+	system("cat temp.json | jq -c '.[]' > tableControl.json")
 	client = bigquery.Client()
-	filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/COLLECTION_BETA/tableCollectionBeta.json'
+	filename = '/home/bred_valenzuela/full_vtex/vtex/license_manager_api/ACCESS_CONTROL/tableControl.json'
 	dataset_id = 'landing_zone'
-	table_id = 'shopstar_vtex_collection_beta'
+	table_id = 'shopstar_vtex_check_resource_access'
 	dataset_ref = client.dataset(dataset_id)
 	table_ref = dataset_ref.table(table_id)
 	job_config = bigquery.LoadJobConfig()
@@ -43,24 +41,7 @@ def cargando_bigquery():
 	job.result()  # Waits for table load to complete.
 	print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 	print("finalizado")
-	system("rm items.json")
-	system("rm tableCollectionBeta.json")
 
-for x in range(pages):
-	start += 1
-	get_collection_beta(start,headers,total)
+for x in range(1):
+	access_control()
 
-'''
-QUERY = (
-    'SELECT FieldId FROM `shopstar-datalake.landing_zone.shopstar_vtex_sku_specification` WHERE FieldId is not null')
-query_job = client.query(QUERY)  
-rows = query_job.result()  
-
-for row in rows:
-    productList.append(row.FieldId)
-
-string = json.dumps(productList)
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SPECIFICATION_FIELD/SPECIFICATION_FIELD_ID_2.json", "w")
-text_file.write(string)
-text_file.close()
-'''
