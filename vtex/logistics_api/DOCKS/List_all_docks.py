@@ -8,16 +8,16 @@ from google.cloud import bigquery
 from itertools import chain
 from collections import defaultdict
 
-result = []
 
 def get_list_docks():
 	url = "https://mercury.vtexcommercestable.com.br/api/logistics/pvt/configuration/docks"
-	querystring = {"total":"1"}
+	querystring = {"page":"1","perPage":"1"}
 	headers = {"Accept": "application/json; charset=utf-8","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 	response = requests.request("GET", url, headers=headers, params=querystring)
 	FJson = json.loads(response.text)
+	result = json.dumps(FJson["items"])
 	text_file = open("/home/bred_valenzuela/full_vtex/vtex/logistics_api/DOCKS/temp.json", "w")
-	text_file.write(str(result))
+	text_file.write(result)
 	text_file.close()
 	#cargando_bigquery()
 
