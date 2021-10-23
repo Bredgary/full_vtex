@@ -11,16 +11,14 @@ from collections import defaultdict
 result = []
 
 def get_list_docks():
-	url = "https://mercury.vtexcommercestable.com.br/api/logistics/pvt/configuration/docks"
 	headers = {"Accept": "application/json; charset=utf-8","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-	response = requests.request("GET", url, headers=headers)
+	url = "https://mercury.vtexcommercestable.com.br/api/logistics/pvt/configuration/docks"
+	querystring = {"total":"1"}
+	response = requests.request("GET", url, headers=headers, params=querystring)
 	FJson = json.loads(response.text)
-	for x in FJson:
-		temp = json.loads(str(x))
-		result.append(temp)
-	#text_file = open("/home/bred_valenzuela/full_vtex/vtex/logistics_api/DOCKS/temp.json", "w")
-	#text_file.write(str(result))
-	#text_file.close()
+	text_file = open("/home/bred_valenzuela/full_vtex/vtex/logistics_api/DOCKS/temp.json", "w")
+	text_file.write(str(result))
+	text_file.close()
 	#cargando_bigquery()
 
 def cargando_bigquery():
