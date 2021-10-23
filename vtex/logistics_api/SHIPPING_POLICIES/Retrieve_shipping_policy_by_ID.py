@@ -22,9 +22,9 @@ def get_retrieve(id,count):
 	text_file = open("/home/bred_valenzuela/full_vtex/vtex/logistics_api/SHIPPING_POLICIES/items.json", "w")
 	text_file.write(result)
 	text_file.close()
-	cargando_bigquery()
+	cargando_bigquery(id)
 
-def cargando_bigquery():
+def cargando_bigquery(id):
 	try:
 		print("Cargando a BigQuery")
 		filename = '/home/bred_valenzuela/full_vtex/vtex/logistics_api/SHIPPING_POLICIES/items.json'
@@ -45,7 +45,7 @@ def cargando_bigquery():
 		print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 		print("finalizado")
 	except:
-		print("Vacio")
+		print("Vacio"+str(id))
 
 def operacion_fenix(count):
 	f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/logistics_api/SHIPPING_POLICIES/shipping_id.json','r')
