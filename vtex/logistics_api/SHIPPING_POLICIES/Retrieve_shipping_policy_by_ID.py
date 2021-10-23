@@ -12,7 +12,7 @@ from collections import defaultdict
 client = bigquery.Client()
 productList = []
 count = 0
-
+'''
 def get_retrieve(id,count):
 	url = "https://mercury.vtexcommercestable.com.br/api/logistics/pvt/shipping-policies/"+str(id)+""
 	headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
@@ -71,4 +71,4 @@ string = json.dumps(productList)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/logistics_api/SHIPPING_POLICIES/shipping_id.json", "w")
 text_file.write(string)
 text_file.close()
-'''
+
