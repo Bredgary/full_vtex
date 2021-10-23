@@ -29,7 +29,7 @@ def cargando_bigquery():
 		print("Cargando a BigQuery")
 		#system("cat temp.json | jq -c '.[]' > table_shipping_policies.json")
 		client = bigquery.Client()
-		filename = '/home/bred_valenzuela/full_vtex/vtex/logistics_api/SHIPPING_POLICIES/table_shipping_policies.json'
+		filename = '/home/bred_valenzuela/full_vtex/vtex/logistics_api/SHIPPING_POLICIES/temp.json'
 		dataset_id = 'landing_zone'
 		table_id = 'shopstar_vtex_list_shipping_policies'
 		dataset_ref = client.dataset(dataset_id)
