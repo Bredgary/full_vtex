@@ -10,19 +10,19 @@ from collections import defaultdict
 
 
 def get_list_shipping():
-	try:
-		url = "https://mercury.vtexcommercestable.com.br/api/logistics/pvt/shipping-policies"
-		querystring = {"page":"1","perPage":"39"}
-		headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-		response = requests.request("GET", url, headers=headers, params=querystring)
-		FJson = json.loads(response.text)
-		result = json.dumps(FJson["items"])
-		text_file = open("/home/bred_valenzuela/full_vtex/vtex/logistics_api/SHIPPING_POLICIES/temp.json", "w")
-		text_file.write(result)
-		text_file.close()
-		cargando_bigquery()
-	except:
-		print("Error")
+	#try:
+	url = "https://mercury.vtexcommercestable.com.br/api/logistics/pvt/shipping-policies"
+	querystring = {"page":"1","perPage":"39"}
+	headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
+	response = requests.request("GET", url, headers=headers, params=querystring)
+	FJson = json.loads(response.text)
+	result = json.dumps(FJson["items"])
+	text_file = open("/home/bred_valenzuela/full_vtex/vtex/logistics_api/SHIPPING_POLICIES/temp.json", "w")
+	text_file.write(result)
+	text_file.close()
+	cargando_bigquery()
+	#except:
+	#	print("Error")
 
 def cargando_bigquery():
 	try:
