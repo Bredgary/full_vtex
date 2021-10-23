@@ -17,10 +17,11 @@ def get_list_docks():
 	FJson = json.loads(response.text)
 	for x in FJson:
 		result.append(x)
-	text_file = open("/home/bred_valenzuela/full_vtex/vtex/logistics_api/DOCKS/temp.json", "w")
-	text_file.write(str(result))
-	text_file.close()
-	cargando_bigquery()
+		print(x)
+	#text_file = open("/home/bred_valenzuela/full_vtex/vtex/logistics_api/DOCKS/temp.json", "w")
+	#text_file.write(str(result))
+	#text_file.close()
+	#cargando_bigquery()
 
 def cargando_bigquery():
 	print("Cargando a BigQuery")
