@@ -27,7 +27,8 @@ def get_list_docks(start,headers):
 	text_file = open("/home/bred_valenzuela/full_vtex/vtex/logistics_api/DOCKS/temp.json", "w")
 	text_file.write(result)
 	text_file.close()
-	#cargando_bigquery()
+	print("Registro N° "+str(start))
+	cargando_bigquery()
 
 def cargando_bigquery():
 	print("Cargando a BigQuery")
