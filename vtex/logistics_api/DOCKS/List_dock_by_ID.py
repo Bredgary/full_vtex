@@ -8,6 +8,9 @@ from google.cloud import bigquery
 from itertools import chain
 from collections import defaultdict
 
+client = bigquery.Client()
+productList = []
+'''
 url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/collection/search"
 querystring = {"page":"1","pageSize":"100","orderByAsc":"true"}
 headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
@@ -61,18 +64,18 @@ for x in range(pages):
 
 '''
 QUERY = (
-    'SELECT FieldId FROM `shopstar-datalake.landing_zone.shopstar_vtex_sku_specification` WHERE FieldId is not null')
+    'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_list_docks`')
 query_job = client.query(QUERY)  
 rows = query_job.result()  
 
 for row in rows:
-    productList.append(row.FieldId)
+    productList.append(row.id)
 
 string = json.dumps(productList)
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SPECIFICATION_FIELD/SPECIFICATION_FIELD_ID_2.json", "w")
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/logistics_api/DOCKS/id_dock.json", "w")
 text_file.write(string)
 text_file.close()
-'''
+
 
 
 
