@@ -21,7 +21,8 @@ def list_dock_by_id(id,count):
 	text_file = open("/home/bred_valenzuela/full_vtex/vtex/logistics_api/DOCKS/temp.json", "w")
 	text_file.write(result)
 	text_file.close()
-	cargando_bigquery(count,result)
+	if count == 11:
+		cargando_bigquery(count,result)
 	
 def cargando_bigquery(count,result):
 	try:
