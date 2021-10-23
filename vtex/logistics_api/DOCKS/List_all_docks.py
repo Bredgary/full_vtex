@@ -8,6 +8,7 @@ from google.cloud import bigquery
 from itertools import chain
 from collections import defaultdict
 
+result = []
 
 def get_list_docks():
 	url = "https://mercury.vtexcommercestable.com.br/api/logistics/pvt/configuration/docks"
