@@ -50,6 +50,7 @@ def cargando_bigquery(count,result):
 		text_file = open("/home/bred_valenzuela/full_vtex/vtex/logistics_api/DOCKS/almacenLocal/"+str(count)+"_registro.json", "w")
 		text_file.write(result)
 		text_file.close()
+		continue
 
 
 def operacion_fenix(count):
