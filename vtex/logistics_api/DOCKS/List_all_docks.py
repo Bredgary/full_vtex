@@ -14,9 +14,12 @@ def get_list_docks():
 	headers = {"Accept": "application/json; charset=utf-8","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 	response = requests.request("GET", url, headers=headers)
 	FJson = json.loads(response.text)
-	result = json.dumps(FJson[0])
+	for x in FJson:
+		result.append(x)
+	result2 = json.loads(result)
+	result2 = json.dumps(result2)
 	text_file = open("/home/bred_valenzuela/full_vtex/vtex/logistics_api/DOCKS/temp.json", "w")
-	text_file.write(result)
+	text_file.write(result2)
 	text_file.close()
 	cargando_bigquery()
 
