@@ -8,11 +8,19 @@ from google.cloud import bigquery
 from itertools import chain
 from collections import defaultdict
 
+url = "https://mercury.vtexcommercestable.com.br/api/logistics/pvt/configuration/docks"
+querystring = {"page":"1","perPage":"1"}
+headers = {"Accept": "application/json; charset=utf-8","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
+response = requests.request("GET", url, headers=headers, params=querystring)
+Json = json.loads(response.text)
+paging = Json["paging"]
+total = int(paging["total"])
+pages = int(paging["pages"])
+start = 0
 
-def get_list_docks():
+def get_list_docks(start,headers):
 	url = "https://mercury.vtexcommercestable.com.br/api/logistics/pvt/configuration/docks"
-	querystring = {"page":"1","perPage":"1"}
-	headers = {"Accept": "application/json; charset=utf-8","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
+	querystring = {"page":""+str(start)+"","perPage":"1"}
 	response = requests.request("GET", url, headers=headers, params=querystring)
 	FJson = json.loads(response.text)
 	result = json.dumps(FJson["items"])
@@ -43,8 +51,9 @@ def cargando_bigquery():
 	print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 	print("finalizado")
 
-for x in range(1):
-	get_list_docks()
+for x in range(pages):
+	start += 1
+	get_list_docks(start,headers)
 
 
 
