@@ -45,7 +45,7 @@ def cargando_bigquery(id):
 		print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 		print("finalizado")
 	except:
-		print("Vacio: "+str(id))
+		print("Vacio ID: "+str(id))
 
 def operacion_fenix(count):
 	f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/logistics_api/SHIPPING_POLICIES/shipping_id.json','r')
