@@ -30,10 +30,10 @@ def get_list_warehouses(start,headers):
 	text_file.write(result)
 	text_file.close()
 	print("Registro N° "+str(start))
-	#cargando_bigquery(result)
+	cargando_bigquery(result,start)
 
 
-def cargando_bigquery():
+def cargando_bigquery(result,start):
 	try:
 		print("Cargando a BigQuery")
 		system("cat temp.json | jq -c '.[]' > listWareHouse.json")
@@ -57,7 +57,7 @@ def cargando_bigquery():
 		print("finalizado")
 	except:
 		print("Vacio")
-		text_file = open("/home/bred_valenzuela/full_vtex/vtex/logistics_api/WAREHOUSES/temp.json", "w")
+		text_file = open("/home/bred_valenzuela/full_vtex/vtex/logistics_api/WAREHOUSES/"+str(start)+"temp.json", "w")
 		text_file.write(result)
 		text_file.close()
 
