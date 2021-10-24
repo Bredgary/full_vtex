@@ -15,7 +15,7 @@ def get_list_polygon_by_id():
 	response = requests.request("GET", url, headers=headers)
 	FJson = json.loads(response.text)
 	result = json.dumps(FJson)
-	text_file = open("/home/bred_valenzuela/full_vtex/vtex/logistics_api/POLYGONS/items.json", "w")
+	text_file = open("/home/bred_valenzuela/full_vtex/vtex/logistics_api/POLYGONS/itemsx.json", "w")
 	text_file.write(result)
 	text_file.close()
 	cargando_bigquery()
