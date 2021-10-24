@@ -22,9 +22,9 @@ def get_list_pickup_points():
 
 def cargando_bigquery():
 	print("Cargando a BigQuery")
-	system("cat items.json | jq -c '.[]' > tablePaged.json")
+	#system("cat items.json | jq -c '.[]' > tablePaged.json")
 	client = bigquery.Client()
-	filename = '/home/bred_valenzuela/full_vtex/vtex/logistics_api/POLYGONS/tablePaged.json'
+	filename = '/home/bred_valenzuela/full_vtex/vtex/logistics_api/POLYGONS/items.json'
 	dataset_id = 'landing_zone'
 	table_id = 'shopstar_vtex_list_paged_polygons'
 	dataset_ref = client.dataset(dataset_id)
