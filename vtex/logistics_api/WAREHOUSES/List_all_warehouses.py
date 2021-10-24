@@ -57,7 +57,7 @@ def cargando_bigquery(result,start):
 		print("finalizado")
 	except:
 		print("Vacio")
-		text_file = open("/home/bred_valenzuela/full_vtex/vtex/logistics_api/WAREHOUSES/"+str(start)+"temp.json", "w")
+		text_file = open("/home/bred_valenzuela/full_vtex/vtex/logistics_api/WAREHOUSES/almacenLocal/"+str(start)+"temp.json", "w")
 		text_file.write(result)
 		text_file.close()
 
