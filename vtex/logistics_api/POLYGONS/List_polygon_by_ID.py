@@ -43,4 +43,4 @@ def cargando_bigquery():
 	print("finalizado")
 
 for x in range(1):
-	get_list_pickup_points()
+	get_list_polygon_by_id()
