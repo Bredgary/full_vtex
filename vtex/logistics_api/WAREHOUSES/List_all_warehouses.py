@@ -61,6 +61,7 @@ def cargando_bigquery():
 		text_file.write(result)
 		text_file.close()
 
+
 for x in range(pages):
 	start += 1
 	get_list_warehouses(start,headers)
