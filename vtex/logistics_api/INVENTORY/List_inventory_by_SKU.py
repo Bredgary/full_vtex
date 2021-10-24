@@ -36,7 +36,7 @@ def cargando_bigquery(result,count):
 		table_ref = dataset_ref.table(table_id)
 		job_config = bigquery.LoadJobConfig()
 		job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-		job_config.autodetect = True
+		#job_config.autodetect = True
 		with open(filename, "rb") as source_file:
 			job = client.load_table_from_file(
 				source_file,
@@ -57,6 +57,7 @@ def operacion_fenix(count):
 	data_from_string = f_01.read()
 	listaIDS = json.loads(data_from_string)
 	for i in listaIDS:
+		count +=1
 		list_inventory_by_sku(i,count)
 
 operacion_fenix(count)
