@@ -22,9 +22,9 @@ def get_list_polygon_by_id():
 
 def cargando_bigquery():
 	print("Cargando a BigQuery")
-	#system("cat items.json | jq -c '.[]' > tablePaged.json")
+	system("cat items.json | jq -c '.[]' > POLYGONS.json")
 	client = bigquery.Client()
-	filename = '/home/bred_valenzuela/full_vtex/vtex/logistics_api/POLYGONS/items.json'
+	filename = '/home/bred_valenzuela/full_vtex/vtex/logistics_api/POLYGONS/POLYGONS.json'
 	dataset_id = 'landing_zone'
 	table_id = 'shopstar_vtex_list_polygon_by_id'
 	dataset_ref = client.dataset(dataset_id)
