@@ -22,7 +22,8 @@ def list_inventory_by_sku(id,count):
 	text_file.write(result)
 	text_file.close()
 	print("Registro: "+str(count))
-	cargando_bigquery(result,count)
+	if count == 558:
+		cargando_bigquery(result,count)
 
 def cargando_bigquery(result,count):
 	try:
