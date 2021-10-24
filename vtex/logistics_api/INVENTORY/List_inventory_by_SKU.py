@@ -8,18 +8,11 @@ from google.cloud import bigquery
 from itertools import chain
 from collections import defaultdict
 
-url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/collection/search"
-querystring = {"page":"1","pageSize":"100","orderByAsc":"true"}
-headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-response = requests.request("GET", url, headers=headers, params=querystring)
-Json = json.loads(response.text)
-paging = Json["paging"]
-total = int(paging["total"])
-pages = int(paging["pages"])
-listItem = []
-start = 0
+client = bigquery.Client()
+productList = []
 
-def get_collection_beta(page,headers,total):
+'''
+def list_inventory_by_sku(page,headers,total):
 	url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/collection/search"
 	querystring = {"page":""+str(page)+"","pageSize":""+str(total)+"","orderByAsc":"true"}
 	response = requests.request("GET", url, headers=headers, params=querystring)
@@ -34,7 +27,6 @@ def get_collection_beta(page,headers,total):
 def cargando_bigquery():
 	print("Cargando a BigQuery")
 	system("cat items.json | jq -c '.[]' > tableCollectionBeta.json")
-	client = bigquery.Client()
 	filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/COLLECTION_BETA/tableCollectionBeta.json'
 	dataset_id = 'landing_zone'
 	table_id = 'shopstar_vtex_collection_beta'
@@ -61,18 +53,18 @@ for x in range(pages):
 
 '''
 QUERY = (
-    'SELECT FieldId FROM `shopstar-datalake.landing_zone.shopstar_vtex_sku_specification` WHERE FieldId is not null')
+    'SELECT Id FROM `shopstar-datalake.landing_zone.shopstar_vtex_sku`')
 query_job = client.query(QUERY)  
 rows = query_job.result()  
 
 for row in rows:
-    productList.append(row.FieldId)
+    productList.append(row.Id)
 
 string = json.dumps(productList)
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SPECIFICATION_FIELD/SPECIFICATION_FIELD_ID_2.json", "w")
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/logistics_api/INVENTORY/id_sku.json", "w")
 text_file.write(string)
 text_file.close()
-'''
+
 
 
 
