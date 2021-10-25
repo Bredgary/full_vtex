@@ -65,8 +65,8 @@ def operacion_fenix(count):
 	#	print(str(count)+" registro almacenado.")
 
 operacion_fenix(count)
-'''
 
+'''
 QUERY = (
     'SELECT SellerId FROM `shopstar-datalake.landing_zone.shopstar_vtex_seller`')
 query_job = client.query(QUERY)  
