@@ -16,16 +16,16 @@ def installments():
 	response = requests.request("GET", url, headers=headers, params=querystring)
 	FJson = json.loads(response.text)
 	result = json.dumps(FJson)
-	text_file = open("/home/bred_valenzuela/full_vtex/vtex/payments_gateway_api/INSTALLMENTS/items.json", "w")
+	text_file = open("/home/bred_valenzuela/full_vtex/vtex/payments_gateway_api/INSTALLMENTS/items2.json", "w")
 	text_file.write(result)
 	text_file.close()
 	cargando_bigquery()
 
 def cargando_bigquery():
 	print("Cargando a BigQuery")
-	system("cat items.json | jq -c '.[]' > tableInstallments.json")
+	#system("cat items.json | jq -c '.[]' > tableInstallments.json")
 	client = bigquery.Client()
-	filename = '/home/bred_valenzuela/full_vtex/vtex/payments_gateway_api/INSTALLMENTS/tableInstallments.json'
+	filename = '/home/bred_valenzuela/full_vtex/vtex/payments_gateway_api/INSTALLMENTS/items.json'
 	dataset_id = 'landing_zone'
 	table_id = 'shopstar_vtex_installments'
 	dataset_ref = client.dataset(dataset_id)
