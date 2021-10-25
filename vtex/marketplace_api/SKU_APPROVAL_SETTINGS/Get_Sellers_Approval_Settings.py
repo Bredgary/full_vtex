@@ -13,7 +13,6 @@ productList = []
 count = 0
 
 def get_sellers_approval_settings(x,count):
-	#try:
 	url = "https://api.vtex.com/mercury/suggestions/configuration/seller/undefined"
 	querystring = {"sellerId":""+x+""}
 	headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
@@ -27,8 +26,6 @@ def get_sellers_approval_settings(x,count):
 		cargando_bigquery()
 	else:
 		print("Vacio")
-	#except:
-	#	print("Error")
 
 def cargando_bigquery():
 	#try:
