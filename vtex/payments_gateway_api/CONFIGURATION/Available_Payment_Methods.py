@@ -9,10 +9,9 @@ from itertools import chain
 from collections import defaultdict
 
 
-def affiliations():
-	url = "https://mercury.vtexpayments.com.br/api/pvt/affiliations"
-	headers = {"X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-	response = requests.request("GET", url, headers=headers)
+def payment_systems():
+	url = "https://mercury.vtexpayments.com.br/api/pvt/merchants/payment-systems"
+	headers = {"Accept": "application/json; charset=utf-8","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}response = requests.request("GET", url, headers=headers)
 	FJson = json.loads(response.text)
 	result = json.dumps(FJson)
 	text_file = open("/home/bred_valenzuela/full_vtex/vtex/payments_gateway_api/CONFIGURATION/items.json", "w")
@@ -22,11 +21,11 @@ def affiliations():
 
 def cargando_bigquery():
 	print("Cargando a BigQuery")
-	system("cat items.json | jq -c '.[]' > affiliations.json")
+	system("cat items.json | jq -c '.[]' > payment_systems.json")
 	client = bigquery.Client()
-	filename = '/home/bred_valenzuela/full_vtex/vtex/payments_gateway_api/CONFIGURATION/affiliations.json'
+	filename = '/home/bred_valenzuela/full_vtex/vtex/payments_gateway_api/CONFIGURATION/payment_systems.json'
 	dataset_id = 'landing_zone'
-	table_id = 'shopstar_vtex_affiliations'
+	table_id = 'shopstar_vtex_payment_systems'
 	dataset_ref = client.dataset(dataset_id)
 	table_ref = dataset_ref.table(table_id)
 	job_config = bigquery.LoadJobConfig()
@@ -42,4 +41,4 @@ def cargando_bigquery():
 	print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 	print("finalizado")
 
-affiliations()
+payment_systems()
