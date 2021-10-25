@@ -58,9 +58,8 @@ def operacion_fenix(count):
 	f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/marketplace_api/SKU_APPROVAL_SETTINGS/id_seller.json','r')
 	data_from_string = f_01.read()
 	listaIDS = json.loads(data_from_string)
-	#rango = int(len(listaIDS))
 	for i in range(int(len(listaIDS))):
-		print("hola")
+		print(i)
 		#list_dock_by_id(i,count)
 		#count += 1
 		#print(str(count)+" registro almacenado.")
