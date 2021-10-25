@@ -66,6 +66,7 @@ def operacion_fenix(count):
 	#	count += 1
 	#	print(str(count)+" registro almacenado.")
 
+
 operacion_fenix(count)
 
 '''
