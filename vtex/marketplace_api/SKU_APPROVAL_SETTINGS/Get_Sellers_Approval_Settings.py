@@ -36,7 +36,7 @@ def cargando_bigquery():
 	#system("cat temp.json | jq -c '.[]' > table_shipping_policies.json")
 	filename = '/home/bred_valenzuela/full_vtex/vtex/marketplace_api/SKU_APPROVAL_SETTINGS/items2.json'
 	dataset_id = 'landing_zone'
-	table_id = 'shopstar_vtex_autoapprove_status_in_account_settings'
+	table_id = 'shopstar_vtex_sellers_approval_settings'
 	dataset_ref = client.dataset(dataset_id)
 	table_ref = dataset_ref.table(table_id)
 	job_config = bigquery.LoadJobConfig()
