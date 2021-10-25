@@ -60,7 +60,7 @@ def operacion_fenix(count):
 	listaIDS = json.loads(data_from_string)
 	rango = len(listaIDS)
 	print(rango)
-	prite(type(rango))
+	print(type(rango))
 	#for i in listaIDS:
 	#	list_dock_by_id(i,count)
 	#	count += 1
