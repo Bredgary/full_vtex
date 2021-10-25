@@ -22,7 +22,7 @@ def get_autoapprove_status_in_account_settings(x,count):
 	response = requests.request("GET", url, headers=headers, params=querystring)
 	FJson = json.loads(response.text)
 	seller = {"id":x}
-	d4 = dict(seller.items() and FJson.items())
+	seller.update(FJson)
 	print(seller)
 	#result2 = seller + result
 	#print(result2)
