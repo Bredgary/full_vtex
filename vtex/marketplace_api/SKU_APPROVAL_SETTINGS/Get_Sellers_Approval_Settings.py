@@ -23,7 +23,7 @@ def get_sellers_approval_settings(x,count):
 	if response.text:
 		FJson = json.loads(response.text)
 		result = json.dumps(FJson)
-		print(type(result))
+		print(type(FJson))
 		text_file = open("/home/bred_valenzuela/full_vtex/vtex/marketplace_api/SKU_APPROVAL_SETTINGS/items2.json", "w")
 		text_file.write(result)
 		text_file.close()
