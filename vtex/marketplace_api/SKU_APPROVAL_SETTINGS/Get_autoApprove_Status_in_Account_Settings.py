@@ -14,18 +14,19 @@ count = 0
 
 
 
-def get_autoApprove_status_in_account_setting():
+def get_autoapprove_status_in_account_settings(x,count):
 	#try:
-	url = "https://mercury.vtexcommercestable.com.br/api/logistics/pvt/shipping-policies"
-	querystring = {"page":"1","perPage":"39"}
+	url = "https://api.vtex.com/mercury/suggestions/configuration/autoapproval/toggle"
+	querystring = {"sellerId":""+x+""}
 	headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 	response = requests.request("GET", url, headers=headers, params=querystring)
 	FJson = json.loads(response.text)
-	result = json.dumps(FJson["items"])
-	text_file = open("/home/bred_valenzuela/full_vtex/vtex/logistics_api/SHIPPING_POLICIES/temp.json", "w")
-	text_file.write(result)
-	text_file.close()
-	cargando_bigquery()
+	result = json.dumps(FJson)
+	print(result)
+	#text_file = open("/home/bred_valenzuela/full_vtex/vtex/logistics_api/SHIPPING_POLICIES/temp.json", "w")
+	#text_file.write(result)
+	#text_file.close()
+	#cargando_bigquery()
 	#except:
 	#	print("Error")
 
@@ -59,10 +60,10 @@ def operacion_fenix(count):
 	data_from_string = f_01.read()
 	listaIDS = json.loads(data_from_string)
 	for i in range(int(len(listaIDS))):
-		print(listaIDS[i])
-		#list_dock_by_id(i,count)
-		#count += 1
-		#print(str(count)+" registro almacenado.")
+		x = listaIDS[i]
+		get_autoapprove_status_in_account_settings(x,count)
+		count += 1
+		print(str(count)+" registro almacenado.")
 
 
 operacion_fenix(count)
