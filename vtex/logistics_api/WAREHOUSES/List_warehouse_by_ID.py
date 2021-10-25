@@ -1,7 +1,7 @@
-import requests
-import json
 #!/usr/bin/python
 # -*- coding: latin-1 -*-
+import requests
+import json
 import os
 import re
 from datetime import datetime
