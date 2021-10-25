@@ -9,25 +9,24 @@ from itertools import chain
 from collections import defaultdict
 
 
-def installments():
-	url = "https://mercury.vtexpayments.com.br/api/pvt/installments"
-	querystring = {"request.value":"10","request.salesChannel":"1","request.paymentDetails[0].id":"2","request.paymentDetails[0].value":"10","request.paymentDetails[0].bin":"411111"}
-	headers = {"Accept": "application/json; charset=utf-8","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-	response = requests.request("GET", url, headers=headers, params=querystring)
+def affiliations():
+	url = "https://mercury.vtexpayments.com.br/api/pvt/affiliations"
+	headers = {"X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
+	response = requests.request("GET", url, headers=headers)
 	FJson = json.loads(response.text)
 	result = json.dumps(FJson)
-	text_file = open("/home/bred_valenzuela/full_vtex/vtex/payments_gateway_api/INSTALLMENTS/items.json", "w")
+	text_file = open("/home/bred_valenzuela/full_vtex/vtex/payments_gateway_api/CONFIGURATION/items.json", "w")
 	text_file.write(result)
 	text_file.close()
 	cargando_bigquery()
 
 def cargando_bigquery():
 	print("Cargando a BigQuery")
-	system("cat items.json | jq -c '.[]' > tableInstallments.json")
+	system("cat items.json | jq -c '.[]' > affiliations.json")
 	client = bigquery.Client()
-	filename = '/home/bred_valenzuela/full_vtex/vtex/payments_gateway_api/INSTALLMENTS/tableInstallments.json'
+	filename = '/home/bred_valenzuela/full_vtex/vtex/payments_gateway_api/CONFIGURATION/affiliations.json'
 	dataset_id = 'landing_zone'
-	table_id = 'shopstar_vtex_installments'
+	table_id = 'shopstar_vtex_affiliations'
 	dataset_ref = client.dataset(dataset_id)
 	table_ref = dataset_ref.table(table_id)
 	job_config = bigquery.LoadJobConfig()
@@ -43,7 +42,7 @@ def cargando_bigquery():
 	print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 	print("finalizado")
 
-installments()
+affiliations()
 
 '''
 QUERY = (
