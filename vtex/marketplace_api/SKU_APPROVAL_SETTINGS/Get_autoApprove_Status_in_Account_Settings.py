@@ -57,12 +57,12 @@ def cargando_bigquery():
 def operacion_fenix(count):
 	f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/marketplace_api/SKU_APPROVAL_SETTINGS/id_seller.json','r')
 	data_from_string = f_01.read()
-	listaIDS = len(data_from_string)
-	for i in listaIDS:
-		print(data_from_string[i])
-		#list_dock_by_id(i,count)
-		#count += 1
-		#print(str(count)+" registro almacenado.")
+	listaIDS = json.loads(data_from_string)
+	print(type(listaIDS))
+	#for i in listaIDS:
+	#	list_dock_by_id(i,count)
+	#	count += 1
+	#	print(str(count)+" registro almacenado.")
 
 operacion_fenix(count)
 '''
