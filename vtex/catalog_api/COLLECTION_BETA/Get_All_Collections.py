@@ -74,8 +74,3 @@ text_file.write(string)
 text_file.close()
 '''
 
-
-
-
-
-
