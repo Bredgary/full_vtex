@@ -59,12 +59,11 @@ def operacion_fenix(count):
 	data_from_string = f_01.read()
 	listaIDS = json.loads(data_from_string)
 	rango = len(listaIDS)
-	print(rango)
-	print(type(rango))
-	#for i in listaIDS:
-	#	list_dock_by_id(i,count)
-	#	count += 1
-	#	print(str(count)+" registro almacenado.")
+	for i in rango(rango):
+		print("hola")
+		#list_dock_by_id(i,count)
+		#count += 1
+		#print(str(count)+" registro almacenado.")
 
 
 operacion_fenix(count)
