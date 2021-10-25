@@ -23,12 +23,11 @@ def get_sellers_approval_settings(x,count):
 	if response.text:
 		FJson = json.loads(response.text)
 		result = json.dumps(FJson)
-		#result = re.sub(r"([^n\u0300-\u036f]|n(?!\u0303(?![\u0300-\u036f])))[\u0300-\u036f]+", r"\1", normalize( "NFD", result), 0, re.I)
-		#result = normalize( 'NFC', result)
+		print(type(result))
 		text_file = open("/home/bred_valenzuela/full_vtex/vtex/marketplace_api/SKU_APPROVAL_SETTINGS/items2.json", "w")
 		text_file.write(result)
 		text_file.close()
-		cargando_bigquery()
+		#cargando_bigquery()
 	else:
 		print("Vacio")
 
@@ -38,8 +37,6 @@ def cargando_bigquery():
 	#try:
 	print("Cargando a BigQuery")
 	#system("cat temp.json | jq -c '.[]' > table_shipping_policies.json")
-	numPiezas = '"n\u00famero de piezas"'
-	system("find . -type f -print0 | xargs -0 sed -i 's/"+numPiezas+"/numero_de_piezas/g'")
 	filename = '/home/bred_valenzuela/full_vtex/vtex/marketplace_api/SKU_APPROVAL_SETTINGS/items2.json'
 	dataset_id = 'landing_zone'
 	table_id = 'shopstar_vtex_sellers_approval_settings'
