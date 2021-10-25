@@ -12,7 +12,8 @@ client = bigquery.Client()
 productList = []
 count = 0
 
-'''
+
+
 def get_autoApprove_status_in_account_setting():
 	#try:
 	url = "https://mercury.vtexcommercestable.com.br/api/logistics/pvt/shipping-policies"
@@ -54,13 +55,14 @@ def cargando_bigquery():
 	#	print("Error")
 
 def operacion_fenix(count):
-	f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/logistics_api/SHIPPING_POLICIES/shipping_id.json','r')
+	f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/marketplace_api/SKU_APPROVAL_SETTINGS/id_seller.json','r')
 	data_from_string = f_01.read()
-	listaIDS = json.loads(data_from_string)
+	listaIDS = len(data_from_string)
 	for i in listaIDS:
-		count += 1
-		get_autoApprove_status_in_account_setting(i,count)
-	print(str(count)+" registro almacenado.")
+		print(data_from_string[i])
+		#list_dock_by_id(i,count)
+		#count += 1
+		#print(str(count)+" registro almacenado.")
 
 operacion_fenix(count)
 '''
@@ -77,3 +79,4 @@ string = json.dumps(productList)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/marketplace_api/SKU_APPROVAL_SETTINGS/id_seller.json", "w")
 text_file.write(string)
 text_file.close()
+'''
