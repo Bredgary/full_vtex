@@ -22,9 +22,10 @@ def get_sellers_approval_settings(x,count):
 	response = requests.request("GET", url, headers=headers, params=querystring)
 	if response.text:
 		FJson = json.loads(response.text)
+		system("find . -type f -print0 | xargs -0 sed -i 's/número de piezas/numero_de_piezas/g'")
 		result = json.dumps(FJson)
-		result = re.sub(r"([^n\u0300-\u036f]|n(?!\u0303(?![\u0300-\u036f])))[\u0300-\u036f]+", r"\1", normalize( "NFD", result), 0, re.I)
-		result = normalize( 'NFC', result)
+		#result = re.sub(r"([^n\u0300-\u036f]|n(?!\u0303(?![\u0300-\u036f])))[\u0300-\u036f]+", r"\1", normalize( "NFD", result), 0, re.I)
+		#result = normalize( 'NFC', result)
 		text_file = open("/home/bred_valenzuela/full_vtex/vtex/marketplace_api/SKU_APPROVAL_SETTINGS/items2.json", "w")
 		text_file.write(result)
 		text_file.close()
