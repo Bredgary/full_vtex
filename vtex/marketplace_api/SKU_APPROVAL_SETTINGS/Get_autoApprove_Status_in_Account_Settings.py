@@ -59,7 +59,7 @@ def operacion_fenix(count):
 	data_from_string = f_01.read()
 	listaIDS = json.loads(data_from_string)
 	for i in range(int(len(listaIDS))):
-		print(i)
+		print(listaIDS[i])
 		#list_dock_by_id(i,count)
 		#count += 1
 		#print(str(count)+" registro almacenado.")
