@@ -65,7 +65,6 @@ def operacion_fenix(count):
 operacion_fenix(count)
 '''
 
-
 QUERY = (
     'SELECT SellerId FROM `shopstar-datalake.landing_zone.shopstar_vtex_seller`')
 query_job = client.query(QUERY)  
