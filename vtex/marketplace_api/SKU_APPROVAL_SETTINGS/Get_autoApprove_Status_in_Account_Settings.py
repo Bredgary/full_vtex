@@ -74,6 +74,6 @@ for row in rows:
     productList.append(row.SellerId)
 
 string = json.dumps(productList)
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/logistics_api/SHIPPING_POLICIES/shipping_id.json", "w")
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/marketplace_api/SKU_APPROVAL_SETTINGS/id_seller.json", "w")
 text_file.write(string)
 text_file.close()
