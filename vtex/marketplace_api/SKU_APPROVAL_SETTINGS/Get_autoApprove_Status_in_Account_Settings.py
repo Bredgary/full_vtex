@@ -23,7 +23,6 @@ def get_autoapprove_status_in_account_settings(x,count):
 	FJson = json.loads(response.text)
 	seller = {"id":x}
 	d4 = dict(seller.items() and FJson.items())
-	print(type(d4))
 	print(d4)
 	#result2 = seller + result
 	#print(result2)
