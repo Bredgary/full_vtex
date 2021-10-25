@@ -21,9 +21,8 @@ def get_autoapprove_status_in_account_settings(x,count):
 	headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 	response = requests.request("GET", url, headers=headers, params=querystring)
 	FJson = json.loads(response.text)
-	result = json.dumps(FJson)
 	seller = {"id":x}
-	d4 = dict(seller.items() + result.items())
+	d4 = dict(seller.items() + FJson.items())
 	print(type(d4))
 	print(d4)
 	#result2 = seller + result
