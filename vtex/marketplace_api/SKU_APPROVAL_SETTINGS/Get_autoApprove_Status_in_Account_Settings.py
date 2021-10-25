@@ -12,8 +12,6 @@ client = bigquery.Client()
 productList = []
 count = 0
 
-
-
 def get_autoapprove_status_in_account_settings(x,count):
 	#try:
 	url = "https://api.vtex.com/mercury/suggestions/configuration/autoapproval/toggle"
@@ -23,24 +21,21 @@ def get_autoapprove_status_in_account_settings(x,count):
 	FJson = json.loads(response.text)
 	seller = {"id":x}
 	seller.update(FJson)
-	print(seller)
-	#result2 = seller + result
-	#print(result2)
-	#text_file = open("/home/bred_valenzuela/full_vtex/vtex/logistics_api/SHIPPING_POLICIES/temp.json", "w")
-	#text_file.write(result)
-	#text_file.close()
-	#cargando_bigquery()
+	result = json.dumps(seller)
+	text_file = open("/home/bred_valenzuela/full_vtex/vtex/marketplace_api/SKU_APPROVAL_SETTINGS/items.json", "w")
+	text_file.write(result)
+	text_file.close()
+	cargando_bigquery()
 	#except:
 	#	print("Error")
 
 def cargando_bigquery():
 	#try:
 	print("Cargando a BigQuery")
-	system("cat temp.json | jq -c '.[]' > table_shipping_policies.json")
-	client = bigquery.Client()
-	filename = '/home/bred_valenzuela/full_vtex/vtex/logistics_api/SHIPPING_POLICIES/table_shipping_policies.json'
+	#system("cat temp.json | jq -c '.[]' > table_shipping_policies.json")
+	filename = '/home/bred_valenzuela/full_vtex/vtex/marketplace_api/SKU_APPROVAL_SETTINGS/items.json'
 	dataset_id = 'landing_zone'
-	table_id = 'shopstar_vtex_list_shipping_policies'
+	table_id = 'shopstar_vtex_autoapprove_status_in_account_settings'
 	dataset_ref = client.dataset(dataset_id)
 	table_ref = dataset_ref.table(table_id)
 	job_config = bigquery.LoadJobConfig()
