@@ -17,14 +17,12 @@ count = 0
 
 def get_sellers_approval_settings(x,count):
 	url = "https://api.vtex.com/mercury/suggestions/configuration/seller/undefined"
-	querystring = {"sellerId":"promart"}
+	querystring = {"sellerId":"oechsle"}
 	headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 	response = requests.request("GET", url, headers=headers, params=querystring)
 	if response.text:
 		FJson = json.loads(response.text)
 		result = json.dumps(FJson)
-		print(type(FJson))
-		print(FJson)
 		text_file = open("/home/bred_valenzuela/full_vtex/vtex/marketplace_api/SKU_APPROVAL_SETTINGS/items2.json", "w")
 		text_file.write(result)
 		text_file.close()
