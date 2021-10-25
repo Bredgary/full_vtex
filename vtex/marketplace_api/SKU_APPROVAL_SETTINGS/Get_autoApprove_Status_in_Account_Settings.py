@@ -8,8 +8,12 @@ from google.cloud import bigquery
 from itertools import chain
 from collections import defaultdict
 
+client = bigquery.Client()
+productList = []
+count = 0
 
-def get_list_shipping():
+'''
+def get_autoApprove_status_in_account_setting():
 	#try:
 	url = "https://mercury.vtexcommercestable.com.br/api/logistics/pvt/shipping-policies"
 	querystring = {"page":"1","perPage":"39"}
@@ -49,5 +53,28 @@ def cargando_bigquery():
 	#except:
 	#	print("Error")
 
-for x in range(1):
-	get_list_shipping()
+def operacion_fenix(count):
+	f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/logistics_api/SHIPPING_POLICIES/shipping_id.json','r')
+	data_from_string = f_01.read()
+	listaIDS = json.loads(data_from_string)
+	for i in listaIDS:
+		count += 1
+		get_autoApprove_status_in_account_setting(i,count)
+	print(str(count)+" registro almacenado.")
+
+operacion_fenix(count)
+'''
+
+
+QUERY = (
+    'SELECT SellerId FROM `shopstar-datalake.landing_zone.shopstar_vtex_seller`')
+query_job = client.query(QUERY)  
+rows = query_job.result()  
+
+for row in rows:
+    productList.append(row.SellerId)
+
+string = json.dumps(productList)
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/logistics_api/SHIPPING_POLICIES/shipping_id.json", "w")
+text_file.write(string)
+text_file.close()
