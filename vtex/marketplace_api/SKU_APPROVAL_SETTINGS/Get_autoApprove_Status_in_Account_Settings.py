@@ -23,7 +23,7 @@ def get_autoapprove_status_in_account_settings(x,count):
 	FJson = json.loads(response.text)
 	seller = {"id":x}
 	d4 = dict(seller.items() and FJson.items())
-	print(d4)
+	print(seller)
 	#result2 = seller + result
 	#print(result2)
 	#text_file = open("/home/bred_valenzuela/full_vtex/vtex/logistics_api/SHIPPING_POLICIES/temp.json", "w")
