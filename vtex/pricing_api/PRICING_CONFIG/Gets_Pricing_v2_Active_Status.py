@@ -41,5 +41,5 @@ def cargando_bigquery():
 	print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 	print("finalizado")
 
-config_pricing()
+migration_pricing()
 
