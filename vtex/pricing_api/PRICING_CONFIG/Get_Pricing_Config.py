@@ -52,4 +52,4 @@ string = json.dumps(productList)
 text_file = open("_2.json", "w")
 text_file.write(string)
 text_file.close()
-'''
+'''s
