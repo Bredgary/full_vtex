@@ -12,7 +12,7 @@ def config_pricing():
 	url = "https://api.vtex.com/mercury/pricing/config"
 	headers = {"Accept": "application/json; charset=utf-8","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 	response = requests.request("GET", url, headers=headers)
-	Fjson = json.loads(response.text)
+	FJson = json.loads(response.text)
 	result = json.dumps(FJson)
 	text_file = open("/home/bred_valenzuela/full_vtex/vtex/pricing_api/PRICING_CONFIG/items.json", "w")
 	text_file.write(result)
