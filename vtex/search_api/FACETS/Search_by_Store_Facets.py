@@ -23,14 +23,15 @@ def search_by_store_facets(id,count):
 	headers = {"Accept": "application/json; charset=utf-8","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 	response = requests.request("GET", url, headers=headers, params=querystring)
 	FJson = json.loads(response.text)
-	while("" in FJson) :
-		FJson.remove("")
-	result = json.dumps(FJson)
-	text_file = open("/home/bred_valenzuela/full_vtex/vtex/search_api/FACETS/items.json", "w")
-	text_file.write(result)
-	text_file.close()
-	print("Registro N°: "+str(count))
-	cargando_bigquery()
+	print(FJson["Summary"])
+	#while("" in FJson) :
+	#	FJson.remove("")
+	#result = json.dumps(FJson)
+	#text_file = open("/home/bred_valenzuela/full_vtex/vtex/search_api/FACETS/items.json", "w")
+	#text_file.write(result)
+	#text_file.close()
+	#print("Registro N°: "+str(count))
+	#cargando_bigquery()
 	#except:
 	#	url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pub/facets/search/"+str(id)+""
 	#	querystring = {"map":"c"}
