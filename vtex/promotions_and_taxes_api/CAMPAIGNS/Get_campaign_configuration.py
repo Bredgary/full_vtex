@@ -15,14 +15,14 @@ def Get_campaign_configuration():
 	response = requests.request("GET", url, headers=headers)
 	FJson = json.loads(response.text)
 	result = json.dumps(FJson)
-	text_file = open("/home/bred_valenzuela/full_vtex/vtex/promotions_and_taxes_api/CAMPAIGNS/CAMPAIGNS.json", "w")
+	text_file = open("/home/bred_valenzuela/full_vtex/vtex/promotions_and_taxes_api/CAMPAIGNS/items.json", "w")
 	text_file.write(result)
 	text_file.close()
 	cargando_bigquery()
 
 def cargando_bigquery():
 	print("Cargando a BigQuery")
-	#system("cat items.json | jq -c '.[]' > tablePaged.json")
+	system("cat items.json | jq -c '.[]' > CAMPAIGNS.json")
 	client = bigquery.Client()
 	filename = '/home/bred_valenzuela/full_vtex/vtex/promotions_and_taxes_api/CAMPAIGNS/CAMPAIGNS.json'
 	dataset_id = 'landing_zone'
