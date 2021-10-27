@@ -67,9 +67,13 @@ query_job = client.query(QUERY)
 rows = query_job.result()  
 
 for row in rows:
-    productList.append(row.Id,row.ProductId)
+	print(type(row.Id))
+	print(type(row.ProductId))
+	break
+	
+    #productList.append(row.Id,row.ProductId)
 
-string = json.dumps(productList)
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/search_api/OFFERS/SKU_and_product_id.json", "w")
-text_file.write(string)
-text_file.close()
+#string = json.dumps(productList)
+#text_file = open("/home/bred_valenzuela/full_vtex/vtex/search_api/OFFERS/SKU_and_product_id.json", "w")
+#text_file.write(string)
+#text_file.close()
