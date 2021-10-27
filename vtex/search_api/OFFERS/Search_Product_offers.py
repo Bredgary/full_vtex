@@ -14,27 +14,24 @@ client = bigquery.Client()
 productList = []
 count = 0
 
-def coupon_usage(id,count):
-	url = "https://mercury.vtexcommercestable.com.br/api/rnb/pvt/coupon/usage/"+str(id)+""
+def search_SKU_offers(id,count):
+	url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pub/products/offers/"+str(id[1])+"/sku/"+str(id[0])+""
 	headers = {"Accept": "application/json; charset=utf-8","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 	response = requests.request("GET", url, headers=headers)
-	if not response:
-		#FJson = json.loads(response.text)
-		#result = json.dumps(FJson)
-		text_file = open("/home/bred_valenzuela/full_vtex/vtex/promotions_and_taxes_api/COUPONS/registros/"+str(count)+"_items.json", "w")
-		text_file.write(result)
-		text_file.close()
-		#cargando_bigquery()
-		print("Registro N°: "+str(count))
-	else:
-		print("Tabla Vacia n° "+str(count))
+	FJson = json.loads(response.text)
+	result = json.dumps(FJson)
+	text_file = open("/home/bred_valenzuela/full_vtex/vtex/search_api/OFFERS/items.json", "w")
+	text_file.write(result)
+	text_file.close()
+	cargando_bigquery()
+	print("Registro N°: "+str(count))
 
 def cargando_bigquery():
 	print("Cargando a BigQuery")
-	system("cat items.json | jq -c '.[]' > coupon_usage.json")
-	filename = '/home/bred_valenzuela/full_vtex/vtex/promotions_and_taxes_api/COUPONS/coupon_usage.json'
+	system("cat items.json | jq -c '.[]' > SKU_offers.json")
+	filename = '/home/bred_valenzuela/full_vtex/vtex/search_api/OFFERS/SKU_offers.json'
 	dataset_id = 'landing_zone'
-	table_id = 'vtex_shopstar_coupon_usage'
+	table_id = 'vtex_shopstar_search_SKU_offers'
 	dataset_ref = client.dataset(dataset_id)
 	table_ref = dataset_ref.table(table_id)
 	job_config = bigquery.LoadJobConfig()
@@ -55,11 +52,8 @@ def operacion_fenix(count):
 	data_from_string = f_01.read()
 	listaIDS = json.loads(data_from_string)
 	for i in listaIDS:
-		print(type(i[0]))
-		print(type(i[1]))
-		break
-		#count +=1
-		#coupon_usage(i,count)
+		count +=1
+		search_SKU_offers(i,count)
 
 operacion_fenix(count)
 
