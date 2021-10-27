@@ -14,7 +14,7 @@ client = bigquery.Client()
 productList = []
 count = 0
 order = {}
-
+DictF = {}
 
 def search_by_store_facets(id,count):
 	#try:
@@ -28,7 +28,10 @@ def search_by_store_facets(id,count):
 		FJson.remove("")
 	Summary = FJson["Summary"]
 	del Summary["SpecificationFilters"]
-	result = json.dumps(FJson)
+	del FJson["Summary"]
+	DictF.update(FJson)
+	DictF.update(Summary)
+	result = json.dumps(DictF)
 	text_file = open("/home/bred_valenzuela/full_vtex/vtex/search_api/FACETS/items.json", "w")
 	text_file.write(result)
 	text_file.close()
