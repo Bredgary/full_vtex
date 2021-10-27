@@ -13,7 +13,7 @@ from collections import defaultdict
 client = bigquery.Client()
 productList = []
 count = 0
-'''
+
 def coupon_usage(id,count):
 	url = "https://mercury.vtexcommercestable.com.br/api/rnb/pvt/coupon/usage/"+str(id)+""
 	headers = {"Accept": "application/json; charset=utf-8","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
@@ -51,12 +51,15 @@ def cargando_bigquery():
 	print("finalizado")
 
 def operacion_fenix(count):
-	f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/promotions_and_taxes_api/COUPONS/COUPONS_ID.json','r')
+	f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/search_api/OFFERS/SKU_and_product_id.json','r')
 	data_from_string = f_01.read()
 	listaIDS = json.loads(data_from_string)
 	for i in listaIDS:
-		count +=1
-		coupon_usage(i,count)
+		print(i[0])
+		print(i[1])
+		break
+		#count +=1
+		#coupon_usage(i,count)
 
 operacion_fenix(count)
 
@@ -74,3 +77,4 @@ string = json.dumps(productList)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/search_api/OFFERS/SKU_and_product_id.json", "w")
 text_file.write(string)
 text_file.close()
+'''
