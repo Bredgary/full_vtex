@@ -24,7 +24,7 @@ def search_by_store_facets(id,count):
 	response = requests.request("GET", url, headers=headers, params=querystring)
 	FJson = json.loads(response.text)
 	Summary = FJson["Summary"]
-	print (Sumary)
+	print(Sumary)
 	#while("" in FJson) :
 	#	FJson.remove("")
 	#while("" in Summary) :
