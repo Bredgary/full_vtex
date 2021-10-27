@@ -24,11 +24,11 @@ def search_by_store_facets(id,count):
 	response = requests.request("GET", url, headers=headers, params=querystring)
 	FJson = json.loads(response.text)
 	Summary = FJson["Summary"]
+	while("" in FJson) :
+		FJson.remove("")
+	while("" in Summary) :
+		Summary.remove("")
 	print(Summary)
-	#while("" in FJson) :
-	#	FJson.remove("")
-	#while("" in Summary) :
-	#	FJson["Summary"].remove("")
 	#result = json.dumps(FJson)
 	#text_file = open("/home/bred_valenzuela/full_vtex/vtex/search_api/FACETS/items.json", "w")
 	#text_file.write(result)
@@ -76,6 +76,7 @@ def operacion_fenix(count):
 	for i in listaIDS:
 		count +=1
 		search_by_store_facets(i,count)
+		break
 
 operacion_fenix(count)
 
