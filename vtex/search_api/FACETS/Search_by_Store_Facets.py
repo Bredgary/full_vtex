@@ -15,18 +15,6 @@ productList = []
 count = 0
 order = {}
 
-def replace_blank_dict(d):
-    if not d:
-        return None
-    if type(d) is list:
-        for list_item in d:
-            if type(list_item) is dict:
-                for k, v in list_item.items():
-                    list_item[k] = replace_blank_dict(v)
-    if type(d) is dict:
-        for k, v in d.items():
-            d[k] = replace_blank_dict(v)
-    return d
 
 def search_by_store_facets(id,count):
 	#try:
@@ -35,8 +23,8 @@ def search_by_store_facets(id,count):
 	headers = {"Accept": "application/json; charset=utf-8","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 	response = requests.request("GET", url, headers=headers, params=querystring)
 	FJson = json.loads(response.text)
-	for k, v in FJson.items():
-		order[k] = replace_blank_dict(v)
+	while("" in FJson) :
+		FJson.remove("")
 	result = json.dumps(FJson)
 	text_file = open("/home/bred_valenzuela/full_vtex/vtex/search_api/FACETS/items.json", "w")
 	text_file.write(result)
