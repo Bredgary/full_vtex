@@ -67,9 +67,10 @@ query_job = client.query(QUERY)
 rows = query_job.result()  
 
 for row in rows:
-	print(type(row.Id))
-	print(type(row.ProductId))
+	temp = [row.Id,row.ProductId]
 	break
+
+print(temp)
 	
     #productList.append(row.Id,row.ProductId)
 
