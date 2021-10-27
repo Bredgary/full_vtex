@@ -24,10 +24,12 @@ def search_product_offers(id,count):
 		text_file = open("/home/bred_valenzuela/full_vtex/vtex/search_api/OFFERS/itemsP.json", "w")
 		text_file.write(result)
 		text_file.close()
-		cargando_bigquery()
 		print("Registro N°: "+str(count))
+		if count >=90:
+			cargando_bigquery()
 	except:
 		print("Vacio")
+
 
 def cargando_bigquery():
 	print("Cargando a BigQuery")
@@ -39,7 +41,7 @@ def cargando_bigquery():
 	table_ref = dataset_ref.table(table_id)
 	job_config = bigquery.LoadJobConfig()
 	job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-	job_config.autodetect = True
+	#job_config.autodetect = True
 	with open(filename, "rb") as source_file:
 		job = client.load_table_from_file(
 			source_file,
