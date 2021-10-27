@@ -17,32 +17,32 @@ order = {}
 DictF = {}
 
 def search_by_store_facets(id,count):
-	#try:
-	url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pub/facets/search/"+str(id)+""
-	querystring = {"map":"c"}
-	headers = {"Accept": "application/json; charset=utf-8","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-	response = requests.request("GET", url, headers=headers, params=querystring)
-	FJson = json.loads(response.text)
-	del FJson["SpecificationFilters"]
-	Summary = FJson["Summary"]
-	del Summary["SpecificationFilters"]
-	result = json.dumps(FJson)
-	text_file = open("/home/bred_valenzuela/full_vtex/vtex/search_api/FACETS/items.json", "w")
-	text_file.write(result)
-	text_file.close()
-	print("Registro N°: "+str(count))
-	cargando_bigquery()
-	#except:
-	#	url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pub/facets/search/"+str(id)+""
-	#	querystring = {"map":"c"}
-	#	headers = {"Accept": "application/json; charset=utf-8","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-	#	response = requests.request("GET", url, headers=headers, params=querystring)
-	#	if response:
-	#		print("Tabla Vacia")
-	#	else:
-	#		text_file = open("/home/bred_valenzuela/full_vtex/vtex/search_api/FACETS/respaldo/itemsS.json", "w")
-	#		text_file.write(response.text)
-	#		text_file.close()
+	try:
+		url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pub/facets/search/"+str(id)+""
+		querystring = {"map":"c"}
+		headers = {"Accept": "application/json; charset=utf-8","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
+		response = requests.request("GET", url, headers=headers, params=querystring)
+		FJson = json.loads(response.text)
+		del FJson["SpecificationFilters"]
+		Summary = FJson["Summary"]
+		del Summary["SpecificationFilters"]
+		result = json.dumps(FJson)
+		text_file = open("/home/bred_valenzuela/full_vtex/vtex/search_api/FACETS/items.json", "w")
+		text_file.write(result)
+		text_file.close()
+		print("Registro N°: "+str(count))
+		cargando_bigquery()
+	except:
+		url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pub/facets/search/"+str(id)+""
+		querystring = {"map":"c"}
+		headers = {"Accept": "application/json; charset=utf-8","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
+		response = requests.request("GET", url, headers=headers, params=querystring)
+		if response:
+			print("Tabla Vacia")
+		else:
+			text_file = open("/home/bred_valenzuela/full_vtex/vtex/search_api/FACETS/respaldo/itemsS.json", "w")
+			text_file.write(response.text)
+			text_file.close()
 
 
 def cargando_bigquery():
