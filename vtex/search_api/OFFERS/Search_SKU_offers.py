@@ -25,7 +25,7 @@ def search_SKU_offers(id,count):
 		text_file.write(result)
 		text_file.close()
 		print("Registro N°: "+str(count))
-		if count >= 32:
+		if count >= 775:
 			cargando_bigquery()
 	except:
 		print("tabla vacia")

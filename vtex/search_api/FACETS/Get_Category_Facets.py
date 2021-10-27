@@ -17,7 +17,6 @@ count = 0
 def Get_Category_Facets(id,count):
 	try:
 		url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pub/facets/category/"+str(id)+""
-		querystring = {"_from":"1","_to":"20"}
 		headers = {"Accept": "application/json; charset=utf-8","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 		response = requests.request("GET", url, headers=headers, params=querystring)
 		FJson = json.loads(response.text)
