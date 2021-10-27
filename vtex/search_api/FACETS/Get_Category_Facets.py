@@ -71,6 +71,6 @@ for row in rows:
 	productList.append(row.id)
 
 string = json.dumps(productList)
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/search_api/OFFERS/SKU_and_product_id.json", "w")
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/search_api/FACETS/id_category.json", "w")
 text_file.write(string)
 text_file.close()
