@@ -24,8 +24,8 @@ def search_by_store_facets(id,count):
 	response = requests.request("GET", url, headers=headers, params=querystring)
 	FJson = json.loads(response.text)
 	del FJson["SpecificationFilters"]
-	#while("" in FJson) :
-	#	FJson.remove("")
+	Summary = FJson["Summary"]
+	del Summary["SpecificationFilters"]
 	result = json.dumps(FJson)
 	text_file = open("/home/bred_valenzuela/full_vtex/vtex/search_api/FACETS/items.json", "w")
 	text_file.write(result)
