@@ -35,7 +35,7 @@ def search_by_store_facets(id,count):
 	response = requests.request("GET", url, headers=headers, params=querystring)
 	FJson = json.loads(response.text)
 	for k, v in FJson.items():
-        order[k] = replace_blank_dict(v)
+		order[k] = replace_blank_dict(v)
 	result = json.dumps(FJson)
 	text_file = open("/home/bred_valenzuela/full_vtex/vtex/search_api/FACETS/items.json", "w")
 	text_file.write(result)
