@@ -67,7 +67,7 @@ def operacion_fenix(count):
 	listaIDS = json.loads(data_from_string)
 	for i in listaIDS:
 		count +=1
-		search_product_offers(i,count)
+		Get_Category_Facets(i,count)
 
 operacion_fenix(count)
 
