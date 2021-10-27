@@ -23,7 +23,8 @@ def search_by_store_facets(id,count):
 	headers = {"Accept": "application/json; charset=utf-8","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 	response = requests.request("GET", url, headers=headers, params=querystring)
 	FJson = json.loads(response.text)
-	print(FJson["Summary.SpecificationFilters"])
+	Summary = FJson["Summary"]
+	print (Sumary)
 	#while("" in FJson) :
 	#	FJson.remove("")
 	#while("" in Summary) :
