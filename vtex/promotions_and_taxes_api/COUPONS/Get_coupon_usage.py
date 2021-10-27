@@ -56,7 +56,7 @@ def operacion_fenix(count):
 	listaIDS = json.loads(data_from_string)
 	for i in listaIDS:
 		count +=1
-		list_inventory_by_sku(i,count)
+		coupon_usage(i,count)
 
 operacion_fenix(count)
 
