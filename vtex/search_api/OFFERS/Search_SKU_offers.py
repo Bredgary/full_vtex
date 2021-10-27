@@ -23,8 +23,8 @@ def search_SKU_offers(id,count):
 	text_file = open("/home/bred_valenzuela/full_vtex/vtex/search_api/OFFERS/items.json", "w")
 	text_file.write(result)
 	text_file.close()
-	cargando_bigquery()
 	print("Registro N°: "+str(count))
+	cargando_bigquery()
 
 def cargando_bigquery():
 	print("Cargando a BigQuery")

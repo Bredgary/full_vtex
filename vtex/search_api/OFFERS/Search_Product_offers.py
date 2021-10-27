@@ -25,8 +25,7 @@ def search_product_offers(id,count):
 		text_file.write(result)
 		text_file.close()
 		print("Registro N°: "+str(count))
-		if count >=90:
-			cargando_bigquery()
+		cargando_bigquery()
 	except:
 		print("Vacio")
 
