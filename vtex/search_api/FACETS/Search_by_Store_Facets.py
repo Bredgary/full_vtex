@@ -73,7 +73,6 @@ def operacion_fenix(count):
 	for i in listaIDS:
 		count +=1
 		search_by_store_facets(i,count)
-		break
 
 operacion_fenix(count)
 
