@@ -27,7 +27,7 @@ def search_by_store_facets(id,count):
 	while("" in FJson) :
 		FJson.remove("")
 	Summary = FJson["Summary"]
-	type(Sumary)
+	print(type(Summary))
 	#while("" in Summary["SpecificationFilters"]) :
 	#	Summary["SpecificationFilters"].remove("")
 	#print(Summary)
