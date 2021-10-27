@@ -8,22 +8,25 @@ from google.cloud import bigquery
 from itertools import chain
 from collections import defaultdict
 
-def :
+
+def Get_campaign_configuration():
+	url = "https://mercury.vtexcommercestable.com.br/api/rnb/pvt/campaignConfiguration/"
+	headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
+	response = requests.request("GET", url, headers=headers)
 	FJson = json.loads(response.text)
 	result = json.dumps(FJson)
-	text_file = open("items.json", "w")
+	text_file = open("/home/bred_valenzuela/full_vtex/vtex/promotions_and_taxes_api/CAMPAIGNS/CAMPAIGNS.json", "w")
 	text_file.write(result)
 	text_file.close()
-	print("Registro: "+str())
 	cargando_bigquery()
 
 def cargando_bigquery():
 	print("Cargando a BigQuery")
-	system("cat items.json | jq -c '.[]' > .json")
+	#system("cat items.json | jq -c '.[]' > tablePaged.json")
 	client = bigquery.Client()
-	filename = '.json'
+	filename = '/home/bred_valenzuela/full_vtex/vtex/promotions_and_taxes_api/CAMPAIGNS/CAMPAIGNS.json'
 	dataset_id = 'landing_zone'
-	table_id = ''
+	table_id = 'shopstar_vtex_campaign_configuration'
 	dataset_ref = client.dataset(dataset_id)
 	table_ref = dataset_ref.table(table_id)
 	job_config = bigquery.LoadJobConfig()
@@ -39,17 +42,4 @@ def cargando_bigquery():
 	print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 	print("finalizado")
 
-'''
-QUERY = (
-    '')
-query_job = client.query(QUERY)  
-rows = query_job.result()  
-
-for row in rows:
-    productList.append(row.FieldId)
-
-string = json.dumps(productList)
-text_file = open("_2.json", "w")
-text_file.write(string)
-text_file.close()
-'''
+Get_campaign_configuration()
