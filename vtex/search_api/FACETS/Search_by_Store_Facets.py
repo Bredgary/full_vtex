@@ -13,6 +13,7 @@ from collections import defaultdict
 client = bigquery.Client()
 productList = []
 count = 0
+order = {}
 
 def replace_blank_dict(d):
     if not d:
