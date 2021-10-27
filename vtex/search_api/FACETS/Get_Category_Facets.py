@@ -62,7 +62,7 @@ def cargando_bigquery():
 	print("finalizado")
 
 def operacion_fenix(count):
-	f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/search_api/FACETS/id_producto.json','r')
+	f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/search_api/FACETS/id_category.json','r')
 	data_from_string = f_01.read()
 	listaIDS = json.loads(data_from_string)
 	for i in listaIDS:
