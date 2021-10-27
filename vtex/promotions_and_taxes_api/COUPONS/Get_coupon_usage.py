@@ -27,7 +27,7 @@ def coupon_usage(id,count):
 		#cargando_bigquery()
 		print("Registro N°: "+str(count))
 	else:
-		print("Tabla Vacia")
+		print("Tabla Vacia n° "+str(count))
 
 def cargando_bigquery():
 	print("Cargando a BigQuery")
