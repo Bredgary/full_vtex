@@ -15,16 +15,22 @@ productList = []
 count = 0
 
 def search_SKU_offers(id,count):
-	url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pub/products/offers/"+str(id[1])+"/sku/"+str(id[0])+""
-	headers = {"Accept": "application/json; charset=utf-8","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-	response = requests.request("GET", url, headers=headers)
-	FJson = json.loads(response.text)
-	result = json.dumps(FJson)
-	text_file = open("/home/bred_valenzuela/full_vtex/vtex/search_api/OFFERS/items.json", "w")
-	text_file.write(result)
-	text_file.close()
-	print("Registro N°: "+str(count))
-	cargando_bigquery()
+	try:
+		url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pub/products/offers/"+str(id[1])+"/sku/"+str(id[0])+""
+		headers = {"Accept": "application/json; charset=utf-8","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
+		response = requests.request("GET", url, headers=headers)
+		FJson = json.loads(response.text)
+		result = json.dumps(FJson)
+		text_file = open("/home/bred_valenzuela/full_vtex/vtex/search_api/OFFERS/items.json", "w")
+		text_file.write(result)
+		text_file.close()
+		print("Registro N°: "+str(count))
+		if count >= 32:
+			cargando_bigquery()
+	except:
+		text_file = open("/home/bred_valenzuela/full_vtex/vtex/search_api/OFFERS/respaldo/items.json", "w")
+		text_file.write(result)
+		text_file.close()
 
 def cargando_bigquery():
 	print("Cargando a BigQuery")
