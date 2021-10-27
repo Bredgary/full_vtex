@@ -47,7 +47,6 @@ def cargando_bigquery():
 all_coupon()
 '''
 
-
 QUERY = (
     'SELECT couponCode FROM `shopstar-datalake.landing_zone.vtex_shopstar_all_coupon`')
 query_job = client.query(QUERY)  
