@@ -14,13 +14,13 @@ client = bigquery.Client()
 productList = []
 count = 0
 
-def search_SKU_offers(id,count):
-	url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pub/products/offers/"+str(id[1])+"/sku/"+str(id[0])+""
+def search_product_offers(id,count):
+	url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pub/products/offers/"+str(id)+""
 	headers = {"Accept": "application/json; charset=utf-8","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 	response = requests.request("GET", url, headers=headers)
 	FJson = json.loads(response.text)
 	result = json.dumps(FJson)
-	text_file = open("/home/bred_valenzuela/full_vtex/vtex/search_api/OFFERS/items.json", "w")
+	text_file = open("/home/bred_valenzuela/full_vtex/vtex/search_api/OFFERS/itemsP.json", "w")
 	text_file.write(result)
 	text_file.close()
 	cargando_bigquery()
@@ -28,10 +28,10 @@ def search_SKU_offers(id,count):
 
 def cargando_bigquery():
 	print("Cargando a BigQuery")
-	system("cat items.json | jq -c '.[]' > SKU_offers.json")
-	filename = '/home/bred_valenzuela/full_vtex/vtex/search_api/OFFERS/SKU_offers.json'
+	system("cat itemsP.json | jq -c '.[]' > Product_offers.json")
+	filename = '/home/bred_valenzuela/full_vtex/vtex/search_api/OFFERS/Product_offers.json'
 	dataset_id = 'landing_zone'
-	table_id = 'vtex_shopstar_search_SKU_offers'
+	table_id = 'vtex_shopstar_search_product_offers'
 	dataset_ref = client.dataset(dataset_id)
 	table_ref = dataset_ref.table(table_id)
 	job_config = bigquery.LoadJobConfig()
@@ -48,12 +48,12 @@ def cargando_bigquery():
 	print("finalizado")
 
 def operacion_fenix(count):
-	f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/search_api/OFFERS/SKU_and_product_id.json','r')
+	f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/search_api/OFFERS/id_producto.json','r')
 	data_from_string = f_01.read()
 	listaIDS = json.loads(data_from_string)
 	for i in listaIDS:
 		count +=1
-		search_SKU_offers(i,count)
+		search_product_offers(i,count)
 
 operacion_fenix(count)
 
