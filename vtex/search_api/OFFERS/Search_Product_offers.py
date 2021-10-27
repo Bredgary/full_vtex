@@ -55,8 +55,8 @@ def operacion_fenix(count):
 	data_from_string = f_01.read()
 	listaIDS = json.loads(data_from_string)
 	for i in listaIDS:
-		print(i[0])
-		print(i[1])
+		print(type(i[0]))
+		print(type(i[1]))
 		break
 		#count +=1
 		#coupon_usage(i,count)
