@@ -24,14 +24,16 @@ def search_by_store_facets(id,count):
 	response = requests.request("GET", url, headers=headers, params=querystring)
 	FJson = json.loads(response.text)
 	print(FJson["Summary"])
-	#while("" in FJson) :
-	#	FJson.remove("")
-	#result = json.dumps(FJson)
-	#text_file = open("/home/bred_valenzuela/full_vtex/vtex/search_api/FACETS/items.json", "w")
-	#text_file.write(result)
-	#text_file.close()
-	#print("Registro N°: "+str(count))
-	#cargando_bigquery()
+	while("" in FJson) :
+		FJson.remove("")
+	while("" in FJson["Summary"]) :
+		FJson["Summary"].remove("")
+	result = json.dumps(FJson)
+	text_file = open("/home/bred_valenzuela/full_vtex/vtex/search_api/FACETS/items.json", "w")
+	text_file.write(result)
+	text_file.close()
+	print("Registro N°: "+str(count))
+	cargando_bigquery()
 	#except:
 	#	url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pub/facets/search/"+str(id)+""
 	#	querystring = {"map":"c"}
