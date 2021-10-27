@@ -13,34 +13,44 @@ from collections import defaultdict
 client = bigquery.Client()
 productList = []
 count = 0
-'''
-def search_product_offers(id,count):
+
+def Get_Category_Facets(id,count):
 	try:
-		url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pub/products/offers/"+str(id)+""
+		url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pub/facets/category/"+str(id)+""
+		querystring = {"_from":"1","_to":"20"}
 		headers = {"Accept": "application/json; charset=utf-8","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-		response = requests.request("GET", url, headers=headers)
+		response = requests.request("GET", url, headers=headers, params=querystring)
 		FJson = json.loads(response.text)
 		result = json.dumps(FJson)
-		text_file = open("/home/bred_valenzuela/full_vtex/vtex/search_api/OFFERS/itemsP.json", "w")
+		text_file = open("/home/bred_valenzuela/full_vtex/vtex/search_api/FACETS/itemsP.json", "w")
 		text_file.write(result)
 		text_file.close()
 		print("Registro N°: "+str(count))
 		cargando_bigquery()
 	except:
-		print("Vacio")
+		url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pub/facets/category/"+str(id)+""
+		querystring = {"_from":"1","_to":"20"}
+		headers = {"Accept": "application/json; charset=utf-8","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
+		response = requests.request("GET", url, headers=headers, params=querystring)
+		if response:
+			print("Tabla Vacia")
+		else:
+			text_file = open("/home/bred_valenzuela/full_vtex/vtex/search_api/FACETS/respaldo/itemsP.json", "w")
+			text_file.write(response.text)
+			text_file.close()
 
 
 def cargando_bigquery():
 	print("Cargando a BigQuery")
-	system("cat itemsP.json | jq -c '.[]' > Product_offers.json")
-	filename = '/home/bred_valenzuela/full_vtex/vtex/search_api/OFFERS/Product_offers.json'
+	system("cat itemsP.json | jq -c '.[]' > category_facets.json")
+	filename = '/home/bred_valenzuela/full_vtex/vtex/search_api/FACETS/category_facets.json'
 	dataset_id = 'landing_zone'
-	table_id = 'vtex_shopstar_search_product_offers'
+	table_id = 'vtex_shopstar_category_facets'
 	dataset_ref = client.dataset(dataset_id)
 	table_ref = dataset_ref.table(table_id)
 	job_config = bigquery.LoadJobConfig()
 	job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-	#job_config.autodetect = True
+	job_config.autodetect = True
 	with open(filename, "rb") as source_file:
 		job = client.load_table_from_file(
 			source_file,
@@ -52,7 +62,7 @@ def cargando_bigquery():
 	print("finalizado")
 
 def operacion_fenix(count):
-	f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/search_api/OFFERS/id_producto.json','r')
+	f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/search_api/FACETS/id_producto.json','r')
 	data_from_string = f_01.read()
 	listaIDS = json.loads(data_from_string)
 	for i in listaIDS:
@@ -74,3 +84,4 @@ string = json.dumps(productList)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/search_api/FACETS/id_category.json", "w")
 text_file.write(string)
 text_file.close()
+'''
