@@ -62,7 +62,7 @@ operacion_fenix(count)
 
 '''
 QUERY = (
-    'SELECT Id,ProductId FROM `shopstar-datalake.landing_zone.shopstar_vtex_sku``')
+    'SELECT Id,ProductId FROM `shopstar-datalake.landing_zone.shopstar_vtex_sku`')
 query_job = client.query(QUERY)  
 rows = query_job.result()  
 
