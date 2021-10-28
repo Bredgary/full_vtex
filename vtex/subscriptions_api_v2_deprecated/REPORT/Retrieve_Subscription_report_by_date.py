@@ -29,7 +29,7 @@ def Retrieve_Subscription_report(email,count):
 		cargando_bigquery()
 	except:
 		url = "https://mercury.vtexcommercestable.com.br/api/rns/report/subscriptionsOrderByDate"
-		querystring = {"requesterEmail":""+str(email)+"}
+		querystring = {"requesterEmail":""+email+""}
 		headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 		response = requests.request("GET", url, headers=headers, params=querystring)
 		if response:
