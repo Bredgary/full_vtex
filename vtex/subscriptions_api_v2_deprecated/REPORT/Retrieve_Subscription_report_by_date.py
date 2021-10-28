@@ -15,29 +15,29 @@ productList = []
 count = 0
 
 def Retrieve_Subscription_report(email,count):
-	try:
-		url = "https://mercury.vtexcommercestable.com.br/api/rns/report/subscriptionsOrderByDate"
-		querystring = {"requesterEmail":""+email+""}
-		headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-		response = requests.request("GET", url, headers=headers, params=querystring)
-		FJson = json.loads(response.text)
-		result = json.dumps(FJson)
-		text_file = open("/home/bred_valenzuela/full_vtex/vtex/subscriptions_api_v2_deprecated/REPORTS/items.json", "w")
-		text_file.write(result)
-		text_file.close()
-		print("Registro N°: "+str(count))
-		cargando_bigquery()
-	except:
-		url = "https://mercury.vtexcommercestable.com.br/api/rns/report/subscriptionsOrderByDate"
-		querystring = {"requesterEmail":""+email+""}
-		headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-		response = requests.request("GET", url, headers=headers, params=querystring)
-		if response:
-			FJson = json.loads(response.text)
-			result = json.dumps(FJson)
-			text_file = open("/home/bred_valenzuela/full_vtex/vtex/subscriptions_api_v2_deprecated/REPORT/respaldo/"+str(count)+"_items.json", "w")
-			text_file.write(result)
-			text_file.close()
+	#try:
+	url = "https://mercury.vtexcommercestable.com.br/api/rns/report/subscriptionsOrderByDate"
+	querystring = {"requesterEmail":""+email+""}
+	headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
+	response = requests.request("GET", url, headers=headers, params=querystring)
+	FJson = json.loads(response.text)
+	result = json.dumps(FJson)
+	text_file = open("/home/bred_valenzuela/full_vtex/vtex/subscriptions_api_v2_deprecated/REPORTS/items.json", "w")
+	text_file.write(result)
+	text_file.close()
+	print("Registro N°: "+str(count))
+	cargando_bigquery()
+	#except:
+	#	url = "https://mercury.vtexcommercestable.com.br/api/rns/report/subscriptionsOrderByDate"
+	#	querystring = {"requesterEmail":""+email+""}
+	#	headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
+	#	response = requests.request("GET", url, headers=headers, params=querystring)
+	#	if response:
+	#		FJson = json.loads(response.text)
+	#		result = json.dumps(FJson)
+	#		text_file = open("/home/bred_valenzuela/full_vtex/vtex/subscriptions_api_v2_deprecated/REPORT/respaldo/"+str(count)+"_items.json", "w")
+	#		text_file.write(result)
+	#		text_file.close()
 
 def cargando_bigquery():
 	print("Cargando a BigQuery")
