@@ -13,7 +13,7 @@ from collections import defaultdict
 client = bigquery.Client()
 productList = []
 count = 0
-
+'''
 def search_SKU_offers(id,count):
 	try:
 		url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pub/products/offers/"+str(id[1])+"/sku/"+str(id[0])+""
@@ -49,7 +49,7 @@ def cargando_bigquery():
 	table_ref = dataset_ref.table(table_id)
 	job_config = bigquery.LoadJobConfig()
 	job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-	#job_config.autodetect = True
+	job_config.autodetect = True
 	with open(filename, "rb") as source_file:
 		job = client.load_table_from_file(
 			source_file,
@@ -72,16 +72,14 @@ operacion_fenix(count)
 
 '''
 QUERY = (
-    'SELECT Id,ProductId FROM `shopstar-datalake.landing_zone.shopstar_vtex_sku`')
+    'SELECT email FROM `shopstar-datalake.landing_zone.shopstar_vtex_search_documents` where email is not null')
 query_job = client.query(QUERY)  
 rows = query_job.result()  
 
 for row in rows:
-	temp = [row.Id,row.ProductId]
-	productList.append(temp)
+	productList.append(row.email)
 
 string = json.dumps(productList)
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/search_api/OFFERS/SKU_and_product_id.json", "w")
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/subscriptions_api_v2_deprecated/REPORT/emails.json", "w")
 text_file.write(string)
 text_file.close()
-'''
