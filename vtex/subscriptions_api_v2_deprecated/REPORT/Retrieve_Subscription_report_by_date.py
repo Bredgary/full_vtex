@@ -22,7 +22,7 @@ def Retrieve_Subscription_report(email,count):
 	response = requests.request("GET", url, headers=headers, params=querystring)
 	FJson = json.loads(response.text)
 	result = json.dumps(FJson)
-	text_file = open("/home/bred_valenzuela/full_vtex/vtex/subscriptions_api_v2_deprecated/REPORTS/items.json", "w")
+	text_file = open("/home/bred_valenzuela/full_vtex/vtex/subscriptions_api_v2_deprecated/REPORT/items.json", "w")
 	text_file.write(result)
 	text_file.close()
 	print("Registro N°: "+str(count))
