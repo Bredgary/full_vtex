@@ -13,16 +13,15 @@ from collections import defaultdict
 client = bigquery.Client()
 productList = []
 count = 0
-'''
-def Retrieve_Subscription_report(email,count):
+
+def Get_report_statusby_ID(id,count):
 	#try:
-	url = "https://mercury.vtexcommercestable.com.br/api/rns/report/subscriptionsOrderByDate"
-	querystring = {"requesterEmail":""+email+""}
+	url = "https://mercury.vtexcommercestable.com.br/api/rns/report/reportStatus/"+str(id)+""
 	headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-	response = requests.request("GET", url, headers=headers, params=querystring)
+	response = requests.request("GET", url, headers=headers)
 	FJson = json.loads(response.text)
 	result = json.dumps(FJson)
-	text_file = open("/home/bred_valenzuela/full_vtex/vtex/subscriptions_api_v2_deprecated/REPORT/items.json", "w")
+	text_file = open("/home/bred_valenzuela/full_vtex/vtex/subscriptions_api_v2_deprecated/REPORT/items2.json", "w")
 	text_file.write(result)
 	text_file.close()
 	print("Registro N°: "+str(count))
@@ -42,9 +41,9 @@ def Retrieve_Subscription_report(email,count):
 def cargando_bigquery():
 	print("Cargando a BigQuery")
 	#system("cat items.json | jq -c '.[]' > report.json")
-	filename = '/home/bred_valenzuela/full_vtex/vtex/subscriptions_api_v2_deprecated/REPORT/items.json'
+	filename = '/home/bred_valenzuela/full_vtex/vtex/subscriptions_api_v2_deprecated/REPORT/items2.json'
 	dataset_id = 'landing_zone'
-	table_id = 'vtex_shopstar_retrieve_subscription_report'
+	table_id = 'shopstar_vtex_get_report_statusby_ID'
 	dataset_ref = client.dataset(dataset_id)
 	table_ref = dataset_ref.table(table_id)
 	job_config = bigquery.LoadJobConfig()
@@ -61,12 +60,12 @@ def cargando_bigquery():
 	print("finalizado")
 
 def operacion_fenix(count):
-	f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/subscriptions_api_v2_deprecated/REPORT/emails.json','r')
+	f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/subscriptions_api_v2_deprecated/REPORT/reportId.json','r')
 	data_from_string = f_01.read()
 	listaIDS = json.loads(data_from_string)
 	for i in listaIDS:
 		count +=1
-		Retrieve_Subscription_report(i,count)
+		Get_report_statusby_ID(i,count)
 
 operacion_fenix(count)
 
@@ -83,3 +82,4 @@ string = json.dumps(productList)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/subscriptions_api_v2_deprecated/REPORT/reportId.json", "w")
 text_file.write(string)
 text_file.close()
+'''
