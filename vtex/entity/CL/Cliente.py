@@ -24,7 +24,7 @@ format = now.strftime('%Y-%m-%d')
 
 def cl_client():
 	url = "https://mercury.vtexcommercestable.com.br/api/dataentities/CL/search"
-	querystring = {"_fields":"beneficio,beneficio2,document,crearGiftcard,profilePicture,proteccionDatos,terminosCondiciones,terminosPago,isCorporate,tradeName,rclastcart,rclastcartvalue,rclastsession,rclastsessiondate,homePhone,phone,brandPurchasedTag,brandVisitedTag,categoryPurchasedTag,categoryVisitedTag,departmentVisitedTag,productPurchasedTag,productVisitedTag,stateRegistration,email,userId,firstName,lastName,document,isNewsletterOptIn,localeDefault,attach,approved,birthDate,businessPhone,carttag,checkouttag,corporateDocument,corporateName,documentType,gender,visitedProductWithStockOutSkusTag,customerClass,priceTables,birthDateMonth,id,accountId,accountName,dataEntityId,createdBy,createdIn,updatedBy,updatedIn,lastInteractionBy,lastInteractionIn,followers,tags,auto_filter","_where":"createdIn="+format+""}
+	querystring = {"_fields":"beneficio,beneficio2,document,crearGiftcard,profilePicture,proteccionDatos,terminosCondiciones,terminosPago,tradeName,rclastcart,rclastcartvalue,rclastsession,rclastsessiondate,homePhone,phone,brandPurchasedTag,brandVisitedTag,categoryPurchasedTag,categoryVisitedTag,departmentVisitedTag,productPurchasedTag,productVisitedTag,stateRegistration,email,userId,firstName,lastName,document,isNewsletterOptIn,localeDefault,attach,approved,birthDate,businessPhone,carttag,checkouttag,corporateDocument,corporateName,documentType,gender,visitedProductWithStockOutSkusTag,customerClass,priceTables,birthDateMonth,id,accountId,accountName,dataEntityId,createdBy,createdIn,updatedBy,updatedIn,lastInteractionBy,lastInteractionIn,followers,tags,auto_filter","_where":"createdIn="+format+""}
 	headers = {
 		"Content-Type": "application/json",
 		"Accept": "application/vnd.vtex.ds.v10+json",
@@ -44,7 +44,7 @@ def format_schema(schema):
 
 
 df = pd.DataFrame(cl_client(),
-columns=['beneficio','beneficio2','document','crearGiftcard','profilePicture','proteccionDatos','terminosCondiciones','terminosPago'])
+columns=['beneficio','beneficio2','document','crearGiftcard','profilePicture','proteccionDatos','terminosCondiciones','terminosPago','tradeName','rclastcart','rclastcartvalue','rclastsession','rclastsessiondate'])
 df.reset_index(drop=True, inplace=True)
 
 json_data = df.to_json(orient = 'records')
@@ -79,10 +79,6 @@ table_schema = {
     "mode": "NULLABLE"
   },{
     "name": "terminosPago",
-    "type": "STRING",
-    "mode": "NULLABLE"
-  },{
-    "name": "isCorporate",
     "type": "STRING",
     "mode": "NULLABLE"
   },{
