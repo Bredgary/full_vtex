@@ -4,11 +4,15 @@ import pandas as pd
 import numpy as np
 from google.cloud import bigquery
 import os, json
+from datetime import datetime
 import requests
 
+output_date = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ")
+print(output_date)
+'''
 def cl_client():
 	url = "https://mercury.vtexcommercestable.com.br/api/dataentities/CL/search"
-	querystring = {"_fields":"email,firstName,document"}
+	querystring = {"_fields":"email%2CfirstName%2Cdocument","_where":"createdIn=3Dtoday"}
 	headers = {
 		"Content-Type": "application/json",
 		"Accept": "application/vnd.vtex.ds.v10+json",
@@ -61,3 +65,4 @@ job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
 job_config.schema = format_schema(table_schema)
 job = client.load_table_from_json(json_object, table, job_config = job_config)
 print(job.result())
+'''
