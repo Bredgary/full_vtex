@@ -16,13 +16,12 @@ aware_dt.isoformat(timespec="seconds")
 utc_dt = aware_dt.astimezone(timezone.utc)
 # correct, ISO-8601 and UTC (but not in UTC format)
 date_str = utc_dt.isoformat(timespec='milliseconds')
-
 date = date_str.replace("+00:00", "Z")
-print(date)
-print(type(date))
 
+now = datetime.now()
+format = now.strftime('%Y,%m,%d')
+print(format)
 
-'''
 def cl_client():
 	url = "https://mercury.vtexcommercestable.com.br/api/dataentities/CL/search"
 	querystring = {"_fields":"email%2CfirstName%2Cdocument","_where":"createdIn=3Dtoday"}
