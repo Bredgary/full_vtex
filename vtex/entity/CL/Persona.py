@@ -35,20 +35,17 @@ json_object = json.loads(json_data)
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = r"credentials.json"
 
 table_schema = {
-    "name": "email",
+	"name": "email",
     "type": "STRING",
     "mode": "NULLABLE"
-  },
-  {
+  },{
     "name": "firstName",
     "type": "STRING",
     "mode": "NULLABLE"
-  },
-  {
+  },{
     "name": "document",
     "type": "INTEGER",
-    "mode": "NULLABLE"
-  }
+    "mode": "NULLABLE"}
 
 
 project_id = 'Shopstar-DataLake'
