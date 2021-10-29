@@ -22,6 +22,7 @@ now = datetime.now()
 format = now.strftime('%Y,%m,%d')
 print(format)
 
+'''
 def cl_client():
 	url = "https://mercury.vtexcommercestable.com.br/api/dataentities/CL/search"
 	querystring = {"_fields":"email%2CfirstName%2Cdocument","_where":"createdIn=3Dtoday"}
