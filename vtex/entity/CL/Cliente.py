@@ -54,7 +54,59 @@ json_object = json.loads(json_data)
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = r"/home/bred_valenzuela/full_vtex/vtex/entity/CL/key.json"
 
 table_schema = {
-    "name": "beneficio",
+    "name": "id",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },{
+    "name": "email",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },{
+    "name": "userId",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },{
+    "name": "firstName",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },{
+    "name": "lastName",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },{
+    "name": "document",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },{
+    "name": "localeDefault",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },{
+    "name": "attach",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },{
+    "name": "accountId",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },{
+    "name": "accountName",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },{
+    "name": "dataEntityId",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },{
+    "name": "createdBy",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },{
+    "name": "createdIn",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },{
+    "name": "updatedBy",
     "type": "STRING",
     "mode": "NULLABLE"
   },{
@@ -110,34 +162,6 @@ table_schema = {
     "type": "STRING",
     "mode": "NULLABLE"
   },{
-    "name": "email",
-    "type": "STRING",
-    "mode": "NULLABLE"
-  },{
-    "name": "userId",
-    "type": "STRING",
-    "mode": "NULLABLE"
-  },{
-    "name": "firstName",
-    "type": "STRING",
-    "mode": "NULLABLE"
-  },{
-    "name": "lastName",
-    "type": "STRING",
-    "mode": "NULLABLE"
-  },{
-    "name": "document",
-    "type": "STRING",
-    "mode": "NULLABLE"
-  },{
-    "name": "localeDefault",
-    "type": "STRING",
-    "mode": "NULLABLE"
-  },{
-    "name": "attach",
-    "type": "STRING",
-    "mode": "NULLABLE"
-  },{
     "name": "approved",
     "type": "STRING",
     "mode": "NULLABLE"
@@ -174,31 +198,7 @@ table_schema = {
     "type": "STRING",
     "mode": "NULLABLE"
   },{
-    "name": "id",
-    "type": "STRING",
-    "mode": "NULLABLE"
-  },{
-    "name": "accountId",
-    "type": "STRING",
-    "mode": "NULLABLE"
-  },{
-    "name": "accountName",
-    "type": "STRING",
-    "mode": "NULLABLE"
-  },{
-    "name": "dataEntityId",
-    "type": "STRING",
-    "mode": "NULLABLE"
-  },{
-    "name": "createdBy",
-    "type": "STRING",
-    "mode": "NULLABLE"
-  },{
-    "name": "createdIn",
-    "type": "STRING",
-    "mode": "NULLABLE"
-  },{
-    "name": "updatedBy",
+    "name": "beneficio",
     "type": "STRING",
     "mode": "NULLABLE"
   },{
