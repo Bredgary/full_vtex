@@ -47,7 +47,7 @@ table_schema = {
     "type": "INTEGER",
     "mode": "NULLABLE"}
 
-
+'''
 project_id = 'Shopstar-DataLake'
 dataset_id = 'landing_zone'
 table_id = 'shopstar_vtex_client'
@@ -62,3 +62,4 @@ job_config.schema = format_schema(table_schema)
 job = client.load_table_from_json(json_object, table, job_config = job_config)
 
 print(job.result())
+'''
