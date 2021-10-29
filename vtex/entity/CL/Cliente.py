@@ -105,7 +105,7 @@ table_schema = {
     "name": "phone",
     "type": "STRING",
     "mode": "NULLABLE"
-  }{
+  },{
     "name": "stateRegistration",
     "type": "STRING",
     "mode": "NULLABLE"
