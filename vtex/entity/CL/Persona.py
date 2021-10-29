@@ -28,7 +28,7 @@ def cl_client():
 	headers = {
 		"Content-Type": "application/json",
 		"Accept": "application/vnd.vtex.ds.v10+json",
-		"REST-Range": "resources=0-1",
+		"REST-Range": "resources=0-1000",
 		"X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA",
 		"X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"
 	}
@@ -42,6 +42,8 @@ def format_schema(schema):
         formatted_schema.append(bigquery.SchemaField(row['name'], row['type'], row['mode']))
     return formatted_schema
 
+
+df.reset_index(drop=True, inplace=True)
 df = pd.DataFrame(cl_client(),
 columns=['beneficio', 'beneficio2', 'document','crearGiftcard','profilePicture','proteccionDatos','terminosCondiciones','terminosPago','isCorporate','tradeName','rclastcart','rclastcartvalue','rclastsession','rclastsessiondate','homePhone','phone','brandPurchasedTag','brandVisitedTag','categoryPurchasedTag','categoryVisitedTag','departmentVisitedTag','productPurchasedTag','productVisitedTag','stateRegistration','email','userId','firstName','lastName','document','isNewsletterOptIn','localeDefault','attach','approved','birthDate','businessPhone','carttag','checkouttag','corporateDocument','corporateName','documentType','gender','visitedProductWithStockOutSkusTag','customerClass','priceTables','birthDateMonth','id','accountId','accountName','dataEntityId','createdBy','createdIn','updatedBy','updatedIn','lastInteractionBy','lastInteractionIn','followers','tags','auto_filter'])
 
