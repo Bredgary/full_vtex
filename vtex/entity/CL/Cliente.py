@@ -24,7 +24,7 @@ format = now.strftime('%Y-%m-%d')
 
 def cl_client():
 	url = "https://mercury.vtexcommercestable.com.br/api/dataentities/CL/search"
-	querystring = {"_fields":"beneficio,beneficio2,document,crearGiftcard,profilePicture,proteccionDatos,terminosCondiciones,terminosPago,tradeName,rclastcart,rclastsession,rclastsessiondate,homePhone,phone,brandPurchasedTag,brandVisitedTag,categoryPurchasedTag,categoryVisitedTag,departmentVisitedTag,productPurchasedTag,productVisitedTag,stateRegistration,email,userId,firstName,lastName,document,isNewsletterOptIn,localeDefault,attach,approved,birthDate,businessPhone,carttag,checkouttag,corporateDocument,corporateName,documentType,gender,visitedProductWithStockOutSkusTag,customerClass,priceTables,birthDateMonth,id,accountId,accountName,dataEntityId,createdBy,createdIn,updatedBy,updatedIn,lastInteractionBy,lastInteractionIn,followers,tags,auto_filter","_where":"createdIn="+format+""}
+	querystring = {"_fields":"beneficio,beneficio2,document,crearGiftcard,profilePicture,proteccionDatos,terminosCondiciones,terminosPago,tradeName,rclastcart,rclastsession,rclastsessiondate,homePhone,phone,brandVisitedTag,categoryPurchasedTag,categoryVisitedTag,departmentVisitedTag,productPurchasedTag,productVisitedTag,stateRegistration,email,userId,firstName,lastName,document,isNewsletterOptIn,localeDefault,attach,approved,birthDate,businessPhone,carttag,checkouttag,corporateDocument,corporateName,documentType,gender,visitedProductWithStockOutSkusTag,customerClass,priceTables,birthDateMonth,id,accountId,accountName,dataEntityId,createdBy,createdIn,updatedBy,updatedIn,lastInteractionBy,lastInteractionIn,followers,tags,auto_filter","_where":"createdIn="+format+""}
 	headers = {
 		"Content-Type": "application/json",
 		"Accept": "application/vnd.vtex.ds.v10+json",
@@ -103,10 +103,6 @@ table_schema = {
     "mode": "NULLABLE"
   },{
     "name": "phone",
-    "type": "STRING",
-    "mode": "NULLABLE"
-  },{
-    "name": "brandPurchasedTag",
     "type": "STRING",
     "mode": "NULLABLE"
   },{
