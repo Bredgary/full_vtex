@@ -44,7 +44,7 @@ table_schema = {
     "mode": "NULLABLE"
   },{
     "name": "document",
-    "type": "INTEGER",
+    "type": "STRING",
     "mode": "NULLABLE"}
 
 
