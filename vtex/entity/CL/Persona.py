@@ -20,7 +20,6 @@ def cl_client():
 	Fjson = json.loads(response.text)
 	return Fjson
 
-
 def format_schema(schema):
     formatted_schema = []
     for row in schema:
@@ -31,16 +30,12 @@ def format_schema(schema):
 df = pd.DataFrame(cl_client(),
 columns=['email', 'firstName', 'document'])
 
-
-print(df)
-
-'''
-### Convert dataframe to JSON object
 json_data = df.to_json(orient = 'records')
 json_object = json.loads(json_data)
 
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = r"credentials.json"
-
+print(json_object)
+'''
 ### Define schema as on BigQuery table, i.e. the fields id, first_name and last_name   
 table_schema = {
           'name': 'id',
