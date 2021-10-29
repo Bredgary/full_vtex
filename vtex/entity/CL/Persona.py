@@ -8,6 +8,9 @@ from datetime import datetime
 import requests
 from datetime import datetime, timezone
 
+aware_dt = naive_dt.astimezone()
+# correct, ISO-8601 (but not UTC)
+aware_dt.isoformat(timespec='seconds')
 # lets get the time in UTC
 utc_dt = aware_dt.astimezone(timezone.utc)
 # correct, ISO-8601 and UTC (but not in UTC format)
