@@ -27,6 +27,7 @@ date_str.replace('+00:00', 'Z')
 print(date_str)
 print(type(date_str))
 
+
 '''
 def cl_client():
 	url = "https://mercury.vtexcommercestable.com.br/api/dataentities/CL/search"
