@@ -9,6 +9,7 @@ import requests
 from datetime import datetime, timezone
 
 naive_dt = datetime.now()
+naive_dt.strftime("%Y-%m-%dT%H:%M:%SZ")
 aware_dt = naive_dt.astimezone()
 # correct, ISO-8601 (but not UTC)
 aware_dt.isoformat(timespec='seconds')
