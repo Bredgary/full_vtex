@@ -50,9 +50,8 @@ df.reset_index(drop=True, inplace=True)
 json_data = df.to_json(orient = 'records')
 json_object = json.loads(json_data)
 
-print(df)
 
-'''
+
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = r"/home/bred_valenzuela/full_vtex/vtex/entity/CL/key.json"
 
 table_schema = {
@@ -299,4 +298,3 @@ job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
 job_config.schema = format_schema(table_schema)
 job = client.load_table_from_json(json_object, table, job_config = job_config)
 print(job.result())
-'''
