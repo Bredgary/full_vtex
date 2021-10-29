@@ -20,16 +20,15 @@ date = date_str.replace("+00:00", "Z")
 
 now = datetime.now()
 format = now.strftime('%Y-%m-%d')
-print(format)
 
-'''
+
 def cl_client():
 	url = "https://mercury.vtexcommercestable.com.br/api/dataentities/CL/search"
-	querystring = {"_fields":"email%2CfirstName%2Cdocument","_where":"createdIn=3Dtoday"}
+	querystring = {"_fields":"email,firstName,Cdocument","_where":"createdIn="+format+""}
 	headers = {
 		"Content-Type": "application/json",
 		"Accept": "application/vnd.vtex.ds.v10+json",
-		"REST-Range": "resources=0-1",
+		"REST-Range": "resources=0-100",
 		"X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA",
 		"X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"
 	}
@@ -78,4 +77,3 @@ job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
 job_config.schema = format_schema(table_schema)
 job = client.load_table_from_json(json_object, table, job_config = job_config)
 print(job.result())
-'''
