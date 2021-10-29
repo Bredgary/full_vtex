@@ -32,7 +32,7 @@ columns=['email', 'firstName', 'document'])
 json_data = df.to_json(orient = 'records')
 json_object = json.loads(json_data)
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = r"/home/bred_valenzuela/key/key.json""
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = r"/home/bred_valenzuela/full_vtex/vtex/entity/CL/key.json""
 
 table_schema = {
 	"name": "email",
