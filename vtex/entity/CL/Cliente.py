@@ -44,7 +44,7 @@ def format_schema(schema):
 
 
 df = pd.DataFrame(cl_client(),
-columns=['beneficio','document'])
+columns=['beneficio','beneficio2','document'])
 df.reset_index(drop=True, inplace=True)
 
 json_data = df.to_json(orient = 'records')
