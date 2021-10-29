@@ -24,7 +24,7 @@ format = now.strftime('%Y-%m-%d')
 
 def cl_client():
 	url = "https://mercury.vtexcommercestable.com.br/api/dataentities/CL/search"
-	querystring = {"_fields":"id,beneficio,beneficio2,document,crearGiftcard,profilePicture,proteccionDatos,terminosCondiciones,terminosPago,isCorporate,tradeName,rclastcart,rclastcartvalue,rclastsession,rclastsessiondate,homePhone,phone,brandPurchasedTag,brandVisitedTag,categoryPurchasedTag,categoryVisitedTag,departmentVisitedTag,productPurchasedTag,productVisitedTag,stateRegistration,email,userId,firstName,lastName,document,isNewsletterOptIn,localeDefault,attach,approved,birthDate,businessPhone,carttag,checkouttag,corporateDocument,corporateName,documentType,gender,visitedProductWithStockOutSkusTag,customerClass,priceTables,birthDateMonth,accountId,accountName,dataEntityId,createdBy,createdIn,updatedBy,updatedIn,lastInteractionBy,lastInteractionIn,followers,tags,auto_filter","_where":"createdIn="+format+""}
+	querystring = {"_fields":"distinct(id),beneficio,beneficio2,document,crearGiftcard,profilePicture,proteccionDatos,terminosCondiciones,terminosPago,isCorporate,tradeName,rclastcart,rclastcartvalue,rclastsession,rclastsessiondate,homePhone,phone,brandPurchasedTag,brandVisitedTag,categoryPurchasedTag,categoryVisitedTag,departmentVisitedTag,productPurchasedTag,productVisitedTag,stateRegistration,email,userId,firstName,lastName,document,isNewsletterOptIn,localeDefault,attach,approved,birthDate,businessPhone,carttag,checkouttag,corporateDocument,corporateName,documentType,gender,visitedProductWithStockOutSkusTag,customerClass,priceTables,birthDateMonth,accountId,accountName,dataEntityId,createdBy,createdIn,updatedBy,updatedIn,lastInteractionBy,lastInteractionIn,followers,tags,auto_filter","_where":"createdIn="+format+""}
 	headers = {
 		"Content-Type": "application/json",
 		"Accept": "application/vnd.vtex.ds.v10+json",
@@ -46,11 +46,11 @@ def format_schema(schema):
 df = pd.DataFrame(cl_client(),
 columns=['id','beneficio', 'beneficio2', 'document','crearGiftcard','profilePicture','proteccionDatos','terminosCondiciones','terminosPago','isCorporate','tradeName','rclastcart','rclastcartvalue','rclastsession','rclastsessiondate','homePhone','phone','brandPurchasedTag','brandVisitedTag','categoryPurchasedTag','categoryVisitedTag','departmentVisitedTag','productPurchasedTag','productVisitedTag','stateRegistration','email','userId','firstName','lastName','document','isNewsletterOptIn','localeDefault','attach','approved','birthDate','businessPhone','carttag','checkouttag','corporateDocument','corporateName','documentType','gender','visitedProductWithStockOutSkusTag','customerClass','priceTables','birthDateMonth','accountId','accountName','dataEntityId','createdBy','createdIn','updatedBy','updatedIn','lastInteractionBy','lastInteractionIn','followers','tags','auto_filter'])
 
-json_data = df.to_json(orient="split")
+json_data = df.to_json(orient = 'records')
 json_object = json.loads(json_data)
 
 print(df)
-
+'''
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = r"/home/bred_valenzuela/full_vtex/vtex/entity/CL/key.json"
 
 table_schema = {
@@ -297,3 +297,4 @@ job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
 job_config.schema = format_schema(table_schema)
 job = client.load_table_from_json(json_object, table, job_config = job_config)
 print(job.result())
+'''
