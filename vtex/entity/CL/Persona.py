@@ -11,14 +11,12 @@ from datetime import datetime, timezone
 naive_dt = datetime.now()
 aware_dt = naive_dt.astimezone()
 # correct, ISO-8601 (but not UTC)
-aware_dt.isoformat(timespec='seconds')
+aware_dt.isoformat(timespec="seconds")
 # lets get the time in UTC
 utc_dt = aware_dt.astimezone(timezone.utc)
 # correct, ISO-8601 and UTC (but not in UTC format)
-utc_dt.isoformat(timespec='seconds')
-# correct, UTC format (this is what you asked for)
-date_str = utc_dt.isoformat(timespec='seconds')
-date_str.replace("+00:00", "Z")
+utc_dt.isoformat(timespec="seconds")
+# correct, UTC format (this is what you asked for
 # Perfect UTC format
 date_str = utc_dt.isoformat(timespec='milliseconds')
 date_str.replace("+00:00", "Z")
