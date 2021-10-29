@@ -9,7 +9,6 @@ import requests
 from datetime import datetime, timezone
 
 naive_dt = datetime.now()
-naive_dt.strftime("%Y-%m-%dT%H:%M:%SZ")
 aware_dt = naive_dt.astimezone()
 # correct, ISO-8601 (but not UTC)
 aware_dt.isoformat(timespec='seconds')
@@ -17,13 +16,12 @@ aware_dt.isoformat(timespec='seconds')
 utc_dt = aware_dt.astimezone(timezone.utc)
 # correct, ISO-8601 and UTC (but not in UTC format)
 utc_dt.isoformat(timespec='seconds')
-'2020-08-28T02:57:54+00:00'
 # correct, UTC format (this is what you asked for)
 date_str = utc_dt.isoformat(timespec='seconds')
-date_str.replace('+00:00', 'Z')
+date_str.replace("+00:00", "Z")
 # Perfect UTC format
 date_str = utc_dt.isoformat(timespec='milliseconds')
-date_str.replace('+00:00', 'Z')
+date_str.replace("+00:00", "Z")
 
 print(date_str)
 print(type(date_str))
