@@ -6,9 +6,11 @@ from google.cloud import bigquery
 import os, json
 from datetime import datetime
 import requests
+from datetime import datetime, timezone
 
-output_date = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ")
-print(output_date)
+# a naive datetime representing local time
+naive_dt = datetime.now()
+print(naive_dt)
 '''
 def cl_client():
 	url = "https://mercury.vtexcommercestable.com.br/api/dataentities/CL/search"
