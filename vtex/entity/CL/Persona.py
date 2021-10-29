@@ -19,7 +19,7 @@ date_str = utc_dt.isoformat(timespec='milliseconds')
 date = date_str.replace("+00:00", "Z")
 
 now = datetime.now()
-format = now.strftime('%Y,%m,%d')
+format = now.strftime('%Y-%m-%d')
 print(format)
 
 '''
