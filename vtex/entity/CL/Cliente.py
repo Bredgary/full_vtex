@@ -24,7 +24,7 @@ format = now.strftime('%Y-%m-%d')
 
 def cl_client():
 	url = "https://mercury.vtexcommercestable.com.br/api/dataentities/CL/search"
-	querystring = {"_fields":"id,firstName,lastName,email,accountId,accountName,dataEntityId","_where":"createdIn="+format+""}
+	querystring = {"_fields":"beneficio,beneficio2,id,firstName,lastName,email,accountId,accountName,dataEntityId","_where":"createdIn="+format+""}
 	headers = {
 		"Content-Type": "application/json",
 		"Accept": "application/vnd.vtex.ds.v10+json",
@@ -44,7 +44,7 @@ def format_schema(schema):
 
 
 df = pd.DataFrame(cl_client(),
-columns=['id','firstName','lastName','email','accountId','accountName','dataEntityId'])
+columns=['beneficio','beneficio2''id','firstName','lastName','email','accountId','accountName','dataEntityId'])
 df.reset_index(drop=True, inplace=True)
 
 json_data = df.to_json(orient = 'records')
