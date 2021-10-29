@@ -31,6 +31,9 @@ def format_schema(schema):
 df = pd.DataFrame(cl_client(),
 columns=['email', 'firstName', 'document'])
 
+
+print(df)
+
 '''
 ### Convert dataframe to JSON object
 json_data = df.to_json(orient = 'records')
