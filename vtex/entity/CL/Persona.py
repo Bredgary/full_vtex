@@ -20,9 +20,9 @@ utc_dt.isoformat(timespec="seconds")
 # Perfect UTC format
 date_str = utc_dt.isoformat(timespec='milliseconds')
 date_str.replace("+00:00", "Z")
-
-print(date_str)
-print(type(date_str))
+date = date_str
+print(date)
+print(type(date))
 
 
 '''
