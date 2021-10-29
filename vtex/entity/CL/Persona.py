@@ -24,11 +24,11 @@ format = now.strftime('%Y-%m-%d')
 
 def cl_client():
 	url = "https://mercury.vtexcommercestable.com.br/api/dataentities/CL/search"
-	querystring = {"_fields":"email,firstName,Cdocument","_where":"createdIn="+format+""}
+	querystring = {"_fields":"email,firstName,document","_where":"createdIn="+format+""}
 	headers = {
 		"Content-Type": "application/json",
 		"Accept": "application/vnd.vtex.ds.v10+json",
-		"REST-Range": "resources=0-100",
+		"REST-Range": "resources=0-1000",
 		"X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA",
 		"X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"
 	}
