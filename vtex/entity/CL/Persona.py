@@ -26,7 +26,6 @@ def format_schema(schema):
         formatted_schema.append(bigquery.SchemaField(row['name'], row['type'], row['mode']))
     return formatted_schema
 
-### Create dummy data to load
 df = pd.DataFrame(cl_client(),
 columns=['email', 'firstName', 'document'])
 
@@ -34,26 +33,25 @@ json_data = df.to_json(orient = 'records')
 json_object = json.loads(json_data)
 
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = r"credentials.json"
-print(json_object)
-'''
-### Define schema as on BigQuery table, i.e. the fields id, first_name and last_name   
-table_schema = {
-          'name': 'id',
-          'type': 'INTEGER',
-          'mode': 'REQUIRED'
-          }, {
-          'name': 'first_name',
-          'type': 'STRING',
-          'mode': 'NULLABLE'
-          }, {
-          'name': 'last_name',
-          'type': 'STRING',
-          'mode': 'NULLABLE'
-          }
 
-project_id = '<my_project>'
-dataset_id = '<my_dataset>'
-table_id = '<my_table>'
+table_schema = {
+	"name": "email",
+	"type": "STRING",
+	"mode": "NULLABLE"
+	},
+	{"name": "firstName",
+    "type": "STRING",
+    "mode": "NULLABLE"
+	},
+	{
+    "name": "document",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+	}
+
+project_id = 'Shopstar-DataLake'
+dataset_id = 'landing_zone'
+table_id = 'shopstar_vtex_client'
 
 client  = bigquery.Client(project = project_id)
 dataset  = client.dataset(dataset_id)
@@ -65,4 +63,3 @@ job_config.schema = format_schema(table_schema)
 job = client.load_table_from_json(json_object, table, job_config = job_config)
 
 print(job.result())
-'''
