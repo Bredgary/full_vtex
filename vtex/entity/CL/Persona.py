@@ -40,13 +40,13 @@ table_schema = {
 	"mode": "NULLABLE"
 	},
 	{"name": "firstName",
-    "type": "STRING",
-    "mode": "NULLABLE"
+	"type": "STRING",
+	"mode": "NULLABLE"
 	},
 	{
     "name": "document",
-    "type": "INTEGER",
-    "mode": "NULLABLE"
+	"type": "INTEGER",
+	"mode": "NULLABLE"
 	}
 
 project_id = 'Shopstar-DataLake'
