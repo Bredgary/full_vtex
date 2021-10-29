@@ -50,6 +50,7 @@ table_schema = {
     "mode": "NULLABLE"
   }
 
+
 project_id = 'Shopstar-DataLake'
 dataset_id = 'landing_zone'
 table_id = 'shopstar_vtex_client'
