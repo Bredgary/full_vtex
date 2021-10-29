@@ -8,9 +8,21 @@ from datetime import datetime
 import requests
 from datetime import datetime, timezone
 
-# a naive datetime representing local time
-naive_dt = datetime.now()
-print(naive_dt)
+# lets get the time in UTC
+utc_dt = aware_dt.astimezone(timezone.utc)
+# correct, ISO-8601 and UTC (but not in UTC format)
+utc_dt.isoformat(timespec='seconds')
+'2020-08-28T02:57:54+00:00'
+# correct, UTC format (this is what you asked for)
+date_str = utc_dt.isoformat(timespec='seconds')
+date_str.replace('+00:00', 'Z')
+# Perfect UTC format
+date_str = utc_dt.isoformat(timespec='milliseconds')
+date_str.replace('+00:00', 'Z')
+
+print(date_str)
+print(type(date_str))
+
 '''
 def cl_client():
 	url = "https://mercury.vtexcommercestable.com.br/api/dataentities/CL/search"
