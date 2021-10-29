@@ -24,11 +24,11 @@ format = now.strftime('%Y-%m-%d')
 
 def cl_client():
 	url = "https://mercury.vtexcommercestable.com.br/api/dataentities/CL/search"
-	querystring = {"_fields":"DISTINCT id,beneficio,beneficio2,document,crearGiftcard,profilePicture,proteccionDatos,terminosCondiciones,terminosPago,isCorporate,tradeName,rclastcart,rclastcartvalue,rclastsession,rclastsessiondate,homePhone,phone,brandPurchasedTag,brandVisitedTag,categoryPurchasedTag,categoryVisitedTag,departmentVisitedTag,productPurchasedTag,productVisitedTag,stateRegistration,email,userId,firstName,lastName,document,isNewsletterOptIn,localeDefault,attach,approved,birthDate,businessPhone,carttag,checkouttag,corporateDocument,corporateName,documentType,gender,visitedProductWithStockOutSkusTag,customerClass,priceTables,birthDateMonth,accountId,accountName,dataEntityId,createdBy,createdIn,updatedBy,updatedIn,lastInteractionBy,lastInteractionIn,followers,tags,auto_filter","_where":"createdIn="+format+""}
+	querystring = {"_fields":"beneficio,beneficio2,document,crearGiftcard,profilePicture,proteccionDatos,terminosCondiciones,terminosPago,isCorporate,tradeName,rclastcart,rclastcartvalue,rclastsession,rclastsessiondate,homePhone,phone,brandPurchasedTag,brandVisitedTag,categoryPurchasedTag,categoryVisitedTag,departmentVisitedTag,productPurchasedTag,productVisitedTag,stateRegistration,email,userId,firstName,lastName,document,isNewsletterOptIn,localeDefault,attach,approved,birthDate,businessPhone,carttag,checkouttag,corporateDocument,corporateName,documentType,gender,visitedProductWithStockOutSkusTag,customerClass,priceTables,birthDateMonth,id,accountId,accountName,dataEntityId,createdBy,createdIn,updatedBy,updatedIn,lastInteractionBy,lastInteractionIn,followers,tags,auto_filter","_where":"createdIn="+format+""}
 	headers = {
 		"Content-Type": "application/json",
 		"Accept": "application/vnd.vtex.ds.v10+json",
-		"REST-Range": "resources=0-1",
+		"REST-Range": "resources=0-1000",
 		"X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA",
 		"X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"
 	}
@@ -44,13 +44,15 @@ def format_schema(schema):
 
 
 df = pd.DataFrame(cl_client(),
-columns=['id','beneficio', 'beneficio2', 'document','crearGiftcard','profilePicture','proteccionDatos','terminosCondiciones','terminosPago','isCorporate','tradeName','rclastcart','rclastcartvalue','rclastsession','rclastsessiondate','homePhone','phone','brandPurchasedTag','brandVisitedTag','categoryPurchasedTag','categoryVisitedTag','departmentVisitedTag','productPurchasedTag','productVisitedTag','stateRegistration','email','userId','firstName','lastName','document','isNewsletterOptIn','localeDefault','attach','approved','birthDate','businessPhone','carttag','checkouttag','corporateDocument','corporateName','documentType','gender','visitedProductWithStockOutSkusTag','customerClass','priceTables','birthDateMonth','accountId','accountName','dataEntityId','createdBy','createdIn','updatedBy','updatedIn','lastInteractionBy','lastInteractionIn','followers','tags','auto_filter'])
-df.rename(index=str, columns={"duplicate_column": "duplicate_column_2"})
-json_data = df.reset_index(drop=True).to_json(orient='split')
+columns=['beneficio', 'beneficio2', 'document','crearGiftcard','profilePicture','proteccionDatos','terminosCondiciones','terminosPago','isCorporate','tradeName','rclastcart','rclastcartvalue','rclastsession','rclastsessiondate','homePhone','phone','brandPurchasedTag','brandVisitedTag','categoryPurchasedTag','categoryVisitedTag','departmentVisitedTag','productPurchasedTag','productVisitedTag','stateRegistration','email','userId','firstName','lastName','document','isNewsletterOptIn','localeDefault','attach','approved','birthDate','businessPhone','carttag','checkouttag','corporateDocument','corporateName','documentType','gender','visitedProductWithStockOutSkusTag','customerClass','priceTables','birthDateMonth','id','accountId','accountName','dataEntityId','createdBy','createdIn','updatedBy','updatedIn','lastInteractionBy','lastInteractionIn','followers','tags','auto_filter'])
+df.reset_index(drop=True, inplace=True)
+
+json_data = df.to_json(orient = 'records')
 json_object = json.loads(json_data)
 
-#print(df)
+print(df)
 
+'''
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = r"/home/bred_valenzuela/full_vtex/vtex/entity/CL/key.json"
 
 table_schema = {
@@ -297,3 +299,4 @@ job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
 job_config.schema = format_schema(table_schema)
 job = client.load_table_from_json(json_object, table, job_config = job_config)
 print(job.result())
+'''
