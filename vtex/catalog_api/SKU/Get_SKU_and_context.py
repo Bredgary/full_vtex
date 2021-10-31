@@ -60,19 +60,19 @@ DIR = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/SKUContext'
 countDir = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])
 
 for x in range(countDir):
-	try:
-		registro += 1
-		uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/SKUContext/"+str(registro)+"_sku.json"
-		f_03 = open (uri,'r')
-		ids_string = f_03.read()
-		formatoJson = json.loads(ids_string)
-		listaID.append(formatoJson)
-		print("sku contexts Almacenados: " +str(registro))
-	except:
-		string = json.dumps(listaID)
-		text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/"+str(registro)+"temp.json", "w")
-		text_file.write(string)
-		text_file.close() 
+	#try:
+	registro += 1
+	uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/SKUContext/"+str(registro)+"_sku.json"
+	f_03 = open (uri,'r')
+	ids_string = f_03.read()
+	formatoJson = json.loads(ids_string)
+	listaID.append(formatoJson)
+	print("sku contexts Almacenados: " +str(registro))
+	#except:
+	#	string = json.dumps(listaID)
+	#	text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/"+str(registro)+"temp.json", "w")
+	#	text_file.write(string)
+	#	text_file.close() 
 
 string = json.dumps(listaID)
 text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/skuF.json", "w")
