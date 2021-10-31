@@ -68,38 +68,14 @@ for x in range(countDir):
 		formatoJson = json.loads(ids_string)
 		listaID.append(formatoJson)
 		print("sku contexts Almacenados: " +str(registro))
-		if registro == 100:
-			break
 	except:
-		continue
-
+		string = json.dumps(listaID)
+		text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/"+str(registro)+"temp.json", "w")
+		text_file.write(string)
+		text_file.close() 
 
 string = json.dumps(listaID)
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/temp.json", "w")
+text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/skuF.json", "w")
 text_file.write(string)
 text_file.close() 
 
-system("cat temp.json | jq -c '.[]' > tableSku.json")
-#df = pd.read_json (r'/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/SKUContext/2_sku.json')
-#df.to_csv (r'/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/tableSku.csv', index = None)
-
-#system("find . -type f -print0 | xargs -0 sed -i 's/1382/n_1382/g'")
-print("Cargando a BigQuery")
-client = bigquery.Client()
-filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/tableSku.json'
-dataset_id = 'landing_zone'
-table_id = 'shopstar_vtex_sku_context'
-dataset_ref = client.dataset(dataset_id)
-table_ref = dataset_ref.table(table_id)
-job_config = bigquery.LoadJobConfig()
-job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-job_config.autodetect = True
-with open(filename, "rb") as source_file:
-    job = client.load_table_from_file(
-        source_file,
-        table_ref,
-        location="southamerica-east1",  # Must match the destination dataset location.
-    job_config=job_config,)  # API request
-job.result()  # Waits for table load to complete.
-print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
-print("finalizado")
