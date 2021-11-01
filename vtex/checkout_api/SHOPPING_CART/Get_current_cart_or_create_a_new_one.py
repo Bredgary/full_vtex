@@ -34,24 +34,23 @@ def current_cart():
 	cargando_bigquery()
 
 def cargando_bigquery():
-	print("Cargando a BigQuery")
-	#system("cat SHOPPING_CART.json | jq -c '.[]' > SHOPPING_CART_TABLE.json")
-	client = bigquery.Client()
-	filename = '/home/bred_valenzuela/full_vtex/vtex/checkout_api/SHOPPING_CART/SHOPPING_CART.json'
-	dataset_id = 'landing_zone'
-	table_id = 'shopstar_vtex_current_cart'
-	dataset_ref = client.dataset(dataset_id)
-	table_ref = dataset_ref.table(table_id)
-	job_config = bigquery.LoadJobConfig()
+    print("Cargando a BigQuery")
+    client = bigquery.Client()
+    filename = '/home/bred_valenzuela/full_vtex/vtex/checkout_api/SHOPPING_CART/SHOPPING_CART.json'
+    dataset_id = 'landing_zone'
+    table_id = 'shopstar_vtex_current_cart'
+    dataset_ref = client.dataset(dataset_id)
+    table_ref = dataset_ref.table(table_id)
+    job_config = bigquery.LoadJobConfig()
     job_config.autodetect = True
-	job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+    job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
     with open(filename, "rb") as source_file:
-		job = client.load_table_from_file(
-			source_file,
-			table_ref,
-			location="southamerica-east1",  # Must match the destination dataset location.
-		job_config=job_config,)  # API request
-	job.result()  # Waits for table load to complete.
+        job = client.load_table_from_file(
+            source_file,
+            table_ref,
+            location="southamerica-east1",  
+            job_config=job_config,) 
+	job.result()  
 	print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 	print("finalizado")
 
