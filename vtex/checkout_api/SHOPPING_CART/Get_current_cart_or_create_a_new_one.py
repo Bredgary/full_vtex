@@ -55,6 +55,7 @@ def cargando_bigquery():
 	print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 	print("finalizado")
 
+
 for x in range(1):
 	current_cart()
 
