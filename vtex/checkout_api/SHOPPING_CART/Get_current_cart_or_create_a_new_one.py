@@ -58,6 +58,7 @@ def cargando_bigquery():
 for x in range(1):
 	current_cart()
 
+
 class CommonLog(typing.NamedTuple):
     ip: str
     user_id: str
