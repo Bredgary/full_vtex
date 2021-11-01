@@ -52,7 +52,7 @@ def cargando_bigquery():
             job_config=job_config,)
     job.result()
     print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
-	print("finalizado")
+    print("finalizado")
 
 
 for x in range(1):
