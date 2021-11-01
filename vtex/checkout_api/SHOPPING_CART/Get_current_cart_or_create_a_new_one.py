@@ -50,8 +50,8 @@ def cargando_bigquery():
             table_ref,
             location="southamerica-east1",
             job_config=job_config,)
-        job.result()
-	print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
+    job.result()
+    print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 	print("finalizado")
 
 
