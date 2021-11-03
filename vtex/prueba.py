@@ -1,12 +1,6 @@
-import pycurl
-from io import BytesIO
+import requests
+headers={'x-api-key':'dapi879a141a514273c14060301b39ff2ce2'}
+url = "https://<databricks-instance>/api/2.1/jobs/list"
+response = requests.request("GET", url, headers=headers)
 
-#b_obj = BytesIO()
-#crl = pycurl.Curl()
-#crl.setopt(crl.URL, 'https://wiki.python.org/moin/BeginnersGuide'
-#crl.setopt(crl.WRITEDATA, b_obj)
-#crl.perform()
-#crl.close()
-#get_body = b_obj.getvalue()
-#print('Output of GET request:\n%s' % get_body.decode('utf8'))
-
+print(response.text)
