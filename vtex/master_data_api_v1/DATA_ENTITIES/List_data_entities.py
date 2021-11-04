@@ -1,3 +1,5 @@
+#!/usr/bin/python
+# -*- coding: latin-1 -*-
 import requests
 import json
 import os
@@ -8,22 +10,26 @@ from google.cloud import bigquery
 from itertools import chain
 from collections import defaultdict
 
-def :
+
+def get_list_entity():
+	url = "https://mercury.vtexcommercestable.com.br/api/dataentities"
+	headers = {"Content-Type": "application/json","Accept": "application/vnd.vtex.ds.v10+json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
+	response = requests.request("GET", url, headers=headers)
 	FJson = json.loads(response.text)
 	result = json.dumps(FJson)
-	text_file = open("items.json", "w")
+	text_file = open("/home/bred_valenzuela/full_vtex/vtex/master_data_api_v1/DATA_ENTITIES/temp.json", "w")
 	text_file.write(result)
 	text_file.close()
-	print("Registro: "+str())
 	cargando_bigquery()
+
 
 def cargando_bigquery():
 	print("Cargando a BigQuery")
-	system("cat items.json | jq -c '.[]' > .json")
+	system("cat temp.json | jq -c '.[]' > table_list_data_entity.json")
 	client = bigquery.Client()
-	filename = '.json'
+	filename = '/home/bred_valenzuela/full_vtex/vtex/master_data_api_v1/DATA_ENTITIES/table_list_data_entity.json'
 	dataset_id = 'landing_zone'
-	table_id = ''
+	table_id = 'shopstar_vtex_list_docks'
 	dataset_ref = client.dataset(dataset_id)
 	table_ref = dataset_ref.table(table_id)
 	job_config = bigquery.LoadJobConfig()
@@ -39,17 +45,4 @@ def cargando_bigquery():
 	print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 	print("finalizado")
 
-'''
-QUERY = (
-    '')
-query_job = client.query(QUERY)  
-rows = query_job.result()  
-
-for row in rows:
-    productList.append(row.FieldId)
-
-string = json.dumps(productList)
-text_file = open("_2.json", "w")
-text_file.write(string)
-text_file.close()
-'''
+get_list_entity()
