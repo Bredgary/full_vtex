@@ -22,7 +22,7 @@ def list_inventory_by_sku(id,count):
 	text_file.write(result)
 	text_file.close()
 	print("Registro: "+str(count))
-	if count >= 7298:
+	if count >= 8668:
 		cargando_bigquery(result,count)
 
 def cargando_bigquery(result,count):
