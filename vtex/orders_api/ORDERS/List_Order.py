@@ -1,14 +1,10 @@
-import requests
-import json
-import os
-import re
-import datetime
-from datetime import date
-from datetime import timedelta
-from os import system
+import pandas as pd
+import numpy as np
 from google.cloud import bigquery
-from itertools import chain
-from collections import defaultdict
+import os, json
+from datetime import datetime
+import requests
+from datetime import datetime, timezone
 
 class Init:
 	today = datetime.date.today()
