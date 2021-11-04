@@ -49,7 +49,7 @@ def run():
     json_data = df.to_json(orient = 'records')
     json_object = json.loads(json_data)
     print(json_object)
-    
+    '''
     table_schema = [
 		{
 			"name": "orderId",
@@ -119,48 +119,39 @@ def run():
 			"name": "ShippingEstimatedDateMax",
 			"type": "STRING",
 			"mode": "NULLABLE"
-			},
-  {
-    "name": "ShippingEstimatedDateMin",
-    "type": "STRING",
-    "mode": "NULLABLE"
-  },
-  {
-    "name": "orderIsComplete",
-    "type": "STRING",
-    "mode": "NULLABLE"
-  },
-  {
-    "name": "listId",
-    "type": "STRING",
-    "mode": "NULLABLE"
-  },
-  {
-    "name": "listType",
-    "type": "STRING",
-    "mode": "NULLABLE"
-  },
-  {
-    "name": "authorizedDate",
-    "type": "STRING",
-    "mode": "NULLABLE"
-  },
-  {
-    "name": "callCenterOperatorName",
-    "type": "STRING",
-    "mode": "NULLABLE"
-  },
-  {
-    "name": "totalItems",
-    "type": "STRING",
-    "mode": "NULLABLE"
-  },
-  {
-    "name": "currencyCode",
-    "type": "STRING",
-    "mode": "NULLABLE"
-  }
-]
+		},{
+			"name": "ShippingEstimatedDateMin",
+			"type": "STRING",
+			"mode": "NULLABLE"
+		},{
+			"name": "orderIsComplete",
+			"type": "STRING",
+			"mode": "NULLABLE"
+		},{
+			"name": "listId",
+			"type": "STRING",
+			"mode": "NULLABLE"
+		},{
+			"name": "listType",
+			"type": "STRING",
+			"mode": "NULLABLE"
+		},{
+			"name": "authorizedDate",
+			"type": "STRING",
+			"mode": "NULLABLE"
+		},{
+			"name": "callCenterOperatorName",
+			"type": "STRING",
+			"mode": "NULLABLE"
+		},{
+			"name": "totalItems",
+			"type": "STRING",
+			"mode": "NULLABLE"
+		},{
+			"name": "currencyCode",
+			"type": "STRING",
+			"mode": "NULLABLE"
+		}]
 
     project_id = '999847639598'
     dataset_id = 'landing_zone'
@@ -175,6 +166,7 @@ def run():
     job_config.schema = format_schema(table_schema)
     job = client.load_table_from_json(json_object, table, job_config = job_config)
     print(job.result())
+	'''
 	
 run()
 
