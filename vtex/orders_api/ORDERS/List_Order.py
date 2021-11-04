@@ -28,7 +28,7 @@ def init():
 		FJson = get_order_list(x)
 		if not FJson["list"]:
 			break
-		print(type(FJson))
+		print(FJson)
 
 init()
 
