@@ -2,6 +2,7 @@ import requests
 import json
 import os
 import re
+import datetime
 from datetime import date
 from datetime import timedelta
 from os import system
@@ -9,7 +10,7 @@ from google.cloud import bigquery
 from itertools import chain
 from collections import defaultdict
 
-today = date.today()
+today = datetime.date.today()
 yesterday = today - datetime.timedelta(days=1)
 before_yesterday = today - datetime.timedelta(days=2)
 limiteDePaginacion = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30]
