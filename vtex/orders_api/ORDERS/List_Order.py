@@ -15,7 +15,7 @@ class Init:
 	yesterday = today - datetime.timedelta(days=1)
 	before_yesterday = today - datetime.timedelta(days=2)
 	ordenes = {}
-	dataframe = {}
+	df = pd.DataFrame()
 
 def format_schema(schema):
     formatted_schema = []
@@ -70,7 +70,7 @@ def run():
 			'callCenterOperatorName': x["callCenterOperatorName"],
 			'totalItems': x["totalItems"],
 			'currencyCode': x["currencyCode"]}, index=[0])
-		df.append(dataframe)
+		Init.df.append(dataframe)
 
 	df.reset_index(drop=True, inplace=True)
 	json_data = df.to_json(orient = 'records')
