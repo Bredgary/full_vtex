@@ -34,7 +34,7 @@ def paging():
 	for x in range(30):
 		FJson = get_order_list(x)
 		if FJson["list"]:
-			Init.ordenes.append(FJson)
+			Init.ordenes.append(FJson["list"])
 		else:
 			break
 	return Init.ordenes
