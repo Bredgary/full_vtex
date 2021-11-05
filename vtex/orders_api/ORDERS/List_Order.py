@@ -45,9 +45,10 @@ def run():
 	lista = FJson["list"]
 	for x in lista:
 		dataf = {'orderId': x["orderId"]}
-		print(dataf)
+		Init.dataframe.update(dataf)
 	
-	
+	print(Init.dataframe)
+
 	'''
 	df = pd.DataFrame({'orderId': x["orderId"]}, index=[0])
     df.reset_index(drop=True, inplace=True)
