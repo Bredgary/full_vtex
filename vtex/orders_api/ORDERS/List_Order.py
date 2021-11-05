@@ -73,8 +73,7 @@ def run():
 		df.reset_index(drop=True, inplace=True)
 		json_data = df.to_json(orient = 'records')
 		json_object = json.loads(json_data)
-		table_schema = [
-			{
+		table_schema = {
 				"name": "orderId",
 				"type": "STRING",
 				"mode": "NULLABLE"
@@ -173,7 +172,7 @@ def run():
 			},{
 				"name": "currencyCode",
 				"type": "STRING",
-				"mode": "NULLABLE"}]
+				"mode": "NULLABLE"}
 		
 		project_id = '999847639598'
 		dataset_id = 'landing_zone'
