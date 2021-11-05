@@ -207,13 +207,10 @@ def run():
 			"type": "STRING",
 			"mode": "NULLABLE"
 			},{
-				"name": "creationDate",
-				"type": "TIMESTAMP",
-				"mode": "NULLABLE"
-				}
-
-
-		#logging.exception("message")
+			"name": "creationDate",
+			"type": "TIMESTAMP",
+			"mode": "NULLABLE"}
+			
 		project_id = '999847639598'
 		dataset_id = 'log'
 		table_id = 'Control_list_order'
