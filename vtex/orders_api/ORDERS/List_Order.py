@@ -45,7 +45,7 @@ def run():
 	lista = FJson["list"]
 	df = pd.DataFrame()
 	for x in lista:
-		dataframe = pd.DataFrame({
+		df = pd.DataFrame({
 			'orderId': x["orderId"],
 			'creationDate': x["creationDate"],
 			'clientName': x["clientName"],
@@ -71,7 +71,8 @@ def run():
 			'callCenterOperatorName': x["callCenterOperatorName"],
 			'totalItems': x["totalItems"],
 			'currencyCode': x["currencyCode"]}, index=[0])
-		df.append(dataframe)
+		df2 = df
+		df.append(df2)
 
 	df.reset_index(drop=True, inplace=True)
 	json_data = df.to_json(orient = 'records')
