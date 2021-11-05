@@ -80,7 +80,7 @@ def run():
 				"mode": "NULLABLE"
 			},{
 				"name": "creationDate",
-				"type": "STRING",
+				"type": "DATE",
 				"mode": "NULLABLE"
 			},{
 				"name": "clientName",
@@ -88,7 +88,7 @@ def run():
 				"mode": "NULLABLE"
 			},{
 				"name": "totalValue",
-				"type": "STRING",
+				"type": "INTEGER",
 				"mode": "NULLABLE"
 			},{
 				"name": "paymentNames",
@@ -108,15 +108,15 @@ def run():
 				"mode": "NULLABLE"
 			},{
 				"name": "sequence",
-				"type": "STRING",
+				"type": "INTEGER",
 				"mode": "NULLABLE"
 			},{
 				"name": "salesChannel",
-				"type": "STRING",
+				"type": "INTEGER",
 				"mode": "NULLABLE"
 			},{
 				"name": "affiliateId",
-				"type": "STRING",
+				"type": "FLOAT",
 				"mode": "NULLABLE"
 			},{
 				"name": "origin",
@@ -160,7 +160,7 @@ def run():
 				"mode": "NULLABLE"
 			},{
 				"name": "authorizedDate",
-				"type": "STRING",
+				"type": "DATE",
 				"mode": "NULLABLE"
 			},{
 				"name": "callCenterOperatorName",
@@ -168,7 +168,7 @@ def run():
 				"mode": "NULLABLE"
 			},{
 				"name": "totalItems",
-				"type": "STRING",
+				"type": "INTEGER",
 				"mode": "NULLABLE"
 			},{
 				"name": "currencyCode",
