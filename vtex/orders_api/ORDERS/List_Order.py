@@ -14,8 +14,7 @@ class Init:
 	today = datetime.date.today()
 	yesterday = today - datetime.timedelta(days=1)
 	before_yesterday = today - datetime.timedelta(days=2)
-
-ordenes = []
+	ordenes = []
 
 def format_schema(schema):
     formatted_schema = []
@@ -34,11 +33,11 @@ def get_order_list(page):
 def paging():
 	for x in range(30):
 		FJson = get_order_list(x)
-		if not FJson["list"]:
-			ordenes.append(FJson["list"])
+		if FJson["list"]:
+			Init.ordenes.append(FJson)
 		else:
 			break
-	return ordenes
+	return Init.ordenes
 
 def run():
 	FJson = paging()
