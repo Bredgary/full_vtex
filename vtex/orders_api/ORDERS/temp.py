@@ -223,7 +223,10 @@ def run():
 				"type": "STRING",
 				"mode": "NULLABLE"
 			}
-		
+		print(json_object[0])
+		print(json_object[1])
+		print(logging.exception("message"))
+		'''
 		project_id = '999847639598'
 		dataset_id = 'log'
 		table_id = 'Control'
@@ -236,5 +239,6 @@ def run():
 		job_config.schema = format_schema(table_schema)
 		job = client.load_table_from_json(json_object, table, job_config = job_config)
 		print(job.result())
+		'''
 
 run()
