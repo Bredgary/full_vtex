@@ -43,7 +43,7 @@ def paging():
 def run():
 	FJson = paging()
 	for x in FJson:
-		print(x["orderId"])
+		print(x[0])
 
 	'''c
     df = pd.DataFrame({
