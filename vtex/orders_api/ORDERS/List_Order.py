@@ -43,7 +43,6 @@ def paging():
 def run():
 	FJson = paging()
 	lista = FJson["list"]
-	df = pd.DataFrame()
 	lst_dict = []
 	for x in lista:
 		lst_dict.append({
