@@ -202,9 +202,9 @@ def run():
 		dataset_id = 'log'
 		table_id_control = 'Control_list_order'
 
-		dataLog = [['table', table_id_control], ['date', Init.today]]
+		dataLog = [['table':table_id_control], ['date':Init.today]]
 
-		df_log = pd.DataFrame(dataLog, columns = ['Mensaje', 'Fecha'])
+		df_log = pd.DataFrame(dataLog, columns = ['table', 'date'])
 		df_log.reset_index(drop=True, inplace=True)
 		json_data_log = df_log.to_json(orient = 'records')
 		json_object_log = json.loads(json_data_log)
