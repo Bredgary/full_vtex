@@ -78,156 +78,124 @@ def dataframe():
 
 
 def run():
-	try:
-		df = dataframe()
-		df.reset_index(drop=True, inplace=True)
-		json_data = df.to_json(orient = 'records')
-		json_object = json.loads(json_data)
-		
-		table_schema = {
-				"name": "orderId",
-				"type": "STRING",
-				"mode": "NULLABLE"
-			},{
-				"name": "creationDate",
-				"type": "TIMESTAMP",
-				"mode": "NULLABLE"
-			},{
-				"name": "clientName",
-				"type": "STRING",
-				"mode": "NULLABLE"
-			},{
-				"name": "totalValue",
-				"type": "INTEGER",
-				"mode": "NULLABLE"
-			},{
-				"name": "paymentNames",
-				"type": "STRING",
-				"mode": "NULLABLE"
-			},{
-				"name": "status",
-				"type": "STRING",
-				"mode": "NULLABLE"
-			},{
-				"name": "statusDescription",
-				"type": "STRING",
-				"mode": "NULLABLE"
-			},{
-				"name": "marketPlaceOrderId",
-				"type": "STRING",
-				"mode": "NULLABLE"
-			},{
-				"name": "sequence",
-				"type": "INTEGER",
-				"mode": "NULLABLE"
-			},{
-				"name": "salesChannel",
-				"type": "INTEGER",
-				"mode": "NULLABLE"
-			},{
-				"name": "affiliateId",
-				"type": "FLOAT",
-				"mode": "NULLABLE"
-			},{
-				"name": "origin",
-				"type": "STRING",
-				"mode": "NULLABLE"
-			},{
-				"name": "workflowInErrorState",
-				"type": "BOOLEAN",
-				"mode": "NULLABLE"
-			},{
-				"name": "workflowInRetry",
-				"type": "BOOLEAN",
-				"mode": "NULLABLE"
-			},{
-				"name": "lastMessageUnread",
-				"type": "STRING",
-				"mode": "NULLABLE"
-			},{
-				"name": "ShippingEstimatedDate",
-				"type": "STRING",
-				"mode": "NULLABLE"
-			},{
-				"name": "ShippingEstimatedDateMax",
-				"type": "STRING",
-				"mode": "NULLABLE"
-			},{
-				"name": "ShippingEstimatedDateMin",
-				"type": "STRING",
-				"mode": "NULLABLE"
-			},{
-				"name": "orderIsComplete",
-				"type": "BOOLEAN",
-				"mode": "NULLABLE"
-			},{
-				"name": "listId",
-				"type": "STRING",
-				"mode": "NULLABLE"
-			},{
-				"name": "listType",
-				"type": "STRING",
-				"mode": "NULLABLE"
-			},{
-				"name": "authorizedDate",
-				"type": "TIMESTAMP",
-				"mode": "NULLABLE"
-			},{
-				"name": "callCenterOperatorName",
-				"type": "STRING",
-				"mode": "NULLABLE"
-			},{
-				"name": "totalItems",
-				"type": "INTEGER",
-				"mode": "NULLABLE"
-			},{
-				"name": "currencyCode",
-				"type": "IN",
-				"mode": "NULLABLE"}
-		
-		project_id = '999847639598'
-		dataset_id = 'landing_zone'
-		table_id = 'shopstar_vtex_list_order'
-		
-		client  = bigquery.Client(project = project_id)
-		dataset  = client.dataset(dataset_id)
-		table = dataset.table(table_id)
-		job_config = bigquery.LoadJobConfig()
-		job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-		job_config.schema = format_schema(table_schema)
-		job = client.load_table_from_json(json_object, table, job_config = job_config)
-		print(job.result())
-	except:
-		project_id = '999847639598'
-		dataset_id = 'log'
-		table_id_control = 'Control_list_order'
-
-		dataLog = [[table_id_control], [Init.today]]
-
-		df_log = pd.DataFrame(dataLog, columns = ['table', 'date'])
-		df_log.reset_index(drop=True, inplace=True)
-		json_data_log = df_log.to_json(orient = 'records')
-		json_object_log = json.loads(json_data_log)
-		print(json_object_log)
-		'''
-		table_schema_log = {
-				"name": "mensajeError",
-				"type": "STRING",
-				"mode": "NULLABLE"
-			},{
-				"name": "fecha",
-				"type": "STRING",
-				"mode": "NULLABLE"
-			}	
-		
-		client  = bigquery.Client(project = project_id)
-		dataset  = client.dataset(dataset_id)
-		table = dataset.table(table_id_control)
-		job_config = bigquery.LoadJobConfig()
-		job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-		job_config.schema = format_schema(table_schema_log)
-		job = client.load_table_from_json(json_object_log, table, job_config = job_config)
-		print(job.result())
-		'''
+	df = dataframe()
+	df.reset_index(drop=True, inplace=True)
+	json_data = df.to_json(orient = 'records')
+	json_object = json.loads(json_data)
+	
+	table_schema = {
+			"name": "orderId",
+			"type": "STRING",
+			"mode": "NULLABLE"
+		},{
+			"name": "creationDate",
+			"type": "STRING",
+			"mode": "NULLABLE"
+		},{
+			"name": "clientName",
+			"type": "STRING",
+			"mode": "NULLABLE"
+		},{
+			"name": "totalValue",
+			"type": "STRING",
+			"mode": "NULLABLE"
+		},{
+			"name": "paymentNames",
+			"type": "STRING",
+			"mode": "NULLABLE"
+		},{
+			"name": "status",
+			"type": "STRING",
+			"mode": "NULLABLE"
+		},{
+			"name": "statusDescription",
+			"type": "STRING",
+			"mode": "NULLABLE"
+		},{
+			"name": "marketPlaceOrderId",
+			"type": "STRING",
+			"mode": "NULLABLE"
+		},{
+			"name": "sequence",
+			"type": "STRING",
+			"mode": "NULLABLE"
+		},{
+			"name": "salesChannel",
+			"type": "STRING",
+			"mode": "NULLABLE"
+		},{
+			"name": "affiliateId",
+			"type": "STRING",
+			"mode": "NULLABLE"
+		},{
+			"name": "origin",
+			"type": "STRING",
+			"mode": "NULLABLE"
+		},{
+			"name": "workflowInErrorState",
+			"type": "STRING",
+			"mode": "NULLABLE"
+		},{
+			"name": "workflowInRetry",
+			"type": "STRING",
+			"mode": "NULLABLE"
+		},{
+			"name": "lastMessageUnread",
+			"type": "STRING",
+			"mode": "NULLABLE"
+		},{
+			"name": "ShippingEstimatedDate",
+			"type": "STRING",
+			"mode": "NULLABLE"
+		},{
+			"name": "ShippingEstimatedDateMax",
+			"type": "STRING",
+			"mode": "NULLABLE"
+		},{
+			"name": "ShippingEstimatedDateMin",
+			"type": "STRING",
+			"mode": "NULLABLE"
+		},{
+			"name": "orderIsComplete",
+			"type": "STRING",
+			"mode": "NULLABLE"
+		},{
+			"name": "listId",
+			"type": "STRING",
+			"mode": "NULLABLE"
+		},{
+			"name": "listType",
+			"type": "STRING",
+			"mode": "NULLABLE"
+		},{
+			"name": "authorizedDate",
+			"type": "STRING",
+			"mode": "NULLABLE"
+		},{
+			"name": "callCenterOperatorName",
+			"type": "STRING",
+			"mode": "NULLABLE"
+		},{
+			"name": "totalItems",
+			"type": "STRING",
+			"mode": "NULLABLE"
+		},{
+			"name": "currencyCode",
+			"type": "STRING",
+			"mode": "NULLABLE"}
+	
+	project_id = '999847639598'
+	dataset_id = 'landing_zone'
+	table_id = 'shopstar_vtex_list_order_temp'
+	
+	client  = bigquery.Client(project = project_id)
+	dataset  = client.dataset(dataset_id)
+	table = dataset.table(table_id)
+	job_config = bigquery.LoadJobConfig()
+	job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+	job_config.schema = format_schema(table_schema)
+	job = client.load_table_from_json(json_object, table, job_config = job_config)
+	print(job.result())
+	
 
 run()
