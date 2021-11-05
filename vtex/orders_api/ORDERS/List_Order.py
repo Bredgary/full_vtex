@@ -72,9 +72,7 @@ def run():
 			'callCenterOperatorName': x["callCenterOperatorName"],
 			'totalItems': x["totalItems"],
 			'currencyCode': x["currencyCode"]}
-	
 	df = df.append(lst_dict)
-
 	df.reset_index(drop=True, inplace=True)
 	json_data = df.to_json(orient = 'records')
 	json_object = json.loads(json_data)
