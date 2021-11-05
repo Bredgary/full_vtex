@@ -50,7 +50,7 @@ def run():
 		json_object = json.loads(json_data)
 		print(json_object)
 		break
-    '''
+	'''
     table_schema = [
 		{
 			"name": "orderId",
@@ -168,7 +168,6 @@ def run():
     job = client.load_table_from_json(json_object, table, job_config = job_config)
     print(job.result())
 	'''
-	
 run()
 
 
