@@ -87,7 +87,7 @@ def run():
 			"mode": "NULLABLE"
 		},{
 			"name": "creationDate",
-			"type": "DATE",
+			"type": "TIMESTAMP",
 			"mode": "NULLABLE"
 		},{
 			"name": "clientName",
@@ -167,7 +167,7 @@ def run():
 			"mode": "NULLABLE"
 		},{
 			"name": "authorizedDate",
-			"type": "DATE",
+			"type": "TIMESTAMP",
 			"mode": "NULLABLE"
 		},{
 			"name": "callCenterOperatorName",
