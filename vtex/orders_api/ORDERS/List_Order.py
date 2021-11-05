@@ -41,7 +41,8 @@ def paging():
 
 def run():
 	FJson = paging()
-	print(type(FJson))
+	lista = FJson["list"]
+	print(type(lista))
 
 	'''
     df = pd.DataFrame({
