@@ -194,22 +194,10 @@ def run():
 		table = dataset.table(table_id)
 		job_config = bigquery.LoadJobConfig()
 		job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-		job_config.autodetect = True
+		job_config.schema = format_schema(table_schema)
 		job = client.load_table_from_json(json_object, table, job_config = job_config)
 		print(job.result())
 	except:
-		log = logging.exception("message")
-		print(json_object[0])
-		print(json_object[1])
-		'''
-		df1 = pd.DataFrame(
-			{'orderId': json_object[0],
-			'creationDate': json_object[1],
-			'Table':'shopstar_vtex_list_order',
-			'logging_exception':log}, index=[0])
-		df1.reset_index(drop=True, inplace=True)
-		json_data = df1.to_json(orient = 'records')
-		json_object = json.loads(json_data)
 		table_schema = {
 				"name": "orderId",
 				"type": "STRING",
@@ -218,22 +206,13 @@ def run():
 				"name": "creationDate",
 				"type": "TIMESTAMP",
 				"mode": "NULLABLE"
-			},{
-				"name": "Table",
-				"type": "STRING",
-				"mode": "NULLABLE"
-			},{
-				"name": "logging_exception",
-				"type": "STRING",
-				"mode": "NULLABLE"
 			}
-		print(json_object[0])
-		print(json_object[1])
-		
-		
+
+
+		logging.exception("message")
 		project_id = '999847639598'
 		dataset_id = 'log'
-		table_id = 'Control'
+		table_id = 'Control_list_order'
 		
 		client  = bigquery.Client(project = project_id)
 		dataset  = client.dataset(dataset_id)
@@ -243,6 +222,6 @@ def run():
 		job_config.schema = format_schema(table_schema)
 		job = client.load_table_from_json(json_object, table, job_config = job_config)
 		print(job.result())
-		'''
+		
 
 run()
