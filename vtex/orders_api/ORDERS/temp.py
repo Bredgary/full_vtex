@@ -9,7 +9,7 @@ from datetime import date
 from datetime import timedelta
 from os import system
 from google.cloud import bigquery
-#import logging
+import logging
 
 class Init:
 	today = datetime.date.today()
@@ -198,18 +198,44 @@ def run():
 		job = client.load_table_from_json(json_object, table, job_config = job_config)
 		print(job.result())
 	except:
+		
+		mensajeError = logging.exception("message")
+		tableError = 'shopstar_vtex_list_order'
+
+		dataLog = [['mensajeError', mensajeError], ['tableError', tableError], ['date', Init.today]]
+
+		df_log = pd.DataFrame(dataLog, columns = ['Mensaje', 'Table','date'])
+		df_log.reset_index(drop=True, inplace=True)
+		json_data_log = df_log.to_json(orient = 'records')
+		json_object_log = json.loads(json_data_log)
+		print(json_object_log)
+		'''
+		table_schema_log = {
+				"name": "mensajeError",
+				"type": "STRING",
+				"mode": "NULLABLE"
+			},{
+				"name": "tableError",
+				"type": "STRING",
+				"mode": "NULLABLE"
+			},{
+				"name": "date",
+				"type": "DATE",
+				"mode": "NULLABLE"
+			},{		
+
 		project_id = '999847639598'
 		dataset_id = 'log'
-		table_id_control = 'Control_list_order'
+		table_id_control = 'Control'
 		
 		client  = bigquery.Client(project = project_id)
 		dataset  = client.dataset(dataset_id)
 		table = dataset.table(table_id_control)
 		job_config = bigquery.LoadJobConfig()
 		job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-		job_config.schema = format_schema(table_schema)
-		job = client.load_table_from_json(json_object, table, job_config = job_config)
+		job_config.schema = format_schema(table_schema_log)
+		job = client.load_table_from_json(json_object_log, table, job_config = job_config)
 		print(job.result())
-		
+		'''
 
 run()
