@@ -202,7 +202,7 @@ def run():
 		dataset_id = 'log'
 		table_id_control = 'Control_list_order'
 
-		dataLog = [['table':table_id_control], ['date':Init.today]]
+		dataLog = [[table_id_control], [Init.today]]
 
 		df_log = pd.DataFrame(dataLog, columns = ['table', 'date'])
 		df_log.reset_index(drop=True, inplace=True)
