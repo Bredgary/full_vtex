@@ -13,6 +13,7 @@ import logging
 
 class Init:
 	today = datetime.date.today()
+	objDate = datetime.strptime(strDate, '%y-%m-%d')
 	yesterday = today - datetime.timedelta(days=1)
 	before_yesterday = today - datetime.timedelta(days=2)
 	ordenes = {}
@@ -198,11 +199,16 @@ def run():
 		job = client.load_table_from_json(json_object, table, job_config = job_config)
 		print(job.result())
 	except:
+		logging.basicConfig(filename=logname,
+		filemode='a',
+		format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
+		datefmt='%H:%M:%S',
+		level=logging.DEBUG)
+		logging.info("Running Urban Planning")
+		self.logger = logging.getLogger('urbanGUI')
+		level=logging.DEBUG
 		
-		mensajeError = logging.exception("message")
-		tableError = 'shopstar_vtex_list_order'
-
-		dataLog = [['mensajeError', mensajeError], ['date', Init.today]]
+		dataLog = [['mensajeError', level], ['date', Init.objDate]]
 
 		df_log = pd.DataFrame(dataLog, columns = ['Mensaje', 'Fecha'])
 		df_log.reset_index(drop=True, inplace=True)
