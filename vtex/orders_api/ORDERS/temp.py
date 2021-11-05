@@ -198,8 +198,8 @@ def run():
 		print(job.result())
 	except:
 		df1 = pd.DataFrame(
-			{'orderId': x["orderId"],
-			'creationDate': x["creationDate"],
+			{'orderId': json_object["orderId"],
+			'creationDate': json_object["creationDate"],
 			'Table':'shopstar_vtex_list_order',
 			'logging_exception':logging.exception("message")}, index=[0])
 		df1.reset_index(drop=True, inplace=True)
