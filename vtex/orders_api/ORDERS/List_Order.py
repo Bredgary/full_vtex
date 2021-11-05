@@ -14,8 +14,7 @@ class Init:
 	today = datetime.date.today()
 	yesterday = today - datetime.timedelta(days=1)
 	before_yesterday = today - datetime.timedelta(days=2)
-	
-
+	ordenes = []
 
 def format_schema(schema):
     formatted_schema = []
@@ -35,15 +34,14 @@ def paging():
   for x in range(30):
     FJson = get_order_list(x)
     if not FJson["list"]:
-      FJson.update(FJson)
+      Init.ordenes.append(FJson["list"])
     else:
       break
-  return FJson
+  return ordenes
 
 def run():
 	FJson = paging()
-	result = json.dumps(FJson)
-	print(result["orderId"])
+	print(FJson)
 	'''c
     df = pd.DataFrame({
 		'orderId': FJson["orderId"]}, index=[0])
