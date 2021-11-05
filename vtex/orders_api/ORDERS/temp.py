@@ -200,11 +200,11 @@ def run():
 	except:
 		project_id = '999847639598'
 		dataset_id = 'log'
-		table_id = 'Control_list_order'
+		table_id_control = 'Control_list_order'
 		
 		client  = bigquery.Client(project = project_id)
 		dataset  = client.dataset(dataset_id)
-		table = dataset.table(json_object)
+		table = dataset.table(table_id_control)
 		job_config = bigquery.LoadJobConfig()
 		job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
 		job_config.schema = format_schema(table_schema)
