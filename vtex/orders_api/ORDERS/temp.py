@@ -198,11 +198,15 @@ def run():
 		job = client.load_table_from_json(json_object, table, job_config = job_config)
 		print(job.result())
 	except:
+		log = logging.exception("message")
+		print(json_object[0])
+		print(json_object[1])
+		'''
 		df1 = pd.DataFrame(
 			{'orderId': json_object[0],
 			'creationDate': json_object[1],
 			'Table':'shopstar_vtex_list_order',
-			'logging_exception':logging.exception("message")}, index=[0])
+			'logging_exception':log}, index=[0])
 		df1.reset_index(drop=True, inplace=True)
 		json_data = df1.to_json(orient = 'records')
 		json_object = json.loads(json_data)
@@ -225,8 +229,8 @@ def run():
 			}
 		print(json_object[0])
 		print(json_object[1])
-		print(logging.exception("message"))
-		'''
+		
+		
 		project_id = '999847639598'
 		dataset_id = 'log'
 		table_id = 'Control'
