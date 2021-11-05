@@ -198,16 +198,11 @@ def run():
 		job = client.load_table_from_json(json_object, table, job_config = job_config)
 		print(job.result())
 	except:
-		logging.basicConfig(filename=logname,
-		filemode='a',
-		format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
-		datefmt='%H:%M:%S',
-		level=logging.DEBUG)
-		logging.info("Running Urban Planning")
-		self.logger = logging.getLogger('urbanGUI')
-		level=logging.DEBUG
+		project_id = '999847639598'
+		dataset_id = 'log'
+		table_id_control = 'Control_list_order'
 
-		dataLog = [['mensajeError', level], ['date', Init.today]]
+		dataLog = [['table', table_id_control], ['date', Init.today]]
 
 		df_log = pd.DataFrame(dataLog, columns = ['Mensaje', 'Fecha'])
 		df_log.reset_index(drop=True, inplace=True)
@@ -224,10 +219,6 @@ def run():
 				"type": "STRING",
 				"mode": "NULLABLE"
 			}	
-
-		project_id = '999847639598'
-		dataset_id = 'log'
-		table_id_control = 'Control_list_order'
 		
 		client  = bigquery.Client(project = project_id)
 		dataset  = client.dataset(dataset_id)
