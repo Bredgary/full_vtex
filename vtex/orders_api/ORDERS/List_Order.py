@@ -31,13 +31,14 @@ def get_order_list(page):
 	return FJson
 
 def paging():
-  for x in range(30):
-    FJson = get_order_list(x)
-    if not FJson["list"]:
-      Init.ordenes.append(FJson["list"])
-    else:
-      break
-  return Init.ordenes
+	ordenes = []
+	for x in range(30):
+		FJson = get_order_list(x)
+		if not FJson["list"]:
+			ordenes.append(FJson["list"])
+		else:
+			break
+	return ordenes
 
 def run():
 	FJson = paging()
