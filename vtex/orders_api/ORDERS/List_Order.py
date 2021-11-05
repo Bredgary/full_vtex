@@ -45,7 +45,9 @@ def run():
 	for x in lista:
 		df = pd.DataFrame({
 		'orderId': x["orderId"]}, index=[0])
-    print(df)
+	
+	print(df)
+
 	'''
     df.reset_index(drop=True, inplace=True)
     json_data = df.to_json(orient = 'records')
