@@ -15,6 +15,7 @@ class Init:
 	yesterday = today - datetime.timedelta(days=1)
 	before_yesterday = today - datetime.timedelta(days=2)
 	ordenes = {}
+	df = pd.DataFrame()
 	
 
 def format_schema(schema):
@@ -43,7 +44,6 @@ def paging():
 def dataframe():
 	FJson = paging()
 	lista = FJson["list"]
-	df = pd.DataFrame()
 	for x in lista:
 		df1 = pd.DataFrame({
 			'orderId': x["orderId"],
@@ -71,8 +71,8 @@ def dataframe():
 			'callCenterOperatorName': x["callCenterOperatorName"],
 			'totalItems': x["totalItems"],
 			'currencyCode': x["currencyCode"]}, index=[0])
-		df.append(df1)
-	print(df1)
+		Init.df = Init.df.append(df1)
+	print(Init.df)
 
 dataframe()
 '''
