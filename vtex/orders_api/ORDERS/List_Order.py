@@ -69,7 +69,7 @@ def run():
 			'authorizedDate': x["authorizedDate"],
 			'callCenterOperatorName': x["callCenterOperatorName"],
 			'totalItems': x["totalItems"],
-			'currencyCode': x["currencyCode"], index=[0])
+			'currencyCode': x["currencyCode"]}, index=[0])
 		df.reset_index(drop=True, inplace=True)
 		json_data = df.to_json(orient = 'records')
 		json_object = json.loads(json_data)
