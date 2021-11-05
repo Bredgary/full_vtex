@@ -72,8 +72,8 @@ def run():
 			'currencyCode': x["currencyCode"]}, index=[0])
 		Init.df.append(dataframe)
 
-	df.reset_index(drop=True, inplace=True)
-	json_data = df.to_json(orient = 'records')
+	Init.df.reset_index(drop=True, inplace=True)
+	json_data = Init.df.to_json(orient = 'records')
 	json_object = json.loads(json_data)
 	print(json_object)
 '''
