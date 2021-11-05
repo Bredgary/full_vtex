@@ -37,7 +37,7 @@ def paging():
       Init.ordenes.append(FJson["list"])
     else:
       break
-  return ordenes
+  return Init.ordenes
 
 def run():
 	FJson = paging()
