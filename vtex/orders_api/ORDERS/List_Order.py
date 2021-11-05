@@ -35,7 +35,7 @@ def paging():
   for x in range(30):
     FJson = get_order_list(x)
     if not FJson["list"]:
-      FJson.update(FJson)
+      FJson.update(FJson["list"])
     else:
       break
   return FJson
@@ -45,7 +45,7 @@ def run():
 	for x in FJson:
 		print(x["orderId"])
 
-	'''
+	'''c
     df = pd.DataFrame({
 		'orderId': FJson["orderId"]}, index=[0])
 
