@@ -41,8 +41,7 @@ def paging():
   return FJson
 
 def run():
-	result = paging()
-	FJson = json.loads(result)
+	FJson = paging()
 	print(FJson["orderId"])
 
 	'''
