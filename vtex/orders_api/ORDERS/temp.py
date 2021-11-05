@@ -13,7 +13,7 @@ import logging
 
 class Init:
 	today = datetime.date.today()
-	objDate = datetime.('%y-%m-%d')
+	objDate = datetime.date.today('%y-%m-%d')
 	yesterday = today - datetime.timedelta(days=1)
 	before_yesterday = today - datetime.timedelta(days=2)
 	ordenes = {}
