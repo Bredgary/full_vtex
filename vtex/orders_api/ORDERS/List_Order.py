@@ -41,7 +41,8 @@ def paging():
 
 def run():
 	FJson = paging()
-	print(FJson["orderId"])
+	for x in FJson:
+		print(x["orderId"])
 	'''
     df = pd.DataFrame({
 		'orderId': FJson["orderId"]}, index=[0])
