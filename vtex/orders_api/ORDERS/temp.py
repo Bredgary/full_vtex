@@ -9,7 +9,7 @@ from datetime import date
 from datetime import timedelta
 from os import system
 from google.cloud import bigquery
-import logging
+#import logging
 
 class Init:
 	today = datetime.date.today()
@@ -198,7 +198,11 @@ def run():
 		job = client.load_table_from_json(json_object, table, job_config = job_config)
 		print(job.result())
 	except:
-		table_schema = {
+		df_control = dataframe()
+		df_control.reset_index(drop=True, inplace=True)
+		json_data_c = df_control.to_json(orient = 'records')
+		json_object_c = json.loads(json_data_c)
+		table_schema_control = {
 			"name": "orderId",
 			"type": "STRING",
 			"mode": "NULLABLE"
@@ -209,17 +213,17 @@ def run():
 				}
 
 
-		logging.exception("message")
+		#logging.exception("message")
 		project_id = '999847639598'
 		dataset_id = 'log'
 		table_id = 'Control_list_order'
 		
 		client  = bigquery.Client(project = project_id)
 		dataset  = client.dataset(dataset_id)
-		table = dataset.table(table_id)
+		table = dataset.table(json_object_c)
 		job_config = bigquery.LoadJobConfig()
 		job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-		job_config.schema = format_schema(table_schema)
+		job_config.schema = format_schema(table_schema_control)
 		job = client.load_table_from_json(json_object, table, job_config = job_config)
 		print(job.result())
 		
