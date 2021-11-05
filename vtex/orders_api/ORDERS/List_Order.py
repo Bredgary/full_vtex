@@ -44,19 +44,13 @@ def run():
 	FJson = paging()
 	lista = FJson["list"]
 	for x in lista:
-		dataf = {'orderId': x["orderId"]}
-		Init.dataframe.update(dataf)
-	
-	for x in Init.dataframe:
-		print(x["orderId"])
-
-	'''
-	df = pd.DataFrame({'orderId': x["orderId"]}, index=[0])
-    df.reset_index(drop=True, inplace=True)
-    json_data = df.to_json(orient = 'records')
-    json_object = json.loads(json_data)
-    print(json_object)
-    
+		df = pd.DataFrame({'orderId': x["orderId"]}, index=[0])
+		df.reset_index(drop=True, inplace=True)
+		json_data = df.to_json(orient = 'records')
+		json_object = json.loads(json_data)
+		print(json_object)
+		break
+    '''
     table_schema = [
 		{
 			"name": "orderId",
