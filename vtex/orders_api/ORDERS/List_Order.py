@@ -47,7 +47,9 @@ def run():
 		dataf = {'orderId': x["orderId"]}
 		Init.dataframe.update(dataf)
 	
-	print(Init.dataframe)
+	print(Init.dataframe[0])
+	print(Init.dataframe[1])
+	print(Init.dataframe[2])
 
 	'''
 	df = pd.DataFrame({'orderId': x["orderId"]}, index=[0])
