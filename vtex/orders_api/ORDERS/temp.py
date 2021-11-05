@@ -199,14 +199,14 @@ def run():
 		print(job.result())
 	except:
 		table_schema = {
-				"name": "orderId",
-				"type": "STRING",
-				"mode": "NULLABLE"
+			"name": "orderId",
+			"type": "STRING",
+			"mode": "NULLABLE"
 			},{
 				"name": "creationDate",
 				"type": "TIMESTAMP",
 				"mode": "NULLABLE"
-			}
+				}
 
 
 		logging.exception("message")
