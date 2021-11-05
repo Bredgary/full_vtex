@@ -44,8 +44,9 @@ def run():
 	FJson = paging()
 	lista = FJson["list"]
 	df = pd.DataFrame()
+	lst_dict = []
 	for x in lista:
-		df = pd.DataFrame({
+		lst_dict.append({
 			'orderId': x["orderId"],
 			'creationDate': x["creationDate"],
 			'clientName': x["clientName"],
@@ -70,9 +71,9 @@ def run():
 			'authorizedDate': x["authorizedDate"],
 			'callCenterOperatorName': x["callCenterOperatorName"],
 			'totalItems': x["totalItems"],
-			'currencyCode': x["currencyCode"]}, index=[0])
-		df2 = df
-		df.append(df2)
+			'currencyCode': x["currencyCode"]}
+	
+	df = df.append(lst_dict)
 
 	df.reset_index(drop=True, inplace=True)
 	json_data = df.to_json(orient = 'records')
