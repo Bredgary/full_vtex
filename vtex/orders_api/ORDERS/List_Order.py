@@ -124,11 +124,11 @@ def run():
 				"mode": "NULLABLE"
 			},{
 				"name": "workflowInErrorState",
-				"type": "STRING",
+				"type": "BOOLEAN",
 				"mode": "NULLABLE"
 			},{
 				"name": "workflowInRetry",
-				"type": "STRING",
+				"type": "BOOLEAN",
 				"mode": "NULLABLE"
 			},{
 				"name": "lastMessageUnread",
@@ -148,7 +148,7 @@ def run():
 				"mode": "NULLABLE"
 			},{
 				"name": "orderIsComplete",
-				"type": "STRING",
+				"type": "BOOLEAN",
 				"mode": "NULLABLE"
 			},{
 				"name": "listId",
