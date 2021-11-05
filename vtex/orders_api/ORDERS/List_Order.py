@@ -75,7 +75,6 @@ def dataframe():
 	return Init.df
 
 
-
 def run():
 	df = dataframe()
 	df.reset_index(drop=True, inplace=True)
