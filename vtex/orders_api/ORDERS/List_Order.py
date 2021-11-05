@@ -40,44 +40,22 @@ def paging():
 			break
 	return Init.ordenes
 
-def run():
+def dataframe():
 	FJson = paging()
 	lista = FJson["list"]
-	lst_dict = []
 	for x in lista:
-		lst_dict.append({
-			'orderId': x["orderId"],
-			'creationDate': x["creationDate"],
-			'clientName': x["clientName"],
-			'totalValue': x["totalValue"],
-			'paymentNames': x["paymentNames"],
-			'status': x["status"],
-			'statusDescription': x["statusDescription"],
-			'marketPlaceOrderId': x["marketPlaceOrderId"],
-			'sequence': x["sequence"],
-			'salesChannel': x["salesChannel"],
-			'affiliateId': x["affiliateId"],
-			'origin': x["origin"],
-			'workflowInErrorState': x["workflowInErrorState"],
-			'workflowInRetry': x["workflowInRetry"],
-			'lastMessageUnread': x["lastMessageUnread"],
-			'ShippingEstimatedDate': x["ShippingEstimatedDate"],
-			'ShippingEstimatedDateMax': x["ShippingEstimatedDateMax"],
-			'ShippingEstimatedDateMin': x["ShippingEstimatedDateMin"],
-			'orderIsComplete': x["orderIsComplete"],
-			'listId': x["listId"],
-			'listType': x["listType"],
-			'authorizedDate': x["authorizedDate"],
-			'callCenterOperatorName': x["callCenterOperatorName"],
-			'totalItems': x["totalItems"],
-			'currencyCode': x["currencyCode"]}
+		df = pd.DataFrame(x["orderId"], columns='orderId')
+	print(df)
 
+'''
+def run():
+	
 	df = pd.DataFrame(lista, columns=lst_dict)
 	df.reset_index(drop=True, inplace=True)
 	json_data = df.to_json(orient = 'records')
 	json_object = json.loads(json_data)
 	print(json_object)
-'''
+
 		df.reset_index(drop=True, inplace=True)
 		json_data = df.to_json(orient = 'records')
 		json_object = json.loads(json_data)
@@ -195,7 +173,8 @@ def run():
 		job = client.load_table_from_json(json_object, table, job_config = job_config)
 		print(job.result())
 '''		
-run()
+dataframe()
+
 
 
 
