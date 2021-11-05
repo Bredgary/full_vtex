@@ -13,7 +13,7 @@ import logging
 
 class Init:
 	today = datetime.date.today()
-	objDate = datetime.strptime(strDate, '%y-%m-%d')
+	objDate = datetime.('%y-%m-%d')
 	yesterday = today - datetime.timedelta(days=1)
 	before_yesterday = today - datetime.timedelta(days=2)
 	ordenes = {}
@@ -207,7 +207,7 @@ def run():
 		logging.info("Running Urban Planning")
 		self.logger = logging.getLogger('urbanGUI')
 		level=logging.DEBUG
-		
+
 		dataLog = [['mensajeError', level], ['date', Init.objDate]]
 
 		df_log = pd.DataFrame(dataLog, columns = ['Mensaje', 'Fecha'])
