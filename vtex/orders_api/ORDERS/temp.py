@@ -43,6 +43,7 @@ def paging():
 	return Init.ordenes
 
 def dataframe():
+	print("Cargando Dataframe")
 	FJson = paging()
 	lista = FJson["list"]
 	for x in lista:
@@ -198,8 +199,8 @@ def run():
 		print(job.result())
 	except:
 		df1 = pd.DataFrame(
-			{'orderId': json_object["orderId"],
-			'creationDate': json_object["creationDate"],
+			{'orderId': json_object[0],
+			'creationDate': json_object[1],
 			'Table':'shopstar_vtex_list_order',
 			'logging_exception':logging.exception("message")}, index=[0])
 		df1.reset_index(drop=True, inplace=True)
