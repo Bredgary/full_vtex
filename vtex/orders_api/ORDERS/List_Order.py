@@ -42,6 +42,8 @@ def paging():
 
 def run():
     FJson = paging()
+	print(FJson["orderId"])
+	'''
     df = pd.DataFrame({
 		'orderId': FJson["orderId"]}, index=[0])
 
@@ -49,7 +51,7 @@ def run():
     json_data = df.to_json(orient = 'records')
     json_object = json.loads(json_data)
     print(json_object)
-    '''
+    
     table_schema = [
 		{
 			"name": "orderId",
