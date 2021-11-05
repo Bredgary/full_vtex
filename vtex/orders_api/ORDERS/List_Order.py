@@ -72,7 +72,7 @@ def dataframe():
 			'totalItems': x["totalItems"],
 			'currencyCode': x["currencyCode"]}, index=[0])
 		df.append(df1)
-	print(df)
+	print(df1)
 
 dataframe()
 '''
