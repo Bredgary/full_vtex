@@ -202,9 +202,9 @@ def run():
 		mensajeError = logging.exception("message")
 		tableError = 'shopstar_vtex_list_order'
 
-		dataLog = [['mensajeError', mensajeError], ['tableError', tableError], ['date', Init.today]]
+		dataLog = [['mensajeError', mensajeError], ['date', Init.today]]
 
-		df_log = pd.DataFrame(dataLog, columns = ['Mensaje', 'Table','date'])
+		df_log = pd.DataFrame(dataLog, columns = ['Mensaje', 'Fecha'])
 		df_log.reset_index(drop=True, inplace=True)
 		json_data_log = df_log.to_json(orient = 'records')
 		json_object_log = json.loads(json_data_log)
@@ -215,18 +215,14 @@ def run():
 				"type": "STRING",
 				"mode": "NULLABLE"
 			},{
-				"name": "tableError",
+				"name": "fecha",
 				"type": "STRING",
 				"mode": "NULLABLE"
-			},{
-				"name": "date",
-				"type": "DATE",
-				"mode": "NULLABLE"
-			},{		
+			}	
 
 		project_id = '999847639598'
 		dataset_id = 'log'
-		table_id_control = 'Control'
+		table_id_control = 'Control_list_order'
 		
 		client  = bigquery.Client(project = project_id)
 		dataset  = client.dataset(dataset_id)
