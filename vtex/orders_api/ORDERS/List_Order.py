@@ -42,8 +42,8 @@ def paging():
 def run():
 	FJson = paging()
 	FormatoJson = json.dumps(FJson)
-	for x in FormatoJson:
-		print(x["orderId"])
+	for x in FormatoJson["orderId"]:
+		print(x)
 
 	'''
     df = pd.DataFrame({
