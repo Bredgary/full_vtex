@@ -27,7 +27,7 @@ def format_schema(schema):
 
 def get_order_list(page):
 	url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders?page="+str(page)+""
-	querystring = {"f_creationDate":"creationDate:[2020-01-02T02:00:00.000Z TO 2020-01-03T01:59:59.999Z]","f_hasInputInvoice":"false"}
+	querystring = {"f_creationDate":"creationDate:["+str(Init.before_yesterday)+"T02:00:00.000Z TO "+str(Init.yesterday)+"T01:59:59.999Z]","f_hasInputInvoice":"false"}
 	headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 	response = requests.request("GET", url, headers=headers, params=querystring)
 	FJson = json.loads(response.text)
@@ -186,7 +186,8 @@ def run():
 	
 	project_id = '999847639598'
 	dataset_id = 'landing_zone'
-	table_id = 'shopstar_vtex_list_order_temp'
+	table_id = 'shopstar_vtex_list_order'
+	table_temp = 'order_write'
 	
 	client  = bigquery.Client(project = project_id)
 	dataset  = client.dataset(dataset_id)
@@ -197,5 +198,15 @@ def run():
 	job = client.load_table_from_json(json_object, table, job_config = job_config)
 	print(job.result())
 	
+	table = dataset.table(table_temp)
+	job_config = bigquery.LoadJobConfig()
+	job_config.write_disposition = "WRITE_TRUNCATE"
+	job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+	job_config.schema = format_schema(table_schema)
+	job = client.load_table_from_json(json_object, table, job_config = job_config)
+	print(job.result())
 
 run()
+
+
+
