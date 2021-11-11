@@ -33,38 +33,17 @@ def get_order_list():
 	headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 	response = requests.request("GET", url, headers=headers)
 	FJson = json.loads(response.text)
-	Init.id = FJson[0]
-	Init.name = FJson[1]
-	Init.hasChildren = FJson[2]
-	Init.url = FJson[3]
-	Init.children = FJson[4]
-	Init.Title = FJson[5]
-	Init.MetaTagDescription = FJson[6]
-	#Init.id = FJson["id"]
-	#Init.name = FJson["name"]
-	#Init.hasChildren = FJson["hasChildren"]
-	#Init.url = FJson["url"]
-	#Init.children = FJson["children"]
-	#Init.Title = FJson["Title"]
-	#Init.MetaTagDescription = FJson["MetaTagDescription"]
+	print(FJson["id"])
+	
 
-	df1 = pd.DataFrame({
-		'id': Init.id,
-		'name': Init.name,
-		'hasChildren': Init.hasChildren,
-		'url': Init.url,
-		'children': Init.children,
-		'Title': Init.Title,
-		'MetaTagDescription': Init.MetaTagDescription}, index=[0])
-	return df1
 
 
 def run():
 	df = get_order_list()
-	df.reset_index(drop=True, inplace=True)
-	json_data = df.to_json(orient = 'records')
-	json_object = json.loads(json_data)
-	print(json_object)
+	#df.reset_index(drop=True, inplace=True)
+	#json_data = df.to_json(orient = 'records')
+	#json_object = json.loads(json_data)
+	#print(json_object)
 	'''
 	table_schema = {
 		"name": "id",
