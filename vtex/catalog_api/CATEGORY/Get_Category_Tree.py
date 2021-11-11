@@ -31,14 +31,7 @@ def dataframe():
 	print("Cargando Dataframe")
 	FJson = get_order_list()
 	for x in FJson:
-		df1 = pd.DataFrame({
-			'id': x["orderId"],
-			'name': x["creationDate"],
-			'hasChildren': x["clientName"],
-			'url': x["totalValue"],
-			'children': x["paymentNames"],
-			'Title': x["status"],
-			'MetaTagDescription': x["currencyCode"]}, index=[0])
+		df1 = pd.DataFrame({'id': x["id"],'name': x["name"],'hasChildren': x["hasChildren"],'url': x["url"],'children': x["children"],'Title': x["Title"],'MetaTagDescription': x["MetaTagDescription"]}, index=[0])
 		Init.df = Init.df.append(df1)
 	return Init.df
 
