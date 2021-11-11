@@ -49,13 +49,10 @@ def get_order_list():
 		'children': Init.children,
 		'Title': Init.Title,
 		'MetaTagDescription': Init.MetaTagDescription)}, index=[0])
-		Init.df = Init.df.append(df1)
-
 	return df1
 
 
 def run():
-
 	df = get_order_list()
 	df.reset_index(drop=True, inplace=True)
 	json_data = df.to_json(orient = 'records')
