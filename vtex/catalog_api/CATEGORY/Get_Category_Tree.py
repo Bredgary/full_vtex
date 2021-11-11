@@ -13,14 +13,6 @@ import logging
 
 class Init:
 	df = pd.DataFrame()
-	id:int
-	name:str
-	hasChildren:bool
-	url:str
-	children:object
-	Title:str
-	MetaTagDescription:str
-	
 
 def format_schema(schema):
     formatted_schema = []
@@ -29,21 +21,33 @@ def format_schema(schema):
     return formatted_schema
 
 def get_order_list():
-	url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pub/category/tree/20000"
+	url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pub/category/tree/100000"
 	headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 	response = requests.request("GET", url, headers=headers)
 	FJson = json.loads(response.text)
-	print(FJson[0])
-	
+	return FJson
 
-
+def dataframe():
+	print("Cargando Dataframe")
+	FJson = get_order_list()
+	for x in FJson:
+		df1 = pd.DataFrame({
+			'id': x["orderId"],
+			'name': x["creationDate"],
+			'hasChildren': x["clientName"],
+			'url': x["totalValue"],
+			'children': x["paymentNames"],
+			'Title': x["status"],
+			'MetaTagDescription': x["currencyCode"]}, index=[0])
+		Init.df = Init.df.append(df1)
+	return Init.df
 
 def run():
-	df = get_order_list()
-	#df.reset_index(drop=True, inplace=True)
-	#json_data = df.to_json(orient = 'records')
-	#json_object = json.loads(json_data)
-	#print(json_object)
+	df = dataframe()
+	df.reset_index(drop=True, inplace=True)
+	json_data = df.to_json(orient = 'records')
+	json_object = json.loads(json_data)
+	print(json_object)
 	'''
 	table_schema = {
 		"name": "id",
