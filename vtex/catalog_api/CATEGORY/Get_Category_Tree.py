@@ -33,13 +33,20 @@ def get_order_list():
 	headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 	response = requests.request("GET", url, headers=headers)
 	FJson = json.loads(response.text)
-	Init.id = FJson["id"]
-	Init.name = FJson["name"]
-	Init.hasChildren = FJson["hasChildren"]
-	Init.url = FJson["url"]
-	Init.children = FJson["children"]
-	Init.Title = FJson["Title"]
-	Init.MetaTagDescription = FJson["MetaTagDescription"]
+	Init.id = FJson[0]
+	Init.name = FJson[1]
+	Init.hasChildren = FJson[2]
+	Init.url = FJson[3]
+	Init.children = FJson[4]
+	Init.Title = FJson[5]
+	Init.MetaTagDescription = FJson[6]
+	#Init.id = FJson["id"]
+	#Init.name = FJson["name"]
+	#Init.hasChildren = FJson["hasChildren"]
+	#Init.url = FJson["url"]
+	#Init.children = FJson["children"]
+	#Init.Title = FJson["Title"]
+	#Init.MetaTagDescription = FJson["MetaTagDescription"]
 
 	df1 = pd.DataFrame({
 		'id': Init.id,
