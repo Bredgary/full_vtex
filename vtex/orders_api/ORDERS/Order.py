@@ -1,0 +1,206 @@
+import pandas as pd
+import numpy as np
+import requests
+import json
+import os
+import re
+import datetime
+from datetime import date
+from datetime import timedelta
+from os import system
+from google.cloud import bigquery
+import logging
+
+class Init:
+	today = datetime.date.today()
+	yesterday = today - datetime.timedelta(days=1)
+	before_yesterday = today - datetime.timedelta(days=2)
+	ordenes = {}
+	df = pd.DataFrame()
+	
+
+def format_schema(schema):
+    formatted_schema = []
+    for row in schema:
+        formatted_schema.append(bigquery.SchemaField(row['name'], row['type'], row['mode']))
+    return formatted_schema
+
+def get_order_list(id):
+	url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders?page="+str(page)+""
+	querystring = {"f_creationDate":"creationDate:["+str(Init.before_yesterday)+"T02:00:00.000Z TO "+str(Init.yesterday)+"T01:59:59.999Z]","f_hasInputInvoice":"false"}
+	headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
+	response = requests.request("GET", url, headers=headers, params=querystring)
+	FJson = json.loads(response.text)
+	return FJson
+
+def for_by_id(count):
+	f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/CATEGORY_SPECIFICATION/id_category.json','r')
+	data_from_string = f_01.read()
+	data_from_string = data_from_string.replace('"', '')
+	listaIDS = json.loads(data_from_string)
+	for i in listaIDS:
+		count += 1
+		get_specifications(i,count,delimitador)
+	print(str(count)+" registro almacenado.")
+
+operacion_fenix(count)
+
+
+def dataframe():
+	print("Cargando Dataframe")
+	FJson = paging()
+	lista = FJson["list"]
+	for x in lista:
+		df1 = pd.DataFrame({
+			'orderId': str(x["orderId"]),
+			'creationDate': str(x["creationDate"]),
+			'clientName': str(x["clientName"]),
+			'totalValue': str(x["totalValue"]),
+			'paymentNames': str(x["paymentNames"]),
+			'status': str(x["status"]),
+			'statusDescription': str(x["statusDescription"]),
+			'marketPlaceOrderId': str(x["marketPlaceOrderId"]),
+			'sequence': str(x["sequence"]),
+			'salesChannel': str(x["salesChannel"]),
+			'affiliateId': str(x["affiliateId"]),
+			'origin': str(x["origin"]),
+			'workflowInErrorState': str(x["workflowInErrorState"]),
+			'workflowInRetry': str(x["workflowInRetry"]),
+			'lastMessageUnread': str(x["lastMessageUnread"]),
+			'ShippingEstimatedDate': str(x["ShippingEstimatedDate"]),
+			'ShippingEstimatedDateMax': str(x["ShippingEstimatedDateMax"]),
+			'ShippingEstimatedDateMin': str(x["ShippingEstimatedDateMin"]),
+			'orderIsComplete': str(x["orderIsComplete"]),
+			'listId': str(x["listId"]),
+			'listType': str(x["listType"]),
+			'authorizedDate': str(x["authorizedDate"]),
+			'callCenterOperatorName': str(x["callCenterOperatorName"]),
+			'totalItems': str(x["totalItems"]),
+			'currencyCode': str(x["currencyCode"])}, index=[0])
+		Init.df = Init.df.append(df1)
+	return Init.df
+
+
+def run():
+	df = dataframe()
+	df.reset_index(drop=True, inplace=True)
+	json_data = df.to_json(orient = 'records')
+	json_object = json.loads(json_data)
+	
+	table_schema = {
+			"name": "orderId",
+			"type": "STRING",
+			"mode": "NULLABLE"
+		},{
+			"name": "creationDate",
+			"type": "STRING",
+			"mode": "NULLABLE"
+		},{
+			"name": "clientName",
+			"type": "STRING",
+			"mode": "NULLABLE"
+		},{
+			"name": "totalValue",
+			"type": "STRING",
+			"mode": "NULLABLE"
+		},{
+			"name": "paymentNames",
+			"type": "STRING",
+			"mode": "NULLABLE"
+		},{
+			"name": "status",
+			"type": "STRING",
+			"mode": "NULLABLE"
+		},{
+			"name": "statusDescription",
+			"type": "STRING",
+			"mode": "NULLABLE"
+		},{
+			"name": "marketPlaceOrderId",
+			"type": "STRING",
+			"mode": "NULLABLE"
+		},{
+			"name": "sequence",
+			"type": "STRING",
+			"mode": "NULLABLE"
+		},{
+			"name": "salesChannel",
+			"type": "STRING",
+			"mode": "NULLABLE"
+		},{
+			"name": "affiliateId",
+			"type": "STRING",
+			"mode": "NULLABLE"
+		},{
+			"name": "origin",
+			"type": "STRING",
+			"mode": "NULLABLE"
+		},{
+			"name": "workflowInErrorState",
+			"type": "STRING",
+			"mode": "NULLABLE"
+		},{
+			"name": "workflowInRetry",
+			"type": "STRING",
+			"mode": "NULLABLE"
+		},{
+			"name": "lastMessageUnread",
+			"type": "STRING",
+			"mode": "NULLABLE"
+		},{
+			"name": "ShippingEstimatedDate",
+			"type": "STRING",
+			"mode": "NULLABLE"
+		},{
+			"name": "ShippingEstimatedDateMax",
+			"type": "STRING",
+			"mode": "NULLABLE"
+		},{
+			"name": "ShippingEstimatedDateMin",
+			"type": "STRING",
+			"mode": "NULLABLE"
+		},{
+			"name": "orderIsComplete",
+			"type": "STRING",
+			"mode": "NULLABLE"
+		},{
+			"name": "listId",
+			"type": "STRING",
+			"mode": "NULLABLE"
+		},{
+			"name": "listType",
+			"type": "STRING",
+			"mode": "NULLABLE"
+		},{
+			"name": "authorizedDate",
+			"type": "STRING",
+			"mode": "NULLABLE"
+		},{
+			"name": "callCenterOperatorName",
+			"type": "STRING",
+			"mode": "NULLABLE"
+		},{
+			"name": "totalItems",
+			"type": "STRING",
+			"mode": "NULLABLE"
+		},{
+			"name": "currencyCode",
+			"type": "STRING",
+			"mode": "NULLABLE"}
+	
+	project_id = '999847639598'
+	dataset_id = 'landing_zone'
+	table_id = 'shopstar_vtex_list_order'
+	table_temp = 'order_write'
+	
+	client  = bigquery.Client(project = project_id)
+	dataset  = client.dataset(dataset_id)
+	table = dataset.table(table_id)
+	job_config = bigquery.LoadJobConfig()
+	job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+	job_config.schema = format_schema(table_schema)
+	job = client.load_table_from_json(json_object, table, job_config = job_config)
+	print(job.result())
+
+run()
+
