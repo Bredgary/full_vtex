@@ -48,7 +48,7 @@ def get_order_list():
 		'url': Init.url,
 		'children': Init.children,
 		'Title': Init.Title,
-		'MetaTagDescription': Init.MetaTagDescription)}, index=[0])
+		'MetaTagDescription': Init.MetaTagDescription}, index=[0])
 	return df1
 
 
