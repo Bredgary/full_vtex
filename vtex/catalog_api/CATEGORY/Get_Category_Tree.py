@@ -27,19 +27,34 @@ def get_order_list():
 	FJson = json.loads(response.text)
 	return FJson
 
-def dataframe():
-	print("Cargando Dataframe")
-	FJson = get_order_list()
-	for x in FJson:
-		if x["hasChildren"]:
-			df1 = pd.DataFrame({'id': x["id"],'name': x["name"],'hasChildren': x["hasChildren"],'url': x["url"],'Title': x["Title"],'MetaTagDescription': x["MetaTagDescription"]}, index=[0])
+
+def dataframe(raiz, nodo):
+	if nodo is not None:
+		if nodo:
+			son = raiz['children']
+			for x in son:
+				if x['hasChildren']:
+					df1 = pd.DataFrame({'id': x["id"],'name': x["name"],'hasChildren': x["hasChildren"],'url': x["url"],'Title': x["Title"],'MetaTagDescription': x["MetaTagDescription"]}, index=[0])
+					Init.df = Init.df.append(df1)
+					dataframe(son, son["hasChildren"])
 		else:
-			df1 = pd.DataFrame({'id': x["id"],'name': x["name"],'hasChildren': x["hasChildren"],'url': x["url"],'Title': x["Title"],'MetaTagDescription': x["MetaTagDescription"]}, index=[0])
-		Init.df = Init.df.append(df1)
-	return Init.df
+			son = raiz['children']
+			for x in son:
+				if x['hasChildren'] == False:
+					children = x['children']
+					for i in children:
+						df1 = pd.DataFrame({'id': x["id"],'name': x["name"],'hasChildren': x["hasChildren"],'url': x["url"],'Title': x["Title"],'MetaTagDescription': x["MetaTagDescription"]}, index=[0])
+						Init.df = Init.df.append(df1)
+						dataframe(son, son["hasChildren"])
+	else:
+		continue
+  return Init.df
+
 
 def run():
-	df = dataframe()
+	raiz = get_order_list
+	df = dataframe(raiz, raiz["hasChildren"])
+	print(df)
 	df.reset_index(drop=True, inplace=True)
 	json_data = df.to_json(orient = 'records')
 	json_object = json.loads(json_data)
@@ -75,9 +90,9 @@ def run():
 	table_id = 'shopstar_vtex_category_test'
 	
 	client  = bigquery.Client(project = project_id)
-	dataset  = client.dataset(dataset_id)
 	table = dataset.table(table_id)
 	job_config = bigquery.LoadJobConfig()
+	job_config.write_disposition = "WRITE_TRUNCATE"
 	job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
 	job_config.schema = format_schema(table_schema)
 	job = client.load_table_from_json(json_object, table, job_config = job_config)
