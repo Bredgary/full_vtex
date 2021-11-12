@@ -53,9 +53,11 @@ def dataframe(raiz, nodo):
 
 
 def run():
-	raiz = get_order_list
-	df = dataframe(raiz, raiz["hasChildren"])
-	print(df)
+	raiz = get_order_list()
+	nodo = raiz["hasChildren"]
+	#df = dataframe(raiz, raiz["hasChildren"])
+	print(raiz)
+	print(nodo)
 	'''
 	df.reset_index(drop=True, inplace=True)
 	json_data = df.to_json(orient = 'records')
