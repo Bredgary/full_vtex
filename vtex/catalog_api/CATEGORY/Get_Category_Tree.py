@@ -37,7 +37,7 @@ def dataframe(raiz, isChildren,lista):
 			lista.append(x["MetaTagDescription"])
 			valid = x["hasChildren"]
 			nodo = x["children"]
-			dataframe(son, valid,lista)
+			dataframe(nodo, valid,lista)
 	else:
 		for x in raiz:
 			lista.append(x["id"])
@@ -47,7 +47,7 @@ def dataframe(raiz, isChildren,lista):
 			lista.append(x["MetaTagDescription"])
 			valid = x["hasChildren"]
 			nodo = x["children"]
-			dataframe(son, valid,lista)
+			dataframe(nodo, valid,lista)
 	return lista
 
 
