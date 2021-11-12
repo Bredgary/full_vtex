@@ -56,7 +56,7 @@ def dataframe():
 	FJson = get_order_list()
 	if FJson[2]:
 		df1 = pd.DataFrame({
-			'id': x["id"]),
+			'id': x["id"],
 			'name': x["name"],
 			'hasChildren': x["hasChildren"],
 			'url': x["url"],
@@ -64,7 +64,7 @@ def dataframe():
 			'MetaTagDescription': x["MetaTagDescription"]}, index=[0])
 	else:
 		df1 = pd.DataFrame({
-			'id': x["id"]),
+			'id': x["id"],
 			'name': x["name"],
 			'hasChildren': x["hasChildren"],
 			'url': x["url"],
