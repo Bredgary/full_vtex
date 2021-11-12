@@ -52,8 +52,10 @@ def run():
 		hasChildren = x["hasChildren"]
 		record = dataframe(FJson,hasChildren,Init.lista)
 	
-	FormatoJson = json.loads(Init.lista)
-	print(FormatoJson)
+	x = json.dumps(Init.lista)
+	y = json.loads(x)
+
+	print(y)
 
 
 '''
