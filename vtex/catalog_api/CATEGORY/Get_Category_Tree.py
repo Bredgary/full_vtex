@@ -55,7 +55,7 @@ def dataframe(raiz, nodo):
 def run():
 	FJson = get_order_list()
 	for x in FJson:
-		hasChildren = FJson["hasChildren"]
+		hasChildren = x["hasChildren"]
 		print(hasChildren)
 
 '''
