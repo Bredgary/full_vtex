@@ -29,7 +29,7 @@ def get_order_list():
 
 
 def dataframe(raiz, isChildren):
-	if nodo:
+	if isChildren:
 		for x in raiz:
 			df1 = pd.DataFrame({'id': x[0]}, index=[0])
 			Init.df = Init.df.append(df1)
