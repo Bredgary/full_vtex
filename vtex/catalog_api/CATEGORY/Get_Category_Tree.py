@@ -56,7 +56,6 @@ def run():
 	raiz = get_order_list()
 	nodo = raiz[2]
 	#df = dataframe(raiz, raiz["hasChildren"])
-	print(raiz)
 	print(nodo)
 	'''
 	df.reset_index(drop=True, inplace=True)
