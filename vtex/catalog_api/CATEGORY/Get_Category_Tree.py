@@ -32,8 +32,8 @@ def dataframe():
 	FJson = get_order_list()
 	for x in FJson:
 		df1 = pd.DataFrame({'id': x["id"],'name': x["name"],'hasChildren': x["hasChildren"],'url': x["url"],'Title': x["Title"],'MetaTagDescription': x["MetaTagDescription"]}, index=[0])
-		print(df1)
-		break
+		#print(df1)
+		#break
 		#Init.df = Init.df.append(df1)
 	#return Init.df
 
@@ -91,6 +91,7 @@ def run():
 	job_config.schema = format_schema(table_schema)
 	job = client.load_table_from_json(json_object, table, job_config = job_config)
 	print(job.result())
-	'''
+	
 
 run()
+'''
