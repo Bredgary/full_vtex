@@ -30,14 +30,14 @@ def get_order_list():
 
 def dataframe(raiz, isChildren,table):
 	if isChildren:
-		for x in raiz:
-			table = json.update(x)
+		#for x in raiz:
+		table = json.update(raiz)
 		#hasChildren = raiz[2]
 		#print(hasChildren)
 		#dataframe(son, hasChildren)
 	else:
-		for x in raiz:
-			table = json.update(x)
+		#for x in raiz:
+		table = json.update(raiz)
 		#hasChildren = raiz[2]
 		#print(hasChildren)
 		#dataframe(son, hasChildren)
