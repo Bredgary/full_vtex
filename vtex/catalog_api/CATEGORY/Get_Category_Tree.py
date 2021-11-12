@@ -35,8 +35,8 @@ def dataframe(raiz, isChildren,lista):
 			lista.append(x["url"])
 			lista.append(x["Title"])
 			lista.append(x["MetaTagDescription"])
-		hasChildren = raiz[2]
-		print("hasChildren")
+		hasChildren = raiz["hasChildren"]
+		print(hasChildren)
 		#dataframe(son, hasChildren)
 	else:
 		for x in raiz:
@@ -45,8 +45,8 @@ def dataframe(raiz, isChildren,lista):
 			lista.append(x["url"])
 			lista.append(x["Title"])
 			lista.append(x["MetaTagDescription"])
-		hasChildren = raiz[2]
-		print("hasChildren")
+		hasChildren = raiz["hasChildren"]
+		print(hasChildren)
 		#dataframe(son, hasChildren)
 	return lista
 
