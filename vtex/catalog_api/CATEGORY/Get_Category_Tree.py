@@ -56,24 +56,24 @@ def dataframe():
 	FJson = get_order_list()
 	for x in FJson:
 		if FJson[2]:
-			df1 = pd.DataFrame({
+			Init.df = pd.DataFrame({
 				'id': FJson[0],
 				'name': FJson[1],
 				'hasChildren': FJson[2],
 				'url': FJson[3],
 				'Title': FJson[5],
 				'MetaTagDescription': FJson[6]}, index=[0])
-			Init.df.append(df1)
+			Init.df.append(Init.df)
 		else:
-			df1 = pd.DataFrame({
+			Init.df = pd.DataFrame({
 				'id': FJson[0],
 				'name': FJson[1],
 				'hasChildren': FJson[2],
 				'url': FJson[3],
 				'Title': FJson[5],
 				'MetaTagDescription': FJson[6]}, index=[0])
-			Init.df.append(df1)
-	Init.df = Init.df.append(df1)
+			Init.df.append(Init.df)
+	Init.df = Init.df.append(Init.df)
 	return Init.df
 
 
