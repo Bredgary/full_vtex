@@ -47,7 +47,7 @@ def dataframe(raiz, nodo):
 						Init.df = Init.df.append(df1)
 						dataframe(son, son["hasChildren"])
 	else:
-		continue
+		print("Fin dataframe")
 	return Init.df
 
 
