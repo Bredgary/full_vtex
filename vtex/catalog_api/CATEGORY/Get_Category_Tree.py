@@ -47,14 +47,16 @@ def dataframe(raiz, nodo):
 						Init.df = Init.df.append(df1)
 						dataframe(son, son["hasChildren"])
 	else:
-		print("Fin dataframe")
+		return Init.df
 	return Init.df
+	
 
 
 def run():
 	raiz = get_order_list
 	df = dataframe(raiz, raiz["hasChildren"])
 	print(df)
+	'''
 	df.reset_index(drop=True, inplace=True)
 	json_data = df.to_json(orient = 'records')
 	json_object = json.loads(json_data)
@@ -97,6 +99,6 @@ def run():
 	job_config.schema = format_schema(table_schema)
 	job = client.load_table_from_json(json_object, table, job_config = job_config)
 	print(job.result())
-	
+	'''
 run()
 
