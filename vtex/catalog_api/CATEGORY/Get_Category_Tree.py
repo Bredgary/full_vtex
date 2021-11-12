@@ -31,14 +31,14 @@ def get_order_list():
 def dataframe(raiz, nodo):
 	if nodo is not None:
 		if nodo:
-			son = raiz[4]
+			son = raiz["children"]
 			for x in son:
 				df1 = pd.DataFrame({'id': x[0]}, index=[0])
 				Init.df = Init.df.append(df1)
 			hasChildren = son["hasChildren"]
 			dataframe(son, hasChildren)
 		else:
-			son = raiz[4]
+			son = raiz["children"]
 			for x in son:
 				df1 = pd.DataFrame({'id': x[0]}, index=[0])
 				Init.df = Init.df.append(df1)
