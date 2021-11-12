@@ -48,6 +48,7 @@ def dataframe(raiz, isChildren,lista):
 		hasChildren = raiz[2]
 		print(hasChildren)
 		#dataframe(son, hasChildren)
+	return lista
 
 
 
