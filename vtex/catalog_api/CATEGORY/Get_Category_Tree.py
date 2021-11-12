@@ -11,7 +11,8 @@ from os import system
 from google.cloud import bigquery
 import logging
 
-
+class init:
+	df = pd.DataFrame()
 
 def format_schema(schema):
     formatted_schema = []
@@ -27,28 +28,32 @@ def get_order_list():
 	return FJson
 
 
-def dataframe(raiz, isChildren,lista):
+def dataframe(raiz, isChildren,df):
 	if isChildren:
 		for x in raiz:
-			lista.append(x["id"])
-			lista.append(x["name"])
-			lista.append(x["url"])
-			lista.append(x["Title"])
-			lista.append(x["MetaTagDescription"])
+			df1 = pd.DataFrame({
+			'id': x["id"],
+			'name': x["name"],
+			'url': x["url"],
+			'Title': x["Title"],
+			'MetaTagDescription': x["MetaTagDescription"]}, index=[0])
 			valid = x["hasChildren"]
 			nodo = x["children"]
-			dataframe(nodo, valid,lista)
+			dataframe(nodo, valid,df1)
+		init.df = Init.df.append(df1)
 	else:
 		for x in raiz:
-			lista.append(x["id"])
-			lista.append(x["name"])
-			lista.append(x["url"])
-			lista.append(x["Title"])
-			lista.append(x["MetaTagDescription"])
+			df1 = pd.DataFrame({
+				'id': x["id"],
+				'name': x["name"],
+				'url': x["url"],
+				'Title': x["Title"],
+				'MetaTagDescription': x["MetaTagDescription"]}, index=[0])
 			valid = x["hasChildren"]
 			nodo = x["children"]
-			dataframe(nodo, valid,lista)
-	return lista
+			dataframe(nodo, valid,df1)
+		init.df = Init.df.append(df1)
+	return init.df 
 
 
 
@@ -58,9 +63,9 @@ def run():
 	for x in FJson:
 		hasChildren = x["hasChildren"]
 		registros = dataframe(FJson,hasChildren,lista)
-	
-	for x in registros:
-		print(x)
+
+	result = registros
+	print(result)
 
 '''
 	df.reset_index(drop=True, inplace=True)
