@@ -28,20 +28,20 @@ def get_order_list():
 	return FJson
 
 
-def dataframe(raiz, isChildren,Init.lista):
+def dataframe(raiz, isChildren,lista):
 	if isChildren:
 		for x in raiz:
-			Init.lista.append(x)
+			lista.append(x)
 		#hasChildren = raiz[2]
 		#print(hasChildren)
 		#dataframe(son, hasChildren)
 	else:
 		for x in raiz:
-			Init.lista.append(x)
+			lista.append(x)
 		#hasChildren = raiz[2]
 		#print(hasChildren)
 		#dataframe(son, hasChildren)
-	return Init.lista
+	return lista
 
 
 
