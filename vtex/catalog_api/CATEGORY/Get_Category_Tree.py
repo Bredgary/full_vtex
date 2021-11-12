@@ -35,8 +35,9 @@ def dataframe(raiz, isChildren,lista):
 			lista.append(x["url"])
 			lista.append(x["Title"])
 			lista.append(x["MetaTagDescription"])
-			print(x["hasChildren"])
-		#dataframe(son, hasChildren)
+			valid = x["hasChildren"]
+			nodo = x["children"]
+			dataframe(son, valid,lista)
 	else:
 		for x in raiz:
 			lista.append(x["id"])
@@ -44,8 +45,9 @@ def dataframe(raiz, isChildren,lista):
 			lista.append(x["url"])
 			lista.append(x["Title"])
 			lista.append(x["MetaTagDescription"])
-			print(x["hasChildren"])
-		#dataframe(son, hasChildren)
+			valid = x["hasChildren"]
+			nodo = x["children"]
+			dataframe(son, valid,lista)
 	return lista
 
 
@@ -55,11 +57,6 @@ def run():
 	lista = []
 	for x in FJson:
 		hasChildren = x["hasChildren"]
-		lista.append(x["id"])
-		lista.append(x["name"])
-		lista.append(x["url"])
-		lista.append(x["Title"])
-		lista.append(x["MetaTagDescription"])
 		record = dataframe(FJson,hasChildren,lista)
 
 '''
