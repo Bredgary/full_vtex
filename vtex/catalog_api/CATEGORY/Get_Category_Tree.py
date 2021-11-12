@@ -29,6 +29,7 @@ def get_order_list():
 
 
 def dataframe(raiz, isChildren,df):
+	df1 = pd.DataFrame()
 	if isChildren:
 		for x in raiz:
 			df1 = pd.DataFrame({
