@@ -58,6 +58,8 @@ def run():
 	for x in FJson:
 		hasChildren = x["hasChildren"]
 		record = dataframe(FJson,hasChildren,lista)
+	
+	print(record)
 
 '''
 	df.reset_index(drop=True, inplace=True)
