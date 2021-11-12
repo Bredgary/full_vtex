@@ -73,7 +73,7 @@ def dataframe():
 				'Title': FJson[5],
 				'MetaTagDescription': FJson[6]}, index=[0])
 			Init.df.append(df1)
-	Init.df = Init.df.append(Init.df)
+	Init.df = Init.df.append(df1)
 	return Init.df
 
 
