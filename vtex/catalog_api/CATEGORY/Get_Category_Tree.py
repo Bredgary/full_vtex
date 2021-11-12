@@ -33,19 +33,15 @@ def dataframe(raiz, nodo):
 		if nodo:
 			son = raiz['children']
 			for x in son:
-				if x['hasChildren']:
-					df1 = pd.DataFrame({'id': x["id"],'name': x["name"],'hasChildren': x["hasChildren"],'url': x["url"],'Title': x["Title"],'MetaTagDescription': x["MetaTagDescription"]}, index=[0])
-					Init.df = Init.df.append(df1)
-					dataframe(son, son["hasChildren"])
+				df1 = pd.DataFrame({'id': x["id"],'name': x["name"],'hasChildren': x["hasChildren"],'url': x["url"],'Title': x["Title"],'MetaTagDescription': x["MetaTagDescription"]}, index=[0])
+				Init.df = Init.df.append(df1)
+			dataframe(son, son["hasChildren"])
 		else:
 			son = raiz['children']
 			for x in son:
-				if x['hasChildren'] == False:
-					children = x['children']
-					for i in children:
-						df1 = pd.DataFrame({'id': x["id"],'name': x["name"],'hasChildren': x["hasChildren"],'url': x["url"],'Title': x["Title"],'MetaTagDescription': x["MetaTagDescription"]}, index=[0])
-						Init.df = Init.df.append(df1)
-						dataframe(son, son["hasChildren"])
+				df1 = pd.DataFrame({'id': x["id"],'name': x["name"],'hasChildren': x["hasChildren"],'url': x["url"],'Title': x["Title"],'MetaTagDescription': x["MetaTagDescription"]}, index=[0])
+				Init.df = Init.df.append(df1)
+			dataframe(son, son["hasChildren"])
 	else:
 		return Init.df
 	return Init.df
@@ -56,8 +52,8 @@ def run():
 	FJson = get_order_list()
 	for x in FJson:
 		hasChildren = x["id"]
-		print(hasChildren)
-
+		dataframe(FJson,hasChildren)
+		
 '''
 	df.reset_index(drop=True, inplace=True)
 	json_data = df.to_json(orient = 'records')
