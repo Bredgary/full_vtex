@@ -31,18 +31,19 @@ def dataframe():
 	print("Cargando Dataframe")
 	FJson = get_order_list()
 	for x in FJson:
-		df1 = pd.DataFrame({'id': x["id"],'name': x["name"],'hasChildren': x["hasChildren"],'url': x["url"],'Title': x["Title"],'MetaTagDescription': x["MetaTagDescription"]}, index=[0])
+		if x["hasChildren"]:
+			df1 = pd.DataFrame({'id': x["id"],'name': x["name"],'hasChildren': x["hasChildren"],'url': x["url"],'Title': x["Title"],'MetaTagDescription': x["MetaTagDescription"]}, index=[0])
+		else:
+			df1 = pd.DataFrame({'id': x["id"],'name': x["name"],'hasChildren': x["hasChildren"],'url': x["url"],'Title': x["Title"],'MetaTagDescription': x["MetaTagDescription"]}, index=[0])
 		Init.df = Init.df.append(df1)
 	return Init.df
-
 
 def run():
 	df = dataframe()
 	df.reset_index(drop=True, inplace=True)
 	json_data = df.to_json(orient = 'records')
 	json_object = json.loads(json_data)
-	print(json_object)
-	
+
 	table_schema = {
 		"name": "id",
 		"type": "INTEGER",
@@ -59,10 +60,6 @@ def run():
 			"name": "url",
 			"type": "STRING",
 			"mode": "NULLABLE"
-		},{
-			"name": "children",
-			"type": "STRING",
-			"mode": "REPEATED"
 		},{
 			"name": "Title",
 			"type": "STRING",
