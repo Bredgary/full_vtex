@@ -56,6 +56,7 @@ def run():
 	FJson = get_order_list()
 	lista = []
 	for x in FJson:
+		hasChildren = x["hasChildren"]
 		lista.append(x["id"])
 		lista.append(x["name"])
 		lista.append(x["url"])
