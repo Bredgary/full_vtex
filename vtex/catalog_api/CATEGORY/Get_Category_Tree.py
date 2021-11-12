@@ -32,13 +32,13 @@ def dataframe(raiz, isChildren):
 	if isChildren:
 		for x in raiz:
 			print(x)
-		hasChildren = son["hasChildren"]
+		hasChildren = raiz["hasChildren"]
 		print(hasChildren)
 		#dataframe(son, hasChildren)
 	else:
 		for x in raiz:
 			print(x)
-		hasChildren = son["hasChildren"]
+		hasChildren = raiz["hasChildren"]
 		print(hasChildren)
 		#dataframe(son, hasChildren)
 	return Init.df
