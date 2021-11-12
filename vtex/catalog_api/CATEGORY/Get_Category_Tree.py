@@ -27,7 +27,7 @@ def get_order_list():
 	FJson = json.loads(response.text)
 	return FJson
 
-
+'''
 def dataframe(raiz, nodo):
 	if nodo is not None:
 		if nodo:
@@ -49,14 +49,34 @@ def dataframe(raiz, nodo):
 	else:
 		return Init.df
 	return Init.df
-	
+'''	
+
+def dataframe():
+	print("Cargando Dataframe")
+	FJson = get_order_list()
+	if FJson[2]:
+		df1 = pd.DataFrame({
+			'id': x["id"]),
+			'name': x["name"],
+			'hasChildren': x["hasChildren"],
+			'url': x["url"],
+			'Title': x["Title"],
+			'MetaTagDescription': x["MetaTagDescription"]}, index=[0])
+	else:
+		df1 = pd.DataFrame({
+			'id': x["id"]),
+			'name': x["name"],
+			'hasChildren': x["hasChildren"],
+			'url': x["url"],
+			'Title': x["Title"],
+			'MetaTagDescription': x["MetaTagDescription"]}, index=[0])
+	Init.df = Init.df.append(df1)
+	return Init.df
 
 
 def run():
-	raiz = get_order_list()
-	nodo = raiz[2]
-	#df = dataframe(raiz, raiz["hasChildren"])
-	print(nodo)
+	df = dataframe()
+	print(df)
 	'''
 	df.reset_index(drop=True, inplace=True)
 	json_data = df.to_json(orient = 'records')
