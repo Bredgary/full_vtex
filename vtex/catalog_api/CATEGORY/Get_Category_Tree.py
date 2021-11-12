@@ -61,7 +61,6 @@ def run():
 	
 	for x in registros:
 		print(x)
-		break
 
 '''
 	df.reset_index(drop=True, inplace=True)
