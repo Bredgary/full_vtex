@@ -31,13 +31,13 @@ def get_order_list():
 def dataframe(raiz, nodo):
 	if nodo is not None:
 		if nodo:
-			son = raiz['children']
+			son = raiz[5]
 			for x in son:
 				df1 = pd.DataFrame({'id': x["id"],'name': x["name"],'hasChildren': x["hasChildren"],'url': x["url"],'Title': x["Title"],'MetaTagDescription': x["MetaTagDescription"]}, index=[0])
 				Init.df = Init.df.append(df1)
-			dataframe(son, son["hasChildren"])
+			dataframe(son, son[2])
 		else:
-			son = raiz['children']
+			son = raiz[5]
 			for x in son:
 				df1 = pd.DataFrame({'id': x["id"],'name': x["name"],'hasChildren': x["hasChildren"],'url': x["url"],'Title': x["Title"],'MetaTagDescription': x["MetaTagDescription"]}, index=[0])
 				Init.df = Init.df.append(df1)
@@ -51,7 +51,7 @@ def dataframe(raiz, nodo):
 def run():
 	FJson = get_order_list()
 	for x in FJson:
-		hasChildren = x["id"]
+		hasChildren = x["hasChildren"]
 		dataframe(FJson,hasChildren)
 		
 '''
