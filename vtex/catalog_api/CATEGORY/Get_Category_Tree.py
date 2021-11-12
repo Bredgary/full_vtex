@@ -32,13 +32,10 @@ def dataframe():
 	FJson = get_order_list()
 	for x in FJson:
 		df1 = pd.DataFrame({'id': x["id"],'name': x["name"],'hasChildren': x["hasChildren"],'url': x["url"],'Title': x["Title"],'MetaTagDescription': x["MetaTagDescription"]}, index=[0])
-		#print(df1)
-		#break
-		#Init.df = Init.df.append(df1)
-	#return Init.df
+		Init.df = Init.df.append(df1)
+	return Init.df
 
-dataframe()
-'''
+
 def run():
 	df = dataframe()
 	print(df)
@@ -47,7 +44,7 @@ def run():
 	json_data = df.to_json(orient = 'records')
 	json_object = json.loads(json_data)
 	print(json_object)
-	
+	'''
 	table_schema = {
 		"name": "id",
 		"type": "INTEGER",
@@ -92,6 +89,5 @@ def run():
 	job = client.load_table_from_json(json_object, table, job_config = job_config)
 	print(job.result())
 	
-
 run()
 '''
