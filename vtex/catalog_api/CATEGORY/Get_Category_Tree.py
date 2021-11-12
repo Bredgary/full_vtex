@@ -35,13 +35,15 @@ def dataframe(raiz, nodo):
 			for x in son:
 				df1 = pd.DataFrame({'id': x[0]}, index=[0])
 				Init.df = Init.df.append(df1)
-			dataframe(son, son[2])
+			hasChildren = son["hasChildren"]
+			dataframe(son, hasChildren)
 		else:
 			son = raiz[4]
 			for x in son:
 				df1 = pd.DataFrame({'id': x[0]}, index=[0])
 				Init.df = Init.df.append(df1)
-			dataframe(son, son[2])
+			hasChildren = son["hasChildren"]
+			dataframe(son, hasChildren)
 	else:
 		return Init.df
 	return Init.df
