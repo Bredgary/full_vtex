@@ -28,18 +28,18 @@ def get_order_list():
 	return FJson
 
 
-def dataframe(raiz, isChildren):
+def dataframe(raiz, isChildren,table):
 	if isChildren:
 		for x in raiz:
-			print(x)
-		hasChildren = raiz[2]
-		print(hasChildren)
+			table = json.update(x)
+		#hasChildren = raiz[2]
+		#print(hasChildren)
 		#dataframe(son, hasChildren)
 	else:
 		for x in raiz:
-			print(x)
-		hasChildren = raiz[2]
-		print(hasChildren)
+			table = json.update(x)
+		#hasChildren = raiz[2]
+		#print(hasChildren)
 		#dataframe(son, hasChildren)
 
 
@@ -47,8 +47,9 @@ def dataframe(raiz, isChildren):
 def run():
 	FJson = get_order_list()
 	for x in FJson:
+		table = json.loads(FJson)
 		hasChildren = x["hasChildren"]
-		dataframe(FJson,hasChildren)
+		dataframe(FJson,hasChildren,table)
 		
 '''
 	df.reset_index(drop=True, inplace=True)
