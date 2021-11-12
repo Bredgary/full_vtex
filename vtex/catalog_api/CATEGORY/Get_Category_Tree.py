@@ -57,9 +57,11 @@ def run():
 	lista = []
 	for x in FJson:
 		hasChildren = x["hasChildren"]
-		record = dataframe(FJson,hasChildren,lista)
+		registros = dataframe(FJson,hasChildren,lista)
 	
-	print(record)
+	for x in registros:
+		print(x)
+		break
 
 '''
 	df.reset_index(drop=True, inplace=True)
