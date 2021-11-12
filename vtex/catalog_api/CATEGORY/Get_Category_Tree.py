@@ -54,8 +54,9 @@ def dataframe(raiz, nodo):
 
 def run():
 	FJson = get_order_list()
-	hasChildren = FJson[2]
-	print(hasChildren)
+	for x in FJson:
+		hasChildren = FJson["hasChildren"]
+		print(hasChildren)
 
 '''
 	df.reset_index(drop=True, inplace=True)
