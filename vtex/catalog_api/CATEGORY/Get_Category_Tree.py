@@ -11,8 +11,7 @@ from os import system
 from google.cloud import bigquery
 import logging
 
-class Init:
-	lista = []
+
 
 def format_schema(schema):
     formatted_schema = []
@@ -47,16 +46,16 @@ def dataframe(raiz, isChildren,lista):
 
 def run():
 	FJson = get_order_list()
+	lista = []
 	for x in FJson:
-		Init.lista.append(FJson)
+		lista.append(x["hasChildren"])
+		lista.append(x["hasChildren"])
+		lista.append(x["hasChildren"])
+		lista.append(x["hasChildren"])
+		lista.append(x["hasChildren"])
+		lista.append(x["hasChildren"])
 		hasChildren = x["hasChildren"]
-		record = dataframe(FJson,hasChildren,Init.lista)
-	
-	x = json.dumps(Init.lista)
-	y = json.loads(x)
-
-	df = pd.DataFrame({'id': y[1]}, index=[0])
-	print(df)
+		record = dataframe(FJson,hasChildren,lista)
 
 '''
 	df.reset_index(drop=True, inplace=True)
