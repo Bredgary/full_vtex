@@ -51,7 +51,8 @@ def run():
 		Init.lista.append(FJson)
 		hasChildren = x["hasChildren"]
 		record = dataframe(FJson,hasChildren,Init.lista)
-		
+	
+	print(Init.lista)
 '''
 	df.reset_index(drop=True, inplace=True)
 	json_data = df.to_json(orient = 'records')
