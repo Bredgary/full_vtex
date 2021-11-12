@@ -52,7 +52,10 @@ def run():
 		hasChildren = x["hasChildren"]
 		record = dataframe(FJson,hasChildren,Init.lista)
 	
-	print(Init.lista)
+	FormatoJson = json.loads(Init.lista)
+	print(FormatoJson)
+
+
 '''
 	df.reset_index(drop=True, inplace=True)
 	json_data = df.to_json(orient = 'records')
