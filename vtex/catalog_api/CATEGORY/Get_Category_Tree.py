@@ -54,7 +54,7 @@ def dataframe(raiz, nodo):
 
 def run():
 	raiz = get_order_list()
-	nodo = raiz["hasChildren"]
+	nodo = raiz[2]
 	#df = dataframe(raiz, raiz["hasChildren"])
 	print(raiz)
 	print(nodo)
