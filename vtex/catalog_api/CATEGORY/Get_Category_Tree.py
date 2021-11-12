@@ -28,24 +28,21 @@ def get_order_list():
 	return FJson
 
 
-def dataframe(raiz, nodo):
-	if nodo is not None:
-		if nodo:
-			son = raiz["children"]
-			for x in son:
-				df1 = pd.DataFrame({'id': x[0]}, index=[0])
-				Init.df = Init.df.append(df1)
-			hasChildren = son["hasChildren"]
-			dataframe(son, hasChildren)
-		else:
-			son = raiz["children"]
-			for x in son:
-				df1 = pd.DataFrame({'id': x[0]}, index=[0])
-				Init.df = Init.df.append(df1)
-			hasChildren = son["hasChildren"]
-			dataframe(son, hasChildren)
+def dataframe(raiz, isChildren):
+	if nodo:
+		for x in raiz:
+			df1 = pd.DataFrame({'id': x[0]}, index=[0])
+			Init.df = Init.df.append(df1)
+		hasChildren = son["hasChildren"]
+		print(hasChildren)
+		#dataframe(son, hasChildren)
 	else:
-		return Init.df
+		for x in raiz:
+			df1 = pd.DataFrame({'id': x[0]}, index=[0])
+			Init.df = Init.df.append(df1)
+		hasChildren = son["hasChildren"]
+		print(hasChildren)
+		#dataframe(son, hasChildren)
 	return Init.df
 
 
