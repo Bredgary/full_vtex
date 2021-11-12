@@ -41,7 +41,6 @@ def dataframe(raiz, isChildren):
 		hasChildren = raiz[2]
 		print(hasChildren)
 		#dataframe(son, hasChildren)
-	return Init.df
 
 
 
