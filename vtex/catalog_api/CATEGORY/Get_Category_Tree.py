@@ -86,6 +86,6 @@ def run():
 	job_config.schema = format_schema(table_schema)
 	job = client.load_table_from_json(json_object, table, job_config = job_config)
 	print(job.result())
-	
+	'''
 run()
-'''
+
