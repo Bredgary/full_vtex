@@ -55,7 +55,7 @@ def run():
 	x = json.dumps(Init.lista)
 	y = json.loads(x)
 
-	df = pd.DataFrame({'id': x["id"]}, index=[0])
+	df = pd.DataFrame({'id': x[1]}, index=[0])
 	print(df)
 
 '''
