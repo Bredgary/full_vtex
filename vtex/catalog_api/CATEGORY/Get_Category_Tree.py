@@ -33,13 +33,13 @@ def dataframe(raiz, nodo):
 		if nodo:
 			son = raiz[4]
 			for x in son:
-				df1 = pd.DataFrame({'id': x[0],'name': x[1],'hasChildren': x[2],'url': x[3],'Title': x[5],'MetaTagDescription': x[6]}, index=[0])
+				df1 = pd.DataFrame({'id': x["id"],'name': x["name"],'hasChildren': x["hasChildren"],'url': x["url"],'Title': x["Title"],'MetaTagDescription': x["MetaTagDescription"]}, index=[0])
 				Init.df = Init.df.append(df1)
 			dataframe(son, son[2])
 		else:
 			son = raiz[4]
 			for x in son:
-				df1 = pd.DataFrame({'id': x[0],'name': x[1],'hasChildren': x[2],'url': x[3],'Title': x[5],'MetaTagDescription': x[6]}, index=[0])
+				df1 = pd.DataFrame({'id': x["id"],'name': x["name"],'hasChildren': x["hasChildren"],'url': x["url"],'Title': x["Title"],'MetaTagDescription': x["MetaTagDescription"]}, index=[0])
 				Init.df = Init.df.append(df1)
 			dataframe(son, son[2])
 	else:
