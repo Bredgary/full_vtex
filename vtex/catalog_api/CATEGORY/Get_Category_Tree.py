@@ -54,7 +54,7 @@ def dataframe(raiz, nodo):
 
 def run():
 	FJson = get_order_list()
-	hasChildren = FJson[3]
+	hasChildren = FJson[2]
 	print(hasChildren)
 
 '''
