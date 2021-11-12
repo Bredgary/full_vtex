@@ -30,17 +30,24 @@ def get_order_list():
 def dataframe(raiz, isChildren,lista):
 	if isChildren:
 		for x in raiz:
-			lista.append(x)
-		#hasChildren = raiz[2]
-		#print(hasChildren)
+			lista.append(x["id"])
+			lista.append(x["name"])
+			lista.append(x["url"])
+			lista.append(x["Title"])
+			lista.append(x["MetaTagDescription"])
+		hasChildren = raiz[2]
+		print(hasChildren)
 		#dataframe(son, hasChildren)
 	else:
 		for x in raiz:
-			lista.append(x)
-		#hasChildren = raiz[2]
-		#print(hasChildren)
+			lista.append(x["id"])
+			lista.append(x["name"])
+			lista.append(x["url"])
+			lista.append(x["Title"])
+			lista.append(x["MetaTagDescription"])
+		hasChildren = raiz[2]
+		print(hasChildren)
 		#dataframe(son, hasChildren)
-	return lista
 
 
 
@@ -48,13 +55,11 @@ def run():
 	FJson = get_order_list()
 	lista = []
 	for x in FJson:
-		lista.append(x["hasChildren"])
-		lista.append(x["hasChildren"])
-		lista.append(x["hasChildren"])
-		lista.append(x["hasChildren"])
-		lista.append(x["hasChildren"])
-		lista.append(x["hasChildren"])
-		hasChildren = x["hasChildren"]
+		lista.append(x["id"])
+		lista.append(x["name"])
+		lista.append(x["url"])
+		lista.append(x["Title"])
+		lista.append(x["MetaTagDescription"])
 		record = dataframe(FJson,hasChildren,lista)
 
 '''
