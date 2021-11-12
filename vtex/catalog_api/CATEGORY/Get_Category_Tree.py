@@ -56,20 +56,20 @@ def dataframe():
 	FJson = get_order_list()
 	if FJson[2]:
 		df1 = pd.DataFrame({
-			'id': x["id"],
-			'name': x["name"],
-			'hasChildren': x["hasChildren"],
-			'url': x["url"],
-			'Title': x["Title"],
-			'MetaTagDescription': x["MetaTagDescription"]}, index=[0])
+			'id': FJson["id"],
+			'name': FJson["name"],
+			'hasChildren': FJson["hasChildren"],
+			'url': FJson["url"],
+			'Title': FJson["Title"],
+			'MetaTagDescription': FJson["MetaTagDescription"]}, index=[0])
 	else:
 		df1 = pd.DataFrame({
-			'id': x["id"],
-			'name': x["name"],
-			'hasChildren': x["hasChildren"],
-			'url': x["url"],
-			'Title': x["Title"],
-			'MetaTagDescription': x["MetaTagDescription"]}, index=[0])
+			'id': FJson["id"],
+			'name': FJson["name"],
+			'hasChildren': FJson["hasChildren"],
+			'url': FJson["url"],
+			'Title': FJson["Title"],
+			'MetaTagDescription': FJson["MetaTagDescription"]}, index=[0])
 	Init.df = Init.df.append(df1)
 	return Init.df
 
