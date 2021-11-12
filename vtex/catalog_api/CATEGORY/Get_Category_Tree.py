@@ -12,7 +12,7 @@ from google.cloud import bigquery
 import logging
 
 class Init:
-	df = pd.DataFrame()
+	lista = []
 
 def format_schema(schema):
     formatted_schema = []
@@ -31,15 +31,13 @@ def get_order_list():
 def dataframe(raiz, isChildren):
 	if isChildren:
 		for x in raiz:
-			df1 = pd.DataFrame({'id': x[0]}, index=[0])
-			Init.df = Init.df.append(df1)
+			print(x)
 		hasChildren = son["hasChildren"]
 		print(hasChildren)
 		#dataframe(son, hasChildren)
 	else:
 		for x in raiz:
-			df1 = pd.DataFrame({'id': x[0]}, index=[0])
-			Init.df = Init.df.append(df1)
+			print(x)
 		hasChildren = son["hasChildren"]
 		print(hasChildren)
 		#dataframe(son, hasChildren)
