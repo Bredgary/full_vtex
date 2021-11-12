@@ -28,28 +28,29 @@ def get_order_list():
 	return FJson
 
 
-def dataframe(raiz, isChildren,table):
+def dataframe(raiz, isChildren,lista):
 	if isChildren:
-		#for x in raiz:
-		table = json.update(raiz)
+		for x in raiz:
+			lista.append(x)
 		#hasChildren = raiz[2]
 		#print(hasChildren)
 		#dataframe(son, hasChildren)
 	else:
-		#for x in raiz:
-		table = json.update(raiz)
+		for x in raiz:
+			lista.append(x)
 		#hasChildren = raiz[2]
 		#print(hasChildren)
 		#dataframe(son, hasChildren)
+	return lista
 
 
 
 def run():
 	FJson = get_order_list()
 	for x in FJson:
-		table = json.loads(FJson)
+		lista.append(FJson)
 		hasChildren = x["hasChildren"]
-		dataframe(FJson,hasChildren,table)
+		record = dataframe(FJson,hasChildren,lista)
 		
 '''
 	df.reset_index(drop=True, inplace=True)
