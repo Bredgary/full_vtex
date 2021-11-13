@@ -22,7 +22,8 @@ def get_productID(idCategory,From,To):
 	Fjson = json.loads(response.text)
 	data = Fjson["data"]
 	for x in data:
-		init.IDS.append(x)
+		if x is not "[]":
+			init.IDS.append(x)
 
 
 def get_params():
