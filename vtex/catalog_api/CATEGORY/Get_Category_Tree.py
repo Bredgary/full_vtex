@@ -29,30 +29,18 @@ def get_order_list():
 	return FJson
 
 
-def dataframe(raiz, isChildren):
-	if isChildren:
-		children = raiz[4]
-		childrenX = json.dumps(children)
-		childrenX = json.loads(childrenX)
-		for x in childrenX:
-			print(x)
-	else:
-		children = raiz[4]
-		childrenX = json.dumps(children)
-		childrenX = json.loads(childrenX)
-		for x in childrenX:
-			print(x)
-
-
 
 def run():
 	FJson = get_order_list()
 	lista = []
 
 	for x in FJson:
-		hasChildren = x["hasChildren"]
-		#init.formDict.update(FJson)
-		dataframe(FJson,hasChildren)
+		print(x)
+		for y in x:
+			print(y)
+			break
+		break
+	
 '''
 	df = registros
 	df.reset_index(drop=True, inplace=True)
