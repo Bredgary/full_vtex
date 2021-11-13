@@ -36,16 +36,17 @@ def children(raiz):
 		if FormatoJ["hasChildren"]:
 			son = raiz["children"]
 			print("Hola")
-			#children(son)
+			children(son)
 		else:
 			son = raiz["children"]
 			print("Hola")
-			#children(son)
+			children(son)
 
 def run():
 	raiz = get_order_list()
 	for x in raiz:
 		children(x)
+		break
 '''
 	df = registros
 	df.reset_index(drop=True, inplace=True)
