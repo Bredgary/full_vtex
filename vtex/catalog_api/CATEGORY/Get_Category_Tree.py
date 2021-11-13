@@ -31,7 +31,7 @@ def get_order_list():
 
 def children(raiz):
 	if raiz is not None:
-		son = raiz["children"]
+		son = raiz[4]
 		Formato = json.dumps(son)
 		FormatoJ = json.loads(Formato)
 		if FormatoJ[2]:
