@@ -36,7 +36,7 @@ def children(raiz):
 		FormatoJ = json.loads(Formato)
 		if FormatoJ[2]:
 			print("Hola")
-			#children(FormatoJ)
+			children(FormatoJ)
 		else:
 			print("Hola")
 			#children(FormatoJ)
