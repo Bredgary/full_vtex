@@ -31,14 +31,13 @@ def get_order_list():
 
 def children(raiz):
 	if raiz is not None:
-		Formato = json.dumps(raiz)
+		son = raiz["children"]
+		Formato = json.dumps(son)
 		FormatoJ = json.loads(Formato)
 		if FormatoJ["hasChildren"]:
-			son = raiz["children"]
 			print("Hola")
 			children(son)
 		else:
-			son = raiz["children"]
 			print("Hola")
 			children(son)
 
