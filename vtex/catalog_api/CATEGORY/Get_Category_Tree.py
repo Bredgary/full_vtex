@@ -41,6 +41,8 @@ def run():
 	raiz = get_order_list()
 	for x in raiz:
 		print(x["id"])
+		son = x["children"]
+		children(son)
 		break
 '''
 	df = registros
