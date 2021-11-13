@@ -32,14 +32,14 @@ def get_order_list():
 def dataframe(raiz, isChildren):
 	if isChildren:
 		children = raiz[4]
-		for x in children:
-			FormatJ = json.loads(x)
-			print(FormatJ)
+		childrenX = json.loads(children)
+		for x in childrenX:
+			print(x)
 	else:
 		children = raiz[4]
-		for x in children:
-			FormatJ = json.loads(x)
-			print(FormatJ)
+		childrenX = json.loads(children)
+		for x in childrenX:
+			print(x)
 
 
 
