@@ -76,10 +76,7 @@ def run():
 				'url': x["url"],
 				'Title': x["Title"],
 				'MetaTagDescription': x["MetaTagDescription"]}, index=[0])
-			init.df = init.df.append(df1)
-
-
-'''		
+			init.df = init.df.append(df1)	
 
 	#for x in FJson:
 	#	hasChildren = x["hasChildren"]
@@ -129,7 +126,7 @@ def run():
 	job_config.schema = format_schema(table_schema)
 	job = client.load_table_from_json(json_object, table, job_config = job_config)
 	print(job.result())
-'''
+
 
 run()
 
