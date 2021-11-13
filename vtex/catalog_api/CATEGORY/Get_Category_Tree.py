@@ -40,7 +40,6 @@ def dataframe(raiz, isChildren,df):
 			'MetaTagDescription': x["MetaTagDescription"]}, index=[0])
 			valid = x["hasChildren"]
 			nodo = x["children"]
-			dataframe(nodo, valid,df1)
 			init.df = init.df.append(df1)
 	else:
 		for x in raiz:
@@ -52,7 +51,6 @@ def dataframe(raiz, isChildren,df):
 				'MetaTagDescription': x["MetaTagDescription"]}, index=[0])
 			valid = x["hasChildren"]
 			nodo = x["children"]
-			dataframe(nodo, valid,df1)
 			init.df = init.df.append(df1)
 	return init.df 
 
