@@ -31,12 +31,13 @@ def get_order_list():
 
 def dataframe(raiz, isChildren):
 	if isChildren:
-		children = raiz
-		for x in raiz:
+		children = raiz["children"]
+		for x in children:
 			init.formDict.update(x)
 			print(x["hasChildren"])
 	else:
-		for x in raiz:
+		children = raiz["children"]
+		for x in children:
 			init.formDict.update(x)
 			print(x["hasChildren"])
 
@@ -48,7 +49,7 @@ def run():
 
 	for x in FJson:
 		hasChildren = x["hasChildren"]
-		init.formDict = FJson
+		init.formDict.update(FJson)
 		dataframe(FJson,hasChildren)
 '''
 	df = registros
