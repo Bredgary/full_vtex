@@ -30,10 +30,15 @@ def get_order_list():
 
 
 def children(raiz):
-	if raiz["hasChildren"]:
-		print("Hola")
-	else:
-		print("Hola")
+	if raiz is not None:
+		if raiz["hasChildren"]:
+			son = raiz["children"]
+			print("Hola")
+			children(son)
+		else:
+			son = raiz["children"]
+			print("Hola")
+			children(son)
 
 def run():
 	raiz = get_order_list()
