@@ -28,7 +28,7 @@ def get_order_list():
 	return FJson
 
 
-def children(raiz):
+def children(raiz,predecessor):
 	if raiz is not None:
 		formato = json.dumps(raiz)
 		formatoJ = json.loads(formato)
@@ -37,8 +37,10 @@ def children(raiz):
 				'id': x["id"],
 				'name': x["name"],
 				'url': x["url"],
-				'Title': x["Title"],
-				'MetaTagDescription': x["MetaTagDescription"]}, index=[0])
+				'title': x["Title"],
+				'metaTagDescription': x["MetaTagDescription"],
+				'predecessor': predecessor,
+				'hasChildren': str(x["hasChildren"])}, index=[0])
 			init.df = init.df.append(df1)
 			children(x["children"])
 		#if raiz[2]:
@@ -60,7 +62,11 @@ def run():
 			'metaTagDescription': x["MetaTagDescription"],
 			'predecessor': 0,
 			'hasChildren': str(x["hasChildren"])}, index=[0])
+		init.df = init.df.append(df1)
+		son = x["children"]
+		children(son,x["id"])
 		break
+	print(init.df)
 	
 	'''		
 
