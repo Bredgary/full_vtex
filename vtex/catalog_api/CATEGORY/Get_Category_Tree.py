@@ -34,12 +34,12 @@ def dataframe(raiz, isChildren):
 		children = raiz[4]
 		for x in children:
 			#init.formDict.update(x)
-			print(x[0])
+			print(x)
 	else:
 		children = raiz[4]
 		for x in children:
 			#init.formDict.update(x)
-			print(x[0])
+			print(x)
 
 
 
