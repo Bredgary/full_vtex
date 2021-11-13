@@ -57,8 +57,8 @@ def run():
 			'url': x["url"],
 			'title': x["Title"],
 			'metaTagDescription': x["MetaTagDescription"],
-			'predecessor': 0},
-			'hasChildren': x["hasChildren"], index=[0])
+			'predecessor': 0}, index=[0])
+			#'hasChildren': x["hasChildren"]
 			#'successor': x["children"].get("id"), index=[0])
 			'''
 		init.df = init.df.append(df1)
