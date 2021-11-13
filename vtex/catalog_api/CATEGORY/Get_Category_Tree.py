@@ -51,7 +51,7 @@ def run():
 	raiz = get_order_list()
 	formDict = {}
 	for x in raiz:
-		f1 = pd.DataFrame({
+		df1 = pd.DataFrame({
 			'id': x["id"],
 			'name': x["name"],
 			'url': x["url"],
