@@ -55,14 +55,18 @@ def run():
 			'id': x["id"],
 			'name': x["name"],
 			'url': x["url"],
-			'Title': x["Title"],
-			'MetaTagDescription': x["MetaTagDescription"]}, index=[0])
+			'title': x["Title"],
+			'metaTagDescription': x["MetaTagDescription"],
+			'predecessor': 0},
+			'hasChildren': x["hasChildren"]
+			'successor': x["children"].get("id"), index=[0])
+			'''
 		init.df = init.df.append(df1)
 		son = x["children"]
 		children(son)
 		break
 	print(init.df)
-'''
+
 	df = registros
 	df.reset_index(drop=True, inplace=True)
 	json_data = df.to_json(orient = 'records')
