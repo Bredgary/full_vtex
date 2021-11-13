@@ -33,7 +33,6 @@ def children(raiz):
 	if raiz is not None:
 		if raiz["hasChildren"]:
 			print("Hola")
-			children(FormatoJ)
 		else:
 			print("Hola")
 			#children(FormatoJ)
