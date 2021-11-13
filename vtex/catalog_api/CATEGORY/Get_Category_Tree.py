@@ -71,11 +71,11 @@ def run():
 		init.df = init.df.append(df1)
 		for y in x:
 			df1 = pd.DataFrame({
-				'id': y["id"],
-				'name': y["name"],
-				'url': y["url"],
-				'Title': y["Title"],
-				'MetaTagDescription': y["MetaTagDescription"]}, index=[0])
+				'id': y[0],
+				'name': y[1],
+				'url': y[3],
+				'Title': y[5],
+				'MetaTagDescription': y[6]}, index=[0])
 			init.df = init.df.append(df1)
 		
 
