@@ -71,7 +71,7 @@ def run():
 		init.df = init.df.append(df1)
 		for y in x:
 			FormatoJson = json.loads(y)
-			print(y[0])
+			print(FormatoJson)
 '''		
 
 	#for x in FJson:
