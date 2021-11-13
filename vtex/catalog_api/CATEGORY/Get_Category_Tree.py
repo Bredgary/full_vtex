@@ -33,12 +33,12 @@ def dataframe(raiz, isChildren):
 	if isChildren:
 		children = raiz["children"]
 		for x in children:
-			init.formDict.update(x)
+			#init.formDict.update(x)
 			print(x["hasChildren"])
 	else:
 		children = raiz["children"]
 		for x in children:
-			init.formDict.update(x)
+			#init.formDict.update(x)
 			print(x["hasChildren"])
 
 
@@ -49,7 +49,7 @@ def run():
 
 	for x in FJson:
 		hasChildren = x["hasChildren"]
-		init.formDict.update(FJson)
+		#init.formDict.update(FJson)
 		dataframe(FJson,hasChildren)
 '''
 	df = registros
