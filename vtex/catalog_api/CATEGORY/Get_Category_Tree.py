@@ -34,7 +34,7 @@ def children(raiz):
 		formato = json.dumps(raiz)
 		formatoJ = json.loads(formato)
 		for x in formatoJ:
-			init.formDict{"id":x["id"]}
+			init.formDict.update{"id":x["id"]}
 			children(x["children"])
 		#if raiz[2]:
 		#	print(raiz["id"])
@@ -46,7 +46,7 @@ def run():
 	raiz = get_order_list()
 	for x in raiz:
 		print(x["id"])
-		init.formDict{"id":x["id"]}
+		init.formDict.update{"id":x["id"]}
 		son = x["children"]
 		children(son)
 		break
