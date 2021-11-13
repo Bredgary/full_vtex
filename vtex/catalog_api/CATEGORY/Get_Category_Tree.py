@@ -33,7 +33,13 @@ def children(raiz):
 		formato = json.dumps(raiz)
 		formatoJ = json.loads(formato)
 		for x in formatoJ:
-			formDict.update{"id":x["id"]}
+			df1 = pd.DataFrame({
+				'id': x["id"],
+				'name': x["name"],
+				'url': x["url"],
+				'Title': x["Title"],
+				'MetaTagDescription': x["MetaTagDescription"]}, index=[0])
+			init.df = init.df.append(df1)
 			children(x["children"])
 		#if raiz[2]:
 		#	print(raiz["id"])
@@ -45,12 +51,17 @@ def run():
 	raiz = get_order_list()
 	formDict = {}
 	for x in raiz:
-		print(x["id"])
-		formDict = {"id":x["id"]}
+		f1 = pd.DataFrame({
+			'id': x["id"],
+			'name': x["name"],
+			'url': x["url"],
+			'Title': x["Title"],
+			'MetaTagDescription': x["MetaTagDescription"]}, index=[0])
+		init.df = init.df.append(df1)
 		son = x["children"]
 		children(son)
 		break
-	print(formDict)
+	print(init.df)
 '''
 	df = registros
 	df.reset_index(drop=True, inplace=True)
