@@ -62,12 +62,6 @@ def run():
 	json_data = df.to_json(orient = 'records')
 	json_object = json.loads(json_data)
 
-	table_schema = {
-		"name": "id",
-		"type": "INTEGER",
-		"mode": "NULLABLE"
-		}
-
 	project_id = '999847639598'
 	dataset_id = 'landing_zone'
 	table_id = 'shopstar_vtex_product_ID'
@@ -78,7 +72,7 @@ def run():
 	job_config = bigquery.LoadJobConfig()
 	job_config.write_disposition = "WRITE_TRUNCATE"
 	job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-	job_config.schema = format_schema(table_schema)
+	job_config.autodetect = True
 	job = client.load_table_from_json(json_object, table, job_config = job_config)
 	print(job.result())
 
