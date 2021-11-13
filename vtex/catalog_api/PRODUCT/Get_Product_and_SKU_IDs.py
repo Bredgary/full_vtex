@@ -36,6 +36,8 @@ def get_params():
 	for row in rows:
 		init.productList.append(row.id)
 	for x in init.productList:
+		init.FROM = 0
+		init.TO = 50
 		querystring = {"categoryId":""+str(x)+""}
 		response = requests.request("GET", init.url, headers=init.headers, params=querystring)
 		FJson = json.loads(response.text)
