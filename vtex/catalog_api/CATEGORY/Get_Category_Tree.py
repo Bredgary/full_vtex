@@ -70,8 +70,7 @@ def run():
 			'MetaTagDescription': x["MetaTagDescription"]}, index=[0])
 		init.df = init.df.append(df1)
 		for y in x:
-			FormatoJson = json.loads(y)
-			print(FormatoJson)
+			print(y[0])
 '''		
 
 	#for x in FJson:
