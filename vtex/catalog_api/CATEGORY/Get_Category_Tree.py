@@ -31,11 +31,13 @@ def get_order_list():
 
 def children(raiz):
 	if raiz is not None:
-		if raiz[2]:
-			print(raiz["id"])
-		else:
-			print("Hola")
-			#children(FormatoJ)
+		formato = json.dumps(raiz)
+		print(formato["id"])
+		#if raiz[2]:
+		#	print(raiz["id"])
+		#else:
+		#	print("Hola")
+		#	#children(FormatoJ)
 
 def run():
 	raiz = get_order_list()
