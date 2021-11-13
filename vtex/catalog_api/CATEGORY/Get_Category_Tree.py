@@ -65,7 +65,7 @@ def run():
 			'title': x["Title"],
 			'metaTagDescription': x["MetaTagDescription"],
 			'predecessor': 0,
-			'hasChildren': str(x["hasChildren"],
+			'hasChildren': str(x["hasChildren"]),
 			'successor': success}, index=[0])
 		init.df = init.df.append(df1)
 		children(son,x["id"])
