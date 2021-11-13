@@ -72,7 +72,7 @@ def run():
 		for y in x:
 			FormatoJson = json.loads(y)
 			print(y["id"])
-		
+'''		
 
 	#for x in FJson:
 	#	hasChildren = x["hasChildren"]
@@ -122,6 +122,7 @@ def run():
 	job_config.schema = format_schema(table_schema)
 	job = client.load_table_from_json(json_object, table, job_config = job_config)
 	print(job.result())
+'''
 
 run()
 
