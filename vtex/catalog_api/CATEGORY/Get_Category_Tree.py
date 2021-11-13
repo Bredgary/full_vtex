@@ -29,22 +29,17 @@ def get_order_list():
 	return FJson
 
 
-def children(children):
-	if children["hasChildren"]:
-		print("Hola")
-	else:
-		print("Hola")
+def children(raiz):
+	for x in raiz:
+		if x["hasChildren"]:
+			print("Hola")
+		else:
+			print("Hola")
 
 def run():
-	FJson = get_order_list()
-	lista = []
-
-	for x in FJson:
-		print(x)
-		children = x["children"]
-		children(children)
-		break
-
+	raiz = get_order_list()
+	for x in raiz:
+		children(x)
 '''
 	df = registros
 	df.reset_index(drop=True, inplace=True)
