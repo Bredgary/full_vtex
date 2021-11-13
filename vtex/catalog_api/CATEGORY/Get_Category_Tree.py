@@ -62,11 +62,22 @@ def run():
 	FJson = get_order_list()
 	lista = []
 	for x in FJson:
-		print(x)
+		df1 = pd.DataFrame({
+			'id': x["id"],
+			'name': x["name"],
+			'url': x["url"],
+			'Title': x["Title"],
+			'MetaTagDescription': x["MetaTagDescription"]}, index=[0])
+		init.df = init.df.append(df1)
 		for y in x:
-			print(y)
-			break
-		break
+			df1 = pd.DataFrame({
+				'id': x["id"],
+				'name': x["name"],
+				'url': x["url"],
+				'Title': x["Title"],
+				'MetaTagDescription': x["MetaTagDescription"]}, index=[0])
+			init.df = init.df.append(df1)
+		
 
 
 '''
