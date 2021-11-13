@@ -44,11 +44,6 @@ def children(raiz,predecessor):
 				'successor': success}, index=[0])
 			init.df = init.df.append(df1)
 			children(x["children"],x["id"])
-		#if raiz[2]:
-		#	print(raiz["id"])
-		#else:
-		#	print("Hola")
-		#	#children(FormatoJ)
 
 def run():
 	raiz = get_order_list()
