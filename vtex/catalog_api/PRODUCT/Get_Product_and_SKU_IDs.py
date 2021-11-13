@@ -59,15 +59,16 @@ def format_schema(schema):
 def run():
 	get_params()
 	for x in init.IDS:
-		df1 = pd.DataFrame({'id': str(x)}, index=[0])
+		df1 = pd.DataFrame({'id': x})
 		init.df = init.df.append(df1)
 
-	df = init.IDS
+	df = init.df
+	print(df)
 	#df.reset_index(drop=True, inplace=True)
 	#json_data = df.to_json(orient = 'records')
 	#json_string = json.dumps(df)
-	json_object = json.dumps(df)
-	print(json_object)
+	#json_object = json.dumps(df)
+	#print(json_object)
 	
 	table_schema = {
 		"name": "id",
