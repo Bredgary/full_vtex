@@ -31,15 +31,15 @@ def get_order_list():
 
 def children(raiz):
 	if raiz is not None:
-		son = raiz[4]
+		son = raiz["children"]
 		Formato = json.dumps(son)
 		FormatoJ = json.loads(Formato)
 		if FormatoJ[2]:
 			print("Hola")
-			children(son)
+			children(FormatoJ)
 		else:
 			print("Hola")
-			children(son)
+			children(FormatoJ)
 
 def run():
 	raiz = get_order_list()
