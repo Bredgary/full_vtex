@@ -34,12 +34,12 @@ def children(raiz):
 		son = raiz["children"]
 		Formato = json.dumps(son)
 		FormatoJ = json.loads(Formato)
-		if FormatoJ[2]:
+		if FormatoJ["hasChildren"]:
 			print("Hola")
-			children(FormatoJ)
+			#children(FormatoJ)
 		else:
 			print("Hola")
-			children(FormatoJ)
+			#children(FormatoJ)
 
 def run():
 	raiz = get_order_list()
