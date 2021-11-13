@@ -61,12 +61,8 @@ def run():
 			#'hasChildren': x["hasChildren"]
 			#'successor': x["children"].get("id"), index=[0])
 			break
-			'''
-		init.df = init.df.append(df1)
-		son = x["children"]
-		children(son)
-		break
-	print(init.df)
+	
+	'''		
 
 	df = registros
 	df.reset_index(drop=True, inplace=True)
