@@ -11,6 +11,8 @@ from datetime import datetime, timezone
 class init:
 	IDS = []
 	productList = []
+	FROM = 1
+	TO = 50
 	url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/GetProductAndSkuIds"
 	headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
@@ -38,7 +40,11 @@ def get_params():
 		rango = FJson["range"]
 		total = rango["total"]
 		for y in range(total):
-			get_productID(x,y,y+1)
+			get_productID(x,init.FROM,init.TO)
+			init.FROM +=50
+			init.TO += 50
+			if init.TO >= total
+			break
 
 
 def format_schema(schema):
