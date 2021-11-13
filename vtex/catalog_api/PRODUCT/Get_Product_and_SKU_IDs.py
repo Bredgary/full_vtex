@@ -11,7 +11,7 @@ from datetime import datetime, timezone
 class init:
 	IDS = []
 	productList = []
-	FROM = 1
+	FROM = 0
 	TO = 50
 	df = pd.DataFrame()
 	url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/GetProductAndSkuIds"
@@ -45,6 +45,8 @@ def get_params():
 			get_productID(x,init.FROM,init.TO)
 			init.FROM +=50
 			init.TO += 50
+			print(x)
+			print(init.TO)
 			if init.TO >= total:
 				break
 
