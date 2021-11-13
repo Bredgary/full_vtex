@@ -27,7 +27,7 @@ def get_order_list():
 	FJson = json.loads(response.text)
 	return FJson
 
-
+'''
 def dataframe(raiz, isChildren,df):
 	df1 = pd.DataFrame()
 	if isChildren:
@@ -39,8 +39,8 @@ def dataframe(raiz, isChildren,df):
 			'Title': x["Title"],
 			'MetaTagDescription': x["MetaTagDescription"]}, index=[0])
 			init.df = init.df.append(df1)
-			#valid = x["hasChildren"]
-			#nodo = x["children"]
+		valid = x["hasChildren"]
+		nodo = x["children"]
 			
 	else:
 		for x in raiz:
@@ -51,19 +51,28 @@ def dataframe(raiz, isChildren,df):
 				'Title': x["Title"],
 				'MetaTagDescription': x["MetaTagDescription"]}, index=[0])
 				init.df = init.df.append(df1)
-			#valid = x["hasChildren"]
-			#nodo = x["children"]
+		valid = x["hasChildren"]
+		nodo = x["children"]
 			
 	return init.df 
-
+'''
 
 
 def run():
 	FJson = get_order_list()
 	lista = []
 	for x in FJson:
-		hasChildren = x["hasChildren"]
-		registros = dataframe(FJson,hasChildren,lista)
+		print(x)
+		for y in x:
+			print(y)
+			break
+		break
+
+
+'''
+	#for x in FJson:
+	#	hasChildren = x["hasChildren"]
+	#	registros = dataframe(FJson,hasChildren,lista)
 
 	df = registros
 	df.reset_index(drop=True, inplace=True)
@@ -109,6 +118,6 @@ def run():
 	job_config.schema = format_schema(table_schema)
 	job = client.load_table_from_json(json_object, table, job_config = job_config)
 	print(job.result())
-
+'''
 run()
 
