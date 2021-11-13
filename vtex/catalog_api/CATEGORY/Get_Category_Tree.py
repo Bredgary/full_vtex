@@ -34,7 +34,7 @@ def children(raiz):
 		son = raiz["children"]
 		Formato = json.dumps(son)
 		FormatoJ = json.loads(Formato)
-		if Formato[2]:
+		if FormatoJ[2]:
 			print("Hola")
 			#children(FormatoJ)
 		else:
