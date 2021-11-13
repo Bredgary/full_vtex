@@ -70,7 +70,9 @@ def run():
 			'MetaTagDescription': x["MetaTagDescription"]}, index=[0])
 		init.df = init.df.append(df1)
 		for y in x:
-			print(y[0])
+			print(y)
+			break
+		break
 '''		
 
 	#for x in FJson:
