@@ -95,19 +95,19 @@ def run():
 			"type": "STRING",
 			"mode": "NULLABLE"}
 
-	
+
 	project_id = '999847639598'
 	dataset_id = 'landing_zone'
 	table_id = 'shopstar_vtex_category_test'
-	
+
 	client  = bigquery.Client(project = project_id)
+	dataset  = client.dataset(dataset_id)
 	table = dataset.table(table_id)
 	job_config = bigquery.LoadJobConfig()
 	job_config.write_disposition = "WRITE_TRUNCATE"
 	job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
 	job_config.schema = format_schema(table_schema)
 	job = client.load_table_from_json(json_object, table, job_config = job_config)
-	print(job.result())
-	
+
 run()
 
