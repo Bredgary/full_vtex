@@ -27,7 +27,7 @@ def get_order_list():
 	FJson = json.loads(response.text)
 	return FJson
 
-'''
+
 def dataframe(raiz, isChildren,df):
 	df1 = pd.DataFrame()
 	if isChildren:
@@ -52,37 +52,20 @@ def dataframe(raiz, isChildren,df):
 				'MetaTagDescription': x["MetaTagDescription"]}, index=[0])
 				init.df = init.df.append(df1)
 		valid = x["hasChildren"]
-		nodo = x["children"]
-			
+		nodo = x["children"]	
 	return init.df 
-'''
+
 
 
 def run():
 	FJson = get_order_list()
 	lista = []
+
 	for x in FJson:
-		df1 = pd.DataFrame({
-			'id': x["id"],
-			'name': x["name"],
-			'url': x["url"],
-			'Title': x["Title"],
-			'MetaTagDescription': x["MetaTagDescription"]}, index=[0])
-		init.df = init.df.append(df1)
-		for y in x["children"]:
-			df1 = pd.DataFrame({
-				'id': x["id"],
-				'name': x["name"],
-				'url': x["url"],
-				'Title': x["Title"],
-				'MetaTagDescription': x["MetaTagDescription"]}, index=[0])
-			init.df = init.df.append(df1)	
+		hasChildren = x["hasChildren"]
+		registros = dataframe(FJson,hasChildren,lista)
 
-	#for x in FJson:
-	#	hasChildren = x["hasChildren"]
-	#	registros = dataframe(FJson,hasChildren,lista)
-
-	df = init.df
+	df = registros
 	df.reset_index(drop=True, inplace=True)
 	json_data = df.to_json(orient = 'records')
 	json_object = json.loads(json_data)
