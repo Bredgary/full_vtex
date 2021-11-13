@@ -41,7 +41,7 @@ def dataframe(raiz, isChildren,df):
 			valid = x["hasChildren"]
 			nodo = x["children"]
 			dataframe(nodo, valid,df1)
-		init.df = init.df.append(df1)
+			init.df = init.df.append(df1)
 	else:
 		for x in raiz:
 			df1 = pd.DataFrame({
@@ -53,7 +53,7 @@ def dataframe(raiz, isChildren,df):
 			valid = x["hasChildren"]
 			nodo = x["children"]
 			dataframe(nodo, valid,df1)
-		init.df = init.df.append(df1)
+			init.df = init.df.append(df1)
 	return init.df 
 
 
@@ -108,6 +108,7 @@ def run():
 	job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
 	job_config.schema = format_schema(table_schema)
 	job = client.load_table_from_json(json_object, table, job_config = job_config)
+	print(job.result())
 
 run()
 
