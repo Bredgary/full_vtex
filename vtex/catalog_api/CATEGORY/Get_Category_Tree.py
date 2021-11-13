@@ -33,13 +33,13 @@ def dataframe(raiz, isChildren):
 	if isChildren:
 		children = raiz[4]
 		for x in children:
-			#init.formDict.update(x)
-			print(x)
+			FormatJ = json.loads(x)
+			print(FormatJ)
 	else:
 		children = raiz[4]
 		for x in children:
-			#init.formDict.update(x)
-			print(x)
+			FormatJ = json.loads(x)
+			print(FormatJ)
 
 
 
