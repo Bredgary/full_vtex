@@ -32,7 +32,7 @@ def get_order_list():
 def children(raiz):
 	if raiz is not None:
 		if raiz["hasChildren"]:
-			print(raiz[id])
+			print(raiz["id"])
 		else:
 			print("Hola")
 			#children(FormatoJ)
@@ -40,7 +40,7 @@ def children(raiz):
 def run():
 	raiz = get_order_list()
 	for x in raiz:
-		print(x[id])
+		print(x["id"])
 		break
 '''
 	df = registros
