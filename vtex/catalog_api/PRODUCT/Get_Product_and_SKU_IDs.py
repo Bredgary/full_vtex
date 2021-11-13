@@ -41,7 +41,7 @@ def get_params():
 		FJson = json.loads(response.text)
 		rango = FJson["range"]
 		total = rango["total"]
-		for y in range(2):
+		for y in range(total):
 			get_productID(x,init.FROM,init.TO)
 			init.FROM +=50
 			init.TO += 50
