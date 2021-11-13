@@ -13,6 +13,7 @@ import logging
 
 class init:
 	df = pd.DataFrame()
+	formDict ={}
 
 def format_schema(schema):
     formatted_schema = []
@@ -28,32 +29,16 @@ def get_order_list():
 	return FJson
 
 
-def dataframe(raiz, isChildren,df):
-	df1 = pd.DataFrame()
+def dataframe(raiz, isChildren):
 	if isChildren:
+		children = raiz
 		for x in raiz:
-			df1 = pd.DataFrame({
-			'id': x["id"],
-			'name': x["name"],
-			'url': x["url"],
-			'Title': x["Title"],
-			'MetaTagDescription': x["MetaTagDescription"]}, index=[0])
-			init.df = init.df.append(df1)
-		valid = x["hasChildren"]
-		nodo = x["children"]
-			
+			init.formDict.update(x)
+			print(x["hasChildren"])
 	else:
 		for x in raiz:
-			df1 = pd.DataFrame({
-				'id': x["id"],
-				'name': x["name"],
-				'url': x["url"],
-				'Title': x["Title"],
-				'MetaTagDescription': x["MetaTagDescription"]}, index=[0])
-			init.df = init.df.append(df1)
-		valid = x["hasChildren"]
-		nodo = x["children"]	
-	return init.df 
+			init.formDict.update(x)
+			print(x["hasChildren"])
 
 
 
@@ -63,8 +48,9 @@ def run():
 
 	for x in FJson:
 		hasChildren = x["hasChildren"]
-		registros = dataframe(FJson,hasChildren,lista)
-
+		init.formDict = FJson
+		dataframe(FJson,hasChildren)
+'''
 	df = registros
 	df.reset_index(drop=True, inplace=True)
 	json_data = df.to_json(orient = 'records')
@@ -110,6 +96,6 @@ def run():
 	job = client.load_table_from_json(json_object, table, job_config = job_config)
 	print(job.result())
 
-
+'''
 run()
 
