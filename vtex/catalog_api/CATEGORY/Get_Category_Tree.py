@@ -58,7 +58,7 @@ def run():
 			'title': x["Title"],
 			'metaTagDescription': x["MetaTagDescription"],
 			'predecessor': 0},
-			'hasChildren': str(x["hasChildren"]),
+			#'hasChildren': str(x["hasChildren"]),
 			'successor': x["children"].get("id"), index=[0])
 		break
 	
