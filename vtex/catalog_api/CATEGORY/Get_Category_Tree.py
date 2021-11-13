@@ -32,12 +32,14 @@ def get_order_list():
 def dataframe(raiz, isChildren):
 	if isChildren:
 		children = raiz[4]
-		childrenX = json.loads(children)
+		childrenX = json.dumps(children)
+		childrenX = json.loads(childrenX)
 		for x in childrenX:
 			print(x)
 	else:
 		children = raiz[4]
-		childrenX = json.loads(children)
+		childrenX = json.dumps(children)
+		childrenX = json.loads(childrenX)
 		for x in childrenX:
 			print(x)
 
