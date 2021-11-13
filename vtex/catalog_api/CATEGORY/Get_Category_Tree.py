@@ -31,14 +31,15 @@ def get_order_list():
 
 def children(raiz):
 	if raiz is not None:
+		Formato = json.loads(raiz)
 		if raiz["hasChildren"]:
 			son = raiz["children"]
 			print("Hola")
-			children(son)
+			#children(son)
 		else:
 			son = raiz["children"]
 			print("Hola")
-			children(son)
+			#children(son)
 
 def run():
 	raiz = get_order_list()
