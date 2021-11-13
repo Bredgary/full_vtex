@@ -37,8 +37,8 @@ def get_params():
 		FJson = json.loads(response.text)
 		rango = FJson["range"]
 		total = rango["total"]
-		print(total)
-		#get_productID(x,1,50)
+		for y in range(total):
+			get_productID(x,y,y+1)
 
 
 def format_schema(schema):
