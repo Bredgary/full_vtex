@@ -68,7 +68,7 @@ def run():
 	json_string = json.dumps(df)
 	json_object = json.loads(json_string)
 	print(json_object)
-	'''
+	
 	table_schema = {
 		"name": "id",
 		"type": "INTEGER",
@@ -85,8 +85,8 @@ def run():
 	job_config = bigquery.LoadJobConfig()
 	job_config.write_disposition = "WRITE_TRUNCATE"
 	job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-	job_config.autodetect = True
-	#job_config.schema = format_schema(table_schema)
+	#job_config.autodetect = True
+	job_config.schema = format_schema(table_schema)
 	job = client.load_table_from_json(json_object, table, job_config = job_config)
 	print(job.result())
 	'''
