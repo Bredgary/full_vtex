@@ -29,6 +29,11 @@ def get_order_list():
 	return FJson
 
 
+def children(children):
+	if children["hasChildren"]:
+		print("Hola")
+	else:
+		print("Hola")
 
 def run():
 	FJson = get_order_list()
@@ -37,9 +42,7 @@ def run():
 	for x in FJson:
 		print(x)
 		children = x["children"]
-		for y in children:
-			print(y["id"])
-			break
+		children(children)
 		break
 
 '''
