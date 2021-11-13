@@ -50,7 +50,7 @@ def dataframe(raiz, isChildren,df):
 				'url': x["url"],
 				'Title': x["Title"],
 				'MetaTagDescription': x["MetaTagDescription"]}, index=[0])
-				init.df = init.df.append(df1)
+			init.df = init.df.append(df1)
 		valid = x["hasChildren"]
 		nodo = x["children"]	
 	return init.df 
