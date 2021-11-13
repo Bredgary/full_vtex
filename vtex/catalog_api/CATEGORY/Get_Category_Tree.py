@@ -51,15 +51,16 @@ def run():
 	raiz = get_order_list()
 	formDict = {}
 	for x in raiz:
+		#x["children"].get("id")
 		df1 = pd.DataFrame({
 			'id': x["id"],
 			'name': x["name"],
 			'url': x["url"],
 			'title': x["Title"],
 			'metaTagDescription': x["MetaTagDescription"],
-			'predecessor': 0},
+			'predecessor': 0,
 			#'hasChildren': str(x["hasChildren"]),
-			'successor': x["children"].get("id"), index=[0])
+			'successor': 0, index=[0])
 		break
 	
 	'''		
