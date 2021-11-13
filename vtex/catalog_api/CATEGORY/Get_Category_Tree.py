@@ -38,7 +38,7 @@ def run():
 		print(x)
 		children = x["children"]
 		for y in children:
-			print(y)
+			print(y["id"])
 			break
 		break
 
