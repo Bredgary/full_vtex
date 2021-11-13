@@ -42,7 +42,7 @@ def children(raiz,predecessor):
 				'predecessor': predecessor,
 				'hasChildren': str(x["hasChildren"])}, index=[0])
 			init.df = init.df.append(df1)
-			children(x["children"])
+			children(x["children"],x["id"])
 		#if raiz[2]:
 		#	print(raiz["id"])
 		#else:
