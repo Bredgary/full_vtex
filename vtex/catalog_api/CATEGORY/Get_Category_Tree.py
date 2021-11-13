@@ -79,13 +79,11 @@ def run():
 			init.df = init.df.append(df1)
 		
 
-
-'''
 	#for x in FJson:
 	#	hasChildren = x["hasChildren"]
 	#	registros = dataframe(FJson,hasChildren,lista)
 
-	df = registros
+	df = init.df
 	df.reset_index(drop=True, inplace=True)
 	json_data = df.to_json(orient = 'records')
 	json_object = json.loads(json_data)
@@ -129,6 +127,6 @@ def run():
 	job_config.schema = format_schema(table_schema)
 	job = client.load_table_from_json(json_object, table, job_config = job_config)
 	print(job.result())
-'''
+
 run()
 
