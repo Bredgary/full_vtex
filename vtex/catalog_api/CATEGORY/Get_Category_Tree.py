@@ -35,7 +35,7 @@ def children(raiz):
 		formatoJ = json.loads(formato)
 		for x in formatoJ:
 			print(x["id"])
-			children(x["id"])
+			children(x["children"])
 		#if raiz[2]:
 		#	print(raiz["id"])
 		#else:
