@@ -13,6 +13,7 @@ class init:
 	productList = []
 	FROM = 1
 	TO = 50
+	df = pd.DataFrame()
 	url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/GetProductAndSkuIds"
 	headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
@@ -57,8 +58,11 @@ def format_schema(schema):
 
 def run():
 	get_params()
+	for x in init.IDS:
+		df1 = pd.DataFrame({'id': x}, index=[0])
+		init.df = init.df.append(df1)
 
-	df = pd.DataFrame(init.IDS)
+	df = init.IDS
 	df.reset_index(drop=True, inplace=True)
 	json_data = df.to_json(orient = 'records')
 	json_object = json.loads(json_data)
