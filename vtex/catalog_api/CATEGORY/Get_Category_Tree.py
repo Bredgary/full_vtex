@@ -37,7 +37,7 @@ def run():
 	for x in FJson:
 		print(x)
 		children = x["children"]
-		for y in x:
+		for y in children:
 			print(y)
 			break
 		break
