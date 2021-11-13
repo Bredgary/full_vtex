@@ -51,9 +51,7 @@ def children(raiz,predecessor):
 
 def run():
 	raiz = get_order_list()
-	formDict = {}
 	for x in raiz:
-		#x["children"].get("id")
 		df1 = pd.DataFrame({
 			'id': x["id"],
 			'name': x["name"],
@@ -65,16 +63,13 @@ def run():
 		init.df = init.df.append(df1)
 		son = x["children"]
 		children(son,x["id"])
-		break
-	print(init.df)
-	
-	'''		
 
-	df = registros
+	df = init.df
 	df.reset_index(drop=True, inplace=True)
 	json_data = df.to_json(orient = 'records')
 	json_object = json.loads(json_data)
-
+	print(json_object)
+'''	
 	table_schema = {
 		"name": "id",
 		"type": "INTEGER",
