@@ -36,11 +36,12 @@ def run():
 
 	for x in FJson:
 		print(x)
+		children = x["children"]
 		for y in x:
 			print(y)
 			break
 		break
-	
+
 '''
 	df = registros
 	df.reset_index(drop=True, inplace=True)
