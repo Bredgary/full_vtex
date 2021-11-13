@@ -33,7 +33,7 @@ def children(raiz):
 	if raiz is not None:
 		Formato = json.dumps(raiz)
 		FormatoJ = json.loads(Formato)
-		if raiz["hasChildren"]:
+		if FormatoJ["hasChildren"]:
 			son = raiz["children"]
 			print("Hola")
 			#children(son)
