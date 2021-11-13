@@ -11,12 +11,12 @@ from datetime import datetime, timezone
 class init:
 	IDS = []
 	productList = []
+	url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/GetProductAndSkuIds"
+	headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
 def get_productID(idCategory,From,To):
-	url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/GetProductAndSkuIds"
-	querystring = {"categoryId":""+str(idCategory)+"","_from":""+str(From)+"",""+str(To)+"":"54"}
-	headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-	response = requests.request("GET", url, headers=headers, params=querystring)
+	querystring = {"categoryId":""+str(idCategory)+"","_from":""+str(From)+"","_to":""+str(To)+""}
+	response = requests.request("GET", init.url, headers=init.headers, params=querystring)
 	Fjson = json.loads(response.text)
 	data = Fjson["data"]
 	for x in data:
@@ -32,7 +32,13 @@ def get_params():
 	for row in rows:
 		init.productList.append(row.id)
 	for x in init.productList:
-		get_productID(x,1,50)
+		querystring = {"categoryId":""+str(x)+""}
+		response = requests.request("GET", init.url, headers=init.headers, params=querystring)
+		FJson = json.loads(response.text)
+		rango = FJson["range"]
+		total = rango["total"]
+		print(total)
+		#get_productID(x,1,50)
 
 
 def format_schema(schema):
