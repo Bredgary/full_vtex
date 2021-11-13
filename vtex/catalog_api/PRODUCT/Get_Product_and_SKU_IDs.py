@@ -63,7 +63,6 @@ def run():
 		init.df = init.df.append(df1)
 
 	df = init.IDS
-	df.reset_index(drop=True, inplace=True)
 	json_data = df.to_json(orient = 'records')
 	json_object = json.loads(json_data)
 
