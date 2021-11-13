@@ -31,7 +31,7 @@ def get_order_list():
 
 def children(raiz):
 	if raiz is not None:
-		if raiz["hasChildren"]:
+		if raiz[2]:
 			print(raiz["id"])
 		else:
 			print("Hola")
