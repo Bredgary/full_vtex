@@ -59,7 +59,7 @@ def format_schema(schema):
 def run():
 	get_params()
 	for x in init.IDS:
-		df1 = pd.DataFrame({'id': x}, index=[0])
+		df1 = pd.DataFrame({'id': init.IDS[x]}, index=[0])
 		init.df = init.df.append(df1)
 
 	df = init.IDS
