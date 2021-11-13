@@ -38,8 +38,8 @@ def dataframe(raiz, isChildren,df):
 			'url': x["url"],
 			'Title': x["Title"],
 			'MetaTagDescription': x["MetaTagDescription"]}, index=[0])
-			valid = x["hasChildren"]
-			nodo = x["children"]
+			#valid = x["hasChildren"]
+			#nodo = x["children"]
 			init.df = init.df.append(df1)
 	else:
 		for x in raiz:
@@ -49,8 +49,8 @@ def dataframe(raiz, isChildren,df):
 				'url': x["url"],
 				'Title': x["Title"],
 				'MetaTagDescription': x["MetaTagDescription"]}, index=[0])
-			valid = x["hasChildren"]
-			nodo = x["children"]
+			#valid = x["hasChildren"]
+			#nodo = x["children"]
 			init.df = init.df.append(df1)
 	return init.df 
 
