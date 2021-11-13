@@ -34,12 +34,12 @@ def dataframe(raiz, isChildren):
 		children = raiz[4]
 		for x in children:
 			#init.formDict.update(x)
-			print(x["hasChildren"])
+			print(x[0])
 	else:
-		children = raiz["children"]
+		children = raiz[4]
 		for x in children:
 			#init.formDict.update(x)
-			print(x["hasChildren"])
+			print(x[0])
 
 
 
