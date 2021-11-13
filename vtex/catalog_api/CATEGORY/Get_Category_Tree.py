@@ -68,8 +68,7 @@ def run():
 	df.reset_index(drop=True, inplace=True)
 	json_data = df.to_json(orient = 'records')
 	json_object = json.loads(json_data)
-	print(json_object)
-'''	
+
 	table_schema = {
 		"name": "id",
 		"type": "INTEGER",
@@ -79,20 +78,24 @@ def run():
 			"type": "STRING",
 			"mode": "NULLABLE"
 		},{
-			"name": "hasChildren",
-			"type": "BOOLEAN",
-			"mode": "NULLABLE"
-		},{
 			"name": "url",
 			"type": "STRING",
 			"mode": "NULLABLE"
 		},{
-			"name": "Title",
+			"name": "title",
 			"type": "STRING",
 			"mode": "NULLABLE"
 		},{
-			"name": "MetaTagDescription",
+			"name": "metaTagDescription",
 			"type": "STRING",
+			"mode": "NULLABLE"
+		},{
+			"name": "predecessor",
+			"type": "INTEGER",
+			"mode": "NULLABLE"
+		},{
+			"name": "hasChildren",
+			"type": "BOOLEAN",
 			"mode": "NULLABLE"}
 
 
@@ -110,6 +113,5 @@ def run():
 	job = client.load_table_from_json(json_object, table, job_config = job_config)
 	print(job.result())
 
-'''
 run()
 
