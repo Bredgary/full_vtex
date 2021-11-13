@@ -30,10 +30,8 @@ def get_order_list():
 
 def children(raiz,predecessor):
 	if raiz is not None:
-		formato = json.dumps(raiz)
-		formatoJ = json.loads(formato)
-		for x in formatoJ:
-			successor = x["children"]
+		for x in raiz:
+			raiz = x[4]
 			success = successor["id"]
 			df1 = pd.DataFrame({
 				'id': x["id"],
