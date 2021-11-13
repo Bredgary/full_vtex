@@ -33,7 +33,7 @@ def children(raiz,predecessor):
 		formato = json.dumps(raiz)
 		formatoJ = json.loads(formato)
 		for x in formatoJ:
-			successor = formatoJ["children"]
+			successor = x["children"]
 			success = successor["id"]
 			df1 = pd.DataFrame({
 				'id': x["id"],
