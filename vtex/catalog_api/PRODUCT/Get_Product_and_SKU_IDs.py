@@ -59,6 +59,14 @@ def format_schema(schema):
         formatted_schema.append(bigquery.SchemaField(row['name'], row['type'], row['mode']))
     return formatted_schema
 
+def delete_duplicate():
+	client = bigquery.Client()
+	QUERY = (
+		'CREATE OR REPLACE TABLE `shopstar-datalake.landing_zone.shopstar_vtex_product_ID` AS SELECT DISTINCT * FROM `shopstar-datalake.landing_zone.shopstar_vtex_product_ID`')
+	query_job = client.query(QUERY)  
+	rows = query_job.result()
+	print(rows)
+
 
 def run():
 	get_params()
@@ -70,7 +78,6 @@ def run():
 	df.reset_index(drop=True, inplace=True)
 	json_data = df.to_json(orient = 'records')
 	json_object = json.loads(json_data)
-	#print(json_object)
 	
 	table_schema = {
 		"name": "id",
@@ -89,10 +96,8 @@ def run():
 	job_config.write_disposition = "WRITE_TRUNCATE"
 	job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
 	job_config.autodetect = True
-	#job_config.schema = format_schema(table_schema)
 	job = client.load_table_from_json(json_object, table, job_config = job_config)
 	print(job.result())
-	
 	
 run()
 
