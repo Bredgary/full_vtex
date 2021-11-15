@@ -28,7 +28,7 @@ def get_params():
     for row in rows:
         registro = 0
         get_product(row.id,registro)
-        reistro += 1
+        registro += 1
     
 
 def format_schema(schema):
