@@ -48,10 +48,31 @@ def delete_duplicate():
 
 def run():
     get_params()
-    print(init.productList)
+    print(type(init.productList))
     '''
-    for x in init.productList:
-        df1 = pd.DataFrame({'id': x}, index=[0])
+    for x in raiz:
+        df1 = pd.DataFrame({
+            'id': x["id"],
+            'name': x["name"],
+            'url': x["url"],
+            'title': x["Title"],
+            'metaTagDescription': x["MetaTagDescription"]
+            'metaTagDescription': x["MetaTagDescription"]
+            'metaTagDescription': x["MetaTagDescription"]
+            'metaTagDescription': x["MetaTagDescription"]
+            'metaTagDescription': x["MetaTagDescription"]
+            'metaTagDescription': x["MetaTagDescription"]
+            'metaTagDescription': x["MetaTagDescription"]
+            'metaTagDescription': x["MetaTagDescription"]
+            'metaTagDescription': x["MetaTagDescription"]
+            'metaTagDescription': x["MetaTagDescription"]
+            'metaTagDescription': x["MetaTagDescription"]
+            'metaTagDescription': x["MetaTagDescription"]
+            'metaTagDescription': x["MetaTagDescription"]
+            'metaTagDescription': x["MetaTagDescription"]
+            'metaTagDescription': x["MetaTagDescription"]
+            'metaTagDescription': x["MetaTagDescription"]
+            'hasChildren': x["hasChildren"]}, index=[0])
         init.df = init.df.append(df1)
 
     df = init.df
@@ -59,11 +80,93 @@ def run():
     json_data = df.to_json(orient = 'records')
     json_object = json.loads(json_data)
     
-    table_schema = {
-        "name": "id",
-        "type": "INTEGER",
-        "mode": "NULLABLE"
-        }
+    
+    table_schema = [
+        {
+            "name": "Id",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "Name",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "DepartmentId",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "CategoryId",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "BrandId",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "LinkId",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "RefId",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "IsVisible",
+            "type": "BOOLEAN",
+            "mode": "NULLABLE"
+        },{
+            "name": "Description",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "DescriptionShort",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "ReleaseDate",
+            "type": "DATE",
+            "mode": "NULLABLE"
+        },{
+            "name": "KeyWords",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "Title",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "IsActive",
+            "type": "BOOLEAN",
+            "mode": "NULLABLE"
+        },{
+            "name": "TaxCode",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "MetaTagDescription",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "SupplierId",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "ShowWithoutStock",
+            "type": "BOOLEAN",
+            "mode": "NULLABLE"
+        },{
+            "name": "AdWordsRemarketingCode",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "LomadeeCampaignCode",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "Score",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        }]
 
     project_id = '999847639598'
     dataset_id = 'landing_zone'
