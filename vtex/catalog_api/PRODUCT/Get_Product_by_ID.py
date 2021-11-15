@@ -16,7 +16,6 @@ def get_product(id,reg):
     response = requests.request("GET", url, headers=init.headers)
     Fjson = json.loads(response.text)
     init.productList.append(Fjson)
-    registro = 0
     print("Registro: "+str(reg))
 
 def get_params():
