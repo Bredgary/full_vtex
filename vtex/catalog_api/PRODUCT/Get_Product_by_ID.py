@@ -9,7 +9,6 @@ from datetime import datetime, timezone
 class init:
     productList = []
     df = pd.DataFrame()
-    registro = 0
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
 def get_product(id,reg):
@@ -27,8 +26,9 @@ def get_params():
     query_job = client.query(QUERY)  
     rows = query_job.result()
     for row in rows:
-        init.registro = +1
-        get_product(row.id,init.registro)
+        registro = 0
+        get_product(row.id,registro)
+        reistro += 1
     
 
 def format_schema(schema):
