@@ -49,6 +49,8 @@ def delete_duplicate():
 def run():
     get_params()
     print(type(init.productList))
+    for x in init.productList:
+        print(x)
     '''
     for x in raiz:
         df1 = pd.DataFrame({
