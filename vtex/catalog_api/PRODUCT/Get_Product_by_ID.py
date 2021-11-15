@@ -24,8 +24,8 @@ def get_params():
         'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_product_ID`')
     query_job = client.query(QUERY)  
     rows = query_job.result()
+    registro = 0
     for row in rows:
-        registro = 0
         get_product(row.id,registro)
         registro += 1
     
