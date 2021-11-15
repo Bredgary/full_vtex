@@ -9,15 +9,16 @@ from datetime import datetime, timezone
 class init:
     productList = []
     df = pd.DataFrame()
-    regirtro = 0
+    registro
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
-def get_product(id):
+def get_product(id,reg):
     url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/product/"+str(id)+""
     response = requests.request("GET", url, headers=init.headers)
     Fjson = json.loads(response.text)
     init.productList.append(Fjson)
-    print("Registro: "+str(init.regirtro+1))
+    registro = 0
+    print("Registro: "+str(reg))
 
 def get_params():
     client = bigquery.Client()
@@ -26,7 +27,8 @@ def get_params():
     query_job = client.query(QUERY)  
     rows = query_job.result()
     for row in rows:
-        get_product(row.id)
+        init.registro = +1
+        get_product(row.id,init.registro)
     
 
 def format_schema(schema):
