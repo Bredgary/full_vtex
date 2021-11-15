@@ -1,73 +1,80 @@
-import requests
-import json
-import os, os.path
-import re
-from datetime import datetime
-from os import system
+import pandas as pd
+import numpy as np
 from google.cloud import bigquery
+import os, json
+from datetime import datetime
+import requests
+from datetime import datetime, timezone
 
-client = bigquery.Client()
-listaID = []
-formatoJson = {}
-listaProductID = []
-formatoJson = {}
-formJson = {}
-count = 0
-
-
-
-DIR = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/'
-countDir = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])
-rangoDir = countDir - 6
-
+class init:
+    productList = []
+    df = pd.DataFrame()
+    regirtro = 0
+    headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
 def get_product(id):
-    url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/product/"""+str(id)+""
-    headers = {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-        "X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA",
-        "X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"
+    url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/product/"+str(id)+""
+    response = requests.request("GET", url, headers=init.headers)
+    Fjson = json.loads(response.text)
+    init.productList(Fjson)
+    print("Registro: "+str(init.regirtro+1))
+
+def get_params():
+    client = bigquery.Client()
+    QUERY = (
+        'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_product_ID`')
+    query_job = client.query(QUERY)  
+    rows = query_job.result()
+    for row in rows:
+        get_product(row.id)
+    
+
+def format_schema(schema):
+    formatted_schema = []
+    for row in schema:
+        formatted_schema.append(bigquery.SchemaField(row['name'], row['type'], row['mode']))
+    return formatted_schema
+
+def delete_duplicate():
+    client = bigquery.Client()
+    QUERY = (
+        'CREATE OR REPLACE TABLE `shopstar-datalake.landing_zone.shopstar_vtex_product` AS SELECT DISTINCT * FROM `shopstar-datalake.landing_zone.shopstar_vtex_product`')
+    query_job = client.query(QUERY)  
+    rows = query_job.result()
+    print(rows)
+
+def run():
+    get_params()
+    print(init.productList)
+    '''
+    for x in init.productList:
+        df1 = pd.DataFrame({'id': x}, index=[0])
+        init.df = init.df.append(df1)
+
+    df = init.df
+    df.reset_index(drop=True, inplace=True)
+    json_data = df.to_json(orient = 'records')
+    json_object = json.loads(json_data)
+    
+    table_schema = {
+        "name": "id",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
         }
-    response = requests.request("GET", url, headers=headers)
-    jsonF = json.loads(response.text)
-    return jsonF
 
-for x in range(rangoDir):
-    uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/HistoryGetProductID/"+str(x)+"_productID_categoryID_1476.json"
-    f_03 = open (uri,'r')
-    ids_string = f_03.read()
-    formatoJson = json.loads(ids_string)
-    for x in formatoJson:
-        producto = get_product(x)
-        listaID.append(producto)
-        count = count + 1
-        print("Producto Almacenados: " +str(count))
+    project_id = '999847639598'
+    dataset_id = 'landing_zone'
+    table_id = 'shopstar_vtex_product'
 
-string = json.dumps(listaID)
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/lista.json", "w")
-text_file.write(string)
-text_file.close() 
-
-system("cat lista.json | jq -c '.[]' > tabla.json")
-
-
-print("Cargando a BigQuery")
-client = bigquery.Client()
-filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/PRODUCT/tabla.json'
-dataset_id = 'landing_zone'
-table_id = 'shopstar_vtex_product'
-dataset_ref = client.dataset(dataset_id)
-table_ref = dataset_ref.table(table_id)
-job_config = bigquery.LoadJobConfig()
-job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-job_config.autodetect = True
-with open(filename, "rb") as source_file:
-    job = client.load_table_from_file(
-        source_file,
-        table_ref,
-        location="southamerica-east1",  # Must match the destination dataset location.
-    job_config=job_config,)  # API request
-job.result()  # Waits for table load to complete.
-print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
-print("finalizado")
+    client  = bigquery.Client(project = project_id)
+    dataset  = client.dataset(dataset_id)
+    table = dataset.table(table_id)
+    job_config = bigquery.LoadJobConfig()
+    job_config.write_disposition = "WRITE_TRUNCATE"
+    job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+    job_config.autodetect = True
+    job = client.load_table_from_json(json_object, table, job_config = job_config)
+    print(job.result())
+    delete_duplicate()
+    '''
+run()
