@@ -25,7 +25,7 @@ def get_params():
         'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_product_ID`')
     query_job = client.query(QUERY)  
     rows = query_job.result()
-    registro = 0
+    registro = 1
     for row in rows:
         get_product(row.id,registro)
         registro += 1
@@ -80,7 +80,6 @@ def run():
     json_data = df.to_json(orient = 'records')
     json_object = json.loads(json_data)
     print(json_object)
-    '''
     
     table_schema = [
         {
@@ -183,5 +182,5 @@ def run():
     job = client.load_table_from_json(json_object, table, job_config = job_config)
     print(job.result())
     delete_duplicate()
-    '''
+    
 run()
