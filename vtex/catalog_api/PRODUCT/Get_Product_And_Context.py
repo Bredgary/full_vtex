@@ -12,7 +12,7 @@ class init:
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
 def get_product(id,reg):
-    url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/product/"+str(id)+""
+    url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/productget/"+str(id)+""
     response = requests.request("GET", url, headers=init.headers)
     Fjson = json.loads(response.text)
     init.productList.append(Fjson)
@@ -29,6 +29,8 @@ def get_params():
     for row in rows:
         get_product(row.id,registro)
         registro += 1
+        if registro == 15:
+            break
     
 
 def format_schema(schema):
@@ -37,13 +39,13 @@ def format_schema(schema):
         formatted_schema.append(bigquery.SchemaField(row['name'], row['type'], row['mode']))
     return formatted_schema
 
-def delete_duplicate():
-    client = bigquery.Client()
-    QUERY = (
-        'CREATE OR REPLACE TABLE `shopstar-datalake.landing_zone.shopstar_vtex_product` AS SELECT DISTINCT * FROM `shopstar-datalake.landing_zone.shopstar_vtex_product`')
-    query_job = client.query(QUERY)  
-    rows = query_job.result()
-    print(rows)
+#def delete_duplicate():
+    #client = bigquery.Client()
+    #QUERY = (
+    #    'CREATE OR REPLACE TABLE `shopstar-datalake.landing_zone.shopstar_vtex_product_context` AS SELECT DISTINCT * FROM `shopstar-datalake.landing_zone.shopstar_vtex_product_context`')
+    #query_job = client.query(QUERY)  
+    #rows = query_job.result()
+    #print(rows)
 
 def run():
     get_params()
@@ -167,7 +169,7 @@ def run():
 
     project_id = '999847639598'
     dataset_id = 'landing_zone'
-    table_id = 'shopstar_vtex_product_context'
+    table_id = 'shopstar_vtex_product_context_test'
 
     client  = bigquery.Client(project = project_id)
     dataset  = client.dataset(dataset_id)
@@ -178,6 +180,6 @@ def run():
     job_config.schema = format_schema(table_schema)
     job = client.load_table_from_json(json_object, table, job_config = job_config)
     print(job.result())
-    delete_duplicate()
+    #delete_duplicate()
     
 run()
