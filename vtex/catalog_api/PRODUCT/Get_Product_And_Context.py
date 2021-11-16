@@ -51,6 +51,8 @@ def run():
     get_params()
     
     for x in init.productList:
+        print(x["ListStoreId"])
+        '''
         df1 = pd.DataFrame({
             'id': x["Id"],
             'name': x["Name"],
@@ -181,5 +183,6 @@ def run():
     job = client.load_table_from_json(json_object, table, job_config = job_config)
     print(job.result())
     #delete_duplicate()
+    '''
     
 run()
