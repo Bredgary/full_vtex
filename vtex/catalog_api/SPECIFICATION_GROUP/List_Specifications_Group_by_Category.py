@@ -30,6 +30,8 @@ def get_params():
 	for row in rows:
 		registro += 1
 		getListSpecificationsGroupByCategory(row.id,registro)
+		if registro == 12:
+			break
 		
 
 def format_schema(schema):
@@ -51,10 +53,10 @@ def run():
     
     for x in init.productList:
         df1 = pd.DataFrame({
-            'id': x["CategoryId"],
-            'name': x["Id"],
-            'departmentId': x["Name"],
-            'categoryId': x["Position"]}, index=[0])
+            'id': x[0],
+            'name': x[1],
+            'departmentId': x[2],
+            'categoryId': x[3]}, index=[0])
         init.df = init.df.append(df1)
     
     '''
