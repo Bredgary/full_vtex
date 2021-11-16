@@ -169,7 +169,7 @@ def run():
 
     project_id = '999847639598'
     dataset_id = 'landing_zone'
-    table_id = 'shopstar_vtex_product_context_t'
+    table_id = 'shopstar_vtex_product_context'
 
     client  = bigquery.Client(project = project_id)
     dataset  = client.dataset(dataset_id)
@@ -178,7 +178,7 @@ def run():
     job_config.write_disposition = "WRITE_TRUNCATE"
     job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
     #job_config.schema = format_schema(table_schema)
-    job_config.autodetect = True
+    #job_config.autodetect = True
     job = client.load_table_from_json(json_object, table, job_config = job_config)
     print(job.result())
     #delete_duplicate()
