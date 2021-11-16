@@ -16,9 +16,9 @@ class init:
 def getListSpecificationsGroupByCategory(id,reg):
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/specification/groupbycategory/"+str(id)+""
     response = requests.request("GET", url, headers=init.headers)
-    Fjson = json.loads(response.text)
+    Fjson = json.dumps(response.text)
     for x in Fjson:
-    	init.productList.append(x)
+    	x[0]
     print("Registro: "+str(reg))
 
 def get_params():
@@ -51,8 +51,6 @@ def delete_duplicate():
 
 def run():
     get_params()
-    df = pd.DataFrame(init.productList,columns =['id','name','departmentId','categoryId'], index=[0])
-    print(df)
     '''
     for x in init.productList:
         df1 = pd.DataFrame({
