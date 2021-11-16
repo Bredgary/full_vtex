@@ -32,8 +32,6 @@ def get_params():
 	for row in rows:
 		registro += 1
 		getListSpecificationsGroupByCategory(row.id,registro)
-		if registro == 12:
-			break
 		
 
 def format_schema(schema):
