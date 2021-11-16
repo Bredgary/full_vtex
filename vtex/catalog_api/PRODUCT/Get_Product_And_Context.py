@@ -51,8 +51,6 @@ def run():
     get_params()
     
     for x in init.productList:
-        print(x["ListStoreId"])
-        '''
         df1 = pd.DataFrame({
             'id': x["Id"],
             'name': x["Name"],
@@ -179,10 +177,11 @@ def run():
     job_config = bigquery.LoadJobConfig()
     job_config.write_disposition = "WRITE_TRUNCATE"
     job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-    job_config.schema = format_schema(table_schema)
+    #job_config.schema = format_schema(table_schema)
+    job_config.autodetect = True
     job = client.load_table_from_json(json_object, table, job_config = job_config)
     print(job.result())
     #delete_duplicate()
-    '''
+    
     
 run()
