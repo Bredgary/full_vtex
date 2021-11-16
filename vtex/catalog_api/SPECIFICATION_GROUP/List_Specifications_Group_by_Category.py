@@ -51,7 +51,9 @@ def delete_duplicate():
 
 def run():
     get_params()
-    
+    df = pd.DataFrame(init.productList,columns =['id','name','departmentId','categoryId'], index=[0])
+    print(df)
+    '''
     for x in init.productList:
         df1 = pd.DataFrame({
             'id': x[0],
@@ -61,7 +63,8 @@ def run():
         init.df = init.df.append(df1)
     df = init.df
     print(df)
-    '''
+    
+    
     df.reset_index(drop=True, inplace=True)
     json_data = df.to_json(orient = 'records')
     json_object = json.loads(json_data)
