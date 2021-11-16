@@ -23,8 +23,7 @@ def getListSpecificationsGroupByCategory(id,reg):
 def get_params():
     print("Cargando consulta")
     client = bigquery.Client()
-    QUERY = (
-        'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_category`')
+    QUERY = ('SELECT id FROM `shopstar-datalake.landing_zone.shopstar_category`')
     query_job = client.query(QUERY)  
     rows = query_job.result()
     registro = 0
