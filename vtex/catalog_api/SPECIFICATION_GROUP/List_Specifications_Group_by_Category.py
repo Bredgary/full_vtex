@@ -56,98 +56,28 @@ def run():
     df.reset_index(drop=True, inplace=True)
     json_data = df.to_json(orient = 'records')
     json_object = json.loads(json_data)
-    print(json_object)
-    '''
-    table_schema = [
-        {
-            "name": "Id",
-            "type": "INTEGER",
-            "mode": "NULLABLE"
-        },{
-            "name": "Name",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "DepartmentId",
-            "type": "INTEGER",
-            "mode": "NULLABLE"
-        },{
-            "name": "CategoryId",
-            "type": "INTEGER",
-            "mode": "NULLABLE"
-        },{
-            "name": "BrandId",
-            "type": "INTEGER",
-            "mode": "NULLABLE"
-        },{
-            "name": "LinkId",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "RefId",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "IsVisible",
-            "type": "BOOLEAN",
-            "mode": "NULLABLE"
-        },{
-            "name": "Description",
-            "type": "FLOAT",
-            "mode": "NULLABLE"
-        },{
-            "name": "DescriptionShort",
-            "type": "FLOAT",
-            "mode": "NULLABLE"
-        },{
-            "name": "ReleaseDate",
-            "type": "DATE",
-            "mode": "NULLABLE"
-        },{
-            "name": "KeyWords",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "Title",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "IsActive",
-            "type": "BOOLEAN",
-            "mode": "NULLABLE"
-        },{
-            "name": "TaxCode",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "MetaTagDescription",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "SupplierId",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "ShowWithoutStock",
-            "type": "BOOLEAN",
-            "mode": "NULLABLE"
-        },{
-            "name": "AdWordsRemarketingCode",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "LomadeeCampaignCode",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "Score",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        }]
+    
+    table_schema = [{
+		"name": "CategoryId",
+		"type": "STRING",
+		"mode": "NULLABLE"
+	},{
+		"name": "Id",
+		"type": "INTEGER",
+		"mode": "NULLABLE"
+	},{
+		"name": "Name",
+		"type": "STRING",
+		"mode": "NULLABLE"
+	},{
+		"name": "Position",
+		"type": "INTEGER",
+		"mode": "NULLABLE"
+	}]
 
     project_id = '999847639598'
     dataset_id = 'landing_zone'
-    table_id = 'shopstar_vtex_product'
+    table_id = 'shopstar_vtex_list_group_specifications'
 
     client  = bigquery.Client(project = project_id)
     dataset  = client.dataset(dataset_id)
@@ -159,6 +89,6 @@ def run():
     job = client.load_table_from_json(json_object, table, job_config = job_config)
     print(job.result())
     delete_duplicate()
-    '''
+    
     
 run()
