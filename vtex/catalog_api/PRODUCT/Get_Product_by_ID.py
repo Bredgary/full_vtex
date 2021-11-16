@@ -50,7 +50,7 @@ def delete_duplicate():
 def run():
     get_params()
     for x in init.productList:
-        print(x["Id"])
+        print(x["Description"])
     '''
     for x in raiz:
         df1 = pd.DataFrame({
