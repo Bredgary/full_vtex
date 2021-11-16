@@ -21,15 +21,16 @@ def getListSpecificationsGroupByCategory(id,reg):
     print("Registro: "+str(reg))
 
 def get_params():
-    print("Cargando consulta")
-    client = bigquery.Client()
-    QUERY = ('SELECT id FROM `shopstar-datalake.landing_zone.shopstar_category`')
-    query_job = client.query(QUERY)  
-    rows = query_job.result()
-    registro = 0
-    for row in rows:
-    	registro += 1
-        getListSpecificationsGroupByCategory(row.id,registro)
+	print("Cargando consulta")
+	client = bigquery.Client()
+	QUERY = ('SELECT id FROM `shopstar-datalake.landing_zone.shopstar_category`')
+	query_job = client.query(QUERY)
+	rows = query_job.result()
+	registro = 0
+	for row in rows:
+		registro += 1
+		getListSpecificationsGroupByCategory(row.id,registro)
+		
 
 def format_schema(schema):
     formatted_schema = []
