@@ -1,119 +1,169 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
-import os, sys
-import requests
-import json
-import os
-import re
-from datetime import datetime
-from os import system
+import pandas as pd
+import numpy as np
 from google.cloud import bigquery
+import os, json
+from datetime import datetime
+import requests
+from datetime import datetime, timezone
 
-client = bigquery.Client()
-productList = []
-listaIDS = []
-listaID = []
-f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/SPECIFICATION_GROUP/delimitador.txt','r')
-data_from_string = f_01.read()
-delimitador = int(data_from_string)
-registro = 0
-count = 0
-mensajeError = '"CategoryId Not Found"'
+class init:
+    productList = []
+    df = pd.DataFrame()
+    headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
-'''
-def get_list_group(id,count,delimitador):
-	jsonF = {}
-	if count >= delimitador:
-		try:
-			url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/specification/groupbycategory/"+str(id)+""
-			headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-			response = requests.request("GET", url, headers=headers)
-			if response.text != mensajeError:
-				jsonF = json.loads(response.text)
-				string = json.dumps(jsonF)
-				text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SPECIFICATION_GROUP/SPECIFICATION_GROUP/"+str(count)+"_group.json", "w")
-				text_file.write(string)
-				text_file.close()
-				print("List_Specifications_Group_by_Category.py Terminando: "+str(count))
-		except:
-			delimitador = count
-			text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SPECIFICATION_GROUP/delimitador.txt", "w")
-			text_file.write(str(delimitador))
-			text_file.close()
-			system("python3 List_Specifications_Group_by_Category.py")
+def getListSpecificationsGroupByCategory(id,reg):
+    url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/specification/groupbycategory/"+str(id)+""
+    response = requests.request("GET", url, headers=init.headers)
+    Fjson = json.loads(response.text)
+    init.productList.append(Fjson)
+    print("Registro: "+str(reg))
 
+def get_params():
+    print("Cargando consulta")
+    client = bigquery.Client()
+    QUERY = (
+        'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_category`')
+    query_job = client.query(QUERY)  
+    rows = query_job.result()
+    registro = 0
+    for row in rows:
+    	registro += 1
+        getListSpecificationsGroupByCategory(row.id,registro)
 
-def operacion_fenix(count):
-	f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/SPECIFICATION_GROUP/id_group.json','r')
-	data_from_string = f_01.read()
-	data_from_string = data_from_string.replace('"', '')
-	listaIDS = json.loads(data_from_string)
-	for i in listaIDS:
-		count += 1
-		get_list_group(i,count,delimitador)
-	print(str(count)+" registro almacenado.")
+def format_schema(schema):
+    formatted_schema = []
+    for row in schema:
+        formatted_schema.append(bigquery.SchemaField(row['name'], row['type'], row['mode']))
+    return formatted_schema
 
-operacion_fenix(count)
+def delete_duplicate():
+    client = bigquery.Client()
+    QUERY = (
+        'CREATE OR REPLACE TABLE `shopstar-datalake.landing_zone.shopstar_vtex_list_group_specifications` AS SELECT DISTINCT * FROM `shopstar-datalake.landing_zone.shopstar_vtex_list_group_specifications`')
+    query_job = client.query(QUERY)  
+    rows = query_job.result()
+    print(rows)
 
+def run():
+    get_params()
+    
+    for x in init.productList:
+        df1 = pd.DataFrame({
+            'id': x["CategoryId"],
+            'name': x["Id"],
+            'departmentId': x["Name"],
+            'categoryId': x["Position"]}, index=[0])
+        init.df = init.df.append(df1)
+    
+    '''
+    df = init.df
+    df.reset_index(drop=True, inplace=True)
+    json_data = df.to_json(orient = 'records')
+    json_object = json.loads(json_data)
+    
+    table_schema = [
+        {
+            "name": "Id",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "Name",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "DepartmentId",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "CategoryId",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "BrandId",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "LinkId",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "RefId",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "IsVisible",
+            "type": "BOOLEAN",
+            "mode": "NULLABLE"
+        },{
+            "name": "Description",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "DescriptionShort",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "ReleaseDate",
+            "type": "DATE",
+            "mode": "NULLABLE"
+        },{
+            "name": "KeyWords",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "Title",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "IsActive",
+            "type": "BOOLEAN",
+            "mode": "NULLABLE"
+        },{
+            "name": "TaxCode",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "MetaTagDescription",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "SupplierId",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "ShowWithoutStock",
+            "type": "BOOLEAN",
+            "mode": "NULLABLE"
+        },{
+            "name": "AdWordsRemarketingCode",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "LomadeeCampaignCode",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "Score",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        }]
 
+    project_id = '999847639598'
+    dataset_id = 'landing_zone'
+    table_id = 'shopstar_vtex_product'
 
-QUERY = (
-    'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_category`')
-query_job = client.query(QUERY)  # API request
-rows = query_job.result()  # Waits for query to finish
-
-for row in rows:
-    productList.append(row.id)
-
-string = json.dumps(productList)
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SPECIFICATION_GROUP/id_group.json", "w")
-text_file.write(string)
-text_file.close()
-
-
-DIR = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/SPECIFICATION_GROUP/SPECIFICATION_GROUP/'
-countDir = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])
-
-for x in range(countDir):
-	registro +=1
-	uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/SPECIFICATION_GROUP/SPECIFICATION_GROUP/"+str(registro)+"_group.json"
-	f_03 = open (uri,'r')
-	ids_string = f_03.read()
-	formatoJson = json.loads(ids_string)
-	listaID.append(formatoJson)
-	print("SKU Almacenados: " +str(registro))
-
-
-string = json.dumps(listaID)
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SPECIFICATION_GROUP/temp.json", "w")
-text_file.write(string)
-text_file.close() 
-
-system("cat temp.json | jq -c '.[]' > tableGroup.json")
-'''
-print("Cargando a BigQuery")
-client = bigquery.Client()
-filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/SPECIFICATION_GROUP/tableGroup.json'
-dataset_id = 'landing_zone'
-table_id = 'shopstar_vtex_list_group_specifications'
-dataset_ref = client.dataset(dataset_id)
-table_ref = dataset_ref.table(table_id)
-job_config = bigquery.LoadJobConfig()
-job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-job_config.autodetect = True
-with open(filename, "rb") as source_file:
-    job = client.load_table_from_file(
-        source_file,
-        table_ref,
-        location="southamerica-east1",  # Must match the destination dataset location.
-    job_config=job_config,)  # API request
-job.result()  # Waits for table load to complete.
-print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
-system("rm sku.json")
-print("finalizado")
-
-
-
-
-
-
+    client  = bigquery.Client(project = project_id)
+    dataset  = client.dataset(dataset_id)
+    table = dataset.table(table_id)
+    job_config = bigquery.LoadJobConfig()
+    job_config.write_disposition = "WRITE_TRUNCATE"
+    job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+    job_config.schema = format_schema(table_schema)
+    job = client.load_table_from_json(json_object, table, job_config = job_config)
+    print(job.result())
+    delete_duplicate()
+    '''
+    
+run()
