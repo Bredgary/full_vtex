@@ -18,7 +18,12 @@ def getListSpecificationsGroupByCategory(id,reg):
     response = requests.request("GET", url, headers=init.headers)
     Fjson = json.loads(response.text)
     for x in Fjson:
-    	print(x["Id"])
+    	df1 = pd.DataFrame({
+            'id': x["Id"],
+            'name': x["Name"],
+            'position': x["Position"],
+            'categoryId': x["CategoryId"]}, index=[0])
+        init.df = init.df.append(df1)
     print("Registro: "+str(reg))
 
 def get_params():
@@ -51,18 +56,9 @@ def delete_duplicate():
 
 def run():
     get_params()
-    '''
-    for x in init.productList:
-        df1 = pd.DataFrame({
-            'id': x[0],
-            'name': x[1],
-            'departmentId': x[2],
-            'categoryId': x[3]}, index=[0])
-        init.df = init.df.append(df1)
     df = init.df
     print(df)
-    
-    
+    '''
     df.reset_index(drop=True, inplace=True)
     json_data = df.to_json(orient = 'records')
     json_object = json.loads(json_data)
