@@ -19,6 +19,7 @@ def get_product(id,reg):
     print("Registro: "+str(reg))
 
 def get_params():
+    print("Cargando consulta")
     client = bigquery.Client()
     QUERY = (
         'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_product_ID`')
@@ -48,9 +49,8 @@ def delete_duplicate():
 
 def run():
     get_params()
-    print(type(init.productList))
     for x in init.productList:
-        print(x)
+        print(x["Id"])
     '''
     for x in raiz:
         df1 = pd.DataFrame({
