@@ -18,7 +18,7 @@ def getListSpecificationsGroupByCategory(id,reg):
     response = requests.request("GET", url, headers=init.headers)
     Fjson = json.dumps(response.text)
     for x in Fjson:
-    	x[0]
+    	print(x[0])
     print("Registro: "+str(reg))
 
 def get_params():
