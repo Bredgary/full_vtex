@@ -16,7 +16,7 @@ class init:
 def getListSpecificationsGroupByCategory(id,reg):
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/specification/groupbycategory/"+str(id)+""
     response = requests.request("GET", url, headers=init.headers)
-    Fjson = json.dumps(response.text)
+    Fjson = json.loads(response.text)
     for x in Fjson:
     	print(x[0])
     print("Registro: "+str(reg))
