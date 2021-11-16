@@ -70,9 +70,9 @@ def run():
             'metaTagDescription': x["MetaTagDescription"],
             'supplierId': x["SupplierId"],
             'showWithoutStock': x["ShowWithoutStock"],
+            'ListStoreId': x["ListStoreId"],
             'adWordsRemarketingCode': x["AdWordsRemarketingCode"],
-            'lomadeeCampaignCode': x["LomadeeCampaignCode"],
-            'score': x["Score"]}, index=[0])
+            'lomadeeCampaignCode': x["LomadeeCampaignCode"]}, index=[0])
         init.df = init.df.append(df1)
 
     df = init.df
