@@ -49,39 +49,38 @@ def delete_duplicate():
 
 def run():
     get_params()
+    
     for x in init.productList:
-        print(x["Description"])
-    '''
-    for x in raiz:
         df1 = pd.DataFrame({
-            'id': x["id"],
-            'name': x["name"],
-            'url': x["url"],
+            'id': x["Id"],
+            'name': x["Name"],
+            'departmentId': x["DepartmentId"],
+            'categoryId': x["CategoryId"],
+            'brandId': x["BrandId"],
+            'linkId': x["LinkId"],
+            'refId': x["RefId"],
+            'isVisible': x["IsVisible"],
+            'description': x["Description"],
+            'descriptionShort': x["DescriptionShort"],
+            'releaseDate': x["ReleaseDate"],
+            'keyWords': x["KeyWords"],
             'title': x["Title"],
-            'metaTagDescription': x["MetaTagDescription"]
-            'metaTagDescription': x["MetaTagDescription"]
-            'metaTagDescription': x["MetaTagDescription"]
-            'metaTagDescription': x["MetaTagDescription"]
-            'metaTagDescription': x["MetaTagDescription"]
-            'metaTagDescription': x["MetaTagDescription"]
-            'metaTagDescription': x["MetaTagDescription"]
-            'metaTagDescription': x["MetaTagDescription"]
-            'metaTagDescription': x["MetaTagDescription"]
-            'metaTagDescription': x["MetaTagDescription"]
-            'metaTagDescription': x["MetaTagDescription"]
-            'metaTagDescription': x["MetaTagDescription"]
-            'metaTagDescription': x["MetaTagDescription"]
-            'metaTagDescription': x["MetaTagDescription"]
-            'metaTagDescription': x["MetaTagDescription"]
-            'metaTagDescription': x["MetaTagDescription"]
-            'hasChildren': x["hasChildren"]}, index=[0])
+            'isActive': x["IsActive"],
+            'taxCode': x["TaxCode"],
+            'metaTagDescription': x["MetaTagDescription"],
+            'supplierId': x["SupplierId"],
+            'showWithoutStock': x["ShowWithoutStock"],
+            'adWordsRemarketingCode': x["AdWordsRemarketingCode"],
+            'lomadeeCampaignCode': x["LomadeeCampaignCode"],
+            'score': x["Score"]}, index=[0])
         init.df = init.df.append(df1)
 
     df = init.df
     df.reset_index(drop=True, inplace=True)
     json_data = df.to_json(orient = 'records')
     json_object = json.loads(json_data)
-    
+    print(json_object)
+    '''
     
     table_schema = [
         {
