@@ -18,13 +18,9 @@ def getListSpecificationsGroupByCategory(id,reg):
     response = requests.request("GET", url, headers=init.headers)
     Fjson = json.loads(response.text)
     for x in Fjson:
-    	df1 = pd.DataFrame({
-            'id': x["Id"],
-            'name': x["Name"],
-            'position': x["Position"],
-            'categoryId': x["CategoryId"]}, index=[0])
-        init.df = init.df.append(df1)
-    print("Registro: "+str(reg))
+    	df1 = pd.DataFrame({'id': x["Id"],'name': x["Name"],'position': x["Position"],'categoryId': x["CategoryId"]}, index=[0])
+    	init.df = init.df.append(df1)
+    	print("Registro: "+str(reg))
 
 def get_params():
 	print("Cargando consulta")
