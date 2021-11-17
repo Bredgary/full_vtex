@@ -1,96 +1,168 @@
-import requests
-import json
-import os
-import re
-from datetime import datetime
-from os import system
+import pandas as pd
+import numpy as np
 from google.cloud import bigquery
+import os, json
+from datetime import datetime
+import requests
+from datetime import datetime, timezone
 
-client = bigquery.Client()
-listaID = []
-listIdSkuAndContext =[]
-registro = 0
+class init:
+    productList = []
+    df = pd.DataFrame()
+    headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
-DIR = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/TRADE_POLICY/TRADE_POLICY/'
-delimitador = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])
-count = 0
+def get_product(id,reg):
+    url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/product/"+str(id)+"/salespolicy"
+    response = requests.request("GET", url, headers=init.headers)
+    Fjson = json.loads(response.text)
+    init.productList.append(Fjson)
 
+def get_params():
+    print("Cargando consulta")
+    client = bigquery.Client()
+    QUERY = (
+        'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_product`')
+    query_job = client.query(QUERY)  
+    rows = query_job.result()
+    registro = 0
+    for row in rows:
+    	registro += 1
+        get_product(row.id,registro)
+        if registro == 12:
+        	break
+    
 
+def format_schema(schema):
+    formatted_schema = []
+    for row in schema:
+        formatted_schema.append(bigquery.SchemaField(row['name'], row['type'], row['mode']))
+    return formatted_schema
 
-def get_trade_policy(id,count,delimitador):
-	jsonF = {}
-	if count >= delimitador:
-		try:
-			url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/product/"+str(id)+"/salespolicy"
-			headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-			response = requests.request("GET", url, headers=headers)
-			jsonF = json.loads(response.text)
-			string = json.dumps(jsonF)
-			text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/TRADE_POLICY/TRADE_POLICY/"+str(count)+"_trade_policy.json", "w")
-			text_file.write(string)
-			text_file.close()
-			print("Get_Trade_Policy_by_Product_ID Terminando: "+str(count))
-		except:
-			delimitador = count
-			text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/TRADE_POLICY/delimitador.txt", "w")
-			text_file.write(str(delimitador))
-			text_file.close()
-			system("python3 Get_Trade_Policy_by_Product_ID.py")
+def delete_duplicate():
+    client = bigquery.Client()
+    QUERY = (
+        'CREATE OR REPLACE TABLE `shopstar-datalake.landing_zone.shopstar_vtex_product_trade_policy` AS SELECT DISTINCT * FROM `shopstar-datalake.landing_zone.shopstar_vtex_product_trade_policy`')
+    query_job = client.query(QUERY)  
+    rows = query_job.result()
+    print(rows)
 
+def run():
+    get_params()
+    
+    for x in init.productList:
+        df1 = pd.DataFrame({
+            'productId': x["ProductId"],
+            'storeId': x["StoreId"]}, index=[0])
+        init.df = init.df.append(df1)
 
-def operacion_fenix(count):
-	f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/TRADE_POLICY/id_producto.json','r')
-	data_from_string = f_01.read()
-	data_from_string = data_from_string.replace('"', '')
-	listaIDS = json.loads(data_from_string)
-	for i in listaIDS:
-		count += 1
-		get_trade_policy(i,count,delimitador)
-	print(str(count)+" registro almacenado.")
+    df = init.df
+    print(df)
+    '''
+    df.reset_index(drop=True, inplace=True)
+    json_data = df.to_json(orient = 'records')
+    json_object = json.loads(json_data)
+    
+    table_schema = [
+        {
+            "name": "Id",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "Name",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "DepartmentId",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "CategoryId",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "BrandId",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "LinkId",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "RefId",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "IsVisible",
+            "type": "BOOLEAN",
+            "mode": "NULLABLE"
+        },{
+            "name": "Description",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "DescriptionShort",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "ReleaseDate",
+            "type": "DATE",
+            "mode": "NULLABLE"
+        },{
+            "name": "KeyWords",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "Title",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "IsActive",
+            "type": "BOOLEAN",
+            "mode": "NULLABLE"
+        },{
+            "name": "TaxCode",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "MetaTagDescription",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "SupplierId",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "ShowWithoutStock",
+            "type": "BOOLEAN",
+            "mode": "NULLABLE"
+        },{
+            "name": "AdWordsRemarketingCode",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "LomadeeCampaignCode",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "Score",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        }]
 
-operacion_fenix(count)
+    project_id = '999847639598'
+    dataset_id = 'landing_zone'
+    table_id = 'shopstar_vtex_product_trade_policy'
 
-'''
-
-DIR = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/TRADE_POLICY/TRADE_POLICY'
-countDir = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])
-
-for x in range(countDir):
-	registro +=1
-	uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/TRADE_POLICY/TRADE_POLICY"+str(registro)+"_sku.json"
-	f_03 = open (uri,'r')
-	ids_string = f_03.read()
-	formatoJson = json.loads(ids_string)
-	listaID.append(formatoJson)
-	print("SKU Almacenados: " +str(registro))
-
-
-string = json.dumps(listaID)
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/TRADE_POLICY/temp.json", "w")
-text_file.write(string)
-text_file.close() 
-
-system("cat temp.json | jq -c '.[]' > tabletradepolicy.json")
-
-print("Cargando a BigQuery")
-client = bigquery.Client()
-filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/TRADE_POLICY/TRADE_POLICY/tabletradepolicy.json'
-dataset_id = 'landing_zone'
-table_id = 'shopstar_vtex_sku'
-dataset_ref = client.dataset(dataset_id)
-table_ref = dataset_ref.table(table_id)
-job_config = bigquery.LoadJobConfig()
-job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-job_config.autodetect = True
-with open(filename, "rb") as source_file:
-    job = client.load_table_from_file(
-        source_file,
-        table_ref,
-        location="southamerica-east1",  # Must match the destination dataset location.
-    job_config=job_config,)  # API request
-job.result()  # Waits for table load to complete.
-print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
-system("rm sku.json")
-print("finalizado")
-'''
-
+    client  = bigquery.Client(project = project_id)
+    dataset  = client.dataset(dataset_id)
+    table = dataset.table(table_id)
+    job_config = bigquery.LoadJobConfig()
+    job_config.write_disposition = "WRITE_TRUNCATE"
+    job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+    job_config.schema = format_schema(table_schema)
+    job = client.load_table_from_json(json_object, table, job_config = job_config)
+    print(job.result())
+    delete_duplicate()
+    '''
+    
+run()
