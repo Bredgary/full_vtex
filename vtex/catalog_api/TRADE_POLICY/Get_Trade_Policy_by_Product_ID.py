@@ -12,14 +12,14 @@ class init:
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
 def get_product(id,reg):
-	try:
-		url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/product/"+str(id)+"/salespolicy"
-		response = requests.request("GET", url, headers=init.headers)
-		Fjson = json.loads(response.text)
+	url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/product/"+str(id)+"/salespolicy"
+	response = requests.request("GET", url, headers=init.headers)
+	Fjson = json.loads(response.text)
+	if Fjson:
 		for x in Fjson:
-			print(x["ProductId"])
-	except:
-		print("vacio")
+			df1 = pd.DataFrame({'productId': x["ProductId"],'storeId': x["StoreId"]}, index=[0])
+			init.df = init.df.append(df1)
+	print("Recorriendo tabla category: "+str(reg))
 
 def get_params():
 	print("Cargando consulta")
@@ -51,20 +51,13 @@ def delete_duplicate():
 
 def run():
     get_params()
-    '''
-    for x in init.productList:
-        df1 = pd.DataFrame({
-            'productId': x[0],
-            'storeId': x[1]}, index=[0])
-        init.df = init.df.append(df1)
-
     df = init.df
-    print(df)
-    
     df.reset_index(drop=True, inplace=True)
     json_data = df.to_json(orient = 'records')
     json_object = json.loads(json_data)
+    print(json_object)
     
+    '''
     table_schema = [
         {
             "name": "Id",
