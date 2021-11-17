@@ -12,23 +12,22 @@ class init:
     IDS = []
     df = pd.DataFrame()
     start = 1
-    end = 600000
-    count = 0
+    end = 50
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/GetProductAndSkuIds"
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
-def get_SKU_ID(page):
-    querystring = {"_from":""+str(page)+"","_to":""+str(init.end)+""}
+def get_SKU_ID():
+    querystring = {"_from":""+str(init.start)+"","_to":""+str(init.end)+""}
     response = requests.request("GET", init.url, headers=init.headers, params=querystring)
     Fjson = json.loads(response.text)
-    print(Fjson)
-    #for x in Fjson:
-    #    print(x)
-    #    init.IDS.append(x)
-    #    init.count +=1
-    #    end = init.end
-    #   if init.count>=end:
-    #        get_SKU_ID(init.start+1)
+    for x in Fjson:
+        init.IDS.append(x)
+        init.start +=1
+        print(x)
+        if init.start>=init.end:
+            init.end = init.end + 50
+            init.start = init.start + 50
+            get_SKU_ID()
 
 
 def format_schema(schema):
