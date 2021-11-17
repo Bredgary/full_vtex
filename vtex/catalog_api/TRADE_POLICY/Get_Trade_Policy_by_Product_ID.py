@@ -60,93 +60,16 @@ def run():
     json_object = json.loads(json_data)
     print(json_object)
     
-    '''
     table_schema = [
-        {
-            "name": "Id",
-            "type": "INTEGER",
-            "mode": "NULLABLE"
-        },{
-            "name": "Name",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "DepartmentId",
-            "type": "INTEGER",
-            "mode": "NULLABLE"
-        },{
-            "name": "CategoryId",
-            "type": "INTEGER",
-            "mode": "NULLABLE"
-        },{
-            "name": "BrandId",
-            "type": "INTEGER",
-            "mode": "NULLABLE"
-        },{
-            "name": "LinkId",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "RefId",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "IsVisible",
-            "type": "BOOLEAN",
-            "mode": "NULLABLE"
-        },{
-            "name": "Description",
-            "type": "FLOAT",
-            "mode": "NULLABLE"
-        },{
-            "name": "DescriptionShort",
-            "type": "FLOAT",
-            "mode": "NULLABLE"
-        },{
-            "name": "ReleaseDate",
-            "type": "DATE",
-            "mode": "NULLABLE"
-        },{
-            "name": "KeyWords",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "Title",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "IsActive",
-            "type": "BOOLEAN",
-            "mode": "NULLABLE"
-        },{
-            "name": "TaxCode",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "MetaTagDescription",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "SupplierId",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "ShowWithoutStock",
-            "type": "BOOLEAN",
-            "mode": "NULLABLE"
-        },{
-            "name": "AdWordsRemarketingCode",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "LomadeeCampaignCode",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "Score",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        }]
+		{
+			"name": "ProductId",
+			"type": "INTEGER",
+			"mode": "NULLABLE"
+		},{
+			"name": "StoreId",
+			"type": "INTEGER",
+			"mode": "NULLABLE"
+		}]
 
     project_id = '999847639598'
     dataset_id = 'landing_zone'
@@ -162,6 +85,6 @@ def run():
     job = client.load_table_from_json(json_object, table, job_config = job_config)
     print(job.result())
     delete_duplicate()
-    '''
+    
     
 run()
