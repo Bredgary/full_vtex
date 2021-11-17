@@ -20,7 +20,8 @@ def get_SKU_ID():
     querystring = {"_from":""+str(init.start)+"","_to":""+str(init.end)+""}
     response = requests.request("GET", init.url, headers=init.headers, params=querystring)
     Fjson = json.loads(response.text)
-    for x in Fjson["data"]:
+    FJson = Fjson["data"]
+    for x in FJson:
         init.IDS.append(x)
         init.start +=1
         print(x)
