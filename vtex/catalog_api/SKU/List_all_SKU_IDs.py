@@ -24,6 +24,7 @@ def get_SKU_ID():
     for x in Fjson:
         init.IDS.append(x)
         init.start +=1
+        print(x)
         if init.start>=init.end:
             init.page = init.page + 1
             init.start = init.start + 0
