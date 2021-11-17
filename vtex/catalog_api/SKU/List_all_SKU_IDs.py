@@ -46,7 +46,7 @@ def delete_duplicate():
 
 
 def run():
-    get_SKU_ID(init.start)
+    get_SKU_ID()
     
     for x in init.IDS:
         df1 = pd.DataFrame({'id': x}, index=[0])
