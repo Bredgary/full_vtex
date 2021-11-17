@@ -18,18 +18,17 @@ def get_product(id,reg):
     init.productList.append(Fjson)
 
 def get_params():
-    print("Cargando consulta")
-    client = bigquery.Client()
-    QUERY = (
-        'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_product`')
-    query_job = client.query(QUERY)  
-    rows = query_job.result()
-    registro = 0
-    for row in rows:
-    	registro += 1
-        get_product(row.id,registro)
-        if registro == 12:
-        	break
+	print("Cargando consulta")
+	client = bigquery.Client()
+	QUERY = ('SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_product`')
+	query_job = client.query(QUERY)  
+	rows = query_job.result()
+	registro = 0
+	for row in rows:
+		registro += 1
+		get_product(row.id,registro)
+		if registro == 12:
+			break
     
 
 def format_schema(schema):
