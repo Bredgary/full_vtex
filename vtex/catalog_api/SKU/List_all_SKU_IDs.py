@@ -12,7 +12,7 @@ class init:
     IDS = []
     df = pd.DataFrame()
     start = 0
-    end = 100
+    end = 600000
     page = 1
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitids"
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
@@ -24,7 +24,6 @@ def get_SKU_ID():
     for x in Fjson:
         init.IDS.append(x)
         init.start +=1
-        print(x)
         if init.start>=init.end:
             init.page = init.page + 1
             init.start = init.start + 0
