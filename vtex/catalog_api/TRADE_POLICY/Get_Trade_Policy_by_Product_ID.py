@@ -16,7 +16,8 @@ def get_product(id,reg):
 		url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/product/"+str(id)+"/salespolicy"
 		response = requests.request("GET", url, headers=init.headers)
 		Fjson = json.loads(response.text)
-		init.productList.append(Fjson)
+		for x in Fjson:
+			print(x)
 	except:
 		print("vacio")
 
@@ -50,6 +51,7 @@ def delete_duplicate():
 
 def run():
     get_params()
+    '''
     for x in init.productList:
         df1 = pd.DataFrame({
             'productId': x[0],
@@ -58,7 +60,7 @@ def run():
 
     df = init.df
     print(df)
-    '''
+    
     df.reset_index(drop=True, inplace=True)
     json_data = df.to_json(orient = 'records')
     json_object = json.loads(json_data)
