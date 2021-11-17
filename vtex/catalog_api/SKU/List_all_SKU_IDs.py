@@ -13,22 +13,22 @@ class init:
     df = pd.DataFrame()
     start = 0
     end = 20
+    page = 1
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/GetProductAndSkuIds"
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
 def get_SKU_ID():
-    querystring = {"page":""+str(init.start)+"","pagesize":""+str(init.end)+""}
+    querystring = {"page":""+str(init.page)+"","pagesize":""+str(init.end)+""}
     response = requests.request("GET", init.url, headers=init.headers, params=querystring)
     Fjson = json.loads(response.text)
     for x in Fjson["data"]:
         init.IDS.append(x)
-        print(x)
         init.start +=1
-        #print(x)
-        #if init.start>=init.end:
-        #    init.end = init.end + 50
-        #    init.start = init.start + 50
-        #    get_SKU_ID()
+        print(x)
+        if init.start>=init.end:
+            init.page = init.page + 1
+            init.start = init.start + 0
+            get_SKU_ID()
 
 
 def format_schema(schema):
