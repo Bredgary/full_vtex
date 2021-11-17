@@ -12,16 +12,16 @@ class init:
     IDS = []
     df = pd.DataFrame()
     start = 0
-    end = 20
+    end = 100
     page = 1
-    url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/GetProductAndSkuIds"
+    url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitids"
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
 def get_SKU_ID():
     querystring = {"page":""+str(init.page)+"","pagesize":""+str(init.end)+""}
     response = requests.request("GET", init.url, headers=init.headers, params=querystring)
     Fjson = json.loads(response.text)
-    for x in Fjson["data"]:
+    for x in Fjson:
         init.IDS.append(x)
         init.start +=1
         print(x)
