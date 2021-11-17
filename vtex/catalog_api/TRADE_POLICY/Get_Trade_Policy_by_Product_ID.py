@@ -52,8 +52,8 @@ def run():
     get_params()
     for x in init.productList:
         df1 = pd.DataFrame({
-            'productId': x["ProductId"],
-            'storeId': x["StoreId"]}, index=[0])
+            'productId': x[0],
+            'storeId': x[1]}, index=[0])
         init.df = init.df.append(df1)
 
     df = init.df
