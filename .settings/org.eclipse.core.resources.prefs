@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
 encoding//vtex/catalog_api/PRODUCT/Get_Product_and_SKU_IDs.py=latin1
 encoding//vtex/catalog_api/PRODUCT/Get_Product_by_ID.py=latin1
+encoding//vtex/catalog_api/SKU/List_all_SKU_IDs.py=latin1
 encoding//vtex/catalog_api/SPECIFICATION_GROUP/List_Specifications_Group_by_Category.py=UTF-8

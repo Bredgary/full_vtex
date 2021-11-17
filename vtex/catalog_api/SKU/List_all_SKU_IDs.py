@@ -1,65 +1,80 @@
-import requests
-import json
-import os
-import re
+#!/usr/bin/python
+# -*- coding: latin-1 -*-
+import pandas as pd
+import numpy as np
+from google.cloud import bigquery
+import os, json
 from datetime import datetime
-from os import system
+import requests
+from datetime import datetime, timezone
 
-listaID = []
-count = 0
-f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/delimitador.txt','r')
-data_from_string = f_01.read()
-delimitador = int(data_from_string)
+class init:
+    IDS = []
+    df = pd.DataFrame()
+    start = 1
+    end = 500000
+    count = 0
+    url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/GetProductAndSkuIds"
+    headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
-def get_list_sku(count,delimitador):
-  if count >= delimitador:
-    try:
-        url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitids"
-        querystring = {"page":""+str(count)+"","pagesize":"100"}
-        headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-        response = requests.request("GET", url, headers=headers, params=querystring)
-        jsonF = json.loads(response.text)
-        if jsonF:
-            string = str(jsonF).replace('[','').replace(']','')
-            text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/IdSku/"+str(count)+"_IdSku.json", "w")
-            text_file.write(string)
-            text_file.close()
-            print("Numero de registro: "+str(count))
-        else:
-            print("Lista Vacia")
-    except:
-      delimitador = count
-      text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/delimitador.txt", "w")
-      text_file.write(str(delimitador))
-      text_file.close()
-      system("python3 List_all_SKU_IDs.py")
-  return jsonF
+def get_SKU_ID(page):
+    querystring = {"page":""+str(page)+"","pagesize":""+str(init.end)+""}
+    response = requests.request("GET", init.url, headers=init.headers, params=querystring)
+    Fjson = json.loads(response.text)
+    for x in data:
+        init.IDS.append(x)
+        init.count +=1
+        end = init.end
+        if init.count>=end:
+            get_SKU_ID(init.start+1)
 
 
-def operacion_fenix(count):
-    for i in range(5000):
-        count +=1
-        list_sku = get_list_sku(count,delimitador)
-        if not list_sku:
-            break
-    print(str(count)+" registro almacenado.")
-    print(list_sku)
+def format_schema(schema):
+    formatted_schema = []
+    for row in schema:
+        formatted_schema.append(bigquery.SchemaField(row['name'], row['type'], row['mode']))
+    return formatted_schema
 
-operacion_fenix(count)
+def delete_duplicate():
+    client = bigquery.Client()
+    QUERY = (
+        'CREATE OR REPLACE TABLE `shopstar-datalake.landing_zone.shopstar_vtex_SKU_ID` AS SELECT DISTINCT * FROM `shopstar-datalake.landing_zone.shopstar_vtex_SKU_ID`')
+    query_job = client.query(QUERY)  
+    rows = query_job.result()
+    print(rows)
 
-DIR = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/IdSku/'
-countDir = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])
 
-for x in range(countDir):
-    count +=1
-    uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/IdSku/"+str(count)+"_IdSku.json"
-    f_03 = open (uri,'r')
-    ids_string = f_03.read()
-    listaID.append(ids_string)
+def run():
+    get_params(init.start)
     
-print("ID: " +str(listaID))
-string = json.dumps(listaID)
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/id_sku.json", "w")
-text_file.write(string)
-text_file.close() 
+    for x in init.IDS:
+        df1 = pd.DataFrame({'id': x}, index=[0])
+        init.df = init.df.append(df1)
 
+    df = init.df
+    df.reset_index(drop=True, inplace=True)
+    json_data = df.to_json(orient = 'records')
+    json_object = json.loads(json_data)
+    
+    table_schema = {
+        "name": "id",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+        }
+
+    project_id = '999847639598'
+    dataset_id = 'landing_zone'
+    table_id = 'shopstar_vtex_SKU_ID'
+
+    client  = bigquery.Client(project = project_id)
+    dataset  = client.dataset(dataset_id)
+    table = dataset.table(table_id)
+    job_config = bigquery.LoadJobConfig()
+    job_config.write_disposition = "WRITE_TRUNCATE"
+    job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+    job_config.autodetect = True
+    job = client.load_table_from_json(json_object, table, job_config = job_config)
+    print(job.result())
+    delete_duplicate()
+    
+run()
