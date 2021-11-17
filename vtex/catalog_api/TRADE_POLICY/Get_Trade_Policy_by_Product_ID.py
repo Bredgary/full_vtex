@@ -17,7 +17,7 @@ def get_product(id,reg):
 		response = requests.request("GET", url, headers=init.headers)
 		Fjson = json.loads(response.text)
 		for x in Fjson:
-			print(x)
+			print(x["ProductId"])
 	except:
 		print("vacio")
 
