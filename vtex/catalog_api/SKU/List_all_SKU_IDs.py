@@ -49,7 +49,7 @@ def delete_duplicate():
 def run():
     get_SKU_ID()
     print(init.start)
-    '''
+    
     for x in init.IDS:
         df1 = pd.DataFrame({'id': x}, index=[0])
         init.df = init.df.append(df1)
@@ -79,5 +79,5 @@ def run():
     job = client.load_table_from_json(json_object, table, job_config = job_config)
     print(job.result())
     delete_duplicate()
-    '''
+    
 run()
