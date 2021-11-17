@@ -21,13 +21,15 @@ def get_SKU_ID(page):
     querystring = {"page":""+str(page)+"","pagesize":""+str(init.end)+""}
     response = requests.request("GET", init.url, headers=init.headers, params=querystring)
     Fjson = json.loads(response.text)
-    for x in Fjson:
-        print(x)
-        init.IDS.append(x)
-        init.count +=1
-        end = init.end
-        if init.count>=end:
-            get_SKU_ID(init.start+1)
+    print(Fjson["data"])
+    print(Fjson["range"])
+    #for x in Fjson:
+    #    print(x)
+    #    init.IDS.append(x)
+    #    init.count +=1
+    #    end = init.end
+    #   if init.count>=end:
+    #        get_SKU_ID(init.start+1)
 
 
 def format_schema(schema):
