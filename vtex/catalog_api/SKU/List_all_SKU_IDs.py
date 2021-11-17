@@ -12,13 +12,13 @@ class init:
     IDS = []
     df = pd.DataFrame()
     start = 1
-    end = 500000
+    end = 600000
     count = 0
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/GetProductAndSkuIds"
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
 def get_SKU_ID(page):
-    querystring = {"page":""+str(page)+"","pagesize":""+str(init.end)+""}
+    querystring = {"from":""+str(page)+"","to":""+str(init.end)+""}
     response = requests.request("GET", init.url, headers=init.headers, params=querystring)
     Fjson = json.loads(response.text)
     print(Fjson["data"])
