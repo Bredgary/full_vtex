@@ -16,7 +16,7 @@ def get_product(id,reg):
 		url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/product/"+str(id)+"/salespolicy"
 		response = requests.request("GET", url, headers=init.headers)
 		Fjson = json.loads(response.text)
-		print(Fjson)
+		init.productList.append(Fjson)
 	except:
 		print("vacio")
 
