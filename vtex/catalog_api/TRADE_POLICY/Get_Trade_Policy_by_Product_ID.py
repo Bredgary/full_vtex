@@ -34,8 +34,6 @@ def get_params():
 	for row in rows:
 		registro += 1
 		get_product(row.id,registro)
-		if registro == 12:
-			break
     
 
 def format_schema(schema):
