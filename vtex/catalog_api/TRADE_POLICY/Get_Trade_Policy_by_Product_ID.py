@@ -12,14 +12,17 @@ class init:
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
 def get_product(id,reg):
-	url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/product/"+str(id)+"/salespolicy"
-	response = requests.request("GET", url, headers=init.headers)
-	Fjson = json.loads(response.text)
-	if Fjson:
-		for x in Fjson:
-			df1 = pd.DataFrame({'productId': x["ProductId"],'storeId': x["StoreId"]}, index=[0])
-			init.df = init.df.append(df1)
-	print("Recorriendo tabla category: "+str(reg))
+	try:
+		url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/product/"+str(id)+"/salespolicy"
+		response = requests.request("GET", url, headers=init.headers)
+		Fjson = json.loads(response.text)
+		if Fjson:
+			for x in Fjson:
+				df1 = pd.DataFrame({'productId': x["ProductId"],'storeId': x["StoreId"]}, index=[0])
+				init.df = init.df.append(df1)
+		print("Recorriendo tabla category: "+str(reg))
+	except:
+		print("Vacio")
 
 def get_params():
 	print("Cargando consulta")
