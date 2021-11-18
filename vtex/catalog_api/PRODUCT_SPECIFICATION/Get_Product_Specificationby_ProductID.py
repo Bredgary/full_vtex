@@ -59,7 +59,6 @@ def run():
     df.reset_index(drop=True, inplace=True)
     json_data = df.to_json(orient = 'records')
     json_object = json.loads(json_data)
-    print(json_object)
     
     table_schema = [
         {
