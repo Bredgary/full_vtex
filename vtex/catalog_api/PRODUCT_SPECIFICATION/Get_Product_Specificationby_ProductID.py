@@ -17,7 +17,11 @@ def get_product(id,reg):
     Fjson = json.loads(response.text)
     if Fjson is not "[]":
         for x in Fjson:
-            init.productList.append(x)
+            df1 = pd.DataFrame({
+                'id': x["Id"],
+                'name': x["Name"],
+                'value': x["Value"]}, index=[0])
+            init.df = init.df.append(df1)
             print("Registro: "+str(Fjson))
 
 def get_params():
@@ -51,19 +55,12 @@ def delete_duplicate():
 
 def run():
     get_params()
-    
-    for x in init.productList:
-        df1 = pd.DataFrame({
-            'id': x["Id"],
-            'name': x["Name"],
-            'value': x["Value"]}, index=[0])
-        init.df = init.df.append(df1)
-
     df = init.df
     df.reset_index(drop=True, inplace=True)
     json_data = df.to_json(orient = 'records')
     json_object = json.loads(json_data)
-    
+    print(json_object)
+    '''
     table_schema = [
         {
             "name": "id",
@@ -92,6 +89,7 @@ def run():
     job_config.schema = format_schema(table_schema)
     job = client.load_table_from_json(json_object, table, job_config = job_config)
     print(job.result())
+    '''
     delete_duplicate()
     
 run()
