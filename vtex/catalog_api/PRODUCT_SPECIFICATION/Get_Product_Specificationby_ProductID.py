@@ -12,17 +12,20 @@ class init:
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
 def get_product(id,reg):
-    url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/"+str(id)+"/specification"
-    response = requests.request("GET", url, headers=init.headers)
-    Fjson = json.loads(response.text)
-    if Fjson is not "[]":
-        for x in Fjson:
-            df1 = pd.DataFrame({
-                'id': x["Id"],
-                'name': x["Name"],
-                'value': x["Value"]}, index=[0])
-            init.df = init.df.append(df1)
-            print("Registro: "+str(reg))
+    try:
+        url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/"+str(id)+"/specification"
+        response = requests.request("GET", url, headers=init.headers)
+        Fjson = json.loads(response.text)
+        if Fjson is not "[]":
+            for x in Fjson:
+                df1 = pd.DataFrame({
+                    'id': x["Id"],
+                    'name': x["Name"],
+                    'value': x["Value"]}, index=[0])
+                init.df = init.df.append(df1)
+                print("Registro: "+str(reg))
+    except:
+        print("vacio")
 
 def get_params():
     print("Cargando consulta")
