@@ -39,16 +39,10 @@ def get_params():
             break
     
 
-def format_schema(schema):
-    formatted_schema = []
-    for row in schema:
-        formatted_schema.append(bigquery.SchemaField(row['name'], row['type'], row['mode']))
-    return formatted_schema
-
 def delete_duplicate():
     client = bigquery.Client()
     QUERY = (
-        'CREATE OR REPLACE TABLE `shopstar-datalake.landing_zone.shopstar_vtex_product_specification_test` AS SELECT DISTINCT * FROM `shopstar-datalake.landing_zone.shopstar_vtex_product_specification_test`')
+        'CREATE OR REPLACE TABLE `shopstar-datalake.landing_zone.shopstar_vtex_product_specification` AS SELECT DISTINCT * FROM `shopstar-datalake.landing_zone.shopstar_vtex_product_specification`')
     query_job = client.query(QUERY)  
     rows = query_job.result()
     print(rows)
@@ -59,25 +53,11 @@ def run():
     df.reset_index(drop=True, inplace=True)
     json_data = df.to_json(orient = 'records')
     json_object = json.loads(json_data)
-    
-    table_schema = [
-        {
-            "name": "id",
-            "type": "INTEGER",
-            "mode": "NULLABLE"
-        },{
-            "name": "name",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "value",
-            "type": "INTEGER",
-            "mode": "NULLABLE"
-        }]
+   
 
     project_id = '999847639598'
     dataset_id = 'landing_zone'
-    table_id = 'shopstar_vtex_product_specification_test'
+    table_id = 'shopstar_vtex_product_specification'
 
     client  = bigquery.Client(project = project_id)
     dataset  = client.dataset(dataset_id)
