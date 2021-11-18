@@ -22,7 +22,7 @@ def get_product(id,reg):
                 'name': x["Name"],
                 'value': x["Value"]}, index=[0])
             init.df = init.df.append(df1)
-            print("Registro: "+str(Fjson))
+            print("Registro: "+str(reg))
 
 def get_params():
     print("Cargando consulta")
