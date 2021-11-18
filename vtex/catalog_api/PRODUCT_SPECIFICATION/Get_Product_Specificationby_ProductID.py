@@ -16,8 +16,9 @@ def get_product(id,reg):
     response = requests.request("GET", url, headers=init.headers)
     Fjson = json.loads(response.text)
     if Fjson is not "[]":
-        init.productList.append(Fjson)
-        print("Registro: "+str(Fjson))
+        for x in Fjson:
+            init.productList.append(x)
+            print("Registro: "+str(Fjson))
 
 def get_params():
     print("Cargando consulta")
