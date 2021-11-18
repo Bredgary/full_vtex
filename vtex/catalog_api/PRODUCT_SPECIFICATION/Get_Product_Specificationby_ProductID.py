@@ -35,8 +35,6 @@ def get_params():
     for row in rows:
         get_product(row.id,registro)
         registro += 1
-        if registro >= 100:
-            break
     
 
 def delete_duplicate():
