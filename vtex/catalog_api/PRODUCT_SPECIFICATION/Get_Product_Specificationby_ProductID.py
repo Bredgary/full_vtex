@@ -17,7 +17,7 @@ def get_product(id,reg):
     Fjson = json.loads(response.text)
     if Fjson is not "[]":
         init.productList.append(Fjson)
-        print("Registro: "+str(reg))
+        print("Registro: "+str(Fjson))
 
 def get_params():
     print("Cargando consulta")
