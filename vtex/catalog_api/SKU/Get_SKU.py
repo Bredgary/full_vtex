@@ -42,8 +42,7 @@ def get_product(id,reg):
             'commercialConditionId': Fjson["CommercialConditionId"],
             'measurementUnit': Fjson["MeasurementUnit"],
             'unitMultiplier': Fjson["UnitMultiplier"],
-            'modalType': Fjson["ModalType"],
-            'videos': Fjson["Videos"]}, index=[0])
+            'modalType': Fjson["ModalType"]}, index=[0])
         init.df = init.df.append(df1)
         print("Registro: "+str(reg))
     except:
