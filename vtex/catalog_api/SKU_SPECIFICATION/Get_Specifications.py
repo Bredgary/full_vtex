@@ -52,6 +52,7 @@ def delete_duplicate():
     rows = query_job.result()
     print(rows)
 
+
 def run():
     get_params()
     df = init.df
