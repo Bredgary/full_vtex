@@ -19,33 +19,32 @@ def get_product(id,reg):
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
         df1 = pd.DataFrame({
-            'id': x["Id"],
-            'productId': x["ProductId"],
-            'isActive': x["IsActive"],
-            'activateIfPossible': x["ActivateIfPossible"],
-            'name': x["Name"],
-            'refId': x["RefId"],
-            'packagedHeight': x["PackagedHeight"],
-            'packagedLength': x["PackagedLength"],
-            'packagedWidth': x["PackagedWidth"],
-            'packagedWeightKg': x["PackagedWeightKg"],
-            'height': x["Height"],
-            'length': x["Length"],
-            'width': x["Width"],
-            'weightKg': x["WeightKg"],
-            'cubicWeight': x["CubicWeight"],
-            'isKit': x["IsKit"],
-            'creationDate': x["CreationDate"],
-            'rewardValue': x["RewardValue"],
-            'estimatedDateArrival': x["EstimatedDateArrival"],
-            'manufacturerCode': x["ManufacturerCode"],
-            'commercialConditionId': x["CommercialConditionId"],
-            'measurementUnit': x["MeasurementUnit"],
-            'unitMultiplier': x["UnitMultiplier"],
-            'modalType': x["ModalType"],
-            'videos': x["Videos"]}, index=[0])
+            'id': Fjson["Id"],
+            'productId': Fjson["ProductId"],
+            'isActive': Fjson["IsActive"],
+            'activateIfPossible': Fjson["ActivateIfPossible"],
+            'name': Fjson["Name"],
+            'refId': Fjson["RefId"],
+            'packagedHeight': Fjson["PackagedHeight"],
+            'packagedLength': Fjson["PackagedLength"],
+            'packagedWidth': Fjson["PackagedWidth"],
+            'packagedWeightKg': Fjson["PackagedWeightKg"],
+            'height': Fjson["Height"],
+            'length': Fjson["Length"],
+            'width': Fjson["Width"],
+            'weightKg': Fjson["WeightKg"],
+            'cubicWeight': Fjson["CubicWeight"],
+            'isKit': Fjson["IsKit"],
+            'creationDate': Fjson["CreationDate"],
+            'rewardValue': Fjson["RewardValue"],
+            'estimatedDateArrival': Fjson["EstimatedDateArrival"],
+            'manufacturerCode': Fjson["ManufacturerCode"],
+            'commercialConditionId': Fjson["CommercialConditionId"],
+            'measurementUnit': Fjson["MeasurementUnit"],
+            'unitMultiplier': Fjson["UnitMultiplier"],
+            'modalType': Fjson["ModalType"],
+            'videos': Fjson["Videos"]}, index=[0])
         init.df = init.df.append(df1)
-        
         print("Registro: "+str(reg))
     except:
         print("Vacio")
@@ -85,7 +84,7 @@ def run():
     
     project_id = '999847639598'
     dataset_id = 'landing_zone'
-    table_id = 'shopstar_vtex_sku'
+    table_id = 'shopstar_vtex_sku_'
 
     client  = bigquery.Client(project = project_id)
     dataset  = client.dataset(dataset_id)
