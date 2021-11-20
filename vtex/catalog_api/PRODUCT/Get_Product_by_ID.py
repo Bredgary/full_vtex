@@ -16,7 +16,29 @@ def get_product(id,reg):
         url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/product/"+str(id)+""
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
-        init.productList.append(Fjson)
+        df1 = pd.DataFrame({
+            'id': Fjson["Id"],
+            'name': Fjson["Name"],
+            'departmentId': Fjson["DepartmentId"],
+            'categoryId': Fjson["CategoryId"],
+            'brandId': Fjson["BrandId"],
+            'linkId': Fjson["LinkId"],
+            'refId': Fjson["RefId"],
+            'isVisible': Fjson["IsVisible"],
+            'description': Fjson["Description"],
+            'descriptionShort': Fjson["DescriptionShort"],
+            'releaseDate': Fjson["ReleaseDate"],
+            'keyWords': Fjson["KeyWords"],
+            'title': Fjson["Title"],
+            'isActive': Fjson["IsActive"],
+            'taxCode': Fjson["TaxCode"],
+            'metaTagDescription': Fjson["MetaTagDescription"],
+            'supplierId': Fjson["SupplierId"],
+            'showWithoutStock': Fjson["ShowWithoutStock"],
+            'adWordsRemarketingCode': Fjson["AdWordsRemarketingCode"],
+            'lomadeeCampaignCode': Fjson["LomadeeCampaignCode"],
+            'score': Fjson["Score"]}, index=[0])
+        init.df = init.df.append(df1)
         print("Registro: "+str(reg))
     except:
         print("Vacio")
@@ -51,30 +73,6 @@ def delete_duplicate():
 def run():
     get_params()
     
-    for x in init.productList:
-        df1 = pd.DataFrame({
-            'id': x["Id"],
-            'name': x["Name"],
-            'departmentId': x["DepartmentId"],
-            'categoryId': x["CategoryId"],
-            'brandId': x["BrandId"],
-            'linkId': x["LinkId"],
-            'refId': x["RefId"],
-            'isVisible': x["IsVisible"],
-            'description': x["Description"],
-            'descriptionShort': x["DescriptionShort"],
-            'releaseDate': x["ReleaseDate"],
-            'keyWords': x["KeyWords"],
-            'title': x["Title"],
-            'isActive': x["IsActive"],
-            'taxCode': x["TaxCode"],
-            'metaTagDescription': x["MetaTagDescription"],
-            'supplierId': x["SupplierId"],
-            'showWithoutStock': x["ShowWithoutStock"],
-            'adWordsRemarketingCode': x["AdWordsRemarketingCode"],
-            'lomadeeCampaignCode': x["LomadeeCampaignCode"],
-            'score': x["Score"]}, index=[0])
-        init.df = init.df.append(df1)
 
     df = init.df
     df.reset_index(drop=True, inplace=True)
