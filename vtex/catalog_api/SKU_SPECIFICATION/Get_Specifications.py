@@ -40,8 +40,6 @@ def get_params():
     for row in rows:
         get_product(row.id,registro)
         registro += 1
-        if registro == 15:
-        	break
     
 
 def delete_duplicate():
@@ -62,7 +60,7 @@ def run():
    
     project_id = '999847639598'
     dataset_id = 'landing_zone'
-    table_id = 'shopstar_vtex_sku_specification_'
+    table_id = 'shopstar_vtex_sku_specification'
 
     client  = bigquery.Client(project = project_id)
     dataset  = client.dataset(dataset_id)
