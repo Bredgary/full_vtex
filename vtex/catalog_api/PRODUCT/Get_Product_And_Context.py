@@ -12,33 +12,36 @@ class init:
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
 def get_product(id,reg):
-    url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/productget/"+str(id)+""
-    response = requests.request("GET", url, headers=init.headers)
-    Fjson = json.loads(response.text)
-    df1 = pd.DataFrame({
-        'id': Fjson["Id"],
-        'name': Fjson["Name"],
-        'departmentId': Fjson["DepartmentId"],
-        'categoryId': Fjson["CategoryId"],
-        'brandId': Fjson["BrandId"],
-        'linkId': Fjson["LinkId"],
-        'refId': Fjson["RefId"],
-        'isVisible': Fjson["IsVisible"],
-        'description': Fjson["Description"],
-        'descriptionShort': Fjson["DescriptionShort"],
-        'releaseDate': Fjson["ReleaseDate"],
-        'keyWords': Fjson["KeyWords"],
-        'title': Fjson["Title"],
-        'isActive': Fjson["IsActive"],
-        'taxCode': Fjson["TaxCode"],
-        'metaTagDescription': Fjson["MetaTagDescription"],
-        'supplierId': Fjson["SupplierId"],
-        'showWithoutStock': Fjson["ShowWithoutStock"],
-        'ListStoreId': Fjson["ListStoreId"],
-        'adWordsRemarketingCode': Fjson["AdWordsRemarketingCode"],
-        'lomadeeCampaignCode': Fjson["LomadeeCampaignCode"]}, index=[0])
-    init.df = init.df.append(df1)
-    print("Registro: "+str(reg))
+    try:
+        url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/productget/"+str(id)+""
+        response = requests.request("GET", url, headers=init.headers)
+        Fjson = json.loads(response.text)
+        df1 = pd.DataFrame({
+            'id': Fjson["Id"],
+            'name': Fjson["Name"],
+            'departmentId': Fjson["DepartmentId"],
+            'categoryId': Fjson["CategoryId"],
+            'brandId': Fjson["BrandId"],
+            'linkId': Fjson["LinkId"],
+            'refId': Fjson["RefId"],
+            'isVisible': Fjson["IsVisible"],
+            'description': Fjson["Description"],
+            'descriptionShort': Fjson["DescriptionShort"],
+            'releaseDate': Fjson["ReleaseDate"],
+            'keyWords': Fjson["KeyWords"],
+            'title': Fjson["Title"],
+            'isActive': Fjson["IsActive"],
+            'taxCode': Fjson["TaxCode"],
+            'metaTagDescription': Fjson["MetaTagDescription"],
+            'supplierId': Fjson["SupplierId"],
+            'showWithoutStock': Fjson["ShowWithoutStock"],
+            'ListStoreId': Fjson["ListStoreId"],
+            'adWordsRemarketingCode': Fjson["AdWordsRemarketingCode"],
+            'lomadeeCampaignCode': Fjson["LomadeeCampaignCode"]}, index=[0])
+        init.df = init.df.append(df1)
+        print("Registro: "+str(reg))
+    except:
+        print("Vacio")
 
 def get_params():
     print("Cargando consulta")
@@ -51,8 +54,7 @@ def get_params():
     for row in rows:
         get_product(row.id,registro)
         registro += 1
-        break
-    
+        
 
 def run():
     get_params()
@@ -65,7 +67,7 @@ def run():
     
     project_id = '999847639598'
     dataset_id = 'landing_zone'
-    table_id = 'shopstar_vtex_product_context_'
+    table_id = 'shopstar_vtex_product_context'
 
     client  = bigquery.Client(project = project_id)
     dataset  = client.dataset(dataset_id)
