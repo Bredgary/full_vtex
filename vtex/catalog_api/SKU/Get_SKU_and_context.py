@@ -19,9 +19,11 @@ def get_sk_context(id,reg):
         Fjson = json.loads(response.text)
         del Fjson["ProductCategories"]
         del Fjson["ProductClusterNames"]
+        del Fjson["PositionsInClusters"]
         data_items = Fjson.items()
         data_list = list(data_items)
         init.df = pd.DataFrame(data_list)
+        
         '''
         for x in Fjson:
             print(x)
