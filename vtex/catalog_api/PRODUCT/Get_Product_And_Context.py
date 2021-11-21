@@ -51,7 +51,6 @@ def get_params():
     for row in rows:
         get_product(row.id,registro)
         registro += 1
-        break
     
 
 def run():
