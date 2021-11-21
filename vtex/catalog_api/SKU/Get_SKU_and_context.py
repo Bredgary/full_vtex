@@ -17,49 +17,7 @@ def get_sk_context(id,reg):
     querystring = {"sc":"1"}
     response = requests.request("GET", url, headers=init.headers)
     Fjson = json.loads(response.text)
-    #del Fjson["Dimension"]
-    del Fjson["RealDimension"]
-    del Fjson["ManufacturerCode"]
-    del Fjson["KitItems"]
-    del Fjson["Services"]
-    del Fjson["Categories"]
-    del Fjson["CategoriesFullPath"]
-    del Fjson["Attachments"]
-    del Fjson["Collections"]
-    del Fjson["SkuSellers"]
-    del Fjson["SalesChannels"]
-    del Fjson["Images"]
-    del Fjson["Videos"]
-    del Fjson["SkuSpecifications"]
-    del Fjson["ProductSpecifications"]
-    del Fjson["ProductClustersIds"]
-    del Fjson["PositionsInClusters"]
-    del Fjson["ProductClusterNames"]
-    del Fjson["ProductClusterHighlights"]
-    del Fjson["ProductCategoryIds"]
-    del Fjson["IsDirectCategoryActive"]
-    del Fjson["ProductGlobalCategoryId"]
-    del Fjson["ProductCategories"]
-    del Fjson["CommercialConditionId"]
-    del Fjson["RewardValue"]
-    del Fjson["AlternateIds"]
-    del Fjson["AlternateIdValues"]
-    del Fjson["EstimatedDateArrival"]
-    del Fjson["MeasurementUnit"]
-    del Fjson["UnitMultiplier"]
-    del Fjson["InformationSource"]
-    del Fjson["ModalType"]
-    del Fjson["KeyWords"]
-    del Fjson["ReleaseDate"]
-    del Fjson["ProductIsVisible"]
-    del Fjson["ShowIfNotAvailable"]
-    del Fjson["IsProductActive"]
-    del Fjson["ProductFinalScore"]
     
-    df1 = pd.DataFrame({
-        'Id': Fjson["Id"],
-        'ProductId': Fjson["ProductId"],
-        'ProductId': Fjson["ProductId"]}, index=[0])
     init.df = init.df.append(df1)
     print("Registro: "+str(reg))
     #except:
