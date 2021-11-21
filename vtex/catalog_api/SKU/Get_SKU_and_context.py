@@ -73,7 +73,7 @@ def get_sk_context(id,reg):
         'DetailUrl': Fjson["DetailUrl"],
         'CSCIdentification': Fjson["CSCIdentification"],
         'BrandId': Fjson["BrandId"],
-        'Dimension': Fjson["Dimension"],
+        'Dimension': Fjson["Dimension"].item(),
         #'BrandName': Fjson["BrandName"],
         'IsBrandActive': Fjson["IsBrandActive"]}, index=[0])
     init.df = init.df.append(df1)
