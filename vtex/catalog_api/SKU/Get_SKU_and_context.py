@@ -17,9 +17,20 @@ def get_sk_context(id,reg):
         querystring = {"sc":"1"}
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
-        del Fjson["ProductCategories"]
-        del Fjson["ProductClusterNames"]
+        del Fjson["Dimension"]
+        del Fjson["RealDimension"]
+        del Fjson["CategoriesFullPath"]
+        del Fjson["SkuSellers"]
+        del Fjson["SalesChannels"]
+        del Fjson["Images"]
+        del Fjson["ProductSpecifications"]
         del Fjson["PositionsInClusters"]
+        del Fjson["ProductClusterNames"]
+        del Fjson["ProductCategAlternateIdsories"]
+        del Fjson["AlternateIdValues"]
+        del Fjson["ProductCategories"]
+        
+        
         data_items = Fjson.items()
         data_list = list(data_items)
         init.df = pd.DataFrame(data_list)
