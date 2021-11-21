@@ -93,7 +93,7 @@ def get_params():
     rows = query_job.result()
     registro = 0
     for row in rows:
-        get_sk_context(2001773,registro)
+        get_sk_context(944,registro)
         registro += 1
         if registro == 1:
             break
