@@ -15,30 +15,29 @@ def get_product(id,reg):
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/productget/"+str(id)+""
     response = requests.request("GET", url, headers=init.headers)
     Fjson = json.loads(response.text)
-    for x in Fjson:
-        df1 = pd.DataFrame({
-            'id': x["Id"],
-            'name': x["Name"],
-            'departmentId': x["DepartmentId"],
-            'categoryId': x["CategoryId"],
-            'brandId': x["BrandId"],
-            'linkId': x["LinkId"],
-            'refId': x["RefId"],
-            'isVisible': x["IsVisible"],
-            'description': x["Description"],
-            'descriptionShort': x["DescriptionShort"],
-            'releaseDate': x["ReleaseDate"],
-            'keyWords': x["KeyWords"],
-            'title': x["Title"],
-            'isActive': x["IsActive"],
-            'taxCode': x["TaxCode"],
-            'metaTagDescription': x["MetaTagDescription"],
-            'supplierId': x["SupplierId"],
-            'showWithoutStock': x["ShowWithoutStock"],
-            'ListStoreId': x["ListStoreId"],
-            'adWordsRemarketingCode': x["AdWordsRemarketingCode"],
-            'lomadeeCampaignCode': x["LomadeeCampaignCode"]}, index=[0])
-        init.df = init.df.append(df1)
+    df1 = pd.DataFrame({
+        'id': Fjson["Id"],
+        'name': Fjson["Name"],
+        'departmentId': Fjson["DepartmentId"],
+        'categoryId': Fjson["CategoryId"],
+        'brandId': Fjson["BrandId"],
+        'linkId': Fjson["LinkId"],
+        'refId': Fjson["RefId"],
+        'isVisible': Fjson["IsVisible"],
+        'description': Fjson["Description"],
+        'descriptionShort': Fjson["DescriptionShort"],
+        'releaseDate': Fjson["ReleaseDate"],
+        'keyWords': Fjson["KeyWords"],
+        'title': Fjson["Title"],
+        'isActive': Fjson["IsActive"],
+        'taxCode': Fjson["TaxCode"],
+        'metaTagDescription': Fjson["MetaTagDescription"],
+        'supplierId': Fjson["SupplierId"],
+        'showWithoutStock': Fjson["ShowWithoutStock"],
+        'ListStoreId': Fjson["ListStoreId"],
+        'adWordsRemarketingCode': Fjson["AdWordsRemarketingCode"],
+        'lomadeeCampaignCode': Fjson["LomadeeCampaignCode"]}, index=[0])
+    init.df = init.df.append(df1)
     print("Registro: "+str(reg))
 
 def get_params():
