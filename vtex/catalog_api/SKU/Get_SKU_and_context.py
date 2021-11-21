@@ -73,6 +73,7 @@ def get_sk_context(id,reg):
         'DetailUrl': Fjson["DetailUrl"],
         'CSCIdentification': Fjson["CSCIdentification"],
         'BrandId': Fjson["BrandId"],
+        'Dimension': Fjson["Dimension"],
         #'BrandName': Fjson["BrandName"],
         'IsBrandActive': Fjson["IsBrandActive"]}, index=[0])
     init.df = init.df.append(df1)
@@ -98,12 +99,16 @@ def get_params():
 
 
 def delete_duplicate():
-    client = bigquery.Client()
-    QUERY = (
-        'CREATE OR REPLACE TABLE `shopstar-datalake.landing_zone.shopstar_vtex_sku_context` AS SELECT DISTINCT * FROM `shopstar-datalake.landing_zone.shopstar_vtex_sku_context`')
-    query_job = client.query(QUERY)  
-    rows = query_job.result()
-    print(rows)
+    try:
+        print("Eliminando Duplicados")
+        client = bigquery.Client()
+        QUERY = (
+            'CREATE OR REPLACE TABLE `shopstar-datalake.landing_zone.shopstar_vtex_sku_context` AS SELECT DISTINCT * FROM `shopstar-datalake.landing_zone.shopstar_vtex_sku_context`')
+        query_job = client.query(QUERY)  
+        rows = query_job.result()
+        print(rows)
+    except:
+        print("Consulta SQL no ejecutada")
 
 def run():
     get_params()
