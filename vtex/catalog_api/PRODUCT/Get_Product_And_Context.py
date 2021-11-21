@@ -11,165 +11,105 @@ class init:
     df = pd.DataFrame()
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
-def get_product(id,reg):
-    url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/productget/"+str(id)+""
-    response = requests.request("GET", url, headers=init.headers)
-    Fjson = json.loads(response.text)
-    init.productList.append(Fjson)
-    print("Registro: "+str(reg))
+def get_sk_context(id,reg):
+    try:
+        url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitbyid/"+str(id)+""
+        querystring = {"sc":"1"}
+        response = requests.request("GET", url, headers=init.headers)
+        Fjson = json.loads(response.text)
+        df1 = pd.DataFrame({
+            'Id': Fjson["Id"],
+            'ProductId': Fjson["ProductId"],
+            'NameComplete': Fjson["NameComplete"],
+            'ComplementName': Fjson["ComplementName"],
+            'ProductName': Fjson["ProductName"],
+            'ProductDescription': Fjson["ProductDescription"],
+            'ProductRefId': Fjson["ProductRefId"],
+            'TaxCode': Fjson["TaxCode"],
+            'SkuName': Fjson["SkuName"],
+            'IsActive': Fjson["IsActive"],
+            'IsTransported': Fjson["IsTransported"],
+            'IsInventoried': Fjson["IsInventoried"],
+            'IsGiftCardRecharge': Fjson["IsGiftCardRecharge"],
+            'ImageUrl': Fjson["ImageUrl"],
+            'DetailUrl': Fjson["DetailUrl"],
+            'CSCIdentification': Fjson["CSCIdentification"],
+            'BrandId': Fjson["BrandId"],
+            'BrandName': Fjson["BrandName"],
+            'IsBrandActive': Fjson["IsBrandActive"],
+            'Dimension': Fjson["Dimension"],
+            'ManufacturerCode': Fjson["ManufacturerCode"],
+            'IsKit': Fjson["IsKit"],
+            'KitItems': Fjson["KitItems"],
+            'Services': Fjson["Services"],
+            'Categories': Fjson["Categories"],
+            'CategoriesFullPath': Fjson["CategoriesFullPath"],
+            'Attachments': Fjson["Attachments"],
+            'Collections': Fjson["Collections"],
+            'SkuSellers': Fjson["SkuSellers"],
+            'SalesChannels': Fjson["SalesChannels"],
+            'Images': Fjson["Images"],
+            'Videos': Fjson["Videos"],
+            'SkuSpecifications': Fjson["SkuSpecifications"],
+            'ProductSpecifications': Fjson["ProductSpecifications"],
+            'ProductClusterHighlights': Fjson["ProductClusterHighlights"],
+            'ProductCategoryIds': Fjson["ProductCategoryIds"],
+            'CommercialConditionId': Fjson["CommercialConditionId"],
+            'RewardValue': Fjson["RewardValue"],
+            'AlternateIds': Fjson["AlternateIds"],
+            'AlternateIdValues': Fjson["AlternateIdValues"],
+            'EstimatedDateArrival': Fjson["EstimatedDateArrival"],
+            'MeasurementUnit': Fjson["MeasurementUnit"],
+            'UnitMultiplier': Fjson["UnitMultiplier"],
+            'InformationSource': Fjson["InformationSource"],
+            'ModalType': Fjson["ModalType"],
+            'KeyWords': Fjson["KeyWords"],
+            'ReleaseDate': Fjson["ReleaseDate"],
+            'ProductIsVisible': Fjson["ProductIsVisible"],
+            'ShowIfNotAvailable': Fjson["ShowIfNotAvailable"],
+            'IsProductActive': Fjson["IsProductActive"],
+            'ProductFinalScore': Fjson["ProductFinalScore"]}, index=[0])
+        init.df = init.df.append(df1)
+        print("Registro: "+str(reg))
+    except:
+        print("Vacio")
 
 def get_params():
     print("Cargando consulta")
     client = bigquery.Client()
     QUERY = (
-        'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_product_ID`')
+        'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_SKU_ID`')
     query_job = client.query(QUERY)  
     rows = query_job.result()
     registro = 1
     for row in rows:
-        get_product(row.id,registro)
+        get_sk_context(row.id,registro)
         registro += 1
-        if registro == 15:
+        if registro == 100:
             break
-    
 
-def format_schema(schema):
-    formatted_schema = []
-    for row in schema:
-        formatted_schema.append(bigquery.SchemaField(row['name'], row['type'], row['mode']))
-    return formatted_schema
 
-#def delete_duplicate():
-    #client = bigquery.Client()
-    #QUERY = (
-    #    'CREATE OR REPLACE TABLE `shopstar-datalake.landing_zone.shopstar_vtex_product_context` AS SELECT DISTINCT * FROM `shopstar-datalake.landing_zone.shopstar_vtex_product_context`')
-    #query_job = client.query(QUERY)  
-    #rows = query_job.result()
-    #print(rows)
+def delete_duplicate():
+    client = bigquery.Client()
+    QUERY = (
+        'CREATE OR REPLACE TABLE `shopstar-datalake.landing_zone.shopstar_vtex_sku_context` AS SELECT DISTINCT * FROM `shopstar-datalake.landing_zone.shopstar_vtex_sku_context`')
+    query_job = client.query(QUERY)  
+    rows = query_job.result()
+    print(rows)
 
 def run():
     get_params()
     
-    for x in init.productList:
-        df1 = pd.DataFrame({
-            'id': x["Id"],
-            'name': x["Name"],
-            'departmentId': x["DepartmentId"],
-            'categoryId': x["CategoryId"],
-            'brandId': x["BrandId"],
-            'linkId': x["LinkId"],
-            'refId': x["RefId"],
-            'isVisible': x["IsVisible"],
-            'description': x["Description"],
-            'descriptionShort': x["DescriptionShort"],
-            'releaseDate': x["ReleaseDate"],
-            'keyWords': x["KeyWords"],
-            'title': x["Title"],
-            'isActive': x["IsActive"],
-            'taxCode': x["TaxCode"],
-            'metaTagDescription': x["MetaTagDescription"],
-            'supplierId': x["SupplierId"],
-            'showWithoutStock': x["ShowWithoutStock"],
-            'ListStoreId': x["ListStoreId"],
-            'adWordsRemarketingCode': x["AdWordsRemarketingCode"],
-            'lomadeeCampaignCode': x["LomadeeCampaignCode"]}, index=[0])
-        init.df = init.df.append(df1)
 
     df = init.df
     df.reset_index(drop=True, inplace=True)
     json_data = df.to_json(orient = 'records')
     json_object = json.loads(json_data)
     
-    table_schema = [
-        {
-            "name": "Id",
-            "type": "INTEGER",
-            "mode": "NULLABLE"
-        },{
-            "name": "Name",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "DepartmentId",
-            "type": "INTEGER",
-            "mode": "NULLABLE"
-        },{
-            "name": "CategoryId",
-            "type": "INTEGER",
-            "mode": "NULLABLE"
-        },{
-            "name": "BrandId",
-            "type": "INTEGER",
-            "mode": "NULLABLE"
-        },{
-            "name": "LinkId",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "RefId",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "IsVisible",
-            "type": "BOOLEAN",
-            "mode": "NULLABLE"
-        },{
-            "name": "Description",
-            "type": "FLOAT",
-            "mode": "NULLABLE"
-        },{
-            "name": "DescriptionShort",
-            "type": "FLOAT",
-            "mode": "NULLABLE"
-        },{
-            "name": "ReleaseDate",
-            "type": "DATE",
-            "mode": "NULLABLE"
-        },{
-            "name": "KeyWords",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "Title",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "IsActive",
-            "type": "BOOLEAN",
-            "mode": "NULLABLE"
-        },{
-            "name": "TaxCode",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "MetaTagDescription",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "SupplierId",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "ShowWithoutStock",
-            "type": "BOOLEAN",
-            "mode": "NULLABLE"
-        },{
-            "name": "ListStoreId",
-            "type": "INTEGER",
-            "mode": "REPEATED"
-        },{
-            "name": "AdWordsRemarketingCode",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "LomadeeCampaignCode",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        }]
 
     project_id = '999847639598'
     dataset_id = 'landing_zone'
-    table_id = 'shopstar_vtex_product_context'
+    table_id = 'shopstar_vtex_sku_context_'
 
     client  = bigquery.Client(project = project_id)
     dataset  = client.dataset(dataset_id)
@@ -177,11 +117,9 @@ def run():
     job_config = bigquery.LoadJobConfig()
     job_config.write_disposition = "WRITE_TRUNCATE"
     job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-    #job_config.schema = format_schema(table_schema)
-    #job_config.autodetect = True
+    job_config.autodetect = True
     job = client.load_table_from_json(json_object, table, job_config = job_config)
     print(job.result())
-    #delete_duplicate()
-    
+    delete_duplicate()
     
 run()
