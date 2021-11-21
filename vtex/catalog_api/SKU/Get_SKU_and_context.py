@@ -20,7 +20,7 @@ def get_sk_context(id,reg):
     print("Registro: "+str(reg))
     for x in Fjson:
         df1 = pd.DataFrame({
-            'Id': Fjson["Id"]}, index=[0])
+            'Id': x["Id"]}, index=[0])
         init.df = init.df.append(df1)
     #except:
     #   print("Vacio")
