@@ -16,7 +16,29 @@ def get_product(id,reg):
     response = requests.request("GET", url, headers=init.headers)
     Fjson = json.loads(response.text)
     for x in Fjson:
-        print(x)
+        df1 = pd.DataFrame({
+            'id': x["Id"],
+            'name': x["Name"],
+            'departmentId': x["DepartmentId"],
+            'categoryId': x["CategoryId"],
+            'brandId': x["BrandId"],
+            'linkId': x["LinkId"],
+            'refId': x["RefId"],
+            'isVisible': x["IsVisible"],
+            'description': x["Description"],
+            'descriptionShort': x["DescriptionShort"],
+            'releaseDate': x["ReleaseDate"],
+            'keyWords': x["KeyWords"],
+            'title': x["Title"],
+            'isActive': x["IsActive"],
+            'taxCode': x["TaxCode"],
+            'metaTagDescription': x["MetaTagDescription"],
+            'supplierId': x["SupplierId"],
+            'showWithoutStock': x["ShowWithoutStock"],
+            'ListStoreId': x["ListStoreId"],
+            'adWordsRemarketingCode': x["AdWordsRemarketingCode"],
+            'lomadeeCampaignCode': x["LomadeeCampaignCode"]}, index=[0])
+        init.df = init.df.append(df1)
     print("Registro: "+str(reg))
 
 def get_params():
@@ -30,6 +52,7 @@ def get_params():
     for row in rows:
         get_product(row.id,registro)
         registro += 1
+        break
     
 
 def run():
@@ -43,7 +66,7 @@ def run():
     
     project_id = '999847639598'
     dataset_id = 'landing_zone'
-    table_id = 'shopstar_vtex_product_context'
+    table_id = 'shopstar_vtex_product_context_'
 
     client  = bigquery.Client(project = project_id)
     dataset  = client.dataset(dataset_id)
