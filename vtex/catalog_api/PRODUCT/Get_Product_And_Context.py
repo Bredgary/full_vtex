@@ -15,7 +15,7 @@ def get_product(id,reg):
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/productget/"+str(id)+""
     response = requests.request("GET", url, headers=init.headers)
     Fjson = json.loads(response.text)
-    init.df = pd.DataFrame.from_dict(Fjson, orient='index')
+    pd.DataFrame.from_dict(Fjson, orient='index',columns=['A', 'B', 'C', 'D'])
     print("Registro: "+str(reg))
 
 def get_params():
@@ -29,7 +29,7 @@ def get_params():
     for row in rows:
         get_product(row.id,registro)
         registro += 1
-        if registro == 100:
+        if registro == 2:
             break
     
 
