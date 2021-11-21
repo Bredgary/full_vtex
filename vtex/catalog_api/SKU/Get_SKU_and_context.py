@@ -91,11 +91,11 @@ def get_params():
         'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_SKU_ID`')
     query_job = client.query(QUERY)  
     rows = query_job.result()
-    registro = 1
+    registro = 0
     for row in rows:
-        get_sk_context(row.id,registro)
+        get_sk_context(2001773,registro)
         registro += 1
-        if registro == 100:
+        if registro == 1:
             break
 
 
