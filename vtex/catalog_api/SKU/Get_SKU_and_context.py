@@ -55,6 +55,10 @@ def get_sk_context(id,reg):
     del Fjson["ShowIfNotAvailable"]
     del Fjson["IsProductActive"]
     del Fjson["ProductFinalScore"]
+    data_items = Fjson.items()
+    data_list = list(data_items)
+    df = pd.DataFrame(data_list)
+    '''
     df1 = pd.DataFrame({
         'Id': Fjson["Id"],
         'ProductId': Fjson["ProductId"],
@@ -75,6 +79,7 @@ def get_sk_context(id,reg):
         'BrandId': Fjson["BrandId"],
         'BrandName': Fjson["BrandName"],
         'IsBrandActive': Fjson["IsBrandActive"]}, index=[0])
+    '''
     init.df = init.df.append(df1)
     print("Registro: "+str(reg))
     #except:
