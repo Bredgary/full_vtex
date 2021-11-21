@@ -55,32 +55,10 @@ def get_sk_context(id,reg):
     del Fjson["ShowIfNotAvailable"]
     del Fjson["IsProductActive"]
     del Fjson["ProductFinalScore"]
-    data_items = Fjson.items()
-    data_list = list(data_items)
-    for x in data_list:
-        df1 = pd.DataFrame(x)
-    '''
+    
     df1 = pd.DataFrame({
         'Id': Fjson["Id"],
-        'ProductId': Fjson["ProductId"],
-        'NameComplete': Fjson["NameComplete"],
-        'ComplementName': Fjson["ComplementName"],
-        'ProductName': Fjson["ProductName"],
-        'ProductDescription': Fjson["ProductDescription"],
-        'ProductRefId': Fjson["ProductRefId"],
-        'TaxCode': Fjson["TaxCode"],
-        'SkuName': Fjson["SkuName"],
-        'IsActive': Fjson["IsActive"],
-        'IsTransported': Fjson["IsTransported"],
-        'IsInventoried': Fjson["IsInventoried"],
-        'IsGiftCardRecharge': Fjson["IsGiftCardRecharge"],
-        'ImageUrl': Fjson["ImageUrl"],
-        'DetailUrl': Fjson["DetailUrl"],
-        'CSCIdentification': Fjson["CSCIdentification"],
-        'BrandId': Fjson["BrandId"],
-        'BrandName': Fjson["BrandName"],
-        'IsBrandActive': Fjson["IsBrandActive"]}, index=[0])
-    '''
+        'ProductId': Fjson["ProductId"]}, index=[0])
     init.df = init.df.append(df1)
     print("Registro: "+str(reg))
     #except:
