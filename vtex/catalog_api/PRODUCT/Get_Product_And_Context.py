@@ -31,21 +31,7 @@ def get_params():
         registro += 1
     
 
-def format_schema(schema):
-    formatted_schema = []
-    for row in schema:
-        formatted_schema.append(bigquery.SchemaField(row['name'], row['type'], row['mode']))
-    return formatted_schema
-
-#def delete_duplicate():
-    #client = bigquery.Client()
-    #QUERY = (
-    #    'CREATE OR REPLACE TABLE `shopstar-datalake.landing_zone.shopstar_vtex_product_context` AS SELECT DISTINCT * FROM `shopstar-datalake.landing_zone.shopstar_vtex_product_context`')
-    #query_job = client.query(QUERY)  
-    #rows = query_job.result()
-    #print(rows)
-
-def run(requests):
+def run():
     get_params()
     
     for x in init.productList:
@@ -175,7 +161,7 @@ def run(requests):
     job_config = bigquery.LoadJobConfig()
     job_config.write_disposition = "WRITE_TRUNCATE"
     job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-    #job_config.schema = format_schema(table_schema)
+    job_config.autodetect = True
     job = client.load_table_from_json(json_object, table, job_config = job_config)
     print(job.result())
     
