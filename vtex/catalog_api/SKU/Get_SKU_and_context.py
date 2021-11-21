@@ -91,6 +91,7 @@ def get_params():
             break
 
 
+
 def delete_duplicate():
     client = bigquery.Client()
     QUERY = (
