@@ -17,11 +17,10 @@ def get_sk_context(id,reg):
     querystring = {"sc":"1"}
     response = requests.request("GET", url, headers=init.headers)
     Fjson = json.loads(response.text)
+    data_items = Fjson.items()
+    data_list = list(data_items)
+    init.df = pd.DataFrame(data_list)
     print("Registro: "+str(reg))
-    for x in Fjson:
-        df1 = pd.DataFrame({
-            'Id': x["Id"]}, index=[0])
-        init.df = init.df.append(df1)
     #except:
     #   print("Vacio")
 
