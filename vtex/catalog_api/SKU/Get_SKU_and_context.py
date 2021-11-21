@@ -17,7 +17,7 @@ def get_sk_context(id,reg):
     querystring = {"sc":"1"}
     response = requests.request("GET", url, headers=init.headers)
     Fjson = json.loads(response.text)
-    del Fjson["Dimension"]
+    #del Fjson["Dimension"]
     del Fjson["RealDimension"]
     del Fjson["ManufacturerCode"]
     del Fjson["KitItems"]
