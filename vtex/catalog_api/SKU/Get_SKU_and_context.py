@@ -31,8 +31,53 @@ def get_sk_context(id,reg):
     del Fjson["ProductCategories"]
     data_items = Fjson.items()
     data_list = list(data_items)
-    init.df = pd.DataFrame(data_list)
+    #init.df = pd.DataFrame(data_list)
     print("Registro: "+str(reg))
+    for x in Fjson:
+            df1 = pd.DataFrame({
+                'Id': Fjson["Id"],
+                'ProductId': Fjson["ProductId"],
+                'NameComplete': Fjson["NameComplete"],
+                'ComplementName': Fjson["ComplementName"],
+                'ProductName': Fjson["ProductName"],
+                'ProductDescription': Fjson["ProductDescription"],
+                'ProductRefId': Fjson["ProductRefId"],
+                'TaxCode': Fjson["TaxCode"],
+                'SkuName': Fjson["SkuName"],
+                'IsActive': Fjson["IsActive"],
+                'IsTransported': Fjson["IsTransported"],
+                'IsInventoried': Fjson["IsInventoried"],
+                'IsGiftCardRecharge': Fjson["IsGiftCardRecharge"],
+                'ImageUrl': Fjson["ImageUrl"],
+                'DetailUrl': Fjson["DetailUrl"],
+                'CSCIdentification': Fjson["CSCIdentification"],
+                'BrandId': Fjson["BrandId"],
+                'BrandName': Fjson["BrandName"],
+                'IsBrandActive': Fjson["IsBrandActive"],
+                'ManufacturerCode': Fjson["ManufacturerCode"],
+                'IsKit': Fjson["IsKit"],
+                'KitItems': Fjson["KitItems"],
+                'Services': Fjson["Services"],
+                'Categories': Fjson["Categories"],
+                'Attachments': Fjson["Attachments"],
+                'Collections': Fjson["Collections"],
+                'Videos': Fjson["Videos"],
+                'SkuSpecifications': Fjson["SkuSpecifications"],
+                'ProductClusterHighlights': Fjson["ProductClusterHighlights"],
+                'ProductCategoryIds': Fjson["ProductCategoryIds"],
+                'CommercialConditionId': Fjson["CommercialConditionId"],
+                'RewardValue': Fjson["RewardValue"],
+                'EstimatedDateArrival': Fjson["EstimatedDateArrival"],
+                'MeasurementUnit': Fjson["MeasurementUnit"],
+                'UnitMultiplier': Fjson["UnitMultiplier"],
+                'InformationSource': Fjson["InformationSource"],
+                'ModalType': Fjson["ModalType"],
+                'KeyWords': Fjson["KeyWords"],
+                'ReleaseDate': Fjson["ReleaseDate"],
+                'ProductIsVisible': Fjson["ProductIsVisible"],
+                'ShowIfNotAvailable': Fjson["ShowIfNotAvailable"],
+                'IsProductActive': Fjson["IsProductActive"],
+                'ProductFinalScore': Fjson["ProductFinalScore"]}, index=[0])
     #except:
     #   print("Vacio")
 
