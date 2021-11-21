@@ -12,36 +12,36 @@ class init:
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
 def get_product(id,reg):
-    try:
-        url = "https://apiexamples.vtexcommercestable.com.br/api/catalog_system/pvt/products/productget/"+str(id)+""
-        response = requests.request("GET", url, headers=init.headers)
-        Fjson = json.loads(response.text)
-        df1 = pd.DataFrame({
-            'id': Fjson["Id"],
-            'name': Fjson["Name"],
-            'departmentId': Fjson["DepartmentId"],
-            'categoryId': Fjson["CategoryId"],
-            'brandId': Fjson["BrandId"],
-            'linkId': Fjson["LinkId"],
-            'refId': Fjson["RefId"],
-            'isVisible': Fjson["IsVisible"],
-            'description': Fjson["Description"],
-            'descriptionShort': Fjson["DescriptionShort"],
-            'releaseDate': Fjson["ReleaseDate"],
-            'keyWords': Fjson["KeyWords"],
-            'title': Fjson["Title"],
-            'isActive': Fjson["IsActive"],
-            'taxCode': Fjson["TaxCode"],
-            'metaTagDescription': Fjson["MetaTagDescription"],
-            'supplierId': Fjson["SupplierId"],
-            'showWithoutStock': Fjson["ShowWithoutStock"],
-            'adWordsRemarketingCode': Fjson["AdWordsRemarketingCode"],
-            'lomadeeCampaignCode': Fjson["LomadeeCampaignCode"],
-            'score': Fjson["Score"]}, index=[0])
-        init.df = init.df.append(df1)
-        print("Registro: "+str(reg))
-    except:
-        print("Vacio")
+    #try:
+    url = "https://apiexamples.vtexcommercestable.com.br/api/catalog_system/pvt/products/productget/"+str(id)+""
+    response = requests.request("GET", url, headers=init.headers)
+    Fjson = json.loads(response.text)
+    df1 = pd.DataFrame({
+        'id': Fjson["Id"],
+        'name': Fjson["Name"],
+        'departmentId': Fjson["DepartmentId"],
+        'categoryId': Fjson["CategoryId"],
+        'brandId': Fjson["BrandId"],
+        'linkId': Fjson["LinkId"],
+        'refId': Fjson["RefId"],
+        'isVisible': Fjson["IsVisible"],
+        'description': Fjson["Description"],
+        'descriptionShort': Fjson["DescriptionShort"],
+        'releaseDate': Fjson["ReleaseDate"],
+        'keyWords': Fjson["KeyWords"],
+        'title': Fjson["Title"],
+        'isActive': Fjson["IsActive"],
+        'taxCode': Fjson["TaxCode"],
+        'metaTagDescription': Fjson["MetaTagDescription"],
+        'supplierId': Fjson["SupplierId"],
+        'showWithoutStock': Fjson["ShowWithoutStock"],
+        'adWordsRemarketingCode': Fjson["AdWordsRemarketingCode"],
+        'lomadeeCampaignCode': Fjson["LomadeeCampaignCode"],
+        'score': Fjson["Score"]}, index=[0])
+    init.df = init.df.append(df1)
+    print("Registro: "+str(reg))
+    #except:
+    #    print("Vacio")
 
 def get_params():
     print("Cargando consulta")
