@@ -18,13 +18,16 @@ class init:
 	headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
 def get_productID(idCategory,From,To):
-	querystring = {"categoryId":""+str(idCategory)+"","_from":""+str(From)+"","_to":""+str(To)+""}
-	response = requests.request("GET", init.url, headers=init.headers, params=querystring)
-	Fjson = json.loads(response.text)
-	data = Fjson["data"]
-	for x in data:
-		if x is not "[]":
-			init.IDS.append(x)
+	try:
+		querystring = {"categoryId":""+str(idCategory)+"","_from":""+str(From)+"","_to":""+str(To)+""}
+		response = requests.request("GET", init.url, headers=init.headers, params=querystring)
+		Fjson = json.loads(response.text)
+		data = Fjson["data"]
+		for x in data:
+			if x is not "[]":
+				init.IDS.append(x)
+	except:
+		print("Vacio")
 
 
 def get_params():

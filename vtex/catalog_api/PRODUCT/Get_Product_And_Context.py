@@ -55,6 +55,17 @@ def get_params():
         get_product(row.id,registro)
         registro += 1
         
+def delete_duplicate():
+    try:
+        print("Eliminando duplicados")
+        client = bigquery.Client()
+        QUERY = (
+            'CREATE OR REPLACE TABLE `shopstar-datalake.landing_zone.shopstar_vtex_product` AS SELECT DISTINCT * FROM `shopstar-datalake.landing_zone.shopstar_vtex_product`')
+        query_job = client.query(QUERY)  
+        rows = query_job.result()
+        print(rows)
+    except:
+        print("Vacio")
 
 def run():
     get_params()
@@ -78,5 +89,5 @@ def run():
     job_config.autodetect = True
     job = client.load_table_from_json(json_object, table, job_config = job_config)
     print(job.result())
-    
+    delete_duplicate()
 run()
