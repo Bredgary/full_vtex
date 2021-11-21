@@ -26,7 +26,7 @@ def get_sk_context(id,reg):
     del Fjson["ProductSpecifications"]
     del Fjson["PositionsInClusters"]
     del Fjson["ProductClusterNames"]
-    del Fjson["ProductCategAlternateIdsories"]
+    del Fjson["AlternateIds"]
     del Fjson["AlternateIdValues"]
     del Fjson["ProductCategories"]
     data_items = Fjson.items()
