@@ -11,64 +11,33 @@ class init:
     df = pd.DataFrame()
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
-def get_sk_context(id,reg):
+def get_product(id,reg):
     try:
-        url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitbyid/"+str(id)+""
-        querystring = {"sc":"1"}
+        url = "https://apiexamples.vtexcommercestable.com.br/api/catalog_system/pvt/products/productget/"+str(id)+""
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
         df1 = pd.DataFrame({
-            'Id': Fjson["Id"],
-            'ProductId': Fjson["ProductId"],
-            'NameComplete': Fjson["NameComplete"],
-            'ComplementName': Fjson["ComplementName"],
-            'ProductName': Fjson["ProductName"],
-            'ProductDescription': Fjson["ProductDescription"],
-            'ProductRefId': Fjson["ProductRefId"],
-            'TaxCode': Fjson["TaxCode"],
-            'SkuName': Fjson["SkuName"],
-            'IsActive': Fjson["IsActive"],
-            'IsTransported': Fjson["IsTransported"],
-            'IsInventoried': Fjson["IsInventoried"],
-            'IsGiftCardRecharge': Fjson["IsGiftCardRecharge"],
-            'ImageUrl': Fjson["ImageUrl"],
-            'DetailUrl': Fjson["DetailUrl"],
-            'CSCIdentification': Fjson["CSCIdentification"],
-            'BrandId': Fjson["BrandId"],
-            'BrandName': Fjson["BrandName"],
-            'IsBrandActive': Fjson["IsBrandActive"],
-            'Dimension': Fjson["Dimension"],
-            'ManufacturerCode': Fjson["ManufacturerCode"],
-            'IsKit': Fjson["IsKit"],
-            'KitItems': Fjson["KitItems"],
-            'Services': Fjson["Services"],
-            'Categories': Fjson["Categories"],
-            'CategoriesFullPath': Fjson["CategoriesFullPath"],
-            'Attachments': Fjson["Attachments"],
-            'Collections': Fjson["Collections"],
-            'SkuSellers': Fjson["SkuSellers"],
-            'SalesChannels': Fjson["SalesChannels"],
-            'Images': Fjson["Images"],
-            'Videos': Fjson["Videos"],
-            'SkuSpecifications': Fjson["SkuSpecifications"],
-            'ProductSpecifications': Fjson["ProductSpecifications"],
-            'ProductClusterHighlights': Fjson["ProductClusterHighlights"],
-            'ProductCategoryIds': Fjson["ProductCategoryIds"],
-            'CommercialConditionId': Fjson["CommercialConditionId"],
-            'RewardValue': Fjson["RewardValue"],
-            'AlternateIds': Fjson["AlternateIds"],
-            'AlternateIdValues': Fjson["AlternateIdValues"],
-            'EstimatedDateArrival': Fjson["EstimatedDateArrival"],
-            'MeasurementUnit': Fjson["MeasurementUnit"],
-            'UnitMultiplier': Fjson["UnitMultiplier"],
-            'InformationSource': Fjson["InformationSource"],
-            'ModalType': Fjson["ModalType"],
-            'KeyWords': Fjson["KeyWords"],
-            'ReleaseDate': Fjson["ReleaseDate"],
-            'ProductIsVisible': Fjson["ProductIsVisible"],
-            'ShowIfNotAvailable': Fjson["ShowIfNotAvailable"],
-            'IsProductActive': Fjson["IsProductActive"],
-            'ProductFinalScore': Fjson["ProductFinalScore"]}, index=[0])
+            'id': Fjson["Id"],
+            'name': Fjson["Name"],
+            'departmentId': Fjson["DepartmentId"],
+            'categoryId': Fjson["CategoryId"],
+            'brandId': Fjson["BrandId"],
+            'linkId': Fjson["LinkId"],
+            'refId': Fjson["RefId"],
+            'isVisible': Fjson["IsVisible"],
+            'description': Fjson["Description"],
+            'descriptionShort': Fjson["DescriptionShort"],
+            'releaseDate': Fjson["ReleaseDate"],
+            'keyWords': Fjson["KeyWords"],
+            'title': Fjson["Title"],
+            'isActive': Fjson["IsActive"],
+            'taxCode': Fjson["TaxCode"],
+            'metaTagDescription': Fjson["MetaTagDescription"],
+            'supplierId': Fjson["SupplierId"],
+            'showWithoutStock': Fjson["ShowWithoutStock"],
+            'adWordsRemarketingCode': Fjson["AdWordsRemarketingCode"],
+            'lomadeeCampaignCode': Fjson["LomadeeCampaignCode"],
+            'score': Fjson["Score"]}, index=[0])
         init.df = init.df.append(df1)
         print("Registro: "+str(reg))
     except:
@@ -83,16 +52,14 @@ def get_params():
     rows = query_job.result()
     registro = 1
     for row in rows:
-        get_sk_context(row.id,registro)
+        get_product(row.id,registro)
         registro += 1
-        if registro == 100:
-            break
 
 
 def delete_duplicate():
     client = bigquery.Client()
     QUERY = (
-        'CREATE OR REPLACE TABLE `shopstar-datalake.landing_zone.shopstar_vtex_sku_context` AS SELECT DISTINCT * FROM `shopstar-datalake.landing_zone.shopstar_vtex_sku_context`')
+        'CREATE OR REPLACE TABLE `shopstar-datalake.landing_zone.shopstar_vtex_product_context` AS SELECT DISTINCT * FROM `shopstar-datalake.landing_zone.shopstar_vtex_product_context`')
     query_job = client.query(QUERY)  
     rows = query_job.result()
     print(rows)
@@ -109,7 +76,7 @@ def run():
 
     project_id = '999847639598'
     dataset_id = 'landing_zone'
-    table_id = 'shopstar_vtex_sku_context_'
+    table_id = 'shopstar_vtex_product_context'
 
     client  = bigquery.Client(project = project_id)
     dataset  = client.dataset(dataset_id)
