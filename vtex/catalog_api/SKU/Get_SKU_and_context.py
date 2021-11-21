@@ -20,7 +20,6 @@ def get_sk_context(id,reg):
         del Fjson["ProductCategories"]
         for x in Fjson:
             print(x)
-            break
             '''
             df1 = pd.DataFrame({
                 'Id': Fjson["Id"],
