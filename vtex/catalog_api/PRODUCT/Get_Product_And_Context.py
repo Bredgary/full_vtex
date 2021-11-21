@@ -155,7 +155,7 @@ def run():
 
     project_id = '999847639598'
     dataset_id = 'landing_zone'
-    table_id = 'shopstar_vtex_product_context_'
+    table_id = 'shopstar_vtex_product_context'
 
     client  = bigquery.Client(project = project_id)
     dataset  = client.dataset(dataset_id)

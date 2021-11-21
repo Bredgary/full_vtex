@@ -58,6 +58,7 @@ def get_sk_context(id,reg):
     
     df1 = pd.DataFrame({
         'Id': Fjson["Id"],
+        'ProductId': Fjson["ProductId"],
         'ProductId': Fjson["ProductId"]}, index=[0])
     init.df = init.df.append(df1)
     print("Registro: "+str(reg))
