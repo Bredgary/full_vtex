@@ -18,9 +18,13 @@ def get_sk_context(id,reg):
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
         del Fjson["ProductCategories"]
+        data_items = Fjson.items()
+        data_list = list(data_items)
+        init.df = pd.DataFrame(data_list)
+        '''
         for x in Fjson:
             print(x)
-            '''
+            
             df1 = pd.DataFrame({
                 'Id': Fjson["Id"],
                 'ProductId': Fjson["ProductId"],
@@ -106,11 +110,13 @@ def delete_duplicate():
 
 def run():
     get_params()
-    '''
+    
     df = init.df
     df.reset_index(drop=True, inplace=True)
     json_data = df.to_json(orient = 'records')
     json_object = json.loads(json_data)
+    print(df)
+    '''
     
 
     project_id = '999847639598'
