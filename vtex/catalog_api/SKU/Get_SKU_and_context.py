@@ -57,7 +57,7 @@ def run():
     json_data = df.to_json(orient = 'records')
     json_object = json.loads(json_data)
     print(json_object)
-    '''
+    
     project_id = '999847639598'
     dataset_id = 'landing_zone'
     table_id = 'shopstar_vtex_sku_context_'
@@ -72,6 +72,6 @@ def run():
     job = client.load_table_from_json(json_object, table, job_config = job_config)
     print(job.result())
     delete_duplicate()
-    '''
+    
     
 run()
