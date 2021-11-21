@@ -57,7 +57,7 @@ def get_sk_context(id,reg):
     del Fjson["ProductFinalScore"]
     data_items = Fjson.items()
     data_list = list(data_items)
-    df = pd.DataFrame(data_list)
+    df1 = pd.DataFrame(data_list)
     '''
     df1 = pd.DataFrame({
         'Id': Fjson["Id"],
