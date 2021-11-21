@@ -12,90 +12,29 @@ class init:
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
 def get_sk_context(id,reg):
-    try:
-        url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitbyid/"+str(id)+""
-        querystring = {"sc":"1"}
-        response = requests.request("GET", url, headers=init.headers)
-        Fjson = json.loads(response.text)
-        del Fjson["Dimension"]
-        del Fjson["RealDimension"]
-        del Fjson["CategoriesFullPath"]
-        del Fjson["SkuSellers"]
-        del Fjson["SalesChannels"]
-        del Fjson["Images"]
-        del Fjson["ProductSpecifications"]
-        del Fjson["PositionsInClusters"]
-        del Fjson["ProductClusterNames"]
-        del Fjson["ProductCategAlternateIdsories"]
-        del Fjson["AlternateIdValues"]
-        del Fjson["ProductCategories"]
-        
-        
-        data_items = Fjson.items()
-        data_list = list(data_items)
-        init.df = pd.DataFrame(data_list)
-        
-        '''
-        for x in Fjson:
-            print(x)
-            
-            df1 = pd.DataFrame({
-                'Id': Fjson["Id"],
-                'ProductId': Fjson["ProductId"],
-                'NameComplete': Fjson["NameComplete"],
-                'ComplementName': Fjson["ComplementName"],
-                'ProductName': Fjson["ProductName"],
-                'ProductDescription': Fjson["ProductDescription"],
-                'ProductRefId': Fjson["ProductRefId"],
-                'TaxCode': Fjson["TaxCode"],
-                'SkuName': Fjson["SkuName"],
-                'IsActive': Fjson["IsActive"],
-                'IsTransported': Fjson["IsTransported"],
-                'IsInventoried': Fjson["IsInventoried"],
-                'IsGiftCardRecharge': Fjson["IsGiftCardRecharge"],
-                'ImageUrl': Fjson["ImageUrl"],
-                'DetailUrl': Fjson["DetailUrl"],
-                'CSCIdentification': Fjson["CSCIdentification"],
-                'BrandId': Fjson["BrandId"],
-                'BrandName': Fjson["BrandName"],
-                'IsBrandActive': Fjson["IsBrandActive"],
-                'Dimension': Fjson["Dimension"],
-                'ManufacturerCode': Fjson["ManufacturerCode"],
-                'IsKit': Fjson["IsKit"],
-                'KitItems': Fjson["KitItems"],
-                'Services': Fjson["Services"],
-                'Categories': Fjson["Categories"],
-                'CategoriesFullPath': Fjson["CategoriesFullPath"],
-                'Attachments': Fjson["Attachments"],
-                'Collections': Fjson["Collections"],
-                'SkuSellers': Fjson["SkuSellers"],
-                'SalesChannels': Fjson["SalesChannels"],
-                'Images': Fjson["Images"],
-                'Videos': Fjson["Videos"],
-                'SkuSpecifications': Fjson["SkuSpecifications"],
-                'ProductSpecifications': Fjson["ProductSpecifications"],
-                'ProductClusterHighlights': Fjson["ProductClusterHighlights"],
-                'ProductCategoryIds': Fjson["ProductCategoryIds"],
-                'CommercialConditionId': Fjson["CommercialConditionId"],
-                'RewardValue': Fjson["RewardValue"],
-                'AlternateIds': Fjson["AlternateIds"],
-                'AlternateIdValues': Fjson["AlternateIdValues"],
-                'EstimatedDateArrival': Fjson["EstimatedDateArrival"],
-                'MeasurementUnit': Fjson["MeasurementUnit"],
-                'UnitMultiplier': Fjson["UnitMultiplier"],
-                'InformationSource': Fjson["InformationSource"],
-                'ModalType': Fjson["ModalType"],
-                'KeyWords': Fjson["KeyWords"],
-                'ReleaseDate': Fjson["ReleaseDate"],
-                'ProductIsVisible': Fjson["ProductIsVisible"],
-                'ShowIfNotAvailable': Fjson["ShowIfNotAvailable"],
-                'IsProductActive': Fjson["IsProductActive"],
-                'ProductFinalScore': Fjson["ProductFinalScore"]}, index=[0])
-                '''
-            #init.df = init.df.append(df1)
-        print("Registro: "+str(reg))
-    except:
-        print("Vacio")
+    #try:
+    url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitbyid/"+str(id)+""
+    querystring = {"sc":"1"}
+    response = requests.request("GET", url, headers=init.headers)
+    Fjson = json.loads(response.text)
+    del Fjson["Dimension"]
+    del Fjson["RealDimension"]
+    del Fjson["CategoriesFullPath"]
+    del Fjson["SkuSellers"]
+    del Fjson["SalesChannels"]
+    del Fjson["Images"]
+    del Fjson["ProductSpecifications"]
+    del Fjson["PositionsInClusters"]
+    del Fjson["ProductClusterNames"]
+    del Fjson["ProductCategAlternateIdsories"]
+    del Fjson["AlternateIdValues"]
+    del Fjson["ProductCategories"]
+    data_items = Fjson.items()
+    data_list = list(data_items)
+    init.df = pd.DataFrame(data_list)
+    print("Registro: "+str(reg))
+    #except:
+    #   print("Vacio")
 
 
 def get_params():
