@@ -18,7 +18,7 @@ def get_sk_context(id,reg):
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
         for x in Fjson:
-            peint(x)
+            print(x)
             '''
             df1 = pd.DataFrame({
                 'Id': Fjson["Id"],
