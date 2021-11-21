@@ -17,6 +17,7 @@ def get_sk_context(id,reg):
         querystring = {"sc":"1"}
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
+        print(type(Fjson))
         df1 = pd.DataFrame({
             'Id': Fjson["Id"],
             'ProductId': Fjson["ProductId"],
@@ -100,8 +101,7 @@ def delete_duplicate():
 
 def run():
     get_params()
-    
-
+    '''
     df = init.df
     df.reset_index(drop=True, inplace=True)
     json_data = df.to_json(orient = 'records')
@@ -122,5 +122,6 @@ def run():
     job = client.load_table_from_json(json_object, table, job_config = job_config)
     print(job.result())
     delete_duplicate()
+    '''
     
 run()
