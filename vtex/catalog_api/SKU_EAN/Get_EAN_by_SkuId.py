@@ -12,18 +12,18 @@ class init:
     id_ean = None
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
-def get_sku(id,reg):
-    try:
-	    url = "https://mercury.vtexcommercestable.csom.br/api/catalog/pvt/stockkeepingunit/"+str(id)+"/ean"
-	    response = requests.request("GET", url, headers=init.headers)
-	    Fjson = json.loads(response.text)
-	    for x in Fjson:
-	    	init.id_ean = x
-	    	df1 = pd.DataFrame({'id': init.id_ean}, index=[0])
-	    	init.df = init.df.append(df1)
-	    print("Registro: "+str(reg))
-    except:
-    	print("Vacio")
+def get_ean(id,reg):
+    #try:
+    url = "https://mercury.vtexcommercestable.csom.br/api/catalog/pvt/stockkeepingunit/"+str(id)+"/ean"
+    response = requests.request("GET", url, headers=init.headers)
+    Fjson = json.loads(response.text)
+    for x in Fjson:
+    	init.id_ean = x
+    	df1 = pd.DataFrame({'id': init.id_ean}, index=[0])
+    	init.df = init.df.append(df1)
+    print("Registro: "+str(reg))
+    #except:
+    #	print("Vacio")
 
 def get_params():
     print("Cargando consulta")
@@ -34,7 +34,7 @@ def get_params():
     rows = query_job.result()
     registro = 1
     for row in rows:
-        get_sku(1,registro)
+        get_ean(1,registro)
         registro += 1
         break
 
