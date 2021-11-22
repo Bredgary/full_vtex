@@ -11,7 +11,7 @@ class init:
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitbyid/"+str(id)+""
     querystring = {"sc":"1"}
-    response = requests.request("GET", url, headers=init.headers, params=querystring)
+    response = requests.request("GET", url, headers=headers, params=querystring)
     Fjson = json.loads(response.text)
     ids: Fjson["Id"]
     ProductId: Fjson["ProductId"]
