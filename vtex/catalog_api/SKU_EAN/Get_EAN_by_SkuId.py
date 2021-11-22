@@ -18,8 +18,7 @@ def get_ean(id,reg):
     response = requests.request("GET", url, headers=init.headers)
     Fjson = json.loads(response.text)
     for x in Fjson:
-    	init.id_ean = x
-    	print(init.id_ean)
+    	print(x)
     print("Registro: "+str(reg))
     print(init.df)
     #except:
