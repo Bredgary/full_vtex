@@ -6,7 +6,7 @@ from datetime import datetime
 import requests
 from datetime import datetime, timezone
 
-class init:
+class init(id,reg):
     df = pd.DataFrame()
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitbyid/"+str(id)+""
@@ -56,6 +56,28 @@ def sku_context(id,reg):
             'NameComplete': init.NameComplete,
             'ProductName': init.ProductName,
             'ProductDescription': init.ProductDescription,
+            'SkuName': init.SkuName,
+            'IsActive': init.IsActive,
+            'IsTransported': init.IsTransported,
+            'IsInventoried': init.IsInventoried,
+            'IsGiftCardRecharge': init.IsGiftCardRecharge,
+            'ImageUrl': init.ImageUrl,
+            'DetailUrl': init.DetailUrl,
+            'CSCIdentification': init.CSCIdentification,
+            'BrandId': init.BrandId,
+            'dimension_cubicweight': init.dimension_cubicweight,
+            'dimension_height': init.dimension_height,
+            'dimension_length': init.dimension_length,
+            'dimension_weight': init.dimension_weight,
+            'RealDimension_realCubicWeight': init.RealDimension_realCubicWeight,
+            'RealDimension_realHeight': init.RealDimension_realHeight,
+            'RealDimension_realLength': init.RealDimension_realLength,
+            'RealDimension_realWeight': init.RealDimension_realWeight,
+            'RealDimension_realWidth': init.RealDimension_realWidth,
+            'Attachments_Id': init.Attachments_Id,
+            'Attachments_Name': init.Attachments_Name,
+            'Attachments_IsActive': init.Attachments_IsActive,
+            'Attachments_IsRequired': init.Attachments_IsRequired,
             'BrandName': init.BrandName}, index=[0])
         init.df = init.df.append(df1)
         print("Registro: "+str(reg))
@@ -72,7 +94,7 @@ def get_params():
     rows = query_job.result()
     registro = 1
     for row in rows:
-        sku_context(268978,registro)
+        init(268978,registro)
         registro += 1
         break
     
