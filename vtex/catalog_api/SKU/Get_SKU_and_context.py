@@ -6,7 +6,7 @@ from datetime import datetime
 import requests
 from datetime import datetime, timezone
 
-class init(id,reg):
+class init(id):
     df = pd.DataFrame()
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitbyid/"+str(id)+""
@@ -94,7 +94,7 @@ def get_params():
     rows = query_job.result()
     registro = 1
     for row in rows:
-        init(268978,registro)
+        init(268978)
         registro += 1
         break
     
