@@ -171,7 +171,7 @@ def get_params():
     rows = query_job.result()
     registro = 1
     for row in rows:
-        sku_context(row.id,registro)
+        sku_context(268978,registro)
         registro += 1
     
 def delete_duplicate():
