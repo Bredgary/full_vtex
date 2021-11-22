@@ -48,7 +48,7 @@ def get_params():
 def delete_duplicate():
     client = bigquery.Client()
     QUERY = (
-        'CREATE OR REPLACE TABLE `shopstar-datalake.landing_zone.shopstar_vtex_sku_specification` AS SELECT DISTINCT * FROM `shopstar-datalake.landing_zone.shopstar_vtex_sku_specification`')
+        'CREATE OR REPLACE TABLE `shopstar-datalake.landing_zone.shopstar_vtex_category_specification` AS SELECT DISTINCT * FROM `shopstar-datalake.landing_zone.shopstar_vtex_category_specification`')
     query_job = client.query(QUERY)  
     rows = query_job.result()
     print(rows)
@@ -62,7 +62,7 @@ def run():
     
     project_id = '999847639598'
     dataset_id = 'landing_zone'
-    table_id = 'shopstar_vtex_sku_specification'
+    table_id = 'shopstar_vtex_category_specification'
 
     client  = bigquery.Client(project = project_id)
     dataset  = client.dataset(dataset_id)
