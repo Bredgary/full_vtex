@@ -16,7 +16,7 @@ def sku_context(id,reg):
     querystring = {"sc":"1"}
     response = requests.request("GET", url, headers=init.headers, params=querystring)
     Fjson = json.loads(response.text)
-    ids: Fjson["Id"]
+    ids = Fjson["Id"]
     ProductId: Fjson["ProductId"]
     NameComplete: Fjson["NameComplete"]
     ProductName: Fjson["ProductName"]
