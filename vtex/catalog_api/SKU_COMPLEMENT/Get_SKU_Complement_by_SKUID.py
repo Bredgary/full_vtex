@@ -36,8 +36,10 @@ def get_params():
     rows = query_job.result()
     registro = 1
     for row in rows:
-        get_sku(row.id,registro)
+        #get_sku(row.id,registro)
+        get_sku(1261,registro)
         registro += 1
+        break
 
 
 def delete_duplicate():
