@@ -19,6 +19,7 @@ def get_ean(id,reg):
     Fjson = json.loads(response.text)
     print(Fjson)
     print("Registro: "+str(reg))
+
     #print(init.df)
     #except:
     #	print("Vacio")
