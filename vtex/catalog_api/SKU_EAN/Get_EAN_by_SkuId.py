@@ -19,7 +19,8 @@ def get_ean(id,reg):
     FJson = json.loads(response.text)
     for x in FJson:
     	init.id_ean = x
-    	print(x)
+    	df1 = pd.DataFrame({'complementTypeId': x["ComplementTypeId"]}, index=[0])
+    	init.df = init.df.append(df1)
 
     #print(init.df)
     #except:
@@ -54,9 +55,10 @@ def delete_duplicate():
 def run():
 	#try:
 		get_params()
-		'''
+		
 		df = init.df
 		print(df)
+		'''
 		df.reset_index(drop=True, inplace=True)
 		json_data = df.to_json(orient = 'records')
 		json_object = json.loads(json_data)
