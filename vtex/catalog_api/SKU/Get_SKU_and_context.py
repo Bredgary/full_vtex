@@ -19,7 +19,6 @@ def sku_context(id,reg):
         dimension = Fjson["Dimension"]
         RealDimension = Fjson["RealDimension"]
         Attachments = Fjson["Attachments"]
-        Fields = Attachments[0]
         df1 = pd.DataFrame({
             'Id': Fjson["Id"],
             'ProductId': Fjson["ProductId"],
@@ -48,9 +47,6 @@ def sku_context(id,reg):
             'Attachments_Name': Attachments["Name"],
             'Attachments_IsActive': Attachments["IsActive"],
             'Attachments_IsRequired': Attachments["IsRequired"],
-            'Fields_FieldName': Fields[0],
-            'Fields_MaxCaracters': Fields[1],
-            'Fields_DomainValues': Fields[2],
             'BrandName': Fjson["BrandName"]}, index=[0])
         init.df = init.df.append(df1)
         print("Registro: "+str(reg))
