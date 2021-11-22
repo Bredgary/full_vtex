@@ -45,12 +45,16 @@ def get_params():
         registro += 1
     
 def delete_duplicate():
-    client = bigquery.Client()
-    QUERY = (
-        'CREATE OR REPLACE TABLE `shopstar-datalake.landing_zone.shopstar_vtex_category_specification` AS SELECT DISTINCT * FROM `shopstar-datalake.landing_zone.shopstar_vtex_category_specification`')
-    query_job = client.query(QUERY)  
-    rows = query_job.result()
-    print(rows)
+	try:
+		print("Borrando duplicados")
+		client = bigquery.Client()
+		QUERY = (
+		    'CREATE OR REPLACE TABLE `shopstar-datalake.landing_zone.shopstar_vtex_category_specification` AS SELECT DISTINCT * FROM `shopstar-datalake.landing_zone.shopstar_vtex_category_specification`')
+		query_job = client.query(QUERY)  
+		rows = query_job.result()
+		print(rows)
+	except:
+		print("Query no ejecutada")
 
 def run():
 	try:
