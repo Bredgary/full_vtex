@@ -66,6 +66,37 @@ def sku_context(id,reg):
         Attachments_Name = None
         Attachments_IsActive = None
         Attachments_IsRequired = None
+    SkuSellers = Fjson["SkuSellers"]
+    if SkuSellers:
+        SkuSellers_SellerId = SkuSellers["SellerId"]
+        SkuSellers_StockKeepingUnitId = SkuSellers["StockKeepingUnitId"]
+        SkuSellers_SellerStockKeepingUnitId = SkuSellers["SellerStockKeepingUnitId"]
+        SkuSellers_IsActive = SkuSellers["IsActive"]
+        SkuSellers_FreightCommissionPercentage = SkuSellers["FreightCommissionPercentage"]
+        SkuSellers_ProductCommissionPercentage = SkuSellers["ProductCommissionPercentage"]
+    else:
+        SkuSellers_SellerId = None
+        SkuSellers_StockKeepingUnitId = None
+        SkuSellers_SellerStockKeepingUnitId = None
+        SkuSellers_IsActive = None
+        SkuSellers_FreightCommissionPercentage = None
+        SkuSellers_ProductCommissionPercentage = None
+    Images = Fjson["Images"]
+    if Images:
+        Images_ImageUrl = Images["ImageUrl"]
+        Images_ImageName = Images["ImageName"]
+        Images_FileId = Images["FileId"]
+    else:
+        Images_ImageUrl = None
+        Images_ImageName = None
+        Images_FileId = None
+    AlternateIds = Fjson["AlternateIds"]
+    if AlternateIds:
+        AlternateIds_Ean = AlternateIds["Ean"]
+        AlternateIds_RefId = AlternateIds["RefId"]
+    else:
+        AlternateIds_Ean = None
+        AlternateIds_RefId = None
     #try:
     df1 = pd.DataFrame({
         'Id': ids,
@@ -95,6 +126,17 @@ def sku_context(id,reg):
         'Attachments_Name': Attachments_Name,
         'Attachments_IsActive': Attachments_IsActive,
         'Attachments_IsRequired': Attachments_IsRequired,
+        'SkuSellers_SellerId' : SkuSellers_SellerId,
+        'SkuSellers_StockKeepingUnitId' : SkuSellers_StockKeepingUnitId,
+        'SkuSellers_SellerStockKeepingUnitId' : SkuSellers_SellerStockKeepingUnitId,
+        'SkuSellers_IsActive' : SkuSellers_IsActive,
+        'SkuSellers_FreightCommissionPercentage' : SkuSellers_FreightCommissionPercentage,
+        'SkuSellers_ProductCommissionPercentage' : SkuSellers_ProductCommissionPercentage,
+        'Images_ImageUrl' : Images_ImageUrl,
+        'Images_ImageName' : Images_ImageName,
+        'Images_FileId' : Images_FileId,
+        'AlternateIds_Ean' : AlternateIds_Ean,
+        'AlternateIds_RefId' : AlternateIds_RefId,
         'BrandName': BrandName}, index=[0])
     init.df = init.df.append(df1)
     print("Registro: "+str(reg))
