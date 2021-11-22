@@ -13,8 +13,8 @@ class init:
         
 def sku_context(id,reg):
     try:
-        url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitbyid/"+str(id)+""
-        querystring = {"sc":"1"}
+    	url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/stockkeepingunitkit"
+    	querystring = {"skuId":""+str(id)+""}
         response = requests.request("GET", url, headers=init.headers, params=querystring)
         Fjson = json.loads(response.text)
         df1 = pd.DataFrame({
