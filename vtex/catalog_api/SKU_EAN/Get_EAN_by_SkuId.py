@@ -34,7 +34,7 @@ def get_params():
     rows = query_job.result()
     registro = 1
     for row in rows:
-        get_ean(1,registro)
+        get_ean(row.id,registro)
         registro += 1
 
 
