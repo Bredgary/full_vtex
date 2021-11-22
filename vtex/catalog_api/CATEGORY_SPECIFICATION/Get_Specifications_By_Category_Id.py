@@ -12,7 +12,7 @@ class init:
     df = pd.DataFrame()
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
-def get_product(id,reg):
+def category_specification(id,reg):
     try:
         url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pub/specification/field/listByCategoryId/"+str(id)+""
         response = requests.request("GET", url, headers=init.headers)
@@ -40,9 +40,8 @@ def get_params():
     rows = query_job.result()
     registro = 1
     for row in rows:
-        get_product(row.id,registro)
+        category_specification(row.id,registro)
         registro += 1
-        break
     
 def delete_duplicate():
     client = bigquery.Client()
