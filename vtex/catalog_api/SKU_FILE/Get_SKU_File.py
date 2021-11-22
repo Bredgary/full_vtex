@@ -11,7 +11,7 @@ class init:
     df = pd.DataFrame()
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
-def get_sku_Attachment(id,reg):
+def get_sku_file(id,reg):
     try:
 	    url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/stockkeepingunit/"+str(id)+"/file"
 	    response = requests.request("GET", url, headers=init.headers)
@@ -38,9 +38,8 @@ def get_params():
     rows = query_job.result()
     registro = 1
     for row in rows:
-        get_sku_Attachment(row.id,registro)
+        get_sku_file(row.id,registro)
         registro += 1
-        break
 
 
 def delete_duplicate():
