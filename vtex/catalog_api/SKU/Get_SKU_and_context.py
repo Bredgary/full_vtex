@@ -16,6 +16,7 @@ def sku_context(id,reg):
         querystring = {"sc":"1"}
         response = requests.request("GET", url, headers=headers, params=querystring)
         Fjson = json.loads(response.text)
+        print(Fjson)
         dimension = Fjson["Dimension"]
         if Fjson:
             df1 = pd.DataFrame({
@@ -57,7 +58,7 @@ def get_params():
     for row in rows:
         sku_context(row.id,registro)
         registro += 1
-        if registro == 8000:
+        if registro == 80000:
             break
     
 def delete_duplicate():
