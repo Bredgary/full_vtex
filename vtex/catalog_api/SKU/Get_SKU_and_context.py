@@ -154,7 +154,7 @@ def sku_context(id,reg):
         'UnitMultiplier' : Fjson["UnitMultiplier"],
         'InformationSource' : Fjson["InformationSource"],
         'ModalType' : Fjson["ModalType"],
-        'BrandName': BrandName}, index=[0])
+        'BrandName': Fjson["BrandName"]}, index=[0])
     init.df = init.df.append(df1)
     print("Registro: "+str(reg))
     #except:
