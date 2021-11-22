@@ -22,6 +22,7 @@ def get_ean(id,reg):
     	df1 = pd.DataFrame({'id': init.id_ean}, index=[0])
     	init.df = init.df.append(df1)
     print("Registro: "+str(reg))
+    print(init.df)
     #except:
     #	print("Vacio")
 
