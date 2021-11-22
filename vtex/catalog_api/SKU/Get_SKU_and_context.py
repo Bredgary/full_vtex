@@ -33,10 +33,10 @@ def sku_context(id,reg):
     BrandName = Fjson["BrandName"]
     Dimension = Fjson["Dimension"]
     if Dimension:
-        dimension_cubicweight = dimension["cubicweight"]
-        dimension_height = dimension["height"]
-        dimension_length = dimension["length"]
-        dimension_weight = dimension["weight"]
+        dimension_cubicweight = Dimension["cubicweight"]
+        dimension_height = Dimension["height"]
+        dimension_length = Dimension["length"]
+        dimension_weight = Dimension["weight"]
     else:
         dimension_cubicweight = None
         dimension_height = None
