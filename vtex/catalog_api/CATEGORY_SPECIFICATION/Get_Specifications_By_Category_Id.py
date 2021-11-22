@@ -40,9 +40,8 @@ def get_params():
     rows = query_job.result()
     registro = 1
     for row in rows:
-        get_product(768,registro)
+        get_product(row.id,registro)
         registro += 1
-        break
     
 def delete_duplicate():
     client = bigquery.Client()
