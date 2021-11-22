@@ -43,7 +43,7 @@ def sku_context(id,reg):
             'RealDimension_realLength': RealDimension["realLength"],
             'RealDimension_realWeight': RealDimension["realWeight"],
             'RealDimension_realWidth': RealDimension["realWidth"],
-            'Attachments_Id': Attachments["Id"],
+            'Attachments_Id': Attachments[0],
             'Attachments_Name': Attachments["Name"],
             'Attachments_IsActive': Attachments["IsActive"],
             'Attachments_IsRequired': Attachments["IsRequired"],
