@@ -19,8 +19,7 @@ def get_ean(id,reg):
     Fjson = json.loads(response.text)
     for x in Fjson:
     	init.id_ean = x
-    	df1 = pd.DataFrame({'id': init.id_ean}, index=[0])
-    	init.df = init.df.append(df1)
+    	print(init.id_ean)
     print("Registro: "+str(reg))
     print(init.df)
     #except:
@@ -55,13 +54,13 @@ def delete_duplicate():
 def run():
 	#try:
 		get_params()
+		'''
 		df = init.df
 		print(df)
 		df.reset_index(drop=True, inplace=True)
 		json_data = df.to_json(orient = 'records')
 		json_object = json.loads(json_data)
-		print(json_object)
-		'''
+		
 		project_id = '999847639598'
 		dataset_id = 'landing_zone'
 		table_id = 'shopstar_vtex_sku_ean_id'
