@@ -63,12 +63,16 @@ def format_schema(schema):
     return formatted_schema
 
 def delete_duplicate():
-	client = bigquery.Client()
-	QUERY = (
-		'CREATE OR REPLACE TABLE `shopstar-datalake.landing_zone.shopstar_vtex_product_ID` AS SELECT DISTINCT * FROM `shopstar-datalake.landing_zone.shopstar_vtex_product_ID`')
-	query_job = client.query(QUERY)  
-	rows = query_job.result()
-	print(rows)
+	try:
+		print("Borrando duplicados")
+		client = bigquery.Client()
+		QUERY = (
+			'CREATE OR REPLACE TABLE `shopstar-datalake.landing_zone.shopstar_vtex_product_ID` AS SELECT DISTINCT * FROM `shopstar-datalake.landing_zone.shopstar_vtex_product_ID`')
+		query_job = client.query(QUERY)
+		rows = query_job.result()
+		print(rows)
+	except:
+		print("Vacio")
 
 
 def run():
