@@ -17,7 +17,9 @@ def get_ean(id,reg):
     url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/stockkeepingunit/"+str(id)+"/ean"
     response = requests.request("GET", url, headers=init.headers)
     FJson = json.loads(response.text)
-    print(FJson)
+    for x in FJson:
+    	init.id_ean = x
+    	print(x)
 
     #print(init.df)
     #except:
