@@ -159,7 +159,7 @@ def sku_context(id,reg):
         init.df = init.df.append(df1)
         print("Registro: "+str(reg))
     except:
-        print("Vacio")
+        print("Registro: "+str(reg))
 
 
 def get_params():
@@ -171,9 +171,8 @@ def get_params():
     rows = query_job.result()
     registro = 1
     for row in rows:
-        sku_context(268978,registro)
+        sku_context(row.id,registro)
         registro += 1
-        break
     
 def delete_duplicate():
     try:
