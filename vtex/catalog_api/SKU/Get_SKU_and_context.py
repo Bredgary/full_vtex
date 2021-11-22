@@ -16,23 +16,30 @@ def sku_context(id,reg):
         querystring = {"sc":"1"}
         response = requests.request("GET", url, headers=headers, params=querystring)
         Fjson = json.loads(response.text)
+        dimension = Fjson["Dimension"]
         if Fjson:
             df1 = pd.DataFrame({
-                'Id': x["Id"],
-                'ProductId': x["ProductId"],
-                'NameComplete': x["NameComplete"],
-                'ProductName': x["ProductName"],
-                'ProductDescription': x["ProductDescription"],
-                'SkuName': x["SkuName"],
-                'IsActive': x["IsActive"],
-                'IsTransported': x["IsTransported"],
-                'IsInventoried': x["IsInventoried"],
-                'IsGiftCardRecharge': x["IsGiftCardRecharge"],
-                'ImageUrl': x["ImageUrl"],
-                'DetailUrl': x["DetailUrl"],
-                'CSCIdentification': x["CSCIdentification"],
-                'BrandId': x["BrandId"],
+                'Id': Fjson["Id"],
+                'ProductId': Fjson["ProductId"],
+                'NameComplete': Fjson["NameComplete"],
+                'ProductName': Fjson["ProductName"],
+                'ProductDescription': Fjson["ProductDescription"],
+                'SkuName': Fjson["SkuName"],
+                'IsActive': Fjson["IsActive"],
+                'IsTransported': Fjson["IsTransported"],
+                'IsInventoried': Fjson["IsInventoried"],
+                'IsGiftCardRecharge': Fjson["IsGiftCardRecharge"],
+                'ImageUrl': Fjson["ImageUrl"],
+                'DetailUrl': Fjson["DetailUrl"],
+                'CSCIdentification': Fjson["CSCIdentification"],
+                'BrandId': Fjson["BrandId"],
+                'BrandId': dimension["cubicweight"],
+                'BrandId': dimension["height"],
+                'BrandId': dimension["length"],
+                'BrandId': dimension["weight"],
+                'BrandId': dimension["width"],
                 'BrandName': x["BrandName"]}, index=[0])
+                
             init.df = init.df.append(df1)
         print("Registro: "+str(reg))
     except:
@@ -50,7 +57,8 @@ def get_params():
     for row in rows:
         sku_context(row.id,registro)
         registro += 1
-        break
+        if registro == 100:
+            break
     
 def delete_duplicate():
     try:
