@@ -46,10 +46,10 @@ def sku_context(id,reg):
         RealDimension_realWidth = RealDimension["realWidth"]
     Attachments = Fjson["Attachments"]
     if Attachments is not "[]":
-        Attachments_Id = Attachments["Id"]
-        Attachments_Name = Attachments["Name"]
-        Attachments_IsActive = Attachments["IsActive"]
-        Attachments_IsRequired = Attachments["IsRequired"]
+        Attachments_Id = Attachments[0]
+        Attachments_Name = Attachments[1]
+        Attachments_IsActive = Attachments[2]
+        Attachments_IsRequired = Attachments[3]
     #try:
     df1 = pd.DataFrame({
         'Id': ids,
