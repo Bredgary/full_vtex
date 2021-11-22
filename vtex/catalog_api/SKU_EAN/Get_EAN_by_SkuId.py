@@ -19,7 +19,7 @@ def get_sku(id,reg):
 	    Fjson = json.loads(response.text)
 	    for x in Fjson:
 	    	init.id_ean = x
-	    	df1 = pd.DataFrame({'id': id_ean}, index=[0])
+	    	df1 = pd.DataFrame({'id': init.id_ean}, index=[0])
 	    	init.df = init.df.append(df1)
 	    print("Registro: "+str(reg))
     except:
