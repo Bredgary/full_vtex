@@ -67,20 +67,21 @@ def sku_context(id,reg):
         Attachments_IsActive = None
         Attachments_IsRequired = None
     SkuSellers = Fjson["SkuSellers"]
-    if SkuSellers:
-        SkuSellers_SellerId = SkuSellers[0]
-        SkuSellers_StockKeepingUnitId = SkuSellers[1]
-        SkuSellers_SellerStockKeepingUnitId = SkuSellers[2]
-        SkuSellers_IsActive = SkuSellers[3]
-        SkuSellers_FreightCommissionPercentage = SkuSellers[4]
-        SkuSellers_ProductCommissionPercentage = SkuSellers[5]
-    else:
-        SkuSellers_SellerId = None
-        SkuSellers_StockKeepingUnitId = None
-        SkuSellers_SellerStockKeepingUnitId = None
-        SkuSellers_IsActive = None
-        SkuSellers_FreightCommissionPercentage = None
-        SkuSellers_ProductCommissionPercentage = None
+    for x in SkuSellers:
+        if SkuSellers:
+            SkuSellers_SellerId = x[0]
+            SkuSellers_StockKeepingUnitId = x[1]
+            SkuSellers_SellerStockKeepingUnitId = x[2]
+            SkuSellers_IsActive = x[3]
+            SkuSellers_FreightCommissionPercentage = x[4]
+            SkuSellers_ProductCommissionPercentage = x[5]
+        else:
+            SkuSellers_SellerId = None
+            SkuSellers_StockKeepingUnitId = None
+            SkuSellers_SellerStockKeepingUnitId = None
+            SkuSellers_IsActive = None
+            SkuSellers_FreightCommissionPercentage = None
+            SkuSellers_ProductCommissionPercentage = None
     Images = Fjson["Images"]
     if Images:
         Images_ImageUrl = Images["ImageUrl"]
