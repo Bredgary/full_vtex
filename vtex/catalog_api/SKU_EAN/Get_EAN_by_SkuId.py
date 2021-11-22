@@ -14,7 +14,7 @@ class init:
 
 def get_ean(id,reg):
     #try:
-    url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/stockkeepingunit/1/ean"
+    url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/stockkeepingunit/"+str(id)+"/ean"
     response = requests.request("GET", url, headers=init.headers)
     print(response.text)
 
