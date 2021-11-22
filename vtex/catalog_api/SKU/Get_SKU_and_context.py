@@ -11,7 +11,7 @@ class init:
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
 def sku_context(id,reg):
-    try:
+    #try:
         url = "https://mercuy.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitbyid/"+str(id)+""
         querystring = {"sc":"1"}
         response = requests.request("GET", url, headers=headers, params=querystring)
@@ -33,17 +33,17 @@ def sku_context(id,reg):
                 'DetailUrl': Fjson["DetailUrl"],
                 'CSCIdentification': Fjson["CSCIdentification"],
                 'BrandId': Fjson["BrandId"],
-                'BrandId': dimension["cubicweight"],
-                'BrandId': dimension["height"],
-                'BrandId': dimension["length"],
-                'BrandId': dimension["weight"],
-                'BrandId': dimension["width"],
+                'cubicweight': dimension["cubicweight"],
+                'height': dimension["height"],
+                'length': dimension["length"],
+                'weight': dimension["weight"],
+                'width': dimension["width"],
                 'BrandName': x["BrandName"]}, index=[0])
                 
             init.df = init.df.append(df1)
         print("Registro: "+str(reg))
-    except:
-        print("Vacio")
+    #except:
+    #    print("Vacio")
 
 
 def get_params():
@@ -57,7 +57,7 @@ def get_params():
     for row in rows:
         sku_context(row.id,registro)
         registro += 1
-        if registro == 100:
+        if registro == 500:
             break
     
 def delete_duplicate():
