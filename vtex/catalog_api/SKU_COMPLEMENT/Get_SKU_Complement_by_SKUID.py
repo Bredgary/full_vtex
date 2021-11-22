@@ -36,12 +36,9 @@ def get_params():
     rows = query_job.result()
     registro = 1
     for row in rows:
-        get_sku(row.id,registro)
-        registro += 100
-        break
-    
-
-
+        get_sku(1261,registro)
+        registro += 1
+        
 def delete_duplicate():
     client = bigquery.Client()
     QUERY = (
