@@ -68,7 +68,7 @@ def sku_context(id,reg):
         Attachments_IsRequired = None
     SkuSellers = Fjson["SkuSellers"]
     if SkuSellers:
-        SkuSellers_SellerId = SkuSellers["SellerId"]
+        SkuSellers_SellerId = SkuSellers[0]
         SkuSellers_StockKeepingUnitId = SkuSellers["StockKeepingUnitId"]
         SkuSellers_SellerStockKeepingUnitId = SkuSellers["SellerStockKeepingUnitId"]
         SkuSellers_IsActive = SkuSellers["IsActive"]
