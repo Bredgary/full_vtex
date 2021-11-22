@@ -12,11 +12,10 @@ class init:
 
 def sku_context(id,reg):
     #try:
-        url = "https://mercuy.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitbyid/"+str(id)+""
+        url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitbyid/"+str(id)+""
         querystring = {"sc":"1"}
         response = requests.request("GET", url, headers=headers, params=querystring)
         Fjson = json.loads(response.text)
-        print(Fjson)
         dimension = Fjson["Dimension"]
         if Fjson:
             df1 = pd.DataFrame({
@@ -58,7 +57,7 @@ def get_params():
     for row in rows:
         sku_context(row.id,registro)
         registro += 1
-        if registro == 80000:
+        if registro == 800:
             break
     
 def delete_duplicate():
