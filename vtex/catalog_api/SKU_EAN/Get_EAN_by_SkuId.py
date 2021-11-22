@@ -13,18 +13,16 @@ class init:
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
 def get_ean(id,reg):
-    #try:
-    url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/stockkeepingunit/"+str(id)+"/ean"
-    response = requests.request("GET", url, headers=init.headers)
-    FJson = json.loads(response.text)
-    for x in FJson:
-    	init.id_ean = x
-    	df1 = pd.DataFrame({'id': init.id_ean}, index=[0])
-    	init.df = init.df.append(df1)
-
-    #print(init.df)
-    #except:
-    #	print("Vacio")
+    try:
+	    url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/stockkeepingunit/"+str(id)+"/ean"
+	    response = requests.request("GET", url, headers=init.headers)
+	    FJson = json.loads(response.text)
+	    for x in FJson:
+	    	init.id_ean = x
+	    	df1 = pd.DataFrame({'id': init.id_ean}, index=[0])
+	    	init.df = init.df.append(df1)
+    except:
+    	print("Vacio")
 
 def get_params():
     print("Cargando consulta")
@@ -37,7 +35,6 @@ def get_params():
     for row in rows:
         get_ean(1,registro)
         registro += 1
-        break
 
 
 def delete_duplicate():
@@ -53,12 +50,12 @@ def delete_duplicate():
 		print("Consulta no ejecutada")
 
 def run():
-	#try:
+	try:
 		get_params()
 		
 		df = init.df
 		print(df)
-		'''
+		
 		df.reset_index(drop=True, inplace=True)
 		json_data = df.to_json(orient = 'records')
 		json_object = json.loads(json_data)
@@ -77,8 +74,8 @@ def run():
 		job = client.load_table_from_json(json_object, table, job_config = job_config)
 		print(job.result())
 		delete_duplicate()
-		'''
-	#except:
-	#	print("No se puede ingestar")
+		
+	except:
+		print("No se puede ingestar")
     
 run()
