@@ -70,7 +70,7 @@ def delete_duplicate():
         print("Query no ejecutada")
 
 def run():
-    try:
+    #try:
         get_params()
         df = init.df
         df.reset_index(drop=True, inplace=True)
@@ -91,7 +91,7 @@ def run():
         job = client.load_table_from_json(json_object, table, job_config = job_config)
         print(job.result())
         delete_duplicate()
-    except:
-        print("vacio")
+    #except:
+    #    print("vacio")
     
 run()
