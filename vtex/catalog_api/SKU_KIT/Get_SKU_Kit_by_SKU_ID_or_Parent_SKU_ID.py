@@ -15,7 +15,7 @@ def sku_context(id,reg):
     try:
     	url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/stockkeepingunitkit"
     	querystring = {"skuId":""+str(id)+""}
-        response = requests.request("GET", url, headers=init.headers, params=querystring)
+    	response = requests.request("GET", url, headers=init.headers, params=querystring)
         Fjson = json.loads(response.text)
         df1 = pd.DataFrame({
             'id' : Fjson["Id"],
