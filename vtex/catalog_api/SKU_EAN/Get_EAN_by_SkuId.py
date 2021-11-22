@@ -55,10 +55,11 @@ def run():
 	try:
 		get_params()
 		df = init.df
+		print(df)
 		df.reset_index(drop=True, inplace=True)
 		json_data = df.to_json(orient = 'records')
 		json_object = json.loads(json_data)
-		
+		'''
 		project_id = '999847639598'
 		dataset_id = 'landing_zone'
 		table_id = 'shopstar_vtex_sku_ean_id'
@@ -73,6 +74,7 @@ def run():
 		job = client.load_table_from_json(json_object, table, job_config = job_config)
 		print(job.result())
 		delete_duplicate()
+		'''
 	except:
 		print("No se puede ingestar")
     
