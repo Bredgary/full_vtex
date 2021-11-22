@@ -37,7 +37,7 @@ def sku_context(id,reg):
             'length': dimension["length"],
             'weight': dimension["weight"],
             'width': dimension["width"],
-            'BrandName': x["BrandName"]}, index=[0])
+            'BrandName': Fjson["BrandName"]}, index=[0])
         init.df = init.df.append(df1)
         print("Registro: "+str(reg))
     #except:
