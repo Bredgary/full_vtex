@@ -48,9 +48,9 @@ def sku_context(id,reg):
             'Attachments_Name': Attachments["Name"],
             'Attachments_IsActive': Attachments["IsActive"],
             'Attachments_IsRequired': Attachments["IsRequired"],
-            'Fields_FieldName': Fields["FieldName"],
-            'Fields_MaxCaracters': Fields["MaxCaracters"],
-            'Fields_DomainValues': Fields["DomainValues"],
+            'Fields_FieldName': Fields[0],
+            'Fields_MaxCaracters': Fields[1],
+            'Fields_DomainValues': Fields[2],
             'BrandName': Fjson["BrandName"]}, index=[0])
         init.df = init.df.append(df1)
         print("Registro: "+str(reg))
