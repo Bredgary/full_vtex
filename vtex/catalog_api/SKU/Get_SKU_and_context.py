@@ -69,11 +69,11 @@ def sku_context(id,reg):
     SkuSellers = Fjson["SkuSellers"]
     if SkuSellers:
         SkuSellers_SellerId = SkuSellers[0]
-        SkuSellers_StockKeepingUnitId = SkuSellers["StockKeepingUnitId"]
-        SkuSellers_SellerStockKeepingUnitId = SkuSellers["SellerStockKeepingUnitId"]
-        SkuSellers_IsActive = SkuSellers["IsActive"]
-        SkuSellers_FreightCommissionPercentage = SkuSellers["FreightCommissionPercentage"]
-        SkuSellers_ProductCommissionPercentage = SkuSellers["ProductCommissionPercentage"]
+        SkuSellers_StockKeepingUnitId = SkuSellers[1]
+        SkuSellers_SellerStockKeepingUnitId = SkuSellers[2]
+        SkuSellers_IsActive = SkuSellers[3]
+        SkuSellers_FreightCommissionPercentage = SkuSellers[4]
+        SkuSellers_ProductCommissionPercentage = SkuSellers[5]
     else:
         SkuSellers_SellerId = None
         SkuSellers_StockKeepingUnitId = None
