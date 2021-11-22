@@ -6,9 +6,12 @@ from datetime import datetime
 import requests
 from datetime import datetime, timezone
 
-class init(id):
+class init(id,reg):
     df = pd.DataFrame()
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
+    
+        
+def sku_context(id,reg):
     url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitbyid/"+str(id)+""
     querystring = {"sc":"1"}
     response = requests.request("GET", url, headers=headers, params=querystring)
@@ -47,40 +50,38 @@ class init(id):
         Attachments_Name: Attachments["Name"]
         Attachments_IsActive: Attachments["IsActive"]
         Attachments_IsRequired: Attachments["IsRequired"]
-        
-def sku_context(id,reg):
     #try:
-        df1 = pd.DataFrame({
-            'Id': init.ids,
-            'ProductId': init.ProductId,
-            'NameComplete': init.NameComplete,
-            'ProductName': init.ProductName,
-            'ProductDescription': init.ProductDescription,
-            'SkuName': init.SkuName,
-            'IsActive': init.IsActive,
-            'IsTransported': init.IsTransported,
-            'IsInventoried': init.IsInventoried,
-            'IsGiftCardRecharge': init.IsGiftCardRecharge,
-            'ImageUrl': init.ImageUrl,
-            'DetailUrl': init.DetailUrl,
-            'CSCIdentification': init.CSCIdentification,
-            'BrandId': init.BrandId,
-            'dimension_cubicweight': init.dimension_cubicweight,
-            'dimension_height': init.dimension_height,
-            'dimension_length': init.dimension_length,
-            'dimension_weight': init.dimension_weight,
-            'RealDimension_realCubicWeight': init.RealDimension_realCubicWeight,
-            'RealDimension_realHeight': init.RealDimension_realHeight,
-            'RealDimension_realLength': init.RealDimension_realLength,
-            'RealDimension_realWeight': init.RealDimension_realWeight,
-            'RealDimension_realWidth': init.RealDimension_realWidth,
-            'Attachments_Id': init.Attachments_Id,
-            'Attachments_Name': init.Attachments_Name,
-            'Attachments_IsActive': init.Attachments_IsActive,
-            'Attachments_IsRequired': init.Attachments_IsRequired,
-            'BrandName': init.BrandName}, index=[0])
-        init.df = init.df.append(df1)
-        print("Registro: "+str(reg))
+    df1 = pd.DataFrame({
+        'Id': ids,
+        'ProductId': ProductId,
+        'NameComplete': NameComplete,
+        'ProductName': ProductName,
+        'ProductDescription': ProductDescription,
+        'SkuName': SkuName,
+        'IsActive': IsActive,
+        'IsTransported': IsTransported,
+        'IsInventoried': IsInventoried,
+        'IsGiftCardRecharge': IsGiftCardRecharge,
+        'ImageUrl': ImageUrl,
+        'DetailUrl': DetailUrl,
+        'CSCIdentification': CSCIdentification,
+        'BrandId': BrandId,
+        'dimension_cubicweight': dimension_cubicweight,
+        'dimension_height': dimension_height,
+        'dimension_length': dimension_length,
+        'dimension_weight': dimension_weight,
+        'RealDimension_realCubicWeight': RealDimension_realCubicWeight,
+        'RealDimension_realHeight': RealDimension_realHeight,
+        'RealDimension_realLength': RealDimension_realLength,
+        'RealDimension_realWeight': RealDimension_realWeight,
+        'RealDimension_realWidth': RealDimension_realWidth,
+        'Attachments_Id': Attachments_Id,
+        'Attachments_Name': Attachments_Name,
+        'Attachments_IsActive': Attachments_IsActive,
+        'Attachments_IsRequired': Attachments_IsRequired,
+        'BrandName': BrandName}, index=[0])
+    init.df = init.df.append(df1)
+    print("Registro: "+str(reg))
     #except:
     #    print("Vacio")
 
@@ -94,7 +95,7 @@ def get_params():
     rows = query_job.result()
     registro = 1
     for row in rows:
-        init(268978)
+        sku_context(268978,registro)
         registro += 1
         break
     
