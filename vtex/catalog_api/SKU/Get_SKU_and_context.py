@@ -17,30 +17,28 @@ def sku_context(id,reg):
         response = requests.request("GET", url, headers=headers, params=querystring)
         Fjson = json.loads(response.text)
         dimension = Fjson["Dimension"]
-        if Fjson:
-            df1 = pd.DataFrame({
-                'Id': Fjson["Id"],
-                'ProductId': Fjson["ProductId"],
-                'NameComplete': Fjson["NameComplete"],
-                'ProductName': Fjson["ProductName"],
-                'ProductDescription': Fjson["ProductDescription"],
-                'SkuName': Fjson["SkuName"],
-                'IsActive': Fjson["IsActive"],
-                'IsTransported': Fjson["IsTransported"],
-                'IsInventoried': Fjson["IsInventoried"],
-                'IsGiftCardRecharge': Fjson["IsGiftCardRecharge"],
-                'ImageUrl': Fjson["ImageUrl"],
-                'DetailUrl': Fjson["DetailUrl"],
-                'CSCIdentification': Fjson["CSCIdentification"],
-                'BrandId': Fjson["BrandId"],
-                'cubicweight': dimension["cubicweight"],
-                'height': dimension["height"],
-                'length': dimension["length"],
-                'weight': dimension["weight"],
-                'width': dimension["width"],
-                'BrandName': x["BrandName"]}, index=[0])
-                
-            init.df = init.df.append(df1)
+        df1 = pd.DataFrame({
+            'Id': Fjson["Id"],
+            'ProductId': Fjson["ProductId"],
+            'NameComplete': Fjson["NameComplete"],
+            'ProductName': Fjson["ProductName"],
+            'ProductDescription': Fjson["ProductDescription"],
+            'SkuName': Fjson["SkuName"],
+            'IsActive': Fjson["IsActive"],
+            'IsTransported': Fjson["IsTransported"],
+            'IsInventoried': Fjson["IsInventoried"],
+            'IsGiftCardRecharge': Fjson["IsGiftCardRecharge"],
+            'ImageUrl': Fjson["ImageUrl"],
+            'DetailUrl': Fjson["DetailUrl"],
+            'CSCIdentification': Fjson["CSCIdentification"],
+            'BrandId': Fjson["BrandId"],
+            'cubicweight': dimension["cubicweight"],
+            'height': dimension["height"],
+            'length': dimension["length"],
+            'weight': dimension["weight"],
+            'width': dimension["width"],
+            'BrandName': x["BrandName"]}, index=[0])
+        init.df = init.df.append(df1)
         print("Registro: "+str(reg))
     #except:
     #    print("Vacio")
