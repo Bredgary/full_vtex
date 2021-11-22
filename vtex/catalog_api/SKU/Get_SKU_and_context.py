@@ -57,7 +57,7 @@ def get_params():
     for row in rows:
         sku_context(row.id,registro)
         registro += 1
-        if registro == 500:
+        if registro == 8000:
             break
     
 def delete_duplicate():
