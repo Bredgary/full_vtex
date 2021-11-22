@@ -19,16 +19,14 @@ def get_product(id,reg):
         Fjson = json.loads(response.text)
         if Fjson:
         	for x in Fjson:
-        		print(x)
-        	'''
-	        df1 = pd.DataFrame({
-	            'Name': x["Name"],
-	            'CategoryId': x["CategoryId"],
-	            'FieldId': x["FieldId"],
-	            'IsActive': x["IsActive"],
-	            'IsStockKeepingUnit': x["IsStockKeepingUnit"]}, index=[0])
-	        init.df = init.df.append(df1)
-	        '''
+		        df1 = pd.DataFrame({
+		            'Name': x["Name"],
+		            'CategoryId': x["CategoryId"],
+		            'FieldId': x["FieldId"],
+		            'IsActive': x["IsActive"],
+		            'IsStockKeepingUnit': x["IsStockKeepingUnit"]}, index=[0])
+		        init.df = init.df.append(df1)
+	        
         print("Registro: "+str(reg))
     except:
         print("Vacio")
