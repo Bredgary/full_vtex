@@ -17,8 +17,8 @@ def get_sku(id,reg):
 	    url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/stockkeepingunit/"+str(id)+"/ean"
 	    response = requests.request("GET", url, headers=init.headers)
 	    Fjson = json.loads(response.text)
-	    print(Fjson)
-	    print(type(Fjson))
+	    for x in Fjson:
+	    	print(x)
 	    #df1 = pd.DataFrame({'complementTypeId': x["ComplementTypeId"]}, index=[0])
 	    #init.df = init.df.append(df1)
 	    print("Registro: "+str(reg))
