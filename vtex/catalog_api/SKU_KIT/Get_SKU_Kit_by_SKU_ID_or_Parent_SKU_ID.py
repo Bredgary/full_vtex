@@ -16,17 +16,17 @@ def sku_context(id,reg):
     	url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/stockkeepingunitkit"
     	querystring = {"skuId":""+str(id)+""}
     	response = requests.request("GET", url, headers=init.headers, params=querystring)
-        Fjson = json.loads(response.text)
-        df1 = pd.DataFrame({
-            'id' : Fjson["Id"],
-            'stockKeepingUnitParent' : Fjson["StockKeepingUnitParent"],
-            'stockKeepingUnitId' : Fjson["StockKeepingUnitId"],
-            'quantity' : Fjson["Quantity"],
-            'unitPrice': Fjson["UnitPrice"]}, index=[0])
-        init.df = init.df.append(df1)
-        print("Registro: "+str(reg))
+    	Fjson = json.loads(response.text)
+    	df1 = pd.DataFrame({
+			'id' : Fjson["Id"],
+			'stockKeepingUnitParent' : Fjson["StockKeepingUnitParent"],
+			'stockKeepingUnitId' : Fjson["StockKeepingUnitId"],
+			'quantity' : Fjson["Quantity"],
+			'unitPrice': Fjson["UnitPrice"]}, index=[0])
+    	init.df = init.df.append(df1)
+    	print("Registro: "+str(reg))
     except:
-        print("Vacio")
+    	print("Vacio")
 
 
 def get_params():
