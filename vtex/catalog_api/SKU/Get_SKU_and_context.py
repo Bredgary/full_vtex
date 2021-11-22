@@ -30,7 +30,16 @@ def sku_context(id,reg):
     DetailUrl = Fjson["DetailUrl"]
     CSCIdentification = Fjson["CSCIdentification"]
     BrandId = Fjson["BrandId"]
-    BrandName = Fjson["BrandName"]
+    ProductCategoryIds = Fjson["ProductCategoryIds"]
+    ProductGlobalCategoryId = Fjson["ProductGlobalCategoryId"]
+    CommercialConditionId = Fjson["CommercialConditionId"]
+    RewardValue = Fjson["RewardValue"]
+    EstimatedDateArrival = Fjson["EstimatedDateArrival"]
+    MeasurementUnit = Fjson["MeasurementUnit"]
+    UnitMultiplier = Fjson["UnitMultiplier"]
+    InformationSource = Fjson["InformationSource"]
+    ModalType = Fjson["ModalType"]
+    
     Dimension = Fjson["Dimension"]
     if Dimension:
         dimension_cubicweight = Dimension["cubicweight"]
@@ -93,7 +102,6 @@ def sku_context(id,reg):
         Images_FileId = None
     AlternateIds = Fjson["AlternateIds"]
     if AlternateIds:
-        AlternateIds_Ean = AlternateIds["Ean"]
         AlternateIds_RefId = AlternateIds["RefId"]
     else:
         AlternateIds_Ean = None
@@ -136,8 +144,16 @@ def sku_context(id,reg):
         'Images_ImageUrl' : Images_ImageUrl,
         'Images_ImageName' : Images_ImageName,
         'Images_FileId' : Images_FileId,
-        'AlternateIds_Ean' : AlternateIds_Ean,
         'AlternateIds_RefId' : AlternateIds_RefId,
+        'ProductCategoryIds' : Fjson["ProductCategoryIds"],
+        'ProductGlobalCategoryId' : Fjson["ProductGlobalCategoryId"],
+        'CommercialConditionId' : Fjson["CommercialConditionId"],
+        'RewardValue' : Fjson["RewardValue"],
+        'EstimatedDateArrival' : Fjson["EstimatedDateArrival"],
+        'MeasurementUnit' : Fjson["MeasurementUnit"],
+        'UnitMultiplier' : Fjson["UnitMultiplier"],
+        'InformationSource' : Fjson["InformationSource"],
+        'ModalType' : Fjson["ModalType"],
         'BrandName': BrandName}, index=[0])
     init.df = init.df.append(df1)
     print("Registro: "+str(reg))
