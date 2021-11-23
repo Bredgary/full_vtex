@@ -56,7 +56,7 @@ def get_order(id,reg):
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
         for x in Fjson:
-        	print(x)
+        	print(x["emailTracked"])
         	'''
 	        df1 = pd.DataFrame({
 	            'emailTracked': x["emailTracked"],
