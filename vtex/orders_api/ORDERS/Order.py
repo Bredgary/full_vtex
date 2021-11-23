@@ -11,7 +11,7 @@ from datetime import datetime, timezone
 class init:
     productList = []
     df = pd.DataFrame()
-    emailTracked : None
+    emailTracked = None
     approvedBy : None
     cancelledBy : None
     cancelReason : None
