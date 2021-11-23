@@ -50,15 +50,20 @@ class init:
     invoicedDate : None
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
+def dicMemberCheck(key, dicObj):
+    if key in dicObj:
+        print("Existing key")
+    else:
+        print("Not existing")
+        
 def get_order(id,reg):
     #try:
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
-        if Fjson in Fjson["emailTracked"]:
-        	print("Existe")
-        else:
-        	print("No existe")
+        
+        dicMemberCheck(Fjson,Fjson["emailTracked"])
+        dicMemberCheck(Fjson,Fjson["orderId"])
         '''
         emailTracked = Fjson["emailTracked"]
         approvedBy = Fjson["approvedBy"]
