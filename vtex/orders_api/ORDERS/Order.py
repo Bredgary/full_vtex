@@ -214,8 +214,6 @@ def run():
 	    json_data = df.to_json(orient = 'records')
 	    json_object = json.loads(json_data)
 	    print(df)
-	    
-	
 	    client  = bigquery.Client(project = project_id)
 	    dataset  = client.dataset(dataset_id)
 	    table = dataset.table(table_id)
