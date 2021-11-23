@@ -55,8 +55,43 @@ def get_order(id,reg):
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
-        print(Fjson)
-        print(Fjson["orderId"])
+        emailTracked = Fjson["emailTracked"]
+        approvedBy = Fjson["approvedBy"]
+        cancelledBy = Fjson["cancelledBy"]
+        cancelReason = Fjson["cancelReason"]
+        orderId = Fjson["orderId"]
+        sequence = Fjson["sequence"]
+        marketplaceOrderId = Fjson["marketplaceOrderId"]
+        marketplaceServicesEndpoint = Fjson["marketplaceServicesEndpoint"]
+        sellerOrderId = Fjson["sellerOrderId"]
+        origin = Fjson["origin"]
+        affiliateId = Fjson["affiliateId"]
+        salesChannel = Fjson["salesChannel"]
+        merchantName = Fjson["merchantName"]
+        status = Fjson["status"]
+        statusDescription = Fjson["statusDescription"]
+        value = Fjson["value"]
+        creationDate = Fjson["creationDate"]
+        lastChange = Fjson["lastChange"]
+        orderGroup = Fjson["orderGroup"]
+        giftRegistryData = Fjson["giftRegistryData"]
+        marketingData = Fjson["marketingData"]
+        callCenterOperatorData = Fjson["callCenterOperatorData"]
+        followUpEmail = Fjson["followUpEmail"]
+        lastMessage = Fjson["lastMessage"]
+        hostname = Fjson["hostname"]
+        invoiceData = Fjson["invoiceData"]
+        openTextField = Fjson["openTextField"]
+        roundingError = Fjson["roundingError"]
+        orderFormId = Fjson["orderFormId"]
+        commercialConditionData = Fjson["commercialConditionData"]
+        isCompleted = Fjson["isCompleted"]
+        customData = Fjson["customData"]
+        allowCancellation = Fjson["allowCancellation"]
+        allowEdition = Fjson["allowEdition"]
+        isCheckedIn = Fjson["isCheckedIn"]
+        authorizedDate = Fjson["authorizedDate"]
+        invoicedDate = Fjson["invoicedDate"]
         '''
         df1 = pd.DataFrame({
             'emailTracked': x["emailTracked"],
