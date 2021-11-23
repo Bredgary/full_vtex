@@ -215,7 +215,7 @@ def run():
 	    json_object = json.loads(json_data)
 	    project_id = '999847639598'
 	    dataset_id = 'landing_zone'
-	    table_id = 'shopstar_vtex_product_context'
+	    table_id = 'shopstar_vtex_order'
 	    
 	    client  = bigquery.Client(project = project_id)
 	    dataset  = client.dataset(dataset_id)
