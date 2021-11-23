@@ -55,8 +55,9 @@ def get_order(id,reg):
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
+        print(Fjson["emailTracked"])
         for x in Fjson:
-        	print(x[0])
+        	print(x)
         	'''
 	        df1 = pd.DataFrame({
 	            'emailTracked': x["emailTracked"],
