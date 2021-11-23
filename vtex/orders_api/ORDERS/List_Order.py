@@ -17,7 +17,6 @@ class Init:
 	before_yesterday = today - datetime.timedelta(days=2)
 	ordenes = {}
 	df = pd.DataFrame()
-	
 
 def format_schema(schema):
     formatted_schema = []
