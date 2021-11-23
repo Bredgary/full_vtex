@@ -144,7 +144,7 @@ def run():
 	    job = client.load_table_from_json(json_object, table, job_config = job_config)
 	    print(job.result())
 	    delete_duplicate()
-    except:
-    	print("Error al ingesta")
+	except:
+		print("Error al ingesta")
     
 run()
