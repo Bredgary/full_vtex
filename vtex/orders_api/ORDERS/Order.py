@@ -228,6 +228,6 @@ def run():
 	    print(job.result())
 	    delete_duplicate()
 	except:
-		print("Error al ingesta")
+		print("Error al ingestar")
     
 run()
