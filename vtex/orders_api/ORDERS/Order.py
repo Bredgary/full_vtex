@@ -62,8 +62,8 @@ def get_order(id,reg):
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
         
-        dicMemberCheck(Fjson,Fjson["emailTracked"])
-        dicMemberCheck(Fjson,Fjson["orderId"])
+        dicMemberCheck(Fjson["emailTracked"],Fjson)
+        dicMemberCheck(Fjson["orderId"],Fjson)
         '''
         emailTracked = Fjson["emailTracked"]
         approvedBy = Fjson["approvedBy"]
