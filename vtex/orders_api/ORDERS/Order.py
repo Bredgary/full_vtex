@@ -55,7 +55,8 @@ def get_order(id,reg):
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
-        print(Fjson["emailTracked"])
+        print(Fjson)
+        '''
         df1 = pd.DataFrame({
             'emailTracked': x["emailTracked"],
             'approvedBy': x["approvedBy"],
@@ -96,6 +97,7 @@ def get_order(id,reg):
             'invoicedDate': x["invoicedDate"]}, index=[0])
         init.df = init.df.append(df1)
         print("Registro: "+str(reg))
+        '''
 	        
     #except:
     #    print("Vacio")
@@ -111,6 +113,7 @@ def get_params():
     for row in rows:
         get_order(row.orderId,registro)
         registro += 1
+        break
 
 def delete_duplicate():
 	try:
