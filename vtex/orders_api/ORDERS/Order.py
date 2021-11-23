@@ -213,6 +213,10 @@ def run():
 	    df.reset_index(drop=True, inplace=True)
 	    json_data = df.to_json(orient = 'records')
 	    json_object = json.loads(json_data)
+	    project_id = '999847639598'
+	    dataset_id = 'landing_zone'
+	    table_id = 'shopstar_vtex_product_context'
+	    
 	    client  = bigquery.Client(project = project_id)
 	    dataset  = client.dataset(dataset_id)
 	    table = dataset.table(table_id)
