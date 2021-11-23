@@ -55,8 +55,12 @@ def get_order(id,reg):
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
-        if not Fjson["emailTracked"]:
-        	emailTracked = Fjson["emailTracked"]
+        if Fjson["emailTracked"] in Fjson:
+        	print("Existe")
+        else:
+        	print("No existe")
+        '''
+        emailTracked = Fjson["emailTracked"]
         approvedBy = Fjson["approvedBy"]
         cancelledBy = Fjson["cancelledBy"]
         cancelReason = Fjson["cancelReason"]
@@ -93,7 +97,7 @@ def get_order(id,reg):
         isCheckedIn = Fjson["isCheckedIn"]
         authorizedDate = Fjson["authorizedDate"]
         invoicedDate = Fjson["invoicedDate"]
-        '''
+        
         df1 = pd.DataFrame({
             'emailTracked': x["emailTracked"],
             'approvedBy': x["approvedBy"],
