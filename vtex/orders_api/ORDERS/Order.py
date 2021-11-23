@@ -52,18 +52,17 @@ class init:
 
 def dicMemberCheck(key, dicObj):
     if key in dicObj:
-        print("Existing key")
+        return True
     else:
-        print("Not existing")
+        return False
         
 def get_order(id,reg):
     #try:
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
-        
-        dicMemberCheck("emailTracked",Fjson)
-        dicMemberCheck("orderId",Fjson)
+        if "emailTracked" in Fjson:
+        	emailTracked = Fjson["emailTracked"]
         '''
         emailTracked = Fjson["emailTracked"]
         approvedBy = Fjson["approvedBy"]
