@@ -145,4 +145,5 @@ def run():
 	except:
 		print("Error al ingesta")
     
-run()
+#run()
+get_params()
