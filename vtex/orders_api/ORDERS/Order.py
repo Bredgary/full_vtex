@@ -62,87 +62,121 @@ def get_order(id,reg):
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
         if "emailTracked" in Fjson:
-        	emailTracked = Fjson["emailTracked"]
-        '''
-        emailTracked = Fjson["emailTracked"]
-        approvedBy = Fjson["approvedBy"]
-        cancelledBy = Fjson["cancelledBy"]
-        cancelReason = Fjson["cancelReason"]
-        orderId = Fjson["orderId"]
-        sequence = Fjson["sequence"]
-        marketplaceOrderId = Fjson["marketplaceOrderId"]
-        marketplaceServicesEndpoint = Fjson["marketplaceServicesEndpoint"]
-        sellerOrderId = Fjson["sellerOrderId"]
-        origin = Fjson["origin"]
-        affiliateId = Fjson["affiliateId"]
-        salesChannel = Fjson["salesChannel"]
-        merchantName = Fjson["merchantName"]
-        status = Fjson["status"]
-        statusDescription = Fjson["statusDescription"]
-        value = Fjson["value"]
-        creationDate = Fjson["creationDate"]
-        lastChange = Fjson["lastChange"]
-        orderGroup = Fjson["orderGroup"]
-        giftRegistryData = Fjson["giftRegistryData"]
-        marketingData = Fjson["marketingData"]
-        callCenterOperatorData = Fjson["callCenterOperatorData"]
-        followUpEmail = Fjson["followUpEmail"]
-        lastMessage = Fjson["lastMessage"]
-        hostname = Fjson["hostname"]
-        invoiceData = Fjson["invoiceData"]
-        openTextField = Fjson["openTextField"]
-        roundingError = Fjson["roundingError"]
-        orderFormId = Fjson["orderFormId"]
-        commercialConditionData = Fjson["commercialConditionData"]
-        isCompleted = Fjson["isCompleted"]
-        customData = Fjson["customData"]
-        allowCancellation = Fjson["allowCancellation"]
-        allowEdition = Fjson["allowEdition"]
-        isCheckedIn = Fjson["isCheckedIn"]
-        authorizedDate = Fjson["authorizedDate"]
-        invoicedDate = Fjson["invoicedDate"]
-        
+        	init.emailTracked = Fjson["emailTracked"]
+        if "approvedBy" in Fjson:
+        	init.approvedBy = Fjson["approvedBy"]
+        if "cancelledBy" in Fjson:
+        	init.cancelledBy = Fjson["cancelledBy"]
+        if "cancelReason" in Fjson:
+        	init.cancelReason = Fjson["cancelReason"]
+        if "orderId" in Fjson:
+        	init.orderId = Fjson["orderId"]
+        if "sequence" in Fjson:
+        	init.sequence = Fjson["sequence"]
+        if "marketplaceOrderId" in Fjson:
+        	init.marketplaceOrderId = Fjson["marketplaceOrderId"]
+        if "marketplaceServicesEndpoint" in Fjson:
+        	init.marketplaceServicesEndpoint = Fjson["marketplaceServicesEndpoint"]
+        if "sellerOrderId" in Fjson:
+        	init.sellerOrderId = Fjson["sellerOrderId"]
+        if "origin" in Fjson:
+        	init.origin = Fjson["origin"]
+        if "affiliateId" in Fjson:
+        	init.affiliateId = Fjson["affiliateId"]
+        if "salesChannel" in Fjson:
+        	init.salesChannel = Fjson["salesChannel"]
+        if "merchantName" in Fjson:
+        	init.merchantName = Fjson["merchantName"]
+        if "status" in Fjson:
+        	init.status = Fjson["status"]
+        if "statusDescription" in Fjson:
+        	init.statusDescription = Fjson["statusDescription"]
+        if "value" in Fjson:
+        	init.value = Fjson["value"]
+        if "creationDate" in Fjson:
+        	init.creationDate = Fjson["creationDate"]
+        if "lastChange" in Fjson:
+        	init.lastChange = Fjson["lastChange"]
+        if "orderGroup" in Fjson:
+        	init.orderGroup = Fjson["orderGroup"]
+        if "giftRegistryData" in Fjson:
+        	init.giftRegistryData = Fjson["giftRegistryData"]
+        if "marketingData" in Fjson:
+        	init.marketingData = Fjson["marketingData"]
+        if "callCenterOperatorData" in Fjson:
+        	init.callCenterOperatorData = Fjson["callCenterOperatorData"]
+        if "followUpEmail" in Fjson:
+        	init.followUpEmail = Fjson["followUpEmail"]
+        if "lastMessage" in Fjson:
+        	init.lastMessage = Fjson["lastMessage"]
+        if "hostname" in Fjson:
+        	init.hostname = Fjson["hostname"]
+        if "invoiceData" in Fjson:
+        	init.invoiceData = Fjson["invoiceData"]
+        if "openTextField" in Fjson:
+        	init.openTextField = Fjson["openTextField"]
+        if "roundingError" in Fjson:
+        	init.roundingError = Fjson["roundingError"]
+        if "orderFormId" in Fjson:
+        	init.orderFormId = Fjson["orderFormId"]
+        if "commercialConditionData" in Fjson:
+        	init.commercialConditionData = Fjson["commercialConditionData"]
+        if "isCompleted" in Fjson:
+        	init.isCompleted = Fjson["isCompleted"]
+        if "customData" in Fjson:
+        	init.customData = Fjson["customData"]
+        if "allowCancellation" in Fjson:
+        	init.allowCancellation = Fjson["allowCancellation"]
+        if "allowEdition" in Fjson:
+        	init.allowEdition = Fjson["allowEdition"]
+        if "isCheckedIn" in Fjson:
+        	init.isCheckedIn = Fjson["isCheckedIn"]
+        if "authorizedDate" in Fjson:
+        	init.authorizedDate = Fjson["authorizedDate"]
+        if "invoicedDate" in Fjson:
+        	init.invoicedDate = Fjson["invoicedDate"]
+
         df1 = pd.DataFrame({
-            'emailTracked': x["emailTracked"],
-            'approvedBy': x["approvedBy"],
-            'cancelledBy': x["cancelledBy"],
-            'cancelReason': x["cancelReason"],
-            'orderId': x["orderId"],
-            'sequence': x["sequence"],
-            'marketplaceOrderId': x["marketplaceOrderId"],
-            'marketplaceServicesEndpoint': x["marketplaceServicesEndpoint"],
-            'sellerOrderId': x["sellerOrderId"],
-            'origin': x["origin"],
-            'affiliateId': x["affiliateId"],
-            'salesChannel': x["salesChannel"],
-            'merchantName': x["merchantName"],
-            'status': x["status"],
-            'statusDescription': x["statusDescription"],
-            'value': x["value"],
-            'creationDate': x["creationDate"],
-            'lastChange': x["lastChange"],
-            'orderGroup': x["orderGroup"],
-            'giftRegistryData': x["giftRegistryData"],
-            'marketingData': x["marketingData"],
-            'callCenterOperatorData': x["callCenterOperatorData"],
-            'followUpEmail': x["followUpEmail"],
-            'lastMessage': x["lastMessage"],
-            'hostname': x["hostname"],
-            'invoiceData': x["invoiceData"],
-            'openTextField': x["openTextField"],
-            'roundingError': x["roundingError"],
-            'orderFormId': x["orderFormId"],
-            'commercialConditionData': x["commercialConditionData"],
-            'isCompleted': x["isCompleted"],
-            'customData': x["customData"],
-            'allowCancellation': x["allowCancellation"],
-            'allowEdition': x["allowEdition"],
-            'isCheckedIn': x["isCheckedIn"],
-            'authorizedDate': x["authorizedDate"],
-            'invoicedDate': x["invoicedDate"]}, index=[0])
+            'emailTracked': init.emailTracked,
+            'approvedBy': init.approvedBy,
+            'cancelledBy': init.cancelledBy,
+            'cancelReason': init.cancelReason,
+            'orderId': init.orderId,
+            'sequence': init.sequence,
+            'marketplaceOrderId': init.marketplaceOrderId,
+            'marketplaceServicesEndpoint': init.marketplaceServicesEndpoint,
+            'sellerOrderId': init.sellerOrderId,
+            'origin': init.origin,
+            'affiliateId': init.affiliateId,
+            'salesChannel': init.salesChannel,
+            'merchantName': init.merchantName,
+            'status': init.status,
+            'statusDescription': init.statusDescription,
+            'value': init.value,
+            'creationDate': init.creationDate,
+            'lastChange': init.lastChange,
+            'orderGroup': init.orderGroup,
+            'giftRegistryData': init.giftRegistryData,
+            'marketingData': init.marketingData,
+            'callCenterOperatorData': init.callCenterOperatorData,
+            'followUpEmail': init.followUpEmail,
+            'lastMessage': init.lastMessage,
+            'hostname': init.hostname,
+            'invoiceData': init.invoiceData,
+            'openTextField': init.openTextField,
+            'roundingError': init.roundingError,
+            'orderFormId': init.orderFormId,
+            'commercialConditionData': init.commercialConditionData,
+            'isCompleted': init.isCompleted,
+            'customData': init.customData,
+            'allowCancellation': init.allowCancellation,
+            'allowEdition': init.allowEdition,
+            'isCheckedIn': init.isCheckedIn,
+            'authorizedDate': init.authorizedDate,
+            'invoicedDate': init.invoicedDate}, index=[0])
         init.df = init.df.append(df1)
         print("Registro: "+str(reg))
-        '''
+        
 	        
     #except:
     #    print("Vacio")
