@@ -55,51 +55,48 @@ def get_order(id,reg):
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
-        #print(Fjson["emailTracked"])
-        for x in Fjson:
-        	print(x[0])
-        	'''
-	        df1 = pd.DataFrame({
-	            'emailTracked': x["emailTracked"],
-	            'approvedBy': x["approvedBy"],
-	            'cancelledBy': x["cancelledBy"],
-	            'cancelReason': x["cancelReason"],
-	            'orderId': x["orderId"],
-	            'sequence': x["sequence"],
-	            'marketplaceOrderId': x["marketplaceOrderId"],
-	            'marketplaceServicesEndpoint': x["marketplaceServicesEndpoint"],
-	            'sellerOrderId': x["sellerOrderId"],
-	            'origin': x["origin"],
-	            'affiliateId': x["affiliateId"],
-	            'salesChannel': x["salesChannel"],
-	            'merchantName': x["merchantName"],
-	            'status': x["status"],
-	            'statusDescription': x["statusDescription"],
-	            'value': x["value"],
-	            'creationDate': x["creationDate"],
-	            'lastChange': x["lastChange"],
-	            'orderGroup': x["orderGroup"],
-	            'giftRegistryData': x["giftRegistryData"],
-	            'marketingData': x["marketingData"],
-	            'callCenterOperatorData': x["callCenterOperatorData"],
-	            'followUpEmail': x["followUpEmail"],
-	            'lastMessage': x["lastMessage"],
-	            'hostname': x["hostname"],
-	            'invoiceData': x["invoiceData"],
-	            'openTextField': x["openTextField"],
-	            'roundingError': x["roundingError"],
-	            'orderFormId': x["orderFormId"],
-	            'commercialConditionData': x["commercialConditionData"],
-	            'isCompleted': x["isCompleted"],
-	            'customData': x["customData"],
-	            'allowCancellation': x["allowCancellation"],
-	            'allowEdition': x["allowEdition"],
-	            'isCheckedIn': x["isCheckedIn"],
-	            'authorizedDate': x["authorizedDate"],
-	            'invoicedDate': x["invoicedDate"]}, index=[0])
-	        init.df = init.df.append(df1)
-	        print("Registro: "+str(reg))
-	        '''
+        print(Fjson["emailTracked"])
+        df1 = pd.DataFrame({
+            'emailTracked': x["emailTracked"],
+            'approvedBy': x["approvedBy"],
+            'cancelledBy': x["cancelledBy"],
+            'cancelReason': x["cancelReason"],
+            'orderId': x["orderId"],
+            'sequence': x["sequence"],
+            'marketplaceOrderId': x["marketplaceOrderId"],
+            'marketplaceServicesEndpoint': x["marketplaceServicesEndpoint"],
+            'sellerOrderId': x["sellerOrderId"],
+            'origin': x["origin"],
+            'affiliateId': x["affiliateId"],
+            'salesChannel': x["salesChannel"],
+            'merchantName': x["merchantName"],
+            'status': x["status"],
+            'statusDescription': x["statusDescription"],
+            'value': x["value"],
+            'creationDate': x["creationDate"],
+            'lastChange': x["lastChange"],
+            'orderGroup': x["orderGroup"],
+            'giftRegistryData': x["giftRegistryData"],
+            'marketingData': x["marketingData"],
+            'callCenterOperatorData': x["callCenterOperatorData"],
+            'followUpEmail': x["followUpEmail"],
+            'lastMessage': x["lastMessage"],
+            'hostname': x["hostname"],
+            'invoiceData': x["invoiceData"],
+            'openTextField': x["openTextField"],
+            'roundingError': x["roundingError"],
+            'orderFormId': x["orderFormId"],
+            'commercialConditionData': x["commercialConditionData"],
+            'isCompleted': x["isCompleted"],
+            'customData': x["customData"],
+            'allowCancellation': x["allowCancellation"],
+            'allowEdition': x["allowEdition"],
+            'isCheckedIn': x["isCheckedIn"],
+            'authorizedDate': x["authorizedDate"],
+            'invoicedDate': x["invoicedDate"]}, index=[0])
+        init.df = init.df.append(df1)
+        print("Registro: "+str(reg))
+	        
     #except:
     #    print("Vacio")
 
