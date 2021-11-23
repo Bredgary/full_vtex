@@ -1,206 +1,143 @@
+#!/usr/bin/python
+# -*- coding: latin-1 -*-
 import pandas as pd
 import numpy as np
-import requests
-import json
-import os
-import re
-import datetime
-from datetime import date
-from datetime import timedelta
-from os import system
 from google.cloud import bigquery
-import logging
+import os, json
+from datetime import datetime
+import requests
+from datetime import datetime, timezone
 
-class Init:
-	today = datetime.date.today()
-	yesterday = today - datetime.timedelta(days=1)
-	before_yesterday = today - datetime.timedelta(days=2)
-	ordenes = {}
-	df = pd.DataFrame()
-	
+class init:
+    productList = []
+    df = pd.DataFrame()
+    emailTracked : None
+    approvedBy : None
+    cancelledBy : None
+    cancelReason : None
+    orderId : None
+    sequence : None
+    marketplaceOrderId : None
+    marketplaceServicesEndpoint : None
+    sellerOrderId : None
+    origin : None
+    affiliateId : None
+    salesChannel : None
+    merchantName : None
+    status : None
+    statusDescription : None
+    value : None
+    creationDate : None
+    lastChange : None
+    orderGroup : None
+    giftRegistryData : None
+    marketingData : None
+    callCenterOperatorData : None
+    followUpEmail : None
+    lastMessage : None
+    hostname : None
+    invoiceData : None
+    openTextField : None
+    roundingError : None
+    orderFormId : None
+    commercialConditionData : None
+    isCompleted : None
+    customData : None
+    allowCancellation : None
+    allowEdition : None
+    isCheckedIn : None
+    authorizedDate : None
+    invoicedDate : None
+    headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
-def format_schema(schema):
-    formatted_schema = []
-    for row in schema:
-        formatted_schema.append(bigquery.SchemaField(row['name'], row['type'], row['mode']))
-    return formatted_schema
+def get_sku(id,reg):
+    try:
+        url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str()+""
+        response = requests.request("GET", url, headers=init.headers)
+        Fjson = json.loads(response.text)
+        df1 = pd.DataFrame({
+            'emailTracked': Fjson["emailTracked"],
+            'approvedBy': Fjson["approvedBy"],
+            'cancelledBy': Fjson["cancelledBy"],
+            'cancelReason': Fjson["cancelReason"],
+            'orderId': Fjson["orderId"],
+            'sequence': Fjson["sequence"],
+            'marketplaceOrderId': Fjson["marketplaceOrderId"],
+            'marketplaceServicesEndpoint': Fjson["marketplaceServicesEndpoint"],
+            'sellerOrderId': Fjson["sellerOrderId"],
+            'origin': Fjson["origin"],
+            'affiliateId': Fjson["affiliateId"],
+            'salesChannel': Fjson["salesChannel"],
+            'merchantName': Fjson["merchantName"],
+            'status': Fjson["status"],
+            'statusDescription': Fjson["statusDescription"],
+            'value': Fjson["value"],
+            'creationDate': Fjson["creationDate"],
+            'lastChange': Fjson["lastChange"],
+            'orderGroup': Fjson["orderGroup"],
+            'giftRegistryData': Fjson["giftRegistryData"],
+            'marketingData': Fjson["marketingData"],
+            'callCenterOperatorData': Fjson["callCenterOperatorData"],
+            'followUpEmail': Fjson["followUpEmail"],
+            'lastMessage': Fjson["lastMessage"],
+            'hostname': Fjson["hostname"],
+            'invoiceData': Fjson["invoiceData"],
+            'openTextField': Fjson["openTextField"],
+            'roundingError': Fjson["roundingError"],
+            'orderFormId': Fjson["orderFormId"],
+            'commercialConditionData': Fjson["commercialConditionData"],
+            'isCompleted': Fjson["isCompleted"],
+            'customData': Fjson["customData"],
+            'allowCancellation': Fjson["allowCancellation"],
+            'allowEdition': Fjson["allowEdition"],
+            'isCheckedIn': Fjson["isCheckedIn"],
+            'authorizedDate': Fjson["authorizedDate"],
+            'invoicedDate': Fjson["invoicedDate"]}, index=[0])
+        init.df = init.df.append(df1)
+        print("Registro: "+str(reg))
+    except:
+        print("Vacio")
 
-def get_order_list(id):
-	url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders?page="+str(page)+""
-	querystring = {"f_creationDate":"creationDate:["+str(Init.before_yesterday)+"T02:00:00.000Z TO "+str(Init.yesterday)+"T01:59:59.999Z]","f_hasInputInvoice":"false"}
-	headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-	response = requests.request("GET", url, headers=headers, params=querystring)
-	FJson = json.loads(response.text)
-	return FJson
+def get_params():
+    print("Cargando consulta")
+    client = bigquery.Client()
+    QUERY = (
+        'SELECT orderId FROM `shopstar-datalake.landing_zone.order_write`')
+    query_job = client.query(QUERY)  
+    rows = query_job.result()
+    registro = 1
+    for row in rows:
+        get_sku(row.orderId,registro)
+        registro += 1
 
-def for_by_id(count):
-	f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/CATEGORY_SPECIFICATION/id_category.json','r')
-	data_from_string = f_01.read()
-	data_from_string = data_from_string.replace('"', '')
-	listaIDS = json.loads(data_from_string)
-	for i in listaIDS:
-		count += 1
-		get_specifications(i,count,delimitador)
-	print(str(count)+" registro almacenado.")
-
-operacion_fenix(count)
-
-
-def dataframe():
-	print("Cargando Dataframe")
-	FJson = paging()
-	lista = FJson["list"]
-	for x in lista:
-		df1 = pd.DataFrame({
-			'orderId': str(x["orderId"]),
-			'creationDate': str(x["creationDate"]),
-			'clientName': str(x["clientName"]),
-			'totalValue': str(x["totalValue"]),
-			'paymentNames': str(x["paymentNames"]),
-			'status': str(x["status"]),
-			'statusDescription': str(x["statusDescription"]),
-			'marketPlaceOrderId': str(x["marketPlaceOrderId"]),
-			'sequence': str(x["sequence"]),
-			'salesChannel': str(x["salesChannel"]),
-			'affiliateId': str(x["affiliateId"]),
-			'origin': str(x["origin"]),
-			'workflowInErrorState': str(x["workflowInErrorState"]),
-			'workflowInRetry': str(x["workflowInRetry"]),
-			'lastMessageUnread': str(x["lastMessageUnread"]),
-			'ShippingEstimatedDate': str(x["ShippingEstimatedDate"]),
-			'ShippingEstimatedDateMax': str(x["ShippingEstimatedDateMax"]),
-			'ShippingEstimatedDateMin': str(x["ShippingEstimatedDateMin"]),
-			'orderIsComplete': str(x["orderIsComplete"]),
-			'listId': str(x["listId"]),
-			'listType': str(x["listType"]),
-			'authorizedDate': str(x["authorizedDate"]),
-			'callCenterOperatorName': str(x["callCenterOperatorName"]),
-			'totalItems': str(x["totalItems"]),
-			'currencyCode': str(x["currencyCode"])}, index=[0])
-		Init.df = Init.df.append(df1)
-	return Init.df
-
+def delete_duplicate():
+    client = bigquery.Client()
+    QUERY = (
+        'CREATE OR REPLACE TABLE `shopstar-datalake.landing_zone.shopstar_vtex_sku` AS SELECT DISTINCT * FROM `shopstar-datalake.landing_zone.shopstar_vtex_sku`')
+    query_job = client.query(QUERY)  
+    rows = query_job.result()
+    print(rows)
 
 def run():
-	df = dataframe()
-	df.reset_index(drop=True, inplace=True)
-	json_data = df.to_json(orient = 'records')
-	json_object = json.loads(json_data)
-	
-	table_schema = {
-			"name": "orderId",
-			"type": "STRING",
-			"mode": "NULLABLE"
-		},{
-			"name": "creationDate",
-			"type": "STRING",
-			"mode": "NULLABLE"
-		},{
-			"name": "clientName",
-			"type": "STRING",
-			"mode": "NULLABLE"
-		},{
-			"name": "totalValue",
-			"type": "STRING",
-			"mode": "NULLABLE"
-		},{
-			"name": "paymentNames",
-			"type": "STRING",
-			"mode": "NULLABLE"
-		},{
-			"name": "status",
-			"type": "STRING",
-			"mode": "NULLABLE"
-		},{
-			"name": "statusDescription",
-			"type": "STRING",
-			"mode": "NULLABLE"
-		},{
-			"name": "marketPlaceOrderId",
-			"type": "STRING",
-			"mode": "NULLABLE"
-		},{
-			"name": "sequence",
-			"type": "STRING",
-			"mode": "NULLABLE"
-		},{
-			"name": "salesChannel",
-			"type": "STRING",
-			"mode": "NULLABLE"
-		},{
-			"name": "affiliateId",
-			"type": "STRING",
-			"mode": "NULLABLE"
-		},{
-			"name": "origin",
-			"type": "STRING",
-			"mode": "NULLABLE"
-		},{
-			"name": "workflowInErrorState",
-			"type": "STRING",
-			"mode": "NULLABLE"
-		},{
-			"name": "workflowInRetry",
-			"type": "STRING",
-			"mode": "NULLABLE"
-		},{
-			"name": "lastMessageUnread",
-			"type": "STRING",
-			"mode": "NULLABLE"
-		},{
-			"name": "ShippingEstimatedDate",
-			"type": "STRING",
-			"mode": "NULLABLE"
-		},{
-			"name": "ShippingEstimatedDateMax",
-			"type": "STRING",
-			"mode": "NULLABLE"
-		},{
-			"name": "ShippingEstimatedDateMin",
-			"type": "STRING",
-			"mode": "NULLABLE"
-		},{
-			"name": "orderIsComplete",
-			"type": "STRING",
-			"mode": "NULLABLE"
-		},{
-			"name": "listId",
-			"type": "STRING",
-			"mode": "NULLABLE"
-		},{
-			"name": "listType",
-			"type": "STRING",
-			"mode": "NULLABLE"
-		},{
-			"name": "authorizedDate",
-			"type": "STRING",
-			"mode": "NULLABLE"
-		},{
-			"name": "callCenterOperatorName",
-			"type": "STRING",
-			"mode": "NULLABLE"
-		},{
-			"name": "totalItems",
-			"type": "STRING",
-			"mode": "NULLABLE"
-		},{
-			"name": "currencyCode",
-			"type": "STRING",
-			"mode": "NULLABLE"}
-	
-	project_id = '999847639598'
-	dataset_id = 'landing_zone'
-	table_id = 'shopstar_vtex_list_order'
-	table_temp = 'order_write'
-	
-	client  = bigquery.Client(project = project_id)
-	dataset  = client.dataset(dataset_id)
-	table = dataset.table(table_id)
-	job_config = bigquery.LoadJobConfig()
-	job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-	job_config.schema = format_schema(table_schema)
-	job = client.load_table_from_json(json_object, table, job_config = job_config)
-	print(job.result())
+    get_params()
+    df = init.df
+    df.reset_index(drop=True, inplace=True)
+    json_data = df.to_json(orient = 'records')
+    json_object = json.loads(json_data)
+    
+    project_id = '999847639598'
+    dataset_id = 'landing_zone'
+    table_id = 'shopstar_vtex_sku'
 
+    client  = bigquery.Client(project = project_id)
+    dataset  = client.dataset(dataset_id)
+    table = dataset.table(table_id)
+    job_config = bigquery.LoadJobConfig()
+    job_config.write_disposition = "WRITE_TRUNCATE"
+    job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+    job_config.autodetect = True
+    job = client.load_table_from_json(json_object, table, job_config = job_config)
+    print(job.result())
+    delete_duplicate()
+    
 run()
-
