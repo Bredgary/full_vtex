@@ -55,7 +55,7 @@ def get_order(id,reg):
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
-        if Fjson["emailTracked"] in Fjson:
+        if Fjson in Fjson["emailTracked"]:
         	print("Existe")
         else:
         	print("No existe")
