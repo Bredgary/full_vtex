@@ -8,11 +8,12 @@ from datetime import datetime
 import requests
 from datetime import datetime, timezone
 from os.path import join
+import requests 
+import base64
 
 class init:
     productList = []
     df = pd.DataFrame()
-    raw_input = ""
     emailTracked = None
     approvedBy = None
     cancelledBy = None
@@ -209,10 +210,23 @@ def delete_duplicate():
 		print("Consulta SQL no ejecutada")
 
 def write(obj):
-        solditems = requests.get('https://github.com/Bredgary/full_vtex/tree/main/ui/order.json')
-        data = obj
-        with open('data.json', 'w') as f:
-            json.dump(data, f)
+        token = "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"
+        repo = 'https://github.com/Bredgary/full_vtex/tree/main/ui'
+        path = obj
+        data = open("data.json", "r").read()
+        r = requests.put(
+            f'https://api.github.com/repos/{repo}/contents/{path}',
+        headers = {
+            'Authorization': f'Token {token}'
+        },
+        json = {
+            "message": "add new file",
+            "content": base64.b64encode(data.encode()).decode(),
+            "branch": "master"
+        }
+)
+print(r.status_code)
+print(r.json())
 
 def run():
     #try:
