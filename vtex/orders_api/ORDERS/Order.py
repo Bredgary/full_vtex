@@ -179,7 +179,7 @@ def get_order(id,reg):
                 init.total_id_tax = tax["id"]
                 init.total_name_tax = tax["name"]
                 init.total_value_tax = tax["value"]
-            if Total[4]:
+            if Total[4] in Total:
                 change = Total[4]
                 init.total_id_change = change["id"]
                 init.total_name_change = change["name"]
