@@ -232,7 +232,7 @@ def get_order(id,reg):
             except:
                 print("No hay datos change")
         if Items:
-            try:
+            #try:
                 init.items_uniqueId = Items["uniqueId"]
                 init.items_id = Items["id"]
                 init.items_productId = Items["productId"]
@@ -254,8 +254,8 @@ def get_order(id,reg):
                 init.item_preSaleDate = Items["preSaleDate"]
                 if Items["itemAttachment"]:
                     init.item_itemAttachment_name = itemAttachment["name"]
-            except:
-                print("No hay datos tax")
+            #except:
+            #    print("No hay datos tax")
             
 
         df1 = pd.DataFrame({
