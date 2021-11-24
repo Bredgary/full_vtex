@@ -68,6 +68,13 @@ class init:
     total_id_change = None
     total_name_change = None
     total_value_change = None
+    
+    items_uniqueId = None
+    items_id = None
+    items_productId = None
+    items_ean = None
+    items_lockId = None
+    
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
 def dicMemberCheck(key, dicObj):
@@ -163,7 +170,8 @@ def get_order(id,reg):
         Total = Fjson["totals"]
         items = Fjson["items"]
         Items = items[0]
-        print(Items["uniqueId"])
+        itemAttachment = Items["itemAttachment"]
+        print(itemAttachment["name"])
         '''
         END
         '''
