@@ -343,7 +343,6 @@ def get_order(id,reg):
             except:
                 print("No hay datos ITEMS")
             
-            init.value = Items["value"]
             init.total = Items["total"]
             
         df1 = pd.DataFrame({
