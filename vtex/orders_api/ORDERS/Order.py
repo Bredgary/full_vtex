@@ -208,7 +208,18 @@ def delete_duplicate():
 	except:
 		print("Consulta SQL no ejecutada")
 
+def write(obj):
+        print('Creating a new file')
+        path = "C:/Users/bredg/Desktop"
+        name = raw_input('obj')+'.json'  # Name of text file coerced with +.txt
 
+        try:
+            file = open(join(path, name),'w')   # Trying to create a new file or open one
+            file.close()
+
+        except:
+            print('Something went wrong! Cannot tell what?')
+            sys.exit(0) # quit Python
 
 def run():
     #try:
@@ -217,16 +228,8 @@ def run():
     df.reset_index(drop=True, inplace=True)
     json_data = df.to_json(orient = 'records')
     json_object = json.loads(json_data)
+    write(json_object)
     
-    print('Creating a new file')
-    path = "C:/Users/bredg/Desktop"
-    init.raw_input(json_object)+".json" 
-    try:
-        file = open(join(path, init.raw_input),'w')   # Trying to create a new file or open one
-        file.close()
-    except:
-        print('Something went wrong! Cannot tell what?')
-        sys.exit(0) 
     
     '''
     project_id = '999847639598'
