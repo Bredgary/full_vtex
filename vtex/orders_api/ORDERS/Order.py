@@ -74,6 +74,21 @@ class init:
     items_productId = None
     items_ean = None
     items_lockId = None
+    item_quantity = None
+    item_seller = None
+    item_name = None
+    item_refId = None
+    item_price = None
+    item_listPrice = None
+    item_manualPrice = None
+    item_imageUrl = None
+    item_detailUrl = None
+    item_sellerSku = None
+    item_priceValidUntil = None
+    item_commission = None
+    item_tax = None
+    item_preSaleDate = None
+    item_itemAttachment_name = None
     
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
@@ -171,7 +186,6 @@ def get_order(id,reg):
         items = Fjson["items"]
         Items = items[0]
         itemAttachment = Items["itemAttachment"]
-        print(itemAttachment["name"])
         '''
         END
         '''
@@ -217,7 +231,31 @@ def get_order(id,reg):
                     init.total_value_change = change["value"]
             except:
                 print("No hay datos change")
-                
+        if Items:
+            try:
+                init.items_uniqueId = Items["uniqueId"]
+                init.items_id = Items["id"]
+                init.items_productId = Items["productId"]
+                init.items_ean = Items["ean"]
+                init.items_lockId = Items["lockId"]
+                init.item_quantity = Items["quantity"]
+                init.item_seller = Items["seller"]
+                init.item_name = Items["name"]
+                init.item_refId = Items["refId"]
+                init.item_price = Items["price"]
+                init.item_listPrice = Items["listPrice"]
+                init.item_manualPrice = Items["manualPrice"]
+                init.item_imageUrl = Items["imageUrl"]
+                init.item_detailUrl = Items["detailUrl"]
+                init.item_sellerSku = Items["sellerSku"]
+                init.item_priceValidUntil = Items["priceValidUntil"]
+                init.item_commission = Items["commission"]
+                init.item_tax = Items["tax"]
+                init.item_preSaleDate = Items["preSaleDate"]
+                if Items["itemAttachment"]:
+                    init.item_itemAttachment_name = itemAttachment["name"]
+            except:
+                print("No hay datos tax")
             
 
         df1 = pd.DataFrame({
@@ -272,6 +310,26 @@ def get_order(id,reg):
             'total_id_change': init.total_id_change,
             'total_name_change': init.total_name_change,
             'total_value_change': init.total_value_change,
+            'items_uniqueId': init.items_uniqueId,
+            'items_id': init.items_id,
+            'items_productId': init.items_productId,
+            'items_ean': init.items_ean,
+            'items_lockId': init.items_lockId,
+            'item_quantity': init.item_quantity,
+            'item_seller': init.item_seller,
+            'item_name': init.item_name,
+            'item_refId': init.item_refId,
+            'item_price': init.item_price,
+            'item_listPrice': init.item_listPrice,
+            'item_manualPrice': init.item_manualPrice,
+            'item_imageUrl': init.item_imageUrl,
+            'item_detailUrl': init.item_detailUrl,
+            'item_sellerSku': init.item_sellerSku,
+            'item_priceValidUntil': init.item_priceValidUntil,
+            'item_commission': init.item_commission,
+            'item_tax': init.item_tax,
+            'item_preSaleDate': init.item_preSaleDate,
+            'item_preSaleDate': init.item_preSaleDate,
             'invoicedDate': init.invoicedDate}, index=[0])
         init.df = init.df.append(df1)
         print("Registro: "+str(reg))
