@@ -219,9 +219,9 @@ def run():
     
     print('Creating a new file')
     path = "C:/Users/bredg/Desktop"
-    name = raw_input("json_object")+'.json'  # Name of text file coerced with +.txt
+    raw_input("json_object")+'.json'  # Name of text file coerced with +.txt
     try:
-        file = open(join(path, name),'w')   # Trying to create a new file or open one
+        file = open(join(path, raw_input),'w')   # Trying to create a new file or open one
         file.close()
     except:
         print('Something went wrong! Cannot tell what?')
