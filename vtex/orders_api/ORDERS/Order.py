@@ -231,7 +231,7 @@ def get_order(id,reg):
         priceDefinition = Items["priceDefinition"]
         sellingPrice = Items["sellingPrice"]
         for x in range(2):
-            print(sellingPrice[x])
+            print(sellingPrice["value"])
         dimension = additionalInfo["dimension"]
         '''
         END
