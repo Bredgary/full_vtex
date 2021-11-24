@@ -119,12 +119,17 @@ class init:
     '''
     Dimensiones ITEMS_INFORMATION__ADITIONAL_dimension
     '''
-    
     cubicweight = None
     height = None
     length = None
     weight = None
     width = None
+    '''
+    Dimensiones ITEMS_priceDefinition
+    '''
+    quantity = None
+    value = None
+    total = None
     
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
@@ -327,6 +332,13 @@ def get_order(id,reg):
                 init.weight = dimension["weight"]
                 init.width = dimension["width"]
                 
+                '''
+                priceDefinition
+                '''
+                init.quantity = quantity["quantity"]
+                init.value = quantity["value"]
+                init.total = sellingPrice["total"]
+                
                 
                 if Items["itemAttachment"]:
                     init.item_itemAttachment_name = itemAttachment["name"]
@@ -429,6 +441,9 @@ def get_order(id,reg):
             'length': init.length,
             'weight': init.weight,
             'width': init.width,
+            'quantity': init.quantity,
+            'value': init.value,
+            'total': init.total,
             'invoicedDate': init.invoicedDate}, index=[0])
         init.df = init.df.append(df1)
         print("Registro: "+str(reg))
