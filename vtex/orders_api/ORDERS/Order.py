@@ -209,43 +209,31 @@ def delete_duplicate():
 	except:
 		print("Consulta SQL no ejecutada")
 
-def write(obj):
-        token = "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"
-        repo = 'https://github.com/Bredgary/full_vtex/tree/main/ui'
-        path = obj
-        data = open("data.json", "r").read()
-        r = requests.put(f'https://api.github.com/repos/{repo}/contents/{path}',
-                         headers = {'Authorization': f'Token {token}'},json = {"message": "add new file","content": base64.b64encode(data.encode()).decode(),"branch": "master"})
-        print(r.status_code)
-        print(r.json())
+
 
 def run():
-    #try:
-    get_params()
-    df = init.df
-    df.reset_index(drop=True, inplace=True)
-    json_data = df.to_json(orient = 'records')
-    json_object = json.loads(json_data)
-    -#write(json_object)
-    
-    
-    '''
-    project_id = '999847639598'
-    dataset_id = 'landing_zone'
-    table_id = 'shopstar_vtex_order'
-    
-    client  = bigquery.Client(project = project_id)
-    dataset  = client.dataset(dataset_id)
-    table = dataset.table(table_id)
-    job_config = bigquery.LoadJobConfig()
-    job_config.write_disposition = "WRITE_TRUNCATE"
-    job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-    job_config.autodetect = True
-    job = client.load_table_from_json(json_object, table, job_config = job_config)
-    print(job.result())
-    delete_duplicate()
-    '''
-    #except:
-    #     print("Error")
+    try:
+        get_params()
+        df = init.df
+        df.reset_index(drop=True, inplace=True)
+        json_data = df.to_json(orient = 'records')
+        json_object = json.loads(json_data)
+        
+        project_id = '999847639598'
+        dataset_id = 'landing_zone'
+        table_id = 'shopstar_vtex_order'
+        
+        client  = bigquery.Client(project = project_id)
+        dataset  = client.dataset(dataset_id)
+        table = dataset.table(table_id)
+        job_config = bigquery.LoadJobConfig()
+        job_config.write_disposition = "WRITE_TRUNCATE"
+        job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+        job_config.autodetect = True
+        job = client.load_table_from_json(json_object, table, job_config = job_config)
+        print(job.result())
+        delete_duplicate()
+    except:
+        print("Error")
     
 run()
