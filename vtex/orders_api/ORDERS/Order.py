@@ -333,18 +333,19 @@ def get_order(id,reg):
 
                 if Items["itemAttachment"]:
                     init.item_itemAttachment_name = itemAttachment["name"]
+                
+                '''    
+                priceDefinition
+                '''
+            
+                init.quantity = Items["sellingPrice"]
+                init.value = Items["value"]
+                init.total = Items["total"]
             except:
                 print("No hay datos ITEMS")
             
             
-            priceDefinition
             
-            init.quantity = Items["sellingPrice"]
-            
-            init.value = sellingPrice["value"]
-            '''
-            init.total = sellingPrice["total"]
-            '''
         df1 = pd.DataFrame({
             'emailTracked': init.emailTracked,
             'approvedBy': init.approvedBy,
@@ -443,7 +444,6 @@ def get_order(id,reg):
             'quantity': init.quantity,
             'value': init.value,
             'total': init.total,
-            'quantity': init.quantity,
             'invoicedDate': init.invoicedDate}, index=[0])
         init.df = init.df.append(df1)
         print("Registro: "+str(reg))
