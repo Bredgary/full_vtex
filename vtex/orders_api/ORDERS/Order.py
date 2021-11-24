@@ -339,7 +339,7 @@ def get_order(id,reg):
             '''
             priceDefinition
             '''
-            init.quantity = sellingPrice["quantity"]
+            init.quantity = str(sellingPrice["quantity"])
             init.value = sellingPrice["value"]
             init.total = sellingPrice["total"]
 
