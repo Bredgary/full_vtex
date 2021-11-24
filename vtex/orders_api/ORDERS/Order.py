@@ -159,31 +159,46 @@ def get_order(id,reg):
         Total = Fjson["totals"]
         
         if Total:
-            if Total[0]:
-                items = Total[0]
-                init.total_id_items = items["id"]
-                init.total_name_items = items["name"]
-                init.total_value_items = items["value"]
-            if Total[1]:
-                discounts = Total[1]
-                init.total_id_discounts = discounts["id"]
-                init.total_name_discounts = discounts["name"]
-                init.total_value_discounts = discounts["value"]
-            if Total[2]:
-                shipping = Total[2]
-                init.total_id_shipping = shipping["id"]
-                init.total_name_shipping = shipping["name"]
-                init.total_value_shipping = shipping["value"]
-            if Total[3]:
-                tax = Total[3]
-                init.total_id_tax = tax["id"]
-                init.total_name_tax = tax["name"]
-                init.total_value_tax = tax["value"]
-            if  Total.keys in Total[4]:
-                change = Total[4]
-                init.total_id_change = change["id"]
-                init.total_name_change = change["name"]
-                init.total_value_change = change["value"]
+            try:
+                if Total[0]:
+                    items = Total[0]
+                    init.total_id_items = items["id"]
+                    init.total_name_items = items["name"]
+                    init.total_value_items = items["value"]
+            except:
+                print("No hay datos")
+            try:
+                if Total[1]:
+                    discounts = Total[1]
+                    init.total_id_discounts = discounts["id"]
+                    init.total_name_discounts = discounts["name"]
+                    init.total_value_discounts = discounts["value"]
+            except:
+                print("No hay datos")
+            try:
+                if Total[2]:
+                    shipping = Total[2]
+                    init.total_id_shipping = shipping["id"]
+                    init.total_name_shipping = shipping["name"]
+                    init.total_value_shipping = shipping["value"]
+            except:
+                print("No hay datos")
+            try:
+                if Total[3]:
+                    tax = Total[3]
+                    init.total_id_tax = tax["id"]
+                    init.total_name_tax = tax["name"]
+                    init.total_value_tax = tax["value"]
+            except:
+                print("No hay datos")
+            try:
+                if  Total[4]:
+                    change = Total[4]
+                    init.total_id_change = change["id"]
+                    init.total_name_change = change["name"]
+                    init.total_value_change = change["value"]
+            except:
+                print("No hay datos")
                 
             
 
