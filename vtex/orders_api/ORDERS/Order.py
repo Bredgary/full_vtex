@@ -230,8 +230,8 @@ def get_order(id,reg):
         additionalInfo = Items["additionalInfo"]
         priceDefinition = Items["priceDefinition"]
         sellingPrice = Items["sellingPrice"]
-        for x in sellingPrice:
-            print(x)
+        for x in range(2):
+            print(sellingPrice[x])
         dimension = additionalInfo["dimension"]
         '''
         END
