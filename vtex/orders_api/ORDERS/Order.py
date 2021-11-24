@@ -89,6 +89,16 @@ class init:
     item_tax = None
     item_preSaleDate = None
     item_itemAttachment_name = None
+    item_measurementUnit = None
+    item_unitMultiplier = None
+    item_sellingPrice = None
+    item_isGift = None
+    item_shippingPrice = None
+    item_rewardValue = None
+    item_freightCommission = None
+    item_taxCode = None
+    item_parentItemIndex = None
+    item_parentAssemblyBinding = None
     
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
@@ -252,6 +262,15 @@ def get_order(id,reg):
                 init.item_commission = Items["commission"]
                 init.item_tax = Items["tax"]
                 init.item_preSaleDate = Items["preSaleDate"]
+                init.item_unitMultiplier = Items["item_unitMultiplier"]
+                init.item_sellingPrice = Items["item_sellingPrice"]
+                init.item_isGift = Items["item_isGift"]
+                init.item_shippingPrice = Items["item_shippingPrice"]
+                init.item_rewardValue = Items["item_rewardValue"]
+                init.item_freightCommission = Items["item_freightCommission"]
+                init.item_taxCode = Items["item_taxCode"]
+                init.item_parentItemIndex = Items["item_parentItemIndex"]
+                init.item_parentAssemblyBinding = Items["item_parentAssemblyBinding"]
                 if Items["itemAttachment"]:
                     init.item_itemAttachment_name = itemAttachment["name"]
             #except:
@@ -329,7 +348,16 @@ def get_order(id,reg):
             'item_commission': init.item_commission,
             'item_tax': init.item_tax,
             'item_preSaleDate': init.item_preSaleDate,
-            'item_preSaleDate': init.item_preSaleDate,
+            'item_unitMultiplier': init.item_unitMultiplier,
+            'item_sellingPrice': init.item_sellingPrice,
+            'item_isGift': init.item_isGift,
+            'item_shippingPrice': init.item_shippingPrice,
+            'item_rewardValue': init.item_rewardValue,
+            'item_freightCommission': init.item_freightCommission,
+            'item_taxCode': init.item_taxCode,
+            'item_parentItemIndex': init.item_parentItemIndex,
+            'item_parentAssemblyBinding': init.item_parentAssemblyBinding,
+            'item_itemAttachment_name': init.item_itemAttachment_name,
             'invoicedDate': init.invoicedDate}, index=[0])
         init.df = init.df.append(df1)
         print("Registro: "+str(reg))
