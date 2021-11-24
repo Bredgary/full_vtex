@@ -159,26 +159,32 @@ def get_order(id,reg):
         Total = Fjson["totals"]
         
         if Total:
-            items = Total[0]
-            discounts = Total[1]
-            shipping = Total[2]
-            tax = Total[3]
-            change = Total[4]
-            init.total_id_items = items["id"]
-            init.total_name_items = items["name"]
-            init.total_value_items = items["value"]
-            init.total_id_discounts = discounts["id"]
-            init.total_name_discounts = discounts["name"]
-            init.total_value_discounts = discounts["value"]
-            init.total_id_shipping = shipping["id"]
-            init.total_name_shipping = shipping["name"]
-            init.total_value_shipping = shipping["value"]
-            init.total_id_tax = tax["id"]
-            init.total_name_tax = tax["name"]
-            init.total_value_tax = tax["value"]
-            init.total_id_change = change["id"]
-            init.total_name_change = change["name"]
-            init.total_value_change = change["value"]
+            if Total[0]:
+                items = Total[0]
+                init.total_id_items = items["id"]
+                init.total_name_items = items["name"]
+                init.total_value_items = items["value"]
+            if Total[1]:
+                discounts = Total[1]
+                init.total_id_discounts = discounts["id"]
+                init.total_name_discounts = discounts["name"]
+                init.total_value_discounts = discounts["value"]
+            if Total[2]:
+                shipping = Total[2]
+                init.total_id_shipping = shipping["id"]
+                init.total_name_shipping = shipping["name"]
+                init.total_value_shipping = shipping["value"]
+            if Total[3]:
+                tax = Total[3]
+                init.total_id_tax = tax["id"]
+                init.total_name_tax = tax["name"]
+                init.total_value_tax = tax["value"]
+            if Total[4]:
+                change = Total[4]
+                init.total_id_change = change["id"]
+                init.total_name_change = change["name"]
+                init.total_value_change = change["value"]
+                
             
 
         df1 = pd.DataFrame({
