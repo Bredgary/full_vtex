@@ -230,6 +230,7 @@ def get_order(id,reg):
         additionalInfo = Items["additionalInfo"]
         priceDefinition = Items["priceDefinition"]
         sellingPrice = Items["sellingPrice"]
+        quality = sellingPrice[0]
         dimension = additionalInfo["dimension"]
         '''
         END
