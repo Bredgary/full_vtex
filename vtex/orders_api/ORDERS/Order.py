@@ -51,8 +51,9 @@ class init:
     invoicedDate = None
     
     '''
-    Dimensiones
+    Dimensiones TOTAL
     '''
+    
     total_id_items = None
     total_name_items = None
     total_value_items = None
@@ -68,7 +69,11 @@ class init:
     total_id_change = None
     total_name_change = None
     total_value_change = None
-    
+
+    '''
+    Dimensiones ITEMS
+    '''
+
     items_uniqueId = None
     items_id = None
     items_productId = None
@@ -99,6 +104,18 @@ class init:
     item_taxCode = None
     item_parentItemIndex = None
     item_parentAssemblyBinding = None
+    
+    '''
+    Dimensiones ITEMS_INFORMATION__ADITIONAL
+    '''
+    brandName = None
+    brandId = None
+    categoriesIds = None
+    productClusterId = None
+    commercialConditionId = None
+    offeringInfo = None
+    offeringType = None
+    offeringTypeId = None
     
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
@@ -196,6 +213,7 @@ def get_order(id,reg):
         items = Fjson["items"]
         Items = items[0]
         itemAttachment = Items["itemAttachment"]
+        additionalInfo = Items["additionalInfo"]
         '''
         END
         '''
@@ -242,7 +260,7 @@ def get_order(id,reg):
             except:
                 print("No hay datos change")
         if Items:
-            #try:
+            try:
                 init.items_uniqueId = Items["uniqueId"]
                 init.items_id = Items["id"]
                 init.items_productId = Items["productId"]
@@ -272,10 +290,26 @@ def get_order(id,reg):
                 init.item_taxCode = Items["taxCode"]
                 init.item_parentItemIndex = Items["parentItemIndex"]
                 init.item_parentAssemblyBinding = Items["parentAssemblyBinding"]
+                
+                '''
+                Informacion Adicional
+                '''
+                
+                init.brandName = additionalInfo["brandName"]
+                init.brandId = additionalInfo["brandId"]
+                init.categoriesIds = additionalInfo["categoriesIds"]
+                init.productClusterId = additionalInfo["productClusterId"]
+                init.commercialConditionId = additionalInfo["commercialConditionId"]
+                init.offeringInfo = additionalInfo["offeringInfo"]
+                init.offeringType = additionalInfo["offeringType"]
+                init.offeringTypeId = additionalInfo["offeringTypeId"]
+                
+                
+                
                 if Items["itemAttachment"]:
                     init.item_itemAttachment_name = itemAttachment["name"]
-            #except:
-            #    print("No hay datos tax")
+            except:
+                print("No hay datos ITEMS")
             
 
         df1 = pd.DataFrame({
@@ -360,6 +394,14 @@ def get_order(id,reg):
             'item_parentItemIndex': init.item_parentItemIndex,
             'item_parentAssemblyBinding': init.item_parentAssemblyBinding,
             'item_itemAttachment_name': init.item_itemAttachment_name,
+            'brandName': init.brandName,
+            'brandId': init.brandId,
+            'categoriesIds': init.categoriesIds,
+            'productClusterId': init.productClusterId,
+            'commercialConditionId': init.commercialConditionId,
+            'offeringInfo': init.offeringInfo,
+            'offeringType': init.offeringType,
+            'offeringTypeId': init.offeringTypeId,
             'invoicedDate': init.invoicedDate}, index=[0])
         init.df = init.df.append(df1)
         print("Registro: "+str(reg))
