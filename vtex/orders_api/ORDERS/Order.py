@@ -330,20 +330,18 @@ def get_order(id,reg):
                 init.length = dimension["length"]
                 init.weight = dimension["weight"]
                 init.width = dimension["width"]
-                
-                '''
-                priceDefinition
-                '''
-                init.quantity = sellingPrice["quantity"]
-                init.value = sellingPrice["value"]
-                init.total = sellingPrice["total"]
-                
-                
+
                 if Items["itemAttachment"]:
                     init.item_itemAttachment_name = itemAttachment["name"]
             except:
                 print("No hay datos ITEMS")
             
+            '''
+            priceDefinition
+            '''
+            init.quantity = sellingPrice["quantity"]
+            init.value = sellingPrice["value"]
+            init.total = sellingPrice["total"]
 
         df1 = pd.DataFrame({
             'emailTracked': init.emailTracked,
