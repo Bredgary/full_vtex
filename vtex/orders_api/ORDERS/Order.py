@@ -156,7 +156,16 @@ def get_order(id,reg):
         if "invoicedDate" in Fjson:
         	init.invoicedDate = Fjson["invoicedDate"]
         
+        '''
+        INIT TREE
+        '''
+        
         Total = Fjson["totals"]
+        Items = Fjson["items"]
+        print(Items["uniqueId"])
+        '''
+        END
+        '''
         
         if Total:
             try:
