@@ -230,7 +230,6 @@ def get_order(id,reg):
         additionalInfo = Items["additionalInfo"]
         priceDefinition = Items["priceDefinition"]
         sellingPrice = Items["sellingPrice"]
-        quantity = sellingPrice[0]
         dimension = additionalInfo["dimension"]
         '''
         END
@@ -335,8 +334,8 @@ def get_order(id,reg):
                 '''
                 priceDefinition
                 '''
-                init.quantity = quantity["quantity"]
-                init.value = quantity["value"]
+                init.quantity = sellingPrice["quantity"]
+                init.value = sellingPrice["value"]
                 init.total = sellingPrice["total"]
                 
                 
