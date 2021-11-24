@@ -339,12 +339,12 @@ def get_order(id,reg):
                 '''
             
                 init.quantity = Items["sellingPrice"]
-                init.value = Items["value"]
-                init.total = Items["total"]
+                
             except:
                 print("No hay datos ITEMS")
             
-            
+            init.value = Items[sellingPrice:value]
+            init.total = Items["total"]
             
         df1 = pd.DataFrame({
             'emailTracked': init.emailTracked,
