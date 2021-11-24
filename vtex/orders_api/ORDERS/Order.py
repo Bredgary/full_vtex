@@ -116,6 +116,15 @@ class init:
     offeringInfo = None
     offeringType = None
     offeringTypeId = None
+    '''
+    Dimensiones ITEMS_INFORMATION__ADITIONAL_dimension
+    '''
+    
+    cubicweight = None
+    height = None
+    length = None
+    weight = None
+    width = None
     
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
@@ -214,6 +223,7 @@ def get_order(id,reg):
         Items = items[0]
         itemAttachment = Items["itemAttachment"]
         additionalInfo = Items["additionalInfo"]
+        dimension = additionalInfo["dimension"]
         '''
         END
         '''
@@ -304,6 +314,15 @@ def get_order(id,reg):
                 init.offeringType = additionalInfo["offeringType"]
                 init.offeringTypeId = additionalInfo["offeringTypeId"]
                 
+                '''
+                información Adicional dimension
+                '''
+                
+                init.cubicweight = dimension["cubicweight"]
+                init.height = dimension["height"]
+                init.length = dimension["length"]
+                init.weight = dimension["weight"]
+                init.width = dimension["width"]
                 
                 
                 if Items["itemAttachment"]:
@@ -402,6 +421,11 @@ def get_order(id,reg):
             'offeringInfo': init.offeringInfo,
             'offeringType': init.offeringType,
             'offeringTypeId': init.offeringTypeId,
+            'cubicweight': init.cubicweight,
+            'height': init.height,
+            'length': init.length,
+            'weight': init.weight,
+            'width': init.width,
             'invoicedDate': init.invoicedDate}, index=[0])
         init.df = init.df.append(df1)
         print("Registro: "+str(reg))
