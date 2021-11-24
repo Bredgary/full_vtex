@@ -166,7 +166,7 @@ def get_order(id,reg):
                     init.total_name_items = items["name"]
                     init.total_value_items = items["value"]
             except:
-                print("No hay datos")
+                print("No hay datos items")
             try:
                 if Total[1]:
                     discounts = Total[1]
@@ -174,7 +174,7 @@ def get_order(id,reg):
                     init.total_name_discounts = discounts["name"]
                     init.total_value_discounts = discounts["value"]
             except:
-                print("No hay datos")
+                print("No hay datos discounts")
             try:
                 if Total[2]:
                     shipping = Total[2]
@@ -182,7 +182,7 @@ def get_order(id,reg):
                     init.total_name_shipping = shipping["name"]
                     init.total_value_shipping = shipping["value"]
             except:
-                print("No hay datos")
+                print("No hay datos shipping")
             try:
                 if Total[3]:
                     tax = Total[3]
@@ -190,7 +190,7 @@ def get_order(id,reg):
                     init.total_name_tax = tax["name"]
                     init.total_value_tax = tax["value"]
             except:
-                print("No hay datos")
+                print("No hay datos tax")
             try:
                 if  Total[4]:
                     change = Total[4]
@@ -198,7 +198,7 @@ def get_order(id,reg):
                     init.total_name_change = change["name"]
                     init.total_value_change = change["value"]
             except:
-                print("No hay datos")
+                print("No hay datos change")
                 
             
 
