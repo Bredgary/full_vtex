@@ -230,8 +230,7 @@ def get_order(id,reg):
         additionalInfo = Items["additionalInfo"]
         priceDefinition = Items["priceDefinition"]
         sellingPrice = Items["sellingPrice"]
-        for x in range(2):
-            print(sellingPrice["value"])
+        print("sellingPrice:", sellingPrice)
         dimension = additionalInfo["dimension"]
         '''
         END
@@ -340,11 +339,11 @@ def get_order(id,reg):
             
             '''
             priceDefinition
-            '''
+            
             init.quantity = str(sellingPrice["quantity"])
             init.value = sellingPrice["value"]
             init.total = sellingPrice["total"]
-
+            '''
         df1 = pd.DataFrame({
             'emailTracked': init.emailTracked,
             'approvedBy': init.approvedBy,
