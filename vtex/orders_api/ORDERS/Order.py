@@ -230,7 +230,6 @@ def get_order(id,reg):
         additionalInfo = Items["additionalInfo"]
         priceDefinition = Items["priceDefinition"]
         sellingPrice = Items["sellingPrice"]
-        print("sellingPrice:", sellingPrice)
         dimension = additionalInfo["dimension"]
         '''
         END
@@ -337,10 +336,11 @@ def get_order(id,reg):
             except:
                 print("No hay datos ITEMS")
             
-            '''
+            
             priceDefinition
             
-            init.quantity = str(sellingPrice["quantity"])
+            init.quantity = Items["sellingPrice"]
+            '''
             init.value = sellingPrice["value"]
             init.total = sellingPrice["total"]
             '''
@@ -442,6 +442,7 @@ def get_order(id,reg):
             'quantity': init.quantity,
             'value': init.value,
             'total': init.total,
+            'quantity': init.quantity,
             'invoicedDate': init.invoicedDate}, index=[0])
         init.df = init.df.append(df1)
         print("Registro: "+str(reg))
