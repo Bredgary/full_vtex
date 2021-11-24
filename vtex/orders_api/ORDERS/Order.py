@@ -268,28 +268,28 @@ def delete_duplicate():
 
 
 def run():
-    try:
-        get_params()
-        df = init.df
-        df.reset_index(drop=True, inplace=True)
-        json_data = df.to_json(orient = 'records')
-        json_object = json.loads(json_data)
-        
-        project_id = '999847639598'
-        dataset_id = 'landing_zone'
-        table_id = 'shopstar_vtex_order'
-        
-        client  = bigquery.Client(project = project_id)
-        dataset  = client.dataset(dataset_id)
-        table = dataset.table(table_id)
-        job_config = bigquery.LoadJobConfig()
-        job_config.write_disposition = "WRITE_TRUNCATE"
-        job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-        job_config.autodetect = True
-        job = client.load_table_from_json(json_object, table, job_config = job_config)
-        print(job.result())
-        delete_duplicate()
-    except:
-        print("Error")
+    #try:
+    get_params()
+    df = init.df
+    df.reset_index(drop=True, inplace=True)
+    json_data = df.to_json(orient = 'records')
+    json_object = json.loads(json_data)
+    
+    project_id = '999847639598'
+    dataset_id = 'landing_zone'
+    table_id = 'shopstar_vtex_order'
+    
+    client  = bigquery.Client(project = project_id)
+    dataset  = client.dataset(dataset_id)
+    table = dataset.table(table_id)
+    job_config = bigquery.LoadJobConfig()
+    job_config.write_disposition = "WRITE_TRUNCATE"
+    job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+    job_config.autodetect = True
+    job = client.load_table_from_json(json_object, table, job_config = job_config)
+    print(job.result())
+    delete_duplicate()
+    #except:
+    #    print("Error")
     
 run()
