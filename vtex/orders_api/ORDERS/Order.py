@@ -7,6 +7,7 @@ import os, json
 from datetime import datetime
 import requests
 from datetime import datetime, timezone
+from os.path import join
 
 class init:
     productList = []
@@ -206,28 +207,43 @@ def delete_duplicate():
 	except:
 		print("Consulta SQL no ejecutada")
 
+
+
 def run():
-	#try:
-    get_params()
-    df = init.df
-    df.reset_index(drop=True, inplace=True)
-    json_data = df.to_json(orient = 'records')
-    json_object = json.loads(json_data)
-    project_id = '999847639598'
-    dataset_id = 'landing_zone'
-    table_id = 'shopstar_vtex_order'
-    
-    client  = bigquery.Client(project = project_id)
-    dataset  = client.dataset(dataset_id)
-    table = dataset.table(table_id)
-    job_config = bigquery.LoadJobConfig()
-    job_config.write_disposition = "WRITE_TRUNCATE"
-    job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-    job_config.autodetect = True
-    job = client.load_table_from_json(json_object, table, job_config = job_config)
-    print(job.result())
-    delete_duplicate()
-	#except:
-	#	print("Error al ingesta")
+    try:
+        get_params()
+        df = init.df
+        df.reset_index(drop=True, inplace=True)
+        json_data = df.to_json(orient = 'records')
+        json_object = json.loads(json_data)
+        
+        print('Creating a new file')
+        path = "C:\Users\bredg\Desktop"
+        name = raw_input(json_object)+'.json'  # Name of text file coerced with +.txt
+        try:
+            file = open(join(path, name),'w')   # Trying to create a new file or open one
+            file.close()
+        except:
+            print('Something went wrong! Cannot tell what?')
+            sys.exit(0) 
+        
+        '''
+        project_id = '999847639598'
+        dataset_id = 'landing_zone'
+        table_id = 'shopstar_vtex_order'
+        
+        client  = bigquery.Client(project = project_id)
+        dataset  = client.dataset(dataset_id)
+        table = dataset.table(table_id)
+        job_config = bigquery.LoadJobConfig()
+        job_config.write_disposition = "WRITE_TRUNCATE"
+        job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+        job_config.autodetect = True
+        job = client.load_table_from_json(json_object, table, job_config = job_config)
+        print(job.result())
+        delete_duplicate()
+        '''
+    except:
+         print("Error")
     
 run()
