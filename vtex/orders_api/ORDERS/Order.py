@@ -214,19 +214,10 @@ def write(obj):
         repo = 'https://github.com/Bredgary/full_vtex/tree/main/ui'
         path = obj
         data = open("data.json", "r").read()
-        r = requests.put(
-            f'https://api.github.com/repos/{repo}/contents/{path}',
-        headers = {
-            'Authorization': f'Token {token}'
-        },
-        json = {
-            "message": "add new file",
-            "content": base64.b64encode(data.encode()).decode(),
-            "branch": "master"
-        }
-)
-print(r.status_code)
-print(r.json())
+        r = requests.put(f'https://api.github.com/repos/{repo}/contents/{path}',
+                         headers = {'Authorization': f'Token {token}'},json = {"message": "add new file","content": base64.b64encode(data.encode()).decode(),"branch": "master"})
+        print(r.status_code)
+        print(r.json())
 
 def run():
     #try:
