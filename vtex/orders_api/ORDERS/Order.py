@@ -262,15 +262,16 @@ def get_order(id,reg):
                 init.item_commission = Items["commission"]
                 init.item_tax = Items["tax"]
                 init.item_preSaleDate = Items["preSaleDate"]
-                init.item_unitMultiplier = Items["item_unitMultiplier"]
-                init.item_sellingPrice = Items["item_sellingPrice"]
-                init.item_isGift = Items["item_isGift"]
-                init.item_shippingPrice = Items["item_shippingPrice"]
-                init.item_rewardValue = Items["item_rewardValue"]
-                init.item_freightCommission = Items["item_freightCommission"]
-                init.item_taxCode = Items["item_taxCode"]
-                init.item_parentItemIndex = Items["item_parentItemIndex"]
-                init.item_parentAssemblyBinding = Items["item_parentAssemblyBinding"]
+                init.item_measurementUnit = Items["measurementUnit"]
+                init.item_unitMultiplier = Items["unitMultiplier"]
+                init.item_sellingPrice = Items["sellingPrice"]
+                init.item_isGift = Items["isGift"]
+                init.item_shippingPrice = Items["shippingPrice"]
+                init.item_rewardValue = Items["rewardValue"]
+                init.item_freightCommission = Items["freightCommission"]
+                init.item_taxCode = Items["taxCode"]
+                init.item_parentItemIndex = Items["parentItemIndex"]
+                init.item_parentAssemblyBinding = Items["parentAssemblyBinding"]
                 if Items["itemAttachment"]:
                     init.item_itemAttachment_name = itemAttachment["name"]
             #except:
@@ -348,6 +349,7 @@ def get_order(id,reg):
             'item_commission': init.item_commission,
             'item_tax': init.item_tax,
             'item_preSaleDate': init.item_preSaleDate,
+            'item_measurementUnit': init.item_measurementUnit,
             'item_unitMultiplier': init.item_unitMultiplier,
             'item_sellingPrice': init.item_sellingPrice,
             'item_isGift': init.item_isGift,
