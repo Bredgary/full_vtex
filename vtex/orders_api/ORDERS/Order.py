@@ -343,7 +343,7 @@ def get_order(id,reg):
             except:
                 print("No hay datos ITEMS")
             
-            init.total = Items["total"]
+            init.total = sellingPrice["total"]
             
         df1 = pd.DataFrame({
             'emailTracked': init.emailTracked,
