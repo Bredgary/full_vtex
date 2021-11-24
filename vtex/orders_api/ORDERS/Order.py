@@ -209,17 +209,10 @@ def delete_duplicate():
 		print("Consulta SQL no ejecutada")
 
 def write(obj):
-        print('Creating a new file')
-        path = "C:/Users/bredg/Desktop"
-        name = raw_input('obj')+'.json'  # Name of text file coerced with +.txt
-
-        try:
-            file = open(join(path, name),'w')   # Trying to create a new file or open one
-            file.close()
-
-        except:
-            print('Something went wrong! Cannot tell what?')
-            sys.exit(0) # quit Python
+        solditems = requests.get('https://github.com/Bredgary/full_vtex/tree/main/ui/order.json')
+        data = obj
+        with open('data.json', 'w') as f:
+            json.dump(data, f)
 
 def run():
     #try:
