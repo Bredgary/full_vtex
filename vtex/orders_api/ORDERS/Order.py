@@ -12,6 +12,7 @@ from os.path import join
 class init:
     productList = []
     df = pd.DataFrame()
+    raw_input = ""
     emailTracked = None
     approvedBy = None
     cancelledBy = None
@@ -219,9 +220,9 @@ def run():
     
     print('Creating a new file')
     path = "C:/Users/bredg/Desktop"
-    raw_input(json_object)+".json" 
+    init.raw_input(json_object)+".json" 
     try:
-        file = open(join(path, raw_input),'w')   # Trying to create a new file or open one
+        file = open(join(path, init.raw_input),'w')   # Trying to create a new file or open one
         file.close()
     except:
         print('Something went wrong! Cannot tell what?')
