@@ -128,6 +128,7 @@ class init:
     Dimensiones ITEMS_priceDefinition
     '''
     total = None
+    calculatedSellingPrice = None
     
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
@@ -335,7 +336,8 @@ def get_order(id,reg):
                 '''    
                 priceDefinition
                 '''
-                init.total = Items["sellingPrice"]
+                init.calculatedSellingPrice = priceDefinition["calculatedSellingPrice"]
+                init.total = priceDefinition["total"]
             except:
                 print("No hay datos ITEMS")
             
@@ -435,7 +437,7 @@ def get_order(id,reg):
             'length': init.length,
             'weight': init.weight,
             'width': init.width,
-            'total': init.total,
+            'total': init.calculatedSellingPrice,
             'invoicedDate': init.invoicedDate}, index=[0])
         init.df = init.df.append(df1)
         print("Registro: "+str(reg))
