@@ -156,15 +156,14 @@ def get_order(id,reg):
         if "invoicedDate" in Fjson:
         	init.invoicedDate = Fjson["invoicedDate"]
         
-        Total = Fjson["total"]
+        Total = Fjson["totals"]
         
         if Total:
-            total = Fjson["total"]
-            items = total[0]
-            discounts = total[0]
-            shipping = total[0]
-            tax = total[0]
-            change = total[0]
+            items = Total[0]
+            discounts = Total[0]
+            shipping = Total[0]
+            tax = Total[0]
+            change = Total[0]
             init.total_id_items = items["id"]
             init.total_name_items = items["name"]
             init.total_value_items = items["value"]
