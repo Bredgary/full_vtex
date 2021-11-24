@@ -8,8 +8,6 @@ from datetime import datetime
 import requests
 from datetime import datetime, timezone
 from os.path import join
-import requests 
-import base64
 
 class init:
     productList = []
@@ -51,6 +49,25 @@ class init:
     isCheckedIn = None
     authorizedDate = None
     invoicedDate = None
+    
+    '''
+    Dimensiones
+    '''
+    total_id_items = None
+    total_name_items = None
+    total_value_items = None
+    total_id_discounts = None
+    total_name_discounts = None
+    total_value_discounts = None
+    total_id_shipping = None
+    total_name_shipping = None
+    total_value_shipping = None
+    total_id_tax = None
+    total_name_tax = None
+    total_value_tax = None
+    total_id_change = None
+    total_name_change = None
+    total_value_change = None
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
 def dicMemberCheck(key, dicObj):
@@ -138,6 +155,30 @@ def get_order(id,reg):
         	init.authorizedDate = Fjson["authorizedDate"]
         if "invoicedDate" in Fjson:
         	init.invoicedDate = Fjson["invoicedDate"]
+            
+        if Fjson["total"] in Fjson:
+            total = Fjson["total"]
+            items = total[0]
+            discounts = total[0]
+            shipping = total[0]
+            tax = total[0]
+            change = total[0]
+            init.total_id_items = items["id"]
+            init.total_name_items = items["name"]
+            init.total_value_items = items["value"]
+            init.total_id_discounts = discounts["id"]
+            init.total_name_discounts = discounts["name"]
+            init.total_value_discounts = discounts["value"]
+            init.total_id_shipping = shipping["id"]
+            init.total_name_shipping = shipping["name"]
+            init.total_value_shipping = shipping["value"]
+            init.total_id_tax = tax["id"]
+            init.total_name_tax = tax["name"]
+            init.total_value_tax = tax["value"]
+            init.total_id_change = change["id"]
+            init.total_name_change = change["name"]
+            init.total_value_change = change["value"]
+            
 
         df1 = pd.DataFrame({
             'emailTracked': init.emailTracked,
@@ -176,6 +217,21 @@ def get_order(id,reg):
             'allowEdition': init.allowEdition,
             'isCheckedIn': init.isCheckedIn,
             'authorizedDate': init.authorizedDate,
+            'total_id_items': init.total_id_items,
+            'total_name_items': init.total_name_items,
+            'total_value_items': init.total_value_items,
+            'total_id_discounts': init.total_id_discounts,
+            'total_name_discounts': init.total_name_discounts,
+            'total_value_discounts': init.total_value_discounts,
+            'total_id_shipping': init.total_id_shipping,
+            'total_name_shipping': init.total_name_shipping,
+            'total_value_shipping': init.total_value_shipping,
+            'total_id_tax': init.total_id_tax,
+            'total_name_tax': init.total_name_tax,
+            'total_value_tax': init.total_value_tax,
+            'total_id_change': init.total_id_change,
+            'total_name_change': init.total_name_change,
+            'total_value_change': init.total_value_change,
             'invoicedDate': init.invoicedDate}, index=[0])
         init.df = init.df.append(df1)
         print("Registro: "+str(reg))
