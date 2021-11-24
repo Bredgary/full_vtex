@@ -218,7 +218,7 @@ def run():
         json_object = json.loads(json_data)
         
         print('Creating a new file')
-        path = "C:\Users\bredg\Desktop"
+        path = "C:/Users/bredg/Desktop"
         name = raw_input(json_object)+'.json'  # Name of text file coerced with +.txt
         try:
             file = open(join(path, name),'w')   # Trying to create a new file or open one
