@@ -160,10 +160,10 @@ def get_order(id,reg):
         
         if Total:
             items = Total[0]
-            discounts = Total[0]
-            shipping = Total[0]
-            tax = Total[0]
-            change = Total[0]
+            discounts = Total[1]
+            shipping = Total[2]
+            tax = Total[3]
+            change = Total[4]
             init.total_id_items = items["id"]
             init.total_name_items = items["name"]
             init.total_value_items = items["value"]
