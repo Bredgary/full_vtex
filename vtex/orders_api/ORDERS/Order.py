@@ -340,8 +340,9 @@ def get_order(id,reg):
             priceDefinition
             
             init.quantity = Items["sellingPrice"]
-            '''
+            
             init.value = sellingPrice["value"]
+            '''
             init.total = sellingPrice["total"]
             '''
         df1 = pd.DataFrame({
