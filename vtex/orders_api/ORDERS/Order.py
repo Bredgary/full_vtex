@@ -161,7 +161,8 @@ def get_order(id,reg):
         '''
         
         Total = Fjson["totals"]
-        Items = Fjson["items"]
+        items = Fjson["items"]
+        Items = items[0]
         print(Items["uniqueId"])
         '''
         END
