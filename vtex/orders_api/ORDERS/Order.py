@@ -150,6 +150,12 @@ class init:
     client_userProfileId = None
     client_customerClass = None
     
+    '''
+    "ratesAndBenefitsData"
+    '''
+    
+    id_ratesAndBenefits = None
+    
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
 def dicMemberCheck(key, dicObj):
@@ -255,6 +261,7 @@ def get_order(id,reg):
         
         Total = Fjson["totals"]
         clientProfileData = Fjson["clientProfileData"]
+        ratesAndBenefitsData = Fjson["ratesAndBenefitsData"]
         items = Fjson["items"]
         Items = items[0]
         itemAttachment = Items["itemAttachment"]
@@ -262,6 +269,8 @@ def get_order(id,reg):
         priceDefinition = Items["priceDefinition"]
         sellingPrice = Items["sellingPrice"]
         dimension = additionalInfo["dimension"]
+        
+        
         '''
         END
         '''
@@ -399,7 +408,9 @@ def get_order(id,reg):
                 
             except:
                 print("No se pudo cargar Client Profile")
-                
+        if ratesAndBenefitsData:
+            init.id_ratesAndBenefits = ratesAndBenefitsData["id"]
+            
             
         df1 = pd.DataFrame({
             'emailTracked': init.emailTracked,
@@ -513,6 +524,7 @@ def get_order(id,reg):
             'client_isCorporate': init.client_isCorporate,
             'client_userProfileId': init.client_userProfileId,
             'client_customerClass': init.client_customerClass,
+            'id_ratesAndBenefits': init.id_ratesAndBenefits,
             'invoicedDate': init.invoicedDate}, index=[0])
         init.df = init.df.append(df1)
         print("Registro: "+str(reg))
