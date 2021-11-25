@@ -389,13 +389,13 @@ def get_order(id,reg):
                 init.client_customerClass = clientProfileData["customerClass"]
                 
                 client_email = init.client_email
-                client_email_d = decrypt_email(client_email)
-                init.followUpEmail = decrypt_email(init.followUpEmail)
+                followUpEmail = init.followUpEmail
+                client_email_01 = decrypt_email(client_email)
+                followUpEmail_02 = decrypt_email(followUpEmail)
                 
             except:
                 print("No se pudo cargar Client Profile")
                 
-            #init.client_email = decrypt_email(init.client_email)
             
         df1 = pd.DataFrame({
             'emailTracked': init.emailTracked,
@@ -420,7 +420,7 @@ def get_order(id,reg):
             'giftRegistryData': init.giftRegistryData,
             'marketingData': init.marketingData,
             'callCenterOperatorData': init.callCenterOperatorData,
-            'followUpEmail': init.followUpEmail,
+            'followUpEmail': init.followUpEmail_02,
             'lastMessage': init.lastMessage,
             'hostname': init.hostname,
             'invoiceData': init.invoiceData,
@@ -495,7 +495,7 @@ def get_order(id,reg):
             'calculatedSellingPrice': init.calculatedSellingPrice,
             'total': init.total,
             'client_id': init.client_id,
-            'client_email': client_email_d,
+            'client_email': client_email_01,
             'client_firstName': init.client_firstName,
             'client_lastName': init.client_lastName,
             'client_documentType': init.client_documentType,
