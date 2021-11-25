@@ -163,8 +163,7 @@ def decrypt_email(email):
     headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
     response = requests.request("GET", url, headers=headers)
     formatoJ = json.loads(response.text)
-    print(formatoJ["email"])
-    #return result
+    return formatoJ["email"]
     
      
 def get_order(id,reg):
@@ -391,8 +390,8 @@ def get_order(id,reg):
                 init.client_userProfileId = clientProfileData["userProfileId"]
                 init.client_customerClass = clientProfileData["customerClass"]
                 
-                email1 = init.client_email
-                print(email1)
+                client_email = init.client_email
+                client_email_d = decrypt_email(client_email)
                 
             except:
                 print("No se pudo cargar Client Profile")
