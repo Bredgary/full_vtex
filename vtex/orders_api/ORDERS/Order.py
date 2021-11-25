@@ -248,7 +248,7 @@ def get_order(id,reg):
         	init.invoicedDate = Fjson["invoicedDate"]
         
         #init.followUpEmail = 
-        decrypt_email(init.followUpEmail)
+        #decrypt_email(init.followUpEmail)
         
         '''
         INIT TREE
