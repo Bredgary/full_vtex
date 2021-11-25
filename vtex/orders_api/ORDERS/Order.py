@@ -246,8 +246,6 @@ def get_order(id,reg):
         if "invoicedDate" in Fjson:
         	init.invoicedDate = Fjson["invoicedDate"]
         
-        #init.followUpEmail = 
-        #decrypt_email(init.followUpEmail)
         
         '''
         INIT TREE
@@ -392,6 +390,7 @@ def get_order(id,reg):
                 
                 client_email = init.client_email
                 client_email_d = decrypt_email(client_email)
+                init.followUpEmail = decrypt_email(init.followUpEmail)
                 
             except:
                 print("No se pudo cargar Client Profile")
