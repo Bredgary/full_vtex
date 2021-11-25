@@ -390,10 +390,10 @@ def get_order(id,reg):
                 init.client_isCorporate = clientProfileData["isCorporate"]
                 init.client_userProfileId = clientProfileData["userProfileId"]
                 init.client_customerClass = clientProfileData["customerClass"]
-                
-                init.client_email = decrypt_email(init.client_email)
             except:
                 print("No se pudo cargar Client Profile")
+                
+            init.client_email = decrypt_email(init.client_email)
             
         df1 = pd.DataFrame({
             'emailTracked': init.emailTracked,
