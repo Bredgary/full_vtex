@@ -163,7 +163,7 @@ def decrypt_email(email):
     headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
     response = requests.request("GET", url, headers=headers)
     fjson = json.loads(response.text)
-    print(fjson["email"])
+    return fjson["email"]
     
      
 def get_order(id,reg):
@@ -245,6 +245,8 @@ def get_order(id,reg):
         	init.authorizedDate = Fjson["authorizedDate"]
         if "invoicedDate" in Fjson:
         	init.invoicedDate = Fjson["invoicedDate"]
+        
+        init.followUpEmail = decrypt_email(init.followUpEmail)
         
         '''
         INIT TREE
@@ -387,7 +389,7 @@ def get_order(id,reg):
                 init.client_userProfileId = clientProfileData["userProfileId"]
                 init.client_customerClass = clientProfileData["customerClass"]
                 
-                decrypt_email(init.client_email)
+                init.client_email = decrypt_email(init.client_email)
             except:
                 print("No se pudo cargar Client Profile")
             
