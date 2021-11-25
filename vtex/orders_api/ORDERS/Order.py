@@ -157,7 +157,15 @@ def dicMemberCheck(key, dicObj):
         return True
     else:
         return False
-        
+
+def decrypt_email(email):
+    url = "https://conversationtracker.vtex.com.br/api/pvt/emailMapping?an=mercury&alias="+str(email)+""
+    headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
+    response = requests.request("GET", url, headers=headers)
+    fjson = json.loads(response.text)
+    print(fjson)
+    
+     
 def get_order(id,reg):
     #try:
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
@@ -378,6 +386,8 @@ def get_order(id,reg):
                 init.client_isCorporate = clientProfileData["isCorporate"]
                 init.client_userProfileId = clientProfileData["userProfileId"]
                 init.client_customerClass = clientProfileData["customerClass"]
+                
+                decrypt_email(init.client_email)
             except:
                 print("No se pudo cargar Client Profile")
             
