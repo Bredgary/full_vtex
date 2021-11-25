@@ -163,8 +163,8 @@ def decrypt_email(email):
     headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
     response = requests.request("GET", url, headers=headers)
     fjson = json.loads(response.text)
-    result = fjson["email"]
-    return result
+    print(fjson["email"])
+    #return result
     
      
 def get_order(id,reg):
@@ -247,7 +247,8 @@ def get_order(id,reg):
         if "invoicedDate" in Fjson:
         	init.invoicedDate = Fjson["invoicedDate"]
         
-        init.followUpEmail = decrypt_email(init.followUpEmail)
+        #init.followUpEmail = 
+        decrypt_email(init.followUpEmail)
         
         '''
         INIT TREE
