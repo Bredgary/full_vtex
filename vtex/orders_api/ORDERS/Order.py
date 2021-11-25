@@ -422,7 +422,7 @@ def get_order(id,reg):
             'giftRegistryData': init.giftRegistryData,
             'marketingData': init.marketingData,
             'callCenterOperatorData': init.callCenterOperatorData,
-            'followUpEmail': init.followUpEmail_02,
+            'followUpEmail': followUpEmail_02,
             'lastMessage': init.lastMessage,
             'hostname': init.hostname,
             'invoiceData': init.invoiceData,
