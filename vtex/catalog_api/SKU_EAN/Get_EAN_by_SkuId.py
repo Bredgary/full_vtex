@@ -25,6 +25,7 @@ def get_ean(id,reg):
     except:
     	print("Vacio")
 
+
 def get_params():
     print("Cargando consulta")
     client = bigquery.Client()
