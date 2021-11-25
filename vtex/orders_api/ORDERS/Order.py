@@ -392,8 +392,10 @@ def get_order(id,reg):
                 
                 client_email = init.client_email
                 followUpEmail = init.followUpEmail
+                print(followUpEmail)
                 client_email_01 = decrypt_email(client_email)
                 followUpEmail_02 = decrypt_email(followUpEmail)
+                print(followUpEmail_02)
                 
             except:
                 print("No se pudo cargar Client Profile")
