@@ -130,6 +130,26 @@ class init:
     total = None
     calculatedSellingPrice = None
     
+    '''
+    clientProfileData
+    '''
+    
+    client_id = None
+    client_email = None
+    client_firstName = None
+    client_lastName = None
+    client_documentType = None
+    client_document = None
+    client_phone = None
+    client_corporateName = None
+    client_tradeName = None
+    client_corporateDocument = None
+    client_stateInscription = None
+    client_corporatePhone = None
+    client_isCorporate = None
+    client_userProfileId = None
+    client_customerClass = None
+    
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
 def dicMemberCheck(key, dicObj):
@@ -223,6 +243,7 @@ def get_order(id,reg):
         '''
         
         Total = Fjson["totals"]
+        clientProfileData = Fjson["clientProfileData"]
         items = Fjson["items"]
         Items = items[0]
         itemAttachment = Items["itemAttachment"]
@@ -340,7 +361,25 @@ def get_order(id,reg):
                 init.total = priceDefinition["total"]
             except:
                 print("No hay datos ITEMS")
-            
+                
+            try:
+                init.client_id = clientProfileData["id"]
+                init.client_email = clientProfileData["email"]
+                init.client_firstName = clientProfileData["firstName"]
+                init.client_lastName = clientProfileData["lastName"]
+                init.client_documentType = clientProfileData["documentType"]
+                init.client_document = clientProfileData["document"]
+                init.client_phone = clientProfileData["phone"]
+                init.client_corporateName = clientProfileData["corporateName"]
+                init.client_tradeName = clientProfileData["tradeName"]
+                init.client_corporateDocument = clientProfileData["corporateDocument"]
+                init.client_stateInscription = clientProfileData["stateInscription"]
+                init.client_corporatePhone = clientProfileData["corporatePhone"]
+                init.client_isCorporate = clientProfileData["isCorporate"]
+                init.client_userProfileId = clientProfileData["userProfileId"]
+                init.client_customerClass = clientProfileData["customerClass"]
+            except:
+                print("No se pudo cargar Client Profile")
             
         df1 = pd.DataFrame({
             'emailTracked': init.emailTracked,
@@ -437,7 +476,24 @@ def get_order(id,reg):
             'length': init.length,
             'weight': init.weight,
             'width': init.width,
-            'total': init.calculatedSellingPrice,
+            'calculatedSellingPrice': init.calculatedSellingPrice,
+            'total': init.total,
+            'client_id': init.client_id,
+            'client_email': init.client_email,
+            'client_email': init.client_email,
+            'client_firstName': init.client_firstName,
+            'client_lastName': init.client_lastName,
+            'client_documentType': init.client_documentType,
+            'client_document': init.client_document,
+            'client_phone': init.client_phone,
+            'client_corporateName': init.client_corporateName,
+            'client_tradeName': init.client_tradeName,
+            'client_corporateDocument': init.client_corporateDocument,
+            'client_stateInscription': init.client_stateInscription,
+            'client_corporatePhone': init.client_corporatePhone,
+            'client_isCorporate': init.client_isCorporate,
+            'client_userProfileId': init.client_userProfileId,
+            'client_customerClass': init.client_customerClass,
             'invoicedDate': init.invoicedDate}, index=[0])
         init.df = init.df.append(df1)
         print("Registro: "+str(reg))
