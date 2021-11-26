@@ -156,6 +156,29 @@ class init:
     
     id_ratesAndBenefits = None
     
+    '''
+    "shippingData"
+    '''
+    
+    shippingData_id = None
+    
+    '''
+    address
+    '''
+    
+    addressType = None
+    receiverName = None
+    addressId = None
+    postalCode = None
+    city = None
+    state = None
+    country = None
+    street = None
+    number = None
+    neighborhood = None
+    complement = None
+    reference = None
+    
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
 def dicMemberCheck(key, dicObj):
@@ -262,6 +285,8 @@ def get_order(id,reg):
         Total = Fjson["totals"]
         clientProfileData = Fjson["clientProfileData"]
         ratesAndBenefitsData = Fjson["ratesAndBenefitsData"]
+        shippingData = Fjson["shippingData"]
+        address = shippingData["address"]
         items = Fjson["items"]
         Items = items[0]
         itemAttachment = Items["itemAttachment"]
@@ -408,6 +433,21 @@ def get_order(id,reg):
                 print("No se pudo cargar Client Profile")
         if ratesAndBenefitsData:
             init.id_ratesAndBenefits = ratesAndBenefitsData["id"]
+        if ratesAndBenefitsData:
+            init.shippingData_id = shippingData["id"]
+        if address:
+            init.addressType = address["addressType"]
+            init.receiverName = address["receiverName"]
+            init.addressId = address["addressId"]
+            init.postalCode = address["postalCode"]
+            init.city = address["city"]
+            init.state = address["state"]
+            init.country = address["country"]
+            init.street = address["street"]
+            init.number = address["number"]
+            init.neighborhood = address["neighborhood"]
+            init.complement = address["complement"]
+            init.reference = address["reference"]
             
             
         df1 = pd.DataFrame({
@@ -433,7 +473,7 @@ def get_order(id,reg):
             'giftRegistryData': init.giftRegistryData,
             'marketingData': init.marketingData,
             'callCenterOperatorData': init.callCenterOperatorData,
-            'followUpEmail': followUpEmail_02,
+            'followUpEmail': init.followUpEmail,
             'lastMessage': init.lastMessage,
             'hostname': init.hostname,
             'invoiceData': init.invoiceData,
@@ -523,6 +563,19 @@ def get_order(id,reg):
             'client_userProfileId': init.client_userProfileId,
             'client_customerClass': init.client_customerClass,
             'id_ratesAndBenefits': init.id_ratesAndBenefits,
+            'shippingData_id': init.shippingData_id,
+            'addressType': init.addressType,
+            'receiverName': init.receiverName,
+            'addressId': init.addressId,
+            'postalCode': init.postalCode,
+            'city': init.city,
+            'state': init.state,
+            'country': init.country,
+            'street': init.street,
+            'number': init.number,
+            'neighborhood': init.neighborhood,
+            'complement': init.complement,
+            'reference': init.reference,
             'invoicedDate': init.invoicedDate}, index=[0])
         init.df = init.df.append(df1)
         print("Registro: "+str(reg))
