@@ -179,6 +179,24 @@ class init:
     complement = None
     reference = None
     
+    '''
+    logisticsInfo
+    '''
+    deliveryChannel = None
+    trackingHints = None
+    addressId = None
+    polygonName = None
+    itemIndex = None
+    selectedSla = None
+    lockTTL = None
+    price = None
+    listPrice = None
+    sellingPrice = None
+    deliveryWindow = None
+    deliveryCompany = None
+    shippingEstimate = None
+    shippingEstimateDate = None
+    
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
 def dicMemberCheck(key, dicObj):
@@ -286,6 +304,8 @@ def get_order(id,reg):
         clientProfileData = Fjson["clientProfileData"]
         ratesAndBenefitsData = Fjson["ratesAndBenefitsData"]
         shippingData = Fjson["shippingData"]
+        logisticsInfo_0 = Fjson["logisticsInfo"]
+        logisticsInfo = logisticsInfo_0[0]
         address = shippingData["address"]
         items = Fjson["items"]
         Items = items[0]
@@ -448,6 +468,22 @@ def get_order(id,reg):
             init.neighborhood = address["neighborhood"]
             init.complement = address["complement"]
             init.reference = address["reference"]
+        if logisticsInfo:
+            init.trackingHints = logisticsInfo_0["trackingHints"]
+            init.deliveryChannel = logisticsInfo["deliveryChannel"]
+            init.addressId = logisticsInfo["addressId"]
+            init.polygonName = logisticsInfo["polygonName"]
+            init.itemIndex = logisticsInfo["itemIndex"]
+            init.selectedSla = logisticsInfo["selectedSla"]
+            init.lockTTL = logisticsInfo["lockTTL"]
+            init.price = logisticsInfo["price"]
+            init.listPrice = logisticsInfo["listPrice"]
+            init.sellingPrice = logisticsInfo["sellingPrice"]
+            init.deliveryWindow = logisticsInfo["deliveryWindow"]
+            init.deliveryCompany = logisticsInfo["deliveryCompany"]
+            init.shippingEstimate = logisticsInfo["shippingEstimate"]
+            init.shippingEstimateDate = logisticsInfo["shippingEstimateDate"]
+            
             
             
         df1 = pd.DataFrame({
@@ -576,6 +612,20 @@ def get_order(id,reg):
             'neighborhood': init.neighborhood,
             'complement': init.complement,
             'reference': init.reference,
+            'trackingHints': init.trackingHints,
+            'deliveryChannel': init.deliveryChannel,
+            'addressId': init.addressId,
+            'polygonName': init.polygonName,
+            'itemIndex': init.itemIndex,
+            'selectedSla': init.selectedSla,
+            'lockTTL': init.lockTTL,
+            'price': init.price,
+            'listPrice': init.listPrice,
+            'sellingPrice': init.sellingPrice,
+            'deliveryWindow': init.deliveryWindow,
+            'deliveryCompany': init.deliveryCompany,
+            'shippingEstimate': init.shippingEstimate,
+            'shippingEstimateDate': init.shippingEstimateDate,
             'invoicedDate': init.invoicedDate}, index=[0])
         init.df = init.df.append(df1)
         print("Registro: "+str(reg))
