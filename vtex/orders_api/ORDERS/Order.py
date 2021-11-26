@@ -318,7 +318,39 @@ class init:
     '''
     payments
     '''
-   
+    
+    payments_id = None
+    payments_paymentSystem = None
+    payments_paymentSystemName = None
+    payments_value = None
+    payments_installments = None
+    payments_referenceValue = None
+    payments_cardHolder = None
+    payments_firstDigits = None
+    payments_lastDigits = None
+    payments_url = None
+    payments_giftCardId = None
+    payments_giftCardName = None
+    payments_giftCardCaption = None
+    payments_redemptionCode = None
+    payments_group = None
+    payments_tid = None
+    payments_dueDate = None
+
+    '''
+    billingAddress
+    '''
+    
+    billingAddress_postalCode = None
+    billingAddress_city = None
+    billingAddress_state = None
+    billingAddress_country = None
+    billingAddress_street = None
+    billingAddress_number = None
+    billingAddress_neighborhood = None
+    billingAddress_complement = None
+    billingAddress_reference = None
+
     
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
@@ -758,6 +790,42 @@ def get_order(id,reg):
         except:
             print("No hay datos selectedAddresses")
             
+        init.transactions_isActive = transactions["isActive"]
+        init.transactions_transactionId = transactions["transactionId"]
+        init.transactions_merchantName = transactions["merchantName"]
+        
+        init.payments_id = payments["id"]
+        init.payments_paymentSystem = payments["paymentSystem"]
+        init.payments_paymentSystemName = payments["paymentSystemName"]
+        init.payments_value = payments["value"]
+        init.payments_installments = payments["installments"]
+        init.payments_referenceValue = payments["referenceValue"]
+        init.payments_cardHolder = payments["cardHolder"]
+        init.payments_firstDigits = payments["firstDigits"]
+        init.payments_lastDigits = payments["lastDigits"]
+        init.payments_url = payments["url"]
+        init.payments_giftCardId = payments["giftCardId"]
+        init.payments_giftCardName = payments["giftCardName"]
+        init.payments_giftCardCaption = payments["giftCardCaption"]
+        init.payments_redemptionCode = payments["redemptionCode"]
+        init.payments_group = payments["group"]
+        init.payments_tid = payments["tid"]
+        init.payments_dueDate = payments["dueDate"]
+    
+        '''
+        billingAddress
+        '''
+        
+        billingAddress_postalCode = billingAddress["postalCode"]
+        billingAddress_city = billingAddress["city"]
+        billingAddress_state = billingAddress["state"]
+        billingAddress_country = billingAddress["country"]
+        billingAddress_street = billingAddress["street"]
+        billingAddress_number = billingAddress["number"]
+        billingAddress_neighborhood = billingAddress["neighborhood"]
+        billingAddress_complement = billingAddress["complement"]
+        billingAddress_reference = billingAddress["reference"]
+            
         df1 = pd.DataFrame({
             'emailTracked': init.emailTracked,
             'approvedBy': init.approvedBy,
@@ -968,6 +1036,35 @@ def get_order(id,reg):
             'selectedAddresses_state': init.selectedAddresses_state,
             'selectedAddresses_country': init.selectedAddresses_country,
             'selectedAddresses_reference': init.selectedAddresses_reference,
+            'transactions_isActive': init.transactions_isActive,
+            'transactions_transactionId': init.transactions_transactionId,
+            'transactions_merchantName': init.transactions_merchantName,
+            'payments_id': init.payments_id,
+            'payments_paymentSystem': init.payments_paymentSystem,
+            'payments_paymentSystemName': init.payments_paymentSystemName,
+            'payments_value': init.payments_value,
+            'payments_installments': init.payments_installments,
+            'payments_referenceValue': init.payments_referenceValue,
+            'payments_cardHolder': init.payments_cardHolder,
+            'payments_firstDigits': init.payments_firstDigits,
+            'payments_lastDigits': init.payments_lastDigits,
+            'payments_url': init.payments_url,
+            'payments_giftCardId': init.payments_giftCardId,
+            'payments_giftCardName': init.payments_giftCardName,
+            'payments_giftCardCaption': init.payments_giftCardCaption,
+            'payments_redemptionCode': init.payments_redemptionCode,
+            'payments_group': init.payments_group,
+            'payments_tid': init.payments_tid,
+            'payments_dueDate': init.payments_dueDate,
+            'billingAddress_postalCode': init.billingAddress_postalCode,
+            'billingAddress_city': init.billingAddress_city,
+            'billingAddress_state': init.billingAddress_state,
+            'billingAddress_country': init.billingAddress_country,
+            'billingAddress_street': init.billingAddress_street,
+            'billingAddress_number': init.billingAddress_number,
+            'billingAddress_neighborhood': init.billingAddress_neighborhood,
+            'billingAddress_complement': init.billingAddress_complement,
+            'billingAddress_reference': init.billingAddress_reference,
             'invoicedDate': init.invoicedDate}, index=[0])
         init.df = init.df.append(df1)
         print("Registro: "+str(reg))
