@@ -606,7 +606,7 @@ def get_order(id,reg):
             init.slas_pickupStoreInfo_friendlyName = pickupStoreInfo["friendlyName"]
             init.slas_pickupStoreInfo_isPickupStore = pickupStoreInfo["isPickupStore"]
         except:
-            print("No hay datos")
+            print("No hay datos slas")
             
         try:
             init.slas_id_01 = slas_1["id"]
@@ -625,7 +625,7 @@ def get_order(id,reg):
             init.slas_pickupStoreInfo_friendlyName_01 = pickupStoreInfo_1["friendlyName"]
             init.slas_pickupStoreInfo_isPickupStore_01 = pickupStoreInfo_1["isPickupStore"]
         except:
-            print("No hay datos")
+            print("No hay datos slas_1")
         
         try:
             init.slas_id_02 = slas_2["id"]
@@ -644,7 +644,7 @@ def get_order(id,reg):
             init.slas_pickupStoreInfo_friendlyName_02 = pickupStoreInfo_2["friendlyName"]
             init.slas_pickupStoreInfo_isPickupStore_02 = pickupStoreInfo_2["isPickupStore"]
         except:
-            print("No hay datos")
+            print("No hay datos slas_2")
             
         try:
             init.slas_id_03 = slas_3["id"]
@@ -663,7 +663,7 @@ def get_order(id,reg):
             init.slas_pickupStoreInfo_friendlyName_03 = pickupStoreInfo_3["friendlyName"]
             init.slas_pickupStoreInfo_isPickupStore_03 = pickupStoreInfo_3["isPickupStore"]
         except:
-            print("No hay datos")
+            print("No hay datos slas_3")
         
             
             
