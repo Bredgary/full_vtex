@@ -504,10 +504,6 @@ def get_order(id,reg):
     except:
         print("marketplace. No tiene datos")
     try:
-        address = shippingData["address"]
-    except:
-        print("address. No tiene datos")
-    try:
         ratesAndBenefitsData = Fjson["ratesAndBenefitsData"]
     except:
         print("ratesAndBenefitsData. No tiene datos")
@@ -539,6 +535,10 @@ def get_order(id,reg):
         logisticsInfo = logisticsInfo_0[0]
     except:
         print("logisticsInfo. No tiene datos")
+    try:
+        address = shippingData["address"]
+    except:
+        print("address. No tiene datos")
     try:
         slas = logisticsInfo["slas"]
     except:
