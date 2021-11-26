@@ -282,6 +282,14 @@ class init:
     quantity = None
     warehouseId = None
     
+    '''
+    pickupStoreInfo
+    '''
+    pickupStoreInfo_additionalInfo = None
+    pickupStoreInfo_address = None
+    pickupStoreInfo_dockId = None
+    pickupStoreInfo_friendlyName = None
+    pickupStoreInfo_isPickupStore = None
    
     
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
@@ -687,6 +695,12 @@ def get_order(id,reg):
         except:
             print("No hay datos deliveryIds")
             
+        init.pickupStoreInfo_additionalInfo = pickupStoreInfo["additionalInfo"]
+        init.pickupStoreInfo_address = pickupStoreInfo["address"]
+        init.pickupStoreInfo_dockId = pickupStoreInfo["dockId"]
+        init.pickupStoreInfo_friendlyName = pickupStoreInfo["friendlyName"]
+        init.pickupStoreInfo_isPickupStore = pickupStoreInfo["isPickupStore"]
+            
             
         df1 = pd.DataFrame({
             'emailTracked': init.emailTracked,
@@ -881,6 +895,11 @@ def get_order(id,reg):
             'dockId': init.dockId,
             'quantity': init.quantity,
             'warehouseId': init.warehouseId,
+            'pickupStoreInfo_additionalInfo': init.pickupStoreInfo_additionalInfo,
+            'pickupStoreInfo_address': init.pickupStoreInfo_address,
+            'pickupStoreInfo_dockId': init.pickupStoreInfo_dockId,
+            'pickupStoreInfo_friendlyName': init.pickupStoreInfo_friendlyName,
+            'pickupStoreInfo_isPickupStore': init.pickupStoreInfo_isPickupStore,
             'invoicedDate': init.invoicedDate}, index=[0])
         init.df = init.df.append(df1)
         print("Registro: "+str(reg))
