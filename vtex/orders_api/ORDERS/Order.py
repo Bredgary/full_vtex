@@ -789,42 +789,50 @@ def get_order(id,reg):
             init.selectedAddresses_reference = selectedAddresses["reference"]
         except:
             print("No hay datos selectedAddresses")
-            
-        init.transactions_isActive = transactions["isActive"]
-        init.transactions_transactionId = transactions["transactionId"]
-        init.transactions_merchantName = transactions["merchantName"]
         
-        init.payments_id = payments["id"]
-        init.payments_paymentSystem = payments["paymentSystem"]
-        init.payments_paymentSystemName = payments["paymentSystemName"]
-        init.payments_value = payments["value"]
-        init.payments_installments = payments["installments"]
-        init.payments_referenceValue = payments["referenceValue"]
-        init.payments_cardHolder = payments["cardHolder"]
-        init.payments_firstDigits = payments["firstDigits"]
-        init.payments_lastDigits = payments["lastDigits"]
-        init.payments_url = payments["url"]
-        init.payments_giftCardId = payments["giftCardId"]
-        init.payments_giftCardName = payments["giftCardName"]
-        init.payments_giftCardCaption = payments["giftCardCaption"]
-        init.payments_redemptionCode = payments["redemptionCode"]
-        init.payments_group = payments["group"]
-        init.payments_tid = payments["tid"]
-        init.payments_dueDate = payments["dueDate"]
+        try:
+            init.transactions_isActive = transactions["isActive"]
+            init.transactions_transactionId = transactions["transactionId"]
+            init.transactions_merchantName = transactions["merchantName"]
+        except:
+            print("No hay datos transactions")
+        
+        try:
+            init.payments_id = payments["id"]
+            init.payments_paymentSystem = payments["paymentSystem"]
+            init.payments_paymentSystemName = payments["paymentSystemName"]
+            init.payments_value = payments["value"]
+            init.payments_installments = payments["installments"]
+            init.payments_referenceValue = payments["referenceValue"]
+            init.payments_cardHolder = payments["cardHolder"]
+            init.payments_firstDigits = payments["firstDigits"]
+            init.payments_lastDigits = payments["lastDigits"]
+            init.payments_url = payments["url"]
+            init.payments_giftCardId = payments["giftCardId"]
+            init.payments_giftCardName = payments["giftCardName"]
+            init.payments_giftCardCaption = payments["giftCardCaption"]
+            init.payments_redemptionCode = payments["redemptionCode"]
+            init.payments_group = payments["group"]
+            init.payments_tid = payments["tid"]
+            init.payments_dueDate = payments["dueDate"]
+        except:
+            print("No hay datos payments")
     
         '''
         billingAddress
         '''
-        
-        billingAddress_postalCode = billingAddress["postalCode"]
-        billingAddress_city = billingAddress["city"]
-        billingAddress_state = billingAddress["state"]
-        billingAddress_country = billingAddress["country"]
-        billingAddress_street = billingAddress["street"]
-        billingAddress_number = billingAddress["number"]
-        billingAddress_neighborhood = billingAddress["neighborhood"]
-        billingAddress_complement = billingAddress["complement"]
-        billingAddress_reference = billingAddress["reference"]
+        try:
+            billingAddress_postalCode = billingAddress["postalCode"]
+            billingAddress_city = billingAddress["city"]
+            billingAddress_state = billingAddress["state"]
+            billingAddress_country = billingAddress["country"]
+            billingAddress_street = billingAddress["street"]
+            billingAddress_number = billingAddress["number"]
+            billingAddress_neighborhood = billingAddress["neighborhood"]
+            billingAddress_complement = billingAddress["complement"]
+            billingAddress_reference = billingAddress["reference"]
+        except:
+            print("No hay datos billingAddress")
             
         df1 = pd.DataFrame({
             'emailTracked': init.emailTracked,
