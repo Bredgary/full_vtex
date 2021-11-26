@@ -385,18 +385,30 @@ def get_order(id,reg):
         logisticsInfo_0 = shippingData["logisticsInfo"]
         logisticsInfo = logisticsInfo_0[0]
         slas = logisticsInfo["slas"]
-        if slas[0] in Fjson:
+        try:
             slas_0 = slas[0]
             pickupStoreInfo = slas_0["pickupStoreInfo"]
-        if slas[1] in Fjson:
+        except:
+            print("slas_0 No tiene datos")
+        
+        try:
             slas_1 = slas[1]
             pickupStoreInfo_1 = slas_1["pickupStoreInfo"]
-        if slas[2] in Fjson:
+        except:
+            print("slas_1 No tiene datos")
+            
+        try:
             slas_2 = slas[2]
             pickupStoreInfo_2 = slas_2["pickupStoreInfo"]
-        if slas[3] in Fjson:
+        except:
+            print("slas_2 No tiene datos")
+        try:
             slas_3 = slas[3]
             pickupStoreInfo_3 = slas_3["pickupStoreInfo"]
+        except:
+            print("slas_3 No tiene datos")
+            
+        
         #logisticsInfo_02 = logisticsInfo_0[2]
         #logisticsInfo_03 = logisticsInfo_0[3]
         address = shippingData["address"]
@@ -577,7 +589,7 @@ def get_order(id,reg):
             init.shippingEstimate = logisticsInfo["shippingEstimate"]
             init.shippingEstimateDate = logisticsInfo["shippingEstimateDate"]
         
-        if slas:
+        try:
             init.slas_id = slas_0["id"]
             init.slas_name = slas_0["name"]
             init.slas_shippingEstimate = slas_0["shippingEstimate"]
@@ -593,8 +605,10 @@ def get_order(id,reg):
             init.slas_pickupStoreInfo_dockId = pickupStoreInfo["dockId"]
             init.slas_pickupStoreInfo_friendlyName = pickupStoreInfo["friendlyName"]
             init.slas_pickupStoreInfo_isPickupStore = pickupStoreInfo["isPickupStore"]
-        
-        if slas_1 in Fjson:
+        except:
+            print("No hay datos")
+            
+        try:
             init.slas_id_01 = slas_1["id"]
             init.slas_name_01 = slas_1["name"]
             init.slas_shippingEstimate_01 = slas_1["shippingEstimate"]
@@ -610,8 +624,10 @@ def get_order(id,reg):
             init.slas_pickupStoreInfo_dockId_01 = pickupStoreInfo_1["dockId"]
             init.slas_pickupStoreInfo_friendlyName_01 = pickupStoreInfo_1["friendlyName"]
             init.slas_pickupStoreInfo_isPickupStore_01 = pickupStoreInfo_1["isPickupStore"]
-            
-        if slas_2 in Fjson:
+        except:
+            print("No hay datos")
+        
+        try:
             init.slas_id_02 = slas_2["id"]
             init.slas_name_02 = slas_2["name"]
             init.slas_shippingEstimate_02 = slas_2["shippingEstimate"]
@@ -627,8 +643,10 @@ def get_order(id,reg):
             init.slas_pickupStoreInfo_dockId_02 = pickupStoreInfo_2["dockId"]
             init.slas_pickupStoreInfo_friendlyName_02 = pickupStoreInfo_2["friendlyName"]
             init.slas_pickupStoreInfo_isPickupStore_02 = pickupStoreInfo_2["isPickupStore"]
+        except:
+            print("No hay datos")
             
-        if slas_3 in Fjson:
+        try:
             init.slas_id_03 = slas_3["id"]
             init.slas_name_03 = slas_3["name"]
             init.slas_shippingEstimate_03 = slas_3["shippingEstimate"]
@@ -644,6 +662,8 @@ def get_order(id,reg):
             init.slas_pickupStoreInfo_dockId_03 = pickupStoreInfo_3["dockId"]
             init.slas_pickupStoreInfo_friendlyName_03 = pickupStoreInfo_3["friendlyName"]
             init.slas_pickupStoreInfo_isPickupStore_03 = pickupStoreInfo_3["isPickupStore"]
+        except:
+            print("No hay datos")
         
             
             
