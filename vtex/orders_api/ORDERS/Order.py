@@ -509,13 +509,13 @@ def get_order(id,reg):
             init.shippingEstimateDate = logisticsInfo["shippingEstimateDate"]
         
         if slas:
-            init.slas_id = slas[0]
-            init.slas_name = slas[0:1]
-            #init.slas_shippingEstimate = slas[2]
-            #init.slas_deliveryWindow = slas[3]
-            #init.slas_price = slas[4]
-            #init.slas_deliveryChannel = slas[5]
-            #init.slas_polygonName = slas[6]
+            init.slas_id = slas_0["id"]
+            init.slas_name = slas_0["name"]
+            init.slas_shippingEstimate = slas_0["shippingEstimate"]
+            init.slas_deliveryWindow = slas_0["deliveryWindow"]
+            init.slas_price = slas_0["price"]
+            init.slas_deliveryChannel = slas_0["deliveryChannel"]
+            init.slas_polygonName = slas_0["polygonName"]
             '''
             slas_pickupStoreInfo
             '''
