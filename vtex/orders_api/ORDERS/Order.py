@@ -357,6 +357,11 @@ class init:
     seller_id = None
     seller_name = None
     seller_logo = None
+    '''
+    changesAttachment
+    '''
+    
+    changesAttachment_id = None
 
     
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
@@ -501,6 +506,7 @@ def get_order(id,reg):
         
         address = shippingData["address"]
         items = Fjson["items"]
+        changesAttachment = Fjson["changesAttachment"]
         paymentData = Fjson["paymentData"]
         sellers_ = Fjson["sellers"]
         sellers = sellers_[0]
@@ -519,6 +525,7 @@ def get_order(id,reg):
         priceDefinition = Items["priceDefinition"]
         sellingPrice = Items["sellingPrice"]
         dimension = additionalInfo["dimension"]
+        
         
         
         '''
@@ -846,9 +853,14 @@ def get_order(id,reg):
         '''
         seller
         '''
-        init.seller_id = sellers["id"]
-        init.seller_name = sellers["name"]
-        init.seller_logo = sellers["logo"]
+        try:
+            init.seller_id = sellers["id"]
+            init.seller_name = sellers["name"]
+            init.seller_logo = sellers["logo"]
+        except:
+            print("No hay datos seller")
+        
+        init.changesAttachment_id = changesAttachment["id"]
 
             
         df1 = pd.DataFrame({
@@ -1093,6 +1105,7 @@ def get_order(id,reg):
             'seller_id': init.seller_id,
             'seller_name': init.seller_name,
             'seller_logo': init.seller_logo,
+            'changesAttachment_id': init.changesAttachment_id,
             'invoicedDate': init.invoicedDate}, index=[0])
         init.df = init.df.append(df1)
         print("Registro: "+str(reg))
