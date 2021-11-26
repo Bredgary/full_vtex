@@ -519,11 +519,11 @@ def get_order(id,reg):
             '''
             slas_pickupStoreInfo
             '''
-            init.slas_pickupStoreInfo_additionalInfo = slas_0["additionalInfo"]
-            init.slas_pickupStoreInfo_address = slas_0["address"]
-            init.slas_pickupStoreInfo_dockId = slas_0["dockId"]
-            init.slas_pickupStoreInfo_friendlyName = slas_0["friendlyName"]
-            init.slas_pickupStoreInfo_isPickupStore = slas_0["isPickupStore"]
+            init.slas_pickupStoreInfo_additionalInfo = pickupStoreInfo["additionalInfo"]
+            init.slas_pickupStoreInfo_address = pickupStoreInfo["address"]
+            init.slas_pickupStoreInfo_dockId = pickupStoreInfo["dockId"]
+            init.slas_pickupStoreInfo_friendlyName = pickupStoreInfo["friendlyName"]
+            init.slas_pickupStoreInfo_isPickupStore = pickupStoreInfo["isPickupStore"]
             
             
             
