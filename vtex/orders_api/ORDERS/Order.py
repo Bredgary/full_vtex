@@ -290,6 +290,23 @@ class init:
     pickupStoreInfo_dockId = None
     pickupStoreInfo_friendlyName = None
     pickupStoreInfo_isPickupStore = None
+    
+    '''
+    selectedAddresses
+    '''
+    
+    selectedAddresses_addressId = None
+    selectedAddresses_addressType = None
+    selectedAddresses_receiverName = None
+    selectedAddresses_street = None
+    selectedAddresses_number = None
+    selectedAddresses_complement = None
+    selectedAddresses_neighborhood = None
+    selectedAddresses_postalCode = None
+    selectedAddresses_city = None
+    selectedAddresses_state = None
+    selectedAddresses_country = None
+    selectedAddresses_reference = None
    
     
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
@@ -400,6 +417,8 @@ def get_order(id,reg):
         ratesAndBenefitsData = Fjson["ratesAndBenefitsData"]
         shippingData = Fjson["shippingData"]
         logisticsInfo_0 = shippingData["logisticsInfo"]
+        selectedAddresses_ = shippingData["selectedAddresses"]
+        selectedAddresses = selectedAddresses_[0]
         logisticsInfo = logisticsInfo_0[0]
         slas = logisticsInfo["slas"]
         deliveryIds_ = logisticsInfo["deliveryIds"]
@@ -703,7 +722,19 @@ def get_order(id,reg):
             init.pickupStoreInfo_isPickupStore = pickupStoreInfo["isPickupStore"]
         except:
             print("No hay datos pickupStoreInfo")
-            
+        
+        init.selectedAddresses_addressId = selectedAddresses["addressId"]
+        init.selectedAddresses_addressType = selectedAddresses["addressType"]
+        init.selectedAddresses_receiverName = selectedAddresses["receiverName"]
+        init.selectedAddresses_street = selectedAddresses["street"]
+        init.selectedAddresses_number = selectedAddresses["number"]
+        init.selectedAddresses_complement = selectedAddresses["complement"]
+        init.selectedAddresses_neighborhood = selectedAddresses["neighborhood"]
+        init.selectedAddresses_postalCode = selectedAddresses["postalCode"]
+        init.selectedAddresses_city = selectedAddresses["city"]
+        init.selectedAddresses_state = selectedAddresses["state"]
+        init.selectedAddresses_country = selectedAddresses["country"]
+        init.selectedAddresses_reference = selectedAddresses["reference"]
             
         df1 = pd.DataFrame({
             'emailTracked': init.emailTracked,
@@ -903,6 +934,18 @@ def get_order(id,reg):
             'pickupStoreInfo_dockId': init.pickupStoreInfo_dockId,
             'pickupStoreInfo_friendlyName': init.pickupStoreInfo_friendlyName,
             'pickupStoreInfo_isPickupStore': init.pickupStoreInfo_isPickupStore,
+            'selectedAddresses_addressId': init.selectedAddresses_addressId,
+            'selectedAddresses_addressType': init.selectedAddresses_addressType,
+            'selectedAddresses_receiverName': init.selectedAddresses_receiverName,
+            'selectedAddresses_street': init.selectedAddresses_street,
+            'selectedAddresses_number': init.selectedAddresses_number,
+            'selectedAddresses_complement': init.selectedAddresses_complement,
+            'selectedAddresses_neighborhood': init.selectedAddresses_neighborhood,
+            'selectedAddresses_postalCode': init.selectedAddresses_postalCode,
+            'selectedAddresses_city': init.selectedAddresses_city,
+            'selectedAddresses_state': init.selectedAddresses_state,
+            'selectedAddresses_country': init.selectedAddresses_country,
+            'selectedAddresses_reference': init.selectedAddresses_reference,
             'invoicedDate': init.invoicedDate}, index=[0])
         init.df = init.df.append(df1)
         print("Registro: "+str(reg))
