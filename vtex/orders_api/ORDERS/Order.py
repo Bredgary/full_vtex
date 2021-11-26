@@ -273,6 +273,15 @@ class init:
     slas_pickupStoreInfo_friendlyName_03 = None
     slas_pickupStoreInfo_isPickupStore_03 = None
     
+    '''
+    deliveryIds
+    '''
+    courierId = None
+    courierName = None
+    dockId = None
+    quantity = None
+    warehouseId = None
+    
    
     
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
@@ -385,6 +394,8 @@ def get_order(id,reg):
         logisticsInfo_0 = shippingData["logisticsInfo"]
         logisticsInfo = logisticsInfo_0[0]
         slas = logisticsInfo["slas"]
+        deliveryIds_ = logisticsInfo["deliveryIds"]
+        deliveryIds = deliveryIds_[0]
         try:
             slas_0 = slas[0]
             pickupStoreInfo = slas_0["pickupStoreInfo"]
@@ -665,7 +676,14 @@ def get_order(id,reg):
         except:
             print("No hay datos slas_3")
         
-            
+        try:
+            init.courierId = deliveryIds["courierId"]
+            init.courierName = deliveryIds["courierName"]
+            init.dockId = deliveryIds["dockId"]
+            init.quantity = deliveryIds["quantity"]
+            init.warehouseId = deliveryIds["warehouseId"]
+        except:
+            print("No hay datos deliveryIds")
             
             
         df1 = pd.DataFrame({
@@ -856,6 +874,11 @@ def get_order(id,reg):
             'slas_pickupStoreInfo_dockId_03': init.slas_pickupStoreInfo_dockId_03,
             'slas_pickupStoreInfo_friendlyName_03': init.slas_pickupStoreInfo_friendlyName_03,
             'slas_pickupStoreInfo_isPickupStore_03': init.slas_pickupStoreInfo_isPickupStore_03,
+            'courierId': init.courierId,
+            'courierName': init.courierName,
+            'dockId': init.dockId,
+            'quantity': init.quantity,
+            'warehouseId': init.warehouseId,
             'invoicedDate': init.invoicedDate}, index=[0])
         init.df = init.df.append(df1)
         print("Registro: "+str(reg))
