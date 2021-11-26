@@ -396,6 +396,8 @@ def get_order(id,reg):
         slas = logisticsInfo["slas"]
         deliveryIds_ = logisticsInfo["deliveryIds"]
         deliveryIds = deliveryIds_[0]
+        pickupStoreInfo = logisticsInfo["pickupStoreInfo"]
+        
         try:
             slas_0 = slas[0]
             pickupStoreInfo = slas_0["pickupStoreInfo"]
