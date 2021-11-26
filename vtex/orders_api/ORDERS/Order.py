@@ -468,7 +468,6 @@ def get_order(id,reg):
         payments_ = transactions["payments"]
         payments = payments_[0]
         billingAddress = payments["billingAddress"]
-        geoCoordinates = billingAddress["geoCoordinates"]
         
         
         
