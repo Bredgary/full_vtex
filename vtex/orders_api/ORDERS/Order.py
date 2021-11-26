@@ -862,12 +862,12 @@ def get_order(id,reg):
         '''
         seller
         '''
-        try:
-            init.seller_id = sellers["id"]
-            init.seller_name = sellers["name"]
-            init.seller_logo = sellers["logo"]
-        except:
-            print("No hay datos seller")
+        #try:
+        init.seller_id = sellers["id"]
+        init.seller_name = sellers["name"]
+        init.seller_logo = sellers["logo"]
+        #except:
+        #    print("No hay datos seller")
         
         try:
             init.changesAttachment_id = changesAttachment["id"]
