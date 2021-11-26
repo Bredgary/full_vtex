@@ -357,12 +357,20 @@ class init:
     seller_id = None
     seller_name = None
     seller_logo = None
+    
     '''
     changesAttachment
     '''
-    
     changesAttachment_id = None
-
+    
+    '''
+    storePreferencesData
+    '''
+    storePreferencesData_countryCode = None
+    storePreferencesData_currencyCode = None
+    storePreferencesData_currencyLocale = None
+    storePreferencesData_currencySymbol = None
+    storePreferencesData_timeZone = None
     
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
@@ -470,6 +478,7 @@ def get_order(id,reg):
         Total = Fjson["totals"]
         clientProfileData = Fjson["clientProfileData"]
         ratesAndBenefitsData = Fjson["ratesAndBenefitsData"]
+        storePreferencesData = Fjson["storePreferencesData"]
         shippingData = Fjson["shippingData"]
         logisticsInfo_0 = shippingData["logisticsInfo"]
         selectedAddresses_ = shippingData["selectedAddresses"]
@@ -860,9 +869,18 @@ def get_order(id,reg):
         except:
             print("No hay datos seller")
         
-        init.changesAttachment_id = changesAttachment["id"]
+        try:
+            init.changesAttachment_id = changesAttachment["id"]
+        except:
+            print("No hay datos seller")
 
-            
+        
+        init.storePreferencesData_countryCode = storePreferencesData["countryCode"]
+        init.storePreferencesData_currencyCode = storePreferencesData["currencyCode"]
+        init.storePreferencesData_currencyLocale = storePreferencesData["currencyLocale"]
+        init.storePreferencesData_currencySymbol = storePreferencesData["currencySymbol"]
+        init.storePreferencesData_timeZone = storePreferencesData["timeZone"]
+        
         df1 = pd.DataFrame({
             'emailTracked': init.emailTracked,
             'approvedBy': init.approvedBy,
@@ -1106,6 +1124,11 @@ def get_order(id,reg):
             'seller_name': init.seller_name,
             'seller_logo': init.seller_logo,
             'changesAttachment_id': init.changesAttachment_id,
+            'storePreferencesData_countryCode': init.storePreferencesData_countryCode,
+            'storePreferencesData_currencyCode': init.storePreferencesData_currencyCode,
+            'storePreferencesData_currencyLocale': init.storePreferencesData_currencyLocale,
+            'storePreferencesData_currencySymbol': init.storePreferencesData_currencySymbol,
+            'storePreferencesData_timeZone': init.storePreferencesData_timeZone,
             'invoicedDate': init.invoicedDate}, index=[0])
         init.df = init.df.append(df1)
         print("Registro: "+str(reg))
