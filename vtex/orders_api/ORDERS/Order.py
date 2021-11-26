@@ -216,6 +216,65 @@ class init:
     slas_pickupStoreInfo_friendlyName = None
     slas_pickupStoreInfo_isPickupStore = None
     
+    '''
+    slas_1
+    '''
+    slas_id_01 = None
+    slas_name_01 = None
+    slas_shippingEstimate_01 = None
+    slas_deliveryWindow_01 = None
+    slas_price_01 = None
+    slas_deliveryChannel_01 = None
+    slas_polygonName_01 = None
+    '''
+    slas_pickupStoreInfo_1
+    '''
+    slas_pickupStoreInfo_additionalInfo_01 = None
+    slas_pickupStoreInfo_address_01 = None
+    slas_pickupStoreInfo_dockId_01 = None
+    slas_pickupStoreInfo_friendlyName_01 = None
+    slas_pickupStoreInfo_isPickupStore_01 = None
+    
+    '''
+    slas_2
+    '''
+    slas_id_02 = None
+    slas_name_02 = None
+    slas_shippingEstimate_02 = None
+    slas_deliveryWindow_02 = None
+    slas_price_02 = None
+    slas_deliveryChannel_02 = None
+    slas_polygonName_02 = None
+    '''
+    slas_pickupStoreInfo_2
+    '''
+    slas_pickupStoreInfo_additionalInfo_02 = None
+    slas_pickupStoreInfo_address_02 = None
+    slas_pickupStoreInfo_dockId_02 = None
+    slas_pickupStoreInfo_friendlyName_02 = None
+    slas_pickupStoreInfo_isPickupStore_02 = None
+    
+    '''
+    slas_3
+    '''
+    slas_id_03 = None
+    slas_name_03 = None
+    slas_shippingEstimate_03 = None
+    slas_deliveryWindow_03 = None
+    slas_price_03 = None
+    slas_deliveryChannel_03 = None
+    slas_polygonName_03 = None
+    '''
+    slas_pickupStoreInfo_3
+    '''
+    slas_pickupStoreInfo_additionalInfo_03 = None
+    slas_pickupStoreInfo_address_03 = None
+    slas_pickupStoreInfo_dockId_03 = None
+    slas_pickupStoreInfo_friendlyName_03 = None
+    slas_pickupStoreInfo_isPickupStore_03 = None
+    
+   
+    
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
 def dicMemberCheck(key, dicObj):
@@ -328,6 +387,12 @@ def get_order(id,reg):
         slas = logisticsInfo["slas"]
         slas_0 = slas[0]
         pickupStoreInfo = slas_0["pickupStoreInfo"]
+        slas_1 = slas[1]
+        pickupStoreInfo_1 = slas_1["pickupStoreInfo"]
+        slas_2 = slas[2]
+        pickupStoreInfo_2 = slas_2["pickupStoreInfo"]
+        slas_3 = slas[3]
+        pickupStoreInfo_3 = slas_3["pickupStoreInfo"]
         #logisticsInfo_02 = logisticsInfo_0[2]
         #logisticsInfo_03 = logisticsInfo_0[3]
         address = shippingData["address"]
@@ -524,6 +589,58 @@ def get_order(id,reg):
             init.slas_pickupStoreInfo_dockId = pickupStoreInfo["dockId"]
             init.slas_pickupStoreInfo_friendlyName = pickupStoreInfo["friendlyName"]
             init.slas_pickupStoreInfo_isPickupStore = pickupStoreInfo["isPickupStore"]
+        
+        if slas_1:
+            init.slas_id_01 = slas_1["id"]
+            init.slas_name_01 = slas_1["name"]
+            init.slas_shippingEstimate_01 = slas_1["shippingEstimate"]
+            init.slas_deliveryWindow_01 = slas_1["deliveryWindow"]
+            init.slas_price_01 = slas_1["price"]
+            init.slas_deliveryChannel_01 = slas_1["deliveryChannel"]
+            init.slas_polygonName_01 = slas_1["polygonName"]
+            '''
+            slas_pickupStoreInfo
+            '''
+            init.slas_pickupStoreInfo_additionalInfo_01 = pickupStoreInfo_1["additionalInfo"]
+            init.slas_pickupStoreInfo_address_01 = pickupStoreInfo_1["address"]
+            init.slas_pickupStoreInfo_dockId_01 = pickupStoreInfo_1["dockId"]
+            init.slas_pickupStoreInfo_friendlyName_01 = pickupStoreInfo_1["friendlyName"]
+            init.slas_pickupStoreInfo_isPickupStore_01 = pickupStoreInfo_1["isPickupStore"]
+            
+        if slas_2:
+            init.slas_id_02 = slas_2["id"]
+            init.slas_name_02 = slas_2["name"]
+            init.slas_shippingEstimate_02 = slas_2["shippingEstimate"]
+            init.slas_deliveryWindow_02 = slas_2["deliveryWindow"]
+            init.slas_price_02 = slas_2["price"]
+            init.slas_deliveryChannel_02 = slas_2["deliveryChannel"]
+            init.slas_polygonName_02 = slas_2["polygonName"]
+            '''
+            slas_pickupStoreInfo
+            '''
+            init.slas_pickupStoreInfo_additionalInfo_02 = pickupStoreInfo_2["additionalInfo"]
+            init.slas_pickupStoreInfo_address_02 = pickupStoreInfo_2["address"]
+            init.slas_pickupStoreInfo_dockId_02 = pickupStoreInfo_2["dockId"]
+            init.slas_pickupStoreInfo_friendlyName_02 = pickupStoreInfo_2["friendlyName"]
+            init.slas_pickupStoreInfo_isPickupStore_02 = pickupStoreInfo_2["isPickupStore"]
+            
+        if slas_3:
+            init.slas_id_03 = slas_3["id"]
+            init.slas_name_03 = slas_3["name"]
+            init.slas_shippingEstimate_03 = slas_3["shippingEstimate"]
+            init.slas_deliveryWindow_03 = slas_3["deliveryWindow"]
+            init.slas_price_03 = slas_3["price"]
+            init.slas_deliveryChannel_03 = slas_3["deliveryChannel"]
+            init.slas_polygonName_03 = slas_3["polygonName"]
+            '''
+            slas_pickupStoreInfo
+            '''
+            init.slas_pickupStoreInfo_additionalInfo_03 = pickupStoreInfo_3["additionalInfo"]
+            init.slas_pickupStoreInfo_address_03 = pickupStoreInfo_3["address"]
+            init.slas_pickupStoreInfo_dockId_03 = pickupStoreInfo_3["dockId"]
+            init.slas_pickupStoreInfo_friendlyName_03 = pickupStoreInfo_3["friendlyName"]
+            init.slas_pickupStoreInfo_isPickupStore_03 = pickupStoreInfo_3["isPickupStore"]
+        
             
             
             
@@ -679,6 +796,42 @@ def get_order(id,reg):
             'slas_pickupStoreInfo_dockId': init.slas_pickupStoreInfo_dockId,
             'slas_pickupStoreInfo_friendlyName': init.slas_pickupStoreInfo_friendlyName,
             'slas_pickupStoreInfo_isPickupStore': init.slas_pickupStoreInfo_isPickupStore,
+            'slas_id_01': init.slas_id_01,
+            'slas_name_01': init.slas_name_01,
+            'slas_shippingEstimate_01': init.slas_shippingEstimate_01,
+            'slas_deliveryWindow_01': init.slas_deliveryWindow_01,
+            'slas_price_01': init.slas_price_01,
+            'slas_deliveryChannel_01': init.slas_deliveryChannel_01,
+            'slas_polygonName_01': init.slas_polygonName_01,
+            'slas_pickupStoreInfo_additionalInfo_01': init.slas_pickupStoreInfo_additionalInfo_01,
+            'slas_pickupStoreInfo_address_01': init.slas_pickupStoreInfo_address_01,
+            'slas_pickupStoreInfo_dockId_01': init.slas_pickupStoreInfo_dockId_01,
+            'slas_pickupStoreInfo_friendlyName_01': init.slas_pickupStoreInfo_friendlyName_01,
+            'slas_pickupStoreInfo_isPickupStore_01': init.slas_pickupStoreInfo_isPickupStore_01,
+            'slas_id_02': init.slas_id_02,
+            'slas_name_02': init.slas_name_02,
+            'slas_shippingEstimate_02': init.slas_shippingEstimate_02,
+            'slas_deliveryWindow_02': init.slas_deliveryWindow_02,
+            'slas_price_02': init.slas_price_02,
+            'slas_deliveryChannel_02': init.slas_deliveryChannel_02,
+            'slas_polygonName_02': init.slas_polygonName_02,
+            'slas_pickupStoreInfo_additionalInfo_02': init.slas_pickupStoreInfo_additionalInfo_02,
+            'slas_pickupStoreInfo_address_02': init.slas_pickupStoreInfo_address_02,
+            'slas_pickupStoreInfo_dockId_02': init.slas_pickupStoreInfo_dockId_02,
+            'slas_pickupStoreInfo_friendlyName_02': init.slas_pickupStoreInfo_friendlyName_02,
+            'slas_pickupStoreInfo_isPickupStore_02': init.slas_pickupStoreInfo_isPickupStore_02,
+            'slas_id_03': init.slas_id_03,
+            'slas_name_03': init.slas_name_03,
+            'slas_shippingEstimate_03': init.slas_shippingEstimate_03,
+            'slas_deliveryWindow_03': init.slas_deliveryWindow_03,
+            'slas_price_03': init.slas_price_03,
+            'slas_deliveryChannel_03': init.slas_deliveryChannel_03,
+            'slas_polygonName_03': init.slas_polygonName_03,
+            'slas_pickupStoreInfo_additionalInfo_03': init.slas_pickupStoreInfo_additionalInfo_03,
+            'slas_pickupStoreInfo_address_03': init.slas_pickupStoreInfo_address_03,
+            'slas_pickupStoreInfo_dockId_03': init.slas_pickupStoreInfo_dockId_03,
+            'slas_pickupStoreInfo_friendlyName_03': init.slas_pickupStoreInfo_friendlyName_03,
+            'slas_pickupStoreInfo_isPickupStore_03': init.slas_pickupStoreInfo_isPickupStore_03,
             'invoicedDate': init.invoicedDate}, index=[0])
         init.df = init.df.append(df1)
         print("Registro: "+str(reg))
