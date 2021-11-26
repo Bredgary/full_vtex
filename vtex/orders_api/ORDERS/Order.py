@@ -507,6 +507,23 @@ def get_order(id,reg):
             init.deliveryCompany = logisticsInfo["deliveryCompany"]
             init.shippingEstimate = logisticsInfo["shippingEstimate"]
             init.shippingEstimateDate = logisticsInfo["shippingEstimateDate"]
+        
+        if slas:
+            init.slas_id = slas["id"]
+            init.slas_name = slas["name"]
+            init.slas_shippingEstimate = slas["shippingEstimate"]
+            init.slas_deliveryWindow = slas["deliveryWindow"]
+            init.slas_price = slas["price"]
+            init.slas_deliveryChannel = slas["deliveryChannel"]
+            init.slas_polygonName = slas["polygonName"]
+            '''
+            slas_pickupStoreInfo
+            '''
+            init.slas_pickupStoreInfo_additionalInfo = slas_0["additionalInfo"]
+            init.slas_pickupStoreInfo_address = slas_0["address"]
+            init.slas_pickupStoreInfo_dockId = slas_0["dockId"]
+            init.slas_pickupStoreInfo_friendlyName = slas_0["friendlyName"]
+            init.slas_pickupStoreInfo_isPickupStore = slas_0["isPickupStore"]
             
             
             
@@ -650,6 +667,18 @@ def get_order(id,reg):
             'deliveryCompany': init.deliveryCompany,
             'shippingEstimate': init.shippingEstimate,
             'shippingEstimateDate': init.shippingEstimateDate,
+            'slas_id': init.slas_id,
+            'slas_name': init.slas_name,
+            'slas_shippingEstimate': init.slas_shippingEstimate,
+            'slas_deliveryWindow': init.slas_deliveryWindow,
+            'slas_price': init.slas_price,
+            'slas_deliveryChannel': init.slas_deliveryChannel,
+            'slas_polygonName': init.slas_polygonName,
+            'slas_pickupStoreInfo_additionalInfo': init.slas_pickupStoreInfo_additionalInfo,
+            'slas_pickupStoreInfo_address': init.slas_pickupStoreInfo_address,
+            'slas_pickupStoreInfo_dockId': init.slas_pickupStoreInfo_dockId,
+            'slas_pickupStoreInfo_friendlyName': init.slas_pickupStoreInfo_friendlyName,
+            'slas_pickupStoreInfo_isPickupStore': init.slas_pickupStoreInfo_isPickupStore,
             'invoicedDate': init.invoicedDate}, index=[0])
         init.df = init.df.append(df1)
         print("Registro: "+str(reg))
