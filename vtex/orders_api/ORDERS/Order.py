@@ -350,6 +350,13 @@ class init:
     billingAddress_neighborhood = None
     billingAddress_complement = None
     billingAddress_reference = None
+    
+    '''
+    Sellers
+    '''
+    seller_id = None
+    seller_name = None
+    seller_logo = None
 
     
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
@@ -495,6 +502,8 @@ def get_order(id,reg):
         address = shippingData["address"]
         items = Fjson["items"]
         paymentData = Fjson["paymentData"]
+        sellers_ = Fjson["sellers"]
+        sellers = sellers_[0]
         transactions_ = paymentData["transactions"]
         transactions = transactions_[0]
         payments_ = transactions["payments"]
@@ -834,6 +843,14 @@ def get_order(id,reg):
         except:
             print("No hay datos billingAddress")
             
+        '''
+        seller
+        '''
+        seller_id = sellers["id"]
+        seller_name = sellers["name"]
+        seller_logo = sellers["logo"]
+
+            
         df1 = pd.DataFrame({
             'emailTracked': init.emailTracked,
             'approvedBy': init.approvedBy,
@@ -1073,6 +1090,9 @@ def get_order(id,reg):
             'billingAddress_neighborhood': init.billingAddress_neighborhood,
             'billingAddress_complement': init.billingAddress_complement,
             'billingAddress_reference': init.billingAddress_reference,
+            'seller_id': init.seller_id,
+            'seller_name': init.seller_name,
+            'seller_logo': init.seller_logo,
             'invoicedDate': init.invoicedDate}, index=[0])
         init.df = init.df.append(df1)
         print("Registro: "+str(reg))
