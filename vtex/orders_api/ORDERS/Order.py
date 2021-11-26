@@ -385,14 +385,18 @@ def get_order(id,reg):
         logisticsInfo_0 = shippingData["logisticsInfo"]
         logisticsInfo = logisticsInfo_0[0]
         slas = logisticsInfo["slas"]
-        slas_0 = slas[0]
-        pickupStoreInfo = slas_0["pickupStoreInfo"]
-        slas_1 = slas[1]
-        pickupStoreInfo_1 = slas_1["pickupStoreInfo"]
-        slas_2 = slas[2]
-        pickupStoreInfo_2 = slas_2["pickupStoreInfo"]
-        slas_3 = slas[3]
-        pickupStoreInfo_3 = slas_3["pickupStoreInfo"]
+        if slas[0] in Fjson:
+            slas_0 = slas[0]
+            pickupStoreInfo = slas_0["pickupStoreInfo"]
+        if slas[1] in Fjson:
+            slas_1 = slas[1]
+            pickupStoreInfo_1 = slas_1["pickupStoreInfo"]
+        if slas[2] in Fjson:
+            slas_2 = slas[2]
+            pickupStoreInfo_2 = slas_2["pickupStoreInfo"]
+        if slas[3] in Fjson:
+            slas_3 = slas[3]
+            pickupStoreInfo_3 = slas_3["pickupStoreInfo"]
         #logisticsInfo_02 = logisticsInfo_0[2]
         #logisticsInfo_03 = logisticsInfo_0[3]
         address = shippingData["address"]
