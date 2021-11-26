@@ -304,7 +304,7 @@ def get_order(id,reg):
         clientProfileData = Fjson["clientProfileData"]
         ratesAndBenefitsData = Fjson["ratesAndBenefitsData"]
         shippingData = Fjson["shippingData"]
-        logisticsInfo_0 = Fjson["logisticsInfo"]
+        logisticsInfo_0 = shippingData["logisticsInfo"]
         logisticsInfo = logisticsInfo_0[0]
         address = shippingData["address"]
         items = Fjson["items"]
