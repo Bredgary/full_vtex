@@ -760,12 +760,7 @@ def get_order(id,reg):
         init.client_corporatePhone = clientProfileData["corporatePhone"]
         init.client_isCorporate = clientProfileData["isCorporate"]
         init.client_userProfileId = clientProfileData["userProfileId"]
-        init.client_customerClass = clientProfileData["customerClass"]
-        
-        client_email = init.client_email
-        followUpEmail = init.followUpEmail
-        client_email_01 = decrypt_email(client_email)
-        followUpEmail_02 = decrypt_email(followUpEmail)   
+        init.client_customerClass = clientProfileData["customerClass"]     
     except:
         print("No se pudo cargar Client Profile") 
     try:
@@ -986,9 +981,28 @@ def get_order(id,reg):
     except:
         print("No hay datos marketplace")
     
+    try:
+        followUpEmail = decrypt_email(str(init.followUpEmail))
+    except:
+        followUpEmail = None
+        print("nulo")
+    
+    try:
+        client_email = decrypt_email(str(init.client_email))
+    except:
+        client_email = None
+        print("nulo")
+    
+    try:
+        emailTracked = decrypt_email(str(init.emailTracked))
+    except:
+        emailTracked = None
+        print("nulo")
+    
+    
     df1 = pd.DataFrame({
         'orderId': init.orderId,
-        'emailTracked': init.emailTracked,
+        'emailTracked': emailTracked,
         'approvedBy': init.approvedBy,
         'cancelledBy': init.cancelledBy,
         'cancelReason': init.cancelReason,
@@ -1009,7 +1023,7 @@ def get_order(id,reg):
         'giftRegistryData': init.giftRegistryData,
         'marketingData': init.marketingData,
         'callCenterOperatorData': init.callCenterOperatorData,
-        'followUpEmail': init.followUpEmail,
+        'followUpEmail': followUpEmail,
         'lastMessage': init.lastMessage,
         'hostname': init.hostname,
         'invoiceData': init.invoiceData,
@@ -1084,7 +1098,7 @@ def get_order(id,reg):
         'calculatedSellingPrice': init.calculatedSellingPrice,
         'total': init.total,
         'client_id': init.client_id,
-        'client_email': client_email_01,
+        'client_email': client_email,
         'client_firstName': init.client_firstName,
         'client_lastName': init.client_lastName,
         'client_documentType': init.client_documentType,
