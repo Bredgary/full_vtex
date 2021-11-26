@@ -694,12 +694,15 @@ def get_order(id,reg):
             init.warehouseId = deliveryIds["warehouseId"]
         except:
             print("No hay datos deliveryIds")
-            
-        init.pickupStoreInfo_additionalInfo = pickupStoreInfo["additionalInfo"]
-        init.pickupStoreInfo_address = pickupStoreInfo["address"]
-        init.pickupStoreInfo_dockId = pickupStoreInfo["dockId"]
-        init.pickupStoreInfo_friendlyName = pickupStoreInfo["friendlyName"]
-        init.pickupStoreInfo_isPickupStore = pickupStoreInfo["isPickupStore"]
+        
+        try: 
+            init.pickupStoreInfo_additionalInfo = pickupStoreInfo["additionalInfo"]
+            init.pickupStoreInfo_address = pickupStoreInfo["address"]
+            init.pickupStoreInfo_dockId = pickupStoreInfo["dockId"]
+            init.pickupStoreInfo_friendlyName = pickupStoreInfo["friendlyName"]
+            init.pickupStoreInfo_isPickupStore = pickupStoreInfo["isPickupStore"]
+        except:
+            print("No hay datos pickupStoreInfo")
             
             
         df1 = pd.DataFrame({
