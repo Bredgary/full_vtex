@@ -590,7 +590,7 @@ def get_order(id,reg):
             init.slas_pickupStoreInfo_friendlyName = pickupStoreInfo["friendlyName"]
             init.slas_pickupStoreInfo_isPickupStore = pickupStoreInfo["isPickupStore"]
         
-        if slas_1:
+        if slas_1 in Fjson:
             init.slas_id_01 = slas_1["id"]
             init.slas_name_01 = slas_1["name"]
             init.slas_shippingEstimate_01 = slas_1["shippingEstimate"]
@@ -607,7 +607,7 @@ def get_order(id,reg):
             init.slas_pickupStoreInfo_friendlyName_01 = pickupStoreInfo_1["friendlyName"]
             init.slas_pickupStoreInfo_isPickupStore_01 = pickupStoreInfo_1["isPickupStore"]
             
-        if slas_2:
+        if slas_2 in Fjson:
             init.slas_id_02 = slas_2["id"]
             init.slas_name_02 = slas_2["name"]
             init.slas_shippingEstimate_02 = slas_2["shippingEstimate"]
@@ -624,7 +624,7 @@ def get_order(id,reg):
             init.slas_pickupStoreInfo_friendlyName_02 = pickupStoreInfo_2["friendlyName"]
             init.slas_pickupStoreInfo_isPickupStore_02 = pickupStoreInfo_2["isPickupStore"]
             
-        if slas_3:
+        if slas_3 in Fjson:
             init.slas_id_03 = slas_3["id"]
             init.slas_name_03 = slas_3["name"]
             init.slas_shippingEstimate_03 = slas_3["shippingEstimate"]
