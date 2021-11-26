@@ -510,12 +510,12 @@ def get_order(id,reg):
         
         if slas:
             init.slas_id = slas[0]
-            init.slas_name = slas[1]
-            init.slas_shippingEstimate = slas[2]
-            init.slas_deliveryWindow = slas[3]
-            init.slas_price = slas[4]
-            init.slas_deliveryChannel = slas[5]
-            init.slas_polygonName = slas[6]
+            init.slas_name = slas[0:1]
+            #init.slas_shippingEstimate = slas[2]
+            #init.slas_deliveryWindow = slas[3]
+            #init.slas_price = slas[4]
+            #init.slas_deliveryChannel = slas[5]
+            #init.slas_polygonName = slas[6]
             '''
             slas_pickupStoreInfo
             '''
