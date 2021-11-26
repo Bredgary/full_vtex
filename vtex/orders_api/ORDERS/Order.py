@@ -197,6 +197,25 @@ class init:
     shippingEstimate = None
     shippingEstimateDate = None
     
+    '''
+    slas
+    '''
+    slas_id = None
+    slas_name = None
+    slas_shippingEstimate = None
+    slas_deliveryWindow = None
+    slas_price = None
+    slas_deliveryChannel = None
+    slas_polygonName = None
+    '''
+    slas_pickupStoreInfo
+    '''
+    slas_pickupStoreInfo_additionalInfo = None
+    slas_pickupStoreInfo_address = None
+    slas_pickupStoreInfo_dockId = None
+    slas_pickupStoreInfo_friendlyName = None
+    slas_pickupStoreInfo_isPickupStore = None
+    
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
 def dicMemberCheck(key, dicObj):
@@ -306,6 +325,11 @@ def get_order(id,reg):
         shippingData = Fjson["shippingData"]
         logisticsInfo_0 = shippingData["logisticsInfo"]
         logisticsInfo = logisticsInfo_0[0]
+        slas = logisticsInfo["slas"]
+        slas_0 = slas[0]
+        pickupStoreInfo = slas_0["pickupStoreInfo"]
+        #logisticsInfo_02 = logisticsInfo_0[2]
+        #logisticsInfo_03 = logisticsInfo_0[3]
         address = shippingData["address"]
         items = Fjson["items"]
         Items = items[0]
