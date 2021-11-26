@@ -307,6 +307,17 @@ class init:
     selectedAddresses_state = None
     selectedAddresses_country = None
     selectedAddresses_reference = None
+    
+    '''
+    transactions
+    '''
+    transactions_isActive = None
+    transactions_transactionId = None
+    transactions_merchantName = None
+    
+    '''
+    payments
+    '''
    
     
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
@@ -449,10 +460,19 @@ def get_order(id,reg):
             print("slas_3 No tiene datos")
             
         
-        #logisticsInfo_02 = logisticsInfo_0[2]
-        #logisticsInfo_03 = logisticsInfo_0[3]
         address = shippingData["address"]
         items = Fjson["items"]
+        paymentData = Fjson["paymentData"]
+        transactions_ = paymentData["transactions"]
+        transactions = transactions_[0]
+        payments_ = transactions["payments"]
+        payments = payments_[0]
+        billingAddress = payments["billingAddress"]
+        geoCoordinates = billingAddress["geoCoordinates"]
+        
+        
+        
+        
         Items = items[0]
         itemAttachment = Items["itemAttachment"]
         additionalInfo = Items["additionalInfo"]
@@ -723,18 +743,21 @@ def get_order(id,reg):
         except:
             print("No hay datos pickupStoreInfo")
         
-        init.selectedAddresses_addressId = selectedAddresses["addressId"]
-        init.selectedAddresses_addressType = selectedAddresses["addressType"]
-        init.selectedAddresses_receiverName = selectedAddresses["receiverName"]
-        init.selectedAddresses_street = selectedAddresses["street"]
-        init.selectedAddresses_number = selectedAddresses["number"]
-        init.selectedAddresses_complement = selectedAddresses["complement"]
-        init.selectedAddresses_neighborhood = selectedAddresses["neighborhood"]
-        init.selectedAddresses_postalCode = selectedAddresses["postalCode"]
-        init.selectedAddresses_city = selectedAddresses["city"]
-        init.selectedAddresses_state = selectedAddresses["state"]
-        init.selectedAddresses_country = selectedAddresses["country"]
-        init.selectedAddresses_reference = selectedAddresses["reference"]
+        try:
+            init.selectedAddresses_addressId = selectedAddresses["addressId"]
+            init.selectedAddresses_addressType = selectedAddresses["addressType"]
+            init.selectedAddresses_receiverName = selectedAddresses["receiverName"]
+            init.selectedAddresses_street = selectedAddresses["street"]
+            init.selectedAddresses_number = selectedAddresses["number"]
+            init.selectedAddresses_complement = selectedAddresses["complement"]
+            init.selectedAddresses_neighborhood = selectedAddresses["neighborhood"]
+            init.selectedAddresses_postalCode = selectedAddresses["postalCode"]
+            init.selectedAddresses_city = selectedAddresses["city"]
+            init.selectedAddresses_state = selectedAddresses["state"]
+            init.selectedAddresses_country = selectedAddresses["country"]
+            init.selectedAddresses_reference = selectedAddresses["reference"]
+        except:
+            print("No hay datos selectedAddresses")
             
         df1 = pd.DataFrame({
             'emailTracked': init.emailTracked,
