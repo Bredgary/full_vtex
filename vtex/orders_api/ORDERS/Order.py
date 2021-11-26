@@ -469,7 +469,7 @@ def get_order(id,reg):
             init.complement = address["complement"]
             init.reference = address["reference"]
         if logisticsInfo:
-            init.trackingHints = logisticsInfo_0["trackingHints"]
+            init.trackingHints = logisticsInfo_0[0]
             init.deliveryChannel = logisticsInfo["deliveryChannel"]
             init.addressId = logisticsInfo["addressId"]
             init.polygonName = logisticsInfo["polygonName"]
