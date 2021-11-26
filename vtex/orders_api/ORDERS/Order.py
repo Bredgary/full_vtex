@@ -831,24 +831,24 @@ def get_order(id,reg):
         billingAddress
         '''
         try:
-            billingAddress_postalCode = billingAddress["postalCode"]
-            billingAddress_city = billingAddress["city"]
-            billingAddress_state = billingAddress["state"]
-            billingAddress_country = billingAddress["country"]
-            billingAddress_street = billingAddress["street"]
-            billingAddress_number = billingAddress["number"]
-            billingAddress_neighborhood = billingAddress["neighborhood"]
-            billingAddress_complement = billingAddress["complement"]
-            billingAddress_reference = billingAddress["reference"]
+            init.billingAddress_postalCode = billingAddress["postalCode"]
+            init.billingAddress_city = billingAddress["city"]
+            init.billingAddress_state = billingAddress["state"]
+            init.billingAddress_country = billingAddress["country"]
+            init.billingAddress_street = billingAddress["street"]
+            init.billingAddress_number = billingAddress["number"]
+            init.billingAddress_neighborhood = billingAddress["neighborhood"]
+            init.billingAddress_complement = billingAddress["complement"]
+            init.billingAddress_reference = billingAddress["reference"]
         except:
             print("No hay datos billingAddress")
             
         '''
         seller
         '''
-        seller_id = sellers["id"]
-        seller_name = sellers["name"]
-        seller_logo = sellers["logo"]
+        init.seller_id = sellers["id"]
+        init.seller_name = sellers["name"]
+        init.seller_logo = sellers["logo"]
 
             
         df1 = pd.DataFrame({
