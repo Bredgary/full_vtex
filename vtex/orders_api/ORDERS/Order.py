@@ -372,6 +372,16 @@ class init:
     storePreferencesData_currencySymbol = None
     storePreferencesData_timeZone = None
     
+    '''
+    currencyFormatInfo
+    '''
+    
+    CurrencyDecimalDigits = None
+    CurrencyDecimalSeparator = None
+    CurrencyGroupSeparator = None
+    CurrencyGroupSize = None
+    StartsWithCurrencySymbol = None
+    
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
 def dicMemberCheck(key, dicObj):
@@ -479,6 +489,7 @@ def get_order(id,reg):
         clientProfileData = Fjson["clientProfileData"]
         ratesAndBenefitsData = Fjson["ratesAndBenefitsData"]
         storePreferencesData = Fjson["storePreferencesData"]
+        currencyFormatInfo = storePreferencesData["currencyFormatInfo"]
         shippingData = Fjson["shippingData"]
         logisticsInfo_0 = shippingData["logisticsInfo"]
         selectedAddresses_ = shippingData["selectedAddresses"]
@@ -858,28 +869,34 @@ def get_order(id,reg):
             init.billingAddress_reference = billingAddress["reference"]
         except:
             print("No hay datos billingAddress")
-            
-        '''
-        seller
-        '''
-        #try:
-        init.seller_id = sellers["id"]
-        init.seller_name = sellers["name"]
-        init.seller_logo = sellers["logo"]
-        #except:
-        #    print("No hay datos seller")
+        
+        try:
+            init.seller_id = sellers["id"]
+            init.seller_name = sellers["name"]
+            init.seller_logo = sellers["logo"]
+        except:
+            print("No hay datos seller")
         
         try:
             init.changesAttachment_id = changesAttachment["id"]
         except:
-            print("No hay datos seller")
+            print("No hay datos changesAttachment")
 
+        try:
+            init.storePreferencesData_countryCode = storePreferencesData["countryCode"]
+            init.storePreferencesData_currencyCode = storePreferencesData["currencyCode"]
+            init.storePreferencesData_currencyLocale = storePreferencesData["currencyLocale"]
+            init.storePreferencesData_currencySymbol = storePreferencesData["currencySymbol"]
+            init.storePreferencesData_timeZone = storePreferencesData["timeZone"]
+        except:
+            print("No hay datos storePreferencesData")
         
-        init.storePreferencesData_countryCode = storePreferencesData["countryCode"]
-        init.storePreferencesData_currencyCode = storePreferencesData["currencyCode"]
-        init.storePreferencesData_currencyLocale = storePreferencesData["currencyLocale"]
-        init.storePreferencesData_currencySymbol = storePreferencesData["currencySymbol"]
-        init.storePreferencesData_timeZone = storePreferencesData["timeZone"]
+        
+        init.CurrencyDecimalDigits = currencyFormatInfo["CurrencyDecimalDigits"]
+        init.CurrencyDecimalSeparator = currencyFormatInfo["CurrencyDecimalSeparator"]
+        init.CurrencyGroupSeparator = currencyFormatInfo["CurrencyGroupSeparator"]
+        init.CurrencyGroupSize = currencyFormatInfo["CurrencyGroupSize"]
+        init.StartsWithCurrencySymbol = currencyFormatInfo["StartsWithCurrencySymbol"]
         
         df1 = pd.DataFrame({
             'emailTracked': init.emailTracked,
@@ -1129,6 +1146,13 @@ def get_order(id,reg):
             'storePreferencesData_currencyLocale': init.storePreferencesData_currencyLocale,
             'storePreferencesData_currencySymbol': init.storePreferencesData_currencySymbol,
             'storePreferencesData_timeZone': init.storePreferencesData_timeZone,
+            'CurrencyDecimalDigits': init.CurrencyDecimalDigits,
+            'CurrencyDecimalSeparator': init.CurrencyDecimalSeparator,
+            'CurrencyGroupSeparator': init.CurrencyGroupSeparator,
+            'CurrencyGroupSize': init.CurrencyGroupSize,
+            'StartsWithCurrencySymbol': init.StartsWithCurrencySymbol,
+            
+            
             'invoicedDate': init.invoicedDate}, index=[0])
         init.df = init.df.append(df1)
         print("Registro: "+str(reg))
