@@ -382,6 +382,14 @@ class init:
     CurrencyGroupSize = None
     StartsWithCurrencySymbol = None
     
+    '''
+    currencyFormatInfo
+    '''
+    
+    baseURL = None
+    isCertified = None
+    name = None
+    
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
 def dicMemberCheck(key, dicObj):
@@ -487,6 +495,7 @@ def get_order(id,reg):
         
         Total = Fjson["totals"]
         clientProfileData = Fjson["clientProfileData"]
+        marketplace = Fjson["marketplace"]
         ratesAndBenefitsData = Fjson["ratesAndBenefitsData"]
         storePreferencesData = Fjson["storePreferencesData"]
         currencyFormatInfo = storePreferencesData["currencyFormatInfo"]
@@ -891,12 +900,19 @@ def get_order(id,reg):
         except:
             print("No hay datos storePreferencesData")
         
+        try:
+            init.CurrencyDecimalDigits = currencyFormatInfo["CurrencyDecimalDigits"]
+            init.CurrencyDecimalSeparator = currencyFormatInfo["CurrencyDecimalSeparator"]
+            init.CurrencyGroupSeparator = currencyFormatInfo["CurrencyGroupSeparator"]
+            init.CurrencyGroupSize = currencyFormatInfo["CurrencyGroupSize"]
+            init.StartsWithCurrencySymbol = currencyFormatInfo["StartsWithCurrencySymbol"]
+        except:
+            print("No hay datos currencyFormatInfo")
         
-        init.CurrencyDecimalDigits = currencyFormatInfo["CurrencyDecimalDigits"]
-        init.CurrencyDecimalSeparator = currencyFormatInfo["CurrencyDecimalSeparator"]
-        init.CurrencyGroupSeparator = currencyFormatInfo["CurrencyGroupSeparator"]
-        init.CurrencyGroupSize = currencyFormatInfo["CurrencyGroupSize"]
-        init.StartsWithCurrencySymbol = currencyFormatInfo["StartsWithCurrencySymbol"]
+        
+        init.baseURL = marketplace["baseURL"]
+        init.isCertified = marketplace["isCertified"]
+        init.name = marketplace["name"]
         
         df1 = pd.DataFrame({
             'emailTracked': init.emailTracked,
@@ -1151,8 +1167,9 @@ def get_order(id,reg):
             'CurrencyGroupSeparator': init.CurrencyGroupSeparator,
             'CurrencyGroupSize': init.CurrencyGroupSize,
             'StartsWithCurrencySymbol': init.StartsWithCurrencySymbol,
-            
-            
+            'marketplace_baseURL': init.baseURL,
+            'marketplace_isCertified': init.isCertified,
+            'marketplace_name': init.name,
             'invoicedDate': init.invoicedDate}, index=[0])
         init.df = init.df.append(df1)
         print("Registro: "+str(reg))
