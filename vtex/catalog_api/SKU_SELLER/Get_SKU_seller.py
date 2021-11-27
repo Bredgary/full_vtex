@@ -38,7 +38,7 @@ def get_params():
     print("Cargando consulta")
     client = bigquery.Client()
     QUERY = (
-        'SELECT orderId, sellerSku, seller_id FROM `shopstar-datalake.cons_zone.shopstar_vtex_order`')
+        'SELECT orderId, sellerSku, seller_id FROM `shopstar-datalake.landing_zone.shopstar_vtex_order`')
     query_job = client.query(QUERY)  
     rows = query_job.result()
     registro = 1
