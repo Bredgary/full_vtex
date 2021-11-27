@@ -11,12 +11,13 @@ class init:
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
     
         
-def sku_context(idSellerSku,idSeller,reg):
+def seller_sku(sellerSku,seller_id,orderId,reg):
     try:
-    	url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/skuseller/"+str(idSellerSku)+"/"+str(idSeller)+""
+    	url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/skuseller/"+str(sellerSku)+"/"+str(seller_id)+""
     	response = requests.request("GET", url, headers=init.headers)
     	Fjson = json.loads(response.text)
     	df1 = pd.DataFrame({
+            'orderId' : orderId,
 			'IsPersisted' : Fjson["IsPersisted"],
 			'IsRemoved' : Fjson["IsRemoved"],
 			'StockKeepingUnitId' : Fjson["StockKeepingUnitId"],
@@ -37,13 +38,15 @@ def get_params():
     print("Cargando consulta")
     client = bigquery.Client()
     QUERY = (
-        'SELECT sellerSku, seller_id FROM `shopstar-datalake.cons_zone.shopstar_vtex_order``')
+        'SELECT orderId, sellerSku, seller_id FROM `shopstar-datalake.cons_zone.shopstar_vtex_order`')
     query_job = client.query(QUERY)  
     rows = query_job.result()
     registro = 1
     for row in rows:
-        sku_context(row.id,registro)
+        seller_sku(row.sellerSku,row.seller_id,row.orderId,registro)
         registro += 1
+        if registro == 100:
+            break
     
 def delete_duplicate():
     try:
