@@ -1,96 +1,85 @@
-import requests
-import json
-import os
-import re
-from datetime import datetime
-from os import system
+import pandas as pd
+import numpy as np
 from google.cloud import bigquery
+import os, json
+from datetime import datetime
+import requests
+from datetime import datetime, timezone
 
-client = bigquery.Client()
-listaIDS = []
-listIdSkuAndContext =[]
-
-f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_SELLER/delimitador.txt','r')
-data_from_string = f_01.read()
-delimitador = int(data_from_string)
-count = 0
-mensajeError = {'Message': 'The request is invalid.'}
-
-
-def get_sku(id,count,delimitador):
-	jsonF = {}
-	if count >= delimitador:
-		try:
-			url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/stockkeepingunit/"""+str(id)+""
-			headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-			response = requests.request("GET", url, headers=headers)
-			jsonF = json.loads(response.text)
-			string = json.dumps(jsonF)
-			text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_SELLER/SKU_SELLER/"+str(count)+"_sku.json", "w")
-			text_file.write(string)
-			text_file.close()
-			print("Get_SKU_seller.py Terminando: "+str(count))
-		except:
-			delimitador = count
-			text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_SELLER/delimitador.txt", "w")
-			text_file.write(str(delimitador))
-			text_file.close()
-			system("python3 Get_SKU_seller.py")
+class init:
+    df = pd.DataFrame()
+    headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
+    
+        
+def sku_context(idSellerSku,idSeller,reg):
+    try:
+    	url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/skuseller/"+str(idSellerSku)+"/"+str(idSeller)+""
+    	response = requests.request("GET", url, headers=init.headers)
+    	Fjson = json.loads(response.text)
+    	df1 = pd.DataFrame({
+			'IsPersisted' : Fjson["IsPersisted"],
+			'IsRemoved' : Fjson["IsRemoved"],
+			'StockKeepingUnitId' : Fjson["StockKeepingUnitId"],
+			'SkuSellerId' : Fjson["SkuSellerId"],
+			'SellerId' : Fjson["SellerId"],
+			'StockKeepingUnitId' : Fjson["StockKeepingUnitId"],
+			'SellerStockKeepingUnitId' : Fjson["SellerStockKeepingUnitId"],
+			'IsActive' : Fjson["IsActive"],
+			'UpdateDate' : Fjson["UpdateDate"],
+			'RequestedUpdateDate': Fjson["RequestedUpdateDate"]}, index=[0])
+    	init.df = init.df.append(df1)
+    	print("Registro: "+str(reg))
+    except:
+    	print("Vacio")
 
 
-def operacion_fenix(count):
-	f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU_SELLER/id_sku.json','r')
-	data_from_string = f_01.read()
-	data_from_string = data_from_string.replace('"', '')
-	listaIDS = json.loads(data_from_string)
-	for i in listaIDS:
-		count += 1
-		get_sku(i,count,delimitador)
-	print(str(count)+" registro almacenado.")
+def get_params():
+    print("Cargando consulta")
+    client = bigquery.Client()
+    QUERY = (
+        'SELECT sellerSku, seller_id FROM `shopstar-datalake.cons_zone.shopstar_vtex_order``')
+    query_job = client.query(QUERY)  
+    rows = query_job.result()
+    registro = 1
+    for row in rows:
+        sku_context(row.id,registro)
+        registro += 1
+    
+def delete_duplicate():
+    try:
+        print("Borrando duplicados")
+        client = bigquery.Client()
+        QUERY = (
+            'CREATE OR REPLACE TABLE `shopstar-datalake.landing_zone.shopstar_vtex_sku_seller` AS SELECT DISTINCT * FROM `shopstar-datalake.landing_zone.shopstar_vtex_sku_seller`')
+        query_job = client.query(QUERY)  
+        rows = query_job.result()
+        print(rows)
+    except:
+        print("Query no ejecutada")
 
-operacion_fenix(count)
-
-'''
-
-DIR = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/SKU/'
-countDir = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])
-
-for x in range(countDir):
-    uri = "/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/SKU/"+str(x)+"_get_SKU.json"
-    if os.path.exists(uri):
-        f_03 = open (uri,'r')
-        ids_string = f_03.read()
-        formatoJson = json.loads(ids_string)
-        listaID.append(formatoJson)
-        print("Producto Almacenados: " +str(count))
-    else:
-        print("Json no existe")
-
-string = json.dumps(listaID)
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/sku.json", "w")
-text_file.write(string)
-text_file.close() 
-
-system("cat sku.json | jq -c '.[]' > tableSku.json")
-
-print("Cargando a BigQuery")
-client = bigquery.Client()
-filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/SKU/tableSku.json'
-dataset_id = 'landing_zone'
-table_id = 'shopstar_vtex_sku'
-dataset_ref = client.dataset(dataset_id)
-table_ref = dataset_ref.table(table_id)
-job_config = bigquery.LoadJobConfig()
-job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-job_config.autodetect = True
-with open(filename, "rb") as source_file:
-    job = client.load_table_from_file(
-        source_file,
-        table_ref,
-        location="southamerica-east1",  # Must match the destination dataset location.
-    job_config=job_config,)  # API request
-job.result()  # Waits for table load to complete.
-print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
-system("rm sku.json")
-print("finalizado")
-'''
+def run():
+    try:
+        get_params()
+        df = init.df
+        df.reset_index(drop=True, inplace=True)
+        json_data = df.to_json(orient = 'records')
+        json_object = json.loads(json_data)
+        
+        project_id = '999847639598'
+        dataset_id = 'landing_zone'
+        table_id = 'shopstar_vtex_sku_seller'
+    
+        client  = bigquery.Client(project = project_id)
+        dataset  = client.dataset(dataset_id)
+        table = dataset.table(table_id)
+        job_config = bigquery.LoadJobConfig()
+        job_config.write_disposition = "WRITE_TRUNCATE"
+        job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+        job_config.autodetect = True
+        job = client.load_table_from_json(json_object, table, job_config = job_config)
+        print(job.result())
+        delete_duplicate()
+    except:
+        print("vacio")
+    
+run()
