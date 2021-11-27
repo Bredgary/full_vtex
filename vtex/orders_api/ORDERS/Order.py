@@ -999,7 +999,6 @@ def get_order(id,reg):
         emailTracked = None
         print("nulo")
     
-    
     df1 = pd.DataFrame({
         'orderId': init.orderId,
         'emailTracked': emailTracked,
