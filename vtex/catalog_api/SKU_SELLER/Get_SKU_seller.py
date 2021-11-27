@@ -12,7 +12,7 @@ class init:
     
 
 def seller_sku(sellerSku,seller_id,orderId,reg):
-    try:
+    #try:
     	url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/skuseller/"+str(sellerSku)+"/"+str(seller_id)+""
     	response = requests.request("GET", url, headers=init.headers)
     	Fjson = json.loads(response.text)
@@ -30,8 +30,8 @@ def seller_sku(sellerSku,seller_id,orderId,reg):
 			'RequestedUpdateDate': Fjson["RequestedUpdateDate"]}, index=[0])
     	init.df = init.df.append(df1)
     	print("Registro: "+str(reg))
-    except:
-    	print("Vacio")
+    #except:
+    #	print("Vacio")
 
 
 def get_params():
