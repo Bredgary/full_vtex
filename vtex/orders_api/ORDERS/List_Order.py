@@ -1,18 +1,19 @@
 #!/usr/bin/python
 # -*- coding: latin-1 -*-
+import pandas as pd
+import numpy as np
+import requests
+import json
+import os
+import re
+import datetime
+from datetime import date
+from datetime import timedelta
+from os import system
+from google.cloud import bigquery
+import logging
+
 class Init:
-	import pandas as pd
-	import numpy as np
-	import requests
-	import json
-	import os
-	import re
-	import datetime
-	from datetime import date
-	from datetime import timedelta
-	from os import system
-	from google.cloud import bigquery
-	import logging
 	today = datetime.date.today()
 	yesterday = today - datetime.timedelta(days=1)
 	before_yesterday = today - datetime.timedelta(days=2)
