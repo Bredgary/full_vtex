@@ -19,10 +19,10 @@ def get_sku_file(id,reg):
     df1 = pd.DataFrame({
 		'id': Fjson[0],
 		'ArchiveId': Fjson[1],
-		'SkuId': Fjson["SkuId"],
-		'Name': Fjson["Name"],
-		'IsMain': Fjson["IsMain"],
-		'Label': Fjson["Label"]}, index=[0])
+		'SkuId': Fjson[2],
+		'Name': Fjson[3],
+		'IsMain': Fjson[4],
+		'Label': Fjson[5]}, index=[0])
     init.df = init.df.append(df1)
     print("Registro: "+str(reg))
     #except:
