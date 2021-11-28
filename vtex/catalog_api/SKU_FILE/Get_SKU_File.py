@@ -15,15 +15,15 @@ def get_sku_file(id,reg):
     #try:
     url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/stockkeepingunit/"+str(id)+"/file"
     response = requests.request("GET", url, headers=init.headers)
-    Fjson = json.loads(response.text)|
-	df1 = pd.DataFrame({
+    Fjson = json.loads(response.text)
+    df1 = pd.DataFrame({
 		'id': Fjson["Id"],
 		'ArchiveId': Fjson["ArchiveId"],
 		'SkuId': Fjson["SkuId"],
 		'Name': Fjson["Name"],
 		'IsMain': Fjson["IsMain"],
 		'Label': Fjson["Label"]}, index=[0])
-	init.df = init.df.append(df1)
+    init.df = init.df.append(df1)
     print("Registro: "+str(reg))
     #except:
     #	print("Vacio")
