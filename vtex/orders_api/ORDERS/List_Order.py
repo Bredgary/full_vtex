@@ -1,14 +1,5 @@
-import pandas as pd
-import numpy as np
-import requests
-import json
-import os
-import re
-import datetime
-from datetime import timedelta, timezone, date
-from os import system
-from google.cloud import bigquery
-import logging
+#!/usr/bin/python
+# -*- coding: latin-1 -*-
 import pandas as pd
 import numpy as np
 from google.cloud import bigquery
@@ -26,6 +17,9 @@ utc_dt = aware_dt.astimezone(timezone.utc)
 # correct, ISO-8601 and UTC (but not in UTC format)
 date_str = utc_dt.isoformat(timespec='milliseconds')
 date = date_str.replace("+00:00", "Z")
+
+now = datetime.now()
+format = now.strftime('%Y-%m-%d')
 
 
 class Init:
