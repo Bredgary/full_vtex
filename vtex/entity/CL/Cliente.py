@@ -50,7 +50,6 @@ def run():
 	json_object = json.loads(json_data)
 	
 	
-	os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = r"/home/bred_valenzuela/full_vtex/vtex/entity/CL/key.json"
 	
 	table_schema = {
 	    "name": "id",
