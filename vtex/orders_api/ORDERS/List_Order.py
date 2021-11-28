@@ -5,6 +5,7 @@ import numpy as np
 from google.cloud import bigquery
 import os, json
 from datetime import datetime
+from datetime import date
 import requests
 from datetime import datetime, timezone
 
