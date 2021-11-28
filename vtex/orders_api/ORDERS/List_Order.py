@@ -37,12 +37,15 @@ class date:
 	utc_dt = aware_dt.astimezone(timezone.utc)
 	# correct, ISO-8601 and UTC (but not in UTC format)
 	date_str = utc_dt.isoformat(timespec='milliseconds')
+	
 	date = date_str.replace("+00:00", "Z")
+	
+	
 	
 	now = datetime.now()
 	format = now.strftime('%Y-%m-%d')
 	
-	print(date)
+	print(date_str)
 
 
 class Init:
