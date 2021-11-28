@@ -37,11 +37,7 @@ class date:
 	utc_dt = aware_dt.astimezone(timezone.utc)
 	# correct, ISO-8601 and UTC (but not in UTC format)
 	date_str = utc_dt.isoformat(timespec='milliseconds')
-	
 	date = date_str.replace("+00:00", "Z")
-	
-	
-	
 	now = datetime.now()
 	format = now.strftime('%Y-%m-%d')
 	
@@ -51,7 +47,6 @@ class date:
 class Init:
 	today = datetime.date.today()
 	yesterday = today - datetime.timedelta(days=1)
-	before_yesterday = today - datetime.timedelta(days=2)
 	ordenes = {}
 	df = pd.DataFrame()
 
@@ -63,7 +58,7 @@ def format_schema(schema):
 
 def get_order_list(page):
 	url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders?page="+str(page)+""
-	querystring = {"f_creationDate":"creationDate:["+str(Init.before_yesterday)+"T02:00:00.000Z TO "+str(Init.yesterday)+"T01:59:59.999Z]","f_hasInputInvoice":"false"}
+	querystring = {"f_creationDate":"creationDate:["+str(Init.yesterday)+"T02:00:00.000Z TO "+str(date.date)+"]","f_hasInputInvoice":"false"}
 	headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 	response = requests.request("GET", url, headers=headers, params=querystring)
 	FJson = json.loads(response.text)
