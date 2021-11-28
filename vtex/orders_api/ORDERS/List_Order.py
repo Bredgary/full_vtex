@@ -1,15 +1,21 @@
 import pandas as pd
 import numpy as np
-import requests
-import json
-import os
-import re
-import datetime
-from datetime import date
-from datetime import timedelta
-from os import system
 from google.cloud import bigquery
-import logging
+import os, json
+from datetime import datetime
+import requests
+from datetime import datetime, timezone
+
+naive_dt = datetime.now()
+aware_dt = naive_dt.astimezone()
+# correct, ISO-8601 (but not UTC)
+aware_dt.isoformat(timespec="seconds")
+# lets get the time in UTC
+utc_dt = aware_dt.astimezone(timezone.utc)
+# correct, ISO-8601 and UTC (but not in UTC format)
+date_str = utc_dt.isoformat(timespec='milliseconds')
+date = date_str.replace("+00:00", "Z")
+
 
 class Init:
 	today = datetime.date.today()
@@ -190,19 +196,19 @@ def run():
 	
 	client  = bigquery.Client(project = project_id)
 	dataset  = client.dataset(dataset_id)
-	table = dataset.table(table_id)
+	table_list = dataset.table(table_id)
 	job_config = bigquery.LoadJobConfig()
 	job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
 	job_config.schema = format_schema(table_schema)
 	job = client.load_table_from_json(json_object, table, job_config = job_config)
 	print(job.result())
 	
-	table = dataset.table(table_temp)
-	job_config = bigquery.LoadJobConfig()
-	job_config.write_disposition = "WRITE_TRUNCATE"
-	job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-	job_config.schema = format_schema(table_schema)
-	job = client.load_table_from_json(json_object, table, job_config = job_config)
+	table_tem = dataset.table(table_temp)
+	job_config_temp = bigquery.LoadJobConfig()
+	job_config_temp.write_disposition = "WRITE_TRUNCATE"
+	job_config_temp.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+	job_config_temp.schema = format_schema(table_schema)
+	job = client.load_table_from_json(json_object, table, job_config = job_config_temp)
 	print(job.result())
 
 run()
