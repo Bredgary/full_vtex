@@ -4,6 +4,7 @@ import requests
 import json
 import os
 import re
+import datetime
 from datetime import timedelta, timezone, date
 from os import system
 from google.cloud import bigquery
