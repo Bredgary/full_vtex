@@ -1,26 +1,45 @@
 #!/usr/bin/python
 # -*- coding: latin-1 -*-
-import pandas as pd
-import numpy as np
-import requests
-import json
-import os
-import re
-import datetime
-from datetime import date
-from datetime import timedelta
-from os import system
-from google.cloud import bigquery
-import logging
-
 class Init:
+	import pandas as pd
+	import numpy as np
+	import requests
+	import json
+	import os
+	import re
+	import datetime
+	from datetime import date
+	from datetime import timedelta
+	from os import system
+	from google.cloud import bigquery
+	import logging
 	today = datetime.date.today()
 	yesterday = today - datetime.timedelta(days=1)
 	before_yesterday = today - datetime.timedelta(days=2)
 	ordenes = {}
 	df = pd.DataFrame()
-	
 
+class date:
+	import pandas as pd
+	import numpy as np
+	from google.cloud import bigquery
+	import os, json
+	from datetime import datetime
+	import requests
+	from datetime import datetime, timezone
+	
+	naive_dt = datetime.now()
+	aware_dt = naive_dt.astimezone()
+	# correct, ISO-8601 (but not UTC)
+	aware_dt.isoformat(timespec="seconds")
+	# lets get the time in UTC
+	utc_dt = aware_dt.astimezone(timezone.utc)
+	# correct, ISO-8601 and UTC (but not in UTC format)
+	date_str = utc_dt.isoformat(timespec='milliseconds')
+	date = date_str.replace("+00:00", "Z")
+	
+	now = datetime.now()
+	format = now.strftime('%Y-%m-%d')
 
 
 class Init:
