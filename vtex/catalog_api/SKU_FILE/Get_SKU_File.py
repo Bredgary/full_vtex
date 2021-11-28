@@ -17,8 +17,8 @@ def get_sku_file(id,reg):
     response = requests.request("GET", url, headers=init.headers)
     Fjson = json.loads(response.text)
     df1 = pd.DataFrame({
-		'id': Fjson["Id"],
-		'ArchiveId': Fjson["ArchiveId"],
+		'id': Fjson[0],
+		'ArchiveId': Fjson[1],
 		'SkuId': Fjson["SkuId"],
 		'Name': Fjson["Name"],
 		'IsMain': Fjson["IsMain"],
