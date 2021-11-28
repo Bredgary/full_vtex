@@ -4,12 +4,21 @@ import requests
 import json
 import os
 import re
-import datetime
-from datetime import date
-from datetime import timedelta
+from datetime import timedelta, timezone, date
 from os import system
 from google.cloud import bigquery
 import logging
+
+naive_dt = datetime.now()
+aware_dt = naive_dt.astimezone()
+# correct, ISO-8601 (but not UTC)
+aware_dt.isoformat(timespec="seconds")
+# lets get the time in UTC
+utc_dt = aware_dt.astimezone(timezone.utc)
+# correct, ISO-8601 and UTC (but not in UTC format)
+date_str = utc_dt.isoformat(timespec='milliseconds')
+date = date_str.replace("+00:00", "Z")
+
 
 class Init:
 	today = datetime.date.today()
@@ -74,6 +83,18 @@ def dataframe():
 			'currencyCode': str(x["currencyCode"])}, index=[0])
 		Init.df = Init.df.append(df1)
 	return Init.df
+
+def delete_duplicate():
+	try:
+		print("Eliminando duplicados")
+		client = bigquery.Client()
+		QUERY = (
+			'CREATE OR REPLACE TABLE `shopstar-datalake.landing_zone.shopstar_vtex_list_order` AS SELECT DISTINCT * FROM `shopstar-datalake.landing_zone.shopstar_vtex_list_order`')
+		query_job = client.query(QUERY)
+		rows = query_job.result()
+		print(rows)
+	except:
+		print("Consulta SQL no ejecutada")
 
 
 def run():
