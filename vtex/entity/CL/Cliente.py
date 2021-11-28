@@ -41,6 +41,18 @@ def format_schema(schema):
         formatted_schema.append(bigquery.SchemaField(row['name'], row['type'], row['mode']))
     return formatted_schema
 
+def delete_duplicate():
+	try:
+		print("Eliminando duplicados")
+		client = bigquery.Client()
+		QUERY = (
+			'CREATE OR REPLACE TABLE `shopstar-datalake.landing_zone.shopstar_vtex_client` AS SELECT DISTINCT * FROM `shopstar-datalake.landing_zone.shopstar_vtex_client`')
+		query_job = client.query(QUERY)
+		rows = query_job.result()
+		print(rows)
+	except:
+		print("Consulta SQL no ejecutada")
+
 def run():
 	df = pd.DataFrame(cl_client(),
 					columns=['beneficio','beneficio2','crearGiftcard','profilePicture','proteccionDatos','terminosCondiciones','terminosPago','tradeName','rclastcart','rclastsession','rclastsessiondate','homePhone','phone','stateRegistration','email','userId','firstName','lastName','document','localeDefault','attach','approved','birthDate','businessPhone','corporateDocument','corporateName','documentType','gender','customerClass','priceTables','id','accountId','accountName','dataEntityId','createdBy','createdIn','updatedBy','updatedIn','lastInteractionBy','lastInteractionIn','followers','auto_filter'])
@@ -235,5 +247,6 @@ def run():
 	job_config.schema = format_schema(table_schema)
 	job = client.load_table_from_json(json_object, table, job_config = job_config)
 	print(job.result())
+	delete_duplicate()
 	
 run()
