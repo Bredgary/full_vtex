@@ -12,22 +12,22 @@ class init:
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
 def get_sku_file(id,reg):
-    try:
-	    url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/stockkeepingunit/"+str(id)+"/file"
-	    response = requests.request("GET", url, headers=init.headers)
-	    Fjson = json.loads(response.text)
-	    for x in Fjson:
-	    	df1 = pd.DataFrame({
-				'id': x["Id"],
-				'ArchiveId': x["ArchiveId"],
-				'SkuId': x["SkuId"],
-				'Name': x["Name"],
-				'IsMain': x["IsMain"],
-				'Label': x["Label"]}, index=[0])
-	    	init.df = init.df.append(df1)
-	    print("Registro: "+str(reg))
-    except:
-    	print("Vacio")
+    #try:
+    url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/stockkeepingunit/"+str(id)+"/file"
+    response = requests.request("GET", url, headers=init.headers)
+    Fjson = json.loads(response.text)
+    for x in Fjson:
+    	df1 = pd.DataFrame({
+			'id': x["Id"],
+			'ArchiveId': x["ArchiveId"],
+			'SkuId': x["SkuId"],
+			'Name': x["Name"],
+			'IsMain': x["IsMain"],
+			'Label': x["Label"]}, index=[0])
+    	init.df = init.df.append(df1)
+    print("Registro: "+str(reg))
+    #except:
+    #	print("Vacio")
 
 def get_params():
     print("Cargando consulta")
@@ -40,6 +40,8 @@ def get_params():
     for row in rows:
         get_sku_file(row.id,registro)
         registro += 1
+        if registro == 100:
+            break
 
 
 def delete_duplicate():
@@ -55,28 +57,28 @@ def delete_duplicate():
 		print("Consulta no ejecutada")
 
 def run():
-	try:
-		get_params()
-		df = init.df
-		df.reset_index(drop=True, inplace=True)
-		json_data = df.to_json(orient = 'records')
-		json_object = json.loads(json_data)
-		
-		project_id = '999847639598'
-		dataset_id = 'landing_zone'
-		table_id = 'shopstar_vtex_sku_file'
-		
-		client  = bigquery.Client(project = project_id)
-		dataset  = client.dataset(dataset_id)
-		table = dataset.table(table_id)
-		job_config = bigquery.LoadJobConfig()
-		job_config.write_disposition = "WRITE_TRUNCATE"
-		job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-		job_config.autodetect = True
-		job = client.load_table_from_json(json_object, table, job_config = job_config)
-		print(job.result())
-		delete_duplicate()
-	except:
-		print("No se puede ingestar")
+	#try:
+	get_params()
+	df = init.df
+	df.reset_index(drop=True, inplace=True)
+	json_data = df.to_json(orient = 'records')
+	json_object = json.loads(json_data)
+	
+	project_id = '999847639598'
+	dataset_id = 'landing_zone'
+	table_id = 'shopstar_vtex_sku_file'
+	
+	client  = bigquery.Client(project = project_id)
+	dataset  = client.dataset(dataset_id)
+	table = dataset.table(table_id)
+	job_config = bigquery.LoadJobConfig()
+	job_config.write_disposition = "WRITE_TRUNCATE"
+	job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+	job_config.autodetect = True
+	job = client.load_table_from_json(json_object, table, job_config = job_config)
+	print(job.result())
+	delete_duplicate()
+	#except:
+	#	print("No se puede ingestar")
     
 run()
