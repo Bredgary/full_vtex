@@ -45,7 +45,7 @@ class date:
 	now = datetime.now()
 	format = now.strftime('%Y-%m-%d')
 	
-	print(date_str)
+	print(date)
 
 
 class Init:
