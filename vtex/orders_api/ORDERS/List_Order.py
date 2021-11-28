@@ -10,6 +10,7 @@ from datetime import timedelta
 from os import system
 from google.cloud import bigquery
 import logging
+from datetime import datetime
 from datetime import datetime, timezone
 
 naive_dt = datetime.now()
