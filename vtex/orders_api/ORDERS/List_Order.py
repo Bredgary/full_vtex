@@ -2,13 +2,16 @@
 # -*- coding: latin-1 -*-
 import pandas as pd
 import numpy as np
-from google.cloud import bigquery
-import os, json
-from datetime import datetime
+import requests
+import json
+import os
+import re
+import datetime
 from datetime import date
 from datetime import timedelta
-import requests
-from datetime import datetime, timezone
+from os import system
+from google.cloud import bigquery
+import logging
 
 naive_dt = datetime.now()
 aware_dt = naive_dt.astimezone()
