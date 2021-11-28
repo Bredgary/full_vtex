@@ -9,6 +9,13 @@ from datetime import timedelta, timezone, date
 from os import system
 from google.cloud import bigquery
 import logging
+import pandas as pd
+import numpy as np
+from google.cloud import bigquery
+import os, json
+from datetime import datetime
+import requests
+from datetime import datetime, timezone
 
 naive_dt = datetime.now()
 aware_dt = naive_dt.astimezone()
