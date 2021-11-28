@@ -6,6 +6,7 @@ from google.cloud import bigquery
 import os, json
 from datetime import datetime
 from datetime import date
+from datetime import timedelta
 import requests
 from datetime import datetime, timezone
 
