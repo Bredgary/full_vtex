@@ -13,7 +13,7 @@ from os import system
 from google.cloud import bigquery
 import logging
 
-class Init:
+class init:
 	today = datetime.date.today()
 	yesterday = today - datetime.timedelta(days=1)
 	before_yesterday = today - datetime.timedelta(days=2)
