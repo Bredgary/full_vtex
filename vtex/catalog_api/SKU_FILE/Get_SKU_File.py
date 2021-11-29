@@ -15,9 +15,8 @@ def get_sku_file(id,reg):
     #try:
     url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/stockkeepingunit/"+str(id)+"/file"
     response = requests.request("GET", url, headers=init.headers)
-    print(response.text)
     if response.status_code == 200:
-        if response.text is not None and response.text is not '"sku archives not found."':
+        if response.text is not None or response.text is not '"sku archives not found."':
             Fjson = json.loads(response.text)
             df1 = pd.DataFrame({
                 'id': Fjson[0],
