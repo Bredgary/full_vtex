@@ -21,12 +21,12 @@ def get_sku_file(id,reg):
                 for x in Fjson:
                     print(x)
                     df1 = pd.DataFrame({
-                        'id': x[0],
-                        'ArchiveId': x[1],
-                        'SkuId': x[2],
-                        'Name': x[3],
-                        'IsMain': x[4],
-                        'Label': x[5]}, index=[0])
+                        'id': x["Id"],
+                        'ArchiveId': x["ArchiveId"],
+                        'SkuId': x["SkuId"],
+                        'Name': x["Name"],
+                        'IsMain': x["IsMain"],
+                        'Label': x["Label"]}, index=[0])
                 init.df = init.df.append(df1)
         print("Registro: "+str(reg))
     #except:
