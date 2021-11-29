@@ -1327,7 +1327,6 @@ def run():
         dataset  = client.dataset(dataset_final)
         table = dataset.table(table_id)
         job_config_Final = bigquery.LoadJobConfig()
-        job_config_Final.write_disposition = "WRITE_TRUNCATE"
         job_config_Final.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
         job_config_Final.autodetect = True
         job = client.load_table_from_json(json_object, table_final, job_config = job_config_Final)
