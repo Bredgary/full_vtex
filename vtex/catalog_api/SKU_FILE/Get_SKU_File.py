@@ -17,7 +17,7 @@ def get_sku_file(id,reg):
     response = requests.request("GET", url, headers=init.headers)
     print(response.text)
     if response.status_code == 200:
-        if response.text is not None:
+        if response.text is not None and response.text is not '"sku archives not found."':
             Fjson = json.loads(response.text)
             df1 = pd.DataFrame({
                 'id': Fjson[0],
