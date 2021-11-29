@@ -228,7 +228,7 @@ def run():
 	
 	project_id = '999847639598'
 	dataset_id = 'landing_zone'
-	table_id = 'shopstar_vtex_list_order_t'
+	table_id = 'shopstar_vtex_list_order'
 	table_temp = 'order_write'
 	
 	client  = bigquery.Client(project = project_id)
