@@ -12,24 +12,24 @@ class init:
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
 def get_sku_file(id,reg):
-    try:
-        url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/stockkeepingunit/"+str(id)+"/file"
-        response = requests.request("GET", url, headers=init.headers)
-        if response.status_code == 200:
-            if response.text is not None or response.text is not '"sku archives not found."':
-                Fjson = json.loads(response.text)
-                for x in Fjson:
-                    df1 = pd.DataFrame({
-                        'id': x[0],
-                        'ArchiveId': x[1],
-                        'SkuId': x[2],
-                        'Name': x[3],
-                        'IsMain': x[4],
-                        'Label': x[5]}, index=[0])
-                init.df = init.df.append(df1)
-        print("Registro: "+str(reg))
-    except:
-    	print("Vacio")
+    #try:
+    url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/stockkeepingunit/"+str(id)+"/file"
+    response = requests.request("GET", url, headers=init.headers)
+    if response.status_code == 200:
+        if response.text is not None or response.text is not '"sku archives not found."':
+            Fjson = json.loads(response.text)
+            for x in Fjson:
+                df1 = pd.DataFrame({
+                    'id': x[0],
+                    'ArchiveId': x[1],
+                    'SkuId': x[2],
+                    'Name': x[3],
+                    'IsMain': x[4],
+                    'Label': x[5]}, index=[0])
+            init.df = init.df.append(df1)
+    print("Registro: "+str(reg))
+    #except:
+    #	print("Vacio")
 
 def get_params():
     print("Cargando consulta")
