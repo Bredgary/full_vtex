@@ -89,7 +89,7 @@ def get_order_list(page):
 			'callCenterOperatorName': str(FJson["callCenterOperatorName"]),
 			'totalItems': str(FJson["totalItems"]),
 			'currencyCode': str(FJson["currencyCode"])}, index=[0])
-	Init.df = Init.df.append(df1)
+	init.df = init.df.append(df1)
 	return FJson
 
 
@@ -109,6 +109,7 @@ def delete_duplicate():
 def run():
 	for x in range(30):
 		get_order_list(x)
+		print("Pagina: "+str(x+1))
 		
 	df = init.df
 	df.reset_index(drop=True, inplace=True)
