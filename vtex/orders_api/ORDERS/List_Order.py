@@ -62,34 +62,35 @@ def get_order_list(page):
 	response = requests.request("GET", url, headers=headers, params=querystring)
 	FJ = json.loads(response.text)
 	x = FJ["list"]
-	for FJson in x:
-		df1 = pd.DataFrame({
-			'orderId': str(FJson["orderId"]),
-			'creationDate': str(FJson["creationDate"]),
-			'clientName': str(FJson["clientName"]),
-			'totalValue': str(FJson["totalValue"]),
-			'paymentNames': str(FJson["paymentNames"]),
-			'status': str(FJson["status"]),
-			'statusDescription': str(FJson["statusDescription"]),
-			'marketPlaceOrderId': str(FJson["marketPlaceOrderId"]),
-			'sequence': str(FJson["sequence"]),
-			'salesChannel': str(FJson["salesChannel"]),
-			'affiliateId': str(FJson["affiliateId"]),
-			'origin': str(FJson["origin"]),
-			'workflowInErrorSta1te': str(FJson["workflowInErrorState"]),
-			'workflowInRetry': str(FJson["workflowInRetry"]),
-			'lastMessageUnread': str(FJson["lastMessageUnread"]),
-			'ShippingEstimatedDate': str(FJson["ShippingEstimatedDate"]),
-			'ShippingEstimatedDateMax': str(FJson["ShippingEstimatedDateMax"]),
-			'ShippingEstimatedDateMin': str(FJson["ShippingEstimatedDateMin"]),
-			'orderIsComplete': str(FJson["orderIsComplete"]),
-			'listId': str(FJson["listId"]),
-			'listType': str(FJson["listType"]),
-			'authorizedDate': str(FJson["authorizedDate"]),
-			'callCenterOperatorName': str(FJson["callCenterOperatorName"]),
-			'totalItems': str(FJson["totalItems"]),
-			'currencyCode': str(FJson["currencyCode"])}, index=[0])
-	init.df = init.df.append(df1)
+	if FJ["list"]:
+		for FJson in x:
+			df1 = pd.DataFrame({
+				'orderId': str(FJson["orderId"]),
+				'creationDate': str(FJson["creationDate"]),
+				'clientName': str(FJson["clientName"]),
+				'totalValue': str(FJson["totalValue"]),
+				'paymentNames': str(FJson["paymentNames"]),
+				'status': str(FJson["status"]),
+				'statusDescription': str(FJson["statusDescription"]),
+				'marketPlaceOrderId': str(FJson["marketPlaceOrderId"]),
+				'sequence': str(FJson["sequence"]),
+				'salesChannel': str(FJson["salesChannel"]),
+				'affiliateId': str(FJson["affiliateId"]),
+				'origin': str(FJson["origin"]),
+				'workflowInErrorSta1te': str(FJson["workflowInErrorState"]),
+				'workflowInRetry': str(FJson["workflowInRetry"]),
+				'lastMessageUnread': str(FJson["lastMessageUnread"]),
+				'ShippingEstimatedDate': str(FJson["ShippingEstimatedDate"]),
+				'ShippingEstimatedDateMax': str(FJson["ShippingEstimatedDateMax"]),
+				'ShippingEstimatedDateMin': str(FJson["ShippingEstimatedDateMin"]),
+				'orderIsComplete': str(FJson["orderIsComplete"]),
+				'listId': str(FJson["listId"]),
+				'listType': str(FJson["listType"]),
+				'authorizedDate': str(FJson["authorizedDate"]),
+				'callCenterOperatorName': str(FJson["callCenterOperatorName"]),
+				'totalItems': str(FJson["totalItems"]),
+				'currencyCode': str(FJson["currencyCode"])}, index=[0])
+		init.df = init.df.append(df1)
 	return FJson
 
 
