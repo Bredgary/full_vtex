@@ -1321,11 +1321,11 @@ def run():
         delete_duplicate()
         
         dataset_final = 'cons_zone'
-        table_final = 'shopstar_vtex_order'
+        table_cons = 'shopstar_vtex_order'
         
         client  = bigquery.Client(project = project_id)
         dataset  = client.dataset(dataset_final)
-        table = dataset.table(table_id)
+        table_final = dataset.table(table_cons)
         job_config_Final = bigquery.LoadJobConfig()
         job_config_Final.write_disposition = "WRITE_TRUNCATE"
         job_config_Final.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
