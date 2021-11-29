@@ -64,7 +64,7 @@ def get_order_list(page):
 	x = FJ["list"]
 	if FJ["list"]:
 		for FJson in x:
-			print(FJson)
+			print(FJson["orderId"])
 			df1 = pd.DataFrame({
 				'orderId': str(FJson["orderId"]),
 				'creationDate': str(FJson["creationDate"]),
