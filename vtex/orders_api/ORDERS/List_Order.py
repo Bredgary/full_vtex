@@ -109,7 +109,7 @@ def delete_duplicate():
 
 
 def run():
-	for x in range(31):
+	for x in range(30):
 		get_order_list(x+1)
 		print("Pagina: "+str(x+1))
 		
