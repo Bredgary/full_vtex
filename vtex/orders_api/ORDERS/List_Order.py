@@ -60,51 +60,37 @@ def get_order_list(page):
 	querystring = {"f_creationDate":"creationDate:["+str(Init.yesterday)+"T02:00:00.000Z TO "+str(date.date)+"]","f_hasInputInvoice":"false"}
 	headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 	response = requests.request("GET", url, headers=headers, params=querystring)
-	FJson = json.loads(response.text)
+	FJ = json.loads(response.text)
+	FJson = FJ["list"]
+	df1 = pd.DataFrame({
+		'orderId': str(FJson["orderId"]),
+		'creationDate': str(FJson["creationDate"]),
+		'clientName': str(FJson["clientName"]),
+		'totalValue': str(FJson["totalValue"]),
+		'paymentNames': str(FJson["paymentNames"]),
+		'status': str(FJson["status"]),
+		'statusDescription': str(FJson["statusDescription"]),
+		'marketPlaceOrderId': str(FJson["marketPlaceOrderId"]),
+		'sequence': str(FJson["sequence"]),
+		'salesChannel': str(FJson["salesChannel"]),
+		'affiliateId': str(FJson["affiliateId"]),
+		'origin': str(FJson["origin"]),
+		'workflowInErrorSta1te': str(FJson["workflowInErrorState"]),
+		'workflowInRetry': str(FJson["workflowInRetry"]),
+		'lastMessageUnread': str(FJson["lastMessageUnread"]),
+		'ShippingEstimatedDate': str(FJson["ShippingEstimatedDate"]),
+		'ShippingEstimatedDateMax': str(FJson["ShippingEstimatedDateMax"]),
+		'ShippingEstimatedDateMin': str(FJson["ShippingEstimatedDateMin"]),
+		'orderIsComplete': str(FJson["orderIsComplete"]),
+		'listId': str(FJson["listId"]),
+		'listType': str(FJson["listType"]),
+		'authorizedDate': str(FJson["authorizedDate"]),
+		'callCenterOperatorName': str(FJson["callCenterOperatorName"]),
+		'totalItems': str(FJson["totalItems"]),
+		'currencyCode': str(FJson["currencyCode"])}, index=[0])
+	Init.df = Init.df.append(df1)
 	return FJson
 
-def paging():
-	for x in range(30):
-		FJson = get_order_list(x)
-		if FJson["list"]:
-			Init.ordenes.update(FJson)
-		else:
-			break
-	return Init.ordenes
-
-def dataframe():
-	print("Cargando Dataframe")
-	FJson = paging()
-	lista = FJson["list"]
-	for x in lista:
-		df1 = pd.DataFrame({
-			'orderId': str(x["orderId"]),
-			'creationDate': str(x["creationDate"]),
-			'clientName': str(x["clientName"]),
-			'totalValue': str(x["totalValue"]),
-			'paymentNames': str(x["paymentNames"]),
-			'status': str(x["status"]),
-			'statusDescription': str(x["statusDescription"]),
-			'marketPlaceOrderId': str(x["marketPlaceOrderId"]),
-			'sequence': str(x["sequence"]),
-			'salesChannel': str(x["salesChannel"]),
-			'affiliateId': str(x["affiliateId"]),
-			'origin': str(x["origin"]),
-			'workflowInErrorState': str(x["workflowInErrorState"]),
-			'workflowInRetry': str(x["workflowInRetry"]),
-			'lastMessageUnread': str(x["lastMessageUnread"]),
-			'ShippingEstimatedDate': str(x["ShippingEstimatedDate"]),
-			'ShippingEstimatedDateMax': str(x["ShippingEstimatedDateMax"]),
-			'ShippingEstimatedDateMin': str(x["ShippingEstimatedDateMin"]),
-			'orderIsComplete': str(x["orderIsComplete"]),
-			'listId': str(x["listId"]),
-			'listType': str(x["listType"]),
-			'authorizedDate': str(x["authorizedDate"]),
-			'callCenterOperatorName': str(x["callCenterOperatorName"]),
-			'totalItems': str(x["totalItems"]),
-			'currencyCode': str(x["currencyCode"])}, index=[0])
-		Init.df = Init.df.append(df1)
-	return Init.df
 
 def delete_duplicate():
 	try:
@@ -120,7 +106,10 @@ def delete_duplicate():
 
 
 def run():
-	df = dataframe()
+	for x in range(30):
+		get_order_list(x)
+		
+	df = init.df
 	df.reset_index(drop=True, inplace=True)
 	json_data = df.to_json(orient = 'records')
 	json_object = json.loads(json_data)
