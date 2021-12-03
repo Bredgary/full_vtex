@@ -30,9 +30,9 @@ def seller_sku(sellerSku,seller_id,orderId,reg):
 			'UpdateDate' : Fjson["UpdateDate"],
 			'RequestedUpdateDate': Fjson["RequestedUpdateDate"]}, index=[0])
         init.df = init.df.append(df1)
-    	print("Registro: "+str(reg))
+        print("Registro: "+str(reg))
     except:
-    	print("Vacio")
+        print("Vacio")
 
 
 def get_params():
