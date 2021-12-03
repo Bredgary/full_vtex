@@ -38,7 +38,7 @@ def get_params():
     print("Cargando consulta")
     client = bigquery.Client()
     QUERY = (
-        'SELECT orderId, sellerSku, seller_id FROM `shopstar-datalake.landing_zone.shopstar_vtex_order`')
+        'SELECT sellerSku, seller_id,orderId FROM `shopstar-datalake.staging_zone.shopstar_vtex_order` where sellerSku is not null and seller_id is not null and orderId is not null')
     query_job = client.query(QUERY)  
     rows = query_job.result()
     registro = 1
@@ -53,7 +53,7 @@ def delete_duplicate():
         print("Borrando duplicados")
         client = bigquery.Client()
         QUERY = (
-            'CREATE OR REPLACE TABLE `shopstar-datalake.landing_zone.shopstar_vtex_sku_seller` AS SELECT DISTINCT * FROM `shopstar-datalake.landing_zone.shopstar_vtex_sku_seller`')
+            'CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_vtex_sku_seller` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.shopstar_vtex_sku_seller`')
         query_job = client.query(QUERY)  
         rows = query_job.result()
         print(rows)
@@ -69,7 +69,7 @@ def run():
         json_object = json.loads(json_data)
         print(df)
         project_id = '999847639598'
-        dataset_id = 'landing_zone'
+        dataset_id = 'staging_zone'
         table_id = 'shopstar_vtex_sku_seller'
     
         client  = bigquery.Client(project = project_id)
