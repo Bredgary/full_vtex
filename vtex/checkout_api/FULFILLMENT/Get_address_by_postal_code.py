@@ -32,7 +32,7 @@ class init:
 
      
 def get_code_postal(countryCode,postalCode,reg,orderId):
-	try:
+	#try:
 	    url = "https://mercury.vtexcommercestable.com.br/api/checkout/pub/postal-code/"+str(countryCode)+"/"+str(postalCode)+""
 	    response = requests.request("GET", url, headers=init.headers)
 	    Fjson = json.loads(response.text)
@@ -73,8 +73,8 @@ def get_code_postal(countryCode,postalCode,reg,orderId):
 			'reference': init.reference,
 			'geoCoordinates': init.geoCoordinates}, index=[0])
 	    init.df = init.df.append(df1)
-	except:
-		print("Vacio")
+	#except:
+	#	print("Vacio")
 
 def get_params():
     print("Cargando consulta")
