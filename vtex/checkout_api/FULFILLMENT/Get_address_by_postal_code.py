@@ -31,7 +31,18 @@ def get_code_postal(countryCode,postalCode,reg):
     url = "https://mercury.vtexcommercestable.com.br/api/checkout/pub/postal-code/"+str(countryCode)+"/"+str(postalCode)+""
     response = requests.request("GET", url, headers=init.headers)
     Fjson = json.loads(response.text)
-    print("Hola")
+    print(Fjson["postalCode"])
+    print(Fjson["city"])
+    print(Fjson["state"])
+    print(Fjson["country"])
+    print(Fjson["street"])
+    print(Fjson["number"])
+    print(Fjson["neighborhood"])
+    print(Fjson["complement"])
+    print(Fjson["reference"])
+    geo = Fjson["geoCoordinates"]
+    print(geo[0])
+    print(geo[1])
     
     #df1 = pd.DataFrame({
     #    'orderId': init.orderId,
