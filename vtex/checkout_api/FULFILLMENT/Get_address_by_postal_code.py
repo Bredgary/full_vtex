@@ -9,7 +9,10 @@ import requests
 from datetime import datetime, timezone
 from os.path import join
 from geopy.extra.rate_limiter import RateLimiter
+import logging
 from google.appengine.api import search
+
+logging.getLogger('googleapiclient.discovery_cache').setLevel(logging.ERROR)
 
 class init:
     productList = []
