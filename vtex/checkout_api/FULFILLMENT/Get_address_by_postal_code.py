@@ -32,7 +32,7 @@ class init:
 
      
 def get_code_postal(countryCode,postalCode,reg,orderId):
-	#try:
+	try:
 	    url = "https://mercury.vtexcommercestable.com.br/api/checkout/pub/postal-code/"+str(countryCode)+"/"+str(postalCode)+""
 	    response = requests.request("GET", url, headers=init.headers)
 	    Fjson = json.loads(response.text)
@@ -75,8 +75,9 @@ def get_code_postal(countryCode,postalCode,reg,orderId):
 			'latitude': init.latitude,
 			'longitude': init.longitude}, index=[0])
 	    init.df = init.df.append(df1)
-	#except:
-	#	print("Vacio")
+	    print("Registro: "+str(reg))
+	except:
+		print("Vacio")
 
 def get_params():
     print("Cargando consulta")
@@ -105,14 +106,14 @@ def delete_duplicate():
 
 
 def run():
-  #  try:
+    try:
         get_params()
         df = init.df
         df.reset_index(drop=True, inplace=True)
         json_data = df.to_json(orient = 'records')
         json_object = json.loads(json_data)
         print(json_object)
-        '''
+        
         project_id = '999847639598'
         dataset_id = 'staging_zone'
         table_id = 'shopstar_vtex_address_by_postal_code'
@@ -127,8 +128,7 @@ def run():
         job = client.load_table_from_json(json_object, table, job_config = job_config)
         print(job.result())
         delete_duplicate()
-        '''
- #   except:
-  #      print("Error")
+    except:
+        print("Error")
     
 run()
