@@ -28,7 +28,7 @@ class init:
 
      
 def get_code_postal(countryCode,postalCode,reg):
-    url = "https://mercury.vtexcommercestable.com.br/api/checkout/pub/postal-code/"+countryCode+"/"+postalCode+""
+    url = "https://mercury.vtexcommercestable.com.br/api/checkout/pub/postal-code/"+str(countryCode)+"/"+str(postalCode)+""
     response = requests.request("GET", url, headers=init.headers)
     Fjson = json.loads(response.text)
     print("Hola")
@@ -68,7 +68,7 @@ def delete_duplicate():
 
 
 def run():
-    try:
+  #  try:
         get_params()
         df = init.df
         df.reset_index(drop=True, inplace=True)
@@ -90,7 +90,7 @@ def run():
         print(job.result())
         delete_duplicate()
         '''
-    except:
-        print("Error")
+ #   except:
+  #      print("Error")
     
 run()
