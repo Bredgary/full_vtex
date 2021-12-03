@@ -57,11 +57,12 @@ def get_code_postal(countryCode,postalCode,reg,orderId):
 	    	init.reference = Fjson["reference"]
 	    if Fjson["geoCoordinates"]:
 	    	init.geoCoordinates = Fjson["geoCoordinates"]
+	    	init.latitude = init.geoCoordinates[0]
+	    	init.longitude = init.geoCoordinates[1]
 	    	
-	    if init.latitude and init.longitude is not None:
-	    	init.geoCoordinates = shapely.geometry.LineString([(init.latitude, 33.9416), (init.longitude , 40.6413)])
 	    
 	    df1 = pd.DataFrame({
+			'orderId': orderId,
 			'postalCode': init.postalCode,
 			'city': init.city,
 			'state': init.state,
@@ -71,7 +72,8 @@ def get_code_postal(countryCode,postalCode,reg,orderId):
 			'neighborhood': init.neighborhood,
 			'complement': init.complement,
 			'reference': init.reference,
-			'geoCoordinates': init.geoCoordinates}, index=[0])
+			'latitude': init.latitude,
+			'longitude': init.longitude}, index=[0])
 	    init.df = init.df.append(df1)
 	#except:
 	#	print("Vacio")
