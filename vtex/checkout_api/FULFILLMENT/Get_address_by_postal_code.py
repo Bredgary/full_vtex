@@ -8,6 +8,7 @@ from datetime import datetime
 import requests
 from datetime import datetime, timezone
 from os.path import join
+from geopy.extra.rate_limiter import RateLimiter
 
 class init:
     productList = []
@@ -22,6 +23,8 @@ class init:
     complement = None
     reference = None
     geoCoordinates = None
+    latitude = None
+    longitude = None
     
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
@@ -31,18 +34,23 @@ def get_code_postal(countryCode,postalCode,reg):
     url = "https://mercury.vtexcommercestable.com.br/api/checkout/pub/postal-code/"+str(countryCode)+"/"+str(postalCode)+""
     response = requests.request("GET", url, headers=init.headers)
     Fjson = json.loads(response.text)
-    print(Fjson["postalCode"])
-    print(Fjson["city"])
-    print(Fjson["state"])
-    print(Fjson["country"])
-    print(Fjson["street"])
-    print(Fjson["number"])
-    print(Fjson["neighborhood"])
-    print(Fjson["complement"])
-    print(Fjson["reference"])
-    geo = Fjson["geoCoordinates"]
-    print(geo[0])
-    print(geo[1])
+    
+    init.postalCode = Fjson["postalCode"]
+    init.city = Fjson["city"]
+    init.state = Fjson["state"]
+    init.country = Fjson["country"]
+    init.street = Fjson["street"]
+    init.number = Fjson["number"]
+    init.neighborhood = Fjson["neighborhood"]
+    init.complement = Fjson["complement"]
+    init.reference = Fjson["reference"]
+    init.geoCoordinates = Fjson["geoCoordinates"]
+    init.latitude = init.geoCoordinates[0]
+    init.longitude = init.geoCoordinates[1]
+    
+    geopoint = search.GeoPoint(init.latitude, init.longitude)
+    print(geopoint)
+    print(type(geopoint))
     
     #df1 = pd.DataFrame({
     #    'orderId': init.orderId,
