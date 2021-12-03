@@ -31,39 +31,57 @@ class init:
 
 
      
-def get_code_postal(countryCode,postalCode,reg):
-    url = "https://mercury.vtexcommercestable.com.br/api/checkout/pub/postal-code/"+str(countryCode)+"/"+str(postalCode)+""
-    response = requests.request("GET", url, headers=init.headers)
-    Fjson = json.loads(response.text)
-    
-    init.postalCode = Fjson["postalCode"]
-    init.city = Fjson["city"]
-    init.state = Fjson["state"]
-    init.country = Fjson["country"]
-    init.street = Fjson["street"]
-    init.number = Fjson["number"]
-    init.neighborhood = Fjson["neighborhood"]
-    init.complement = Fjson["complement"]
-    init.reference = Fjson["reference"]
-    init.geoCoordinates = Fjson["geoCoordinates"]
-    init.latitude = init.geoCoordinates[0]
-    init.longitude = init.geoCoordinates[1]
-    
-    
-    geography = shapely.geometry.LineString([(init.latitude , 33.9416), (init.longitude , 40.6413)])
-    print(geography)
-    print(type(geography))
+def get_code_postal(countryCode,postalCode,reg,orderId):
+	try:
+	    url = "https://mercury.vtexcommercestable.com.br/api/checkout/pub/postal-code/"+str(countryCode)+"/"+str(postalCode)+""
+	    response = requests.request("GET", url, headers=init.headers)
+	    Fjson = json.loads(response.text)
+	    
+	    if Fjson["postalCode"]:
+	    	init.postalCode = Fjson["postalCode"]
+	    if Fjson["city"]:
+	    	init.city = Fjson["city"]
+	    if Fjson["state"]:
+	    	init.state = Fjson["state"]
+	    if Fjson["postalCode"]:
+	    	init.country = Fjson["country"]
+	    if Fjson["postalCode"]:
+	    	init.street = Fjson["street"]
+	    if Fjson["postalCode"]:
+	    	init.number = Fjson["number"]
+	    if Fjson["postalCode"]:
+	    	init.neighborhood = Fjson["neighborhood"]
+	    if Fjson["postalCode"]:
+	    	init.complement = Fjson["complement"]
+	    if Fjson["postalCode"]:
+	    	init.reference = Fjson["reference"]
+	    if Fjson["postalCode"]:
+	    	init.geoCoordinates = Fjson["geoCoordinates"]
+	    	
+	    if init.latitude and init.longitude is not null:
+	    	init.latitude = init.geoCoordinates[0]
+	    	init.longitude = init.geoCoordinates[1]
+	    	
+	    print("Hola")
+	   
+	    
+	    
+	    
+	    
+	    geography = shapely.geometry.LineString([(init.latitude , 33.9416), (init.longitude , 40.6413)])
+	except:
+		print("Vacio")
 
 def get_params():
     print("Cargando consulta")
     client = bigquery.Client()
     QUERY = (
-        'SELECT storePreferencesData_countryCode,postalCode FROM `shopstar-datalake.staging_zone.shopstar_vtex_order` where storePreferencesData_countryCode is not null and postalCode is not null')
+        'SELECT orderId, storePreferencesData_countryCode,postalCode FROM `shopstar-datalake.staging_zone.shopstar_vtex_order` where storePreferencesData_countryCode is not null and postalCode is not null')
     query_job = client.query(QUERY)  
     rows = query_job.result()
     registro = 1
     for row in rows:
-        get_code_postal(row.storePreferencesData_countryCode,row.postalCode,registro)
+        get_code_postal(row.storePreferencesData_countryCode,row.postalCode,registro,orderId)
         registro += 1
 
 def delete_duplicate():
