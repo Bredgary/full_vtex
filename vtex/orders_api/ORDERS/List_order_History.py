@@ -51,11 +51,6 @@ class init:
     registro = 0
     reg = 0
 
-def format_schema(schema):
-    formatted_schema = []
-    for row in schema:
-        formatted_schema.append(bigquery.SchemaField(row['name'], row['type'], row['mode']))
-    return formatted_schema
 
 def get_order_list(page):
     url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders?page="+str(page)+""
@@ -65,8 +60,8 @@ def get_order_list(page):
     FJ = json.loads(response.text)
     FJsonn = FJ["list"]
     if FJsonn:
-        init.reg +=1
         for FJson in FJsonn:
+            init.reg +=1
             df1 = pd.DataFrame({
                 'orderId': FJson["orderId"],
                 'creationDate': FJson["creationDate"],
@@ -121,106 +116,7 @@ def run():
     json_data = df.to_json(orient = 'records')
     json_object = json.loads(json_data)
     
-    table_schema = {
-            "name": "orderId",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "creationDate",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "clientName",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "totalValue",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "paymentNames",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "status",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "statusDescription",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "marketPlaceOrderId",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "sequence",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "salesChannel",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "affiliateId",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "origin",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "workflowInErrorState",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "workflowInRetry",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "lastMessageUnread",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "ShippingEstimatedDate",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "ShippingEstimatedDateMax",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "ShippingEstimatedDateMin",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "orderIsComplete",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "listId",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "listType",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "authorizedDate",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "callCenterOperatorName",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "totalItems",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "currencyCode",
-            "type": "STRING",
-            "mode": "NULLABLE"}
+    
     
     project_id = '999847639598'
     dataset_id = 'staging_zone'
@@ -232,7 +128,7 @@ def run():
     tableO = dataset.table(table_id)
     job_config = bigquery.LoadJobConfig()
     job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-    job_config.schema = format_schema(table_schema)
+    job_config.autodetect = True
     job = client.load_table_from_json(json_object, tableO, job_config = job_config)
     print(job.result())
     
@@ -240,7 +136,7 @@ def run():
     job_config_temp = bigquery.LoadJobConfig()
     job_config_temp.write_disposition = "WRITE_TRUNCATE"
     job_config_temp.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-    job_config_temp.schema = format_schema(table_schema)
+    job_config.autodetect = True
     job = client.load_table_from_json(json_object, tableT, job_config = job_config_temp)
     print(job.result())
 
