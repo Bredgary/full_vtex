@@ -63,37 +63,38 @@ def get_order_list(page):
     headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
     response = requests.request("GET", url, headers=headers, params=querystring)
     FJ = json.loads(response.text)
-    FJson = FJ["list"]
-    if FJson:
+    FJsonn = FJ["list"]
+    if FJsonn:
         init.reg +=1
-        df1 = pd.DataFrame({
-            'orderId': FJson["orderId"],
-            'creationDate': FJson["creationDate"],
-            'clientName': FJson["clientName"],
-            'totalValue': FJson["totalValue"],
-            'paymentNames': FJson["paymentNames"],
-            'status': FJson["status"],
-            'statusDescription': FJson["statusDescription"],
-            'marketPlaceOrderId': FJson["marketPlaceOrderId"],
-            'sequence': FJson["sequence"],
-            'salesChannel': FJson["salesChannel"],
-            'affiliateId': FJson["affiliateId"],
-            'origin': FJson["origin"],
-            'workflowInErrorSta1te': FJson["workflowInErrorState"],
-            'workflowInRetry': FJson["workflowInRetry"],
-            'lastMessageUnread': FJson["lastMessageUnread"],
-            'ShippingEstimatedDate': FJson["ShippingEstimatedDate"],
-            'ShippingEstimatedDateMax': FJson["ShippingEstimatedDateMax"],
-            'ShippingEstimatedDateMin': FJson["ShippingEstimatedDateMin"],
-            'orderIsComplete': FJson["orderIsComplete"],
-            'listId': FJson["listId"],
-            'listType': FJson["listType"],
-            'authorizedDate': FJson["authorizedDate"],
-            'callCenterOperatorName': FJson["callCenterOperatorName"],
-            'totalItems': FJson["totalItems"],
-            'currencyCode': FJson["currencyCode"]}, index=[0])
-        print("Registro: "+str(init.reg))
-        init.df = init.df.append(df1)
+        for FJson in FJsonn:
+            df1 = pd.DataFrame({
+                'orderId': FJson["orderId"],
+                'creationDate': FJson["creationDate"],
+                'clientName': FJson["clientName"],
+                'totalValue': FJson["totalValue"],
+                'paymentNames': FJson["paymentNames"],
+                'status': FJson["status"],
+                'statusDescription': FJson["statusDescription"],
+                'marketPlaceOrderId': FJson["marketPlaceOrderId"],
+                'sequence': FJson["sequence"],
+                'salesChannel': FJson["salesChannel"],
+                'affiliateId': FJson["affiliateId"],
+                'origin': FJson["origin"],
+                'workflowInErrorSta1te': FJson["workflowInErrorState"],
+                'workflowInRetry': FJson["workflowInRetry"],
+                'lastMessageUnread': FJson["lastMessageUnread"],
+                'ShippingEstimatedDate': FJson["ShippingEstimatedDate"],
+                'ShippingEstimatedDateMax': FJson["ShippingEstimatedDateMax"],
+                'ShippingEstimatedDateMin': FJson["ShippingEstimatedDateMin"],
+                'orderIsComplete': FJson["orderIsComplete"],
+                'listId': FJson["listId"],
+                'listType': FJson["listType"],
+                'authorizedDate': FJson["authorizedDate"],
+                'callCenterOperatorName': FJson["callCenterOperatorName"],
+                'totalItems': FJson["totalItems"],
+                'currencyCode': FJson["currencyCode"]}, index=[0])
+            print("Registro: "+str(init.reg))
+            init.df = init.df.append(df1)
 
 
 
