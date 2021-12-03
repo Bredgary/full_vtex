@@ -81,7 +81,7 @@ def get_params():
     rows = query_job.result()
     registro = 1
     for row in rows:
-        get_code_postal(row.storePreferencesData_countryCode,row.postalCode,registro,orderId)
+        get_code_postal(row.storePreferencesData_countryCode,row.postalCode,registro,row.orderId)
         registro += 1
 
 def delete_duplicate():
