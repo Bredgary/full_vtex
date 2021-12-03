@@ -43,32 +43,36 @@ def get_code_postal(countryCode,postalCode,reg,orderId):
 	    	init.city = Fjson["city"]
 	    if Fjson["state"]:
 	    	init.state = Fjson["state"]
-	    if Fjson["postalCode"]:
+	    if Fjson["country"]:
 	    	init.country = Fjson["country"]
-	    if Fjson["postalCode"]:
+	    if Fjson["street"]:
 	    	init.street = Fjson["street"]
-	    if Fjson["postalCode"]:
+	    if Fjson["number"]:
 	    	init.number = Fjson["number"]
-	    if Fjson["postalCode"]:
+	    if Fjson["neighborhood"]:
 	    	init.neighborhood = Fjson["neighborhood"]
-	    if Fjson["postalCode"]:
+	    if Fjson["complement"]:
 	    	init.complement = Fjson["complement"]
-	    if Fjson["postalCode"]:
+	    if Fjson["reference"]:
 	    	init.reference = Fjson["reference"]
-	    if Fjson["postalCode"]:
+	    if Fjson["geoCoordinates"]:
 	    	init.geoCoordinates = Fjson["geoCoordinates"]
 	    	
-	    if init.latitude and init.longitude is not null:
-	    	init.latitude = init.geoCoordinates[0]
-	    	init.longitude = init.geoCoordinates[1]
-	    	
-	    print("Hola")
-	   
+	    if init.latitude and init.longitude is not None:
+	    	init.geoCoordinates = shapely.geometry.LineString([(init.latitude, 33.9416), (init.longitude , 40.6413)])
 	    
-	    
-	    
-	    
-	    geography = shapely.geometry.LineString([(init.latitude , 33.9416), (init.longitude , 40.6413)])
+	    df1 = pd.DataFrame({
+			'postalCode': init.postalCode,
+			'city': init.city,
+			'state': init.state,
+			'country': init.country,
+			'street': init.street,
+			'number': init.number,
+			'neighborhood': init.neighborhood,
+			'complement': init.complement,
+			'reference': init.reference,
+			'geoCoordinates': init.geoCoordinates}, index=[0])
+	    init.df = init.df.append(df1)
 	except:
 		print("Vacio")
 
@@ -105,6 +109,7 @@ def run():
         df.reset_index(drop=True, inplace=True)
         json_data = df.to_json(orient = 'records')
         json_object = json.loads(json_data)
+        print(json_object)
         '''
         project_id = '999847639598'
         dataset_id = 'staging_zone'
