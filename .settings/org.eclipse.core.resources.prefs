@@ -10,4 +10,5 @@ encoding//vtex/catalog_api/SPECIFICATION_GROUP/List_Specifications_Group_by_Cate
 encoding//vtex/checkout_api/FULFILLMENT/Get_address_by_postal_code.py=latin1
 encoding//vtex/entity/CL/Cliente.py=latin1
 encoding//vtex/orders_api/ORDERS/List_Order.py=latin1
+encoding//vtex/orders_api/ORDERS/List_order_History.py=latin1
 encoding//vtex/orders_api/ORDERS/Order.py=latin1

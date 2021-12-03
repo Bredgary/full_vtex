@@ -1264,7 +1264,7 @@ def get_params():
     print("Cargando consulta")
     client = bigquery.Client()
     QUERY = (
-        'SELECT orderId FROM `shopstar-datalake.landing_zone.shopstar_vtex_list_order`')
+        'SELECT orderId FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`')
     query_job = client.query(QUERY)  
     rows = query_job.result()
     registro = 1
@@ -1277,7 +1277,7 @@ def delete_duplicate():
 		print("Eliminando duplicados")
 		client = bigquery.Client()
 		QUERY = (
-			'CREATE OR REPLACE TABLE `shopstar-datalake.landing_zone.shopstar_vtex_order` AS SELECT DISTINCT * FROM `shopstar-datalake.landing_zone.shopstar_vtex_order`')
+			'CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_vtex_order` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.shopstar_vtex_order`')
 		query_job = client.query(QUERY)
 		rows = query_job.result()
 		print(rows)

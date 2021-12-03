@@ -100,7 +100,7 @@ def delete_duplicate():
 		print("Eliminando duplicados")
 		client = bigquery.Client()
 		QUERY = (
-			'CREATE OR REPLACE TABLE `shopstar-datalake.landing_zone.shopstar_vtex_list_order` AS SELECT DISTINCT * FROM `shopstar-datalake.landing_zone.shopstar_vtex_list_order`')
+			'CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_vtex_list_order` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`')
 		query_job = client.query(QUERY)
 		rows = query_job.result()
 		print(rows)
@@ -220,9 +220,9 @@ def run():
 			"mode": "NULLABLE"}
 	
 	project_id = '999847639598'
-	dataset_id = 'landing_zone'
-	table_id = 'shopstar_vtex_list_order'
-	table_temp = 'order_write'
+	dataset_id = 'staging_zone'
+	table_id = 'shopstar_vtex_list_order____'
+	table_temp = 'order_write_____'
 	
 	client  = bigquery.Client(project = project_id)
 	dataset  = client.dataset(dataset_id)
