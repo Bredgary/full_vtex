@@ -16,6 +16,7 @@ def seller_sku(sellerSku,seller_id,orderId,reg):
     	url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/skuseller/"+str(seller_id)+"/"+str(sellerSku)+""
     	response = requests.request("GET", url, headers=init.headers)
     	Fjson = json.loads(response.text)
+        print(Fjson)
     	df1 = pd.DataFrame({
             'orderId' : orderId,
 			'IsPersisted' : Fjson["IsPersisted"],
