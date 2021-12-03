@@ -48,6 +48,7 @@ class Init:
     yesterday = today - datetime.timedelta(days=1)
     ordenes = {}
     df = pd.DataFrame()
+    registro = 0
 
 def format_schema(schema):
     formatted_schema = []
@@ -55,43 +56,43 @@ def format_schema(schema):
         formatted_schema.append(bigquery.SchemaField(row['name'], row['type'], row['mode']))
     return formatted_schema
 
-def get_order_list(page):
+def get_order_list(page,reg):
     url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders?page="+str(page)+""
     querystring = {"f_creationDate":"creationDate:[2020-01-01T02:00:00.000Z TO 2020-01-02T01:59:59.999Z]","f_hasInputInvoice":"false"}
     headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
     response = requests.request("GET", url, headers=headers, params=querystring)
-    FJ = json.loads(response.text)
-    x = FJ["list"]
-    if FJ["list"]:
-        for FJson in x:
+    FJson = json.loads(response.text)
+    if FJson["list"]:
+        for x in FJson:
             print(FJson["orderId"])
             df1 = pd.DataFrame({
-                'orderId': str(FJson["orderId"]),
-                'creationDate': str(FJson["creationDate"]),
-                'clientName': str(FJson["clientName"]),
-                'totalValue': str(FJson["totalValue"]),
-                'paymentNames': str(FJson["paymentNames"]),
-                'status': str(FJson["status"]),
-                'statusDescription': str(FJson["statusDescription"]),
-                'marketPlaceOrderId': str(FJson["marketPlaceOrderId"]),
-                'sequence': str(FJson["sequence"]),
-                'salesChannel': str(FJson["salesChannel"]),
-                'affiliateId': str(FJson["affiliateId"]),
-                'origin': str(FJson["origin"]),
-                'workflowInErrorSta1te': str(FJson["workflowInErrorState"]),
-                'workflowInRetry': str(FJson["workflowInRetry"]),
-                'lastMessageUnread': str(FJson["lastMessageUnread"]),
-                'ShippingEstimatedDate': str(FJson["ShippingEstimatedDate"]),
-                'ShippingEstimatedDateMax': str(FJson["ShippingEstimatedDateMax"]),
-                'ShippingEstimatedDateMin': str(FJson["ShippingEstimatedDateMin"]),
-                'orderIsComplete': str(FJson["orderIsComplete"]),
-                'listId': str(FJson["listId"]),
-                'listType': str(FJson["listType"]),
-                'authorizedDate': str(FJson["authorizedDate"]),
-                'callCenterOperatorName': str(FJson["callCenterOperatorName"]),
-                'totalItems': str(FJson["totalItems"]),
-                'currencyCode': str(FJson["currencyCode"])}, index=[0])
+                'orderId': x["orderId"],
+                'creationDate': x["creationDate"],
+                'clientName': x["clientName"],
+                'totalValue': x["totalValue"],
+                'paymentNames': x["paymentNames"],
+                'status': x["status"],
+                'statusDescription': x["statusDescription"],
+                'marketPlaceOrderId': x["marketPlaceOrderId"],
+                'sequence': x["sequence"],
+                'salesChannel': x["salesChannel"],
+                'affiliateId': x["affiliateId"],
+                'origin': x["origin"],
+                'workflowInErrorSta1te': x["workflowInErrorState"],
+                'workflowInRetry': x["workflowInRetry"],
+                'lastMessageUnread': x["lastMessageUnread"],
+                'ShippingEstimatedDate': x["ShippingEstimatedDate"],
+                'ShippingEstimatedDateMax': x["ShippingEstimatedDateMax"],
+                'ShippingEstimatedDateMin': x["ShippingEstimatedDateMin"],
+                'orderIsComplete': x["orderIsComplete"],
+                'listId': x["listId"],
+                'listType': x["listType"],
+                'authorizedDate': x["authorizedDate"],
+                'callCenterOperatorName': x["callCenterOperatorName"],
+                'totalItems': x["totalItems"],
+                'currencyCode': x["currencyCode"]}, index=[0])
         init.df = init.df.append(df1)
+        print("Registro: "+str(reg))
     return FJson
 
 
@@ -110,8 +111,8 @@ def delete_duplicate():
 
 def run():
     for x in range(30):
-        get_order_list(x+1)
-        print("Pagina: "+str(x+1))
+        init.registro += 1
+        get_order_list(init.registro,reg)
         
     df = init.df
     df.reset_index(drop=True, inplace=True)
@@ -221,7 +222,7 @@ def run():
     
     project_id = '999847639598'
     dataset_id = 'staging_zone'
-    table_id = 'shopstar_vtex_list_order'
+    table_id = 'shopstar_vtex_list_order_test'
     table_temp = 'order_write'
     
     client  = bigquery.Client(project = project_id)
