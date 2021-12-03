@@ -46,8 +46,6 @@ def get_params():
     for row in rows:
         seller_sku(row.sellerSku,row.seller_id,row.orderId,registro)
         registro += 1
-        if registro == 100:
-            break
     
 def delete_duplicate():
     try:
