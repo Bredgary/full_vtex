@@ -1,64 +1,96 @@
-import requests
-import json
-import os
-import re
-from datetime import datetime
-from os import system
+#!/usr/bin/python
+# -*- coding: latin-1 -*-
+import pandas as pd
+import numpy as np
 from google.cloud import bigquery
-from itertools import chain
-from collections import defaultdict
+import os, json
+from datetime import datetime
+import requests
+from datetime import datetime, timezone
+from os.path import join
 
-countryCode = "BRA"
-postalCode = "1234000"
+class init:
+    productList = []
+    df = pd.DataFrame()
+    postalCode = None
+    city = None
+    state = None
+    country = None
+    street = None
+    number = None
+    neighborhood = None
+    complement = None
+    reference = None
+    geoCoordinates = None
+    
+    headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
-def address_by_postal(countryCode,postalCode):
-	url = "https://mercury.vtexcommercestable.com.br/api/checkout/pub/postal-code/"+countryCode+"/"+postalCode+""
-	headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-	response = requests.request("GET", url, headers=headers)
-	FJson = json.loads(response.text)
-	result = json.dumps(FJson)
-	text_file = open("/home/bred_valenzuela/full_vtex/vtex/checkout_api/FULFILLMENT/address_by_postal.json", "w")
-	text_file.write(result)
-	text_file.close()
-	cargando_bigquery()
 
-def cargando_bigquery():
-	print("Cargando a BigQuery")
-	#system("cat items.json | jq -c '.[]' > tableCollectionBeta.json")
-	client = bigquery.Client()
-	filename = '/home/bred_valenzuela/full_vtex/vtex/checkout_api/FULFILLMENT/address_by_postal.json'
-	dataset_id = 'landing_zone'
-	table_id = 'shopstar_address_by_postal_code'
-	dataset_ref = client.dataset(dataset_id)
-	table_ref = dataset_ref.table(table_id)
-	job_config = bigquery.LoadJobConfig()
-	job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-	job_config.autodetect = True
-	with open(filename, "rb") as source_file:
-		job = client.load_table_from_file(
-			source_file,
-			table_ref,
-			location="southamerica-east1",  # Must match the destination dataset location.
-		job_config=job_config,)  # API request
-	job.result()  # Waits for table load to complete.
-	print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
-	print("finalizado")
+     
+def get_code_postal(countryCode,postalCode,reg):
+    url = "https://mercury.vtexcommercestable.com.br/api/checkout/pub/postal-code/"+countryCode+"/"+postalCode+""
+    response = requests.request("GET", url, headers=init.headers)
+    Fjson = json.loads(response.text)
+    print("Hola")
+    
+    #df1 = pd.DataFrame({
+    #    'orderId': init.orderId,
+    #    'emailTracked': emailTr,
+    #    'invoicedDate': init.invoicedDate}, index=[0])
+    #init.df = init.df.append(df1)
+    #print("Registro: "+str(reg))
+        
 
-for x in range(1):
-	address_by_postal(countryCode,postalCode)
+def get_params():
+    print("Cargando consulta")
+    client = bigquery.Client()
+    QUERY = (
+        'SELECT storePreferencesData_countryCode,postalCode FROM `shopstar-datalake.staging_zone.shopstar_vtex_order` where storePreferencesData_countryCode is not null and postalCode is not null')
+    query_job = client.query(QUERY)  
+    rows = query_job.result()
+    registro = 1
+    for row in rows:
+        get_code_postal(row.storePreferencesData_countryCode,row.postalCode,registro)
+        registro += 1
 
-'''
-QUERY = (
-    'SELECT FieldId FROM `shopstar-datalake.landing_zone.shopstar_vtex_sku_specification` WHERE FieldId is not null')
-query_job = client.query(QUERY)  
-rows = query_job.result()  
+def delete_duplicate():
+	try:
+		print("Eliminando duplicados")
+		client = bigquery.Client()
+		QUERY = (
+			'CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_vtex_address_by_postal_code` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.shopstar_vtex_address_by_postal_code`')
+		query_job = client.query(QUERY)
+		rows = query_job.result()
+		print(rows)
+	except:
+		print("Consulta SQL no ejecutada")
 
-for row in rows:
-    productList.append(row.FieldId)
 
-string = json.dumps(productList)
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/SPECIFICATION_FIELD/SPECIFICATION_FIELD_ID_2.json", "w")
-text_file.write(string)
-text_file.close()
-'''
 
+def run():
+    try:
+        get_params()
+        df = init.df
+        df.reset_index(drop=True, inplace=True)
+        json_data = df.to_json(orient = 'records')
+        json_object = json.loads(json_data)
+        '''
+        project_id = '999847639598'
+        dataset_id = 'staging_zone'
+        table_id = 'shopstar_vtex_address_by_postal_code'
+        
+        client  = bigquery.Client(project = project_id)
+        dataset  = client.dataset(dataset_id)
+        table = dataset.table(table_id)
+        job_config = bigquery.LoadJobConfig()
+        job_config.write_disposition = "WRITE_TRUNCATE"
+        job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+        job_config.autodetect = True
+        job = client.load_table_from_json(json_object, table, job_config = job_config)
+        print(job.result())
+        delete_duplicate()
+        '''
+    except:
+        print("Error")
+    
+run()

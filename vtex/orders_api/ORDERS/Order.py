@@ -1284,17 +1284,6 @@ def delete_duplicate():
 	except:
 		print("Consulta SQL no ejecutada")
 
-def delete_duplicate_cons():
-    try:
-        print("Eliminando duplicados")
-        client = bigquery.Client()
-        QUERY = (
-            'CREATE OR REPLACE TABLE `shopstar-datalake.cons_zone.shopstar_vtex_order` AS SELECT DISTINCT * FROM `shopstar-datalake.cons_zone.shopstar_vtex_order`')
-        query_job = client.query(QUERY)
-        rows = query_job.result()
-        print(rows)
-    except:
-        print("Consulta SQL no ejecutada")
 
 
 def run():
@@ -1306,7 +1295,7 @@ def run():
         json_object = json.loads(json_data)
         
         project_id = '999847639598'
-        dataset_id = 'landing_zone'
+        dataset_id = 'staging_zone'
         table_id = 'shopstar_vtex_order'
         
         client  = bigquery.Client(project = project_id)
@@ -1319,20 +1308,6 @@ def run():
         job = client.load_table_from_json(json_object, table, job_config = job_config)
         print(job.result())
         delete_duplicate()
-        
-        dataset_final = 'cons_zone'
-        table_cons = 'shopstar_vtex_order'
-        
-        client  = bigquery.Client(project = project_id)
-        dataset  = client.dataset(dataset_final)
-        table_final = dataset.table(table_cons)
-        job_config_Final = bigquery.LoadJobConfig()
-        job_config_Final.write_disposition = "WRITE_TRUNCATE"
-        job_config_Final.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-        job_config_Final.autodetect = True
-        job = client.load_table_from_json(json_object, table_final, job_config = job_config_Final)
-        print(job.result())
-        delete_duplicate_cons()
     except:
         print("Error")
     
