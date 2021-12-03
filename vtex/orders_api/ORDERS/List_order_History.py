@@ -49,6 +49,7 @@ class init:
     ordenes = {}
     df = pd.DataFrame()
     registro = 0
+    reg = 0
 
 def format_schema(schema):
     formatted_schema = []
@@ -56,7 +57,7 @@ def format_schema(schema):
         formatted_schema.append(bigquery.SchemaField(row['name'], row['type'], row['mode']))
     return formatted_schema
 
-def get_order_list(page,reg):
+def get_order_list(page):
     url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders?page="+str(page)+""
     querystring = {"f_creationDate":"creationDate:[2020-01-01T02:00:00.000Z TO 2020-01-02T01:59:59.999Z]","f_hasInputInvoice":"false"}
     headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
@@ -64,7 +65,7 @@ def get_order_list(page,reg):
     FJson = json.loads(response.text)
     if FJson["list"]:
         for x in FJson:
-            print(FJson["orderId"])
+            init.reg +=1
             df1 = pd.DataFrame({
                 'orderId': x["orderId"],
                 'creationDate': x["creationDate"],
@@ -91,8 +92,8 @@ def get_order_list(page,reg):
                 'callCenterOperatorName': x["callCenterOperatorName"],
                 'totalItems': x["totalItems"],
                 'currencyCode': x["currencyCode"]}, index=[0])
+            print("Registro: "+str(init.reg))
         init.df = init.df.append(df1)
-        print("Registro: "+str(reg))
     return FJson
 
 
@@ -112,7 +113,7 @@ def delete_duplicate():
 def run():
     for x in range(30):
         init.registro += 1
-        get_order_list(init.registro,reg)
+        get_order_list(init.registro)
         
     df = init.df
     df.reset_index(drop=True, inplace=True)
