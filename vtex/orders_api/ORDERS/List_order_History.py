@@ -43,7 +43,7 @@ class date:
     
 
 
-class Init:
+class init:
     today = datetime.date.today()
     yesterday = today - datetime.timedelta(days=1)
     ordenes = {}
