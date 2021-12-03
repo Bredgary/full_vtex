@@ -49,11 +49,12 @@ def get_code_postal(countryCode,postalCode,reg):
     init.latitude = init.geoCoordinates[0]
     init.longitude = init.geoCoordinates[1]
     
-    geography = shapely.geometry.LineString([(init.longitude), (init.longitude)])
+    
+    print(geopoint)
+    print(type(geopoint))
+    geography = shapely.geometry.LineString([(init.latitude , 33.9416), (init.longitude , 40.6413)])
     print(geography)
     print(type(geography))
-    
-        
 
 def get_params():
     print("Cargando consulta")
