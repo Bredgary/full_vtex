@@ -8,11 +8,8 @@ from datetime import datetime
 import requests
 from datetime import datetime, timezone
 from os.path import join
-from geopy.extra.rate_limiter import RateLimiter
-import logging
-from google.appengine.api import search
-
-logging.getLogger('googleapiclient.discovery_cache').setLevel(logging.ERROR)
+import shapely.geometry
+import shapely.wkt
 
 class init:
     productList = []
@@ -52,16 +49,10 @@ def get_code_postal(countryCode,postalCode,reg):
     init.latitude = init.geoCoordinates[0]
     init.longitude = init.geoCoordinates[1]
     
-    geopoint = search.GeoPoint(init.latitude, init.longitude)
-    print(geopoint)
-    print(type(geopoint))
+    geography = shapely.geometry.LineString([(init.longitude), (init.longitude)])
+    print(geography)
+    print(type(geography))
     
-    #df1 = pd.DataFrame({
-    #    'orderId': init.orderId,
-    #    'emailTracked': emailTr,
-    #    'invoicedDate': init.invoicedDate}, index=[0])
-    #init.df = init.df.append(df1)
-    #print("Registro: "+str(reg))
         
 
 def get_params():
