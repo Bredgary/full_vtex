@@ -13,12 +13,7 @@ from os import system
 from google.cloud import bigquery
 import logging
 
-class init:
-	today = datetime.date.today()
-	yesterday = today - datetime.timedelta(days=1)
-	before_yesterday = today - datetime.timedelta(days=2)
-	ordenes = {}
-	df = pd.DataFrame()
+
 
 class date:
 	import pandas as pd
@@ -43,12 +38,12 @@ class date:
 	
 
 
-class Init:
+class init:
 	today = datetime.date.today()
 	yesterday = today - datetime.timedelta(days=1)
 	ordenes = {}
 	df = pd.DataFrame()
-
+	today = datetime.date.today()
 def format_schema(schema):
     formatted_schema = []
     for row in schema:
@@ -57,7 +52,7 @@ def format_schema(schema):
 
 def get_order_list(page):
 	url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders?page="+str(page)+""
-	querystring = {"f_creationDate":"creationDate:["+str(Init.yesterday)+"T02:00:00.000Z TO "+str(date.date)+"]","f_hasInputInvoice":"false"}
+	querystring = {"f_creationDate":"creationDate:["+str(init.yesterday)+"T02:00:00.000Z TO "+str(date.date)+"]","f_hasInputInvoice":"false"}
 	headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 	response = requests.request("GET", url, headers=headers, params=querystring)
 	FJ = json.loads(response.text)

@@ -43,13 +43,6 @@ class date:
     
 
 
-class init:
-    today = datetime.date.today()
-    yesterday = today - datetime.timedelta(days=1)
-    ordenes = {}
-    df = pd.DataFrame()
-    registro = 0
-    reg = 0
 
 
 def get_order_list(page):
