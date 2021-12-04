@@ -19,6 +19,7 @@ class init:
     before_yesterday = today - datetime.timedelta(days=2)
     ordenes = {}
     df = pd.DataFrame()
+    registro
 
 class date:
     import pandas as pd
