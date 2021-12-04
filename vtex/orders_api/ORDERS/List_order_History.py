@@ -53,7 +53,7 @@ def format_schema(schema):
 
 def get_order_list(page):
     url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders?page="+str(page)+""
-    querystring = {"f_creationDate":"creationDate:[2020-03-29T02:00:00.000Z TO 2020-03-30T01:59:59.999Z]","f_hasInputInvoice":"false"}
+    querystring = {"f_creationDate":"creationDate:[2020-03-30T02:00:00.000Z TO 2020-03-31T01:59:59.999Z]","f_hasInputInvoice":"false"}
     headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
     response = requests.request("GET", url, headers=headers, params=querystring)
     FJTemp = json.loads(response.text)
@@ -108,6 +108,8 @@ def delete_duplicate():
 def run():
     for x in range(30):
         init.registro += 1
+        if init.registro ==28:
+            print("Re ejecutar")
         get_order_list(init.registro)
         
     df = init.df
