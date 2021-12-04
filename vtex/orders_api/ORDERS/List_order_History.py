@@ -31,8 +31,6 @@ class date:
     import requests
     from datetime import datetime, timezone
     
-    
-    
     naive_dt = datetime.now()
     aware_dt = naive_dt.astimezone()
     # correct, ISO-8601 (but not UTC)
@@ -55,7 +53,7 @@ def format_schema(schema):
 
 def get_order_list(page):
     url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders?page="+str(page)+""
-    querystring = {"f_creationDate":"creationDate:[2020-01-25T02:00:00.000Z TO 2020-01-26T01:59:59.999Z]","f_hasInputInvoice":"false"}
+    querystring = {"f_creationDate":"creationDate:[2020-01-26T02:00:00.000Z TO 2020-01-27T01:59:59.999Z]","f_hasInputInvoice":"false"}
     headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
     response = requests.request("GET", url, headers=headers, params=querystring)
     FJTemp = json.loads(response.text)
