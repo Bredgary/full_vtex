@@ -45,8 +45,6 @@ class date:
     
 
 
-
-
 def get_order_list(page):
     url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders?page="+str(page)+""
     querystring = {"f_creationDate":"creationDate:[2020-01-01T02:00:00.000Z TO 2020-01-02T01:59:59.999Z]","f_hasInputInvoice":"false"}
