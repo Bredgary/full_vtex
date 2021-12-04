@@ -108,10 +108,11 @@ def delete_duplicate():
 def run():
     for x in range(30):
         init.registro += 1
-        if init.registro ==28:
-            print("Re ejecutar")
         get_order_list(init.registro)
-        
+    
+    if init.registro ==28:
+        print("Re ejecutar")
+    
     df = init.df
     df.reset_index(drop=True, inplace=True)
     json_data = df.to_json(orient = 'records')
