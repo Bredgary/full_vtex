@@ -44,7 +44,7 @@ class date:
 
 def get_order_list(page):
     url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders?page="+str(page)+""
-    querystring = {"f_creationDate":"creationDate:[2020-01-01T02:00:00.000Z TO 2020-01-02T01:59:59.999Z]","f_hasInputInvoice":"false"}
+    querystring = {"f_creationDate":"creationDate:["+str(init.yesterday)+"T02:00:00.000Z TO "+str(date.date)+"]","f_hasInputInvoice":"false"}
     headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
     response = requests.request("GET", url, headers=headers, params=querystring)
     FJ = json.loads(response.text)
@@ -53,31 +53,31 @@ def get_order_list(page):
         for FJson in FJsonn:
             init.reg +=1
             df1 = pd.DataFrame({
-                'orderId': FJson["orderId"],
-                'creationDate': FJson["creationDate"],
-                'clientName': FJson["clientName"],
-                'totalValue': FJson["totalValue"],
-                'paymentNames': FJson["paymentNames"],
-                'status': FJson["status"],
-                'statusDescription': FJson["statusDescription"],
-                'marketPlaceOrderId': FJson["marketPlaceOrderId"],
-                'sequence': FJson["sequence"],
-                'salesChannel': FJson["salesChannel"],
-                'affiliateId': FJson["affiliateId"],
-                'origin': FJson["origin"],
-                'workflowInErrorSta1te': FJson["workflowInErrorState"],
-                'workflowInRetry': FJson["workflowInRetry"],
-                'lastMessageUnread': FJson["lastMessageUnread"],
-                'ShippingEstimatedDate': FJson["ShippingEstimatedDate"],
-                'ShippingEstimatedDateMax': FJson["ShippingEstimatedDateMax"],
-                'ShippingEstimatedDateMin': FJson["ShippingEstimatedDateMin"],
-                'orderIsComplete': FJson["orderIsComplete"],
-                'listId': FJson["listId"],
-                'listType': FJson["listType"],
-                'authorizedDate': FJson["authorizedDate"],
-                'callCenterOperatorName': FJson["callCenterOperatorName"],
-                'totalItems': FJson["totalItems"],
-                'currencyCode': FJson["currencyCode"]}, index=[0])
+                'orderId': str(FJson["orderId"]),
+                'creationDate': str(FJson["creationDate"]),
+                'clientName': str(FJson["clientName"]),
+                'totalValue': str(FJson["totalValue"]),
+                'paymentNames': str(FJson["paymentNames"]),
+                'status': str(FJson["status"]),
+                'statusDescription': str(FJson["statusDescription"]),
+                'marketPlaceOrderId': str(FJson["marketPlaceOrderId"]),
+                'sequence': str(FJson["sequence"]),
+                'salesChannel': str(FJson["salesChannel"]),
+                'affiliateId': str(FJson["affiliateId"]),
+                'origin': str(FJson["origin"]),
+                'workflowInErrorSta1te': str(FJson["workflowInErrorState"]),
+                'workflowInRetry': str(FJson["workflowInRetry"]),
+                'lastMessageUnread': str(FJson["lastMessageUnread"]),
+                'ShippingEstimatedDate': str(FJson["ShippingEstimatedDate"]),
+                'ShippingEstimatedDateMax': str(FJson["ShippingEstimatedDateMax"]),
+                'ShippingEstimatedDateMin': str(FJson["ShippingEstimatedDateMin"]),
+                'orderIsComplete': str(FJson["orderIsComplete"]),
+                'listId': str(FJson["listId"]),
+                'listType': str(FJson["listType"]),
+                'authorizedDate': str(FJson["authorizedDate"]),
+                'callCenterOperatorName': str(FJson["callCenterOperatorName"]),
+                'totalItems': str(FJson["totalItems"]),
+                'currencyCode': str(FJson["currencyCode"])}, index=[0])
             print("Registro: "+str(init.reg))
             init.df = init.df.append(df1)
 
@@ -128,6 +128,7 @@ def run():
     job = client.load_table_from_json(json_object, tableT, job_config = job_config_temp)
     print(job.result())
     delete_duplicate()
+
 
 run()
 
