@@ -1,5 +1,3 @@
-#!/usr/bin/python
-# -*- coding: latin-1 -*-
 import pandas as pd
 import numpy as np
 import requests
@@ -43,7 +41,6 @@ class date:
     now = datetime.now()
     format = now.strftime('%Y-%m-%d')
     
-
 
 def get_order_list(page):
     url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders?page="+str(page)+""
@@ -119,7 +116,7 @@ def run():
     tableO = dataset.table(table_id)
     job_config = bigquery.LoadJobConfig()
     job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-    #job_config.autodetect = True
+    job_config.autodetect = True
     job = client.load_table_from_json(json_object, tableO, job_config = job_config)
     print(job.result())
     
@@ -127,7 +124,7 @@ def run():
     job_config_temp = bigquery.LoadJobConfig()
     job_config_temp.write_disposition = "WRITE_TRUNCATE"
     job_config_temp.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-    #job_config.autodetect = True
+    job_config.autodetect = True
     job = client.load_table_from_json(json_object, tableT, job_config = job_config_temp)
     print(job.result())
     delete_duplicate()
