@@ -55,7 +55,7 @@ def format_schema(schema):
 
 def get_order_list(page):
     url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders?page="+str(page)+""
-    querystring = {"f_creationDate":"creationDate:[2020-01-21T02:00:00.000Z TO 2020-01-22T01:59:59.999Z]","f_hasInputInvoice":"false"}
+    querystring = {"f_creationDate":"creationDate:[2020-01-22T02:00:00.000Z TO 2020-01-23T01:59:59.999Z]","f_hasInputInvoice":"false"}
     headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
     response = requests.request("GET", url, headers=headers, params=querystring)
     FJTemp = json.loads(response.text)
