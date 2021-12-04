@@ -20,6 +20,7 @@ class init:
     ordenes = {}
     df = pd.DataFrame()
     registro = 0
+    reg = 0
 
 class date:
     import pandas as pd
