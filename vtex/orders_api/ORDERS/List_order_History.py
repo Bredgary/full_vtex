@@ -116,8 +116,6 @@ def run():
     json_data = df.to_json(orient = 'records')
     json_object = json.loads(json_data)
     
-    
-    
     project_id = '999847639598'
     dataset_id = 'staging_zone'
     table_id = 'shopstar_vtex_list_order'
