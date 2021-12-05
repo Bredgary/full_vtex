@@ -22,8 +22,8 @@ class init:
     df = pd.DataFrame()
     registro = 0
     reg = 0 
-    num_from = "25"
-    num_to ="26"
+    num_from = "26"
+    num_to ="27"
     mount = "06"
     '''
     30
@@ -163,6 +163,8 @@ def run():
         get_order_list(init.registro,init.hora_21)
         get_order_list(init.registro,init.hora_22)
     
+    if init.registro >=29:
+        print("Re ejecutar")
     
     df = init.df
     df.reset_index(drop=True, inplace=True)
