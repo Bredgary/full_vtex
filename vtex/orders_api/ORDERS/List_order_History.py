@@ -57,7 +57,7 @@ def format_schema(schema):
 def get_order_list(page):
     for x in range(50):
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders?page="+str(page)+""
-        querystring = {"f_creationDate":"creationDate:[2021-03-01T0"+str(init.hora_from)+":00:00.000Z TO 2021-03-02T0"+str(init.hora_to)+":59:59.999Z]","f_hasInputInvoice":"false"}
+        querystring = {"f_creationDate":"creationDate:[2021-03-01T"+str(init.hora_from)+":00:00.000Z TO 2021-03-02T"+str(init.hora_to)+":59:59.999Z]","f_hasInputInvoice":"false"}
         headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
         response = requests.request("GET", url, headers=headers, params=querystring)
         FJTemp = json.loads(response.text)
@@ -94,7 +94,7 @@ def get_order_list(page):
                 print("Registro: "+str(init.reg))
                 init.df = init.df.append(df1)
         init.hora_from += 1
-        init.hora_to+=2
+        init.hora_to+=1
         if init.hora_to == 23:
             break
 
