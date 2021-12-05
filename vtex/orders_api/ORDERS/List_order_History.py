@@ -21,6 +21,7 @@ class init:
     df = pd.DataFrame()
     registro = 0
     reg = 0
+    querystring = {"f_creationDate":"creationDate:[2021-05-06T01:00:00.000Z TO 2021-05-07T01:59:59.999Z]","f_hasInputInvoice":"false"}
 
 class date:
     import pandas as pd
@@ -53,42 +54,42 @@ def format_schema(schema):
 def get_order_list(page):
     try:
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders?page="+str(page)+""
-        querystring = {"f_creationDate":"creationDate:[2021-05-06T02:00:00.000Z TO 2021-05-07T01:59:59.999Z]","f_hasInputInvoice":"false"}
-        headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-        response = requests.request("GET", url, headers=headers, params=querystring)
-        FJTemp = json.loads(response.text)
-        FJson = FJTemp["list"]
-        if FJson:
-            for x in FJson:
-                init.reg +=1
-                df1 = pd.DataFrame({
-                    'orderId': str(x["orderId"]),
-                    'creationDate': str(x["creationDate"]),
-                    'clientName': str(x["clientName"]),
-                    'totalValue': str(x["totalValue"]),
-                    'paymentNames': str(x["paymentNames"]),
-                    'status': str(x["status"]),
-                    'statusDescription': str(x["statusDescription"]),
-                    'marketPlaceOrderId': str(x["marketPlaceOrderId"]),
-                    'sequence': str(x["sequence"]),
-                    'salesChannel': str(x["salesChannel"]),
-                    'affiliateId': str(x["affiliateId"]),
-                    'origin': str(x["origin"]),
-                    'workflowInErrorSta1te': str(x["workflowInErrorState"]),
-                    'workflowInRetry': str(x["workflowInRetry"]),
-                    'lastMessageUnread': str(x["lastMessageUnread"]),
-                    'ShippingEstimatedDate': str(x["ShippingEstimatedDate"]),
-                    'ShippingEstimatedDateMax': str(x["ShippingEstimatedDateMax"]),
-                    'ShippingEstimatedDateMin': str(x["ShippingEstimatedDateMin"]),
-                    'orderIsComplete': str(x["orderIsComplete"]),
-                    'listId': str(x["listId"]),
-                    'listType': str(x["listType"]),
-                    'authorizedDate': str(x["authorizedDate"]),
-                    'callCenterOperatorName': str(x["callCenterOperatorName"]),
-                    'totalItems': str(x["totalItems"]),
-                    'currencyCode': str(x["currencyCode"])}, index=[0])
-                print("Registro: "+str(init.reg))
-                init.df = init.df.append(df1)
+        for x in rage(23):
+            headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
+            response = requests.request("GET", url, headers=headers, params=init.querystring)
+            FJTemp = json.loads(response.text)
+            FJson = FJTemp["list"]
+            if FJson:
+                for x in FJson:
+                    init.reg +=1
+                    df1 = pd.DataFrame({
+                        'orderId': str(x["orderId"]),
+                        'creationDate': str(x["creationDate"]),
+                        'clientName': str(x["clientName"]),
+                        'totalValue': str(x["totalValue"]),
+                        'paymentNames': str(x["paymentNames"]),
+                        'status': str(x["status"]),
+                        'statusDescription': str(x["statusDescription"]),
+                        'marketPlaceOrderId': str(x["marketPlaceOrderId"]),
+                        'sequence': str(x["sequence"]),
+                        'salesChannel': str(x["salesChannel"]),
+                        'affiliateId': str(x["affiliateId"]),
+                        'origin': str(x["origin"]),
+                        'workflowInErrorSta1te': str(x["workflowInErrorState"]),
+                        'workflowInRetry': str(x["workflowInRetry"]),
+                        'lastMessageUnread': str(x["lastMessageUnread"]),
+                        'ShippingEstimatedDate': str(x["ShippingEstimatedDate"]),
+                        'ShippingEstimatedDateMax': str(x["ShippingEstimatedDateMax"]),
+                        'ShippingEstimatedDateMin': str(x["ShippingEstimatedDateMin"]),
+                        'orderIsComplete': str(x["orderIsComplete"]),
+                        'listId': str(x["listId"]),
+                        'listType': str(x["listType"]),
+                        'authorizedDate': str(x["authorizedDate"]),
+                        'callCenterOperatorName': str(x["callCenterOperatorName"]),
+                        'totalItems': str(x["totalItems"]),
+                        'currencyCode': str(x["currencyCode"])}, index=[0])
+                    print("Registro: "+str(init.reg))
+                    init.df = init.df.append(df1)
     except:
         print("Vacio")
 
@@ -108,8 +109,9 @@ def delete_duplicate():
 
 
 def run():
-    for x in range(5000):
+    for x in range(30):
         init.registro += 1
+        init.querystring = {"f_creationDate":"creationDate:[2021-05-6T02:00:00.000Z TO 2021-05-7T01:59:59.999Z]","f_hasInputInvoice":"false"}
         get_order_list(init.registro)
     
     
