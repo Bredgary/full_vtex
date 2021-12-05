@@ -18,11 +18,12 @@ class init:
     yesterday = today - datetime.timedelta(days=1)
     before_yesterday = today - datetime.timedelta(days=2)
     ordenes = {}
+    salir = 0
     df = pd.DataFrame()
     registro = 0
     reg = 0
-    num_from = "01"
-    num_to ="01"
+    num_from = "03"
+    num_to ="03"
     mount = "01"
     headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
     hora_0 = {"f_creationDate":"creationDate:[2021-"+mount+"-"+num_from+"T01:00:00.000Z TO 2021-"+mount+"-"+num_to+"T01:59:59.999Z]","f_hasInputInvoice":"false"}
@@ -113,6 +114,8 @@ def get_order_list(page,hora):
                 'currencyCode': str(x["currencyCode"])}, index=[0])
             print("Registro: "+str(init.reg))
             init.df = init.df.append(df1)
+    else:
+        init.salir = 1
 
 
 
@@ -131,6 +134,8 @@ def delete_duplicate():
 
 def run():
     for x in range(30):
+        if init.salir == 1:
+            break
         init.registro += 1
         get_order_list(init.registro,init.hora_0)
         get_order_list(init.registro,init.hora_1)
