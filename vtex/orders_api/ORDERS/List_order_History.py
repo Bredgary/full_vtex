@@ -21,9 +21,29 @@ class init:
     df = pd.DataFrame()
     registro = 0
     reg = 0
-    querystring = {"f_creationDate":"creationDate:[2021-05-06T02:00:00.000Z TO 2021-05-07T01:59:59.999Z]","f_hasInputInvoice":"false"}
     headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-    
+    hora_1 = {"f_creationDate":"creationDate:[2021-05-06T02:00:00.000Z TO 2021-05-07T01:59:59.999Z]","f_hasInputInvoice":"false"}
+    hora_2 = {"f_creationDate":"creationDate:[2021-05-06T03:00:00.000Z TO 2021-05-07T01:59:59.999Z]","f_hasInputInvoice":"false"}
+    hora_3 = {"f_creationDate":"creationDate:[2021-05-06T04:00:00.000Z TO 2021-05-07T01:59:59.999Z]","f_hasInputInvoice":"false"}
+    hora_4 = {"f_creationDate":"creationDate:[2021-05-06T05:00:00.000Z TO 2021-05-07T01:59:59.999Z]","f_hasInputInvoice":"false"}
+    hora_5 = {"f_creationDate":"creationDate:[2021-05-06T06:00:00.000Z TO 2021-05-07T01:59:59.999Z]","f_hasInputInvoice":"false"}
+    hora_6 = {"f_creationDate":"creationDate:[2021-05-06T07:00:00.000Z TO 2021-05-07T01:59:59.999Z]","f_hasInputInvoice":"false"}
+    hora_7 = {"f_creationDate":"creationDate:[2021-05-06T08:00:00.000Z TO 2021-05-07T01:59:59.999Z]","f_hasInputInvoice":"false"}
+    hora_8 = {"f_creationDate":"creationDate:[2021-05-06T09:00:00.000Z TO 2021-05-07T01:59:59.999Z]","f_hasInputInvoice":"false"}
+    hora_9 = {"f_creationDate":"creationDate:[2021-05-06T10:00:00.000Z TO 2021-05-07T01:59:59.999Z]","f_hasInputInvoice":"false"}
+    hora_10 = {"f_creationDate":"creationDate:[2021-05-06T11:00:00.000Z TO 2021-05-07T01:59:59.999Z]","f_hasInputInvoice":"false"}
+    hora_11 = {"f_creationDate":"creationDate:[2021-05-06T12:00:00.000Z TO 2021-05-07T01:59:59.999Z]","f_hasInputInvoice":"false"}
+    hora_12 = {"f_creationDate":"creationDate:[2021-05-06T13:00:00.000Z TO 2021-05-07T01:59:59.999Z]","f_hasInputInvoice":"false"}
+    hora_13 = {"f_creationDate":"creationDate:[2021-05-06T14:00:00.000Z TO 2021-05-07T01:59:59.999Z]","f_hasInputInvoice":"false"}
+    hora_14 = {"f_creationDate":"creationDate:[2021-05-06T15:00:00.000Z TO 2021-05-07T01:59:59.999Z]","f_hasInputInvoice":"false"}
+    hora_15 = {"f_creationDate":"creationDate:[2021-05-06T16:00:00.000Z TO 2021-05-07T01:59:59.999Z]","f_hasInputInvoice":"false"}
+    hora_16 = {"f_creationDate":"creationDate:[2021-05-06T17:00:00.000Z TO 2021-05-07T01:59:59.999Z]","f_hasInputInvoice":"false"}
+    hora_17 = {"f_creationDate":"creationDate:[2021-05-06T18:00:00.000Z TO 2021-05-07T01:59:59.999Z]","f_hasInputInvoice":"false"}
+    hora_18 = {"f_creationDate":"creationDate:[2021-05-06T19:00:00.000Z TO 2021-05-07T01:59:59.999Z]","f_hasInputInvoice":"false"}
+    hora_19 = {"f_creationDate":"creationDate:[2021-05-06T20:00:00.000Z TO 2021-05-07T01:59:59.999Z]","f_hasInputInvoice":"false"}
+    hora_20 = {"f_creationDate":"creationDate:[2021-05-06T21:00:00.000Z TO 2021-05-07T01:59:59.999Z]","f_hasInputInvoice":"false"}
+    hora_21 = {"f_creationDate":"creationDate:[2021-05-06T22:00:00.000Z TO 2021-05-07T01:59:59.999Z]","f_hasInputInvoice":"false"}
+    hora_22 = {"f_creationDate":"creationDate:[2021-05-06T23:00:00.000Z TO 2021-05-07T01:59:59.999Z]","f_hasInputInvoice":"false"}
 
 class date:
     import pandas as pd
@@ -53,9 +73,9 @@ def format_schema(schema):
     return formatted_schema
 
 
-def get_order_list(page):
+def get_order_list(page,hora):
     url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders?page="+str(page)+""
-    response = requests.request("GET", url, headers=init.headers, params=init.querystring)
+    response = requests.request("GET", url, headers=init.headers, params=hora)
     FJTemp = json.loads(response.text)
     FJson = FJTemp["list"]
     if FJson:
@@ -89,6 +109,7 @@ def get_order_list(page):
                 'currencyCode': str(x["currencyCode"])}, index=[0])
             print("Registro: "+str(init.reg))
             init.df = init.df.append(df1)
+        get_order_list(page)
 
 
 
@@ -108,7 +129,27 @@ def delete_duplicate():
 def run():
     for x in range(30):
         init.registro += 1
-        get_order_list(init.registro)
+        get_order_list(init.registro,init.hora_1)
+        get_order_list(init.registro,init.hora_2)
+        get_order_list(init.registro,init.hora_3)
+        get_order_list(init.registro,init.hora_4)
+        get_order_list(init.registro,init.hora_5)
+        get_order_list(init.registro,init.hora_6)
+        get_order_list(init.registro,init.hora_7)
+        get_order_list(init.registro,init.hora_8)
+        get_order_list(init.registro,init.hora_9)
+        get_order_list(init.registro,init.hora_10)
+        get_order_list(init.registro,init.hora_11)
+        get_order_list(init.registro,init.hora_13)
+        get_order_list(init.registro,init.hora_14)
+        get_order_list(init.registro,init.hora_15)
+        get_order_list(init.registro,init.hora_16)
+        get_order_list(init.registro,init.hora_17)
+        get_order_list(init.registro,init.hora_18)
+        get_order_list(init.registro,init.hora_19)
+        get_order_list(init.registro,init.hora_20)
+        get_order_list(init.registro,init.hora_21)
+        get_order_list(init.registro,init.hora_22)
     
     
     df = init.df
