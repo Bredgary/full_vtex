@@ -24,6 +24,7 @@ class init:
     num_from = "07"
     num_to ="07"
     headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
+    hora_0 = {"f_creationDate":"creationDate:[2021-05-"+num_from+"T01:00:00.000Z TO 2021-05-"+num_to+"T02:59:59.999Z]","f_hasInputInvoice":"false"}
     hora_1 = {"f_creationDate":"creationDate:[2021-05-"+num_from+"T02:00:00.000Z TO 2021-05-"+num_to+"T03:59:59.999Z]","f_hasInputInvoice":"false"}
     hora_2 = {"f_creationDate":"creationDate:[2021-05-"+num_from+"T03:00:00.000Z TO 2021-05-"+num_to+"T04:59:59.999Z]","f_hasInputInvoice":"false"}
     hora_3 = {"f_creationDate":"creationDate:[2021-05-"+num_from+"T04:00:00.000Z TO 2021-05-"+num_to+"T05:59:59.999Z]","f_hasInputInvoice":"false"}
@@ -129,6 +130,7 @@ def delete_duplicate():
 def run():
     for x in range(30):
         init.registro += 1
+        get_order_list(init.registro,init.hora_0)
         get_order_list(init.registro,init.hora_1)
         get_order_list(init.registro,init.hora_2)
         get_order_list(init.registro,init.hora_3)
