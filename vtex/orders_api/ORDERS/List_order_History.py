@@ -21,7 +21,7 @@ class init:
     df = pd.DataFrame()
     registro = 0
     reg = 0
-    querystring = {"f_creationDate":"creationDate:[2021-05-06T01:00:00.000Z TO 2021-05-07T01:59:59.999Z]","f_hasInputInvoice":"false"}
+    
 
 class date:
     import pandas as pd
@@ -54,9 +54,10 @@ def format_schema(schema):
 def get_order_list(page):
     try:
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders?page="+str(page)+""
+        querystring = {"f_creationDate":"creationDate:[2021-05-06T02:00:00.000Z TO 2021-05-07T01:59:59.999Z]","f_hasInputInvoice":"false"}
         for x in rage(23):
             headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-            response = requests.request("GET", url, headers=headers, params=init.querystring)
+            response = requests.request("GET", url, headers=headers, params=querystring)
             FJTemp = json.loads(response.text)
             FJson = FJTemp["list"]
             if FJson:
@@ -111,7 +112,6 @@ def delete_duplicate():
 def run():
     for x in range(30):
         init.registro += 1
-        init.querystring = {"f_creationDate":"creationDate:[2021-05-06T02:00:00.000Z TO 2021-05-07T01:59:59.999Z]","f_hasInputInvoice":"false"}
         get_order_list(init.registro)
     
     
