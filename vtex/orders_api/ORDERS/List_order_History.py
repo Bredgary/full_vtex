@@ -23,7 +23,7 @@ class init:
     registro = 0
     reg = 0 
     num_from = "01"
-    num_to ="02"
+    num_to ="01"
     mount = "09"
     '''
     30
