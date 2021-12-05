@@ -21,29 +21,30 @@ class init:
     df = pd.DataFrame()
     registro = 0
     reg = 0
+    num_from = "06"
+    num_to ="06"
     headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-    hora_1 = {"f_creationDate":"creationDate:[2021-05-06T02:00:00.000Z TO 2021-05-07T01:59:59.999Z]","f_hasInputInvoice":"false"}
-    hora_2 = {"f_creationDate":"creationDate:[2021-05-06T03:00:00.000Z TO 2021-05-07T01:59:59.999Z]","f_hasInputInvoice":"false"}
-    hora_3 = {"f_creationDate":"creationDate:[2021-05-06T04:00:00.000Z TO 2021-05-07T01:59:59.999Z]","f_hasInputInvoice":"false"}
-    hora_4 = {"f_creationDate":"creationDate:[2021-05-06T05:00:00.000Z TO 2021-05-07T01:59:59.999Z]","f_hasInputInvoice":"false"}
-    hora_5 = {"f_creationDate":"creationDate:[2021-05-06T06:00:00.000Z TO 2021-05-07T01:59:59.999Z]","f_hasInputInvoice":"false"}
-    hora_6 = {"f_creationDate":"creationDate:[2021-05-06T07:00:00.000Z TO 2021-05-07T01:59:59.999Z]","f_hasInputInvoice":"false"}
-    hora_7 = {"f_creationDate":"creationDate:[2021-05-06T08:00:00.000Z TO 2021-05-07T01:59:59.999Z]","f_hasInputInvoice":"false"}
-    hora_8 = {"f_creationDate":"creationDate:[2021-05-06T09:00:00.000Z TO 2021-05-07T01:59:59.999Z]","f_hasInputInvoice":"false"}
-    hora_9 = {"f_creationDate":"creationDate:[2021-05-06T10:00:00.000Z TO 2021-05-07T01:59:59.999Z]","f_hasInputInvoice":"false"}
-    hora_10 = {"f_creationDate":"creationDate:[2021-05-06T11:00:00.000Z TO 2021-05-07T01:59:59.999Z]","f_hasInputInvoice":"false"}
-    hora_11 = {"f_creationDate":"creationDate:[2021-05-06T12:00:00.000Z TO 2021-05-07T01:59:59.999Z]","f_hasInputInvoice":"false"}
-    hora_12 = {"f_creationDate":"creationDate:[2021-05-06T13:00:00.000Z TO 2021-05-07T01:59:59.999Z]","f_hasInputInvoice":"false"}
-    hora_13 = {"f_creationDate":"creationDate:[2021-05-06T14:00:00.000Z TO 2021-05-07T01:59:59.999Z]","f_hasInputInvoice":"false"}
-    hora_14 = {"f_creationDate":"creationDate:[2021-05-06T15:00:00.000Z TO 2021-05-07T01:59:59.999Z]","f_hasInputInvoice":"false"}
-    hora_15 = {"f_creationDate":"creationDate:[2021-05-06T16:00:00.000Z TO 2021-05-07T01:59:59.999Z]","f_hasInputInvoice":"false"}
-    hora_16 = {"f_creationDate":"creationDate:[2021-05-06T17:00:00.000Z TO 2021-05-07T01:59:59.999Z]","f_hasInputInvoice":"false"}
-    hora_17 = {"f_creationDate":"creationDate:[2021-05-06T18:00:00.000Z TO 2021-05-07T01:59:59.999Z]","f_hasInputInvoice":"false"}
-    hora_18 = {"f_creationDate":"creationDate:[2021-05-06T19:00:00.000Z TO 2021-05-07T01:59:59.999Z]","f_hasInputInvoice":"false"}
-    hora_19 = {"f_creationDate":"creationDate:[2021-05-06T20:00:00.000Z TO 2021-05-07T01:59:59.999Z]","f_hasInputInvoice":"false"}
-    hora_20 = {"f_creationDate":"creationDate:[2021-05-06T21:00:00.000Z TO 2021-05-07T01:59:59.999Z]","f_hasInputInvoice":"false"}
-    hora_21 = {"f_creationDate":"creationDate:[2021-05-06T22:00:00.000Z TO 2021-05-07T01:59:59.999Z]","f_hasInputInvoice":"false"}
-    hora_22 = {"f_creationDate":"creationDate:[2021-05-06T23:00:00.000Z TO 2021-05-07T01:59:59.999Z]","f_hasInputInvoice":"false"}
+    hora_1 = {"f_creationDate":"creationDate:[2021-05-"+num_from+"T02:00:00.000Z TO 2021-05-"+num_to+"T03:59:59.999Z]","f_hasInputInvoice":"false"}
+    hora_2 = {"f_creationDate":"creationDate:[2021-05-"+num_from+"T03:00:00.000Z TO 2021-05-"+num_to+"T04:59:59.999Z]","f_hasInputInvoice":"false"}
+    hora_3 = {"f_creationDate":"creationDate:[2021-05-"+num_from+"T04:00:00.000Z TO 2021-05-"+num_to+"T05:59:59.999Z]","f_hasInputInvoice":"false"}
+    hora_4 = {"f_creationDate":"creationDate:[2021-05-"+num_from+"T05:00:00.000Z TO 2021-05-"+num_to+"T06:59:59.999Z]","f_hasInputInvoice":"false"}
+    hora_5 = {"f_creationDate":"creationDate:[2021-05-"+num_from+"T06:00:00.000Z TO 2021-05-"+num_to+"T07:59:59.999Z]","f_hasInputInvoice":"false"}
+    hora_6 = {"f_creationDate":"creationDate:[2021-05-"+num_from+"T07:00:00.000Z TO 2021-05-"+num_to+"T08:59:59.999Z]","f_hasInputInvoice":"false"}
+    hora_7 = {"f_creationDate":"creationDate:[2021-05-"+num_from+"T08:00:00.000Z TO 2021-05-"+num_to+"T09:59:59.999Z]","f_hasInputInvoice":"false"}
+    hora_8 = {"f_creationDate":"creationDate:[2021-05-"+num_from+"T09:00:00.000Z TO 2021-05-"+num_to+"T10:59:59.999Z]","f_hasInputInvoice":"false"}
+    hora_9 = {"f_creationDate":"creationDate:[2021-05-"+num_from+"T10:00:00.000Z TO 2021-05-"+num_to+"T11:59:59.999Z]","f_hasInputInvoice":"false"}
+    hora_10 = {"f_creationDate":"creationDate:[2021-05-"+num_from+"T11:00:00.000Z TO 2021-05-"+num_to+"T12:59:59.999Z]","f_hasInputInvoice":"false"}
+    hora_11 = {"f_creationDate":"creationDate:[2021-05-"+num_from+"T12:00:00.000Z TO 2021-05-"+num_to+"T13:59:59.999Z]","f_hasInputInvoice":"false"}
+    hora_12 = {"f_creationDate":"creationDate:[2021-05-"+num_from+"T13:00:00.000Z TO 2021-05-"+num_to+"T14:59:59.999Z]","f_hasInputInvoice":"false"}
+    hora_13 = {"f_creationDate":"creationDate:[2021-05-"+num_from+"T14:00:00.000Z TO 2021-05-"+num_to+"T15:59:59.999Z]","f_hasInputInvoice":"false"}
+    hora_14 = {"f_creationDate":"creationDate:[2021-05-"+num_from+"T15:00:00.000Z TO 2021-05-"+num_to+"T16:59:59.999Z]","f_hasInputInvoice":"false"}
+    hora_15 = {"f_creationDate":"creationDate:[2021-05-"+num_from+"T16:00:00.000Z TO 2021-05-"+num_to+"T17:59:59.999Z]","f_hasInputInvoice":"false"}
+    hora_16 = {"f_creationDate":"creationDate:[2021-05-"+num_from+"T17:00:00.000Z TO 2021-05-"+num_to+"T18:59:59.999Z]","f_hasInputInvoice":"false"}
+    hora_17 = {"f_creationDate":"creationDate:[2021-05-"+num_from+"T18:00:00.000Z TO 2021-05-"+num_to+"T19:59:59.999Z]","f_hasInputInvoice":"false"}
+    hora_18 = {"f_creationDate":"creationDate:[2021-05-"+num_from+"T19:00:00.000Z TO 2021-05-"+num_to+"T20:59:59.999Z]","f_hasInputInvoice":"false"}
+    hora_19 = {"f_creationDate":"creationDate:[2021-05-"+num_from+"T20:00:00.000Z TO 2021-05-"+num_to+"T21:59:59.999Z]","f_hasInputInvoice":"false"}
+    hora_20 = {"f_creationDate":"creationDate:[2021-05-"+num_from+"T21:00:00.000Z TO 2021-05-"+num_to+"T22:59:59.999Z]","f_hasInputInvoice":"false"}
+    hora_21 = {"f_creationDate":"creationDate:[2021-05-"+num_from+"T22:00:00.000Z TO 2021-05-"+num_to+"T23:59:59.999Z]","f_hasInputInvoice":"false"}
 
 class date:
     import pandas as pd
@@ -148,7 +149,6 @@ def run():
         get_order_list(init.registro,init.hora_19)
         get_order_list(init.registro,init.hora_20)
         get_order_list(init.registro,init.hora_21)
-        get_order_list(init.registro,init.hora_22)
     
     
     df = init.df
