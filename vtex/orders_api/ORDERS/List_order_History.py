@@ -109,7 +109,6 @@ def get_order_list(page,hora):
                 'currencyCode': str(x["currencyCode"])}, index=[0])
             print("Registro: "+str(init.reg))
             init.df = init.df.append(df1)
-        get_order_list(page)
 
 
 
