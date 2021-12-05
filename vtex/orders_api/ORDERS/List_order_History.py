@@ -22,8 +22,8 @@ class init:
     df = pd.DataFrame()
     registro = 0
     reg = 0 
-    num_from = "22"
-    num_to ="22"
+    num_from = "23"
+    num_to ="23"
     mount = "08"
     '''
     31
