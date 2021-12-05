@@ -52,8 +52,8 @@ def format_schema(schema):
 
 
 def get_order_list(page):
-    url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders?page="+str(page)+""
-    querystring = {"f_creationDate":"creationDate:[2021-03-02T02:00:00.000Z TO 2021-03-03T01:59:59.999Z]","f_hasInputInvoice":"false"}
+    url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders?f_creationDate=creationDate:[2021-03-02T02:00:00.000Z TO 2021-03-03T01:59:59.999Z]"
+    #querystring = {"f_creationDate":"creationDate:[2021-03-02T02:00:00.000Z TO 2021-03-03T01:59:59.999Z]","f_hasInputInvoice":"false"}
     headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
     response = requests.request("GET", url, headers=headers, params=querystring)
     FJTemp = json.loads(response.text)
@@ -106,12 +106,10 @@ def delete_duplicate():
 
 
 def run():
-    for x in range(50):
+    for x in range(1):
         init.registro += 1
         get_order_list(init.registro)
     
-    if init.registro ==28:
-        print("Re ejecutar")
     
     df = init.df
     df.reset_index(drop=True, inplace=True)
