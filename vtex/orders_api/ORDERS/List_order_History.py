@@ -111,7 +111,7 @@ def delete_duplicate():
 def run():
     for x in range(30):
         init.registro += 1
-        init.querystring = {"f_creationDate":"creationDate:[2021-05-6T02:00:00.000Z TO 2021-05-7T01:59:59.999Z]","f_hasInputInvoice":"false"}
+        init.querystring = {"f_creationDate":"creationDate:[2021-05-06T02:00:00.000Z TO 2021-05-07T01:59:59.999Z]","f_hasInputInvoice":"false"}
         get_order_list(init.registro)
     
     
