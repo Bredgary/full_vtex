@@ -106,7 +106,7 @@ def delete_duplicate():
 
 
 def run():
-    for x in range(30):
+    for x in range(50):
         init.registro += 1
         get_order_list(init.registro)
     
