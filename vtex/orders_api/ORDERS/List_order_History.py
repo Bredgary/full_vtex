@@ -50,7 +50,6 @@ def format_schema(schema):
     return formatted_schema
 
 
-
 def get_order_list(page):
     url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders?page="+str(page)+""
     querystring = {"f_creationDate":"creationDate:[2021-03-10T02:00:00.000Z TO 2021-03-13T01:59:59.999Z]","f_hasInputInvoice":"false"}
