@@ -21,7 +21,7 @@ class init:
     salir = 0
     df = pd.DataFrame()
     registro = 0
-    reg = 0
+    reg = 0 
     num_from = "15"
     num_to ="15"
     mount = "02"
