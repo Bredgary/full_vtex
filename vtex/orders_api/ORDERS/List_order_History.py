@@ -95,7 +95,7 @@ def get_order_list(page):
                 init.df = init.df.append(df1)
         init.hora_from += 1
         init.hora_to+=2
-        if date.hora_to == 23:
+        if init.hora_to == 23:
             break
 
 
