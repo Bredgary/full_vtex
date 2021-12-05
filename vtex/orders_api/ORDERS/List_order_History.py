@@ -22,8 +22,8 @@ class init:
     df = pd.DataFrame()
     registro = 0
     reg = 0
-    num_from = "10"
-    num_to ="10"
+    num_from = "11"
+    num_to ="11"
     mount = "01"
     headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
     hora_0 = {"f_creationDate":"creationDate:[2021-"+mount+"-"+num_from+"T01:00:00.000Z TO 2021-"+mount+"-"+num_to+"T01:59:59.999Z]","f_hasInputInvoice":"false"}
