@@ -24,7 +24,7 @@ class init:
     reg = 0 
     num_from = "01"
     num_to ="01"
-    mount = "02"
+    mount = "03"
     '''
     31
     '''
