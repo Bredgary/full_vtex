@@ -1135,6 +1135,7 @@ def get_order(id,reg):
     print(init.payid)
     print(init.paymentSystem)
     
+    
     df1 = pd.DataFrame({
         'orderId': init.orderId,
         'emailTracked': emailTracked,
