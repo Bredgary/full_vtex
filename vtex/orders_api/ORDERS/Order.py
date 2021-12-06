@@ -1129,7 +1129,7 @@ def get_order(id,reg):
         print("vacio")
         
     DIM_payments_pay = transactions["payments"]
-    print(DIM_payments_pay)
+    print(DIM_payments_pay["id"])
     
     
     df1 = pd.DataFrame({
