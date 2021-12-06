@@ -1023,19 +1023,6 @@ def get_order(id,reg):
         init.payments_group = payments["group"]
         init.payments_tid = payments["tid"]
         init.payments_dueDate = payments["dueDate"]
-        init.payments_cardNumber = payments["cardNumber"]
-        init.payments_cvv2 = payments["cvv2"]
-        init.payments_expireMonth = payments["expireMonth"]
-        init.payments_expireYear = payments["expireYear"]
-        init.payments_giftCardProvider = payments["giftCardProvider"]
-        init.payments_giftCardAsDiscount = payments["giftCardAsDiscount"]
-        init.payments_koinUrl = payments["koinUrl"]
-        init.payments_accountId = payments["accountId"]
-        init.payments_parentAccountId = payments["parentAccountId"]
-        init.payments_bankIssuedInvoiceIdentificationNumber = payments["bankIssuedInvoiceIdentificationNumber"]
-        init.payments_bankIssuedInvoiceIdentificationNumberFormatted = payments["bankIssuedInvoiceIdentificationNumberFormatted"]
-        init.payments_bankIssuedInvoiceBarCodeNumber = payments["bankIssuedInvoiceBarCodeNumber"]
-        init.payments_bankIssuedInvoiceBarCodeType = payments["payments_bankIssuedInvoiceBarCodeType"]
     except:
         print("No hay datos payments")
     try:
@@ -1151,11 +1138,21 @@ def get_order(id,reg):
     except:
         print("vacio")
         
-    DIM_payments_pay = transactions["payments"]
-    for x in DIM_payments_pay:
-        payid = None
-        paymentSystem = None
     
+    
+    init.payments_cardNumber = payments["cardNumber"]
+    init.payments_cvv2 = payments["cvv2"]
+    init.payments_expireMonth = payments["expireMonth"]
+    init.payments_expireYear = payments["expireYear"]
+    init.payments_giftCardProvider = payments["giftCardProvider"]
+    init.payments_giftCardAsDiscount = payments["giftCardAsDiscount"]
+    init.payments_koinUrl = payments["koinUrl"]
+    init.payments_accountId = payments["accountId"]
+    init.payments_parentAccountId = payments["parentAccountId"]
+    init.payments_bankIssuedInvoiceIdentificationNumber = payments["bankIssuedInvoiceIdentificationNumber"]
+    init.payments_bankIssuedInvoiceIdentificationNumberFormatted = payments["bankIssuedInvoiceIdentificationNumberFormatted"]
+    init.payments_bankIssuedInvoiceBarCodeNumber = payments["bankIssuedInvoiceBarCodeNumber"]
+    init.payments_bankIssuedInvoiceBarCodeType = payments["payments_bankIssuedInvoiceBarCodeType"]
     
     df1 = pd.DataFrame({
         'orderId': init.orderId,
