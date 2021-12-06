@@ -1074,22 +1074,23 @@ def get_order(id,reg):
     except:
         print("vacio")
     
-    try:  
-        init.courier = packages["courier"]
-        init.invoiceNumber = packages["invoiceNumber"]
-        init.invoiceValue = packages["invoiceValue"]
-        init.invoiceUrl = packages["invoiceUrl"]
-        init.issuanceDate = packages["issuanceDate"]
-        init.trackingNumber = packages["trackingNumber"]
-        init.invoiceKey = packages["invoiceKey"]
-        init.trackingUrl = packages["trackingUrl"]
-        init.embeddedInvoice = packages["embeddedInvoice"]
-        init.type = packages["type"]
-        init.courierStatus = packages["courierStatus"]
-        init.cfop = packages["cfop"]
-        #init.restitutions = packages["restitutions"]
-        init.volumes = packages["volumes"]
-        init.EnableInferItems = packages["EnableInferItems"]
+    try:
+        for x in packages:
+            init.courier = x["courier"]
+            init.invoiceNumber = x["invoiceNumber"]
+            init.invoiceValue = x["invoiceValue"]
+            init.invoiceUrl = x["invoiceUrl"]
+            init.issuanceDate = x["issuanceDate"]
+            init.trackingNumber = x["trackingNumber"]
+            init.invoiceKey = x["invoiceKey"]
+            init.trackingUrl = x["trackingUrl"]
+            init.embeddedInvoice = x["embeddedInvoice"]
+            init.type = x["type"]
+            init.courierStatus = x["courierStatus"]
+            init.cfop = x["cfop"]
+            #init.restitutions = packages["restitutions"]
+            init.volumes = x["volumes"]
+            init.EnableInferItems = x["EnableInferItems"]
     except:
         print("vacio")
     
