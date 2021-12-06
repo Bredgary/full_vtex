@@ -33,35 +33,38 @@ def get_params():
         query_job = client.query(QUERY)
         rows = query_job.result()
         for row in rows:
-            init.orderId = row.orderId
-            init.EnableInferItems = row.EnableInferItems
-            init.cfop = row.cfop
-            init.restitutions = row.restitutions
-            init.courierStatus = row.courierStatus
-            init.embeddedInvoice = row.embeddedInvoice
-            init.invoiceNumber = row.invoiceNumber
-            init.invoiceKey = row.invoiceKey
-            init.issuanceDate = row.issuanceDate
-            init.trackingUrl = row.trackingUrl
-            init.invoiceUrl = row.invoiceUrl
-            init.type = row.type
-            init.invoiceValue = row.invoiceValue
-            init.courier = row.courier
-            df1 = pd.DataFrame({
-                'orderId': row.orderId,
-                'EnableInferItems': row.EnableInferItems,
-                'cfop': row.cfop,
-                'restitutions': row.restitutions,
-                'courierStatus': row.courierStatus,
-                'embeddedInvoice': row.embeddedInvoice,
-                'invoiceNumber': row.invoiceNumber,
-                'invoiceKey': row.invoiceKey,
-                'issuanceDate': row.issuanceDate,
-                'trackingUrl': row.trackingUrl,
-                'invoiceUrl': row.invoiceUrl,
-                'type': row.type,
-                'invoiceValue': row.invoiceValue,
-                'courier': row.courier}, index=[0])
+            try:
+                init.orderId = row.orderId
+                init.EnableInferItems = row.EnableInferItems
+                init.cfop = row.cfop
+                init.restitutions = row.restitutions
+                init.courierStatus = row.courierStatus
+                init.embeddedInvoice = row.embeddedInvoice
+                init.invoiceNumber = row.invoiceNumber
+                init.invoiceKey = row.invoiceKey
+                init.issuanceDate = row.issuanceDate
+                init.trackingUrl = row.trackingUrl
+                init.invoiceUrl = row.invoiceUrl
+                init.type = row.type
+                init.invoiceValue = row.invoiceValue
+                init.courier = row.courier
+                df1 = pd.DataFrame({
+                    'orderId': row.orderId,
+                    'EnableInferItems': row.EnableInferItems,
+                    'cfop': row.cfop,
+                    'restitutions': row.restitutions,
+                    'courierStatus': row.courierStatus,
+                    'embeddedInvoice': row.embeddedInvoice,
+                    'invoiceNumber': row.invoiceNumber,
+                    'invoiceKey': row.invoiceKey,
+                    'issuanceDate': row.issuanceDate,
+                    'trackingUrl': row.trackingUrl,
+                    'invoiceUrl': row.invoiceUrl,
+                    'type': row.type,
+                    'invoiceValue': row.invoiceValue,
+                    'courier': row.courier}, index=[0])
+            except:
+                print("vacio")
             init.df = init.df.append(df1)
     #except:
     #    print("Consulta SQL no ejecutada")
