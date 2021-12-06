@@ -9,6 +9,8 @@ import requests
 from datetime import datetime, timezone
 from os.path import join
 
+class init:
+    df = pd.DataFrame()
 
 def get_params():
     #try:
