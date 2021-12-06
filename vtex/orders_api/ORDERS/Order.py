@@ -1104,11 +1104,11 @@ def get_order(id,reg):
         print("vacio")
         
 
-    try:
-        init.invoice_address = invoiceData["address"]
-        init.userPaymentInfo = invoiceData["userPaymentInfo"]
-    except:
-        print("vacio")
+    #try:
+    init.invoice_address = invoiceData["address"]
+    init.userPaymentInfo = invoiceData["userPaymentInfo"]
+    #except:
+    #    print("vacio")
     
     df1 = pd.DataFrame({
         'orderId': init.orderId,
