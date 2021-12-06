@@ -662,7 +662,6 @@ def get_order(id,reg):
     try:
         paymentData = Fjson["paymentData"]
         transactions = paymentData["transactions"]
-        DIM_payments = transactions["payments"]
     except:
         print("paymentData No tiene datos")
     try:
@@ -1129,8 +1128,8 @@ def get_order(id,reg):
     except:
         print("vacio")
         
-    for x in DIM_payments:
-        print(x)
+    DIM_payments_pay = transactions["payments"]
+    print(DIM_payments_pay)
     
     
     df1 = pd.DataFrame({
