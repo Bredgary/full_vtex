@@ -1030,7 +1030,7 @@ def get_order(id,reg):
         init.itemMetadata_ImageUrl = ItemMetadata["ImageUrl"]
         init.itemMetadata_DetailUrl = ItemMetadata["DetailUrl"]
     except:
-        print(vacio)
+        print("vacio")
     
     df1 = pd.DataFrame({
         'orderId': init.orderId,
