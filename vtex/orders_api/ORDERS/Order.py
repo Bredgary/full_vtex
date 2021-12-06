@@ -1019,22 +1019,19 @@ def get_order(id,reg):
         emailTracked = None
         print("nulo")
     
-    #try:
-    for x in ItemMetadata:
-        init.itemMetadata_Id = x["id"]
-        init.itemMetadata_Seller = x["Seller"]
-    #init.itemMetadata_Name = ItemMetadata["Name"]
-    #init.itemMetadata_SkuName = ItemMetadata["SkuName"]
-    #init.itemMetadata_ProductId = ItemMetadata["ProductId"]
-    #init.itemMetadata_RefId = ItemMetadata["RefId"]
-    #init.itemMetadata_Ean = ItemMetadata["Ean"]
-    #init.itemMetadata_ImageUrl = ItemMetadata["ImageUrl"]
-    #init.itemMetadata_DetailUrl = ItemMetadata["DetailUrl"]
-    
-    print(init.itemMetadata_Id)
-    print(init.itemMetadata_Seller)
-    #except:
-    #    print("vacio")
+    try:
+        for x in ItemMetadata:
+            init.itemMetadata_Id = x["Id"]
+            init.itemMetadata_Seller = x["Seller"]
+            init.itemMetadata_Name = ItemMetadata["Name"]
+            init.itemMetadata_SkuName = ItemMetadata["SkuName"]
+            init.itemMetadata_ProductId = ItemMetadata["ProductId"]
+            init.itemMetadata_RefId = ItemMetadata["RefId"]
+            init.itemMetadata_Ean = ItemMetadata["Ean"]
+            init.itemMetadata_ImageUrl = ItemMetadata["ImageUrl"]
+            init.itemMetadata_DetailUrl = ItemMetadata["DetailUrl"]
+    except:
+        print("vacio")
     
     df1 = pd.DataFrame({
         'orderId': init.orderId,
