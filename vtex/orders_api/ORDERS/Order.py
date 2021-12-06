@@ -1334,20 +1334,18 @@ def get_params():
     for row in rows:
         get_order(row.orderId,registro)
         registro += 1
-        if registro == 100:
-            break
 
 def delete_duplicate():
-	try:
-		print("Eliminando duplicados")
-		client = bigquery.Client()
-		QUERY = (
-			'CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_vtex_order` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.shopstar_vtex_order`')
-		query_job = client.query(QUERY)
-		rows = query_job.result()
-		print(rows)
-	except:
-		print("Consulta SQL no ejecutada")
+    try:
+        print("Eliminando duplicados")
+        client = bigquery.Client()
+        QUERY = (
+            'CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_vtex_order` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.shopstar_vtex_order`')
+        query_job = client.query(QUERY)
+        rows = query_job.result()
+        print(rows)
+    except:
+        print("Consulta SQL no ejecutada")
 
 
 
