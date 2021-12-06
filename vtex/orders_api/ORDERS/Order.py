@@ -404,6 +404,11 @@ class init:
     itemMetadata_ImageUrl = None
     itemMetadata_DetailUrl = None
     
+    subscriptionData = None
+    taxData = None
+    checkedInPickupPointId = None
+    cancellationData = None
+    
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
 def dicMemberCheck(key, dicObj):
@@ -426,6 +431,16 @@ def get_order(id,reg):
     url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
     response = requests.request("GET", url, headers=init.headers)
     Fjson = json.loads(response.text)
+    
+    if "subscriptionData" in Fjson:
+        init.subscriptionData = Fjson["subscriptionData"]
+    if "taxData" in Fjson:
+        init.taxData = Fjson["taxData"]
+    if "checkedInPickupPointId" in Fjson:
+        init.checkedInPickupPointId = Fjson["checkedInPickupPointId"]
+    if "cancellationData" in Fjson:
+        init.cancellationData = Fjson["cancellationData"]
+    
     if "emailTracked" in Fjson:
     	init.emailTracked = Fjson["emailTracked"]
     if "approvedBy" in Fjson:
@@ -1019,6 +1034,7 @@ def get_order(id,reg):
         emailTracked = None
         print("nulo")
     
+    
     try:
         for x in ItemMetadata:
             init.itemMetadata_Id = x["Id"]
@@ -1299,6 +1315,9 @@ def get_order(id,reg):
         'itemMetadata_Ean': init.itemMetadata_Ean,
         'itemMetadata_ImageUrl': init.itemMetadata_ImageUrl,
         'itemMetadata_DetailUrl': init.itemMetadata_DetailUrl,
+        'subscriptionData': init.subscriptionData,
+        'taxData': init.taxData,
+        'cancellationData': init.cancellationData,
         'invoicedDate': init.invoicedDate}, index=[0])
     init.df = init.df.append(df1)
     print("Registro: "+str(reg))
