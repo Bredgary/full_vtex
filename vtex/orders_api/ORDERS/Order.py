@@ -1152,7 +1152,7 @@ def get_order(id,reg):
     init.payments_bankIssuedInvoiceIdentificationNumber = payments["bankIssuedInvoiceIdentificationNumber"]
     init.payments_bankIssuedInvoiceIdentificationNumberFormatted = payments["bankIssuedInvoiceIdentificationNumberFormatted"]
     init.payments_bankIssuedInvoiceBarCodeNumber = payments["bankIssuedInvoiceBarCodeNumber"]
-    #init.payments_bankIssuedInvoiceBarCodeType = payments["payments_bankIssuedInvoiceBarCodeType"]
+    init.payments_bankIssuedInvoiceBarCodeType = payments["bankIssuedInvoiceBarCodeType"]
     
     df1 = pd.DataFrame({
         'orderId': init.orderId,
