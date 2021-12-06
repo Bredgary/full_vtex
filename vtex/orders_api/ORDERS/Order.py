@@ -1409,9 +1409,7 @@ def get_params():
     for row in rows:
         get_order(row.orderId,registro)
         registro += 1
-        if registro == 101:
-            break
-
+        
 def delete_duplicate():
     try:
         print("Eliminando duplicados")
