@@ -9,7 +9,9 @@ from datetime import datetime, timezone
 class init:
     df = pd.DataFrame()
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-    
+    id = None
+    name = None
+    hosts = None
         
 def get_account():
     try:
@@ -17,15 +19,15 @@ def get_account():
     	response = requests.request("GET", url, headers=headers)
     	Fjson = json.loads(response.text)
     	for x in Fjson:
-    		id = x["id"]
-    		name = x["name"]
+    		init.id = x["id"]
+    		init.name = x["name"]
     		hosts = x["hosts"]
     		for i in hosts:
-    			host = i
+    			init.hosts = i
     	df1 = pd.DataFrame({
-			'id' : id,
-			'name' :name,
-			'hosts' : hosts}, index=[0])
+			'id' : init.id,
+			'name' : init.name,
+			'hosts' : init.hosts}, index=[0])
     	init.df = init.df.append(df1)
     	print("Registro: "+str(reg))
     except:
