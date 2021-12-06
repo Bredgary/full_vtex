@@ -391,6 +391,19 @@ class init:
     isCertified = None
     name = None
     
+    '''
+    itemMetadata
+    '''
+    itemMetadata_Id = None
+    itemMetadata_Seller = None
+    itemMetadata_Name = None
+    itemMetadata_SkuName = None
+    itemMetadata_ProductId = None
+    itemMetadata_RefId = None
+    itemMetadata_Ean = None
+    itemMetadata_ImageUrl = None
+    itemMetadata_DetailUrl = None
+    
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
 def dicMemberCheck(key, dicObj):
@@ -492,6 +505,11 @@ def get_order(id,reg):
     '''
     INIT DIMENSION
     '''
+    try:
+        itemMetadata = Fjson["itemMetadata"]
+        ItemMetadata = itemMetadata["Items"]
+    except:
+        print("Total. No tiene datos")
     try:
         Total = Fjson["totals"]
     except:
@@ -1001,6 +1019,19 @@ def get_order(id,reg):
         emailTracked = None
         print("nulo")
     
+    try:
+        init.itemMetadata_Id = ItemMetadata["Id"]
+        init.itemMetadata_Seller = ItemMetadata["Seller"]
+        init.itemMetadata_Name = ItemMetadata["Name"]
+        init.itemMetadata_SkuName = ItemMetadata["SkuName"]
+        init.itemMetadata_ProductId = ItemMetadata["ProductId"]
+        init.itemMetadata_RefId = ItemMetadata["RefId"]
+        init.itemMetadata_Ean = ItemMetadata["Ean"]
+        init.itemMetadata_ImageUrl = ItemMetadata["ImageUrl"]
+        init.itemMetadata_DetailUrl = ItemMetadata["DetailUrl"]
+    except:
+        print(vacio)
+    
     df1 = pd.DataFrame({
         'orderId': init.orderId,
         'emailTracked': emailTracked,
@@ -1258,6 +1289,15 @@ def get_order(id,reg):
         'marketplace_baseURL': init.baseURL,
         'marketplace_isCertified': init.isCertified,
         'marketplace_name': init.name,
+        'itemMetadata_Id': init.itemMetadata_Id,
+        'itemMetadata_Seller': init.itemMetadata_Seller,
+        'itemMetadata_Name': init.itemMetadata_Name,
+        'itemMetadata_SkuName': init.itemMetadata_SkuName,
+        'itemMetadata_ProductId': init.itemMetadata_ProductId,
+        'itemMetadata_RefId': init.itemMetadata_RefId,
+        'itemMetadata_Ean': init.itemMetadata_Ean,
+        'itemMetadata_ImageUrl': init.itemMetadata_ImageUrl,
+        'itemMetadata_DetailUrl': init.itemMetadata_DetailUrl,
         'invoicedDate': init.invoicedDate}, index=[0])
     init.df = init.df.append(df1)
     print("Registro: "+str(reg))
