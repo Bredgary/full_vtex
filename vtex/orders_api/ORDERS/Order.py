@@ -1151,7 +1151,37 @@ def get_order(id,reg):
     except:
         print("vacio")
         
-
+    init.items_uniqueId = Items["uniqueId"]
+    init.items_id = Items["id"]
+    init.items_productId = Items["productId"]
+    init.items_ean = Items["ean"]
+    init.items_lockId = Items["lockId"]
+    init.item_quantity = Items["quantity"]
+    init.item_seller = Items["seller"]
+    init.item_name = Items["name"]
+    init.item_refId = Items["refId"]
+    init.item_price = Items["price"]
+    init.item_listPrice = Items["listPrice"]
+    init.item_manualPrice = Items["manualPrice"]
+    init.item_imageUrl = Items["imageUrl"]
+    init.item_detailUrl = Items["detailUrl"]
+    init.item_sellerSku = Items["sellerSku"]
+    init.item_priceValidUntil = Items["priceValidUntil"]
+    init.item_commission = Items["commission"]
+    init.item_tax = Items["tax"]
+    init.item_preSaleDate = Items["preSaleDate"]
+    init.item_measurementUnit = Items["measurementUnit"]
+    init.item_unitMultiplier = Items["unitMultiplier"]
+    init.item_sellingPrice = Items["sellingPrice"]
+    init.item_isGift = Items["isGift"]
+    init.item_shippingPrice = Items["shippingPrice"]
+    init.item_rewardValue = Items["rewardValue"]
+    init.item_freightCommission = Items["freightCommission"]
+    init.item_taxCode = Items["taxCode"]
+    init.item_parentItemIndex = Items["parentItemIndex"]
+    init.item_parentAssemblyBinding = Items["parentAssemblyBinding"]
+    init.item_price_definition = Items["priceDefinition"]
+    item.item_serialNumbers = Items["serialNumbers"]
     
     df1 = pd.DataFrame({
         'orderId': init.orderId,
