@@ -11,8 +11,7 @@ from os.path import join
 
 
 def get_params():
-    try:
-        print("Eliminando duplicados")
+    #try:
         client = bigquery.Client()
         QUERY = ("SELECT orderId,'pendiente' as id_customer,taxData,itemMetadata_DetailUrl,itemMetadata_Ean,itemMetadata_Id,itemMetadata_ImageUrl,itemMetadata_Name,itemMetadata_ProductId,itemMetadata_RefId,itemMetadata_Seller,itemMetadata_SkuName,allowEdition,allowCancellation,roundingError,hostname,subscriptionData,isCompleted,commercialConditionData,authorizedDate,status,seller_id,marketplaceOrderId,creationDate,giftRegistryData,callCenterOperatorData,'pendiente' as id_user,'pendiente' as id_item,marketplaceOrderIdchangesAttachment_id,lastChange,'pendiente' as id_marketplace,orderGroup,'pendiente' quantity,value,invoicedDate,followUpEmail,'pendiente' as id_package,affiliateId,origin,salesChannel,cancelReason,'pendiente' as checkeInPickupPointId,orderFormId,statusDescription,sellerOrderId,customData,merchantName,openTextField,marketplaceServicesEndpoint,'pendiente' as id_addressShipping,sequenceFROM `shopstar-datalake.staging_zone.shopstar_vtex_order`")
         query_job = client.query(QUERY)
@@ -71,8 +70,8 @@ def get_params():
                 'id_addressShipping': row.id_addressShipping,
                 'sequence': row.sequence}, index=[0])
             init.df = init.df.append(df1)
-    except:
-        print("Consulta SQL no ejecutada")
+    #except:
+    #    print("Consulta SQL no ejecutada")
 
 
 
