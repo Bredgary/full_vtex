@@ -14,9 +14,9 @@ class init:
     hosts = None
         
 def get_account():
-    #try:
+    try:
     	url = "https://mercury.vtexcommercestable.com.br/api/vlm/account/stores"
-    	response = requests.request("GET", url, headers=headers)
+    	response = requests.request("GET", url, headers=init.headers)
     	Fjson = json.loads(response.text)
     	for x in Fjson:
     		init.id = x["id"]
@@ -30,8 +30,8 @@ def get_account():
 			'hosts' : init.hosts}, index=[0])
     	init.df = init.df.append(df1)
     	print("Registro: "+str(reg))
-    #except:
-    #	print("Vacio")
+    except:
+    	print("Vacio")
 
     
 def delete_duplicate():
