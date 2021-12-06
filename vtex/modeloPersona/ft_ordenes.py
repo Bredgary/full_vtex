@@ -67,7 +67,17 @@ def get_params():
     #except:
     #    print("Consulta SQL no ejecutada")
 
-
+def delete_duplicate():
+    try:
+        print("Eliminando duplicados")
+        client = bigquery.Client()
+        QUERY = (
+            'CREATE OR REPLACE TABLE `shopstar-datalake.cons_zone.ft_ordenes` AS SELECT DISTINCT * FROM `shopstar-datalake.cons_zone.ft_ordenes`')
+        query_job = client.query(QUERY)
+        rows = query_job.result()
+        print(rows)
+    except:
+        print("Consulta SQL no ejecutada")
 
 def run():
     #try:
