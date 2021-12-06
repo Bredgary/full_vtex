@@ -544,11 +544,7 @@ def get_order(id,reg):
     
     '''
     INIT DIMENSION  packageAttachment
-    '''
-    try:
-        invoiceData = Fjson["invoiceData"]
-    except:
-        print("invoiceData. No tiene datos")     
+    '''    
     try:
         packageAttachment = Fjson["packageAttachment"]
         packages = packageAttachment["packages"]
@@ -1105,8 +1101,9 @@ def get_order(id,reg):
         
 
     #try:
-    init.invoice_address = invoiceData["address"]
-    init.userPaymentInfo = invoiceData["userPaymentInfo"]
+    dim_invoiceData = Fjson["invoiceData"]
+    init.invoice_address = dim_invoiceData["address"]
+    init.userPaymentInfo = dim_invoiceData["userPaymentInfo"]
     #except:
     #    print("vacio")
     
