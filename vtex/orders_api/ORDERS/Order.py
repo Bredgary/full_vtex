@@ -1052,7 +1052,7 @@ def get_order(id,reg):
     except:
         print("No hay datos seller")
     try:
-        init.changesAttachment_id = changesAttachment["id"]
+        init.changesAttachment_id = Fjson["changesAttachment"]
     except:
         print("No hay datos changesAttachment")
     try:
