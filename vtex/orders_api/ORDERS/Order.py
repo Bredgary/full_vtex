@@ -105,6 +105,7 @@ class init:
     item_parentItemIndex = None
     item_parentAssemblyBinding = None
     item_price_definition = None
+    item_serialNumbers = None
     
     '''
     Dimensiones ITEMS_INFORMATION__ADITIONAL
@@ -780,6 +781,7 @@ def get_order(id,reg):
         init.item_parentItemIndex = Items["parentItemIndex"]
         init.item_parentAssemblyBinding = Items["parentAssemblyBinding"]
         init.item_price_definition = Items["priceDefinition"]
+        item.item_serialNumbers = Items["serialNumbers"]
     except:
         print("No hay datos Items")
     try:
@@ -1393,6 +1395,7 @@ def get_order(id,reg):
         'EnableInferItems': init.EnableInferItems,
         'invoice_address': init.invoice_address,
         'userPaymentInfo': init.userPaymentInfo,
+        'serialNumbers':init.serialNumbers,
         'invoicedDate': init.invoicedDate}, index=[0])
     init.df = init.df.append(df1)
     print("Registro: "+str(reg))
