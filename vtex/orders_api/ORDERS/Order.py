@@ -1129,11 +1129,8 @@ def get_order(id,reg):
     except:
         print("vacio")
         
-    init.payid = DIM_payments["id"]
-    init.paymentSystem = DIM_payments["paymentSystem"]
-    
-    print(init.payid)
-    print(init.paymentSystem)
+    for x in DIM_payments:
+        print(x)
     
     
     df1 = pd.DataFrame({
