@@ -509,7 +509,7 @@ def get_order(id,reg):
         itemMetadata = Fjson["itemMetadata"]
         ItemMetadata = itemMetadata["Items"]
     except:
-        print("Total. No tiene datos")
+        print("ItemMetadata. No tiene datos")
     try:
         Total = Fjson["totals"]
     except:
@@ -1023,13 +1023,13 @@ def get_order(id,reg):
         for x in ItemMetadata:
             init.itemMetadata_Id = x["Id"]
             init.itemMetadata_Seller = x["Seller"]
-            init.itemMetadata_Name = ItemMetadata["Name"]
-            init.itemMetadata_SkuName = ItemMetadata["SkuName"]
-            init.itemMetadata_ProductId = ItemMetadata["ProductId"]
-            init.itemMetadata_RefId = ItemMetadata["RefId"]
-            init.itemMetadata_Ean = ItemMetadata["Ean"]
-            init.itemMetadata_ImageUrl = ItemMetadata["ImageUrl"]
-            init.itemMetadata_DetailUrl = ItemMetadata["DetailUrl"]
+            init.itemMetadata_Name = x["Name"]
+            init.itemMetadata_SkuName = x["SkuName"]
+            init.itemMetadata_ProductId = x["ProductId"]
+            init.itemMetadata_RefId = x["RefId"]
+            init.itemMetadata_Ean = x["Ean"]
+            init.itemMetadata_ImageUrl = x["ImageUrl"]
+            init.itemMetadata_DetailUrl = x["DetailUrl"]
     except:
         print("vacio")
     
