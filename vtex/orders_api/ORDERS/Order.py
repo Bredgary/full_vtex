@@ -1021,8 +1021,8 @@ def get_order(id,reg):
     
     #try:
     for x in ItemMetadata:
-        init.itemMetadata_Id = ItemMetadata["id"]
-        init.itemMetadata_Seller = ItemMetadata["Seller"]
+        init.itemMetadata_Id = x["id"]
+        init.itemMetadata_Seller = x["Seller"]
     #init.itemMetadata_Name = ItemMetadata["Name"]
     #init.itemMetadata_SkuName = ItemMetadata["SkuName"]
     #init.itemMetadata_ProductId = ItemMetadata["ProductId"]
