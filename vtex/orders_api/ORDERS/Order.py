@@ -1181,7 +1181,7 @@ def get_order(id,reg):
     init.item_parentItemIndex = Items["parentItemIndex"]
     init.item_parentAssemblyBinding = Items["parentAssemblyBinding"]
     init.item_price_definition = Items["priceDefinition"]
-    item.item_serialNumbers = Items["serialNumbers"]
+    init.item_serialNumbers = Items["serialNumbers"]
     
     df1 = pd.DataFrame({
         'orderId': init.orderId,
