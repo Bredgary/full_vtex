@@ -15,7 +15,7 @@ class init:
 def get_params():
     #try:
         client = bigquery.Client()
-        QUERY = ('SELECT orderId,EnableInferItems,cfop,restitutions,courierStatus,embeddedInvoice,invoiceNumber,invoiceKey,issuanceDate,trackingUrl,invoiceUrl,type,invoiceValue,courier FROM `shopstar-datalake.staging_zone.shopstar_vtex_order`` ')
+        QUERY = ('SELECT orderId,EnableInferItems,cfop,restitutions,courierStatus,embeddedInvoice,invoiceNumber,invoiceKey,issuanceDate,trackingUrl,invoiceUrl,type,invoiceValue,courier FROM `shopstar-datalake.staging_zone.shopstar_vtex_order` ')
         query_job = client.query(QUERY)
         rows = query_job.result()
         for row in rows:
