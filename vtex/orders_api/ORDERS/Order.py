@@ -1166,7 +1166,7 @@ def get_order(id,reg):
         'DIM_ITEMS_lockId': init.items_lockId,
         'DIM_ITEMS_quantity': init.item_quantity,
         'DIM_ITEMS_seller': init.item_seller,
-        'DIM_ITEMS__name': init.item_name,
+        'DIM_ITEMS_name': init.item_name,
         'DIM_ITEMS_refId': init.item_refId,
         'DIM_ITEMS_price': init.item_price,
         'DIM_ITEMS_listPrice': init.item_listPrice,
@@ -1409,6 +1409,8 @@ def get_params():
     for row in rows:
         get_order(row.orderId,registro)
         registro += 1
+        if registro == 101:
+            break
 
 def delete_duplicate():
     try:
