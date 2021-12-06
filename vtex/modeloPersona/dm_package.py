@@ -11,60 +11,30 @@ from os.path import join
 
 class init:
     df = pd.DataFrame()
-    orderId = None
-    EnableInferItems = None
-    cfop = None
-    restitutions = None
-    courierStatus = None
-    embeddedInvoice = None
-    invoiceNumber = None
-    invoiceKey = None
-    issuanceDate = None
-    trackingUrl = None
-    invoiceUrl = None
-    type = None
-    invoiceValue = None
-    courier = None
 
 def get_params():
     #try:
         client = bigquery.Client()
-        QUERY = ('SELECT orderId,EnableInferItems,cfop,restitutions,courierStatus,embeddedInvoice,invoiceNumber,invoiceKey,issuanceDate,trackingUrl,invoiceUrl,type,invoiceValue,courier FROM `shopstar-datalake.staging_zone.shopstar_vtex_order`')
+        QUERY = ('SELECT orderId,EnableInferItems,cfop,restitutions,courierStatus,embeddedInvoice,invoiceNumber,invoiceKey,issuanceDate,trackingUrl,invoiceUrl,type,invoiceValue,courier FROM `shopstar-datalake.staging_zone.shopstar_vtex_order`` ')
         query_job = client.query(QUERY)
         rows = query_job.result()
         for row in rows:
-            try:
-                init.orderId = row.orderId
-                init.EnableInferItems = row.EnableInferItems
-                init.cfop = row.cfop
-                init.restitutions = row.restitutions
-                init.courierStatus = row.courierStatus
-                init.embeddedInvoice = row.embeddedInvoice
-                init.invoiceNumber = row.invoiceNumber
-                init.invoiceKey = row.invoiceKey
-                init.issuanceDate = row.issuanceDate
-                init.trackingUrl = row.trackingUrl
-                init.invoiceUrl = row.invoiceUrl
-                init.type = row.type
-                init.invoiceValue = row.invoiceValue
-                init.courier = row.courier
-                df1 = pd.DataFrame({
-                    'orderId': row.orderId,
-                    'EnableInferItems': row.EnableInferItems,
-                    'cfop': row.cfop,
-                    'restitutions': row.restitutions,
-                    'courierStatus': row.courierStatus,
-                    'embeddedInvoice': row.embeddedInvoice,
-                    'invoiceNumber': row.invoiceNumber,
-                    'invoiceKey': row.invoiceKey,
-                    'issuanceDate': row.issuanceDate,
-                    'trackingUrl': row.trackingUrl,
-                    'invoiceUrl': row.invoiceUrl,
-                    'type': row.type,
-                    'invoiceValue': row.invoiceValue,
-                    'courier': row.courier}, index=[0])
-            except:
-                print("vacio")
+            df1 = pd.DataFrame({
+                'orderId': row.orderId,
+                'EnableInferItems': row.EnableInferItems,
+                'cfop': row.cfop,
+                'restitutions': row.restitutions,
+                'email': row.courierStatus,
+                'courierStatus': row.email,
+                'embeddedInvoice': row.embeddedInvoice,
+                'invoiceNumber': row.invoiceNumber,
+                'invoiceKey': row.invoiceKey,
+                'issuanceDate': row.issuanceDate,
+                'trackingUrl': row.trackingUrl,
+                'invoiceUrl': row.invoiceUrl,
+                'type': row.type,
+                'invoiceValue': row.invoiceValue,
+                'courier': row.courier}, index=[0])
             init.df = init.df.append(df1)
     #except:
     #    print("Consulta SQL no ejecutada")
