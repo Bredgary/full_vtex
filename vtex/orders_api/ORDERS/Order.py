@@ -428,6 +428,12 @@ class init:
     volumes = None
     EnableInferItems = None
     
+    '''
+    invoice data
+    '''
+    invoice_address = None
+    userPaymentInfo = None
+    
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
 def dicMemberCheck(key, dicObj):
@@ -539,7 +545,10 @@ def get_order(id,reg):
     '''
     INIT DIMENSION  packageAttachment
     '''
-        
+    try:
+        invoiceData = Fjson["invoiceData"]
+    except:
+        print("invoiceData. No tiene datos")     
     try:
         packageAttachment = Fjson["packageAttachment"]
         packages = packageAttachment["packages"]
@@ -1093,6 +1102,12 @@ def get_order(id,reg):
             init.EnableInferItems = x["EnableInferItems"]
     except:
         print("vacio")
+        
+    try:
+        init.invoice_address = invoiceData["address"]
+        init.userPaymentInfo = invoiceData["userPaymentInfo"]
+    except:
+        print("vacio")
     
     df1 = pd.DataFrame({
         'orderId': init.orderId,
@@ -1378,6 +1393,8 @@ def get_order(id,reg):
         'restitutions': init.restitutions,
         'volumes': init.volumes,
         'EnableInferItems': init.EnableInferItems,
+        'invoice_address': init.invoice_address,
+        'userPaymentInfo': init.userPaymentInfo,
         'invoicedDate': init.invoicedDate}, index=[0])
     init.df = init.df.append(df1)
     print("Registro: "+str(reg))
@@ -1394,6 +1411,8 @@ def get_params():
     for row in rows:
         get_order(row.orderId,registro)
         registro += 1
+        if registros == 101:
+            break
 
 def delete_duplicate():
     try:
