@@ -1103,6 +1103,7 @@ def get_order(id,reg):
     except:
         print("vacio")
         
+
     try:
         init.invoice_address = invoiceData["address"]
         init.userPaymentInfo = invoiceData["userPaymentInfo"]
@@ -1411,6 +1412,8 @@ def get_params():
     for row in rows:
         get_order(row.orderId,registro)
         registro += 1
+        if registro == 101:
+            break
 
 def delete_duplicate():
     try:
