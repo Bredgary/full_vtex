@@ -338,6 +338,19 @@ class init:
     payments_group = None
     payments_tid = None
     payments_dueDate = None
+    payments_cardNumber = None
+    payments_cvv2 = None
+    payments_expireMonth = None
+    payments_expireYear = None
+    payments_giftCardProvider = None
+    payments_giftCardAsDiscount = None
+    payments_koinUrl = None
+    payments_accountId = None
+    payments_parentAccountId = None
+    payments_bankIssuedInvoiceIdentificationNumber = None
+    payments_bankIssuedInvoiceIdentificationNumberFormatted = None
+    payments_ankIssuedInvoiceBarCodeNumber = None
+    payments_bankIssuedInvoiceBarCodeType = None
 
     '''
     billingAddress
@@ -442,9 +455,6 @@ class init:
     isActive = None
     transactionId = None
     merchantName = None
-    
-    payid = None
-    paymentSystem = None
     
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
@@ -1013,6 +1023,19 @@ def get_order(id,reg):
         init.payments_group = payments["group"]
         init.payments_tid = payments["tid"]
         init.payments_dueDate = payments["dueDate"]
+        init.payments_cardNumber = payments["cardNumber"]
+        init.payments_cvv2 = payments["cvv2"]
+        init.payments_expireMonth = payments["expireMonth"]
+        init.payments_expireYear = payments["expireYear"]
+        init.payments_giftCardProvider = payments["giftCardProvider"]
+        init.payments_giftCardAsDiscount = payments["giftCardAsDiscount"]
+        init.payments_koinUrl = payments["koinUrl"]
+        init.payments_accountId = payments["accountId"]
+        init.payments_parentAccountId = payments["parentAccountId"]
+        init.payments_bankIssuedInvoiceIdentificationNumber = payments["bankIssuedInvoiceIdentificationNumber"]
+        init.payments_bankIssuedInvoiceIdentificationNumberFormatted = payments["bankIssuedInvoiceIdentificationNumberFormatted"]
+        init.payments_bankIssuedInvoiceBarCodeNumber = payments["bankIssuedInvoiceBarCodeNumber"]
+        init.payments_bankIssuedInvoiceBarCodeType = payments["payments_bankIssuedInvoiceBarCodeType"]
     except:
         print("No hay datos payments")
     try:
@@ -1130,7 +1153,8 @@ def get_order(id,reg):
         
     DIM_payments_pay = transactions["payments"]
     for x in DIM_payments_pay:
-        print(x["id"])
+        payid = None
+        paymentSystem = None
     
     
     df1 = pd.DataFrame({
@@ -1364,6 +1388,19 @@ def get_order(id,reg):
         'payments_group': init.payments_group,
         'payments_tid': init.payments_tid,
         'payments_dueDate': init.payments_dueDate,
+        'payments_cardNumber': init.payments_cardNumber,
+        'payments_cvv2': init.payments_cvv2,
+        'payments_expireMonth': init.payments_expireMonth,
+        'payments_expireYear': init.payments_expireYear,
+        'payments_giftCardProvider': init.payments_giftCardProvider,
+        'payments_giftCardAsDiscount': init.payments_giftCardAsDiscount,
+        'payments_koinUrl': init.payments_koinUrl,
+        'payments_accountId': init.payments_accountId,
+        'payments_parentAccountId': init.payments_parentAccountId,
+        'payments_bankIssuedInvoiceIdentificationNumber': init.payments_bankIssuedInvoiceIdentificationNumber,
+        'payments_bankIssuedInvoiceIdentificationNumberFormatted': init.payments_bankIssuedInvoiceIdentificationNumberFormatted,
+        'payments_bankIssuedInvoiceBarCodeNumber': init.payments_bankIssuedInvoiceBarCodeNumber,
+        'payments_bankIssuedInvoiceBarCodeType': init.payments_bankIssuedInvoiceBarCodeType,
         'billingAddress_postalCode': init.billingAddress_postalCode,
         'billingAddress_city': init.billingAddress_city,
         'billingAddress_state': init.billingAddress_state,
