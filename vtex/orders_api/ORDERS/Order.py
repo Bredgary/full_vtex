@@ -1102,8 +1102,9 @@ def get_order(id,reg):
 
     #try:
     dim_invoiceData = Fjson["invoiceData"]
-    init.invoice_address = dim_invoiceData["address"]
-    init.userPaymentInfo = dim_invoiceData["userPaymentInfo"]
+    print(dim_invoiceData)
+    #init.invoice_address = dim_invoiceData["address"]
+    #init.userPaymentInfo = dim_invoiceData["userPaymentInfo"]
     #except:
     #    print("vacio")
     
@@ -1391,8 +1392,8 @@ def get_order(id,reg):
         'restitutions': init.restitutions,
         'volumes': init.volumes,
         'EnableInferItems': init.EnableInferItems,
-        'invoice_address': init.invoice_address,
-        'userPaymentInfo': init.userPaymentInfo,
+        #'invoice_address': init.invoice_address,
+        #'userPaymentInfo': init.userPaymentInfo,
         'invoicedDate': init.invoicedDate}, index=[0])
     init.df = init.df.append(df1)
     print("Registro: "+str(reg))
