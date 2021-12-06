@@ -13,7 +13,7 @@ from os.path import join
 def get_params():
     #try:
         client = bigquery.Client()
-        QUERY = ('SELECT orderId,taxData,itemMetadata_DetailUrl,itemMetadata_Ean,itemMetadata_Id,itemMetadata_ImageUrl,itemMetadata_Name,itemMetadata_ProductId,itemMetadata_RefId,itemMetadata_Seller,itemMetadata_SkuName,allowEdition,allowCancellation,roundingError,hostname,subscriptionData,isCompleted,commercialConditionData,authorizedDate,status,seller_id,marketplaceOrderId,creationDate,giftRegistryData,callCenterOperatorData,marketplaceOrderIdchangesAttachment_id,lastChange,orderGroup,value,invoicedDate,followUpEmail,affiliateId,origin,salesChannel,cancelReason,orderFormId,statusDescription,sellerOrderId,customData,merchantName,openTextField,marketplaceServicesEndpoint,sequenceFROM `shopstar-datalake.staging_zone.shopstar_vtex_order`')
+        QUERY = ('SELECT orderId,taxData,itemMetadata_DetailUrl,itemMetadata_Ean,itemMetadata_Id,itemMetadata_ImageUrl,itemMetadata_Name,itemMetadata_ProductId,itemMetadata_RefId,itemMetadata_Seller,itemMetadata_SkuName,allowEdition,allowCancellation,roundingError,hostname,subscriptionData,isCompleted,commercialConditionData,authorizedDate,status,seller_id,marketplaceOrderId,creationDate,giftRegistryData,callCenterOperatorData,marketplaceOrderId,changesAttachment_id,lastChange,orderGroup,value,invoicedDate,followUpEmail,affiliateId,origin,salesChannel,cancelReason,orderFormId,statusDescription,sellerOrderId,customData,merchantName,openTextField,marketplaceServicesEndpoint,sequence FROM `shopstar-datalake.staging_zone.shopstar_vtex_order`')
         query_job = client.query(QUERY)
         rows = query_job.result()
         for row in rows:
