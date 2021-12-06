@@ -1395,7 +1395,7 @@ def get_order(id,reg):
         'EnableInferItems': init.EnableInferItems,
         'invoice_address': init.invoice_address,
         'userPaymentInfo': init.userPaymentInfo,
-        'serialNumbers':init.serialNumbers,
+        'serialNumbers':init.item_serialNumbers,
         'invoicedDate': init.invoicedDate}, index=[0])
     init.df = init.df.append(df1)
     print("Registro: "+str(reg))
