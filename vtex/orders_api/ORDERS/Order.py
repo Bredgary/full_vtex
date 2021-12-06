@@ -443,6 +443,9 @@ class init:
     transactionId = None
     merchantName = None
     
+    payid = None
+    paymentSystem = None
+    
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
 def dicMemberCheck(key, dicObj):
@@ -659,6 +662,7 @@ def get_order(id,reg):
     try:
         paymentData = Fjson["paymentData"]
         transactions = paymentData["transactions"]
+        DIM_payments = transactions["payments"]
     except:
         print("paymentData No tiene datos")
     try:
@@ -1117,10 +1121,19 @@ def get_order(id,reg):
         init.userPaymentInfo = dim_invoiceData["userPaymentInfo"]
     except:
         print("vacio")
+    
+    try:    
+        init.isActive = transactions["isActive"]
+        init.transactionId = transactions["transactionId"]
+        init.merchantName = transactions["merchantName"]
+    except:
+        print("vacio")
         
-    init.isActive = transactions["isActive"]
-    init.transactionId = transactions["transactionId"]
-    init.merchantName = transactions["merchantName"]
+    init.payid = DIM_payments["id"]
+    init.paymentSystem = DIM_payments["paymentSystem"]
+    
+    print(init.payid)
+    print(init.paymentSystem)
     
     df1 = pd.DataFrame({
         'orderId': init.orderId,
@@ -1409,6 +1422,9 @@ def get_order(id,reg):
         'invoice_address': init.invoice_address,
         'userPaymentInfo': init.userPaymentInfo,
         'serialNumbers':init.item_serialNumbers,
+        'isActive':init.isActive,
+        'transactionId':init.transactionId,
+        'merchantName':init.merchantName,
         'invoicedDate': init.invoicedDate}, index=[0])
     init.df = init.df.append(df1)
     print("Registro: "+str(reg))
