@@ -409,6 +409,25 @@ class init:
     checkedInPickupPointId = None
     cancellationData = None
     
+    '''
+    packageAttachment
+    '''
+    courier = None
+    invoiceNumber = None
+    invoiceValue = None
+    invoiceUrl = None
+    issuanceDate = None
+    trackingNumber = None
+    invoiceKey = None
+    trackingUrl = None
+    embeddedInvoice = None
+    type = None
+    courierStatus = None
+    cfop = None
+    restitutions = None
+    volumes = None
+    EnableInferItems = None
+    
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
 def dicMemberCheck(key, dicObj):
@@ -518,8 +537,14 @@ def get_order(id,reg):
     
     
     '''
-    INIT DIMENSION
+    INIT DIMENSION  packageAttachment
     '''
+        
+    try:
+        packageAttachment = Fjson["packageAttachment"]
+        packages = packageAttachment["packages"]
+    except:
+        print("packageAttachment. No tiene datos")    
     try:
         itemMetadata = Fjson["itemMetadata"]
         ItemMetadata = itemMetadata["Items"]
@@ -1049,6 +1074,25 @@ def get_order(id,reg):
     except:
         print("vacio")
     
+    try:  
+        init.courier = packages["courier"]
+        init.invoiceNumber = packages["invoiceNumber"]
+        init.invoiceValue = packages["invoiceValue"]
+        init.invoiceUrl = packages["invoiceUrl"]
+        init.issuanceDate = packages["issuanceDate"]
+        init.trackingNumber = packages["trackingNumber"]
+        init.invoiceKey = packages["invoiceKey"]
+        init.trackingUrl = packages["trackingUrl"]
+        init.embeddedInvoice = packages["embeddedInvoice"]
+        init.type = packages["type"]
+        init.courierStatus = packages["courierStatus"]
+        init.cfop = packages["cfop"]
+        init.restitutions = packages["restitutions"]
+        init.volumes = packages["volumes"]
+        init.EnableInferItems = packages["EnableInferItems"]
+    except:
+        print("vacio")
+    
     df1 = pd.DataFrame({
         'orderId': init.orderId,
         'emailTracked': emailTracked,
@@ -1318,6 +1362,21 @@ def get_order(id,reg):
         'subscriptionData': init.subscriptionData,
         'taxData': init.taxData,
         'cancellationData': init.cancellationData,
+        'courier': init.courier,
+        'invoiceNumber': init.invoiceNumber,
+        'invoiceValue': init.invoiceValue,
+        'invoiceUrl': init.invoiceUrl,
+        'issuanceDate': init.issuanceDate,
+        'trackingNumber': init.trackingNumber,
+        'invoiceKey': init.invoiceKey,
+        'trackingUrl': init.trackingUrl,
+        'embeddedInvoice': init.embeddedInvoice,
+        'type': init.type,
+        'courierStatus': init.courierStatus,
+        'cfop': init.cfop,
+        'restitutions': init.restitutions,
+        'volumes': init.volumes,
+        'EnableInferItems': init.EnableInferItems,
         'invoicedDate': init.invoicedDate}, index=[0])
     init.df = init.df.append(df1)
     print("Registro: "+str(reg))
