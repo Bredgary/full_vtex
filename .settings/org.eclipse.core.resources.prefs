@@ -12,6 +12,7 @@ encoding//vtex/entity/CL/Cliente.py=latin1
 encoding//vtex/modeloPersona/dm_user.py=latin1
 encoding//vtex/modeloPersona/ft_cancellations.py=latin1
 encoding//vtex/modeloPersona/ft_ordenes.py=latin1
+encoding//vtex/modeloPersona/package.py=latin1
 encoding//vtex/orders_api/ORDERS/List_Order.py=latin1
 encoding//vtex/orders_api/ORDERS/List_order_History.py=latin1
 encoding//vtex/orders_api/ORDERS/Order.py=latin1

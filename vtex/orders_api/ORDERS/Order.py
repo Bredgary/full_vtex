@@ -1088,7 +1088,7 @@ def get_order(id,reg):
             init.type = x["type"]
             init.courierStatus = x["courierStatus"]
             init.cfop = x["cfop"]
-            #init.restitutions = packages["restitutions"]
+            init.restitutions = packages["restitutions"]
             init.volumes = x["volumes"]
             init.EnableInferItems = x["EnableInferItems"]
     except:
