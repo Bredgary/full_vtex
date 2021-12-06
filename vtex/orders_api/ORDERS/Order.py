@@ -1427,7 +1427,6 @@ def delete_duplicate():
         print("Consulta SQL no ejecutada")
 
 
-
 def run():
     try:
         get_params()
