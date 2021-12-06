@@ -805,7 +805,7 @@ def get_order(id,reg):
         init.item_price_definition = Items["priceDefinition"]
         item.item_serialNumbers = Items["serialNumbers"]
     except:
-        print("No hay datos Items")
+        print("No hay datos dim Items")
     try:
         init.brandName = additionalInfo["brandName"]
         init.brandId = additionalInfo["brandId"]
@@ -1023,6 +1023,19 @@ def get_order(id,reg):
         init.payments_group = payments["group"]
         init.payments_tid = payments["tid"]
         init.payments_dueDate = payments["dueDate"]
+        init.payments_cardNumber = payments["cardNumber"]
+        init.payments_cvv2 = payments["cvv2"]
+        init.payments_expireMonth = payments["expireMonth"]
+        init.payments_expireYear = payments["expireYear"]
+        init.payments_giftCardProvider = payments["giftCardProvider"]
+        init.payments_giftCardAsDiscount = payments["giftCardAsDiscount"]
+        init.payments_koinUrl = payments["koinUrl"]
+        init.payments_accountId = payments["accountId"]
+        init.payments_parentAccountId = payments["parentAccountId"]
+        init.payments_bankIssuedInvoiceIdentificationNumber = payments["bankIssuedInvoiceIdentificationNumber"]
+        init.payments_bankIssuedInvoiceIdentificationNumberFormatted = payments["bankIssuedInvoiceIdentificationNumberFormatted"]
+        init.payments_bankIssuedInvoiceBarCodeNumber = payments["bankIssuedInvoiceBarCodeNumber"]
+        init.payments_bankIssuedInvoiceBarCodeType = payments["bankIssuedInvoiceBarCodeType"]
     except:
         print("No hay datos payments")
     try:
@@ -1138,21 +1151,7 @@ def get_order(id,reg):
     except:
         print("vacio")
         
-    
-    
-    init.payments_cardNumber = payments["cardNumber"]
-    init.payments_cvv2 = payments["cvv2"]
-    init.payments_expireMonth = payments["expireMonth"]
-    init.payments_expireYear = payments["expireYear"]
-    init.payments_giftCardProvider = payments["giftCardProvider"]
-    init.payments_giftCardAsDiscount = payments["giftCardAsDiscount"]
-    init.payments_koinUrl = payments["koinUrl"]
-    init.payments_accountId = payments["accountId"]
-    init.payments_parentAccountId = payments["parentAccountId"]
-    init.payments_bankIssuedInvoiceIdentificationNumber = payments["bankIssuedInvoiceIdentificationNumber"]
-    init.payments_bankIssuedInvoiceIdentificationNumberFormatted = payments["bankIssuedInvoiceIdentificationNumberFormatted"]
-    init.payments_bankIssuedInvoiceBarCodeNumber = payments["bankIssuedInvoiceBarCodeNumber"]
-    init.payments_bankIssuedInvoiceBarCodeType = payments["bankIssuedInvoiceBarCodeType"]
+
     
     df1 = pd.DataFrame({
         'orderId': init.orderId,
