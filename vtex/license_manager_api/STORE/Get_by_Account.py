@@ -1,46 +1,72 @@
-import requests
-import json
-import os
-import re
-from datetime import datetime
-from os import system
+import pandas as pd
+import numpy as np
 from google.cloud import bigquery
-from itertools import chain
-from collections import defaultdict
+import os, json
+from datetime import datetime
+import requests
+from datetime import datetime, timezone
 
+class init:
+    df = pd.DataFrame()
+    headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
+    
+        
+def get_account():
+    try:
+    	url = "https://mercury.vtexcommercestable.com.br/api/vlm/account/stores"
+    	response = requests.request("GET", url, headers=headers)
+    	Fjson = json.loads(response.text)
+    	for x in Fjson:
+    		id = x["id"]
+    		name = x["name"]
+    		hosts = x["hosts"]
+    		for i in hosts:
+    			host = i
+    	df1 = pd.DataFrame({
+			'id' : id,
+			'name' :name,
+			'hosts' : hosts}, index=[0])
+    	init.df = init.df.append(df1)
+    	print("Registro: "+str(reg))
+    except:
+    	print("Vacio")
 
-def get_appKeys():
-	url = "https://mercury.vtexcommercestable.com.br/api/vlm/account/stores"
-	headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-	response = requests.request("GET", url, headers=headers)
-	FJson = json.loads(response.text)
-	result = json.dumps(FJson)
-	text_file = open("/home/bred_valenzuela/full_vtex/vtex/license_manager_api/STORE/account.json", "w")
-	text_file.write(result)
-	text_file.close()
-	cargando_bigquery()
+    
+def delete_duplicate():
+    try:
+        print("Borrando duplicados")
+        client = bigquery.Client()
+        QUERY = (
+            'CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_vtex_account` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.shopstar_vtex_account`')
+        query_job = client.query(QUERY)  
+        rows = query_job.result()
+        print(rows)
+    except:
+        print("Query no ejecutada")
 
-def cargando_bigquery():
-	print("Cargando a BigQuery")
-	system("cat account.json | jq -c '.[]' > table_account.json")
-	client = bigquery.Client()
-	filename = '/home/bred_valenzuela/full_vtex/vtex/license_manager_api/STORE/table_account.json'
-	dataset_id = 'landing_zone'
-	table_id = 'shopstar_vtex_account'
-	dataset_ref = client.dataset(dataset_id)
-	table_ref = dataset_ref.table(table_id)
-	job_config = bigquery.LoadJobConfig()
-	job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-	job_config.autodetect = True
-	with open(filename, "rb") as source_file:
-		job = client.load_table_from_file(
-			source_file,
-			table_ref,
-			location="southamerica-east1",  # Must match the destination dataset location.
-		job_config=job_config,)  # API request
-	job.result()  # Waits for table load to complete.
-	print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
-	print("finalizado")
-
-for x in range(1):
-	get_appKeys()
+def run():
+    #try:
+        get_account()
+        df = init.df
+        df.reset_index(drop=True, inplace=True)
+        json_data = df.to_json(orient = 'records')
+        json_object = json.loads(json_data)
+        
+        project_id = '999847639598'
+        dataset_id = 'staging_zone'
+        table_id = 'shopstar_vtex_account'
+    
+        client  = bigquery.Client(project = project_id)
+        dataset  = client.dataset(dataset_id)
+        table = dataset.table(table_id)
+        job_config = bigquery.LoadJobConfig()
+        job_config.write_disposition = "WRITE_TRUNCATE"
+        job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+        job_config.autodetect = True
+        job = client.load_table_from_json(json_object, table, job_config = job_config)
+        print(job.result())
+        delete_duplicate()
+    #except:
+    #    print("vacio")
+    
+run()
