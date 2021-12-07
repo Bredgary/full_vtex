@@ -1038,7 +1038,6 @@ def get_order(id,reg):
         init.payments_bankIssuedInvoiceIdentificationNumberFormatted = payments["bankIssuedInvoiceIdentificationNumberFormatted"]
         init.payments_bankIssuedInvoiceBarCodeNumber = payments["bankIssuedInvoiceBarCodeNumber"]
         init.payments_bankIssuedInvoiceBarCodeType = payments["bankIssuedInvoiceBarCodeType"]
-        connectorResponses = payments["connectorResponses"]
     except:
         print("No hay datos payments")
     try:
