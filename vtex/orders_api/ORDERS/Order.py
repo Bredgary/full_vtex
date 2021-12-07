@@ -1044,7 +1044,6 @@ def get_order(id,reg):
         print("No hay datos payments")
     try:
         connectorResponses = payments["connectorResponses"]
-        init.payments_Tid = connectorResponses["Tid"]
         init.payments_ReturnCode = connectorResponses["ReturnCode"]
         init.payments_Message = connectorResponses["Message"]
         init.payments_authId = connectorResponses["authId"]
@@ -1395,7 +1394,6 @@ def get_order(id,reg):
         'payments_giftCardCaption': init.payments_giftCardCaption,
         'payments_redemptionCode': init.payments_redemptionCode,
         'payments_group': init.payments_group,
-        'payments_tid': init.payments_tid,
         'payments_dueDate': init.payments_dueDate,
         'payments_cardNumber': init.payments_cardNumber,
         'payments_cvv2': init.payments_cvv2,
@@ -1491,6 +1489,8 @@ def get_params():
     for row in rows:
         get_order(row.orderId,registro)
         registro += 1
+        if registro == 100:
+            break
         
 def delete_duplicate():
     try:
