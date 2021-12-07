@@ -351,6 +351,13 @@ class init:
     payments_bankIssuedInvoiceIdentificationNumberFormatted = None
     payments_ankIssuedInvoiceBarCodeNumber = None
     payments_bankIssuedInvoiceBarCodeType = None
+    
+    payments_Tid = None
+    payments_ReturnCode = None
+    payments_Message = None
+    payments_authId = None
+    payments_acquirer = None
+    payments_message = None
 
     '''
     billingAddress
@@ -455,6 +462,7 @@ class init:
     isActive = None
     transactionId = None
     merchantName = None
+    
     
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
@@ -1031,8 +1039,19 @@ def get_order(id,reg):
         init.payments_bankIssuedInvoiceIdentificationNumberFormatted = payments["bankIssuedInvoiceIdentificationNumberFormatted"]
         init.payments_bankIssuedInvoiceBarCodeNumber = payments["bankIssuedInvoiceBarCodeNumber"]
         init.payments_bankIssuedInvoiceBarCodeType = payments["bankIssuedInvoiceBarCodeType"]
+        connectorResponses = payments["connectorResponses"]
     except:
         print("No hay datos payments")
+    try:
+        connectorResponses = payments["connectorResponses"]
+        init.payments_Tid = connectorResponses["Tid"]
+        init.payments_ReturnCode = connectorResponses["ReturnCode"]
+        init.payments_Message = connectorResponses["Message"]
+        init.payments_authId = connectorResponses["authId"]
+        init.payments_acquirer = connectorResponses["acquirer"]
+        init.payments_message = connectorResponses["message"]
+    except:
+        print("No hay datos connectorResponses")
     try:
         init.billingAddress_postalCode = billingAddress["postalCode"]
         init.billingAddress_city = billingAddress["city"]
@@ -1391,6 +1410,12 @@ def get_order(id,reg):
         'payments_bankIssuedInvoiceIdentificationNumberFormatted': init.payments_bankIssuedInvoiceIdentificationNumberFormatted,
         'payments_bankIssuedInvoiceBarCodeNumber': init.payments_bankIssuedInvoiceBarCodeNumber,
         'payments_bankIssuedInvoiceBarCodeType': init.payments_bankIssuedInvoiceBarCodeType,
+        'payments_Tid': init.payments_Tid,
+        'payments_ReturnCode': init.payments_ReturnCode,
+        'payments_Message': init.payments_Message,
+        'payments_authId': init.payments_authId,
+        'payments_acquirer': init.payments_acquirer,
+        'payments_message': init.payments_message,
         'billingAddress_postalCode': init.billingAddress_postalCode,
         'billingAddress_city': init.billingAddress_city,
         'billingAddress_state': init.billingAddress_state,
