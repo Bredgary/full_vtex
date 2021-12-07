@@ -357,7 +357,6 @@ class init:
     payments_Message = None
     payments_authId = None
     payments_acquirer = None
-    payments_message = None
 
     '''
     billingAddress
@@ -1048,7 +1047,6 @@ def get_order(id,reg):
         init.payments_Message = connectorResponses["Message"]
         init.payments_authId = connectorResponses["authId"]
         init.payments_acquirer = connectorResponses["acquirer"]
-        init.payments_message = connectorResponses["message"]
     except:
         print("No hay datos connectorResponses")
     try:
@@ -1413,7 +1411,6 @@ def get_order(id,reg):
         'payments_Message': init.payments_Message,
         'payments_authId': init.payments_authId,
         'payments_acquirer': init.payments_acquirer,
-        'payments_message': init.payments_message,
         'billingAddress_postalCode': init.billingAddress_postalCode,
         'billingAddress_city': init.billingAddress_city,
         'billingAddress_state': init.billingAddress_state,
