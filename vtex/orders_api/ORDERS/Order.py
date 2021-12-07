@@ -1042,7 +1042,7 @@ def get_order(id,reg):
         connectorResponses = payments["connectorResponses"]
     except:
         print("No hay datos payments")
-    #try:
+    try:
         connectorResponses = payments["connectorResponses"]
         init.payments_Tid = connectorResponses["Tid"]
         init.payments_ReturnCode = connectorResponses["ReturnCode"]
@@ -1050,8 +1050,8 @@ def get_order(id,reg):
         init.payments_authId = connectorResponses["authId"]
         init.payments_acquirer = connectorResponses["acquirer"]
         init.payments_message = connectorResponses["message"]
-    #except:
-    #    print("No hay datos connectorResponses")
+    except:
+        print("No hay datos connectorResponses")
     try:
         init.billingAddress_postalCode = billingAddress["postalCode"]
         init.billingAddress_city = billingAddress["city"]
