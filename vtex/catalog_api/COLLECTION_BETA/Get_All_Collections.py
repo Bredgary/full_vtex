@@ -15,6 +15,7 @@ class init:
     Fjson = json.loads(response.text)
     paging = Fjson["paging"]
     page = paging["page"]
+    pages = paging["pages"]
     total = paging["total"]
     lista = Fjson["items"]
     print(page)
@@ -22,13 +23,12 @@ class init:
     
 def get_all_collections():
     try:
-        querystring = {"page":""+str(init.page)+"","total":""+str(init.total)+"","orderByAsc":"true"}
-        print(init.page)
-        print(init.total)
-        response = requests.request("GET", init.url, headers=init.headers, params=querystring)
-        Fjson = init.Fjson
-        lista = Fjson["items"]
-        if lista:
+        for x in range(init.pages):
+            x += 1
+            querystring = {"page":""+str(init.page)+"","pageSize":""+str(init.total)+"","orderByAsc":"true"}
+            response = requests.request("GET", init.url, headers=init.headers, params=querystring)
+            Fjson = init.Fjson
+            lista = Fjson["items"]
             for x in lista:
                 df1 = pd.DataFrame({
                     'id': x["id"],
