@@ -23,11 +23,11 @@ def get_all_collections():
     	querystring = {"page":""+str(init.page)+"","total":""+str(init.total)+"","orderByAsc":"true"}
         print(init.page)
         print(init.total)
-    	response = requests.request("GET", init.url, headers=init.headers, params=querystring)
-    	Fjson = init.Fjson
-    	lista = Fjson["items"]
-    	for x in lista:
-    		df1 = pd.DataFrame({
+        response = requests.request("GET", init.url, headers=init.headers, params=querystring)
+        Fjson = init.Fjson
+        lista = Fjson["items"]
+        for x in lista:
+            df1 = pd.DataFrame({
                 'id': x["id"],
 				'name': x["name"],
 				'searchable':x["searchable"],
@@ -38,7 +38,7 @@ def get_all_collections():
 				'totalProducts': x["totalProducts"],
 				'type': x["type"],
 				'lastModifiedBy': x["lastModifiedBy"]}, index=[0])
-    		init.df = init.df.append(df1)
+            init.df = init.df.append(df1)
     except:
         print("Vacio")
 
