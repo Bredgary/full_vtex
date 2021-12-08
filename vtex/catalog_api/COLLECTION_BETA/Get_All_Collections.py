@@ -17,10 +17,12 @@ class init:
     page = paging["page"]
     total = paging["total"]
     lista = Fjson["items"]
+    print(page)
+    print(total)
     
 def get_all_collections():
     try:
-    	querystring = {"page":""+str(init.page)+"","total":""+str(init.total)+"","orderByAsc":"true"}
+        querystring = {"page":""+str(init.page)+"","total":""+str(init.total)+"","orderByAsc":"true"}
         print(init.page)
         print(init.total)
         response = requests.request("GET", init.url, headers=init.headers, params=querystring)
