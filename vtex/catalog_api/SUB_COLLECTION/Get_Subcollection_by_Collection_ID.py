@@ -12,21 +12,20 @@ class init:
     
 
 def get_subCollection(id,reg):
-    try:
-        url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/collection/"+str(id)+"/subcollection"
-        response = requests.request("GET", url, headers=init.headers)
-        print(Fjson)
-        df1 = pd.DataFrame({
-            'Id' : Fjson["Id"],
-			'CollectionId' : Fjson["CollectionId"],
-			'Name' : Fjson["Name"],
-			'Type' : Fjson["Type"],
-			'PreSale' : Fjson["PreSale"],
-			'Release': Fjson["Release"]}, index=[0])
-        init.df = init.df.append(df1)
-        print("Registro: "+str(reg))
-    except:
-        print("Vacio")
+    #try:
+    url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/collection/"+str(id)+"/subcollection"
+    response = requests.request("GET", url, headers=init.headers)
+    df1 = pd.DataFrame({
+        'Id' : Fjson["Id"],
+		'CollectionId' : Fjson["CollectionId"],
+		'Name' : Fjson["Name"],
+		'Type' : Fjson["Type"],
+		'PreSale' : Fjson["PreSale"],
+		'Release': Fjson["Release"]}, index=[0])
+    init.df = init.df.append(df1)
+    print("Registro: "+str(reg))
+    #except:
+     #   print("Vacio")
 
 
 def get_params():
