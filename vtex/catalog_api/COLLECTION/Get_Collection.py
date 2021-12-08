@@ -11,24 +11,22 @@ class init:
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
     
 
-def seller_sku(id,reg):
+def get_sku(id,reg):
     try:
-        url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/skuseller/"+str(seller_id)+"/"+str(sellerSku)+""
+        url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/collection/"+str(id)+""
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
         print(Fjson)
         df1 = pd.DataFrame({
-            'orderId' : orderId,
-			'IsPersisted' : Fjson["IsPersisted"],
-			'IsRemoved' : Fjson["IsRemoved"],
-			'StockKeepingUnitId' : Fjson["StockKeepingUnitId"],
-			'SkuSellerId' : Fjson["SkuSellerId"],
-			'SellerId' : Fjson["SellerId"],
-			'StockKeepingUnitId' : Fjson["StockKeepingUnitId"],
-			'SellerStockKeepingUnitId' : Fjson["SellerStockKeepingUnitId"],
-			'IsActive' : Fjson["IsActive"],
-			'UpdateDate' : Fjson["UpdateDate"],
-			'RequestedUpdateDate': Fjson["RequestedUpdateDate"]}, index=[0])
+            'Id' : Fjson["Id"],
+			'Name' : Fjson["Name"],
+			'Description' : Fjson["Description"],
+			'Searchable' : Fjson["Searchable"],
+			'Highlight' : Fjson["Highlight"],
+			'DateFrom' : Fjson["DateFrom"],
+			'DateTo' : Fjson["DateTo"],
+			'TotalProducts' : Fjson["TotalProducts"],
+			'Type': Fjson["Type"]}, index=[0])
         init.df = init.df.append(df1)
         print("Registro: "+str(reg))
     except:
@@ -44,7 +42,7 @@ def get_params():
     rows = query_job.result()
     registro = 1
     for row in rows:
-        seller_sku(row.id,registro)
+        get_sku(row.id,registro)
         registro += 1
     
 def delete_duplicate():
