@@ -11,7 +11,7 @@ class init:
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
     
 
-def seller_sku(sellerSku,seller_id,orderId,reg):
+def seller_sku(id,reg):
     try:
         url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/skuseller/"+str(seller_id)+"/"+str(sellerSku)+""
         response = requests.request("GET", url, headers=init.headers)
@@ -39,12 +39,12 @@ def get_params():
     print("Cargando consulta")
     client = bigquery.Client()
     QUERY = (
-        'SELECT sellerSku, seller_id,orderId FROM `shopstar-datalake.staging_zone.shopstar_vtex_collection_beta`')
+        'SELECT id FROM `shopstar-datalake.staging_zone.shopstar_vtex_collection_beta`')
     query_job = client.query(QUERY)  
     rows = query_job.result()
     registro = 1
     for row in rows:
-        seller_sku(row.sellerSku,row.seller_id,row.orderId,registro)
+        seller_sku(row.id,registro)
         registro += 1
     
 def delete_duplicate():

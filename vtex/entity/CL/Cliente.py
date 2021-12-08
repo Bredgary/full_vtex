@@ -61,8 +61,6 @@ def run():
 	json_data = df.to_json(orient = 'records')
 	json_object = json.loads(json_data)
 	
-	
-	
 	table_schema = {
 	    "name": "id",
 	    "type": "STRING",
@@ -232,7 +230,6 @@ def run():
 	    "type": "STRING",
 	    "mode": "NULLABLE"
 	  }
-	
 	
 	project_id = '999847639598'
 	dataset_id = 'landing_zone'
