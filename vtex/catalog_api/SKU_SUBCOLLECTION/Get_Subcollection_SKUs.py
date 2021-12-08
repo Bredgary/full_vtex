@@ -8,10 +8,10 @@ from datetime import datetime, timezone
 
 class init:
     df = pd.DataFrame()
-    
     url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/subcollection/1103/stockkeepingunit"
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-    response = requests.request("GET", url, headers=headers)
+    querystring = {"page":"1","size":"50"}
+    response = requests.request("GET", url, headers=headers, params=querystring)
     FormatoJson = json.loads(response.text)
     print(FormatoJson)
     #page = FormatoJson["page"]
