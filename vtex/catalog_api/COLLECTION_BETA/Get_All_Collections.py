@@ -18,14 +18,12 @@ class init:
     pages = paging["pages"]
     total = paging["total"]
     lista = Fjson["items"]
-    print(page)
-    print(total)
     
 def get_all_collections():
     try:
         for x in range(init.pages):
             x += 1
-            querystring = {"page":""+str(init.page)+"","pageSize":""+str(init.total)+"","orderByAsc":"true"}
+            querystring = {"page":""+str(x)+"","pageSize":""+str(init.total)+"","orderByAsc":"true"}
             response = requests.request("GET", init.url, headers=init.headers, params=querystring)
             Fjson = init.Fjson
             lista = Fjson["items"]
@@ -42,6 +40,7 @@ def get_all_collections():
     				'type': x["type"],
     				'lastModifiedBy': x["lastModifiedBy"]}, index=[0])
                 init.df = init.df.append(df1)
+                print("registro: "+str(x))
     except:
         print("Vacio")
 
