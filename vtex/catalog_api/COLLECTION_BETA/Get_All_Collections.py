@@ -39,7 +39,7 @@ def get_all_collections():
 					'type': x["type"],
 					'lastModifiedBy': x["lastModifiedBy"]}, index=[0])
         		init.df = init.df.append(df1)
-        		print("Registro: "+str(init.reg+1))
+        	print("Registro: "+str(init.reg+1))
     except:
         print("Vacio")
 
