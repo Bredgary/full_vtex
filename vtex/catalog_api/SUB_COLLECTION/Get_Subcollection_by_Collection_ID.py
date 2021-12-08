@@ -18,12 +18,12 @@ def get_subCollection(id,reg):
 	    Fjson = json.loads(response.text)
 	    for x in Fjson:
 		    df1 = pd.DataFrame({
-		        'Id' : Fjson["Id"],
-				'CollectionId' : Fjson["CollectionId"],
-				'Name' : Fjson["Name"],
-				'Type' : Fjson["Type"],
-				'PreSale' : Fjson["PreSale"],
-				'Release': Fjson["Release"]}, index=[0])
+		        'Id' : x["Id"],
+				'CollectionId' : x["CollectionId"],
+				'Name' : x["Name"],
+				'Type' : x["Type"],
+				'PreSale' : x["PreSale"],
+				'Release': x["Release"]}, index=[0])
 		    init.df = init.df.append(df1)
 		    print("Registro: "+str(reg))
     except:
