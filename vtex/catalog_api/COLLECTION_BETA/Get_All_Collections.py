@@ -24,20 +24,19 @@ def get_all_collections():
     	response = requests.request("GET", init.url, headers=init.headers, params=querystring)
     	Fjson = init.Fjson
     	lista = Fjson["items"]
-    	if lista:
-    		for x in lista:
-        		df1 = pd.DataFrame({
-                    'id': x["id"],
-					'name': x["name"],
-					'searchable':x["searchable"],
-					'highlight': x["highlight"],
-					'dateFrom': x["dateFrom"],
-					'dateTo': x["dateTo"],
-					'totalSku': x["totalSku"],
-					'totalProducts': x["totalProducts"],
-					'type': x["type"],
-					'lastModifiedBy': x["lastModifiedBy"]}, index=[0])
-        		init.df = init.df.append(df1)
+    	for x in lista:
+    		df1 = pd.DataFrame({
+                'id': x["id"],
+				'name': x["name"],
+				'searchable':x["searchable"],
+				'highlight': x["highlight"],
+				'dateFrom': x["dateFrom"],
+				'dateTo': x["dateTo"],
+				'totalSku': x["totalSku"],
+				'totalProducts': x["totalProducts"],
+				'type': x["type"],
+				'lastModifiedBy': x["lastModifiedBy"]}, index=[0])
+    		init.df = init.df.append(df1)
     except:
         print("Vacio")
 
