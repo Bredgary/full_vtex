@@ -126,7 +126,7 @@ def delete_duplicate():
     print("Consulta SQL no ejecutada")
 
 
-def run(requests):
+def run():
   for x in range(30):
     if init.salir == 1:
       break
