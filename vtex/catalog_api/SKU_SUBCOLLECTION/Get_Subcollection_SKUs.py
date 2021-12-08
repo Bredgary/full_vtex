@@ -13,9 +13,10 @@ class init:
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
     response = requests.request("GET", url, headers=headers)
     FormatoJson = json.loads(response.text)
-    page = FormatoJson["page"]
-    size = FormatoJson["size"]
-
+    print(FormatoJson)
+    #page = FormatoJson["page"]
+    #size = FormatoJson["size"]
+'''
 def get_subCollectionSKU(id,reg):
     try:
     	querystring = {"page":""+str(init.page)+"","size":""+str(init.size)+""}
@@ -84,3 +85,4 @@ def run():
         print("vacio")
     
 run()
+'''
