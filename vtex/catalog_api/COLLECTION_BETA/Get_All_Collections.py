@@ -34,8 +34,8 @@ def get_all_collections():
     	response = requests.request("GET", init.url, headers=init.headers, params=querystring)
     	Fjson = init.Fjson
     	lista = Fjson["items"]
-        if lista:
-        	for x in lista:
+    	if lista:
+    		for x in lista:
         		df1 = pd.DataFrame({
 					'name': init.name,
 					'searchable':init.searchable,
