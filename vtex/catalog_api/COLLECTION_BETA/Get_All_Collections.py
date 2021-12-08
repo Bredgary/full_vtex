@@ -26,6 +26,7 @@ class init:
     totalProducts = None
     type = None
     lastModifiedBy = None
+    reg = 0
     
 def get_all_collections():
     try:
@@ -34,19 +35,19 @@ def get_all_collections():
     	Fjson = init.Fjson
     	lista = Fjson["items"]
         if lista:
-	        for x in lista:
-		        df1 = pd.DataFrame({
-		            'name': init.name,
-		            'searchable':init.searchable,
-		            'highlight': init.highlight,
-		            'dateFrom': init.dateFrom,
-		            'dateTo': init.dateTo,
-		            'totalSku': init.totalSku,
-		            'totalProducts': init.totalProducts,
-		            'type': init.type,
-		            'lastModifiedBy': init.lastModifiedBy}, index=[0])
-		        init.df = init.df.append(df1)
-		        print("Registro: "+str(reg))
+        	for x in lista:
+        		df1 = pd.DataFrame({
+					'name': init.name,
+					'searchable':init.searchable,
+					'highlight': init.highlight,
+					'dateFrom': init.dateFrom,
+					'dateTo': init.dateTo,
+					'totalSku': init.totalSku,
+					'totalProducts': init.totalProducts,
+					'type': init.type,
+					'lastModifiedBy': init.lastModifiedBy}, index=[0])
+        		init.df = init.df.append(df1)
+        		print("Registro: "+str(init.reg+1))
     except:
         print("Vacio")
 
