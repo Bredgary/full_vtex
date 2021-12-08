@@ -1,5 +1,3 @@
-#!/usr/bin/python
-# -*- coding: latin-1 -*-
 import pandas as pd
 import numpy as np
 from google.cloud import bigquery
@@ -46,7 +44,7 @@ def delete_duplicate():
 		print("Eliminando duplicados")
 		client = bigquery.Client()
 		QUERY = (
-			'CREATE OR REPLACE TABLE `shopstar-datalake.landing_zone.shopstar_vtex_client` AS SELECT DISTINCT * FROM `shopstar-datalake.landing_zone.shopstar_vtex_client`')
+			'CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_vtex_client` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.shopstar_vtex_client`')
 		query_job = client.query(QUERY)
 		rows = query_job.result()
 		print(rows)
@@ -230,9 +228,9 @@ def run():
 	    "type": "STRING",
 	    "mode": "NULLABLE"
 	  }
-	
+
 	project_id = '999847639598'
-	dataset_id = 'landing_zone'
+	dataset_id = 'staging_zone'
 	table_id = 'shopstar_vtex_client'
 	
 	client  = bigquery.Client(project = project_id)
@@ -242,6 +240,7 @@ def run():
 	job_config = bigquery.LoadJobConfig()
 	job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
 	job_config.schema = format_schema(table_schema)
+	#job_config.autodetect = True
 	job = client.load_table_from_json(json_object, table, job_config = job_config)
 	print(job.result())
 	delete_duplicate()
