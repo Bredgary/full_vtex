@@ -25,7 +25,7 @@ def get_all_collections():
             y += 1
             querystring = {"page":""+str(y)+"","pageSize":""+str(init.total)+"","orderByAsc":"true"}
             response = requests.request("GET", init.url, headers=init.headers, params=querystring)
-            Fjson = init.Fjson
+            Fjson = json.loads(response.text)
             lista = Fjson["items"]
             for x in lista:
                 df1 = pd.DataFrame({
