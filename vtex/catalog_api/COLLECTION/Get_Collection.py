@@ -1,76 +1,87 @@
-import os, sys
-import requests
-import json
-import os
-import re
-from datetime import datetime
-from os import system
+import pandas as pd
+import numpy as np
 from google.cloud import bigquery
+import os, json
+from datetime import datetime
+import requests
+from datetime import datetime, timezone
 
-productList = []
-client = bigquery.Client()
-listaIDS = []
-start = 0
+class init:
+    df = pd.DataFrame()
+    headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
+    
 
-def get_collection(id):
-	url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/collection/"+str(id)+""
-	headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-	response = requests.request("GET", url, headers=headers)
-	FJson = json.loads(response.text)
-	FJsonD = json.dumps(FJson)
-	text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/COLLECTION/tableCollection.json", "w")
-	text_file.write(FJsonD)
-	text_file.close()
-	print("collection: "+str(id))
-	cargando_bigquery()
-
-def cargando_bigquery():
-	print("Cargando a BigQuery")
-	client = bigquery.Client()
-	filename = '/home/bred_valenzuela/full_vtex/vtex/catalog_api/COLLECTION/tableCollection.json'
-	dataset_id = 'landing_zone'
-	table_id = 'shopstar_vtex_collection'
-	dataset_ref = client.dataset(dataset_id)
-	table_ref = dataset_ref.table(table_id)
-	job_config = bigquery.LoadJobConfig()
-	job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-	job_config.autodetect = True
-	with open(filename, "rb") as source_file:
-		job = client.load_table_from_file(
-			source_file,
-			table_ref,
-			location="southamerica-east1",  # Must match the destination dataset location.
-		job_config=job_config,)  # API request
-	job.result()  # Waits for table load to complete.
-	print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
-	print("finalizado")
-	system("rm tableCollection.json")
+def seller_sku(sellerSku,seller_id,orderId,reg):
+    try:
+        url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/skuseller/"+str(seller_id)+"/"+str(sellerSku)+""
+        response = requests.request("GET", url, headers=init.headers)
+        Fjson = json.loads(response.text)
+        print(Fjson)
+        df1 = pd.DataFrame({
+            'orderId' : orderId,
+			'IsPersisted' : Fjson["IsPersisted"],
+			'IsRemoved' : Fjson["IsRemoved"],
+			'StockKeepingUnitId' : Fjson["StockKeepingUnitId"],
+			'SkuSellerId' : Fjson["SkuSellerId"],
+			'SellerId' : Fjson["SellerId"],
+			'StockKeepingUnitId' : Fjson["StockKeepingUnitId"],
+			'SellerStockKeepingUnitId' : Fjson["SellerStockKeepingUnitId"],
+			'IsActive' : Fjson["IsActive"],
+			'UpdateDate' : Fjson["UpdateDate"],
+			'RequestedUpdateDate': Fjson["RequestedUpdateDate"]}, index=[0])
+        init.df = init.df.append(df1)
+        print("Registro: "+str(reg))
+    except:
+        print("Vacio")
 
 
-def operacion_fenix(start):
-	f_01 = open ('/home/bred_valenzuela/full_vtex/vtex/catalog_api/COLLECTION/collection.json','r')
-	data_from_string = f_01.read()
-	listaIDS = json.loads(data_from_string)
-	for i in listaIDS:
-		get_collection(i)
-		start +=1
-	print(str(start)+" registro almacenado.")
+def get_params():
+    print("Cargando consulta")
+    client = bigquery.Client()
+    QUERY = (
+        'SELECT sellerSku, seller_id,orderId FROM `shopstar-datalake.staging_zone.shopstar_vtex_collection_beta`')
+    query_job = client.query(QUERY)  
+    rows = query_job.result()
+    registro = 1
+    for row in rows:
+        seller_sku(row.sellerSku,row.seller_id,row.orderId,registro)
+        registro += 1
+    
+def delete_duplicate():
+    try:
+        print("Borrando duplicados")
+        client = bigquery.Client()
+        QUERY = (
+            'CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_vtex_collection` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.shopstar_vtex_collection`')
+        query_job = client.query(QUERY)  
+        rows = query_job.result()
+        print(rows)
+    except:
+        print("Query no ejecutada")
 
-operacion_fenix(start)
-
-
-
-'''
-QUERY = (
-    'SELECT id FROM `shopstar-datalake.landing_zone.shopstar_vtex_collection_beta`')
-query_job = client.query(QUERY)  # API request
-rows = query_job.result()  # Waits for query to finish
-
-for row in rows:
-    productList.append(row.id)
-
-string = json.dumps(productList)
-text_file = open("/home/bred_valenzuela/full_vtex/vtex/catalog_api/COLLECTION/collection.json", "w")
-text_file.write(string)
-text_file.close()
-'''
+def run():
+    try:
+        get_params()
+        df = init.df
+        df.reset_index(drop=True, inplace=True)
+        json_data = df.to_json(orient = 'records')
+        json_object = json.loads(json_data)
+        print(df)
+        project_id = '999847639598'
+        dataset_id = 'staging_zone'
+        table_id = 'shopstar_vtex_collection'
+    
+        client  = bigquery.Client(project = project_id)
+        dataset  = client.dataset(dataset_id)
+        table = dataset.table(table_id)
+        job_config = bigquery.LoadJobConfig()
+        job_config.write_disposition = "WRITE_TRUNCATE"
+        job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+        job_config.autodetect = True
+        job = client.load_table_from_json(json_object, table, job_config = job_config)
+        print(job.result())
+        delete_duplicate()
+    except:
+        print("vacio")
+    
+run()

@@ -17,15 +17,6 @@ class init:
     page = paging["page"]
     total = paging["total"]
     lista = Fjson["items"]
-    name = None
-    searchable = None
-    highlight = None
-    dateFrom = None
-    dateTo = None
-    totalSku = None
-    totalProducts = None
-    type = None
-    lastModifiedBy = None
     reg = 0
     
 def get_all_collections():
@@ -37,15 +28,15 @@ def get_all_collections():
     	if lista:
     		for x in lista:
         		df1 = pd.DataFrame({
-					'name': init.name,
-					'searchable':init.searchable,
-					'highlight': init.highlight,
-					'dateFrom': init.dateFrom,
-					'dateTo': init.dateTo,
-					'totalSku': init.totalSku,
-					'totalProducts': init.totalProducts,
-					'type': init.type,
-					'lastModifiedBy': init.lastModifiedBy}, index=[0])
+					'name': x["name"],
+					'searchable':x["searchable"],
+					'highlight': x["highlight"],
+					'dateFrom': x["dateFrom"],
+					'dateTo': x["dateTo"],
+					'totalSku': x["totalSku"],
+					'totalProducts': x["totalProducts"],
+					'type': x["type"],
+					'lastModifiedBy': x["lastModifiedBy"]}, index=[0])
         		init.df = init.df.append(df1)
         		print("Registro: "+str(init.reg+1))
     except:
