@@ -16,7 +16,7 @@ class init:
     print(FormatoJson)
     page = FormatoJson["Page"]
     size = FormatoJson["Size"]
-'''
+
 def get_subCollectionSKU(id,reg):
     try:
     	querystring = {"page":""+str(init.page)+"","size":""+str(init.size)+""}
@@ -85,4 +85,3 @@ def run():
         print("vacio")
     
 run()
-'''
