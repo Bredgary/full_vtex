@@ -28,6 +28,7 @@ def get_all_collections():
     	if lista:
     		for x in lista:
         		df1 = pd.DataFrame({
+                    'id': x["id"],
 					'name': x["name"],
 					'searchable':x["searchable"],
 					'highlight': x["highlight"],
