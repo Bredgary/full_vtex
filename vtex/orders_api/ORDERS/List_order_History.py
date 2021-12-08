@@ -107,8 +107,8 @@ def get_order_list(page,hora):
         'callCenterOperatorName': str(x["callCenterOperatorName"]),
         'totalItems': str(x["totalItems"]),
         'currencyCode': str(x["currencyCode"])}, index=[0])
-    print("Registro: "+str(init.reg))
-    init.df = init.df.append(df1)
+      print("Registro: "+str(init.reg))
+      init.df = init.df.append(df1)
   else:
     init.salir = 1
 
@@ -285,3 +285,5 @@ def run(requests):
   job = client.load_table_from_json(json_object, tableT, job_config = job_config_temp)
   print(job.result())
   delete_duplicate()
+
+run()
