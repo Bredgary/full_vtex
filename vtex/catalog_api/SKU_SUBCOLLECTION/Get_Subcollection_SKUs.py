@@ -14,8 +14,8 @@ class init:
     response = requests.request("GET", url, headers=headers, params=querystring)
     FormatoJson = json.loads(response.text)
     print(FormatoJson)
-    #page = FormatoJson["page"]
-    #size = FormatoJson["size"]
+    page = FormatoJson["page"]
+    size = FormatoJson["size"]
 '''
 def get_subCollectionSKU(id,reg):
     try:
