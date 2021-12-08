@@ -12,21 +12,22 @@ class init:
     
 
 def get_subCollection(id,reg):
-    #try:
-    url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/collection/"+str(id)+"/subcollection"
-    response = requests.request("GET", url, headers=init.headers)
-    Fjson = json.loads(response.text)
-    df1 = pd.DataFrame({
-        'Id' : Fjson["Id"],
-		'CollectionId' : Fjson["CollectionId"],
-		'Name' : Fjson["Name"],
-		'Type' : Fjson["Type"],
-		'PreSale' : Fjson["PreSale"],
-		'Release': Fjson["Release"]}, index=[0])
-    init.df = init.df.append(df1)
-    print("Registro: "+str(reg))
-    #except:
-     #   print("Vacio")
+    try:
+	    url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/collection/"+str(id)+"/subcollection"
+	    response = requests.request("GET", url, headers=init.headers)
+	    Fjson = json.loads(response.text)
+	    for x in Fjson:
+		    df1 = pd.DataFrame({
+		        'Id' : Fjson["Id"],
+				'CollectionId' : Fjson["CollectionId"],
+				'Name' : Fjson["Name"],
+				'Type' : Fjson["Type"],
+				'PreSale' : Fjson["PreSale"],
+				'Release': Fjson["Release"]}, index=[0])
+		    init.df = init.df.append(df1)
+		    print("Registro: "+str(reg))
+    except:
+        print("Vacio")
 
 
 def get_params():
@@ -54,7 +55,7 @@ def delete_duplicate():
         print("Query no ejecutada")
 
 def run():
-    #try:
+    try:
         get_params()
         df = init.df
         df.reset_index(drop=True, inplace=True)
@@ -75,7 +76,7 @@ def run():
         job = client.load_table_from_json(json_object, table, job_config = job_config)
         print(job.result())
         delete_duplicate()
-  #  except:
-   #     print("vacio")
+    except:
+        print("vacio")
     
 run()
