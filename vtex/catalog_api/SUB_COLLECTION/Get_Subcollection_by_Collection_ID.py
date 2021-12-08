@@ -15,6 +15,7 @@ def get_subCollection(id,reg):
     #try:
     url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/collection/"+str(id)+"/subcollection"
     response = requests.request("GET", url, headers=init.headers)
+    Fjson = json.loads(response.text)
     df1 = pd.DataFrame({
         'Id' : Fjson["Id"],
 		'CollectionId' : Fjson["CollectionId"],
