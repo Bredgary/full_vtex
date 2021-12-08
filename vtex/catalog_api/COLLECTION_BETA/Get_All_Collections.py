@@ -21,6 +21,8 @@ class init:
 def get_all_collections():
     try:
     	querystring = {"page":""+str(init.page)+"","total":""+str(init.total)+"","orderByAsc":"true"}
+        print(init.page)
+        print(init.total)
     	response = requests.request("GET", init.url, headers=init.headers, params=querystring)
     	Fjson = init.Fjson
     	lista = Fjson["items"]
