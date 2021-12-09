@@ -27,8 +27,8 @@ def get_subCollectionSKU(id,reg):
     		df1 = pd.DataFrame({
 				'page' : init.page,
 				'size' : init.size,
-				'SubCollectionId' : Fjson[0],
-				'SkuId': Fjson[1]}, index=[0])
+				'SubCollectionId' : Fjson["SubCollectionId"],
+				'SkuId': Fjson["SkuId"]}, index=[0])
     		init.df = init.df.append(df1)
     		print("Registro: "+str(reg))
    # except:
