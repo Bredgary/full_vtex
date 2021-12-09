@@ -94,7 +94,7 @@ def run():
 		job_config = bigquery.LoadJobConfig()
 		job_config.write_disposition = "WRITE_TRUNCATE"
 		job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-		job_config.schema = format_schema(table_schema)
+		job_config.autodetect = True
 		job = client.load_table_from_json(json_object_dfAffi, tableO, job_config = job_config)
 		print(job.result())
 		
@@ -102,7 +102,7 @@ def run():
 		job_config_temp = bigquery.LoadJobConfig()
 		job_config_temp.write_disposition = "WRITE_TRUNCATE"
 		job_config_temp.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-		job_config.schema = format_schema(table_schema)
+		job_config.autodetect = True
 		job = client.load_table_from_json(json_object_dfConf, tableT, job_config = job_config_temp)
 		print(job.result())
 		delete_duplicate()
