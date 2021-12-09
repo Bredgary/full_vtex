@@ -17,7 +17,7 @@ class init:
     size = FormatoJson["Size"]
 
 def get_subCollectionSKU(id,reg):
-    try:
+    #try:
     	querystring = {"page":""+str(init.page)+"","size":""+str(init.size)+""}
     	url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/collection/"+str(id)+"/subcollection"
     	response = requests.request("GET", url, headers=init.headers, params=querystring)
@@ -32,8 +32,8 @@ def get_subCollectionSKU(id,reg):
 					'SkuId': x["SkuId"]}, index=[0])
     			init.df = init.df.append(df1)
     			print("Registro: "+str(reg))
-    except:
-        print("Vacio")
+   # except:
+    #    print("Vacio")
         
 
 def get_params():
@@ -61,7 +61,7 @@ def delete_duplicate():
         print("Query no ejecutada")
 
 def run():
-    try:
+   # try:
         get_params()
         df = init.df
         df.reset_index(drop=True, inplace=True)
@@ -82,7 +82,7 @@ def run():
         job = client.load_table_from_json(json_object, table, job_config = job_config)
         print(job.result())
         delete_duplicate()
-    except:
-        print("vacio")
+  #  except:
+  #      print("vacio")
     
 run()
