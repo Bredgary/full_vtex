@@ -50,7 +50,7 @@ def delete_duplicate():
         print("Borrando duplicados")
         client = bigquery.Client()
         QUERY = (
-            'CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_vtex_specification_field` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.shopstar_vtex_specification_field`')
+            'CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_vtex_affiliations` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.shopstar_vtex_affiliations`')
         query_job = client.query(QUERY)  
         rows = query_job.result()
         print(rows)
@@ -62,7 +62,7 @@ def delete_duplicate_2():
         print("Borrando duplicados")
         client = bigquery.Client()
         QUERY = (
-            'CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_vtex_specification_field` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.shopstar_vtex_specification_field`')
+            'CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_vtex_affiliations_conf` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.shopstar_vtex_affiliations_conf`')
         query_job = client.query(QUERY)  
         rows = query_job.result()
         print(rows)
@@ -72,15 +72,15 @@ def delete_duplicate_2():
 def run():
 	try:
 		dfAffi = init.dfAffi
-		dfCon = init.dfCon
+		dfConf = init.dfCon
 		
 		dfAffi.reset_index(drop=True, inplace=True)
-		json_data = dfAffi.to_json(orient = 'records')
-		json_object = json.loads(json_data)
+		json_data_dfAffi = dfAffi.to_json(orient = 'records')
+		json_object_dfAffi = json.loads(json_data_dfAffi)
 		
-		dfCon.reset_index(drop=True, inplace=True)
-		json_data = dfCon.to_json(orient = 'records')
-		json_object = json.loads(json_data)
+		dfConf.reset_index(drop=True, inplace=True)
+		json_data_dfConf = dfConf.to_json(orient = 'records')
+		json_object_dfConf = json.loads(json_data_dfConf)
 		
 		project_id = '999847639598'
 		dataset_id = 'staging_zone'
@@ -94,7 +94,7 @@ def run():
 		job_config.write_disposition = "WRITE_TRUNCATE"
 		job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
 		job_config.schema = format_schema(table_schema)
-		job = client.load_table_from_json(json_object, tableO, job_config = job_config)
+		job = client.load_table_from_json(json_object_dfAffi, tableO, job_config = job_config)
 		print(job.result())
 		
 		tableT = dataset.table(table_temp)
@@ -102,7 +102,7 @@ def run():
 		job_config_temp.write_disposition = "WRITE_TRUNCATE"
 		job_config_temp.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
 		job_config.schema = format_schema(table_schema)
-		job = client.load_table_from_json(json_object, tableT, job_config = job_config_temp)
+		job = client.load_table_from_json(json_object_dfConf, tableT, job_config = job_config_temp)
 		print(job.result())
 		delete_duplicate()
 		delete_duplicate_2()
