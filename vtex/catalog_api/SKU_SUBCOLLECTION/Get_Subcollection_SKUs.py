@@ -26,8 +26,6 @@ def get_subCollectionSKU(id,reg):
     	if Fjson:
     		for x in Fjson:
     			df1 = pd.DataFrame({
-					'page' : init.page,
-					'size' : init.size,
 					'SubCollectionId' : x["SubCollectionId"],
 					'SkuId': x["SkuId"]}, index=[0])
     			init.df = init.df.append(df1)
