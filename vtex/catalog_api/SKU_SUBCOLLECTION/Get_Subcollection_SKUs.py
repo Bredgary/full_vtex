@@ -23,6 +23,7 @@ def get_subCollectionSKU(id,reg):
     	response = requests.request("GET", url, headers=init.headers, params=querystring)
     	data = json.loads(response.text)
     	Fjson = data[0]
+    	print(Fjson)
     	if Fjson:
     		df1 = pd.DataFrame({
 				'page' : init.page,
