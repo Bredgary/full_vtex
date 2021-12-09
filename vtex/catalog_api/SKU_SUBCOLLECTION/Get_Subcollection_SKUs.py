@@ -22,7 +22,7 @@ def get_subCollectionSKU(id,reg):
     	url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/subcollection/"+str(id)+"/stockkeepingunit"
     	response = requests.request("GET", url, headers=init.headers, params=querystring)
     	data = json.loads(response.text)
-    	Fjson = data[0]
+    	Fjson = data["Data"]
     	print(Fjson)
     	#if Fjson:
     	#	df1 = pd.DataFrame({
