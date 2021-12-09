@@ -19,19 +19,19 @@ class init:
 def get_subCollectionSKU(id,reg):
     #try:
     	querystring = {"page":""+str(init.page)+"","size":""+str(init.size)+""}
-    	url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/collection/"+str(id)+"/subcollection"
+    	url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/subcollection/"+str(id)+"/stockkeepingunit"
     	response = requests.request("GET", url, headers=init.headers, params=querystring)
     	data = json.loads(response.text)
     	Fjson = data[0]
     	print(Fjson)
-    	if Fjson:
-    		df1 = pd.DataFrame({
-				'page' : init.page,
-				'size' : init.size,
-				'SubCollectionId' : Fjson[0],
-				'SkuId': Fjson[1]}, index=[0])
-    		init.df = init.df.append(df1)
-    		print("Registro: "+str(reg))
+    	#if Fjson:
+    	#	df1 = pd.DataFrame({
+		#		'page' : init.page,
+		#		'size' : init.size,
+		#		'SubCollectionId' : Fjson[0],
+		#		'SkuId': Fjson[1]}, index=[0])
+    	#	init.df = init.df.append(df1)
+    	#	print("Registro: "+str(reg))
    # except:
     #    print("Vacio")
         
