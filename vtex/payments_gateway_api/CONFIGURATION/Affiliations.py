@@ -13,36 +13,37 @@ class init:
     
 
 def get_aff():
-    try:
+    #try:
         url = "https://mercury.vtexpayments.com.br/api/pvt/affiliations"
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
         for x in Fjson:
         	df1 = pd.DataFrame({
-				'id' : Fjson["id"],
-				'implementation' : Fjson["implementation"],
+				'id' : x["id"],
+				'implementation' : x["implementation"],
 				'name' : Fjson["name"],
-				'isdelivered' : Fjson["isdelivered"],
-				'isConfigured': Fjson["isConfigured"]}, index=[0])
+				'isdelivered' : x["isdelivered"],
+				'isConfigured': x["isConfigured"]}, index=[0])
         	init.dfAffi = init.df.append(df1)
-    except:
-        print("Vacio")
+    #except:
+     #   print("Vacio")
 
 def get_config():
-    try:
+    #try:
     	url = "https://mercury.vtexpayments.com.br/api/pvt/affiliations"
     	response = requests.request("GET", url, headers=init.headers)
     	Fjson = json.loads(response.text)
     	config = Fjson["configuration"]
     	for x in Fjson:
-    		df1 = pd.DataFrame({
-				'affiliationsId' : Fjson["id"],
-				'name' : config["name"],
-				'value' : config["value"],
-				'valueKey': config["valueKey"]}, index=[0])
-    		init.dfCon = init.df.append(df1)
-    except:
-        print("Vacio")
+    		for y in config:
+    			df1 = pd.DataFrame({
+					'affiliationsId' : x["id"],
+					'name' : y["name"],
+					'value' : y["value"],
+					'valueKey': y["valueKey"]}, index=[0])
+    			init.dfCon = init.df.append(df1)
+    #except:
+    #    print("Vacio")
 
     
 def delete_duplicate():
@@ -70,7 +71,7 @@ def delete_duplicate_2():
         print("Query no ejecutada")
 
 def run():
-	try:
+	#try:
 		dfAffi = init.dfAffi
 		dfConf = init.dfCon
 		
@@ -106,7 +107,7 @@ def run():
 		print(job.result())
 		delete_duplicate()
 		delete_duplicate_2()
-	except:
-		print("vacio")
+	#except:
+	#	print("vacio")
 
 run()
