@@ -24,14 +24,13 @@ def get_subCollectionSKU(id,reg):
     	data = json.loads(response.text)
     	Fjson = data["Data"]
     	if Fjson:
-    		for x in Fjson:
-    			df1 = pd.DataFrame({
-					'page' : init.page,
-					'size' : init.size,
-					'SubCollectionId' : x["SubCollectionId"],
-					'SkuId': x["SkuId"]}, index=[0])
-    			init.df = init.df.append(df1)
-    			print("Registro: "+str(reg))
+    		df1 = pd.DataFrame({
+				'page' : init.page,
+				'size' : init.size,
+				'SubCollectionId' : x["SubCollectionId"],
+				'SkuId': x["SkuId"]}, index=[0])
+    		init.df = init.df.append(df1)
+    		print("Registro: "+str(reg))
    # except:
     #    print("Vacio")
         
