@@ -16,6 +16,7 @@ def get_sku_Attachment(id,reg):
         url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/stockkeepingunit/"+str(id)+"/attachment"
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
+        print(Fjson)
         df1 = pd.DataFrame({
             'id': Fjson["Id"],
             'attachmentId': Fjson["AttachmentId"],
