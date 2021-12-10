@@ -12,7 +12,7 @@ class init:
     
         
 def sku_context(id,reg):
-    try:
+    #try:
     	url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/stockkeepingunitkit"
     	querystring = {"skuId":""+str(id)+""}
     	response = requests.request("GET", url, headers=init.headers, params=querystring)
@@ -25,8 +25,8 @@ def sku_context(id,reg):
 			'unitPrice': Fjson["UnitPrice"]}, index=[0])
     	init.df = init.df.append(df1)
     	print("Registro: "+str(reg))
-    except:
-    	print("Vacio")
+    #except:
+    #	print("Vacio")
 
 
 def get_params():
