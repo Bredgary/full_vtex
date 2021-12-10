@@ -5,6 +5,7 @@ import os, json
 from datetime import datetime
 import requests
 from datetime import datetime, timezone
+from _queue import Empty
 
 class init:
     productList = []
@@ -15,7 +16,8 @@ def get_sku_Attachment(id,reg):
     #try:
     url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/stockkeepingunit/"+str(id)+"/attachment"
     response = requests.request("GET", url, headers=init.headers)
-    print(response)
+    if response is Empty:
+        print("Hola")
     #Fjson = json.loads(response.text)
     #if Fjson:
     #    print(Fjson)
