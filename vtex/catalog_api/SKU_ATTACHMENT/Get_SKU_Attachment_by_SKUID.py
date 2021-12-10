@@ -12,20 +12,20 @@ class init:
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
 def get_sku_Attachment(id,reg):
-    try:
-        url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/stockkeepingunit/"+str(id)+"/attachment"
-        response = requests.request("GET", url, headers=init.headers)
-        Fjson = json.loads(response.text)
-        if Fjson:
-            print(Fjson)
-            df1 = pd.DataFrame({
-                'id': Fjson["Id"],
-                'attachmentId': Fjson["AttachmentId"],
-                'skuId': Fjson["SkuId"]}, index=[0])
-            init.df = init.df.append(df1)
-            print("Registro: "+str(reg))
-    except:
-    	print("Vacio")
+    #try:
+    url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/stockkeepingunit/"+str(id)+"/attachment"
+    response = requests.request("GET", url, headers=init.headers)
+    Fjson = json.loads(response.text)
+    if Fjson:
+        print(Fjson)
+        df1 = pd.DataFrame({
+            'id': Fjson["Id"],
+            'attachmentId': Fjson["AttachmentId"],
+            'skuId': Fjson["SkuId"]}, index=[0])
+        init.df = init.df.append(df1)
+        print("Registro: "+str(reg))
+    #except:
+    #	print("Vacio")
 
 def get_params():
     print("Cargando consulta")
