@@ -43,7 +43,7 @@ def delete_duplicate():
         print("Eliminando duplicados")
         client = bigquery.Client()
         QUERY = (
-            'CREATE OR REPLACE TABLE `shopstar-datalake.test.shopstar_vtex_client` AS SELECT DISTINCT * FROM `shopstar-datalake.test.shopstar_vtex_client`')
+            'CREATE OR REPLACE TABLE `shopstar-datalake.test.shopstar_vtex_order_client` AS SELECT DISTINCT * FROM `shopstar-datalake.test.shopstar_vtex_order_client`')
         query_job = client.query(QUERY)
         rows = query_job.result()
         print(rows)
@@ -66,8 +66,8 @@ def get_params():
         
         
 def run(orderId,registro):
-    df = pd.DataFrame(cl_client(orderId,registro),
-                    columns=['beneficio','beneficio2','crearGiftcard','profilePicture','proteccionDatos','terminosCondiciones','terminosPago','tradeName','rclastcart','rclastsession','rclastsessiondate','homePhone','phone','stateRegistration','email','userId','firstName','lastName','document','localeDefault','attach','approved','birthDate','businessPhone','corporateDocument','corporateName','documentType','gender','customerClass','priceTables','id','accountId','accountName','dataEntityId','createdBy','createdIn','updatedBy','updatedIn','lastInteractionBy','lastInteractionIn','followers','auto_filter'])
+    df = pd.DataFrame(orderId,cl_client(orderId,registro),
+                    columns=['orderId','beneficio','beneficio2','crearGiftcard','profilePicture','proteccionDatos','terminosCondiciones','terminosPago','tradeName','rclastcart','rclastsession','rclastsessiondate','homePhone','phone','stateRegistration','email','userId','firstName','lastName','document','localeDefault','attach','approved','birthDate','businessPhone','corporateDocument','corporateName','documentType','gender','customerClass','priceTables','id','accountId','accountName','dataEntityId','createdBy','createdIn','updatedBy','updatedIn','lastInteractionBy','lastInteractionIn','followers','auto_filter'])
     df.reset_index(drop=True, inplace=True)
 
     json_data = df.to_json(orient = 'records')
