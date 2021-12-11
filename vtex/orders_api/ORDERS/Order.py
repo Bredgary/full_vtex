@@ -465,12 +465,12 @@ class init:
     '''
     cancellation
     '''
-    #RequestedByUser = None
-    #RequestedBySystem = None
-    #RequestedBySellerNotification = None
-    #RequestedByPaymentNotification = None
-    #Reason = None
-    #CancellationDate = None
+    RequestedByUser = None
+    RequestedBySystem = None
+    RequestedBySellerNotification = None
+    RequestedByPaymentNotification = None
+    Reason = None
+    CancellationDate = None
     
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
@@ -1172,13 +1172,13 @@ def get_order(id,reg):
             print("vacio")
             
         try:
-            cancellationData = Fjson["cancellationData"]
-            RequestedByUser = cancellationData["RequestedByUser"]
-            RequestedBySystem = cancellationData["RequestedBySystem"]
-            RequestedBySellerNotification = cancellationData["RequestedBySellerNotification"]
-            RequestedByPaymentNotification = cancellationData["RequestedByPaymentNotification"]
-            Reason = cancellationData["Reason"]
-            CancellationDate = cancellationData["CancellationDate"]
+            init.cancellationData = Fjson["cancellationData"]
+            init.RequestedByUser = cancellationData["RequestedByUser"]
+            init.RequestedBySystem = cancellationData["RequestedBySystem"]
+            init.RequestedBySellerNotification = cancellationData["RequestedBySellerNotification"]
+            init.RequestedByPaymentNotification = cancellationData["RequestedByPaymentNotification"]
+            init.Reason = cancellationData["Reason"]
+            init.CancellationDate = cancellationData["CancellationDate"]
         except:
             print("cancellationData")
     
@@ -1490,12 +1490,12 @@ def get_order(id,reg):
             'isActive':init.isActive,
             'transactionId':init.transactionId,
             'merchantName':init.merchantName,
-            'RequestedByUser':RequestedByUser,
-            'RequestedBySystem':RequestedBySystem,
-            'RequestedBySellerNotification':RequestedBySellerNotification,
-            'RequestedByPaymentNotification':RequestedByPaymentNotification,
-            'Reason':Reason,
-            'CancellationDate':CancellationDate,
+            'RequestedByUser':init.RequestedByUser,
+            'RequestedBySystem':init.RequestedBySystem,
+            'RequestedBySellerNotification':init.RequestedBySellerNotification,
+            'RequestedByPaymentNotification':init.RequestedByPaymentNotification,
+            'Reason':init.Reason,
+            'CancellationDate':init.CancellationDate,
             'invoicedDate': init.invoicedDate}, index=[0])
         init.df = init.df.append(df1)
         print("Registro: "+str(reg))
