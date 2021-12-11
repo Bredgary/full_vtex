@@ -68,7 +68,7 @@ def get_params():
         if registro == 15:
             break
         
-def run(orderId,registro):
+def run():
     get_params()
     df = init.df
     df.reset_index(drop=True, inplace=True)
