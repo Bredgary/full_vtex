@@ -13,7 +13,7 @@ class init:
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
     
 def get_order(id,reg):
-    #try:
+    try:
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
@@ -36,8 +36,8 @@ def get_order(id,reg):
             'CancellationDate': CancellationDate}, index=[0])
         print("Registro: "+str(reg))
         init.df = init.df.append(df1)
-    #except:
-     #   print("Vacio")
+    except:
+        print("Vacio")
         
         
 def get_params():
