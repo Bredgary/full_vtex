@@ -62,14 +62,14 @@ def get_order(id,reg):
         init.isCorporate = clientProfileData["isCorporate"]
         init.userProfileId = clientProfileData["userProfileId"]
         init.customerClass = clientProfileData["customerClass"]
-        decrypt_email(init.email)
+        email_decrypt = decrypt_email(init.email)
         print("Registro: "+str(reg))
         #except:
          #   print("Registro: "+str(reg))
         df1 = pd.DataFrame({
             'orderId': id,
             'dim_client': init.id,
-            'email': init.email,
+            'email': email_decrypt,
             'firstName': init.firstName,
             'lastName': init.lastName,
             'documentType': init.documentType,
