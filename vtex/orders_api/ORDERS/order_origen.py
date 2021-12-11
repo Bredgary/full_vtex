@@ -11,7 +11,7 @@ class init:
     productList = []
     df = pd.DataFrame()
 def get_order(id,reg):
-    try:
+    #try:
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
         response = requests.request("GET", url, headers=init.headers)
         response = requests.request("GET", url, headers=headers)
@@ -35,8 +35,8 @@ def get_order(id,reg):
             'CancellationDate': CancellationDate}, index=[0])
         print("Registro: "+str(init.reg))
         init.df = init.df.append(df1)
-    except:
-        print("Vacio")
+    #except:
+     #   print("Vacio")
         
         
 def get_params():
