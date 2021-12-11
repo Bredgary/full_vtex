@@ -70,7 +70,7 @@ def get_order(id,reg):
         df1 = pd.DataFrame({
             'orderId': id,
             'dim_client': init.id,
-            'email': email_decrypt,
+            'email': client_email,
             'firstName': init.firstName,
             'lastName': init.lastName,
             'documentType': init.documentType,
