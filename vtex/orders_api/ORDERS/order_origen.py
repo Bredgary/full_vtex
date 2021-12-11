@@ -10,7 +10,6 @@ from os.path import join
 class init:
     productList = []
     df = pd.DataFrame()
-    reg
 def get_order(id,reg):
     try:
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
@@ -25,7 +24,7 @@ def get_order(id,reg):
         RequestedByPaymentNotification = cancellationData["RequestedByPaymentNotification"]
         Reason = cancellationData["Reason"]
         CancellationDate = cancellationData["CancellationDate"]
-        init.reg +=1
+        reg +=1
         df1 = pd.DataFrame({
             'orderId': id,
             'RequestedByUser': RequestedByUser,
