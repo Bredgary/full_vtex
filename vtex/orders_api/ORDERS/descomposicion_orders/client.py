@@ -64,9 +64,6 @@ def get_order(id,reg):
         init.customerClass = clientProfileData["customerClass"]
         client_email = decrypt_email(str(init.email))
         
-        print("Registro: "+str(reg))
-        #except:
-         #   print("Registro: "+str(reg))
         df1 = pd.DataFrame({
             'orderId': id,
             'dim_client': init.id,
@@ -85,10 +82,7 @@ def get_order(id,reg):
             'userProfileId': init.userProfileId,
             'customerClass': init.customerClass}, index=[0])
         init.df = init.df.append(df1)
-    #except:
-     #   print("Vacio")
-      #  print("Registro: "+str(reg))
-        
+        print("Registro: "+str(reg))
         
         
 def get_params():
@@ -121,6 +115,7 @@ def delete_duplicate():
 def run():
     get_params()
     df = init.df
+    print(df)
     df.reset_index(drop=True, inplace=True)
     json_data = df.to_json(orient = 'records')
     json_object = json.loads(json_data)
