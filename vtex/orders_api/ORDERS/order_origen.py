@@ -32,6 +32,7 @@ def get_order(id,reg):
             init.RequestedByPaymentNotification = cancellationData["RequestedByPaymentNotification"]
             init.Reason = cancellationData["Reason"]
             init.CancellationDate = cancellationData["CancellationDate"]
+            print("Registro: "+str(reg))
         except:
             print("Registro: "+str(reg))
         df1 = pd.DataFrame({
@@ -42,7 +43,6 @@ def get_order(id,reg):
             'RequestedByPaymentNotification': init.RequestedByPaymentNotification,
             'Reason': init.Reason,
             'CancellationDate': init.CancellationDate}, index=[0])
-        print("Registro: "+str(reg))
         init.df = init.df.append(df1)
     except:
         print("Vacio")
