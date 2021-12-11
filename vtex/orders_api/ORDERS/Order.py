@@ -1495,7 +1495,7 @@ def get_order(id,reg):
             'RequestedBySellerNotification':init.RequestedBySellerNotification,
             'RequestedByPaymentNotification':init.RequestedByPaymentNotification,
             'Reason':init.Reason,
-            'CancellationDate':init.CancellationDate,
+            'CancellationDate':str(init.CancellationDate),
             'invoicedDate': init.invoicedDate}, index=[0])
         init.df = init.df.append(df1)
         print("Registro: "+str(reg))
