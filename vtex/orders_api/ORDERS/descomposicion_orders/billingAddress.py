@@ -49,6 +49,8 @@ def get_order(id,reg):
                     init.reference = billingAddress["reference"]
                     init.lon = geoCoordinates[0]
                     init.lat = geoCoordinates[1]
+                    print(init.lon)
+                    print(init.lat)
             print("Registro: "+str(reg))
         except:
             print("Registro: "+str(reg))
