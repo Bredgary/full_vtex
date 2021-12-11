@@ -62,7 +62,8 @@ def get_order(id,reg):
         init.isCorporate = clientProfileData["isCorporate"]
         init.userProfileId = clientProfileData["userProfileId"]
         init.customerClass = clientProfileData["customerClass"]
-        email_decrypt = decrypt_email(init.email)
+        client_email = decrypt_email(str(init.email))
+        
         print("Registro: "+str(reg))
         #except:
          #   print("Registro: "+str(reg))
