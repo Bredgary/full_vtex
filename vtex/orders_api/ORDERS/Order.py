@@ -462,6 +462,15 @@ class init:
     transactionId = None
     merchantName = None
     
+    '''
+    cancellation
+    '''
+    RequestedByUser = None
+    RequestedBySystem = None
+    RequestedBySellerNotification = None
+    RequestedByPaymentNotification = None
+    Reason = None
+    CancellationDate = None
     
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
@@ -1161,6 +1170,17 @@ def get_order(id,reg):
             init.merchantName = transactions["merchantName"]
         except:
             print("vacio")
+            
+        try:
+            init.cancellationData = Fjson["cancellationData"]
+            init.RequestedByUser = cancellationData["RequestedByUser"]
+            init.RequestedBySystem = cancellationData["RequestedBySystem"]
+            init.RequestedBySellerNotification = cancellationData["RequestedBySellerNotification"]
+            init.RequestedByPaymentNotification = cancellationData["RequestedByPaymentNotification"]
+            init.Reason = cancellationData["Reason"]
+            init.CancellationDate = cancellationData["CancellationDate"]
+        except:
+            print("cancellationData")
     
         
         df1 = pd.DataFrame({
@@ -1470,6 +1490,13 @@ def get_order(id,reg):
             'isActive':init.isActive,
             'transactionId':init.transactionId,
             'merchantName':init.merchantName,
+            'cancellationData':init.cancellationData,
+            'cancellationData':init.RequestedByUser,
+            'RequestedBySystem':init.RequestedBySystem,
+            'RequestedBySellerNotification':init.RequestedBySellerNotification,
+            'RequestedByPaymentNotification':init.RequestedByPaymentNotification,
+            'Reason':init.Reason,
+            'CancellationDate':init.CancellationDate,
             'invoicedDate': init.invoicedDate}, index=[0])
         init.df = init.df.append(df1)
         print("Registro: "+str(reg))
@@ -1505,28 +1532,25 @@ def delete_duplicate():
 
 
 def run():
-    try:
-        get_params()
-        df = init.df
-        df.reset_index(drop=True, inplace=True)
-        json_data = df.to_json(orient = 'records')
-        json_object = json.loads(json_data)
-        
-        project_id = '999847639598'
-        dataset_id = 'staging_zone'
-        table_id = 'shopstar_vtex_order'
-        
-        client  = bigquery.Client(project = project_id)
-        dataset  = client.dataset(dataset_id)
-        table = dataset.table(table_id)
-        job_config = bigquery.LoadJobConfig()
-        job_config.write_disposition = "WRITE_TRUNCATE"
-        job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-        job_config.autodetect = True
-        job = client.load_table_from_json(json_object, table, job_config = job_config)
-        print(job.result())
-        delete_duplicate()
-    except:
-        print("Error")
+    get_params()
+    df = init.df
+    df.reset_index(drop=True, inplace=True)
+    json_data = df.to_json(orient = 'records')
+    json_object = json.loads(json_data)
+    
+    project_id = '999847639598'
+    dataset_id = 'staging_zone'
+    table_id = 'shopstar_vtex_order'
+    
+    client  = bigquery.Client(project = project_id)
+    dataset  = client.dataset(dataset_id)
+    table = dataset.table(table_id)
+    job_config = bigquery.LoadJobConfig()
+    job_config.write_disposition = "WRITE_TRUNCATE"
+    job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+    job_config.autodetect = True
+    job = client.load_table_from_json(json_object, table, job_config = job_config)
+    print(job.result())
+    delete_duplicate()
     
 run()

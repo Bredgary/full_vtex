@@ -49,22 +49,19 @@ def delete_duplicate():
 
 
 def run():
-    try:
-        project_id = '999847639598'
-        dataset_id = 'test'
-        table_id = 'shopstar_order'
-        
-        client  = bigquery.Client(project = project_id)
-        dataset  = client.dataset(dataset_id)
-        table = dataset.table(table_id)
-        job_config = bigquery.LoadJobConfig()
-        job_config.write_disposition = "WRITE_TRUNCATE"
-        job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-        job_config.autodetect = True
-        job = client.load_table_from_json(init.Fjson, table, job_config = job_config)
-        print(job.result())
-        delete_duplicate()
-    except:
-        print("Error")
+    project_id = '999847639598'
+    dataset_id = 'test'
+    table_id = 'shopstar_order'
+    
+    client  = bigquery.Client(project = project_id)
+    dataset  = client.dataset(dataset_id)
+    table = dataset.table(table_id)
+    job_config = bigquery.LoadJobConfig()
+    job_config.write_disposition = "WRITE_TRUNCATE"
+    job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+    job_config.autodetect = True
+    job = client.load_table_from_json(init.Fjson, table, job_config = job_config)
+    print(job.result())
+    delete_duplicate()
     
 run()
