@@ -1501,22 +1501,7 @@ def get_order(id,reg):
         print("Registro: "+str(reg))
     except:
         print("vacio")
-        
 
-def get_params():
-    print("Cargando consulta")
-    client = bigquery.Client()
-    QUERY = (
-        'SELECT orderId FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`')
-    query_job = client.query(QUERY)  
-    rows = query_job.result()
-    registro = 1
-    for row in rows:
-        get_order(row.orderId,registro)
-        registro += 1
-        if registro ==30:
-            break
-        
 def delete_duplicate():
     try:
         print("Eliminando duplicados")
@@ -1529,9 +1514,7 @@ def delete_duplicate():
     except:
         print("Consulta SQL no ejecutada")
 
-
 def run():
-    get_params()
     df = init.df
     df.reset_index(drop=True, inplace=True)
     json_data = df.to_json(orient = 'records')
@@ -1549,6 +1532,26 @@ def run():
     job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
     job = client.load_table_from_json(json_object, table, job_config = job_config)
     print(job.result())
-    delete_duplicate()
+    delete_duplicate()        
+
+def get_params():
+    print("Cargando consulta")
+    client = bigquery.Client()
+    QUERY = (
+        'SELECT orderId FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`')
+    query_job = client.query(QUERY)  
+    rows = query_job.result()
+    registro = 1
+    for row in rows:
+        get_order(row.orderId,registro)
+        registro += 1
+        if registro >= 30:
+            run()
+        if registro >= 40:
+            run()
+        if registro >= 50:
+            run()
+
+
     
-run()
+get_params()
