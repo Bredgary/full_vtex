@@ -45,23 +45,23 @@ def get_order(id,reg):
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
         #try:
-            clientProfileData = Fjson["clientProfileData"]
-            init.id = clientProfileData["id"]
-            init.email = clientProfileData["email"]
-            init.firstName = clientProfileData["firstName"]
-            init.lastName = clientProfileData["lastName"]
-            init.documentType = clientProfileData["documentType"]
-            init.document = clientProfileData["document"]
-            init.phone = clientProfileData["phone"]
-            init.corporateName = clientProfileData["corporateName"]
-            init.tradeName = clientProfileData["tradeName"]
-            init.corporateDocument = clientProfileData["corporateDocument"]
-            init.stateInscription = clientProfileData["stateInscription"]
-            init.corporatePhone = clientProfileData["corporatePhone"]
-            init.isCorporate = clientProfileData["isCorporate"]
-            init.suserProfileId = clientProfileData["suserProfileId"]
-            decrypt_email(init.email)
-            print("Registro: "+str(reg))
+        clientProfileData = Fjson["clientProfileData"]
+        init.id = clientProfileData["id"]
+        init.email = clientProfileData["email"]
+        init.firstName = clientProfileData["firstName"]
+        init.lastName = clientProfileData["lastName"]
+        init.documentType = clientProfileData["documentType"]
+        init.document = clientProfileData["document"]
+        init.phone = clientProfileData["phone"]
+        init.corporateName = clientProfileData["corporateName"]
+        init.tradeName = clientProfileData["tradeName"]
+        init.corporateDocument = clientProfileData["corporateDocument"]
+        init.stateInscription = clientProfileData["stateInscription"]
+        init.corporatePhone = clientProfileData["corporatePhone"]
+        init.isCorporate = clientProfileData["isCorporate"]
+        init.suserProfileId = clientProfileData["suserProfileId"]
+        decrypt_email(init.email)
+        print("Registro: "+str(reg))
         #except:
          #   print("Registro: "+str(reg))
         df1 = pd.DataFrame({
