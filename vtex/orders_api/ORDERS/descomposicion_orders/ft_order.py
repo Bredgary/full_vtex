@@ -60,7 +60,7 @@ def decrypt_email(email):
         formatoJ = json.loads(response.text)
         return formatoJ["email"]
     except:
-        print("No se pudo desencriptar Email: "+str(email))
+        print("No se pudo desencriptar Email")
         
 def get_order(id,reg):
     #try:
@@ -149,6 +149,9 @@ def get_order(id,reg):
             'checkedInPickupPointId': init.checkedInPickupPointId,
             'cancellationData': init.cancellationData,
             'followUpEmail': followUpEmail}, index=[0])
+        init.df = init.df.append(df1)
+        print("Registro: "+str(reg))
+        
         
 def get_params():
     print("Cargando consulta")
