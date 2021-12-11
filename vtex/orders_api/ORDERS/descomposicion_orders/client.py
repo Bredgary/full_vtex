@@ -115,7 +115,6 @@ def delete_duplicate():
 def run():
     get_params()
     df = init.df
-    print(df)
     df.reset_index(drop=True, inplace=True)
     json_data = df.to_json(orient = 'records')
     json_object = json.loads(json_data)
