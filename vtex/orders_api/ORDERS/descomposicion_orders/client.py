@@ -23,7 +23,7 @@ def cl_client(orderId,reg):
     headers = {
         "Content-Type": "application/json",
         "Accept": "application/vnd.vtex.ds.v10+json",
-        "REST-Range": "resources=0-1000",
+        "REST-Range": "resources=0-1",
         "X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA",
         "X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"
     }
@@ -74,8 +74,7 @@ def run():
     json_data = df.to_json(orient = 'records')
     json_object = json.loads(json_data)
 
-    json_data = df.to_json(orient = 'records')
-    json_object = json.loads(json_data)
+
     
     table_schema = {
         "name": "orderId",
