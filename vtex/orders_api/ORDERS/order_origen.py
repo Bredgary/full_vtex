@@ -9,14 +9,33 @@ from os.path import join
 
 class init:
     productList = []
-    Fjson = {}
-
-     
+    df = pd.DataFrame()
+    reg
 def get_order(id,reg):
     try:
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
         response = requests.request("GET", url, headers=init.headers)
-        init.Fjson = json.loads(response.text)
+        response = requests.request("GET", url, headers=headers)
+        Fjson = json.loads(response.text)
+        cancellationData = Fjson["cancellationData"]
+        
+        RequestedByUser = cancellationData["RequestedByUser"]
+        RequestedBySystem = cancellationData["RequestedBySystem"]
+        RequestedBySellerNotification = cancellationData["RequestedBySellerNotification"]
+        RequestedByPaymentNotification = cancellationData["RequestedByPaymentNotification"]
+        Reason = cancellationData["Reason"]
+        CancellationDate = cancellationData["CancellationDate"]
+        init.reg +=1
+        df1 = pd.DataFrame({
+            'orderId': id,
+            'RequestedByUser': RequestedByUser,
+            'RequestedBySystem': RequestedBySystem,
+            'RequestedBySellerNotification': RequestedBySellerNotification,
+            'RequestedByPaymentNotification': RequestedByPaymentNotification,
+            'Reason': Reason,
+            'CancellationDate': CancellationDate}, index=[0])
+        print("Registro: "+str(init.reg))
+        init.df = init.df.append(df1)
     except:
         print("Vacio")
         
@@ -32,15 +51,13 @@ def get_params():
     for row in rows:
         get_order(row.orderId,registro)
         registro += 1
-        if registro == 5:
-            break
         
 def delete_duplicate():
     try:
         print("Eliminando duplicados")
         client = bigquery.Client()
         QUERY = (
-            'CREATE OR REPLACE TABLE `shopstar-datalake.test.shopstar_order` AS SELECT DISTINCT * FROM `shopstar-datalake.test.shopstar_order`')
+            'CREATE OR REPLACE TABLE `shopstar-datalake.test.shopstar_order_cancellation` AS SELECT DISTINCT * FROM `shopstar-datalake.test.shopstar_order_cancellation`')
         query_job = client.query(QUERY)
         rows = query_job.result()
         print(rows)
@@ -49,9 +66,15 @@ def delete_duplicate():
 
 
 def run():
+    
+    df = init.df
+    df.reset_index(drop=True, inplace=True)
+    json_data = df.to_json(orient = 'records')
+    json_object = json.loads(json_data)
+    
     project_id = '999847639598'
     dataset_id = 'test'
-    table_id = 'shopstar_order'
+    table_id = 'shopstar_order_cancellation'
     
     client  = bigquery.Client(project = project_id)
     dataset  = client.dataset(dataset_id)
