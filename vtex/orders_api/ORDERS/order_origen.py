@@ -10,11 +10,12 @@ from os.path import join
 class init:
     productList = []
     df = pd.DataFrame()
+    headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
+    
 def get_order(id,reg):
     #try:
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
         response = requests.request("GET", url, headers=init.headers)
-        response = requests.request("GET", url, headers=headers)
         Fjson = json.loads(response.text)
         cancellationData = Fjson["cancellationData"]
         
