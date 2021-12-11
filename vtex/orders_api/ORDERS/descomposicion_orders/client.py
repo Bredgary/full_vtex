@@ -66,7 +66,7 @@ def get_params():
         
         
 def run(orderId,registro):
-    df = pd.DataFrame(orderId,cl_client(orderId,registro),
+    df = pd.DataFrame(cl_client(orderId,registro),
                     columns=['orderId','beneficio','beneficio2','crearGiftcard','profilePicture','proteccionDatos','terminosCondiciones','terminosPago','tradeName','rclastcart','rclastsession','rclastsessiondate','homePhone','phone','stateRegistration','email','userId','firstName','lastName','document','localeDefault','attach','approved','birthDate','businessPhone','corporateDocument','corporateName','documentType','gender','customerClass','priceTables','id','accountId','accountName','dataEntityId','createdBy','createdIn','updatedBy','updatedIn','lastInteractionBy','lastInteractionIn','followers','auto_filter'])
     df.reset_index(drop=True, inplace=True)
 
