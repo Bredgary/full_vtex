@@ -1490,8 +1490,7 @@ def get_order(id,reg):
             'isActive':init.isActive,
             'transactionId':init.transactionId,
             'merchantName':init.merchantName,
-            'cancellationData':init.cancellationData,
-            'cancellationData':init.RequestedByUser,
+            'RequestedByUser':init.RequestedByUser,
             'RequestedBySystem':init.RequestedBySystem,
             'RequestedBySellerNotification':init.RequestedBySellerNotification,
             'RequestedByPaymentNotification':init.RequestedByPaymentNotification,
@@ -1548,7 +1547,6 @@ def run():
     job_config = bigquery.LoadJobConfig()
     job_config.write_disposition = "WRITE_TRUNCATE"
     job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-    job_config.autodetect = True
     job = client.load_table_from_json(json_object, table, job_config = job_config)
     print(job.result())
     delete_duplicate()
