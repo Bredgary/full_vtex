@@ -97,7 +97,7 @@ def get_params():
         'SELECT orderId FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`')
     query_job = client.query(QUERY)  
     rows = query_job.result()
-    registro = 1
+    registro = 0
     for row in rows:
         get_order(row.orderId,registro)
         registro += 1
