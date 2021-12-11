@@ -74,6 +74,10 @@ def run(orderId,registro):
     json_object = json.loads(json_data)
     
     table_schema = {
+        "name": "orderId",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      },{
         "name": "id",
         "type": "STRING",
         "mode": "NULLABLE"
