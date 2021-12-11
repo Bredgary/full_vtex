@@ -10,34 +10,43 @@ from os.path import join
 class init:
     productList = []
     df = pd.DataFrame()
+    RequestedByUser = None
+    RequestedBySystem = None
+    RequestedBySellerNotification = None
+    RequestedByPaymentNotification = None
+    Reason = None
+    CancellationDate = None
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
     
 def get_order(id,reg):
     try:
+        reg +=1
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
-        cancellationData = Fjson["cancellationData"]
-        
-        RequestedByUser = cancellationData["RequestedByUser"]
-        RequestedBySystem = cancellationData["RequestedBySystem"]
-        RequestedBySellerNotification = cancellationData["RequestedBySellerNotification"]
-        RequestedByPaymentNotification = cancellationData["RequestedByPaymentNotification"]
-        Reason = cancellationData["Reason"]
-        CancellationDate = cancellationData["CancellationDate"]
-        reg +=1
+        try:
+            init.cancellationData = Fjson["cancellationData"]
+            init.RequestedByUser = cancellationData["RequestedByUser"]
+            init.RequestedBySystem = cancellationData["RequestedBySystem"]
+            init.RequestedBySellerNotification = cancellationData["RequestedBySellerNotification"]
+            init.RequestedByPaymentNotification = cancellationData["RequestedByPaymentNotification"]
+            init.Reason = cancellationData["Reason"]
+            init.CancellationDate = cancellationData["CancellationDate"]
+        except:
+            print("Registro: "+str(reg))
         df1 = pd.DataFrame({
             'orderId': id,
-            'RequestedByUser': RequestedByUser,
-            'RequestedBySystem': RequestedBySystem,
-            'RequestedBySellerNotification': RequestedBySellerNotification,
-            'RequestedByPaymentNotification': RequestedByPaymentNotification,
-            'Reason': Reason,
-            'CancellationDate': CancellationDate}, index=[0])
+            'RequestedByUser': init.RequestedByUser,
+            'RequestedBySystem': init.RequestedBySystem,
+            'RequestedBySellerNotification': init.RequestedBySellerNotification,
+            'RequestedByPaymentNotification': init.RequestedByPaymentNotification,
+            'Reason': init.Reason,
+            'CancellationDate': init.CancellationDate}, index=[0])
         print("Registro: "+str(reg))
         init.df = init.df.append(df1)
     except:
         print("Vacio")
+        print("Registro: "+str(reg))
         
         
 def get_params():
