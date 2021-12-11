@@ -34,7 +34,7 @@ def get_order(id,reg):
             'RequestedByPaymentNotification': RequestedByPaymentNotification,
             'Reason': Reason,
             'CancellationDate': CancellationDate}, index=[0])
-        print("Registro: "+str(init.reg))
+        print("Registro: "+str(reg))
         init.df = init.df.append(df1)
     #except:
      #   print("Vacio")
