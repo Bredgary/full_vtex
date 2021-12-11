@@ -11,15 +11,15 @@ class init:
     df = pd.DataFrame()
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
-def cl_client(id,reg):
-    url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
+def cl_client(orderId,reg):
+    url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(orderId)+""
     response = requests.request("GET", url, headers=init.headers)
-    Fjson = json.loads(response.text)
-    clientProfileData = Fjson["clientProfileData"]
+    Fjson2 = json.loads(response.text)
+    clientProfileData = Fjson2["clientProfileData"]
     document = clientProfileData["document"]
     
     url = "https://mercury.vtexcommercestable.com.br/api/dataentities/CL/search"
-    querystring = {"_fields":"beneficio,beneficio2,crearGiftcard,profilePicture,proteccionDatos,terminosCondiciones,terminosPago,tradeName,rclastcart,rclastsession,rclastsessiondate,homePhone,phone,stateRegistration,email,userId,firstName,lastName,document,localeDefault,attach,approved,birthDate,businessPhone,corporateDocument,corporateName,documentType,gender,customerClass,priceTables,id,accountId,accountName,dataEntityId,createdBy,createdIn,updatedBy,updatedIn,lastInteractionBy,lastInteractionIn,followers,auto_filter","_where":"document="+document+""}
+    querystring = {"_fields":"beneficio,beneficio2,crearGiftcard,profilePicture,proteccionDatos,terminosCondiciones,terminosPago,tradeName,rclastcart,rclastsession,rclastsessiondate,homePhone,phone,stateRegistration,email,userId,firstName,lastName,document,localeDefault,attach,approved,birthDate,businessPhone,corporateDocument,corporateName,documentType,gender,customerClass,priceTables,id,accountId,accountName,dataEntityId,createdBy,createdIn,updatedBy,updatedIn,lastInteractionBy,lastInteractionIn","_where":"document="+document+""}
     headers = {
         "Content-Type": "application/json",
         "Accept": "application/vnd.vtex.ds.v10+json",
@@ -29,8 +29,12 @@ def cl_client(id,reg):
     }
     response = requests.request("GET", url, headers=headers, params=querystring)
     Fjson = json.loads(response.text)
+    id = Fjson["id"]
+    df1 = pd.DataFrame({
+            'id': str(id),
+            'orderId': str(orderId)}, index=[0])
+    init.df = init.df.append(df1)
     print("registro = "+str(reg))
-    return Fjson
 
 def format_schema(schema):
     formatted_schema = []
@@ -65,9 +69,11 @@ def get_params():
             break
         
 def run(orderId,registro):
-    df = pd.DataFrame(cl_client(orderId,registro),
-                    columns=['orderId','beneficio','beneficio2','crearGiftcard','profilePicture','proteccionDatos','terminosCondiciones','terminosPago','tradeName','rclastcart','rclastsession','rclastsessiondate','homePhone','phone','stateRegistration','email','userId','firstName','lastName','document','localeDefault','attach','approved','birthDate','businessPhone','corporateDocument','corporateName','documentType','gender','customerClass','priceTables','id','accountId','accountName','dataEntityId','createdBy','createdIn','updatedBy','updatedIn','lastInteractionBy','lastInteractionIn','followers','auto_filter'])
+    get_params()
+    df = init.df
     df.reset_index(drop=True, inplace=True)
+    json_data = df.to_json(orient = 'records')
+    json_object = json.loads(json_data)
 
     json_data = df.to_json(orient = 'records')
     json_object = json.loads(json_data)
@@ -262,4 +268,4 @@ def run(orderId,registro):
     print(job.result())
     delete_duplicate()
     
-get_params()
+run()
