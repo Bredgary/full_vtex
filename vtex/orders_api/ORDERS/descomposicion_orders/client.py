@@ -25,6 +25,7 @@ class init:
     corporatePhone = None
     isCorporate = None
     userProfileId = None
+    customerClass = None
     
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
     
@@ -59,7 +60,8 @@ def get_order(id,reg):
         init.stateInscription = clientProfileData["stateInscription"]
         init.corporatePhone = clientProfileData["corporatePhone"]
         init.isCorporate = clientProfileData["isCorporate"]
-        init.suserProfileId = clientProfileData["suserProfileId"]
+        init.userProfileId = clientProfileData["userProfileId"]
+        init.customerClass = clientProfileData["customerClass"]
         decrypt_email(init.email)
         print("Registro: "+str(reg))
         #except:
