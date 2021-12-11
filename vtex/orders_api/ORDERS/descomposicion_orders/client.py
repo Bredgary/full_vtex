@@ -81,7 +81,8 @@ def get_order(id,reg):
             'stateInscription': init.stateInscription,
             'corporatePhone': init.corporatePhone,
             'isCorporate': init.isCorporate,
-            'suserProfileId': init.suserProfileId}, index=[0])
+            'userProfileId': init.userProfileId,
+            'customerClass': init.customerClass}, index=[0])
         init.df = init.df.append(df1)
     #except:
      #   print("Vacio")
