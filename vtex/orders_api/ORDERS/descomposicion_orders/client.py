@@ -39,12 +39,12 @@ def decrypt_email(email):
         print("No se pudo desencriptar Email: "+str(email))
         
 def get_order(id,reg):
-    try:
+    #try:
         reg +=1
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
-        try:
+        #try:
             clientProfileData = Fjson["clientProfileData"]
             init.id = clientProfileData["id"]
             init.email = clientProfileData["email"]
@@ -62,8 +62,8 @@ def get_order(id,reg):
             init.suserProfileId = clientProfileData["suserProfileId"]
             decrypt_email(init.email)
             print("Registro: "+str(reg))
-        except:
-            print("Registro: "+str(reg))
+        #except:
+         #   print("Registro: "+str(reg))
         df1 = pd.DataFrame({
             'orderId': id,
             'dim_client': init.id,
@@ -81,9 +81,9 @@ def get_order(id,reg):
             'isCorporate': init.isCorporate,
             'suserProfileId': init.suserProfileId}, index=[0])
         init.df = init.df.append(df1)
-    except:
-        print("Vacio")
-        print("Registro: "+str(reg))
+    #except:
+     #   print("Vacio")
+      #  print("Registro: "+str(reg))
         
         
         
