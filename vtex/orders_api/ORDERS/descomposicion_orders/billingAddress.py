@@ -47,8 +47,8 @@ def get_order(id,reg):
                     init.neighborhood = billingAddress["neighborhood"]
                     init.complement = billingAddress["complement"]
                     init.reference = billingAddress["reference"]
-                    init.lon = str(geoCoordinates[0])
-                    init.lat = str(geoCoordinates[1])
+                    init.lot = geoCoordinates[0]
+                    init.lan = geoCoordinates[1]
             print("Registro: "+str(reg))
         except:
             print("Registro: "+str(reg))
@@ -82,8 +82,6 @@ def get_params():
     for row in rows:
         get_order(row.orderId,registro)
         registro += 1
-        if registro == 100:
-            break
         
 def delete_duplicate():
     try:
