@@ -34,10 +34,10 @@ def get_order(id,reg):
         except:
             print("Registro: "+str(reg))
         df1 = pd.DataFrame({
-            'orderId': id,
-            'isActive': init.isActive,
-            'transactionId': init.transactionId,
-            'merchantName': init.merchantName}, index=[0])
+            'orderId': str(id),
+            'isActive': str(init.isActive),
+            'transactionId': str(init.transactionId),
+            'merchantName': str(init.merchantName)}, index=[0])
         init.df = init.df.append(df1)
     except:
         print("Vacio")
