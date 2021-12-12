@@ -156,10 +156,8 @@ def get_params():
     rows = query_job.result()
     registro = 0
     for row in rows:
-        get_order(row.orderId,registro)
         registro += 1
-        if registro == 15:
-            break
+        get_order(row.orderId,registro)
         
 def delete_duplicate():
     try:
