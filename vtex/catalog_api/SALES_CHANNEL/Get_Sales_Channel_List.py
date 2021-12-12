@@ -33,7 +33,7 @@ class init:
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
     
         
-def get_order(reg):
+def get_list_channel():
     try:
         url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/saleschannel/list"
         response = requests.request("GET", url, headers=init.headers)
@@ -84,18 +84,6 @@ def get_order(reg):
         print("Registro: "+str(reg))
         
         
-def get_params():
-    print("Cargando consulta")
-    client = bigquery.Client()
-    QUERY = (
-        'SELECT id FROM `shopstar-datalake.staging_zone.shopstar_vtex_sku_ean_id`')
-    query_job = client.query(QUERY)  
-    rows = query_job.result()
-    registro = 0
-    for row in rows:
-        registro += 1
-        get_order(row.id,registro)
-        
 def delete_duplicate():
     try:
         print("Eliminando duplicados")
@@ -110,7 +98,7 @@ def delete_duplicate():
 
 
 def run():
-    get_params()
+    get_list_channel()
     df = init.df
     df.reset_index(drop=True, inplace=True)
     json_data = df.to_json(orient = 'records')
