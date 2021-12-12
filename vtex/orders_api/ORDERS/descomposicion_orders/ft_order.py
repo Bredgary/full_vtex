@@ -52,18 +52,10 @@ class init:
     
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
     
-def decrypt_email(email):
-    try:
-        url = "https://conversationtracker.vtex.com.br/api/pvt/emailMapping?an=mercury&alias="+email+""
-        headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-        response = requests.request("GET", url, headers=headers)
-        formatoJ = json.loads(response.text)
-        return formatoJ["email"]
-    except:
-        print("No se pudo desencriptar Email")
+
         
 def get_order(id,reg):
-    #try:
+    try:
         reg +=1
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
         response = requests.request("GET", url, headers=init.headers)
@@ -103,7 +95,7 @@ def get_order(id,reg):
         init.marketplace = Fjson["marketplace"]
         init.authorizedDate = Fjson["authorizedDate"]
         init.invoicedDate = Fjson["invoicedDate"]
-        init.cancelReason = Fjson["cancelReason"]
+        init.cancelReason = str(Fjson["cancelReason"])
         init.taxData = Fjson["taxData"]
         init.checkedInPickupPointId = Fjson["checkedInPickupPointId"]
         init.cancellationData = Fjson["cancellationData"]
@@ -151,6 +143,8 @@ def get_order(id,reg):
             'followUpEmail': followUpEmail}, index=[0])
         init.df = init.df.append(df1)
         print("Registro: "+str(reg))
+    except:
+        print("vacio")
         
         
 def get_params():
