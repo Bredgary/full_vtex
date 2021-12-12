@@ -66,100 +66,103 @@ def get_order(id,reg):
     cl_client(init.orderId,init.document)
         
 def cl_client(order,document):
-    url = "https://mercury.vtexcommercestable.com.br/api/dataentities/CL/search"
-    querystring = {"_fields":"beneficio,beneficio2,crearGiftcard,profilePicture,proteccionDatos,terminosCondiciones,terminosPago,tradeName,rclastcart,rclastsession,rclastsessiondate,homePhone,phone,stateRegistration,email,userId,firstName,lastName,document,localeDefault,attach,approved,birthDate,businessPhone,corporateDocument,corporateName,documentType,gender,customerClass,priceTables,id,accountId,accountName,dataEntityId,createdBy,createdIn,updatedBy,updatedIn,lastInteractionBy,lastInteractionIn","_where":"document="+document+""}
-    headers = {
-        "Content-Type": "application/json",
-        "Accept": "application/vnd.vtex.ds.v10+json",
-        "REST-Range": "resources=0-1",
-        "X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA",
-        "X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"
-    }
-    response = requests.request("GET", url, headers=headers, params=querystring)
-    Fjson = json.loads(response.text)
-    for x in Fjson:
-        init.beneficio = x["beneficio"]
-        init.beneficio2 = x["beneficio2"]
-        init.crearGiftcard = x["crearGiftcard"]
-        init.profilePicture = x["profilePicture"]
-        init.proteccionDatos = x["proteccionDatos"]
-        init.terminosCondiciones = x["terminosCondiciones"]
-        init.terminosPago = x["terminosPago"]
-        init.tradeName = x["tradeName"]
-        init.rclastcart = x["rclastcart"]
-        init.rclastsession = x["rclastsession"]
-        init.rclastsessiondate = x["rclastsessiondate"]
-        init.homePhone = x["homePhone"]
-        init.phone = x["phone"]
-        init.stateRegistration = x["stateRegistration"]
-        init.email = x["email"]
-        init.userId = x["userId"]
-        init.firstName = x["firstName"]
-        init.lastName = x["lastName"]
-        init.document = x["document"]
-        init.localeDefault = x["localeDefault"]
-        init.attach = x["attach"]
-        init.approved = x["approved"]
-        init.birthDate = x["birthDate"]
-        init.businessPhone = x["businessPhone"]
-        init.corporateDocument = x["corporateDocument"]
-        init.corporateName = x["corporateName"]
-        init.documentType = x["documentType"]
-        init.gender = x["gender"]
-        init.customerClass = x["customerClass"]
-        init.priceTables = x["priceTables"]
-        init.id = x["id"]
-        init.accountId = x["accountId"]
-        init.accountName = x["accountName"]
-        init.dataEntityId = x["dataEntityId"]
-        init.createdBy = x["createdBy"]
-        init.createdIn = x["createdIn"]
-        init.updatedBy = x["updatedBy"]
-        init.updatedIn = x["updatedIn"]
-        init.lastInteractionBy = x["lastInteractionBy"]
-        init.lastInteractionIn = x["lastInteractionIn"]
-    
-    
-    df1 = pd.DataFrame({
-        'orderId': order,
-        'beneficio': init.beneficio,
-        'beneficio2': init.beneficio2,
-        'crearGiftcard': init.crearGiftcard,
-        'profilePicture': init.profilePicture,
-        'proteccionDatos': init.proteccionDatos,
-        'terminosCondiciones': init.terminosCondiciones,
-        'terminosPago': init.terminosPago,
-        'tradeName': init.tradeName,
-        'rclastcart': init.rclastcart,
-        'rclastsession': init.rclastsession,
-        'rclastsessiondate': init.rclastsessiondate,
-        'homePhone': init.homePhone,
-        'phone': init.phone,
-        'stateRegistration': init.stateRegistration,
-        'email': init.email,
-        'userId': init.userId,
-        'firstName': init.firstName,
-        'lastName': init.lastName,
-        'document': init.document,
-        'attach': init.attach,
-        'approved': init.approved,
-        'birthDate': init.birthDate,
-        'businessPhone': init.businessPhone,
-        'corporateDocument': init.corporateDocument,
-        'gender': init.gender,
-        'customerClass': init.customerClass,
-        'priceTables': init.priceTables,
-        'id': init.id,
-        'accountId': init.accountId,
-        'accountName': init.accountName,
-        'dataEntityId': init.dataEntityId,
-        'createdBy': init.createdBy,
-        'createdBy': init.createdBy,
-        'createdIn': init.createdIn,
-        'updatedBy': init.updatedBy,
-        'lastInteractionBy': init.lastInteractionBy,
-        'lastInteractionIn': init.lastInteractionIn}, index=[0])
-    init.df = init.df.append(df1)
+    try:
+        url = "https://mercury.vtexcommercestable.com.br/api/dataentities/CL/search"
+        querystring = {"_fields":"beneficio,beneficio2,crearGiftcard,profilePicture,proteccionDatos,terminosCondiciones,terminosPago,tradeName,rclastcart,rclastsession,rclastsessiondate,homePhone,phone,stateRegistration,email,userId,firstName,lastName,document,localeDefault,attach,approved,birthDate,businessPhone,corporateDocument,corporateName,documentType,gender,customerClass,priceTables,id,accountId,accountName,dataEntityId,createdBy,createdIn,updatedBy,updatedIn,lastInteractionBy,lastInteractionIn","_where":"document="+document+""}
+        headers = {
+            "Content-Type": "application/json",
+            "Accept": "application/vnd.vtex.ds.v10+json",
+            "REST-Range": "resources=0-1",
+            "X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA",
+            "X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"
+        }
+        response = requests.request("GET", url, headers=headers, params=querystring)
+        Fjson = json.loads(response.text)
+        for x in Fjson:
+            init.beneficio = x["beneficio"]
+            init.beneficio2 = x["beneficio2"]
+            init.crearGiftcard = x["crearGiftcard"]
+            init.profilePicture = x["profilePicture"]
+            init.proteccionDatos = x["proteccionDatos"]
+            init.terminosCondiciones = x["terminosCondiciones"]
+            init.terminosPago = x["terminosPago"]
+            init.tradeName = x["tradeName"]
+            init.rclastcart = x["rclastcart"]
+            init.rclastsession = x["rclastsession"]
+            init.rclastsessiondate = x["rclastsessiondate"]
+            init.homePhone = x["homePhone"]
+            init.phone = x["phone"]
+            init.stateRegistration = x["stateRegistration"]
+            init.email = x["email"]
+            init.userId = x["userId"]
+            init.firstName = x["firstName"]
+            init.lastName = x["lastName"]
+            init.document = x["document"]
+            init.localeDefault = x["localeDefault"]
+            init.attach = x["attach"]
+            init.approved = x["approved"]
+            init.birthDate = x["birthDate"]
+            init.businessPhone = x["businessPhone"]
+            init.corporateDocument = x["corporateDocument"]
+            init.corporateName = x["corporateName"]
+            init.documentType = x["documentType"]
+            init.gender = x["gender"]
+            init.customerClass = x["customerClass"]
+            init.priceTables = x["priceTables"]
+            init.id = x["id"]
+            init.accountId = x["accountId"]
+            init.accountName = x["accountName"]
+            init.dataEntityId = x["dataEntityId"]
+            init.createdBy = x["createdBy"]
+            init.createdIn = x["createdIn"]
+            init.updatedBy = x["updatedBy"]
+            init.updatedIn = x["updatedIn"]
+            init.lastInteractionBy = x["lastInteractionBy"]
+            init.lastInteractionIn = x["lastInteractionIn"]
+        
+        
+        df1 = pd.DataFrame({
+            'orderId': order,
+            'beneficio': init.beneficio,
+            'beneficio2': init.beneficio2,
+            'crearGiftcard': init.crearGiftcard,
+            'profilePicture': init.profilePicture,
+            'proteccionDatos': init.proteccionDatos,
+            'terminosCondiciones': init.terminosCondiciones,
+            'terminosPago': init.terminosPago,
+            'tradeName': init.tradeName,
+            'rclastcart': init.rclastcart,
+            'rclastsession': init.rclastsession,
+            'rclastsessiondate': init.rclastsessiondate,
+            'homePhone': init.homePhone,
+            'phone': init.phone,
+            'stateRegistration': init.stateRegistration,
+            'email': init.email,
+            'userId': init.userId,
+            'firstName': init.firstName,
+            'lastName': init.lastName,
+            'document': init.document,
+            'attach': init.attach,
+            'approved': init.approved,
+            'birthDate': init.birthDate,
+            'businessPhone': init.businessPhone,
+            'corporateDocument': init.corporateDocument,
+            'gender': init.gender,
+            'customerClass': init.customerClass,
+            'priceTables': init.priceTables,
+            'id': init.id,
+            'accountId': init.accountId,
+            'accountName': init.accountName,
+            'dataEntityId': init.dataEntityId,
+            'createdBy': init.createdBy,
+            'createdBy': init.createdBy,
+            'createdIn': init.createdIn,
+            'updatedBy': init.updatedBy,
+            'lastInteractionBy': init.lastInteractionBy,
+            'lastInteractionIn': init.lastInteractionIn}, index=[0])
+        init.df = init.df.append(df1)
+    except:
+        print("Vacio")
         
         
 def get_params():
