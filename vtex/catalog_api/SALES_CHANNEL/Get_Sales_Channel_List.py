@@ -79,19 +79,6 @@ def get_list_channel():
         'ConditionRule': init.ConditionRule}, index=[0])
     init.df = init.df.append(df1)
         
-        
-def delete_duplicate():
-    try:
-        print("Eliminando duplicados")
-        client = bigquery.Client()
-        QUERY = (
-            'CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_vtex_sales_channel_list` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.shopstar_vtex_sales_channel_list`')
-        query_job = client.query(QUERY)
-        rows = query_job.result()
-        print(rows)
-    except:
-        print("Consulta SQL no ejecutada")
-
 
 def run():
     get_list_channel()
