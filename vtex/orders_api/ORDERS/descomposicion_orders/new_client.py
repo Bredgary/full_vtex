@@ -62,6 +62,7 @@ def get_order(id,reg):
     clientProfileData = Fjson["clientProfileData"]
     init.document = clientProfileData["document"]
     init.orderId = id
+    print("Registro: "+str(reg))
     cl_client(init.orderId,init.document)
         
 def cl_client(order,document):
@@ -159,7 +160,6 @@ def cl_client(order,document):
         'lastInteractionBy': init.lastInteractionBy,
         'lastInteractionIn': init.lastInteractionIn}, index=[0])
     init.df = init.df.append(df1)
-    print("Registro: "+str(reg))
         
         
 def get_params():
