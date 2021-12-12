@@ -82,29 +82,6 @@ def get_order(id,reg):
         init.IsInventoried = Fjson[11]
         init.IsGiftCardRecharge = Fjson[12]
         init.ImageUrl = Fjson[13]
-        init.DetailUrl = Fjson[14]
-        init.CSCIdentification = Fjson[15]
-        init.BrandId = Fjson[16]
-        init.BrandName = Fjson[17]
-        init.IsBrandActive = Fjson[18]
-        init.ManufacturerCode = Fjson[21]
-        init.IsKit = Fjson[22]
-        init.ProductCategoryIds = Fjson[35]
-        init.IsDirectCategoryActive = Fjson[36]
-        init.ProductGlobalCategoryId = Fjson[37]
-        init.CommercialConditionId = Fjson[39]
-        init.RewardValue = Fjson[40]
-        init.EstimatedDateArrival = Fjson[43]
-        init.MeasurementUnit = Fjson[44]
-        init.UnitMultiplier = Fjson[45]
-        init.InformationSource = Fjson[46]
-        init.ModalType = Fjson[47]
-        init.KeyWords = Fjson[48]
-        init.ReleaseDate = Fjson[49]
-        init.ProductIsVisible = Fjson[50]
-        init.ShowIfNotAvailable = Fjson[51]
-        init.IsProductActive = Fjson[52]
-        init.ProductFinalScore = Fjson[53]
         
         df1 = pd.DataFrame({
             'Id_ean': init.Id,
@@ -137,13 +114,7 @@ def get_order(id,reg):
             'InformationSource': init.InformationSource,
             'ModalType': init.ModalType,
             'KeyWords': init.KeyWords,
-            'ImageUrl': init.ImageUrl,
-            'ReleaseDate': init.ReleaseDate,
-            'ProductIsVisible': init.ProductIsVisible,
-            'ShowIfNotAvailable': init.ShowIfNotAvailable,
-            'IsProductActive': init.IsProductActive,
-            'ProductFinalScore': init.ProductFinalScore,
-            'DetailUrl': init.DetailUrl}, index=[0])
+            'ImageUrl': init.ImageUrl}, index=[0])
         init.df = init.df.append(df1)
         print("Registro: "+str(reg))
    # except:
