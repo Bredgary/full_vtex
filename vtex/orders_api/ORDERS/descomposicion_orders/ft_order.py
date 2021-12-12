@@ -130,7 +130,7 @@ def get_order(id,reg):
             'isCompleted': str(init.isCompleted),
             'customData': str(init.customData),
             'allowCancellation': str(init.allowCancellation),
-            'allowEdition': init.allowEdition),
+            'allowEdition': str(init.allowEdition),
             'isCheckedIn': str(init.isCheckedIn),
             'marketplace': str(init.marketplace),
             'authorizedDate': str(init.authorizedDate),
