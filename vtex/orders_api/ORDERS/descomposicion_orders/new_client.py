@@ -56,14 +56,17 @@ class init:
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
     
 def get_order(id,reg):
-    url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
-    response = requests.request("GET", url, headers=init.headers)
-    Fjson = json.loads(response.text)
-    clientProfileData = Fjson["clientProfileData"]
-    init.document = clientProfileData["document"]
-    init.orderId = id
-    print("Registro: "+str(reg))
-    cl_client(init.orderId,init.document)
+    try:
+        url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
+        response = requests.request("GET", url, headers=init.headers)
+        Fjson = json.loads(response.text)
+        clientProfileData = Fjson["clientProfileData"]
+        init.document = clientProfileData["document"]
+        init.orderId = id
+        print("Registro: "+str(reg))
+        cl_client(init.orderId,init.document)
+    except:
+        print("Vacio")
         
 def cl_client(order,document):
     try:
