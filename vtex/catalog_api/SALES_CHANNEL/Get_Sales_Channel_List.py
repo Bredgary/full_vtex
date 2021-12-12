@@ -59,25 +59,24 @@ def get_list_channel():
 	    init.ConditionRule = x["ConditionRule"]
     
     df1 = pd.DataFrame({
-        'Id_ean': init.Id,
-        'ProductId': init.Name,
-        'NameComplete': init.IsActive,
-        'ComplementName': init.ProductClusterId,
-        'ProductName': init.CountryCode,
-        'ProductDescription': init.CultureInfo,
-        'ProductRefId': init.TimeZone,
-        'TaxCode': init.CurrencyCode,
-        'SkuName': init.CurrencySymbol,
-        'IsActive': init.CurrencyLocale,
-        'ProductFinalScore': init.CurrencyDecimalDigits,
-        'ProductFinalScore': init.CurrencyDecimalSeparator,
-        'ProductFinalScore': init.CurrencyGroupSeparator,
-        'ProductFinalScore': init.CurrencyGroupSize,
-        'ProductFinalScore': init.StartsWithCurrencySymbol,
-        'ProductFinalScore': init.Origin,
-        'ProductFinalScore': init.Position,
-        'ProductFinalScore': init.ConditionRule,
-        'DetailUrl': init.DetailUrl}, index=[0])
+        'Id': init.Id,
+        'Name': init.Name,
+        'IsActive': init.IsActive,
+        'ProductClusterId': init.ProductClusterId,
+        'CountryCode': init.CountryCode,
+        'CultureInfo': init.CultureInfo,
+        'TimeZone': init.TimeZone,
+        'CurrencyCode': init.CurrencyCode,
+        'CurrencySymbol': init.CurrencySymbol,
+        'CurrencyLocale': init.CurrencyLocale,
+        'CurrencyDecimalDigits': init.CurrencyDecimalDigits,
+        'CurrencyDecimalSeparator': init.CurrencyDecimalSeparator,
+        'CurrencyGroupSeparator': init.CurrencyGroupSeparator,
+        'CurrencyGroupSize': init.CurrencyGroupSize,
+        'StartsWithCurrencySymbol': init.StartsWithCurrencySymbol,
+        'Origin': init.Origin,
+        'Position': init.Position,
+        'ConditionRule': init.ConditionRule}, index=[0])
     init.df = init.df.append(df1)
         
         
