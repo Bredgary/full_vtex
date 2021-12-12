@@ -68,8 +68,8 @@ def get_order(id,reg):
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
         
-        init.Id = Fjson["Id"]
-        init.ProductId = Fjson["ProductId"]
+        init.Id = Fjson[0]
+        init.ProductId = Fjson[1]
         init.NameComplete = Fjson["NameComplete"]
         init.ComplementName = Fjson["ComplementName"]
         init.ProductName = Fjson["ProductName"]
