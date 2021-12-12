@@ -36,7 +36,7 @@ def get_order(id,reg):
         except:
             print("Registro: "+str(reg))
         df1 = pd.DataFrame({
-            'orderId': id,
+            'orderId': str(id),
             'RequestedByUser': str(init.RequestedByUser),
             'RequestedBySystem': str(init.RequestedBySystem),
             'RequestedBySellerNotification': str(init.RequestedBySellerNotification),

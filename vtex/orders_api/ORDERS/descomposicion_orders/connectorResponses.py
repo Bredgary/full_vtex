@@ -43,13 +43,13 @@ def get_order(id,reg):
         except:
             print("Registro: "+str(reg))
         df1 = pd.DataFrame({
-            'orderId': id,
-            'Tid': init.Tid,
-            'ReturnCode': init.ReturnCode,
-            'Message': init.Message,
-            'authId': init.authId,
-            'C_orderId': init.orderId,
-            'state': init.state}, index=[0])
+            'orderId': str(id),
+            'Tid': str(init.Tid),
+            'ReturnCode': str(init.ReturnCode),
+            'Message': str(init.Message),
+            'authId': str(init.authId),
+            'C_orderId': str(init.orderId),
+            'state': str(init.state)}, index=[0])
         init.df = init.df.append(df1)
     except:
         print("Vacio")

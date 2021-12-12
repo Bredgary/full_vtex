@@ -65,22 +65,22 @@ def get_order(id,reg):
         client_email = decrypt_email(str(init.email))
         
         df1 = pd.DataFrame({
-            'orderId': id,
-            'dim_client': init.id,
-            'email': client_email,
-            'firstName': init.firstName,
-            'lastName': init.lastName,
-            'documentType': init.documentType,
-            'document': init.document,
-            'phone': init.phone,
-            'corporateName': init.corporateName,
-            'tradeName': init.tradeName,
-            'corporateDocument': init.corporateDocument,
-            'stateInscription': init.stateInscription,
-            'corporatePhone': init.corporatePhone,
-            'isCorporate': init.isCorporate,
-            'userProfileId': init.userProfileId,
-            'customerClass': init.customerClass}, index=[0])
+            'orderId': str(id),
+            'dim_client': str(init.id),
+            'email': str(client_email),
+            'firstName': str(init.firstName),
+            'lastName': str(init.lastName),
+            'documentType': str(init.documentType),
+            'document': str(init.document),
+            'phone': str(init.phone),
+            'corporateName': str(init.corporateName),
+            'tradeName': str(init.tradeName),
+            'corporateDocument': str(init.corporateDocument),
+            'stateInscription': str(init.stateInscription),
+            'corporatePhone': str(init.corporatePhone),
+            'isCorporate': str(init.isCorporate),
+            'userProfileId': str(init.userProfileId),
+            'customerClass': str(init.customerClass)}, index=[0])
         init.df = init.df.append(df1)
         print("Registro: "+str(reg))
         
