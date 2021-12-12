@@ -55,7 +55,7 @@ class init:
 
         
 def get_order(id,reg):
-   # try:
+    try:
         reg +=1
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
         response = requests.request("GET", url, headers=init.headers)
@@ -100,7 +100,6 @@ def get_order(id,reg):
         init.checkedInPickupPointId = Fjson["checkedInPickupPointId"]
         init.cancellationData = Fjson["cancellationData"]
         
-        followUpEmail = decrypt_email(str(init.followUpEmail))
         
         df1 = pd.DataFrame({
             'orderId': init.orderId,
@@ -140,11 +139,11 @@ def get_order(id,reg):
             'taxData': init.taxData,
             'checkedInPickupPointId': init.checkedInPickupPointId,
             'cancellationData': init.cancellationData,
-            'followUpEmail': followUpEmail}, index=[0])
+            'followUpEmail': init.followUpEmail}, index=[0])
         init.df = init.df.append(df1)
         print("Registro: "+str(reg))
-    #except:
-    #    print("vacio")
+    except:
+        print("vacio")
         
         
 def get_params():
@@ -156,8 +155,8 @@ def get_params():
     rows = query_job.result()
     registro = 0
     for row in rows:
-        registro += 1
         get_order(row.orderId,registro)
+        registro += 1
         
 def delete_duplicate():
     try:
