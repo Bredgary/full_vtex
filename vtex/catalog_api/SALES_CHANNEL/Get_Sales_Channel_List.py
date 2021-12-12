@@ -10,28 +10,25 @@ from os.path import join
 class init:
     productList = []
     df = pd.DataFrame()
-    
-    "Id":1
-"Name":"Principal"
-"IsActive":true
-"ProductClusterId":NULL
-"CountryCode":"PER"
-"CultureInfo":"es-PE"
-"TimeZone":"SA Pacific Standard Time"
-"CurrencyCode":"PEN"
-"CurrencySymbol":"S/."
-"CurrencyLocale":10250
-"CurrencyFormatInfo":{
-"CurrencyDecimalDigits":2
-"CurrencyDecimalSeparator":"."
-"CurrencyGroupSeparator":","
-"CurrencyGroupSize":3
-"StartsWithCurrencySymbol":true
-}
-"Origin":NULL
-"Position":1
-"ConditionRule":NULL
-"CurrencyDecimalDigits":NULL
+    Id = None
+    Name = None
+    IsActive = None
+    ProductClusterId = None
+    CountryCode = None
+    CultureInfo = None
+    TimeZone = None
+    CurrencyCode = None
+    CurrencySymbol = None
+    CurrencyLocale = None
+    CurrencyFormatInfo = None
+    CurrencyDecimalDigits = None
+    CurrencyDecimalSeparator = None
+    CurrencyGroupSeparator = None
+    CurrencyGroupSize = None
+    StartsWithCurrencySymbol = None
+    Origin = None
+    Position = None
+    ConditionRule = None
     
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
     
@@ -41,88 +38,50 @@ def get_order(reg):
         url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/saleschannel/list"
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
-        
         init.Id = Fjson["Id"]
-        init.ProductId = Fjson["ProductId"]
-        init.NameComplete = Fjson["NameComplete"]
-        init.ComplementName = Fjson["ComplementName"]
-        init.ProductName = Fjson["ProductName"]
-        init.ProductDescription = Fjson["ProductDescription"]
-        init.ProductRefId = Fjson["ProductRefId"]
-        init.TaxCode = Fjson["TaxCode"]
-        init.SkuName = Fjson["SkuName"]
+        init.Name = Fjson["Name"]
         init.IsActive = Fjson["IsActive"]
-        init.IsTransported = Fjson["IsTransported"]
-        init.IsInventoried = Fjson["IsInventoried"]
-        init.IsGiftCardRecharge = Fjson["IsGiftCardRecharge"]
-        init.ImageUrl = Fjson["ImageUrl"]
-        init.DetailUrl = Fjson["DetailUrl"]
-        init.CSCIdentification = Fjson["CSCIdentification"]
-        init.BrandId = Fjson["BrandId"]
-        init.BrandName = Fjson["BrandName"]
-        init.IsBrandActive = Fjson["IsBrandActive"]
-        init.ManufacturerCode = Fjson["ManufacturerCode"]
-        init.IsKit = Fjson["IsKit"]
-        init.ProductCategoryIds = Fjson["ProductCategoryIds"]
-        init.IsDirectCategoryActive = Fjson["IsDirectCategoryActive"]
-        init.ProductGlobalCategoryId = Fjson["ProductGlobalCategoryId"]
-        init.CommercialConditionId = Fjson["CommercialConditionId"]
-        init.RewardValue = Fjson["RewardValue"]
-        init.EstimatedDateArrival = Fjson["EstimatedDateArrival"]
-        init.MeasurementUnit = Fjson["MeasurementUnit"]
-        init.UnitMultiplier = Fjson["UnitMultiplier"]
-        init.InformationSource = Fjson["InformationSource"]
-        init.ModalType = Fjson["ModalType"]
-        init.KeyWords = Fjson["KeyWords"]
-        init.ReleaseDate = Fjson["ReleaseDate"]
-        init.ProductIsVisible = Fjson["ProductIsVisible"]
-        init.ShowIfNotAvailable = Fjson["ShowIfNotAvailable"]
-        init.IsProductActive = Fjson["IsProductActive"]
-        init.ProductFinalScore = Fjson["ProductFinalScore"]
+        init.ProductClusterId = Fjson["ProductClusterId"]
+        init.CountryCode = Fjson["CountryCode"]
+        init.CultureInfo = Fjson["CultureInfo"]
+        init.TimeZone = Fjson["TimeZone"]
+        init.CurrencyCode = Fjson["CurrencyCode"]
+        init.CurrencySymbol = Fjson["CurrencySymbol"]
+        init.CurrencyLocale = Fjson["CurrencyLocale"]
+        CurrencyFormatInfo = Fjson["CurrencyFormatInfo"]
+        init.CurrencyDecimalDigits = CurrencyFormatInfo["CurrencyDecimalDigits"]
+        init.CurrencyDecimalSeparator = CurrencyFormatInfo["CurrencyDecimalSeparator"]
+        init.CurrencyGroupSeparator = CurrencyFormatInfo["CurrencyGroupSeparator"]
+        init.CurrencyGroupSize = CurrencyFormatInfo["CurrencyGroupSize"]
+        init.StartsWithCurrencySymbol = CurrencyFormatInfo["StartsWithCurrencySymbol"]
+        init.Origin = Fjson["Origin"]
+        init.Position = Fjson["Position"]
+        init.ConditionRule = Fjson["ConditionRule"]
         
         df1 = pd.DataFrame({
             'Id_ean': init.Id,
-            'ProductId': init.ProductId,
-            'NameComplete': init.NameComplete,
-            'ComplementName': init.ComplementName,
-            'ProductName': init.ProductName,
-            'ProductDescription': init.ProductDescription,
-            'ProductRefId': init.ProductRefId,
-            'TaxCode': init.TaxCode,
-            'SkuName': init.SkuName,
-            'IsActive': init.IsActive,
-            'IsTransported': init.IsTransported,
-            'IsInventoried': init.IsInventoried,
-            'IsGiftCardRecharge': init.IsGiftCardRecharge,
-            'CSCIdentification': init.CSCIdentification,
-            'BrandId': init.BrandId,
-            'BrandName': init.BrandName,
-            'IsBrandActive': init.IsBrandActive,
-            'ManufacturerCode': init.ManufacturerCode,
-            'IsKit': init.IsKit,
-            'ProductCategoryIds': init.ProductCategoryIds,
-            'IsDirectCategoryActive': init.IsDirectCategoryActive,
-            'ProductGlobalCategoryId': init.ProductGlobalCategoryId,
-            'CommercialConditionId': init.CommercialConditionId,
-            'RewardValue': init.RewardValue,
-            'EstimatedDateArrival': init.EstimatedDateArrival,
-            'MeasurementUnit': init.MeasurementUnit,
-            'UnitMultiplier': init.UnitMultiplier,
-            'InformationSource': init.InformationSource,
-            'ModalType': init.ModalType,
-            'KeyWords': init.KeyWords,
-            'ImageUrl': init.ImageUrl,
-            'ReleaseDate': init.ReleaseDate,
-            'ProductIsVisible': init.ProductIsVisible,
-            'ShowIfNotAvailable': init.ShowIfNotAvailable,
-            'IsProductActive': init.IsProductActive,
-            'ProductFinalScore': init.ProductFinalScore,
+            'ProductId': init.Name,
+            'NameComplete': init.IsActive,
+            'ComplementName': init.ProductClusterId,
+            'ProductName': init.CountryCode,
+            'ProductDescription': init.CultureInfo,
+            'ProductRefId': init.TimeZone,
+            'TaxCode': init.CurrencyCode,
+            'SkuName': init.CurrencySymbol,
+            'IsActive': init.CurrencyLocale,
+            'ProductFinalScore': init.CurrencyDecimalDigits,
+            'ProductFinalScore': init.CurrencyDecimalSeparator,
+            'ProductFinalScore': init.CurrencyGroupSeparator,
+            'ProductFinalScore': init.CurrencyGroupSize,
+            'ProductFinalScore': init.StartsWithCurrencySymbol,
+            'ProductFinalScore': init.Origin,
+            'ProductFinalScore': init.Position,
+            'ProductFinalScore': init.ConditionRule,
             'DetailUrl': init.DetailUrl}, index=[0])
         init.df = init.df.append(df1)
         print("Registro: "+str(reg))
     except:
         print("Registro: "+str(reg))
-        
         
         
 def get_params():
@@ -142,7 +101,7 @@ def delete_duplicate():
         print("Eliminando duplicados")
         client = bigquery.Client()
         QUERY = (
-            'CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_vtex_ean` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.shopstar_vtex_ean`')
+            'CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_vtex_sales_channel_list` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.shopstar_vtex_sales_channel_list`')
         query_job = client.query(QUERY)
         rows = query_job.result()
         print(rows)
@@ -159,7 +118,7 @@ def run():
     
     project_id = '999847639598'
     dataset_id = 'staging_zone'
-    table_id = 'shopstar_vtex_ean'
+    table_id = 'shopstar_vtex_sales_channel_list'
     
     client  = bigquery.Client(project = project_id)
     dataset  = client.dataset(dataset_id)
