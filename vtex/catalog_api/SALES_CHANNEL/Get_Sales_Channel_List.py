@@ -34,54 +34,50 @@ class init:
     
         
 def get_list_channel():
-    try:
-        url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/saleschannel/list"
-        response = requests.request("GET", url, headers=init.headers)
-        Fjson = json.loads(response.text)
-        init.Id = Fjson["Id"]
-        init.Name = Fjson["Name"]
-        init.IsActive = Fjson["IsActive"]
-        init.ProductClusterId = Fjson["ProductClusterId"]
-        init.CountryCode = Fjson["CountryCode"]
-        init.CultureInfo = Fjson["CultureInfo"]
-        init.TimeZone = Fjson["TimeZone"]
-        init.CurrencyCode = Fjson["CurrencyCode"]
-        init.CurrencySymbol = Fjson["CurrencySymbol"]
-        init.CurrencyLocale = Fjson["CurrencyLocale"]
-        CurrencyFormatInfo = Fjson["CurrencyFormatInfo"]
-        init.CurrencyDecimalDigits = CurrencyFormatInfo["CurrencyDecimalDigits"]
-        init.CurrencyDecimalSeparator = CurrencyFormatInfo["CurrencyDecimalSeparator"]
-        init.CurrencyGroupSeparator = CurrencyFormatInfo["CurrencyGroupSeparator"]
-        init.CurrencyGroupSize = CurrencyFormatInfo["CurrencyGroupSize"]
-        init.StartsWithCurrencySymbol = CurrencyFormatInfo["StartsWithCurrencySymbol"]
-        init.Origin = Fjson["Origin"]
-        init.Position = Fjson["Position"]
-        init.ConditionRule = Fjson["ConditionRule"]
-        
-        df1 = pd.DataFrame({
-            'Id_ean': init.Id,
-            'ProductId': init.Name,
-            'NameComplete': init.IsActive,
-            'ComplementName': init.ProductClusterId,
-            'ProductName': init.CountryCode,
-            'ProductDescription': init.CultureInfo,
-            'ProductRefId': init.TimeZone,
-            'TaxCode': init.CurrencyCode,
-            'SkuName': init.CurrencySymbol,
-            'IsActive': init.CurrencyLocale,
-            'ProductFinalScore': init.CurrencyDecimalDigits,
-            'ProductFinalScore': init.CurrencyDecimalSeparator,
-            'ProductFinalScore': init.CurrencyGroupSeparator,
-            'ProductFinalScore': init.CurrencyGroupSize,
-            'ProductFinalScore': init.StartsWithCurrencySymbol,
-            'ProductFinalScore': init.Origin,
-            'ProductFinalScore': init.Position,
-            'ProductFinalScore': init.ConditionRule,
-            'DetailUrl': init.DetailUrl}, index=[0])
-        init.df = init.df.append(df1)
-        print("Registro: "+str(reg))
-    except:
-        print("Registro: "+str(reg))
+    url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/saleschannel/list"
+    response = requests.request("GET", url, headers=init.headers)
+    Fjson = json.loads(response.text)
+    init.Id = Fjson["Id"]
+    init.Name = Fjson["Name"]
+    init.IsActive = Fjson["IsActive"]
+    init.ProductClusterId = Fjson["ProductClusterId"]
+    init.CountryCode = Fjson["CountryCode"]
+    init.CultureInfo = Fjson["CultureInfo"]
+    init.TimeZone = Fjson["TimeZone"]
+    init.CurrencyCode = Fjson["CurrencyCode"]
+    init.CurrencySymbol = Fjson["CurrencySymbol"]
+    init.CurrencyLocale = Fjson["CurrencyLocale"]
+    CurrencyFormatInfo = Fjson["CurrencyFormatInfo"]
+    init.CurrencyDecimalDigits = CurrencyFormatInfo["CurrencyDecimalDigits"]
+    init.CurrencyDecimalSeparator = CurrencyFormatInfo["CurrencyDecimalSeparator"]
+    init.CurrencyGroupSeparator = CurrencyFormatInfo["CurrencyGroupSeparator"]
+    init.CurrencyGroupSize = CurrencyFormatInfo["CurrencyGroupSize"]
+    init.StartsWithCurrencySymbol = CurrencyFormatInfo["StartsWithCurrencySymbol"]
+    init.Origin = Fjson["Origin"]
+    init.Position = Fjson["Position"]
+    init.ConditionRule = Fjson["ConditionRule"]
+    
+    df1 = pd.DataFrame({
+        'Id_ean': init.Id,
+        'ProductId': init.Name,
+        'NameComplete': init.IsActive,
+        'ComplementName': init.ProductClusterId,
+        'ProductName': init.CountryCode,
+        'ProductDescription': init.CultureInfo,
+        'ProductRefId': init.TimeZone,
+        'TaxCode': init.CurrencyCode,
+        'SkuName': init.CurrencySymbol,
+        'IsActive': init.CurrencyLocale,
+        'ProductFinalScore': init.CurrencyDecimalDigits,
+        'ProductFinalScore': init.CurrencyDecimalSeparator,
+        'ProductFinalScore': init.CurrencyGroupSeparator,
+        'ProductFinalScore': init.CurrencyGroupSize,
+        'ProductFinalScore': init.StartsWithCurrencySymbol,
+        'ProductFinalScore': init.Origin,
+        'ProductFinalScore': init.Position,
+        'ProductFinalScore': init.ConditionRule,
+        'DetailUrl': init.DetailUrl}, index=[0])
+    init.df = init.df.append(df1)
         
         
 def delete_duplicate():
