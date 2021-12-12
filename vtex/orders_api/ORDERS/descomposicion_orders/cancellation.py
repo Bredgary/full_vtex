@@ -37,12 +37,12 @@ def get_order(id,reg):
             print("Registro: "+str(reg))
         df1 = pd.DataFrame({
             'orderId': id,
-            'RequestedByUser': init.RequestedByUser,
-            'RequestedBySystem': init.RequestedBySystem,
-            'RequestedBySellerNotification': init.RequestedBySellerNotification,
-            'RequestedByPaymentNotification': init.RequestedByPaymentNotification,
-            'Reason': init.Reason,
-            'CancellationDate': init.CancellationDate}, index=[0])
+            'RequestedByUser': str(init.RequestedByUser),
+            'RequestedBySystem': str(init.RequestedBySystem),
+            'RequestedBySellerNotification': str(init.RequestedBySellerNotification),
+            'RequestedByPaymentNotification': str(init.RequestedByPaymentNotification),
+            'Reason': str(init.Reason),
+            'CancellationDate': str(init.CancellationDate)}, index=[0])
         init.df = init.df.append(df1)
     except:
         print("Vacio")
