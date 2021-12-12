@@ -53,18 +53,18 @@ def get_order(id,reg):
         except:
             print("Registro: "+str(reg))
         df1 = pd.DataFrame({
-            'orderId': id,
-            'postalCode': init.postalCode,
-            'city': init.city,
-            'state': init.state,
-            'country': init.country,
-            'street': init.street,
-            'number': init.number,
-            'neighborhood': init.neighborhood,
-            'complement': init.complement,
-            'reference': init.reference,
-            'lon': init.lon,
-            'lat': init.lat}, index=[0])
+            'orderId': str(id),
+            'postalCode': str(init.postalCode),
+            'city': str(init.city),
+            'state': str(init.state),
+            'country': str(init.country),
+            'street': str(init.street),
+            'number': str(init.number),
+            'neighborhood': str(init.neighborhood),
+            'complement': str(init.complement),
+            'reference': str(init.reference),
+            'lon': str(init.lon),
+            'lat': str(init.lat)}, index=[0])
         init.df = init.df.append(df1)
     except:
         print("Vacio")
