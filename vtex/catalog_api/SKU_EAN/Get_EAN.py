@@ -62,26 +62,49 @@ def decrypt_email(email):
         print("No se pudo desencriptar Email: "+str(email))
         
 def get_order(id,reg):
-    #try:
+    try:
         reg +=1
         url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitbyean/"+str(id)+""
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
         
-        init.Id = Fjson[0]
-        init.ProductId = Fjson[1]
-        init.NameComplete = Fjson[2]
-        init.ComplementName = Fjson[3]
-        init.ProductName = Fjson[4]
-        init.ProductDescription = Fjson[5]
-        init.ProductRefId = Fjson[6]
-        init.TaxCode = Fjson[7]
-        init.SkuName = Fjson[8]
-        init.IsActive = Fjson[9]
-        init.IsTransported = Fjson[10]
-        init.IsInventoried = Fjson[11]
-        init.IsGiftCardRecharge = Fjson[12]
-        init.ImageUrl = Fjson[13]
+        init.Id = Fjson["Id"]
+        init.ProductId = Fjson["ProductId"]
+        init.NameComplete = Fjson["NameComplete"]
+        init.ComplementName = Fjson["ComplementName"]
+        init.ProductName = Fjson["ProductName"]
+        init.ProductDescription = Fjson["ProductDescription"]
+        init.ProductRefId = Fjson["ProductRefId"]
+        init.TaxCode = Fjson["TaxCode"]
+        init.SkuName = Fjson["SkuName"]
+        init.IsActive = Fjson["IsActive"]
+        init.IsTransported = Fjson["IsTransported"]
+        init.IsInventoried = Fjson["IsInventoried"]
+        init.IsGiftCardRecharge = Fjson["IsGiftCardRecharge"]
+        init.ImageUrl = Fjson["ImageUrl"]
+        init.DetailUrl = Fjson["DetailUrl"]
+        init.CSCIdentification = Fjson["CSCIdentification"]
+        init.BrandId = Fjson["BrandId"]
+        init.BrandName = Fjson["BrandName"]
+        init.IsBrandActive = Fjson["IsBrandActive"]
+        init.ManufacturerCode = Fjson["ManufacturerCode"]
+        init.IsKit = Fjson["IsKit"]
+        init.ProductCategoryIds = Fjson["ProductCategoryIds"]
+        init.IsDirectCategoryActive = Fjson["IsDirectCategoryActive"]
+        init.ProductGlobalCategoryId = Fjson["ProductGlobalCategoryId"]
+        init.CommercialConditionId = Fjson["CommercialConditionId"]
+        init.RewardValue = Fjson["RewardValue"]
+        init.EstimatedDateArrival = Fjson["EstimatedDateArrival"]
+        init.MeasurementUnit = Fjson["MeasurementUnit"]
+        init.UnitMultiplier = Fjson["UnitMultiplier"]
+        init.InformationSource = Fjson["InformationSource"]
+        init.ModalType = Fjson["ModalType"]
+        init.KeyWords = Fjson["KeyWords"]
+        init.ReleaseDate = Fjson["ReleaseDate"]
+        init.ProductIsVisible = Fjson["ProductIsVisible"]
+        init.ShowIfNotAvailable = Fjson["ShowIfNotAvailable"]
+        init.IsProductActive = Fjson["IsProductActive"]
+        init.ProductFinalScore = Fjson["ProductFinalScore"]
         
         df1 = pd.DataFrame({
             'Id_ean': init.Id,
@@ -114,11 +137,17 @@ def get_order(id,reg):
             'InformationSource': init.InformationSource,
             'ModalType': init.ModalType,
             'KeyWords': init.KeyWords,
-            'ImageUrl': init.ImageUrl}, index=[0])
+            'ImageUrl': init.ImageUrl,
+            'ReleaseDate': init.ReleaseDate,
+            'ProductIsVisible': init.ProductIsVisible,
+            'ShowIfNotAvailable': init.ShowIfNotAvailable,
+            'IsProductActive': init.IsProductActive,
+            'ProductFinalScore': init.ProductFinalScore,
+            'DetailUrl': init.DetailUrl}, index=[0])
         init.df = init.df.append(df1)
         print("Registro: "+str(reg))
-   # except:
-    #    print("vacio")
+    except:
+        print("Registro: "+str(reg))
         
         
         
