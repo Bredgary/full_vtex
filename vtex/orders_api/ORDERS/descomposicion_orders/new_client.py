@@ -169,16 +169,18 @@ def cl_client(order,document):
         
         
 def get_params():
-    print("Cargando consulta")
-    client = bigquery.Client()
-    QUERY = (
-        'SELECT orderId FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`')
-    query_job = client.query(QUERY)  
-    rows = query_job.result()
-    registro = 0
-    for row in rows:
-        registro += 1
-        get_order(row.orderId,registro)
+    try:
+        print("Cargando consulta")
+        client = bigquery.Client()
+        QUERY = ('SELECT orderId FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`')
+        query_job = client.query(QUERY)  
+        rows = query_job.result()
+        registro = 0
+        for row in rows:
+            registro += 1
+            get_order(row.orderId,registro)
+    except:
+        print("vacio")
         
 def delete_duplicate():
     try:
