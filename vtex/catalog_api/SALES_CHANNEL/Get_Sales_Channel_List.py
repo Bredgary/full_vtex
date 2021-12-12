@@ -100,6 +100,5 @@ def run():
     job_config.autodetect = True
     job = client.load_table_from_json(json_object, table, job_config = job_config)
     print(job.result())
-    delete_duplicate()
     
 run()
