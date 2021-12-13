@@ -40,7 +40,7 @@ def decrypt_email(email):
         print("No se pudo desencriptar Email: "+str(email))
         
 def get_order(id,reg):
-    #try:
+    try:
         reg +=1
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
         response = requests.request("GET", url, headers=init.headers)
@@ -83,7 +83,8 @@ def get_order(id,reg):
             'customerClass': str(init.customerClass)}, index=[0])
         init.df = init.df.append(df1)
         print("Registro: "+str(reg))
-        
+    except:
+        print("vacio")
         
 def get_params():
     print("Cargando consulta")
