@@ -8,6 +8,7 @@ encoding//vtex/catalog_api/SKU/Get_SKU_list_by_ProductId.py=UTF-8
 encoding//vtex/catalog_api/SKU/List_all_SKU_IDs.py=latin1
 encoding//vtex/catalog_api/SPECIFICATION_GROUP/List_Specifications_Group_by_Category.py=UTF-8
 encoding//vtex/checkout_api/FULFILLMENT/Get_address_by_postal_code.py=latin1
+encoding//vtex/cuadratura/order.py=latin1
 encoding//vtex/entity/CL/Cliente.py=latin1
 encoding//vtex/modeloPersona/dm_package.py=latin1
 encoding//vtex/modeloPersona/dm_user.py=latin1
