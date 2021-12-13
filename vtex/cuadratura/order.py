@@ -1522,6 +1522,7 @@ def get_params():
     rows = query_job.result()
     registro = 0
     for row in rows:
+        print(row.orderId)
         registro += 1
         get_order(row.orderId,registro)
 
