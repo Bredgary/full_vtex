@@ -15,6 +15,8 @@ def get_params():
         client = bigquery.Client()
         QUERY = ('CREATE OR REPLACE TABLE `shopstar-datalake.cons_zone.dm_addressType` AS SELECT GENERATE_UUID() id_typeAddress,DIM_SHIPPING_DATA_addressType description FROM `shopstar-datalake.staging_zone.shopstar_vtex_order` ')
         query_job = client.query(QUERY)
+        rows = query_job.result()
+        print(rows)
         delete_duplicate()
     except:
         print("Consulta SQL no ejecutada")

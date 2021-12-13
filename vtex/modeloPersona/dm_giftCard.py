@@ -13,7 +13,7 @@ class init:
 def get_params():
     try:
         client = bigquery.Client()
-        QUERY = ('CREATE OR REPLACE TABLE `shopstar-datalake.cons_zone.dm_address` AS SELECT GENERATE_UUID() id_address,DIM_CLIENT_document id_customer,DIM_SHIPPING_DATA_receiverName receiverName,DIM_SHIPPING_DATA_postalCode postalCode,DIM_SHIPPING_DATA_city city,DIM_SHIPPING_DATA_addressId addressId,DIM_SHIPPING_DATA_state state,DIM_SHIPPING_DATA_street street,DIM_SHIPPING_DATA_number number,DIM_SHIPPING_DATA_country country,DIM_SHIPPING_DATA_neighborhood neighborhood,DIM_SHIPPING_DATA_complement complement,DIM_SHIPPING_DATA_reference reference FROM `shopstar-datalake.staging_zone.shopstar_vtex_order` ')
+        QUERY = ('CREATE OR REPLACE TABLE `shopstar-datalake.cons_zone.dm_giftCard` AS SELECT id_payments,giftCardId giftCardId  FROM `shopstar-datalake.staging_zone.shopstar_order_payments`')
         query_job = client.query(QUERY)
         rows = query_job.result()
         print(rows)
@@ -26,7 +26,7 @@ def delete_duplicate():
         print("Eliminando duplicados")
         client = bigquery.Client()
         QUERY = (
-            'CREATE OR REPLACE TABLE `shopstar-datalake.cons_zone.dm_address` AS SELECT DISTINCT * FROM `shopstar-datalake.cons_zone.dm_address`')
+            'CREATE OR REPLACE TABLE `shopstar-datalake.cons_zone.dm_giftCard` AS SELECT DISTINCT * FROM `shopstar-datalake.cons_zone.dm_giftCard`')
         query_job = client.query(QUERY)
         rows = query_job.result()
         print(rows)
