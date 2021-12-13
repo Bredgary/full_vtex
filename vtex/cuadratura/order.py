@@ -1521,14 +1521,13 @@ def get_params():
     query_job = client.query(QUERY)  
     rows = query_job.result()
     registro = 0
-    print("hola")
     for row in rows:
         print(row.orderId)
         registro += 1
-        print("hola")
-        #get_order(row.orderId,registro)
+        get_order(row.orderId,registro)
 
 def run():
+    get_params()
     df = init.df
     df.reset_index(drop=True, inplace=True)
     json_data = df.to_json(orient = 'records')
