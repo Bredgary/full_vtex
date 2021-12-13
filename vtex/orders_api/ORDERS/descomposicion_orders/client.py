@@ -61,7 +61,7 @@ def get_order(id,reg):
         init.corporatePhone = clientProfileData["corporatePhone"]
         init.isCorporate = clientProfileData["isCorporate"]
         init.userProfileId = clientProfileData["userProfileId"]
-        init.customerClass = clientProfileData["customerClass"]
+        #init.customerClass = clientProfileData["customerClass"]
         client_email = decrypt_email(str(init.email))
         
         df1 = pd.DataFrame({
