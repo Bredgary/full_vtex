@@ -13,7 +13,7 @@ class init:
 def get_params():
     try:
         client = bigquery.Client()
-        QUERY = ('CREATE OR REPLACE TABLE `shopstar-datalake.cons_zone.dm_address` AS SELECTGENERATE_UUID() id_address,DIM_CLIENT_document id_customer,DIM_SHIPPING_DATA_receiverName receiverName,DIM_SHIPPING_DATA_postalCode postalCode,DIM_SHIPPING_DATA_city city,DIM_SHIPPING_DATA_addressId addressId,DIM_SHIPPING_DATA_state state,DIM_SHIPPING_DATA_street street,DIM_SHIPPING_DATA_number number,DIM_SHIPPING_DATA_country country,DIM_SHIPPING_DATA_neighborhood neighborhood,DIM_SHIPPING_DATA_complement complement,DIM_SHIPPING_DATA_reference referenceFROM `shopstar-datalake.staging_zone.shopstar_vtex_order` ')
+        QUERY = ('CREATE OR REPLACE TABLE `shopstar-datalake.cons_zone.dm_address` AS SELECT GENERATE_UUID() id_address,DIM_CLIENT_document id_customer,DIM_SHIPPING_DATA_receiverName receiverName,DIM_SHIPPING_DATA_postalCode postalCode,DIM_SHIPPING_DATA_city city,DIM_SHIPPING_DATA_addressId addressId,DIM_SHIPPING_DATA_state state,DIM_SHIPPING_DATA_street street,DIM_SHIPPING_DATA_number number,DIM_SHIPPING_DATA_country country,DIM_SHIPPING_DATA_neighborhood neighborhood,DIM_SHIPPING_DATA_complement complement,DIM_SHIPPING_DATA_reference reference FROM `shopstar-datalake.staging_zone.shopstar_vtex_order` ')
         query_job = client.query(QUERY)
         delete_duplicate()
     except:
