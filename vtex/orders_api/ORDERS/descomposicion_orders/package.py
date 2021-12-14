@@ -9,6 +9,7 @@ from os.path import join
 
 class init:
     
+    df = pd.DataFrame()
     '''
     packageAttachment
     '''
