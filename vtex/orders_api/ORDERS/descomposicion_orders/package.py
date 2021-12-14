@@ -31,7 +31,7 @@ class init:
 
 
 def get_order(id,reg):
-    #try:
+    try:
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
@@ -82,8 +82,8 @@ def get_order(id,reg):
             'EnableInferItems': str(init.EnableInferItems)}, index=[0])
         init.df = init.df.append(df1)
         print("Registro: "+str(reg))
-    #except:
-    #    print("vacio")
+    except:
+        print("vacio")
               
 
 def get_params():
@@ -95,9 +95,7 @@ def get_params():
     registro = 0
     for row in rows:
         registro += 1
-        get_order("1033163314156-02",registro)
-        if registro ==2:
-            break
+        get_order(row.orderId,registro)
         
 def delete_duplicate():
     try:
