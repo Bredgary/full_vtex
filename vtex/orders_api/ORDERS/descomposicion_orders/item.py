@@ -74,12 +74,12 @@ class init:
 
 
 def get_order(id,reg):
-    try:
+    #try:
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
         
-        try:
+        #try:
             init.items_uniqueId = Items["uniqueId"]
             init.items_id = Items["id"]
             init.items_productId = Items["productId"]
@@ -111,10 +111,10 @@ def get_order(id,reg):
             init.item_parentAssemblyBinding = Items["parentAssemblyBinding"]
             init.item_price_definition = Items["priceDefinition"]
             init.item_serialNumbers = Items["serialNumbers"]
-        except:
-            print("No hay datos dim Items")
+        #except:
+         #   print("No hay datos dim Items")
             
-        try:
+        #try:
             init.brandName = additionalInfo["brandName"]
             init.brandId = additionalInfo["brandId"]
             init.categoriesIds = additionalInfo["categoriesIds"]
@@ -123,16 +123,16 @@ def get_order(id,reg):
             init.offeringInfo = additionalInfo["offeringInfo"]
             init.offeringType = additionalInfo["offeringType"]
             init.offeringTypeId = additionalInfo["offeringTypeId"]
-        except:
-            print("No hay datos. additionalInfo")
-        try:
+        #except:
+        #    print("No hay datos. additionalInfo")
+        #try:
             init.cubicweight = dimension["cubicweight"]
             init.height = dimension["height"]
             init.length = dimension["length"]
             init.weight = dimension["weight"]
             init.width = dimension["width"]
-        except:
-            print("No hay datos. dimension")
+        #except:
+         #   print("No hay datos. dimension")
         
     
         
@@ -186,8 +186,8 @@ def get_order(id,reg):
             'DIM_ITEM_priceDefinition_total': init.total}, index=[0])
         init.df = init.df.append(df1)
         print("Registro: "+str(reg))
-    except:
-        print("vacio")
+   # except:
+    #    print("vacio")
 
 def get_params():
     print("Cargando consulta")
