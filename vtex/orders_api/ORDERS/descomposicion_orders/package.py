@@ -66,20 +66,20 @@ def get_order(id,reg):
     
         
         df1 = pd.DataFrame({
-            'orderId': id,
-            'courier': init.courier,
-            'invoiceNumber': init.invoiceNumber,
-            'invoiceValue': init.invoiceValue,
-            'invoiceUrl': init.invoiceUrl,
-            'issuanceDate': init.issuanceDate,
-            'trackingNumber': init.trackingNumber,
-            'invoiceKey': init.invoiceKey,
-            'trackingUrl': init.trackingUrl,
-            'embeddedInvoice': init.embeddedInvoice,
-            'type': init.type,
-            'cfop': init.cfop,
-            'volumes': init.volumes,
-            'EnableInferItems': init.EnableInferItems}, index=[0])
+            'orderId': str(id),
+            'courier': str(init.courier),
+            'invoiceNumber': str(init.invoiceNumber),
+            'invoiceValue': str(init.invoiceValue),
+            'invoiceUrl': str(init.invoiceUrl),
+            'issuanceDate': str(init.issuanceDate),
+            'trackingNumber': str(init.trackingNumber),
+            'invoiceKey': str(init.invoiceKey),
+            'trackingUrl': str(init.trackingUrl),
+            'embeddedInvoice': str(init.embeddedInvoice),
+            'type': str(init.type),
+            'cfop': str(init.cfop),
+            'volumes': str(init.volumes),
+            'EnableInferItems': str(init.EnableInferItems)}, index=[0])
         init.df = init.df.append(df1)
         print("Registro: "+str(reg))
     #except:
