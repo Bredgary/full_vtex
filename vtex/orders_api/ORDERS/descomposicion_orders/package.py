@@ -23,9 +23,7 @@ class init:
     trackingUrl = None
     embeddedInvoice = None
     type = None
-    courierStatus = None
     cfop = None
-    restitutions = None
     volumes = None
     EnableInferItems = None
     
@@ -60,9 +58,7 @@ def get_order(id,reg):
                 init.trackingUrl = x["trackingUrl"]
                 init.embeddedInvoice = x["embeddedInvoice"]
                 init.type = x["type"]
-                init.courierStatus = x["courierStatus"]
                 init.cfop = x["cfop"]
-                init.restitutions = packages["restitutions"]
                 init.volumes = x["volumes"]
                 init.EnableInferItems = x["EnableInferItems"]
         except:
@@ -81,9 +77,7 @@ def get_order(id,reg):
             'trackingUrl': init.trackingUrl,
             'embeddedInvoice': init.embeddedInvoice,
             'type': init.type,
-            'courierStatus': init.courierStatus,
             'cfop': init.cfop,
-            'restitutions': init.restitutions,
             'volumes': init.volumes,
             'EnableInferItems': init.EnableInferItems}, index=[0])
         init.df = init.df.append(df1)
@@ -101,7 +95,9 @@ def get_params():
     registro = 0
     for row in rows:
         registro += 1
-        get_order(row.orderId,registro)
+        get_order("1033163314156-02",registro)
+        if registro ==2:
+            break
         
 def delete_duplicate():
     try:
