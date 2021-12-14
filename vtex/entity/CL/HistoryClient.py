@@ -20,8 +20,8 @@ now = datetime.now()
 format = now.strftime('%Y-%m-%d')
 def cl_client():
 	print("Cargando")
-	url = "https://mercury.vtexcommercestable.com.br/api/dataentities/CL/search?_where=createdIn between 2019-06-01 AND 2019-06-10"
-	querystring = {"_fields":"beneficio,beneficio2,crearGiftcard,profilePicture,proteccionDatos,terminosCondiciones,terminosPago,tradeName,rclastcart,rclastsession,rclastsessiondate,homePhone,phone,stateRegistration,email,userId,firstName,lastName,document,localeDefault,attach,approved,birthDate,businessPhone,corporateDocument,corporateName,documentType,gender,customerClass,priceTables,id,accountId,accountName,dataEntityId,createdBy,createdIn,updatedBy,updatedIn,lastInteractionBy,lastInteractionIn,followers,auto_filter"}
+	url = "https://mercury.vtexcommercestable.com.br/api/dataentities/CL/search?_where=createdIn between 2018-01-01 AND 2019-01-01"
+	querystring = {"_fields":"beneficio,beneficio2,crearGiftcard,profilePicture,proteccionDatos,terminosCondiciones,terminosPago,tradeName,rclastcart,rclastsession,rclastsessiondate,homePhone,phone,stateRegistration,email,userId,firstName,lastName,document,localeDefault,attach,approved,birthDate,businessPhone,corporateDocument,corporateName,documentType,gender,customerClass,priceTables,id,accountId,accountName,dataEntityId,createdBy,createdIn,updatedBy,updatedIn,lastInteractionBy,lastInteractionIn"}
 	headers = {
 		"Content-Type": "application/json",
 		"Accept": "application/vnd.vtex.ds.v10+json",
@@ -53,7 +53,7 @@ def delete_duplicate():
 
 def run():
 	df = pd.DataFrame(cl_client(),
-					columns=['beneficio','beneficio2','crearGiftcard','profilePicture','proteccionDatos','terminosCondiciones','terminosPago','tradeName','rclastcart','rclastsession','rclastsessiondate','homePhone','phone','stateRegistration','email','userId','firstName','lastName','document','localeDefault','attach','approved','birthDate','businessPhone','corporateDocument','corporateName','documentType','gender','customerClass','priceTables','id','accountId','accountName','dataEntityId','createdBy','createdIn','updatedBy','updatedIn','lastInteractionBy','lastInteractionIn','followers','auto_filter'])
+					columns=['beneficio','beneficio2','crearGiftcard','profilePicture','proteccionDatos','terminosCondiciones','terminosPago','tradeName','rclastcart','rclastsession','rclastsessiondate','homePhone','phone','stateRegistration','email','userId','firstName','lastName','document','localeDefault','attach','approved','birthDate','businessPhone','corporateDocument','corporateName','documentType','gender','customerClass','priceTables','id','accountId','accountName','dataEntityId','createdBy','createdIn','updatedBy','updatedIn','lastInteractionBy','lastInteractionIn'])
 	df.reset_index(drop=True, inplace=True)
 
 	json_data = df.to_json(orient = 'records')
@@ -217,14 +217,6 @@ def run():
 	    "mode": "NULLABLE"
 	  },{
 	    "name": "lastInteractionIn",
-	    "type": "STRING",
-	    "mode": "NULLABLE"
-	  },{
-	    "name": "followers",
-	    "type": "STRING",
-	    "mode": "REPEATED"
-	  },{
-	    "name": "auto_filter",
 	    "type": "STRING",
 	    "mode": "NULLABLE"
 	  }
