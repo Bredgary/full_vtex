@@ -195,14 +195,12 @@ def get_params():
     for row in rows:
         get_order(row.orderId,registro)
         registro += 1
-        if registro == 15:
-            break
         
 def delete_duplicate():
     try:
         print("Eliminando duplicados")
         client = bigquery.Client()
-        QUERY = ('CREATE OR REPLACE TABLE `shopstar-datalake.test.shopstar_order_payments` AS SELECT DISTINCT * FROM `shopstar-datalake.test.shopstar_order_payments`')
+        QUERY = ('CREATE OR REPLACE TABLE `shopstar-datalake.test.shopstar_order_items` AS SELECT DISTINCT * FROM `shopstar-datalake.test.shopstar_order_items`')
         query_job = client.query(QUERY)
         rows = query_job.result()
         print(rows)
