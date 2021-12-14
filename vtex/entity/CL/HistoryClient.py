@@ -5,23 +5,28 @@ import os, json
 from datetime import datetime
 import requests
 from datetime import datetime, timezone
+from datetime import date, timedelta
 
-naive_dt = datetime.now()
-aware_dt = naive_dt.astimezone()
-# correct, ISO-8601 (but not UTC)
-aware_dt.isoformat(timespec="seconds")
-# lets get the time in UTC
-utc_dt = aware_dt.astimezone(timezone.utc)
-# correct, ISO-8601 and UTC (but not in UTC format)
-date_str = utc_dt.isoformat(timespec='milliseconds')
-date = date_str.replace("+00:00", "Z")
 
-now = datetime.now()
-format = now.strftime('%Y-%m-%d')
-def cl_client():
+
+
+
+def daterange(start_date, end_date):
+    for n in range(int((end_date - start_date).days)):
+        yield start_date + timedelta(n)
+
+start_date = date(2016, 1, 1)
+end_date = date(2021, 12, 15)
+for single_date in daterange(start_date, end_date):
+    variFecha = single_date.strftime("%Y-%m-%d")
+    print("Dia: "+str(variFecha))
+    run(variFecha)
+
+
+def cl_client(fecha):
 	print("Cargando")
-	url = "https://mercury.vtexcommercestable.com.br/api/dataentities/CL/search?_where=createdIn between 2019-01-10 AND 2019-02-01"
-	querystring = {"_fields":"beneficio,beneficio2,crearGiftcard,profilePicture,proteccionDatos,terminosCondiciones,terminosPago,tradeName,rclastcart,rclastsession,rclastsessiondate,homePhone,phone,stateRegistration,email,userId,firstName,lastName,document,localeDefault,attach,approved,birthDate,businessPhone,corporateDocument,corporateName,documentType,gender,customerClass,priceTables,id,accountId,accountName,dataEntityId,createdBy,createdIn,updatedBy,updatedIn,lastInteractionBy,lastInteractionIn"}
+	url = "https://mercury.vtexcommercestable.com.br/api/dataentities/CL/search"
+	querystring = {"_fields":"beneficio,beneficio2,crearGiftcard,profilePicture,proteccionDatos,terminosCondiciones,terminosPago,tradeName,rclastcart,rclastsession,rclastsessiondate,homePhone,phone,stateRegistration,email,userId,firstName,lastName,document,localeDefault,attach,approved,birthDate,businessPhone,corporateDocument,corporateName,documentType,gender,customerClass,priceTables,id,accountId,accountName,dataEntityId,createdBy,createdIn,updatedBy,updatedIn,lastInteractionBy,lastInteractionIn,followers,auto_filter","_where":"createdIn="+fecha+""}
 	headers = {
 		"Content-Type": "application/json",
 		"Accept": "application/vnd.vtex.ds.v10+json",
@@ -51,8 +56,8 @@ def delete_duplicate():
 	except:
 		print("Consulta SQL no ejecutada")
 
-def run():
-	df = pd.DataFrame(cl_client(),
+def run(variFecha):
+	df = pd.DataFrame(cl_client(variFecha),
 					columns=['beneficio','beneficio2','crearGiftcard','profilePicture','proteccionDatos','terminosCondiciones','terminosPago','tradeName','rclastcart','rclastsession','rclastsessiondate','homePhone','phone','stateRegistration','email','userId','firstName','lastName','document','localeDefault','attach','approved','birthDate','businessPhone','corporateDocument','corporateName','documentType','gender','customerClass','priceTables','id','accountId','accountName','dataEntityId','createdBy','createdIn','updatedBy','updatedIn','lastInteractionBy','lastInteractionIn'])
 	df.reset_index(drop=True, inplace=True)
 
@@ -222,7 +227,7 @@ def run():
 	  }
 
 	project_id = '999847639598'
-	dataset_id = 'test'
+	dataset_id = 'staging_zone'
 	table_id = 'shopstar_vtex_client'
 	
 	client  = bigquery.Client(project = project_id)
@@ -237,4 +242,3 @@ def run():
 	print(job.result())
 	delete_duplicate()
 	
-run()
