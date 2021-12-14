@@ -78,59 +78,52 @@ def get_order(id,reg):
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
-        
-        #try:
-            init.items_uniqueId = Items["uniqueId"]
-            init.items_id = Items["id"]
-            init.items_productId = Items["productId"]
-            init.items_ean = Items["ean"]
-            init.items_lockId = Items["lockId"]
-            init.item_quantity = Items["quantity"]
-            init.item_seller = Items["seller"]
-            init.item_name = Items["name"]
-            init.item_refId = Items["refId"]
-            init.item_price = Items["price"]
-            init.item_listPrice = Items["listPrice"]
-            init.item_manualPrice = Items["manualPrice"]
-            init.item_imageUrl = Items["imageUrl"]
-            init.item_detailUrl = Items["detailUrl"]
-            init.item_sellerSku = Items["sellerSku"]
-            init.item_priceValidUntil = Items["priceValidUntil"]
-            init.item_commission = Items["commission"]
-            init.item_tax = Items["tax"]
-            init.item_preSaleDate = Items["preSaleDate"]
-            init.item_measurementUnit = Items["measurementUnit"]
-            init.item_unitMultiplier = Items["unitMultiplier"]
-            init.item_sellingPrice = Items["sellingPrice"]
-            init.item_isGift = Items["isGift"]
-            init.item_shippingPrice = Items["shippingPrice"]
-            init.item_rewardValue = Items["rewardValue"]
-            init.item_freightCommission = Items["freightCommission"]
-            init.item_taxCode = Items["taxCode"]
-            init.item_parentItemIndex = Items["parentItemIndex"]
-            init.item_parentAssemblyBinding = Items["parentAssemblyBinding"]
-            init.item_price_definition = Items["priceDefinition"]
-            init.item_serialNumbers = Items["serialNumbers"]
-        #except:
-         #   print("No hay datos dim Items")
-            
-        #try:
-            init.brandName = additionalInfo["brandName"]
-            init.brandId = additionalInfo["brandId"]
-            init.categoriesIds = additionalInfo["categoriesIds"]
-            init.productClusterId = additionalInfo["productClusterId"]
-            init.commercialConditionId = additionalInfo["commercialConditionId"]
-            init.offeringInfo = additionalInfo["offeringInfo"]
-            init.offeringType = additionalInfo["offeringType"]
-            init.offeringTypeId = additionalInfo["offeringTypeId"]
-        #except:
-        #    print("No hay datos. additionalInfo")
-        #try:
-            init.cubicweight = dimension["cubicweight"]
-            init.height = dimension["height"]
-            init.length = dimension["length"]
-            init.weight = dimension["weight"]
-            init.width = dimension["width"]
+        items = Fjson["items"]
+        Items = items[0]
+        init.items_uniqueId = Items["uniqueId"]
+        init.items_id = Items["id"]
+        init.items_productId = Items["productId"]
+        init.items_ean = Items["ean"]
+        init.items_lockId = Items["lockId"]
+        init.item_quantity = Items["quantity"]
+        init.item_seller = Items["seller"]
+        init.item_name = Items["name"]
+        init.item_refId = Items["refId"]
+        init.item_price = Items["price"]
+        init.item_listPrice = Items["listPrice"]
+        init.item_manualPrice = Items["manualPrice"]
+        init.item_imageUrl = Items["imageUrl"]
+        init.item_detailUrl = Items["detailUrl"]
+        init.item_sellerSku = Items["sellerSku"]
+        init.item_priceValidUntil = Items["priceValidUntil"]
+        init.item_commission = Items["commission"]
+        init.item_tax = Items["tax"]
+        init.item_preSaleDate = Items["preSaleDate"]
+        init.item_measurementUnit = Items["measurementUnit"]
+        init.item_unitMultiplier = Items["unitMultiplier"]
+        init.item_sellingPrice = Items["sellingPrice"]
+        init.item_isGift = Items["isGift"]
+        init.item_shippingPrice = Items["shippingPrice"]
+        init.item_rewardValue = Items["rewardValue"]
+        init.item_freightCommission = Items["freightCommission"]
+        init.item_taxCode = Items["taxCode"]
+        init.item_parentItemIndex = Items["parentItemIndex"]
+        init.item_parentAssemblyBinding = Items["parentAssemblyBinding"]
+        init.item_price_definition = Items["priceDefinition"]
+        init.item_serialNumbers = Items["serialNumbers"]
+        init.brandName = additionalInfo["brandName"]
+        init.brandId = additionalInfo["brandId"]
+        init.categoriesIds = additionalInfo["categoriesIds"]
+        init.productClusterId = additionalInfo["productClusterId"]
+        init.commercialConditionId = additionalInfo["commercialConditionId"]
+        init.offeringInfo = additionalInfo["offeringInfo"]
+        init.offeringType = additionalInfo["offeringType"]
+        init.offeringTypeId = additionalInfo["offeringTypeId"]
+        init.cubicweight = dimension["cubicweight"]
+        init.height = dimension["height"]
+        init.length = dimension["length"]
+        init.weight = dimension["weight"]
+        init.width = dimension["width"]
         #except:
          #   print("No hay datos. dimension")
         
@@ -138,52 +131,52 @@ def get_order(id,reg):
         
         df1 = pd.DataFrame({
             'orderId': id,
-            'DIM_ITEMS_uniqueId': init.items_uniqueId,
-            'DIM_ITEMS_items_id': init.items_id,
-            'DIM_ITEMS_productId': init.items_productId,
-            'DIM_ITEMS_ean': init.items_ean,
-            'DIM_ITEMS_lockId': init.items_lockId,
-            'DIM_ITEMS_quantity': init.item_quantity,
-            'DIM_ITEMS_seller': init.item_seller,
-            'DIM_ITEMS_name': init.item_name,
-            'DIM_ITEMS_refId': init.item_refId,
-            'DIM_ITEMS_price': init.item_price,
-            'DIM_ITEMS_listPrice': init.item_listPrice,
-            'DIM_ITEMS_manualPrice': init.item_manualPrice,
-            'DIM_ITEMS_imageUrl': init.item_imageUrl,
-            'DIM_ITEMS_detailUrl': init.item_detailUrl,
-            'DIM_ITEMS_sellerSku': init.item_sellerSku,
-            'DIM_ITEMS_priceValidUntil': init.item_priceValidUntil,
-            'DIM_ITEMS_commission': init.item_commission,
-            'DIM_ITEMS_tax': init.item_tax,
-            'DIM_ITEM_preSaleDate': init.item_preSaleDate,
-            'DIM_ITEM_measurementUnit': init.item_measurementUnit,
-            'DIM_ITEM_unitMultiplier': init.item_unitMultiplier,
-            'DIM_ITEM_sellingPrice': init.item_sellingPrice,
-            'DIM_ITEM_isGift': init.item_isGift,
-            'DIM_ITEM_shippingPrice': init.item_shippingPrice,
-            'DIM_ITEM_rewardValue': init.item_rewardValue,
-            'DIM_ITEM_freightCommission': init.item_freightCommission,
-            'DIM_ITEM_priceDefinition': init.item_price_definition,
-            'DIM_ITEM_taxCode': init.item_taxCode,
-            'DIM_ITEM_parentItemIndex': init.item_parentItemIndex,
-            'DIM_ITEM_parentAssemblyBinding': init.item_parentAssemblyBinding,
-            'DIM_ITEM_itemAttachment_name': init.item_itemAttachment_name,
-            'DIM_ITEM_AInfo_brandName': init.brandName,
-            'DIM_ITEM_AInfo_brandId': init.brandId,
-            'DIM_ITEM_AInfo_categoriesIds': init.categoriesIds,
-            'DIM_ITEM_AInfo_productClusterId': init.productClusterId,
-            'DIM_ITEM_AInfo_commercialConditionId': init.commercialConditionId,
-            'DIM_ITEM_AInfo_offeringInfo': init.offeringInfo,
-            'DIM_ITEM_AInfo_offeringType': init.offeringType,
-            'DIM_ITEM_AInfo_offeringTypeId': init.offeringTypeId,
-            'DIM_ITEM_AInfo_cubicweight': init.cubicweight,
-            'DIM_ITEM_AInfo_dim_height': init.height,
-            'DIM_ITEM_AInfo_dim_length': init.length,
-            'DIM_ITEM_AInfo_dim_weight': init.weight,
-            'DIM_ITEM_AInfo_dim_width': init.width,
-            'DIM_ITEM_calculatedSellingPrice': init.calculatedSellingPrice,
-            'DIM_ITEM_priceDefinition_total': init.total}, index=[0])
+            'uniqueId': init.items_uniqueId,
+            'items_id': init.items_id,
+            'productId': init.items_productId,
+            'ean': init.items_ean,
+            'lockId': init.items_lockId,
+            'quantity': init.item_quantity,
+            'seller': init.item_seller,
+            'name': init.item_name,
+            'refId': init.item_refId,
+            'price': init.item_price,
+            'listPrice': init.item_listPrice,
+            'manualPrice': init.item_manualPrice,
+            'imageUrl': init.item_imageUrl,
+            'detailUrl': init.item_detailUrl,
+            'sellerSku': init.item_sellerSku,
+            'priceValidUntil': init.item_priceValidUntil,
+            'commission': init.item_commission,
+            'tax': init.item_tax,
+            'preSaleDate': init.item_preSaleDate,
+            'measurementUnit': init.item_measurementUnit,
+            'unitMultiplier': init.item_unitMultiplier,
+            'sellingPrice': init.item_sellingPrice,
+            'isGift': init.item_isGift,
+            'shippingPrice': init.item_shippingPrice,
+            'rewardValue': init.item_rewardValue,
+            'freightCommission': init.item_freightCommission,
+            'priceDefinition': init.item_price_definition,
+            'taxCode': init.item_taxCode,
+            'parentItemIndex': init.item_parentItemIndex,
+            'parentAssemblyBinding': init.item_parentAssemblyBinding,
+            'itemAttachment_name': init.item_itemAttachment_name,
+            'brandName': init.brandName,
+            'brandId': init.brandId,
+            'categoriesIds': init.categoriesIds,
+            'productClusterId': init.productClusterId,
+            'commercialConditionId': init.commercialConditionId,
+            'offeringInfo': init.offeringInfo,
+            'offeringType': init.offeringType,
+            'offeringTypeId': init.offeringTypeId,
+            'cubicweight': init.cubicweight,
+            'height': init.height,
+            'length': init.length,
+            'weight': init.weight,
+            'width': init.width,
+            'calculatedSellingPrice': init.calculatedSellingPrice,
+            'priceDefinition_total': init.total}, index=[0])
         init.df = init.df.append(df1)
         print("Registro: "+str(reg))
    # except:
