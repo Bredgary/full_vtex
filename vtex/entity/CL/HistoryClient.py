@@ -226,12 +226,12 @@ def run(variFecha):
 	print(job.result())
 	delete_duplicate()
 
-#2020,3,3
+#2020-04-04
 def daterange(start_date, end_date):
     for n in range(int((end_date - start_date).days)):
         yield start_date + timedelta(n)
 
-start_date = date(2020, 3, 3)
+start_date = date(2020, 4, 4)
 end_date = date(2021, 12, 15)
 for single_date in daterange(start_date, end_date):
     variFecha = single_date.strftime("%Y-%m-%d")
