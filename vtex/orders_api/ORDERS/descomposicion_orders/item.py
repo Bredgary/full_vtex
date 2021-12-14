@@ -80,6 +80,9 @@ def get_order(id,reg):
         Fjson = json.loads(response.text)
         items = Fjson["items"]
         Items = items[0]
+        additionalInfo = Items["additionalInfo"]
+        dimension = additionalInfo["dimension"]
+        
         init.items_uniqueId = Items["uniqueId"]
         init.items_id = Items["id"]
         init.items_productId = Items["productId"]
