@@ -11,7 +11,7 @@ class init:
     '''
     Dimensiones ITEMS
     '''
-
+    df = pd.DataFrame()
     items_uniqueId = None
     items_id = None
     items_productId = None
