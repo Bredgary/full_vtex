@@ -20,12 +20,12 @@ now = datetime.now()
 format = now.strftime('%Y-%m-%d')
 def cl_client():
 	print("Cargando")
-	url = "https://mercury.vtexcommercestable.com.br/api/dataentities/CL/search?_where=createdIn between 2018-01-01 AND 2021-01-01"
+	url = "https://mercury.vtexcommercestable.com.br/api/dataentities/CL/search?_where=createdIn between 2018-01-01 AND 2019-01-01"
 	querystring = {"_fields":"beneficio,beneficio2,crearGiftcard,profilePicture,proteccionDatos,terminosCondiciones,terminosPago,tradeName,rclastcart,rclastsession,rclastsessiondate,homePhone,phone,stateRegistration,email,userId,firstName,lastName,document,localeDefault,attach,approved,birthDate,businessPhone,corporateDocument,corporateName,documentType,gender,customerClass,priceTables,id,accountId,accountName,dataEntityId,createdBy,createdIn,updatedBy,updatedIn,lastInteractionBy,lastInteractionIn,followers,auto_filter"}
 	headers = {
 		"Content-Type": "application/json",
 		"Accept": "application/vnd.vtex.ds.v10+json",
-		"REST-Range": "resources=0-1000000",
+		"REST-Range": "resources=0-1000",
 		"X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA",
 		"X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"
 	}
