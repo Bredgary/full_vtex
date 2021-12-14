@@ -13,4 +13,5 @@ encoding//vtex/entity/CL/Cliente.py=latin1
 encoding//vtex/orders_api/ORDERS/List_Order.py=latin1
 encoding//vtex/orders_api/ORDERS/List_order_History.py=latin1
 encoding//vtex/orders_api/ORDERS/Order.py=latin1
+encoding//vtex/orders_api/ORDERS/descomposicion_orders/item.py=latin1
 encoding//vtex/orders_api/ORDERS/descomposicion_orders/package.py=latin1
