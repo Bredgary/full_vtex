@@ -53,6 +53,7 @@ class init:
     
 def get_order(id,email,reg):
     try:
+        print(email)
         url = "https://mercury.vtexcommercestable.com.br/api/checkout/pub/profiles"
         querystring = {"email":""+str(email)+""}
         response = requests.request("GET", url, headers=init.headers, params=querystring)
@@ -158,6 +159,8 @@ def get_params():
     for row in rows:
         registro += 1
         get_order(row.id,row.email,registro)
+        if registro == 100:
+            break
         
 def delete_duplicate():
     try:
