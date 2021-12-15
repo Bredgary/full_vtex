@@ -51,59 +51,59 @@ class init:
   headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
     
 def get_order(id,email,reg):
-    try:
+    #try:
         url = "https://mercury.vtexcommercestable.com.br/api/checkout/pub/profiles"
         querystring = {"email":""+str(email)+""}
         response = requests.request("GET", url, headers=init.headers, params=querystring)
         Fjson = json.loads(response.text)
-        try:
-            init.userProfileId = Fjson["userProfileId"]
-            init.profileProvider = Fjson["profileProvider"]
-        except:
-            print("Vacio")
+        #try:
+        init.userProfileId = Fjson["userProfileId"]
+        init.profileProvider = Fjson["profileProvider"]
+        #except:
+        #    print("Vacio")
         
-        try:
-            init.availableAddresses = Fjson["availableAddresses"]
-            for x in init.availableAddresses:
-                init.addressType = x["addressType"]
-                init.receiverName = x["receiverName"]
-                init.addressId = x["addressId"]
-                init.isDisposable = x["isDisposable"]
-                init.postalCode = x["postalCode"]
-                init.city = x["city"]
-                init.state = x["state"]
-                init.country = x["country"]
-                init.street = x["street"]
-                init.number = x["number"]
-                init.neighborhood = x["neighborhood"]
-                init.complement = x["complement"]
-                init.reference = x["reference"]
-                init.geoCoordinates = x["geoCoordinates"]
-                if geoCoordinates:
-                    init.lon = geoCoordinates[0]
-                    init.lat = geoCoordinates[1]
-        except:
-            print("Vacio")
+        #try:
+        init.availableAddresses = Fjson["availableAddresses"]
+        for x in init.availableAddresses:
+            init.addressType = x["addressType"]
+            init.receiverName = x["receiverName"]
+            init.addressId = x["addressId"]
+            init.isDisposable = x["isDisposable"]
+            init.postalCode = x["postalCode"]
+            init.city = x["city"]
+            init.state = x["state"]
+            init.country = x["country"]
+            init.street = x["street"]
+            init.number = x["number"]
+            init.neighborhood = x["neighborhood"]
+            init.complement = x["complement"]
+            init.reference = x["reference"]
+            init.geoCoordinates = x["geoCoordinates"]
+            if geoCoordinates:
+                init.lon = geoCoordinates[0]
+                init.lat = geoCoordinates[1]
+        #except:
+        #    print("Vacio")
         
-        try:
-            init.userProfile = Fjson["userProfile"]
-            init.email = userProfile["email"]
-            init.firstName = userProfile["firstName"]
-            init.lastName = userProfile["lastName"]
-            init.document = userProfile["document"]
-            init.documentType = userProfile["documentType"]
-            init.phone = userProfile["phone"]
-            init.corporateName = userProfile["corporateName"]
-            init.tradeName = userProfile["tradeName"]
-            init.corporateDocument = userProfile["corporateDocument"]
-            init.stateInscription = userProfile["stateInscription"]
-            init.corporatePhone = userProfile["corporatePhone"]
-            init.isCorporate = userProfile["isCorporate"]
-            init.profileCompleteOnLoading = userProfile["profileCompleteOnLoading"]
-            init.profileErrorOnLoading = userProfile["profileErrorOnLoading"]
-            init.isComplete = Fjson["profileProvider"]
-        except:
-            print("Vacio")
+        #try:
+        init.userProfile = Fjson["userProfile"]
+        init.email = userProfile["email"]
+        init.firstName = userProfile["firstName"]
+        init.lastName = userProfile["lastName"]
+        init.document = userProfile["document"]
+        init.documentType = userProfile["documentType"]
+        init.phone = userProfile["phone"]
+        init.corporateName = userProfile["corporateName"]
+        init.tradeName = userProfile["tradeName"]
+        init.corporateDocument = userProfile["corporateDocument"]
+        init.stateInscription = userProfile["stateInscription"]
+        init.corporatePhone = userProfile["corporatePhone"]
+        init.isCorporate = userProfile["isCorporate"]
+        init.profileCompleteOnLoading = userProfile["profileCompleteOnLoading"]
+        init.profileErrorOnLoading = userProfile["profileErrorOnLoading"]
+        init.isComplete = Fjson["profileProvider"]
+        #except:
+        #    print("Vacio")
         
         
         df1 = pd.DataFrame({
@@ -143,9 +143,9 @@ def get_order(id,email,reg):
             'isComplete': str(init.isComplete)}, index=[0])
         init.df = init.df.append(df1)
         print("Registro: "+str(reg))
-    except:
-        print("Vacio")
-        print("Registro: "+str(reg))
+    #except:
+        #print("Vacio")
+        #print("Registro: "+str(reg))
         
         
 def get_params():
