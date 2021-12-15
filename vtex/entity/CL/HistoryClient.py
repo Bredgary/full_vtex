@@ -33,7 +33,7 @@ def delete_duplicate():
 		print("Eliminando duplicados")
 		client = bigquery.Client()
 		QUERY = (
-			'CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_vtex_client` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.shopstar_vtex_client`')
+			'CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_vtex_client_` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.shopstar_vtex_client_`')
 		query_job = client.query(QUERY)
 		rows = query_job.result()
 		print(rows)
@@ -212,7 +212,7 @@ def run(variFecha):
 
 	project_id = '999847639598'
 	dataset_id = 'staging_zone'
-	table_id = 'shopstar_vtex_client'
+	table_id = 'shopstar_vtex_client_'
 	
 	client  = bigquery.Client(project = project_id)
 	dataset  = client.dataset(dataset_id)
