@@ -60,7 +60,7 @@ def get_order(id,email,reg):
             init.userProfileId = Fjson["userProfileId"]
             init.profileProvider = Fjson["profileProvider"]
         except:
-            print("userProfileId Vacio")
+            userProfileId = "Vacio"
         
         try:
             init.availableAddresses = Fjson["availableAddresses"]
@@ -157,8 +157,6 @@ def get_params():
     for row in rows:
         registro += 1
         get_order(row.id,row.email,registro)
-        if registro == 1000:
-            break
         
 def delete_duplicate():
     try:
@@ -190,6 +188,7 @@ def run():
     job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
     job = client.load_table_from_json(json_object, table, job_config = job_config)
     print(job.result())
+    print(userProfileId)
     delete_duplicate()
     
 run()
