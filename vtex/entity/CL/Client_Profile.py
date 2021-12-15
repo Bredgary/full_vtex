@@ -104,7 +104,7 @@ def get_order(id,email,reg):
             init.profileErrorOnLoading = init.userProfile["profileErrorOnLoading"]
             init.isComplete = Fjson["profileProvider"]
         except:
-            print("userProfile Vacio")
+            print("client profile")
         
         
         df1 = pd.DataFrame({
