@@ -1533,6 +1533,7 @@ def run():
     print(job.result())
     delete_duplicate()        
 
+
 def get_params():
     print("Cargando consulta")
     client = bigquery.Client()
