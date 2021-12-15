@@ -60,7 +60,7 @@ def get_order(id,email,reg):
             init.userProfileId = Fjson["userProfileId"]
             init.profileProvider = Fjson["profileProvider"]
         except:
-            print("Vacio")
+            print("userProfileId Vacio")
         
         try:
             init.availableAddresses = Fjson["availableAddresses"]
@@ -83,7 +83,7 @@ def get_order(id,email,reg):
                     init.lon = geoCoordinates[0]
                     init.lat = geoCoordinates[1]
         except:
-            print("Vacio")
+            print("availableAddresses Vacio")
         
         try:
             init.userProfile = Fjson["userProfile"]
@@ -103,7 +103,7 @@ def get_order(id,email,reg):
             init.profileErrorOnLoading = init.userProfile["profileErrorOnLoading"]
             init.isComplete = Fjson["profileProvider"]
         except:
-            print("Vacio")
+            print("userProfile Vacio")
         
         
         df1 = pd.DataFrame({
@@ -156,7 +156,7 @@ def get_params():
     registro = 0
     for row in rows:
         registro += 1
-        get_order(row.id,"anibal2502@gmail.com",registro)
+        get_order(row.id,row.email,registro)
         break
         
 def delete_duplicate():
