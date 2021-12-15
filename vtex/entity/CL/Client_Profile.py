@@ -87,22 +87,22 @@ def get_order(id,email,reg):
             print("availableAddresses Vacio")
         
         try:
-            init.userProfile = Fjson["userProfile"]
-            init.email = init.userProfile["email"]
-            init.firstName = init.userProfile["firstName"]
-            init.lastName = init.userProfile["lastName"]
-            init.document = init.userProfile["document"]
-            init.documentType = init.userProfile["documentType"]
-            init.phone = init.userProfile["phone"]
-            init.corporateName = init.userProfile["corporateName"]
-            init.tradeName = init.userProfile["tradeName"]
-            init.corporateDocument = init.userProfile["corporateDocument"]
-            init.stateInscription = init.userProfile["stateInscription"]
-            init.corporatePhone = init.userProfile["corporatePhone"]
-            init.isCorporate = init.userProfile["isCorporate"]
-            init.profileCompleteOnLoading = init.userProfile["profileCompleteOnLoading"]
-            init.profileErrorOnLoading = init.userProfile["profileErrorOnLoading"]
-            init.isComplete = Fjson["profileProvider"]
+            userProfile = Fjson["userProfile"]
+            init.email = userProfile["email"]
+            init.firstName = userProfile["firstName"]
+            init.lastName = userProfile["lastName"]
+            init.document = userProfile["document"]
+            init.documentType = userProfile["documentType"]
+            init.phone = userProfile["phone"]
+            init.corporateName = userProfile["corporateName"]
+            init.tradeName = userProfile["tradeName"]
+            init.corporateDocument = userProfile["corporateDocument"]
+            init.stateInscription = userProfile["stateInscription"]
+            init.corporatePhone = userProfile["corporatePhone"]
+            init.isCorporate = userProfile["isCorporate"]
+            init.profileCompleteOnLoading = userProfile["profileCompleteOnLoading"]
+            init.profileErrorOnLoading = userProfile["profileErrorOnLoading"]
+            init.isComplete = Fjson["isComplete"]
         except:
             print("client profile")
         
