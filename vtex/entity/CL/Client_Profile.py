@@ -157,7 +157,6 @@ def get_params():
     for row in rows:
         registro += 1
         get_order(row.id,row.email,registro)
-        break
         
 def delete_duplicate():
     try:
