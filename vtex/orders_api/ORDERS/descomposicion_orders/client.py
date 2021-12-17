@@ -79,8 +79,7 @@ def get_order(id,reg):
             'stateInscription': str(init.stateInscription),
             'corporatePhone': str(init.corporatePhone),
             'isCorporate': str(init.isCorporate),
-            'userProfileId': str(init.userProfileId),
-            'customerClass': str(init.customerClass)}, index=[0])
+            'userProfileId': str(init.userProfileId)}, index=[0])
         init.df = init.df.append(df1)
         print("Registro: "+str(reg))
     except:
