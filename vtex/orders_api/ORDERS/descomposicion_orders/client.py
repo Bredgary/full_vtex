@@ -94,17 +94,17 @@ def get_params():
     for row in rows:
         registro += 1
         get_order(row.orderId,registro)
-        if registro == 5000:
+        if registro <= 5000:
             run()
-        if registro == 10000:
+        if registro <= 10000:
             run()
-        if registro == 15000:
+        if registro <= 15000:
             run()
-        if registro == 20000:
+        if registro <= 20000:
             run()
-        if registro == 25000:
+        if registro <= 25000:
             run()
-        if registro == 30000:
+        if registro <= 30000:
             run()
     run()
             
