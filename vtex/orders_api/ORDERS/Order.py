@@ -1514,6 +1514,7 @@ def delete_duplicate():
     except:
         print("Consulta SQL no ejecutada")
 
+
 def run():
     df = init.df
     df.reset_index(drop=True, inplace=True)
