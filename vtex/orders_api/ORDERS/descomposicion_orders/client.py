@@ -106,7 +106,6 @@ def get_params():
             run()
         if registro <= 30000:
             run()
-    run()
             
             
         
