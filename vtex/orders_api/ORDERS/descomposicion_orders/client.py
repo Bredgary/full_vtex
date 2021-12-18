@@ -94,18 +94,19 @@ def get_params():
     for row in rows:
         registro += 1
         get_order(row.orderId,registro)
-        if registro <= 5000:
+        if registro == 5000:
             run()
-        if registro <= 10000:
+        if registro == 10000:
             run()
-        if registro <= 15000:
+        if registro == 15000:
             run()
-        if registro <= 20000:
+        if registro == 20000:
             run()
-        if registro <= 25000:
+        if registro == 25000:
             run()
-        if registro <= 30000:
+        if registro == 30000:
             run()
+    run()
             
             
         
@@ -123,26 +124,23 @@ def delete_duplicate():
 
 
 def run():
-    try:
-        df = init.df
-        df.reset_index(drop=True, inplace=True)
-        json_data = df.to_json(orient = 'records')
-        
-        json_object = json.loads(json_data)
-        project_id = '999847639598'
-        dataset_id = 'test'
-        table_id = 'shopstar_order_client'
-        
-        client  = bigquery.Client(project = project_id)
-        dataset  = client.dataset(dataset_id)
-        table = dataset.table(table_id)
-        job_config = bigquery.LoadJobConfig()
-        job_config.write_disposition = "WRITE_TRUNCATE"
-        job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-        job = client.load_table_from_json(json_object, table, job_config = job_config)
-        print(job.result())
-        delete_duplicate()
-    except:
-        print(init.df)
+    df = init.df
+    df.reset_index(drop=True, inplace=True)
+    json_data = df.to_json(orient = 'records')
+    
+    json_object = json.loads(json_data)
+    project_id = '999847639598'
+    dataset_id = 'test'
+    table_id = 'shopstar_order_client'
+    
+    client  = bigquery.Client(project = project_id)
+    dataset  = client.dataset(dataset_id)
+    table = dataset.table(table_id)
+    job_config = bigquery.LoadJobConfig()
+    job_config.write_disposition = "WRITE_TRUNCATE"
+    job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+    job = client.load_table_from_json(json_object, table, job_config = job_config)
+    print(job.result())
+    delete_duplicate()
     
 get_params()

@@ -1182,7 +1182,7 @@ def get_order(id,reg):
         except:
             print("cancellationData")
     
-        
+        '''
         df1 = pd.DataFrame({
             'orderId': str(init.orderId),
             'emailTracked': str(emailTracked,
@@ -1444,9 +1444,9 @@ def get_order(id,reg):
             'seller_name': str(init.seller_name,
             'seller_logo': str(init.seller_logo,
             'changesAttachment_id': str(init.changesAttachment_id,
-            'storePreferencesData_countryCode': init.storePreferencesData_countryCode,
-            'storePreferencesData_currencyCode': init.storePreferencesData_currencyCode,
-            'storePreferencesData_currencyLocale': init.storePreferencesData_currencyLocale,
+            'storePreferencesData_countryCode': str(init.storePreferencesData_countryCode,
+            'storePreferencesData_currencyCode': str(init.storePreferencesData_currencyCode,
+            'storePreferencesData_currencyLocale': str(init.storePreferencesData_currencyLocale,
             'storePreferencesData_currencySymbol': init.storePreferencesData_currencySymbol,
             'storePreferencesData_timeZone': init.storePreferencesData_timeZone,
             'CurrencyDecimalDigits': init.CurrencyDecimalDigits,
@@ -1498,6 +1498,7 @@ def get_order(id,reg):
             'CancellationDate':init.CancellationDate,
             'invoicedDate': init.invoicedDate}, index=[0])
         init.df = init.df.append(df1)
+        '''
         print("Registro: "+str(reg))
     except:
         print("vacio")
