@@ -146,7 +146,7 @@ def get_order(id,email,reg):
         init.df = init.df.append(df1)
         print("Registro: "+str(reg))
     except:
-        print("Registro: "+str(reg))
+        print("No data profile "+str(reg))
         
         
 def get_params():
@@ -159,6 +159,39 @@ def get_params():
     for row in rows:
         registro += 1
         get_order(row.id,row.email,registro)
+        if registro == 5000:
+            run()
+        if registro == 10000:
+            run()
+        if registro == 15000:
+            run()
+        if registro == 20000:
+            run()
+        if registro == 25000:
+            run()
+        if registro == 30000:
+            run()
+        if registro == 35000:
+            run()
+        if registro == 40000:
+            run()
+        if registro == 45000:
+            run()
+        if registro == 50000:
+            run()
+        if registro == 55000:
+            run()
+        if registro == 60000:
+            run()
+        if registro == 65000:
+            run()
+        if registro == 70000:
+            run()
+        if registro == 75000:
+            run()
+        if registro == 80000:
+            run()
+    run()
         
 def delete_duplicate():
     try:
@@ -173,7 +206,6 @@ def delete_duplicate():
 
 
 def run():
-    get_params()
     df = init.df
     df.reset_index(drop=True, inplace=True)
     json_data = df.to_json(orient = 'records')
@@ -192,4 +224,4 @@ def run():
     print(job.result())
     delete_duplicate()
     
-run()
+get_params()
