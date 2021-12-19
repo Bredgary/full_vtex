@@ -179,10 +179,10 @@ def get_order(id,email,reg):
     print("No data profile "+str(reg))
         
         
-def get_params():
+def get_params(requests):
   print("Cargando consulta")
   client = bigquery.Client()
-  QUERY = ('SELECT DISTINCT email  FROM `shopstar-datalake.staging_zone.shopstar_vtex_client_temp`WHERE (email NOT IN (SELECT email FROM `shopstar-datalake.staging_zone.shopstar_vtex_client_profile`))')
+  QUERY = ('SELECT DISTINCT id, email  FROM `shopstar-datalake.staging_zone.shopstar_vtex_client`WHERE (id NOT IN (SELECT id FROM `shopstar-datalake.staging_zone.shopstar_vtex_client_temp`))')
   query_job = client.query(QUERY)
   rows = query_job.result()
   registro = 0
@@ -204,22 +204,23 @@ def delete_duplicate():
 
 
 def run():
-  df = init.df
-  df.reset_index(drop=True, inplace=True)
-  json_data = df.to_json(orient = 'records')
-  json_object = json.loads(json_data)
-  
-  project_id = '999847639598'
-  dataset_id = 'staging_zone'
-  table_id = 'shopstar_vtex_client_profile'
-  
-  client  = bigquery.Client(project = project_id)
-  dataset  = client.dataset(dataset_id)
-  table = dataset.table(table_id)
-  job_config = bigquery.LoadJobConfig()
-  job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-  job = client.load_table_from_json(json_object, table, job_config = job_config)
-  print(job.result())
-  delete_duplicate()
-
-get_params()
+ # try:
+    df = init.df
+    df.reset_index(drop=True, inplace=True)
+    json_data = df.to_json(orient = 'records')
+    json_object = json.loads(json_data)
+    
+    project_id = '999847639598'
+    dataset_id = 'staging_zone'
+    table_id = 'shopstar_vtex_client_profile'
+    
+    client  = bigquery.Client(project = project_id)
+    dataset  = client.dataset(dataset_id)
+    table = dataset.table(table_id)
+    job_config = bigquery.LoadJobConfig()
+    job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+    job = client.load_table_from_json(json_object, table, job_config = job_config)
+    print(job.result())
+    delete_duplicate()
+ # except:
+  #  print("vacio")
