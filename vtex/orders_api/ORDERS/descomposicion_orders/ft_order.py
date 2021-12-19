@@ -49,9 +49,9 @@ class init:
     taxData = None
     checkedInPickupPointId = None
     cancellationData = None
-    init.seller_id  = None
-    init.seller_name = None
-    init.seller_logo = None
+    seller_id  = None
+    seller_name = None
+    seller_logo = None
     
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
     
