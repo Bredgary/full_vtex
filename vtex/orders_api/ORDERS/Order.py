@@ -1166,7 +1166,7 @@ def get_order(id,reg):
     
         df1 = pd.DataFrame({
             'orderId': str(id),
-            'emailTracked': str(emailTracked),
+            'emailTracked': str(init.emailTracked),
             'approvedBy': str(init.approvedBy),
             'cancelledBy': str(init.cancelledBy),
             'cancelReason': str(init.cancelReason),
