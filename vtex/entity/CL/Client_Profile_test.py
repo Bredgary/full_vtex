@@ -195,45 +195,13 @@ def get_params():
     for row in rows:
         registro += 1
         get_order(row.id,row.email,registro)
-        if registro == 5000:
-            run()
-        if registro == 10000:
-            run()
-        if registro == 15000:
-            run()
-        if registro == 20000:
-            run()
-        if registro == 25000:
-            run()
-        if registro == 30000:
-            run()
-        if registro == 35000:
-            run()
-        if registro == 40000:
-            run()
-        if registro == 45000:
-            run()
-        if registro == 50000:
-            run()
-        if registro == 55000:
-            run()
-        if registro == 60000:
-            run()
-        if registro == 65000:
-            run()
-        if registro == 70000:
-            run()
-        if registro == 75000:
-            run()
-        if registro == 80000:
-            run()
     run()
         
 def delete_duplicate():
     try:
         print("Eliminando duplicados")
         client = bigquery.Client()
-        QUERY = ('CREATE OR REPLACE TABLE `shopstar-datalake.test.shopstar_vtex_client_profile_test` AS SELECT DISTINCT * FROM `shopstar-datalake.test.shopstar_vtex_client_profile_test`')
+        QUERY = ('CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_vtex_client_profile` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.shopstar_vtex_client_profile`')
         query_job = client.query(QUERY)
         rows = query_job.result()
         print(rows)
@@ -248,8 +216,8 @@ def run():
     json_object = json.loads(json_data)
     
     project_id = '999847639598'
-    dataset_id = 'test'
-    table_id = 'shopstar_vtex_client_profile_test'
+    dataset_id = 'staging_zone'
+    table_id = 'shopstar_vtex_client_profile'
     
     client  = bigquery.Client(project = project_id)
     dataset  = client.dataset(dataset_id)
