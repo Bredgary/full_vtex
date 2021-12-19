@@ -1404,7 +1404,7 @@ def get_order(id,reg):
             'billingAddress_state': str(init.billingAddress_state),
             'billingAddress_country': str(init.billingAddress_country),
             'billingAddress_street': str(init.billingAddress_street),
-            'billingAddress_number': str(init.billingAddress_number),
+            'billingAddress_number': int(init.billingAddress_number),
             'billingAddress_neighborhood': str(init.billingAddress_neighborhood),
             'billingAddress_complement': str(init.billingAddress_complement),
             'billingAddress_reference': str(init.billingAddress_reference),
@@ -1496,7 +1496,7 @@ def run():
     dataset  = client.dataset(dataset_id)
     table = dataset.table(table_id)
     job_config = bigquery.LoadJobConfig()
-    #job_config.write_disposition = "WRITE_TRUNCATE"
+    job_config.write_disposition = "WRITE_TRUNCATE"
     job_config.autodetect = True
     job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
     job = client.load_table_from_json(json_object, table, job_config = job_config)
