@@ -1187,7 +1187,7 @@ def get_order(id,reg):
             'giftRegistryData': str(init.giftRegistryData),
             'marketingData': str(init.marketingData),
             'callCenterOperatorData': str(init.callCenterOperatorData),
-            'followUpEmail': str(followUpEmail),
+            'followUpEmail': str(init.followUpEmail),
             'lastMessage': str(init.lastMessage),
             'hostname': str(init.hostname),
             'invoiceData': str(init.invoiceData),
