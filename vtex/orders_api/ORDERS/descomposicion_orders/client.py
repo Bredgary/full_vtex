@@ -28,39 +28,30 @@ class init:
     customerClass = None
     
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-    
-def decrypt_email(email):
-    try:
-        url = "https://conversationtracker.vtex.com.br/api/pvt/emailMapping?an=mercury&alias="+email+""
-        headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-        response = requests.request("GET", url, headers=headers)
-        formatoJ = json.loads(response.text)
-        return formatoJ["email"]
-    except:
-        print("No se pudo desencriptar Email: "+str(email))
         
 def get_order(id,reg):
     try:
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
-        
-        clientProfileData = Fjson["clientProfileData"]
-        init.id = clientProfileData["id"]
-        init.email = clientProfileData["email"]
-        init.firstName = clientProfileData["firstName"]
-        init.lastName = clientProfileData["lastName"]
-        init.documentType = clientProfileData["documentType"]
-        init.document = clientProfileData["document"]
-        init.phone = clientProfileData["phone"]
-        init.corporateName = clientProfileData["corporateName"]
-        init.tradeName = clientProfileData["tradeName"]
-        init.corporateDocument = clientProfileData["corporateDocument"]
-        init.stateInscription = clientProfileData["stateInscription"]
-        init.corporatePhone = clientProfileData["corporatePhone"]
-        init.isCorporate = clientProfileData["isCorporate"]
-        init.userProfileId = clientProfileData["userProfileId"]
-        client_email = decrypt_email(str(init.email))
+        try:
+            clientProfileData = Fjson["clientProfileData"]
+            init.id = clientProfileData["id"]
+            init.email = clientProfileData["email"]
+            init.firstName = clientProfileData["firstName"]
+            init.lastName = clientProfileData["lastName"]
+            init.documentType = clientProfileData["documentType"]
+            init.document = clientProfileData["document"]
+            init.phone = clientProfileData["phone"]
+            init.corporateName = clientProfileData["corporateName"]
+            init.tradeName = clientProfileData["tradeName"]
+            init.corporateDocument = clientProfileData["corporateDocument"]
+            init.stateInscription = clientProfileData["stateInscription"]
+            init.corporatePhone = clientProfileData["corporatePhone"]
+            init.isCorporate = clientProfileData["isCorporate"]
+            init.userProfileId = clientProfileData["userProfileId"]
+        except:
+            print("vacio")
         
         df1 = pd.DataFrame({
             'orderId': str(id),
