@@ -1516,6 +1516,8 @@ def get_params():
         get_order(row.orderId,registro)
         if registro == 5:
             run()
+        if registro == 10:
+            run()
         if registro == 100:
             run()
         if registro == 200:
