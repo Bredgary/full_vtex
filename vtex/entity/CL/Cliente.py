@@ -238,7 +238,7 @@ def runTemp():
 	print(job.result())
 	delete_duplicate()
 
-def run(request):
+def run():
 	df = pd.DataFrame(cl_client(),
 					columns=['beneficio','beneficio2','crearGiftcard','profilePicture','proteccionDatos','terminosCondiciones','terminosPago','tradeName','rclastcart','rclastsession','rclastsessiondate','homePhone','phone','stateRegistration','email','userId','firstName','lastName','document','localeDefault','attach','approved','birthDate','businessPhone','corporateDocument','corporateName','documentType','gender','customerClass','priceTables','id','accountId','accountName','dataEntityId','createdBy','createdIn','updatedBy','updatedIn','lastInteractionBy','lastInteractionIn'])
 	df.reset_index(drop=True, inplace=True)
@@ -424,3 +424,4 @@ def run(request):
 	print(job.result())
 	delete_duplicate()
 	runTemp()
+run()
