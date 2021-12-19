@@ -1242,7 +1242,7 @@ def get_order(id,reg):
             'DIM_ITEMS_quantity': str(init.item_quantity),
             'DIM_ITEMS_seller': str(init.item_seller),
             'DIM_ITEMS_name': str(init.item_name),
-            'DIM_ITEMS_refId': str(init.item_refId),
+            'DIM_ITEMS_refId': Int(init.item_refId),
             'DIM_ITEMS_price': str(init.item_price),
             'DIM_ITEMS_listPrice': str(init.item_listPrice),
             'DIM_ITEMS_manualPrice': str(init.item_manualPrice),
