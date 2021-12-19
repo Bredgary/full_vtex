@@ -1429,7 +1429,7 @@ def get_order(id,reg):
             'itemMetadata_Name': str(init.itemMetadata_Name),
             'itemMetadata_SkuName': str(init.itemMetadata_SkuName),
             'itemMetadata_ProductId': init.itemMetadata_ProductId,
-            'itemMetadata_RefId': int(init.itemMetadata_RefId),
+            'itemMetadata_RefId': str(init.itemMetadata_RefId),
             'itemMetadata_Ean': init.itemMetadata_Ean,
             'itemMetadata_ImageUrl': str(init.itemMetadata_ImageUrl),
             'itemMetadata_DetailUrl': str(init.itemMetadata_DetailUrl),
