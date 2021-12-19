@@ -1430,7 +1430,7 @@ def get_order(id,reg):
             'itemMetadata_Name': str(init.itemMetadata_Name),
             'itemMetadata_SkuName': str(init.itemMetadata_SkuName),
             'itemMetadata_ProductId': init.itemMetadata_ProductId,
-            'itemMetadata_RefId': str(init.itemMetadata_RefId),
+            'itemMetadata_RefId': int(init.itemMetadata_RefId),
             'itemMetadata_Ean': init.itemMetadata_Ean,
             'itemMetadata_ImageUrl': str(init.itemMetadata_ImageUrl),
             'itemMetadata_DetailUrl': str(init.itemMetadata_DetailUrl),
@@ -1496,7 +1496,7 @@ def run():
     dataset  = client.dataset(dataset_id)
     table = dataset.table(table_id)
     job_config = bigquery.LoadJobConfig()
-    #job_config.write_disposition = "WRITE_TRUNCATE"
+    job_config.write_disposition = "WRITE_TRUNCATE"
     job_config.autodetect = True
     job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
     job = client.load_table_from_json(json_object, table, job_config = job_config)
