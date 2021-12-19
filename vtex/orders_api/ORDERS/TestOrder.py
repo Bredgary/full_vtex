@@ -12,7 +12,7 @@ from os.path import join
 class init:
     productList = []
     df = pd.DataFrame()
-   
+    
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
 def dicMemberCheck(key, dicObj):
@@ -24,8 +24,7 @@ def dicMemberCheck(key, dicObj):
 def decrypt_email(email):
     try:
         url = "https://conversationtracker.vtex.com.br/api/pvt/emailMapping?an=mercury&alias="+email+""
-        headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-        response = requests.request("GET", url, headers=headers)
+        response = requests.request("GET", url, headers=init.headers)
         formatoJ = json.loads(response.text)
         return formatoJ["email"]
     except:
