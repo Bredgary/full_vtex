@@ -56,7 +56,7 @@ def get_order(id,reg):
         df1 = pd.DataFrame({
             'orderId': str(id),
             'dim_client': str(init.id),
-            'email': str(client_email),
+            'email': str(init.email),
             'firstName': str(init.firstName),
             'lastName': str(init.lastName),
             'documentType': str(init.documentType),
@@ -85,18 +85,6 @@ def get_params():
     for row in rows:
         registro += 1
         get_order(row.orderId,registro)
-        if registro == 5000:
-            run()
-        if registro == 10000:
-            run()
-        if registro == 15000:
-            run()
-        if registro == 20000:
-            run()
-        if registro == 25000:
-            run()
-        if registro == 30000:
-            run()
     run()
             
             

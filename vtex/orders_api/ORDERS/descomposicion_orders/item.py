@@ -127,8 +127,8 @@ def get_order(id,reg):
         init.length = dimension["length"]
         init.weight = dimension["weight"]
         init.width = dimension["width"]
-        #except:
-         #   print("No hay datos. dimension")
+    except:
+        print("No hay datos. dimension")
         
     
         
