@@ -188,7 +188,7 @@ def get_order(id,email,reg):
 def get_params():
     print("Cargando consulta")
     client = bigquery.Client()
-    QUERY = ('SELECT id,email FROM `shopstar-datalake.staging_zone.shopstar_vtex_client`')
+    QUERY = ('SELECT DISTINCT id, email  FROM `shopstar-datalake.staging_zone.shopstar_vtex_client`WHERE (id NOT IN (SELECT id FROM `shopstar-datalake.staging_zone.shopstar_vtex_client_profile`))')
     query_job = client.query(QUERY)
     rows = query_job.result()
     registro = 0
