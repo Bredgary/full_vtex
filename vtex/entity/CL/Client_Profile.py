@@ -47,6 +47,15 @@ class init:
   profileCompleteOnLoading = None
   profileErrorOnLoading = None
   isComplete = None
+  accountId = None
+  paymentSystem = None
+  paymentSystemName = None
+  cardNumber = None
+  bin = None
+  availableAddresses_0 = None
+  availableAddresses_1 = None
+  expirationDate = None
+  isExpired = None
   
   
   headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
@@ -61,8 +70,27 @@ def get_order(id,email,reg):
         try:
             init.userProfileId = Fjson["userProfileId"]
             init.profileProvider = Fjson["profileProvider"]
+            init.isComplete = Fjson["isComplete"]
         except:
             userProfileId = "Vacio"
+        try:
+            availableAccounts = Fjson["availableAccounts"]
+            for x in availableAccounts:
+                init.accountId = x["accountId"]
+                init.paymentSystem = x["paymentSystem"]
+                init.paymentSystemName = x["paymentSystemName"]
+                init.cardNumber = x["cardNumber"]
+                init.bin = x["bin"]
+                try:
+                    availableAddresses = x["availableAddresses"]
+                    init.availableAddresses_0 = availableAddresses[0]
+                    init.availableAddresses_1 = availableAddresses[1]
+                except:
+                    print("Ramificacion no existe")
+                init.expirationDate = x["expirationDate"]
+                init.isExpired = x["isExpired"]
+        except:
+            print("availableAddresses Vacio")
         
         try:
             init.availableAddresses = Fjson["availableAddresses"]
@@ -103,7 +131,6 @@ def get_order(id,email,reg):
             init.isCorporate = userProfile["isCorporate"]
             init.profileCompleteOnLoading = userProfile["profileCompleteOnLoading"]
             init.profileErrorOnLoading = userProfile["profileErrorOnLoading"]
-            init.isComplete = Fjson["isComplete"]
         except:
             print("client profile")
         
@@ -142,6 +169,15 @@ def get_order(id,email,reg):
             'isCorporate': str(init.isCorporate),
             'profileCompleteOnLoading': str(init.profileCompleteOnLoading),
             'profileErrorOnLoading': str(init.profileErrorOnLoading),
+            'accountId': str(init.accountId),
+            'paymentSystem': str(init.paymentSystem),
+            'paymentSystemName': str(init.paymentSystemName),
+            'cardNumber': str(init.cardNumber),
+            'bin': str(init.bin),
+            'availableAddresses_0': str(init.availableAddresses_0),
+            'availableAddresses_1': str(init.availableAddresses_1),
+            'expirationDate': str(init.expirationDate),
+            'isExpired': str(init.isExpired),
             'isComplete': str(init.isComplete)}, index=[0])
         init.df = init.df.append(df1)
         print("Registro: "+str(reg))
@@ -152,45 +188,13 @@ def get_order(id,email,reg):
 def get_params():
     print("Cargando consulta")
     client = bigquery.Client()
-    QUERY = ('SELECT id,email FROM `shopstar-datalake.staging_zone.shopstar_vtex_client`')
+    QUERY = ('SELECT DISTINCT id, email  FROM `shopstar-datalake.staging_zone.shopstar_vtex_client`WHERE (id NOT IN (SELECT id FROM `shopstar-datalake.staging_zone.shopstar_vtex_client_profile`))')
     query_job = client.query(QUERY)
     rows = query_job.result()
     registro = 0
     for row in rows:
         registro += 1
         get_order(row.id,row.email,registro)
-        if registro == 5000:
-            run()
-        if registro == 10000:
-            run()
-        if registro == 15000:
-            run()
-        if registro == 20000:
-            run()
-        if registro == 25000:
-            run()
-        if registro == 30000:
-            run()
-        if registro == 35000:
-            run()
-        if registro == 40000:
-            run()
-        if registro == 45000:
-            run()
-        if registro == 50000:
-            run()
-        if registro == 55000:
-            run()
-        if registro == 60000:
-            run()
-        if registro == 65000:
-            run()
-        if registro == 70000:
-            run()
-        if registro == 75000:
-            run()
-        if registro == 80000:
-            run()
     run()
         
 def delete_duplicate():
