@@ -491,7 +491,7 @@ def decrypt_email(email):
         print("No se pudo desencriptar Email: "+str(email))
      
 def get_order(id,reg):
-    try:
+    #try:
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
@@ -1466,8 +1466,8 @@ def get_order(id,reg):
         init.df = init.df.append(df1)
         
         print("Registro: "+str(reg))
-    except:
-        print("vacio")
+    #except:
+     #   print("vacio")
 
 def delete_duplicate():
     try:
