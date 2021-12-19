@@ -179,7 +179,7 @@ def get_order(id,email,reg):
     print("No data profile "+str(reg))
         
         
-def get_params(requests):
+def get_params():
   print("Cargando consulta")
   client = bigquery.Client()
   QUERY = ('SELECT DISTINCT id, email  FROM `shopstar-datalake.staging_zone.shopstar_vtex_client`WHERE (id NOT IN (SELECT id FROM `shopstar-datalake.staging_zone.shopstar_vtex_client_temp`))')
@@ -224,3 +224,5 @@ def run():
     delete_duplicate()
  # except:
   #  print("vacio")
+  
+get_params()
