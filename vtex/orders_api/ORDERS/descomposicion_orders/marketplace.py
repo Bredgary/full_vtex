@@ -31,23 +31,19 @@ def get_order(id,reg):
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
         
-       
         try:
             marketplace = Fjson["marketplace"]
             init.baseURL = marketplace["baseURL"]
             init.isCertified = marketplace["isCertified"]
             init.name = marketplace["name"]
+            df1 = pd.DataFrame({
+                'orderId': str(id),
+                'marketplace_baseURL': str(init.baseURL),
+                'marketplace_isCertified': str(init.isCertified),
+                'marketplace_name': str(init.name)}, index=[0])
+            init.df = init.df.append(df1)
         except:
             print("marketplace. No tiene datos")
-        
-        
-        df1 = pd.DataFrame({
-            'orderId': str(id),
-            'marketplace_baseURL': str(init.baseURL),
-            'marketplace_isCertified': str(init.isCertified),
-            'marketplace_name': str(init.name)}, index=[0])
-        init.df = init.df.append(df1)
-        
         print("Registro: "+str(reg))
     except:
         print("vacio")
