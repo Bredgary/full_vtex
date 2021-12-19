@@ -975,7 +975,7 @@ def get_order(id,reg):
         try:
             init.courierId = deliveryIds["courierId"]
             init.courierName = deliveryIds["courierName"]
-            init.dockId = deliveryIds["dockId"]
+            init.dockId = int(deliveryIds["dockId"])
             init.quantity = deliveryIds["quantity"]
             init.warehouseId = deliveryIds["warehouseId"]
         except:
