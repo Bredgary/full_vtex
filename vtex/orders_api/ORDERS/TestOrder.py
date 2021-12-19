@@ -1439,7 +1439,7 @@ def get_order(id,reg):
             'invoiceNumber': str(init.invoiceNumber),
             'invoiceValue': str(init.invoiceValue),
             'invoiceUrl': str(init.invoiceUrl),
-            'issuanceDate': init.issuanceDate,
+            'issuanceDate': str(init.issuanceDate),
             'trackingNumber': str(init.trackingNumber),
             'invoiceKey': str(init.invoiceKey),
             'trackingUrl': str(init.trackingUrl),
