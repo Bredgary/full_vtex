@@ -1343,7 +1343,7 @@ def get_order(id,reg):
             'DIM_SHIPPING_DATA_slas_pickupStoreInfo_isPickupStore_03': init.slas_pickupStoreInfo_isPickupStore_03,
             'DIM_SHIPPING_DATA_courierId_delivery': str(init.courierId),
             'DIM_SHIPPING_DATA_courierName_delivery': str(init.courierName),
-            'DIM_SHIPPING_DATA_dockId_delivery': init.dockId,
+            'DIM_SHIPPING_DATA_dockId_delivery': int(init.dockId),
             'DIM_SHIPPING_DATA_quantity_delivery': init.quantity,
             'DIM_SHIPPING_DATA_warehouseId': str(init.warehouseId),
             'DIM_SHIPPING_DATA_pickupStoreInfo_additionalInfo': str(init.pickupStoreInfo_additionalInfo),
@@ -1496,7 +1496,7 @@ def run():
     dataset  = client.dataset(dataset_id)
     table = dataset.table(table_id)
     job_config = bigquery.LoadJobConfig()
-    #job_config.write_disposition = "WRITE_TRUNCATE"
+    job_config.write_disposition = "WRITE_TRUNCATE"
     job_config.autodetect = True
     job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
     job = client.load_table_from_json(json_object, table, job_config = job_config)
