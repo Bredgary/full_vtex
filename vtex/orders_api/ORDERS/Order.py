@@ -1189,7 +1189,6 @@ def get_order(id,reg):
             'followUpEmail': str(init.followUpEmail),
             'lastMessage': str(init.lastMessage),
             'hostname': str(init.hostname),
-            'invoiceData': str(init.invoiceData),
             'openTextField': str(init.openTextField),
             'roundingError': str(init.roundingError),
             'orderFormId': str(init.orderFormId),
@@ -1290,7 +1289,6 @@ def get_order(id,reg):
             'DIM_SHIPPING_DATA_neighborhood': str(init.neighborhood),
             'DIM_SHIPPING_DATA_complement': str(init.complement),
             'DIM_SHIPPING_DATA_reference': str(init.reference),
-            'DIM_SHIPPING_DATA_trackingHints': str(init.trackingHints),
             'DIM_SHIPPING_DATA_deliveryChannel': str(init.deliveryChannel),
             'DIM_SHIPPING_DATA_addressId': str(init.addressId),
             'DIM_SHIPPING_DATA_polygonName': str(init.polygonName),
@@ -1300,7 +1298,6 @@ def get_order(id,reg):
             'DIM_SHIPPING_DATA_price': str(init.price),
             'DIM_SHIPPING_DATA_listPrice': str(init.listPrice),
             'DIM_SHIPPING_DATA_sellingPrice': str(init.sellingPrice),
-            'DIM_SHIPPING_DATA_deliveryWindow': str(init.deliveryWindow),
             'DIM_SHIPPING_DATA_deliveryCompany': str(init.deliveryCompany),
             'DIM_SHIPPING_DATA_shippingEstimate': str(init.shippingEstimate),
             'DIM_SHIPPING_DATA_shippingEstimateDate': str(init.shippingEstimateDate),
@@ -1312,7 +1309,6 @@ def get_order(id,reg):
             'DIM_SHIPPING_DATA_slas_deliveryChannel': str(init.slas_deliveryChannel),
             'DIM_SHIPPING_DATA_slas_polygonName': str(init.slas_polygonName),
             'DIM_SHIPPING_DATA_slas_pickupStoreInfo_additionalInfo': str(init.slas_pickupStoreInfo_additionalInfo),
-            'DIM_SHIPPING_DATA_slas_pickupStoreInfo_address': str(init.slas_pickupStoreInfo_address),
             'DIM_SHIPPING_DATA_slas_pickupStoreInfo_dockId': str(init.slas_pickupStoreInfo_dockId),
             'DIM_SHIPPING_DATA_slas_pickupStoreInfo_friendlyName': str(init.slas_pickupStoreInfo_friendlyName),
             'DIM_SHIPPING_DATA_slas_pickupStoreInfo_isPickupStore': str(init.slas_pickupStoreInfo_isPickupStore),
@@ -1348,7 +1344,6 @@ def get_order(id,reg):
             'DIM_SHIPPING_DATA_slas_deliveryChannel_03': str(init.slas_deliveryChannel_03),
             'DIM_SHIPPING_DATA_slas_polygonName_03': str(init.slas_polygonName_03),
             'DIM_SHIPPING_DATA_slas_pickupStoreInfo_additionalInfo_03': str(init.slas_pickupStoreInfo_additionalInfo_03),
-            'DIM_SHIPPING_DATA_slas_pickupStoreInfo_address_03': str(init.slas_pickupStoreInfo_address_03),
             'DIM_SHIPPING_DATA_slas_pickupStoreInfo_dockId_03': str(init.slas_pickupStoreInfo_dockId_03),
             'DIM_SHIPPING_DATA_slas_pickupStoreInfo_friendlyName_03': str(init.slas_pickupStoreInfo_friendlyName_03),
             'DIM_SHIPPING_DATA_slas_pickupStoreInfo_isPickupStore_03': str(init.slas_pickupStoreInfo_isPickupStore_03),
@@ -1358,7 +1353,6 @@ def get_order(id,reg):
             'DIM_SHIPPING_DATA_quantity_delivery': str(init.quantity),
             'DIM_SHIPPING_DATA_warehouseId': str(init.warehouseId),
             'DIM_SHIPPING_DATA_pickupStoreInfo_additionalInfo': str(init.pickupStoreInfo_additionalInfo),
-            'DIM_SHIPPING_DATA_pickupStoreInfo_address': str(init.pickupStoreInfo_address),
             'DIM_SHIPPING_DATA_pickupStoreInfo_dockId': str(init.pickupStoreInfo_dockId),
             'DIM_SHIPPING_DATA_pickupStoreInfo_friendlyName': str(init.pickupStoreInfo_friendlyName),
             'DIM_SHIPPING_DATA_pickupStoreInfo_isPickupStore': str(init.pickupStoreInfo_isPickupStore),
@@ -1518,7 +1512,7 @@ def run():
 def get_params():
     print("Cargando consulta")
     client = bigquery.Client()
-    QUERY = ('SELECT DISTINCT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`WHERE (orderId NOT IN (SELECT orderId FROM `shopstar-datalake.test.shopstar_vtex_order`))')
+    QUERY = ('SELECT DISTINCT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`WHERE (orderId NOT IN (SELECT orderId FROM `shopstar-datalake.staging_zone.shopstar_vtex_order`))')
     query_job = client.query(QUERY)  
     rows = query_job.result()
     registro = 0
