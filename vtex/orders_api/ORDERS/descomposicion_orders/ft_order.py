@@ -49,6 +49,9 @@ class init:
     taxData = None
     checkedInPickupPointId = None
     cancellationData = None
+    init.seller_id  = None
+    init.seller_name = None
+    init.seller_logo = None
     
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
     
@@ -99,6 +102,17 @@ def get_order(id,reg):
         init.taxData = Fjson["taxData"]
         init.checkedInPickupPointId = Fjson["checkedInPickupPointId"]
         init.cancellationData = Fjson["cancellationData"]
+        try:
+            sellers_ = Fjson["sellers"]
+        except:
+            print("sellers_ No tiene datos")
+        try:
+            sellers = sellers_[0]
+            init.seller_id = sellers["id"]
+            init.seller_name = sellers["name"]
+            init.seller_logo = sellers["logo"]
+        except:
+            print("sellers No tiene datos")
         
         
         df1 = pd.DataFrame({
@@ -139,6 +153,9 @@ def get_order(id,reg):
             'taxData': str(init.taxData),
             'checkedInPickupPointId': str(init.checkedInPickupPointId),
             'cancellationData': str(init.cancellationData),
+            'seller_id': str(init.seller_id),
+            'seller_name': str(init.seller_name),
+            'seller_logo': str(init.seller_logo),
             'followUpEmail': str(init.followUpEmail)}, index=[0])
         init.df = init.df.append(df1)
         print("Registro: "+str(reg))
@@ -146,6 +163,7 @@ def get_order(id,reg):
         print("vacio")
         
         
+
 def get_params():
     print("Cargando consulta")
     client = bigquery.Client()
