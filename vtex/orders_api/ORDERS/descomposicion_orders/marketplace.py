@@ -42,7 +42,7 @@ def get_order(id,reg):
         
         
         df1 = pd.DataFrame({
-            'orderId': str(init.orderId),
+            'orderId': str(id),
             'marketplace_baseURL': str(init.baseURL),
             'marketplace_isCertified': str(init.isCertified),
             'marketplace_name': str(init.name)}, index=[0])
@@ -57,7 +57,7 @@ def delete_duplicate():
         print("Eliminando duplicados")
         client = bigquery.Client()
         QUERY = (
-            'CREATE OR REPLACE TABLE `shopstar-datalake.test.shopstar_vtex_order` AS SELECT DISTINCT * FROM `shopstar-datalake.test.shopstar_vtex_order`')
+            'CREATE OR REPLACE TABLE `shopstar-datalake.test.shopstar_order_marketplace` AS SELECT DISTINCT * FROM `shopstar-datalake.test.shopstar_order_marketplace`')
         query_job = client.query(QUERY)
         rows = query_job.result()
         print(rows)
