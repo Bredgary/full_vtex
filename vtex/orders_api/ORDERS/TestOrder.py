@@ -619,6 +619,8 @@ def get_order(id,reg):
             Reason = cancellationData["Reason"]
         except:
             print("cancellationData")
+            
+        emailTracked = Fjson["emailTracked"]
     
         df1 = pd.DataFrame({
             'orderId': id,
