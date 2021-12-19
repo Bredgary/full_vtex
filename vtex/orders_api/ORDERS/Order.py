@@ -1160,7 +1160,6 @@ def get_order(id,reg):
             init.RequestedBySellerNotification = cancellationData["RequestedBySellerNotification"]
             init.RequestedByPaymentNotification = cancellationData["RequestedByPaymentNotification"]
             init.Reason = cancellationData["Reason"]
-            init.CancellationDate = cancellationData["CancellationDate"]
         except:
             print("cancellationData")
     
@@ -1449,7 +1448,6 @@ def get_order(id,reg):
             'itemMetadata_DetailUrl': str(init.itemMetadata_DetailUrl),
             'subscriptionData': str(init.subscriptionData),
             'taxData': str(init.taxData),
-            'cancellationData': str(init.cancellationData),
             'courier': str(init.courier),
             'invoiceNumber': str(init.invoiceNumber),
             'invoiceValue': str(init.invoiceValue),
@@ -1511,6 +1509,8 @@ def run():
     dataset  = client.dataset(dataset_id)
     table = dataset.table(table_id)
     job_config = bigquery.LoadJobConfig()
+    job_config.write_disposition = "WRITE_TRUNCATE"
+    job_config.autodetect = True
     job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
     job = client.load_table_from_json(json_object, table, job_config = job_config)
     print(job.result())
