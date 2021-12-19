@@ -33,7 +33,7 @@ def decrypt_email(email):
 def get_order(id,reg):
    # try:
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
-        response = requests.request("GET", url, headers=headers)
+        response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
         
         
