@@ -782,14 +782,6 @@ def get_order(id,reg):
         except:
             print("No hay datos tax")
         try:
-            if  Total[4]:
-                change = Total[4]
-                init.total_id_change = change["id"]
-                init.total_name_change = change["name"]
-                init.total_value_change = change["value"]
-        except:
-            print("No hay datos change")
-        try:
             init.items_uniqueId = Items["uniqueId"]
             init.items_id = Items["id"]
             init.items_productId = Items["productId"]
@@ -1104,22 +1096,12 @@ def get_order(id,reg):
             print("No hay datos marketplace")
         
         try:
-            followUpEmail = decrypt_email(str(init.followUpEmail))
-        except:
-            followUpEmail = None
-            print("nulo")
-        
-        try:
             client_email = decrypt_email(str(init.client_email))
         except:
             client_email = None
             print("nulo")
         
-        try:
-            emailTracked = decrypt_email(str(init.emailTracked))
-        except:
-            emailTracked = None
-            print("nulo")
+        
         
         
         try:
