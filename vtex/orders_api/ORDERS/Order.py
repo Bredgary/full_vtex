@@ -1218,7 +1218,7 @@ def get_order(id,reg):
             'DIM_ITEMS_uniqueId': str(init.items_uniqueId),
             'DIM_ITEMS_items_id': init.items_id,
             'DIM_ITEMS_productId': init.items_productId,
-            'DIM_ITEMS_ean': int(init.items_ean),
+            'DIM_ITEMS_ean': init.items_ean,
             'DIM_ITEMS_lockId': str(init.items_lockId),
             'DIM_ITEMS_quantity': init.item_quantity,
             'DIM_ITEMS_seller': str(init.item_seller),
