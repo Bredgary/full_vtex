@@ -1582,7 +1582,6 @@ def delete_duplicate():
 
 def run():
     try:
-        get_params()
         df = init.df
         df.reset_index(drop=True, inplace=True)
         json_data = df.to_json(orient = 'records')
@@ -1600,4 +1599,4 @@ def run():
         delete_duplicate()
     except:
         print("Error")
-run()
+get_params()
