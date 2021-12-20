@@ -1345,7 +1345,7 @@ def get_order(id,reg):
             'DIM_SHIPPING_DATA_slas_pickupStoreInfo_isPickupStore_03': init.slas_pickupStoreInfo_isPickupStore_03,
             'DIM_SHIPPING_DATA_courierId_delivery': str(init.courierId),
             'DIM_SHIPPING_DATA_courierName_delivery': str(init.courierName),
-            'DIM_SHIPPING_DATA_dockId_delivery': int(init.dockId),
+            'DIM_SHIPPING_DATA_dockId_delivery': init.dockId,
             'DIM_SHIPPING_DATA_quantity_delivery': init.quantity,
             'DIM_SHIPPING_DATA_warehouseId': str(init.warehouseId),
             'DIM_SHIPPING_DATA_pickupStoreInfo_additionalInfo': str(init.pickupStoreInfo_additionalInfo),
