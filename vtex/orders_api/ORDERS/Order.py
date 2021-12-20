@@ -13,465 +13,465 @@ class init:
     productList = []
     df = pd.DataFrame()
     cache = 0
-    emailTracked = None
-    approvedBy = None
-    cancelledBy = None
-    cancelReason = None
-    orderId = None
-    sequence = None
-    marketplaceOrderId = None
-    marketplaceServicesEndpoint = None
-    sellerOrderId = None
-    origin = None
-    affiliateId = None
-    salesChannel = None
-    merchantName = None
-    status = None
-    statusDescription = None
-    value = None
-    creationDate = None
-    lastChange = None
-    orderGroup = None
-    giftRegistryData = None
-    marketingData = None
-    callCenterOperatorData = None
-    followUpEmail = None
-    lastMessage = None
-    hostname = None
-    invoiceData = None
-    openTextField = None
-    roundingError = None
-    orderFormId = None
-    commercialConditionData = None
-    isCompleted = None
-    customData = None
-    allowCancellation = None
-    allowEdition = None
-    isCheckedIn = None
-    authorizedDate = None
-    invoicedDate = None
+    emailTracked = "null"
+    approvedBy = "null"
+    cancelledBy = "null"
+    cancelReason = "null"
+    orderId = "null"
+    sequence = "null"
+    marketplaceOrderId = "null"
+    marketplaceServicesEndpoint = "null"
+    sellerOrderId = "null"
+    origin = "null"
+    affiliateId = "null"
+    salesChannel = "null"
+    merchantName = "null"
+    status = "null"
+    statusDescription = "null"
+    value = "null"
+    creationDate = "null"
+    lastChange = "null"
+    orderGroup = "null"
+    giftRegistryData = "null"
+    marketingData = "null"
+    callCenterOperatorData = "null"
+    followUpEmail = "null"
+    lastMessage = "null"
+    hostname = "null"
+    invoiceData = "null"
+    openTextField = "null"
+    roundingError = "null"
+    orderFormId = "null"
+    commercialConditionData = "null"
+    isCompleted = "null"
+    customData = "null"
+    allowCancellation = "null"
+    allowEdition = "null"
+    isCheckedIn = "null"
+    authorizedDate = "null"
+    invoicedDate = "null"
     
     '''
     Dimensiones TOTAL
     '''
     
-    total_id_items = None
-    total_name_items = None
-    total_value_items = None
-    total_id_discounts = None
-    total_name_discounts = None
-    total_value_discounts = None
-    total_id_shipping = None
-    total_name_shipping = None
-    total_value_shipping = None
-    total_id_tax = None
-    total_name_tax = None
-    total_value_tax = None
-    total_id_change = None
-    total_name_change = None
-    total_value_change = None
+    total_id_items = "null"
+    total_name_items = "null"
+    total_value_items = "null"
+    total_id_discounts = "null"
+    total_name_discounts = "null"
+    total_value_discounts = "null"
+    total_id_shipping = "null"
+    total_name_shipping = "null"
+    total_value_shipping = "null"
+    total_id_tax = "null"
+    total_name_tax = "null"
+    total_value_tax = "null"
+    total_id_change = "null"
+    total_name_change = "null"
+    total_value_change = "null"
 
     '''
     Dimensiones ITEMS
     '''
 
-    items_uniqueId = None
-    items_id = None
-    items_productId = None
-    items_ean = None
-    items_lockId = None
-    item_quantity = None
-    item_seller = None
-    item_name = None
-    item_refId = None
-    item_price = None
-    item_listPrice = None
-    item_manualPrice = None
-    item_imageUrl = None
-    item_detailUrl = None
-    item_sellerSku = None
-    item_priceValidUntil = None
-    item_commission = None
-    item_tax = None
-    item_preSaleDate = None
-    item_itemAttachment_name = None
-    item_measurementUnit = None
-    item_unitMultiplier = None
-    item_sellingPrice = None
-    item_isGift = None
-    item_shippingPrice = None
-    item_rewardValue = None
-    item_freightCommission = None
-    item_taxCode = None
-    item_parentItemIndex = None
-    item_parentAssemblyBinding = None
-    item_price_definition = None
-    item_serialNumbers = None
+    items_uniqueId = "null"
+    items_id = "null"
+    items_productId = "null"
+    items_ean = "null"
+    items_lockId = "null"
+    item_quantity = "null"
+    item_seller = "null"
+    item_name = "null"
+    item_refId = "null"
+    item_price = "null"
+    item_listPrice = "null"
+    item_manualPrice = "null"
+    item_imageUrl = "null"
+    item_detailUrl = "null"
+    item_sellerSku = "null"
+    item_priceValidUntil = "null"
+    item_commission = "null"
+    item_tax = "null"
+    item_preSaleDate = "null"
+    item_itemAttachment_name = "null"
+    item_measurementUnit = "null"
+    item_unitMultiplier = "null"
+    item_sellingPrice = "null"
+    item_isGift = "null"
+    item_shippingPrice = "null"
+    item_rewardValue = "null"
+    item_freightCommission = "null"
+    item_taxCode = "null"
+    item_parentItemIndex = "null"
+    item_parentAssemblyBinding = "null"
+    item_price_definition = "null"
+    item_serialNumbers = "null"
     
     '''
     Dimensiones ITEMS_INFORMATION__ADITIONAL
     '''
-    brandName = None
-    brandId = None
-    categoriesIds = None
-    productClusterId = None
-    commercialConditionId = None
-    offeringInfo = None
-    offeringType = None
-    offeringTypeId = None
+    brandName = "null"
+    brandId = "null"
+    categoriesIds = "null"
+    productClusterId = "null"
+    commercialConditionId = "null"
+    offeringInfo = "null"
+    offeringType = "null"
+    offeringTypeId = "null"
     '''
     Dimensiones ITEMS_INFORMATION__ADITIONAL_dimension
     '''
-    cubicweight = None
-    height = None
-    length = None
-    weight = None
-    width = None
+    cubicweight = "null"
+    height = "null"
+    length = "null"
+    weight = "null"
+    width = "null"
     '''
     Dimensiones ITEMS_priceDefinition
     '''
-    total = None
-    calculatedSellingPrice = None
+    total = "null"
+    calculatedSellingPrice = "null"
     
     '''
     clientProfileData
     '''
     
-    client_id = None
-    client_email = None
-    client_firstName = None
-    client_lastName = None
-    client_documentType = None
-    client_document = None
-    client_phone = None
-    client_corporateName = None
-    client_tradeName = None
-    client_corporateDocument = None
-    client_stateInscription = None
-    client_corporatePhone = None
-    client_isCorporate = None
-    client_userProfileId = None
-    client_customerClass = None
+    client_id = "null"
+    client_email = "null"
+    client_firstName = "null"
+    client_lastName = "null"
+    client_documentType = "null"
+    client_document = "null"
+    client_phone = "null"
+    client_corporateName = "null"
+    client_tradeName = "null"
+    client_corporateDocument = "null"
+    client_stateInscription = "null"
+    client_corporatePhone = "null"
+    client_isCorporate = "null"
+    client_userProfileId = "null"
+    client_customerClass = "null"
     
     '''
     "ratesAndBenefitsData"
     '''
     
-    id_ratesAndBenefits = None
+    id_ratesAndBenefits = "null"
     
     '''
     "shippingData"
     '''
     
-    shippingData_id = None
+    shippingData_id = "null"
     
     '''
     address
     '''
     
-    addressType = None
-    receiverName = None
-    addressId = None
-    postalCode = None
-    city = None
-    state = None
-    country = None
-    street = None
-    number = None
-    neighborhood = None
-    complement = None
-    reference = None
+    addressType = "null"
+    receiverName = "null"
+    addressId = "null"
+    postalCode = "null"
+    city = "null"
+    state = "null"
+    country = "null"
+    street = "null"
+    number = "null"
+    neighborhood = "null"
+    complement = "null"
+    reference = "null"
     
     '''
     logisticsInfo
     '''
-    deliveryChannel = None
-    trackingHints = None
-    addressId = None
-    polygonName = None
-    itemIndex = None
-    selectedSla = None
-    lockTTL = None
-    price = None
-    listPrice = None
-    sellingPrice = None
-    deliveryWindow = None
-    deliveryCompany = None
-    shippingEstimate = None
-    shippingEstimateDate = None
+    deliveryChannel = "null"
+    trackingHints = "null"
+    addressId = "null"
+    polygonName = "null"
+    itemIndex = "null"
+    selectedSla = "null"
+    lockTTL = "null"
+    price = "null"
+    listPrice = "null"
+    sellingPrice = "null"
+    deliveryWindow = "null"
+    deliveryCompany = "null"
+    shippingEstimate = "null"
+    shippingEstimateDate = "null"
     
     '''
     slas
     '''
-    slas_id = None
-    slas_name = None
-    slas_shippingEstimate = None
-    slas_deliveryWindow = None
-    slas_price = None
-    slas_deliveryChannel = None
-    slas_polygonName = None
+    slas_id = "null"
+    slas_name = "null"
+    slas_shippingEstimate = "null"
+    slas_deliveryWindow = "null"
+    slas_price = "null"
+    slas_deliveryChannel = "null"
+    slas_polygonName = "null"
     '''
     slas_pickupStoreInfo
     '''
-    slas_pickupStoreInfo_additionalInfo = None
-    slas_pickupStoreInfo_address = None
-    slas_pickupStoreInfo_dockId = None
-    slas_pickupStoreInfo_friendlyName = None
-    slas_pickupStoreInfo_isPickupStore = None
+    slas_pickupStoreInfo_additionalInfo = "null"
+    slas_pickupStoreInfo_address = "null"
+    slas_pickupStoreInfo_dockId = "null"
+    slas_pickupStoreInfo_friendlyName = "null"
+    slas_pickupStoreInfo_isPickupStore = "null"
     
     '''
     slas_1
     '''
-    slas_id_01 = None
-    slas_name_01 = None
-    slas_shippingEstimate_01 = None
-    slas_deliveryWindow_01 = None
-    slas_price_01 = None
-    slas_deliveryChannel_01 = None
-    slas_polygonName_01 = None
+    slas_id_01 = "null"
+    slas_name_01 = "null"
+    slas_shippingEstimate_01 = "null"
+    slas_deliveryWindow_01 = "null"
+    slas_price_01 = "null"
+    slas_deliveryChannel_01 = "null"
+    slas_polygonName_01 = "null"
     '''
     slas_pickupStoreInfo_1
     '''
-    slas_pickupStoreInfo_additionalInfo_01 = None
-    slas_pickupStoreInfo_address_01 = None
-    slas_pickupStoreInfo_dockId_01 = None
-    slas_pickupStoreInfo_friendlyName_01 = None
-    slas_pickupStoreInfo_isPickupStore_01 = None
+    slas_pickupStoreInfo_additionalInfo_01 = "null"
+    slas_pickupStoreInfo_address_01 = "null"
+    slas_pickupStoreInfo_dockId_01 = "null"
+    slas_pickupStoreInfo_friendlyName_01 = "null"
+    slas_pickupStoreInfo_isPickupStore_01 = "null"
     
     '''
     slas_2
     '''
-    slas_id_02 = None
-    slas_name_02 = None
-    slas_shippingEstimate_02 = None
-    slas_deliveryWindow_02 = None
-    slas_price_02 = None
-    slas_deliveryChannel_02 = None
-    slas_polygonName_02 = None
+    slas_id_02 = "null"
+    slas_name_02 = "null"
+    slas_shippingEstimate_02 = "null"
+    slas_deliveryWindow_02 = "null"
+    slas_price_02 = "null"
+    slas_deliveryChannel_02 = "null"
+    slas_polygonName_02 = "null"
     '''
     slas_pickupStoreInfo_2
     '''
-    slas_pickupStoreInfo_additionalInfo_02 = None
-    slas_pickupStoreInfo_address_02 = None
-    slas_pickupStoreInfo_dockId_02 = None
-    slas_pickupStoreInfo_friendlyName_02 = None
-    slas_pickupStoreInfo_isPickupStore_02 = None
+    slas_pickupStoreInfo_additionalInfo_02 = "null"
+    slas_pickupStoreInfo_address_02 = "null"
+    slas_pickupStoreInfo_dockId_02 = "null"
+    slas_pickupStoreInfo_friendlyName_02 = "null"
+    slas_pickupStoreInfo_isPickupStore_02 = "null"
     
     '''
     slas_3
     '''
-    slas_id_03 = None
-    slas_name_03 = None
-    slas_shippingEstimate_03 = None
-    slas_deliveryWindow_03 = None
-    slas_price_03 = None
-    slas_deliveryChannel_03 = None
-    slas_polygonName_03 = None
+    slas_id_03 = "null"
+    slas_name_03 = "null"
+    slas_shippingEstimate_03 = "null"
+    slas_deliveryWindow_03 = "null"
+    slas_price_03 = "null"
+    slas_deliveryChannel_03 = "null"
+    slas_polygonName_03 = "null"
     '''
     slas_pickupStoreInfo_3
     '''
-    slas_pickupStoreInfo_additionalInfo_03 = None
-    slas_pickupStoreInfo_address_03 = None
-    slas_pickupStoreInfo_dockId_03 = None
-    slas_pickupStoreInfo_friendlyName_03 = None
-    slas_pickupStoreInfo_isPickupStore_03 = None
+    slas_pickupStoreInfo_additionalInfo_03 = "null"
+    slas_pickupStoreInfo_address_03 = "null"
+    slas_pickupStoreInfo_dockId_03 = "null"
+    slas_pickupStoreInfo_friendlyName_03 = "null"
+    slas_pickupStoreInfo_isPickupStore_03 = "null"
     
     '''
     deliveryIds
     '''
-    courierId = None
-    courierName = None
-    dockId = None
-    quantity = None
-    warehouseId = None
+    courierId = "null"
+    courierName = "null"
+    dockId = "null"
+    quantity = "null"
+    warehouseId = "null"
     
     '''
     pickupStoreInfo
     '''
-    pickupStoreInfo_additionalInfo = None
-    pickupStoreInfo_address = None
-    pickupStoreInfo_dockId = None
-    pickupStoreInfo_friendlyName = None
-    pickupStoreInfo_isPickupStore = None
+    pickupStoreInfo_additionalInfo = "null"
+    pickupStoreInfo_address = "null"
+    pickupStoreInfo_dockId = "null"
+    pickupStoreInfo_friendlyName = "null"
+    pickupStoreInfo_isPickupStore = "null"
     
     '''
     selectedAddresses
     '''
     
-    selectedAddresses_addressId = None
-    selectedAddresses_addressType = None
-    selectedAddresses_receiverName = None
-    selectedAddresses_street = None
-    selectedAddresses_number = None
-    selectedAddresses_complement = None
-    selectedAddresses_neighborhood = None
-    selectedAddresses_postalCode = None
-    selectedAddresses_city = None
-    selectedAddresses_state = None
-    selectedAddresses_country = None
-    selectedAddresses_reference = None
+    selectedAddresses_addressId = "null"
+    selectedAddresses_addressType = "null"
+    selectedAddresses_receiverName = "null"
+    selectedAddresses_street = "null"
+    selectedAddresses_number = "null"
+    selectedAddresses_complement = "null"
+    selectedAddresses_neighborhood = "null"
+    selectedAddresses_postalCode = "null"
+    selectedAddresses_city = "null"
+    selectedAddresses_state = "null"
+    selectedAddresses_country = "null"
+    selectedAddresses_reference = "null"
     
     '''
     transactions
     '''
-    transactions_isActive = None
-    transactions_transactionId = None
-    transactions_merchantName = None
+    transactions_isActive = "null"
+    transactions_transactionId = "null"
+    transactions_merchantName = "null"
     
     '''
     payments
     '''
     
-    payments_id = None
-    payments_paymentSystem = None
-    payments_paymentSystemName = None
-    payments_value = None
-    payments_installments = None
-    payments_referenceValue = None
-    payments_cardHolder = None
-    payments_firstDigits = None
-    payments_lastDigits = None
-    payments_url = None
-    payments_giftCardId = None
-    payments_giftCardName = None
-    payments_giftCardCaption = None
-    payments_redemptionCode = None
-    payments_group = None
-    payments_tid = None
-    payments_dueDate = None
-    payments_cardNumber = None
-    payments_cvv2 = None
-    payments_expireMonth = None
-    payments_expireYear = None
-    payments_giftCardProvider = None
-    payments_giftCardAsDiscount = None
-    payments_koinUrl = None
-    payments_accountId = None
-    payments_parentAccountId = None
-    payments_bankIssuedInvoiceIdentificationNumber = None
-    payments_bankIssuedInvoiceIdentificationNumberFormatted = None
-    payments_ankIssuedInvoiceBarCodeNumber = None
-    payments_bankIssuedInvoiceBarCodeType = None
+    payments_id = "null"
+    payments_paymentSystem = "null"
+    payments_paymentSystemName = "null"
+    payments_value = "null"
+    payments_installments = "null"
+    payments_referenceValue = "null"
+    payments_cardHolder = "null"
+    payments_firstDigits = "null"
+    payments_lastDigits = "null"
+    payments_url = "null"
+    payments_giftCardId = "null"
+    payments_giftCardName = "null"
+    payments_giftCardCaption = "null"
+    payments_redemptionCode = "null"
+    payments_group = "null"
+    payments_tid = "null"
+    payments_dueDate = "null"
+    payments_cardNumber = "null"
+    payments_cvv2 = "null"
+    payments_expireMonth = "null"
+    payments_expireYear = "null"
+    payments_giftCardProvider = "null"
+    payments_giftCardAsDiscount = "null"
+    payments_koinUrl = "null"
+    payments_accountId = "null"
+    payments_parentAccountId = "null"
+    payments_bankIssuedInvoiceIdentificationNumber = "null"
+    payments_bankIssuedInvoiceIdentificationNumberFormatted = "null"
+    payments_ankIssuedInvoiceBarCodeNumber = "null"
+    payments_bankIssuedInvoiceBarCodeType = "null"
     
-    payments_Tid = None
-    payments_ReturnCode = None
-    payments_Message = None
-    payments_authId = None
-    payments_acquirer = None
+    payments_Tid = "null"
+    payments_ReturnCode = "null"
+    payments_Message = "null"
+    payments_authId = "null"
+    payments_acquirer = "null"
 
     '''
     billingAddress
     '''
     
-    billingAddress_postalCode = None
-    billingAddress_city = None
-    billingAddress_state = None
-    billingAddress_country = None
-    billingAddress_street = None
-    billingAddress_number = None
-    billingAddress_neighborhood = None
-    billingAddress_complement = None
-    billingAddress_reference = None
+    billingAddress_postalCode = "null"
+    billingAddress_city = "null"
+    billingAddress_state = "null"
+    billingAddress_country = "null"
+    billingAddress_street = "null"
+    billingAddress_number = "null"
+    billingAddress_neighborhood = "null"
+    billingAddress_complement = "null"
+    billingAddress_reference = "null"
     
     '''
     Sellers
     '''
-    seller_id = None
-    seller_name = None
-    seller_logo = None
+    seller_id = "null"
+    seller_name = "null"
+    seller_logo = "null"
     
     '''
     changesAttachment
     '''
-    changesAttachment_id = None
+    changesAttachment_id = "null"
     
     '''
     storePreferencesData
     '''
-    storePreferencesData_countryCode = None
-    storePreferencesData_currencyCode = None
-    storePreferencesData_currencyLocale = None
-    storePreferencesData_currencySymbol = None
-    storePreferencesData_timeZone = None
+    storePreferencesData_countryCode = "null"
+    storePreferencesData_currencyCode = "null"
+    storePreferencesData_currencyLocale = "null"
+    storePreferencesData_currencySymbol = "null"
+    storePreferencesData_timeZone = "null"
     
     '''
     currencyFormatInfo
     '''
     
-    CurrencyDecimalDigits = None
-    CurrencyDecimalSeparator = None
-    CurrencyGroupSeparator = None
-    CurrencyGroupSize = None
-    StartsWithCurrencySymbol = None
+    CurrencyDecimalDigits = "null"
+    CurrencyDecimalSeparator = "null"
+    CurrencyGroupSeparator = "null"
+    CurrencyGroupSize = "null"
+    StartsWithCurrencySymbol = "null"
     
     '''
     currencyFormatInfo
     '''
     
-    baseURL = None
-    isCertified = None
-    name = None
+    baseURL = "null"
+    isCertified = "null"
+    name = "null"
     
     '''
     itemMetadata
     '''
-    itemMetadata_Id = None
-    itemMetadata_Seller = None
-    itemMetadata_Name = None
-    itemMetadata_SkuName = None
-    itemMetadata_ProductId = None
-    itemMetadata_RefId = None
-    itemMetadata_Ean = None
-    itemMetadata_ImageUrl = None
-    itemMetadata_DetailUrl = None
+    itemMetadata_Id = "null"
+    itemMetadata_Seller = "null"
+    itemMetadata_Name = "null"
+    itemMetadata_SkuName = "null"
+    itemMetadata_ProductId = "null"
+    itemMetadata_RefId = "null"
+    itemMetadata_Ean = "null"
+    itemMetadata_ImageUrl = "null"
+    itemMetadata_DetailUrl = "null"
     
-    subscriptionData = None
-    taxData = None
-    checkedInPickupPointId = None
-    cancellationData = None
+    subscriptionData = "null"
+    taxData = "null"
+    checkedInPickupPointId = "null"
+    cancellationData = "null"
     
     '''
     packageAttachment
     '''
-    courier = None
-    invoiceNumber = None
-    invoiceValue = None
-    invoiceUrl = None
-    issuanceDate = None
-    trackingNumber = None
-    invoiceKey = None
-    trackingUrl = None
-    embeddedInvoice = None
-    type = None
-    courierStatus = None
-    cfop = None
-    restitutions = None
-    volumes = None
-    EnableInferItems = None
+    courier = "null"
+    invoiceNumber = "null"
+    invoiceValue = "null"
+    invoiceUrl = "null"
+    issuanceDate = "null"
+    trackingNumber = "null"
+    invoiceKey = "null"
+    trackingUrl = "null"
+    embeddedInvoice = "null"
+    type = "null"
+    courierStatus = "null"
+    cfop = "null"
+    restitutions = "null"
+    volumes = "null"
+    EnableInferItems = "null"
     
     '''
     invoice data
     '''
-    invoice_address = None
-    userPaymentInfo = None
+    invoice_address = "null"
+    userPaymentInfo = "null"
     
     '''
     transacctions
     '''
     
-    isActive = None
-    transactionId = None
-    merchantName = None
+    isActive = "null"
+    transactionId = "null"
+    merchantName = "null"
     
     '''
     cancellation
     '''
-    RequestedByUser = None
-    RequestedBySystem = None
-    RequestedBySellerNotification = None
-    RequestedByPaymentNotification = None
-    Reason = None
-    CancellationDate = None
+    RequestedByUser = "null"
+    RequestedBySystem = "null"
+    RequestedBySellerNotification = "null"
+    RequestedByPaymentNotification = "null"
+    Reason = "null"
+    CancellationDate = "null"
     
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
