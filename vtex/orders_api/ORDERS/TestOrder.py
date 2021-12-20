@@ -1095,20 +1095,17 @@ def get_order(id,reg):
         try:
             followUpEmail = decrypt_email(str(init.followUpEmail))
         except:
-            followUpEmail = None
-            print("nulo")
+            init.cache = 2
         
         try:
             client_email = decrypt_email(str(init.client_email))
         except:
-            client_email = None
-            print("nulo")
+            init.cache = 2
         
         try:
             emailTracked = decrypt_email(str(init.emailTracked))
         except:
-            emailTracked = None
-            print("nulo")
+            init.cache = 2
         
         
         try:
@@ -1123,7 +1120,7 @@ def get_order(id,reg):
                 init.itemMetadata_ImageUrl = x["ImageUrl"]
                 init.itemMetadata_DetailUrl = x["DetailUrl"]
         except:
-            print("vacio")
+            init.cache = 2
         
         try:
             for x in packages:
@@ -1143,7 +1140,7 @@ def get_order(id,reg):
                 init.volumes = x["volumes"]
                 init.EnableInferItems = x["EnableInferItems"]
         except:
-            print("vacio")
+            init.cache = 2
             
     
         try:
@@ -1151,14 +1148,14 @@ def get_order(id,reg):
             init.invoice_address = dim_invoiceData["address"]
             init.userPaymentInfo = dim_invoiceData["userPaymentInfo"]
         except:
-            print("vacio")
+            init.cache = 2
         
         try:    
             init.isActive = transactions["isActive"]
             init.transactionId = transactions["transactionId"]
             init.merchantName = transactions["merchantName"]
         except:
-            print("vacio")
+            init.cache = 2
     
         
         df1 = pd.DataFrame({
