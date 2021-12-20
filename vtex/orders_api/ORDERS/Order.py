@@ -12,6 +12,7 @@ from os.path import join
 class init:
     productList = []
     df = pd.DataFrame()
+    cache = 0
     emailTracked = None
     approvedBy = None
     cancelledBy = None
@@ -488,7 +489,7 @@ def decrypt_email(email):
         formatoJ = json.loads(response.text)
         return formatoJ["email"]
     except:
-        print("No se pudo desencriptar Email: "+str(email))
+        init.cache = 2
      
 def get_order(id,reg):
     try:
@@ -588,161 +589,161 @@ def get_order(id,reg):
             packageAttachment = Fjson["packageAttachment"]
             packages = packageAttachment["packages"]
         except:
-            print("packageAttachment. No tiene datos")    
+            init.cache = 2 
         try:
             itemMetadata = Fjson["itemMetadata"]
             ItemMetadata = itemMetadata["Items"]
         except:
-            print("ItemMetadata. No tiene datos")
+            init.cache = 2
         try:
             Total = Fjson["totals"]
         except:
-            print("Total. No tiene datos")
+            init.cache = 2
         try:
             clientProfileData = Fjson["clientProfileData"]
         except:
-            print("clientProfileData. No tiene datos")
+            init.cache = 2
         try:
             marketplace = Fjson["marketplace"]
         except:
-            print("marketplace. No tiene datos")
+           init.cache = 2
         try:
             ratesAndBenefitsData = Fjson["ratesAndBenefitsData"]
         except:
-            print("ratesAndBenefitsData. No tiene datos")
+            init.cache = 2
         try:
             storePreferencesData = Fjson["storePreferencesData"]
         except:
-            print("storePreferencesData. No tiene datos")
+            init.cache = 2
         try:
             currencyFormatInfo = storePreferencesData["currencyFormatInfo"]
         except:
-            print("currencyFormatInfo. No tiene datos") 
+            init.cache = 2
         try:
             shippingData = Fjson["shippingData"]
         except:
-            print("shippingData. No tiene datos")
+            init.cache = 2
         try:
             logisticsInfo_0 = shippingData["logisticsInfo"]
         except:
-            print("logisticsInfo_0. No tiene datos")  
+            init.cache = 2
         try:
             selectedAddresses_ = shippingData["selectedAddresses"]
         except:
-            print("selectedAddresses_. No tiene datos")  
+            init.cache = 2
         try:
             selectedAddresses = selectedAddresses_[0]
         except:
-            print("selectedAddresses. No tiene datos") 
+            init.cache = 2
         try:
             logisticsInfo = logisticsInfo_0[0]
         except:
-            print("logisticsInfo. No tiene datos")
+            init.cache = 2
         try:
             address = shippingData["address"]
         except:
-            print("address. No tiene datos")
+            init.cache = 2
         try:
             slas = logisticsInfo["slas"]
         except:
-            print("slas. No tiene datos")
+            init.cache = 2
         try:
             deliveryIds_ = logisticsInfo["deliveryIds"]
         except:
-            print("deliveryIds_. No tiene datos")
+            init.cache = 2
         try:
             deliveryIds = deliveryIds_[0]
         except:
-            print("deliveryIds. No tiene datos")
+            init.cache = 2
         try:
             pickupStoreInfo = logisticsInfo["pickupStoreInfo"]
         except:
-            print("pickupStoreInfo. No tiene datos")
+            init.cache = 2
         try:
             slas_0 = slas[0]
             pickupStoreInfo = slas_0["pickupStoreInfo"]
         except:
-            print("slas_0 No tiene datos")
+            init.cache = 2
         try:
             slas_1 = slas[1]
             pickupStoreInfo_1 = slas_1["pickupStoreInfo"]
         except:
-            print("slas_1 No tiene datos")
+            init.cache = 2
         try:
             slas_2 = slas[2]
             pickupStoreInfo_2 = slas_2["pickupStoreInfo"]
         except:
-            print("slas_2 No tiene datos")
+            init.cache = 2
         try:
             slas_3 = slas[3]
             pickupStoreInfo_3 = slas_3["pickupStoreInfo"]
         except:
-            print("slas_3 No tiene datos")
+            init.cache = 2
         try:
             items = Fjson["items"]
         except:
-            print("items No tiene datos")
+            init.cache = 2
         try:
             changesAttachment = Fjson["changesAttachment"]
         except:
-            print("changesAttachment No tiene datos")
+            init.cache = 2
         try:
             paymentData = Fjson["paymentData"]
             transactions = paymentData["transactions"]
         except:
-            print("paymentData No tiene datos")
+            init.cache = 2
         try:
             sellers_ = Fjson["sellers"]
         except:
-            print("sellers_ No tiene datos")
+            init.cache = 2
         try:
             sellers = sellers_[0]
         except:
-            print("sellers No tiene datos")
+            init.cache = 2
         try:
             transactions_ = paymentData["transactions"]
         except:
-            print("transactions_ No tiene datos")
+            init.cache = 2
         try:
             transactions = transactions_[0]
         except:
-            print("transactions No tiene datos")
+            init.cache = 2
         try:
             payments_ = transactions["payments"]
         except:
-            print("payments_ No tiene datos")
+            init.cache = 2
         try:
             payments = payments_[0]
         except:
-            print("payments No tiene datos")
+            init.cache = 2
         try:
             billingAddress = payments["billingAddress"]
         except:
-            print("billingAddress No tiene datos")
+            init.cache = 2
         try:
             Items = items[0]
         except:
-            print("Items No tiene datos")
+            init.cache = 2
         try:
             itemAttachment = Items["itemAttachment"]
         except:
-            print("itemAttachment No tiene datos")
+            init.cache = 2
         try:
             additionalInfo = Items["additionalInfo"]
         except:
-            print("additionalInfo No tiene datos")
+            init.cache = 2
         try:
             priceDefinition = Items["priceDefinition"]
         except:
-            print("priceDefinition No tiene datos")
+            init.cache = 2
         try:
             sellingPrice = Items["sellingPrice"]
         except:
-            print("sellingPrice No tiene datos")
+            init.cache = 2
         try:
             dimension = additionalInfo["dimension"]
         except:
-            print("dimension No tiene datos")
+            init.cache = 2
         
         '''
         END DIMENSION
@@ -756,7 +757,7 @@ def get_order(id,reg):
                 init.total_name_items = items["name"]
                 init.total_value_items = items["value"]
         except:
-            print("No hay datos items")
+            init.cache = 2
         try:
             if Total[1]:
                 discounts = Total[1]
@@ -764,7 +765,7 @@ def get_order(id,reg):
                 init.total_name_discounts = discounts["name"]
                 init.total_value_discounts = discounts["value"]
         except:
-            print("No hay datos discounts")
+            init.cache = 2
         try:
             if Total[2]:
                 shipping = Total[2]
@@ -772,7 +773,7 @@ def get_order(id,reg):
                 init.total_name_shipping = shipping["name"]
                 init.total_value_shipping = shipping["value"]
         except:
-            print("No hay datos shipping")
+            init.cache = 2
         try:
             if Total[3]:
                 tax = Total[3]
@@ -780,7 +781,7 @@ def get_order(id,reg):
                 init.total_name_tax = tax["name"]
                 init.total_value_tax = tax["value"]
         except:
-            print("No hay datos tax")
+            init.cache = 2
         try:
             init.items_uniqueId = Items["uniqueId"]
             init.items_id = Items["id"]
@@ -814,7 +815,7 @@ def get_order(id,reg):
             init.item_price_definition = Items["priceDefinition"]
             init.item_serialNumbers = Items["serialNumbers"]
         except:
-            print("No hay datos dim Items")
+            init.cache = 2
         try:
             init.brandName = additionalInfo["brandName"]
             init.brandId = additionalInfo["brandId"]
@@ -825,7 +826,7 @@ def get_order(id,reg):
             init.offeringType = additionalInfo["offeringType"]
             init.offeringTypeId = additionalInfo["offeringTypeId"]
         except:
-            print("No hay datos. additionalInfo")
+            init.cache = 2
         try:
             init.cubicweight = dimension["cubicweight"]
             init.height = dimension["height"]
@@ -833,11 +834,11 @@ def get_order(id,reg):
             init.weight = dimension["weight"]
             init.width = dimension["width"]
         except:
-            print("No hay datos. dimension")
+            init.cache = 2
         try:
             init.item_itemAttachment_name = itemAttachment["name"]
         except:
-            print("No hay datos. itemAttachment")   
+            init.cache = 2
         try:
             init.client_id = clientProfileData["id"]
             init.client_email = clientProfileData["email"]
@@ -855,15 +856,15 @@ def get_order(id,reg):
             init.client_userProfileId = clientProfileData["userProfileId"]
             init.client_customerClass = clientProfileData["customerClass"]     
         except:
-            print("No se pudo cargar Client Profile") 
+            init.cache = 2
         try:
             init.id_ratesAndBenefits = ratesAndBenefitsData["id"]
         except:
-            print("No se pudo cargar ratesAndBenefitsData")
+            init.cache = 2
         try:
             init.shippingData_id = shippingData["id"]
         except:
-            print("No se pudo cargar shippingData")
+            init.cache = 2
         try:
             init.addressType = address["addressType"]
             init.receiverName = address["receiverName"]
@@ -878,7 +879,7 @@ def get_order(id,reg):
             init.complement = address["complement"]
             init.reference = address["reference"]
         except:
-            print("No se pudo cargar address")
+            init.cache = 2
             
         try:
             init.trackingHints = logisticsInfo_0[0]
@@ -896,7 +897,7 @@ def get_order(id,reg):
             init.shippingEstimate = logisticsInfo["shippingEstimate"]
             init.shippingEstimateDate = logisticsInfo["shippingEstimateDate"]
         except:
-            print("No se pudo cargar address")
+            init.cache = 2
         try:
             init.slas_id = slas_0["id"]
             init.slas_name = slas_0["name"]
@@ -906,7 +907,7 @@ def get_order(id,reg):
             init.slas_deliveryChannel = slas_0["deliveryChannel"]
             init.slas_polygonName = slas_0["polygonName"]
         except:
-            print("No hay datos slas")
+            init.cache = 2
             
         try:
             init.slas_pickupStoreInfo_additionalInfo = pickupStoreInfo["additionalInfo"]
@@ -915,7 +916,7 @@ def get_order(id,reg):
             init.slas_pickupStoreInfo_friendlyName = pickupStoreInfo["friendlyName"]
             init.slas_pickupStoreInfo_isPickupStore = pickupStoreInfo["isPickupStore"]
         except:
-            print("No hay datos pickupStoreInfo")
+            init.cache = 2
         try:
             init.slas_id_01 = slas_1["id"]
             init.slas_name_01 = slas_1["name"]
@@ -925,7 +926,7 @@ def get_order(id,reg):
             init.slas_deliveryChannel_01 = slas_1["deliveryChannel"]
             init.slas_polygonName_01 = slas_1["polygonName"]
         except:
-            print("No hay datos slas_1")
+            init.cache = 2
         try:
             init.slas_pickupStoreInfo_additionalInfo_01 = pickupStoreInfo_1["additionalInfo"]
             init.slas_pickupStoreInfo_address_01 = pickupStoreInfo_1["address"]
@@ -933,7 +934,7 @@ def get_order(id,reg):
             init.slas_pickupStoreInfo_friendlyName_01 = pickupStoreInfo_1["friendlyName"]
             init.slas_pickupStoreInfo_isPickupStore_01 = pickupStoreInfo_1["isPickupStore"]
         except:
-            print("No hay datos pickupStoreInfo_1")
+            init.cache = 2
         
         try:
             init.slas_id_02 = slas_2["id"]
@@ -944,7 +945,7 @@ def get_order(id,reg):
             init.slas_deliveryChannel_02 = slas_2["deliveryChannel"]
             init.slas_polygonName_02 = slas_2["polygonName"]
         except:
-            print("No hay datos slas_2")
+            init.cache = 2
         try:
             init.slas_pickupStoreInfo_additionalInfo_02 = pickupStoreInfo_2["additionalInfo"]
             init.slas_pickupStoreInfo_address_02 = pickupStoreInfo_2["address"]
@@ -952,7 +953,7 @@ def get_order(id,reg):
             init.slas_pickupStoreInfo_friendlyName_02 = pickupStoreInfo_2["friendlyName"]
             init.slas_pickupStoreInfo_isPickupStore_02 = pickupStoreInfo_2["isPickupStore"]
         except:
-            print("No hay datos pickupStoreInfo_2")
+            init.cache = 2
             
         try:
             init.slas_id_03 = slas_3["id"]
@@ -963,7 +964,7 @@ def get_order(id,reg):
             init.slas_deliveryChannel_03 = slas_3["deliveryChannel"]
             init.slas_polygonName_03 = slas_3["polygonName"]
         except:
-            print("No hay datos slas_3")
+            init.cache = 2
         try: 
             init.slas_pickupStoreInfo_additionalInfo_03 = pickupStoreInfo_3["additionalInfo"]
             init.slas_pickupStoreInfo_address_03 = pickupStoreInfo_3["address"]
@@ -971,7 +972,7 @@ def get_order(id,reg):
             init.slas_pickupStoreInfo_friendlyName_03 = pickupStoreInfo_3["friendlyName"]
             init.slas_pickupStoreInfo_isPickupStore_03 = pickupStoreInfo_3["isPickupStore"]
         except:
-            print("No hay datos pickupStoreInfo_3")
+            init.cache = 2
         try:
             init.courierId = deliveryIds["courierId"]
             init.courierName = deliveryIds["courierName"]
@@ -979,7 +980,7 @@ def get_order(id,reg):
             init.quantity = deliveryIds["quantity"]
             init.warehouseId = deliveryIds["warehouseId"]
         except:
-            print("No hay datos deliveryIds")
+            init.cache = 2
         try: 
             init.pickupStoreInfo_additionalInfo = pickupStoreInfo["additionalInfo"]
             init.pickupStoreInfo_address = pickupStoreInfo["address"]
@@ -987,7 +988,7 @@ def get_order(id,reg):
             init.pickupStoreInfo_friendlyName = pickupStoreInfo["friendlyName"]
             init.pickupStoreInfo_isPickupStore = pickupStoreInfo["isPickupStore"]
         except:
-            print("No hay datos pickupStoreInfo")
+            init.cache = 2
         try:
             init.selectedAddresses_addressId = selectedAddresses["addressId"]
             init.selectedAddresses_addressType = selectedAddresses["addressType"]
@@ -1002,13 +1003,13 @@ def get_order(id,reg):
             init.selectedAddresses_country = selectedAddresses["country"]
             init.selectedAddresses_reference = selectedAddresses["reference"]
         except:
-            print("No hay datos selectedAddresses")
+            init.cache = 2
         try:
             init.transactions_isActive = transactions["isActive"]
             init.transactions_transactionId = transactions["transactionId"]
             init.transactions_merchantName = transactions["merchantName"]
         except:
-            print("No hay datos transactions")
+            init.cache = 2
         try:
             init.payments_id = payments["id"]
             init.payments_paymentSystem = payments["paymentSystem"]
@@ -1041,7 +1042,7 @@ def get_order(id,reg):
             init.payments_bankIssuedInvoiceBarCodeNumber = payments["bankIssuedInvoiceBarCodeNumber"]
             init.payments_bankIssuedInvoiceBarCodeType = payments["bankIssuedInvoiceBarCodeType"]
         except:
-            print("No hay datos payments")
+            init.cache = 2
         try:
             connectorResponses = payments["connectorResponses"]
             init.payments_ReturnCode = connectorResponses["ReturnCode"]
@@ -1049,7 +1050,7 @@ def get_order(id,reg):
             init.payments_authId = connectorResponses["authId"]
             init.payments_acquirer = connectorResponses["acquirer"]
         except:
-            print("No hay datos connectorResponses")
+            init.cache = 2
         try:
             init.billingAddress_postalCode = billingAddress["postalCode"]
             init.billingAddress_city = billingAddress["city"]
@@ -1061,17 +1062,17 @@ def get_order(id,reg):
             init.billingAddress_complement = billingAddress["complement"]
             init.billingAddress_reference = billingAddress["reference"]
         except:
-            print("No hay datos billingAddress")
+            init.cache = 2
         try:
             init.seller_id = sellers["id"]
             init.seller_name = sellers["name"]
             init.seller_logo = sellers["logo"]
         except:
-            print("No hay datos seller")
+            init.cache = 2
         try:
             init.changesAttachment_id = Fjson["changesAttachment"]
         except:
-            print("No hay datos changesAttachment")
+            init.cache = 2
         try:
             init.storePreferencesData_countryCode = storePreferencesData["countryCode"]
             init.storePreferencesData_currencyCode = storePreferencesData["currencyCode"]
@@ -1079,7 +1080,7 @@ def get_order(id,reg):
             init.storePreferencesData_currencySymbol = storePreferencesData["currencySymbol"]
             init.storePreferencesData_timeZone = storePreferencesData["timeZone"]
         except:
-            print("No hay datos storePreferencesData")
+            init.cache = 2
         try:
             init.CurrencyDecimalDigits = currencyFormatInfo["CurrencyDecimalDigits"]
             init.CurrencyDecimalSeparator = currencyFormatInfo["CurrencyDecimalSeparator"]
@@ -1087,19 +1088,19 @@ def get_order(id,reg):
             init.CurrencyGroupSize = currencyFormatInfo["CurrencyGroupSize"]
             init.StartsWithCurrencySymbol = currencyFormatInfo["StartsWithCurrencySymbol"]
         except:
-            print("No hay datos currencyFormatInfo")
+            init.cache = 2
         try:
             init.baseURL = marketplace["baseURL"]
             init.isCertified = marketplace["isCertified"]
             init.name = marketplace["name"]
         except:
-            print("No hay datos marketplace")
+            init.cache = 2
         
         try:
             client_email = decrypt_email(str(init.client_email))
         except:
             client_email = None
-            print("nulo")
+            
         
         
         
@@ -1116,7 +1117,7 @@ def get_order(id,reg):
                 init.itemMetadata_ImageUrl = x["ImageUrl"]
                 init.itemMetadata_DetailUrl = x["DetailUrl"]
         except:
-            print("vacio")
+            init.cache = 2
         
         try:
             for x in packages:
@@ -1136,7 +1137,7 @@ def get_order(id,reg):
                 init.volumes = x["volumes"]
                 init.EnableInferItems = x["EnableInferItems"]
         except:
-            print("vacio")
+            init.cache = 2
             
     
         try:
@@ -1144,14 +1145,14 @@ def get_order(id,reg):
             init.invoice_address = dim_invoiceData["address"]
             init.userPaymentInfo = dim_invoiceData["userPaymentInfo"]
         except:
-            print("vacio")
+            init.cache = 2
         
         try:    
             init.isActive = transactions["isActive"]
             init.transactionId = transactions["transactionId"]
             init.merchantName = transactions["merchantName"]
         except:
-            print("vacio")
+            init.cache = 2
             
         try:
             init.cancellationData = Fjson["cancellationData"]
@@ -1161,7 +1162,7 @@ def get_order(id,reg):
             init.RequestedByPaymentNotification = cancellationData["RequestedByPaymentNotification"]
             init.Reason = cancellationData["Reason"]
         except:
-            print("cancellationData")
+            init.cache = 2
     
         df1 = pd.DataFrame({
             'orderId': str(id),
@@ -1467,7 +1468,7 @@ def get_order(id,reg):
         
         print("Registro: "+str(reg))
     except:
-        print("vacio")
+        init.cache = 2
 
 def delete_duplicate():
     try:
