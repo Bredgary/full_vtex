@@ -1406,7 +1406,7 @@ def get_order(id,reg):
             'billingAddress_state': str(init.billingAddress_state),
             'billingAddress_country': str(init.billingAddress_country),
             'billingAddress_street': str(init.billingAddress_street),
-            'billingAddress_number': int(init.billingAddress_number),
+            'billingAddress_number': init.billingAddress_number,
             'billingAddress_neighborhood': str(init.billingAddress_neighborhood),
             'billingAddress_complement': str(init.billingAddress_complement),
             'billingAddress_reference': str(init.billingAddress_reference),
