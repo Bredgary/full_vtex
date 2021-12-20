@@ -493,6 +493,7 @@ def decrypt_email(email):
      
 def get_order(id,reg):
     try:
+        print("Registro: "+str(reg))
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
@@ -1465,8 +1466,6 @@ def get_order(id,reg):
             'CancellationDate':str(init.CancellationDate),
             'invoicedDate': str(init.invoicedDate)}, index=[0])
         init.df = init.df.append(df1)
-        
-        print("Registro: "+str(reg))
     except:
         init.cache = 2
 
@@ -1515,10 +1514,6 @@ def get_params():
     for row in rows:
         registro += 1
         get_order(row.orderId,registro)
-        if registro == 5:
-            run()
-        if registro == 10:
-            run()
         if registro == 100:
             run()
         if registro == 5000:
@@ -1534,7 +1529,6 @@ def get_params():
         if registro == 50000:
             run()
         if registro == 60000:
-            run()
             run()
     run()
         
