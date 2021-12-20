@@ -110,7 +110,7 @@ def delete_duplicate():
         print("Consulta SQL no ejecutada")
 
 
-def run(requests):
+def run():
     get_params()
     df = init.df
     df.reset_index(drop=True, inplace=True)
@@ -130,4 +130,4 @@ def run(requests):
     print(job.result())
     delete_duplicate()
     
-
+run()
