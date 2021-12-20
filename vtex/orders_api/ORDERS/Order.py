@@ -1491,7 +1491,7 @@ def run():
     
     project_id = '999847639598'
     dataset_id = 'test'
-    table_id = 'shopstar_vtex_order'
+    table_id = 'shopstar_vtex_order_'
     
     client  = bigquery.Client(project = project_id)
     dataset  = client.dataset(dataset_id)
@@ -1521,83 +1521,20 @@ def get_params():
             run()
         if registro == 100:
             run()
-        if registro == 200:
-            run()
-        if registro == 300:
-            run()
-        if registro == 400:
-            run()
-        if registro == 500:
-            run()
-        if registro == 600:
-            run()
-        if registro == 700:
-            run()
-        if registro == 800:
-            run()
-        if registro == 900:
-            run()
-        if registro == 1000:
-            run()
-        if registro == 1100:
-            run()
-        if registro == 1200:
-            run()
-        if registro == 1300:
-            run()
-        if registro == 1400:
-            run()
-        if registro == 1500:
-            run()
-        if registro == 1600:
-            run()
-        if registro == 1700:
-            run()
-        if registro == 1800:
-            run()
-        if registro == 1900:
-            run()
-        if registro == 2000:
-            run()
-        if registro == 2500:
-            run()
-        if registro == 3000:
-            run()
-        if registro == 3500:
-            run()
-        if registro == 4000:
-            run()
-        if registro == 4500:
-            run()
         if registro == 5000:
-            run()
-        if registro == 5500:
-            run()
-        if registro == 7000:
-            run()
-        if registro == 7500:
-            run()
-        if registro == 8000:
-            run()
-        if registro == 8500:
-            run()
-        if registro == 9000:
-            run()
-        if registro == 9500:
             run()
         if registro == 10000:
             run()
-        if registro == 11000:
+        if registro == 20000:
             run()
-        if registro == 12000:
+        if registro == 30000:
             run()
-        if registro == 13000:
+        if registro == 40000:
             run()
-        if registro == 14000:
+        if registro == 50000:
             run()
-        if registro == 15000:
+        if registro == 60000:
             run()
-        if registro == 16000:
             run()
     run()
         
