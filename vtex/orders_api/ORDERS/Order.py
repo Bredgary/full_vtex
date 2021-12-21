@@ -1907,7 +1907,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "DIM_ITEM_AInfo_productClusterId",
-        "type": "INTEGER",
+        "type": "FLOAT",
         "mode": "NULLABLE"
     },{
         "name": "DIM_SHIPPING_DATA_pickupStoreInfo_additionalInfo",
