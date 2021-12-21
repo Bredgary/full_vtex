@@ -1399,7 +1399,7 @@ def get_order(id,reg):
             'payments_Tid': str(init.payments_Tid),
             'payments_ReturnCode': init.payments_ReturnCode,
             'payments_Message': str(init.payments_Message),
-            'payments_authId': int(init.payments_authId),
+            'payments_authId': str(init.payments_authId),
             'payments_acquirer': str(init.payments_acquirer),
             'billingAddress_postalCode': str(init.billingAddress_postalCode),
             'billingAddress_city': str(init.billingAddress_city),
@@ -1497,7 +1497,6 @@ def run():
     table = dataset.table(table_id)
     job_config = bigquery.LoadJobConfig()
     #job_config.write_disposition = "WRITE_TRUNCATE"
-    job_config.autodetect = True
     job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
     job = client.load_table_from_json(json_object, table, job_config = job_config)
     print(job.result())
