@@ -1543,7 +1543,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "issuanceDate",
-        "type": "DATE",
+        "type": "STRING",
         "mode": "NULLABLE"
     },{
         "name": "invoiceUrl",
