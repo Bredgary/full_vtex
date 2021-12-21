@@ -1398,7 +1398,7 @@ def get_order(id,reg):
             'payments_bankIssuedInvoiceBarCodeType': str(init.payments_bankIssuedInvoiceBarCodeType),
             'payments_Tid': str(init.payments_Tid),
             'payments_ReturnCode': init.payments_ReturnCode,
-            'payments_Message': init.payments_Message,
+            'payments_Message': str(init.payments_Message),
             'payments_authId': init.payments_authId,
             'payments_acquirer': str(init.payments_acquirer),
             'billingAddress_postalCode': str(init.billingAddress_postalCode),
@@ -1514,6 +1514,8 @@ def get_params():
     for row in rows:
         registro += 1
         get_order(row.orderId,registro)
+        if registro == 5:
+            run()
         if registro == 100:
             run()
         if registro == 5000:
