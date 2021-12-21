@@ -1667,7 +1667,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "itemMetadata_RefId",
-        "type": "INTEGER",
+        "type": "STRING",
         "mode": "NULLABLE"
     },{
         "name": "storePreferencesData_currencyLocale",
