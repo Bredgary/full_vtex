@@ -2615,7 +2615,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "DIM_ITEMS_priceValidUntil",
-        "type": "DATE",
+        "type": "TIMESTAMP",
         "mode": "NULLABLE"
     },{
         "name": "DIM_ITEM_AInfo_offeringInfo",
