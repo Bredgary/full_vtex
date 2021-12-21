@@ -1481,12 +1481,1203 @@ def delete_duplicate():
     except:
         print("Consulta SQL no ejecutada")
 
+def format_schema(schema):
+    formatted_schema = []
+    for row in schema:
+        formatted_schema.append(bigquery.SchemaField(row['name'], row['type'], row['mode']))
+    return formatted_schema
 
 def run():
     df = init.df
     df.reset_index(drop=True, inplace=True)
     json_data = df.to_json(orient = 'records')
     json_object = json.loads(json_data)
+    
+    table_schema = {
+        "name": "CancellationDate",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "Reason",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "RequestedBySystem",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "isActive",
+        "type": "BOOLEAN",
+        "mode": "NULLABLE"
+    },{
+        "name": "RequestedBySellerNotification",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "userPaymentInfo",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "EnableInferItems",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "volumes",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "restitutions",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "type",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "embeddedInvoice",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+    },{
+        "name": "trackingUrl",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "issuanceDate",
+        "type": "DATE",
+        "mode": "NULLABLE"
+    },{
+        "name": "invoiceUrl",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "courier",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "subscriptionData",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "itemMetadata_DetailUrl",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "itemMetadata_ProductId",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "itemMetadata_Id",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "marketplace_name",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "marketplace_isCertified",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "marketplace_baseURL",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "CurrencyDecimalSeparator",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "CurrencyDecimalDigits",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "storePreferencesData_timeZone",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "storePreferencesData_currencySymbol",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "storePreferencesData_currencyCode",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "storePreferencesData_countryCode",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "RequestedByUser",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "seller_logo",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+    },{
+        "name": "seller_id",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "billingAddress_reference",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "billingAddress_complement",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "billingAddress_neighborhood",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "billingAddress_number",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "billingAddress_street",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "billingAddress_country",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "billingAddress_state",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "billingAddress_city",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "payments_acquirer",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "itemMetadata_Name",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "payments_authId",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "payments_Message",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "itemMetadata_RefId",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "storePreferencesData_currencyLocale",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "payments_ReturnCode",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "payments_Tid",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "payments_bankIssuedInvoiceBarCodeType",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "payments_bankIssuedInvoiceBarCodeNumber",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "itemMetadata_Seller",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "payments_bankIssuedInvoiceIdentificationNumberFormatted",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "payments_bankIssuedInvoiceIdentificationNumber",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "payments_parentAccountId",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "payments_giftCardProvider",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "payments_expireMonth",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "payments_cvv2",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "payments_group",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "payments_redemptionCode",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "payments_giftCardCaption",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "payments_giftCardName",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "payments_giftCardId",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "payments_url",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "payments_lastDigits",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "invoicedDate",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "itemMetadata_ImageUrl",
+        "type": "DATE",
+        "mode": "NULLABLE"
+    },{
+        "name": "payments_firstDigits",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "payments_value",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "payments_paymentSystemName",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "payments_paymentSystem",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "payments_id",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "transactions_merchantName",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_selectedAddresses_postalCode",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "origin",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_selectedAddresses_complement",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_selectedAddresses_number",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_selectedAddresses_street",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_selectedAddresses_addressType",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_listPrice",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_selectedAddresses_addressId",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_slas_pickupStoreInfo_isPickupStore_01",
+        "type": "BOOLEAN",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_slas_pickupStoreInfo_isPickupStore_02",
+        "type": "BOOLEAN",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_pickupStoreInfo_friendlyName",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_dockId_delivery",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_courierName_delivery",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_courierId_delivery",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "invoiceNumber",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_slas_pickupStoreInfo_dockId_03",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_slas_price_03",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_slas_name_03",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "authorizedDate",
+        "type": "DATE",
+        "mode": "NULLABLE"
+    },{
+        "name": "sequence",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_CLIENT_email",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_slas_pickupStoreInfo_additionalInfo_02",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_slas_shippingEstimate_03",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "salesChannel",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_slas_id_01",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_slas_polygonName_02",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+    },{
+        "name": "payments_accountId",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_slas_deliveryWindow_02",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_slas_name_02",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_CLIENT_stateInscription",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_slas_pickupStoreInfo_dockId_01",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "payments_referenceValue",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_ITEM_AInfo_productClusterId",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_pickupStoreInfo_additionalInfo",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "payments_giftCardAsDiscount",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_polygonName",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_quantity_delivery",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_slas_deliveryChannel_01",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_TOTAL_value_shipping",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_slas_price_01",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "CurrencyGroupSeparator",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_slas_pickupStoreInfo_isPickupStore",
+        "type": "BOOLEAN",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_slas_pickupStoreInfo_friendlyName",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_CLIENT_isCorporate",
+        "type": "BOOLEAN",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_slas_polygonName",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_slas_deliveryChannel",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_slas_price",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_ITEM_shippingPrice",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_slas_shippingEstimate",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_slas_name",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "trackingNumber",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "customData",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_sellingPrice",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_itemIndex",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_ITEM_rewardValue",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_deliveryChannel",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_ITEM_parentAssemblyBinding",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_complement",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_neighborhood",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_number",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_slas_id_03",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "transactions_isActive",
+        "type": "BOOLEAN",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_ITEM_AInfo_dim_length",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_shippingData_id",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_slas_id",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_country",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "cancelReason",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_state",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "transactions_transactionId",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_selectedAddresses_reference",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_postalCode",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_addressId",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_CLIENT_customerClass",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "RequestedByPaymentNotification",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_CLIENT_userProfileId",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_selectedAddresses_receiverName",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_CLIENT_phone",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_slas_pickupStoreInfo_friendlyName_02",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_CLIENT_corporatePhone",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "invoiceValue",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_CLIENT_corporateDocument",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_CLIENT_tradeName",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_shippingEstimate",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "emailTracked",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_TOTAL_name_tax",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_CLIENT_corporateName",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_CLIENT_documentType",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_slas_pickupStoreInfo_isPickupStore_03",
+        "type": "BOOLEAN",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_CLIENT_firstName",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_ITEM_calculatedSellingPrice",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_warehouseId",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_ITEM_AInfo_dim_width",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_city",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "payments_cardNumber",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_ITEMS_productId",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_ITEM_AInfo_dim_height",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "transactionId",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "merchantName",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_ITEM_taxCode",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_ITEMS_refId",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_ITEM_AInfo_commercialConditionId",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_ITEM_itemAttachment_name",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_ITEM_AInfo_offeringType",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "taxData",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "hostname",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_ITEM_AInfo_offeringTypeId",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_pickupStoreInfo_isPickupStore",
+        "type": "BOOLEAN",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_CLIENT_document",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_slas_id_02",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_ITEM_priceDefinition_total",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "statusDescription",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_ITEMS_lockId",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_receiverName",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_slas_pickupStoreInfo_friendlyName_03",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "billingAddress_postalCode",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_ITEMS_quantity",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_slas_deliveryChannel_03",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_reference",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_slas_pickupStoreInfo_friendlyName_01",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "roundingError",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_ITEM_AInfo_dim_weight",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_ITEM_isGift",
+        "type": "BOOLEAN",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_slas_deliveryChannel_02",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_slas_pickupStoreInfo_dockId_02",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_ITEMS_tax",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "payments_installments",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "value",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_pickupStoreInfo_dockId",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_ITEMS_sellerSku",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "changesAttachment_id",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_ITEMS_listPrice",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_slas_pickupStoreInfo_additionalInfo",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "lastMessage",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_ITEMS_name",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "itemMetadata_Ean",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_ITEMS_detailUrl",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_ITEMS_seller",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_ITEMS_manualPrice",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_ITEMS_price",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "creationDate",
+        "type": "DATE",
+        "mode": "NULLABLE"
+    },{
+        "name": "payments_dueDate",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_ITEMS_ean",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_ITEMS_commission",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "openTextField",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_selectedAddresses_city",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_ITEM_measurementUnit",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "approvedBy",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_ITEMS_uniqueId",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_slas_name_01",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_addressType",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_TOTAL_id_change",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_TOTAL_value_tax",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_selectedSla",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "followUpEmail",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "invoice_address",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_ITEM_sellingPrice",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_TOTAL_id_tax",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_TOTAL_name_shipping",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_TOTAL_id_items",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "marketplaceServicesEndpoint",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_street",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_TOTAL_id_shipping",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_ITEM_unitMultiplier",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_TOTAL_value_discounts",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "invoiceKey",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "orderGroup",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "payments_koinUrl",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_TOTAL_name_discounts",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_slas_price_02",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "serialNumbers",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_TOTAL_name_change",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_TOTAL_id_discounts",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_TOTAL_name_items",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_deliveryCompany",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_ITEM_preSaleDate",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_ITEMS_items_id",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "CurrencyGroupSize",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "cancelledBy",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "allowEdition",
+        "type": "BOOLEAN",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_TOTAL_value_change",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_ITEM_AInfo_categoriesIds",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_ITEM_AInfo_brandId",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "allowCancellation",
+        "type": "BOOLEAN",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_slas_pickupStoreInfo_additionalInfo_01",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+    },{
+        "name": "cfop",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "commercialConditionData",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "status",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "orderFormId",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_slas_polygonName_01",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_slas_shippingEstimate_01",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "isCheckedIn",
+        "type": "BOOLEAN",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_ITEMS_imageUrl",
+        "type": "DATE",
+        "mode": "NULLABLE"
+    },{
+        "name": "payments_cardHolder",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_selectedAddresses_neighborhood",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "isCompleted",
+        "type": "BOOLEAN",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_slas_polygonName_03",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+    },{
+        "name": "payments_expireYear",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "sellerOrderId",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_CLIENT",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_ITEM_AInfo_brandName",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "id_ratesAndBenefits",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_TOTAL_value_items",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "giftRegistryData",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_slas_pickupStoreInfo_dockId",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_slas_pickupStoreInfo_additionalInfo_03",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+    },{
+        "name": "lastChange",
+        "type": "DATE",
+        "mode": "NULLABLE"
+    },{
+        "name": "callCenterOperatorData",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_ITEM_AInfo_cubicweight",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_selectedAddresses_state",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_ITEMS_priceValidUntil",
+        "type": "DATE",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_ITEM_AInfo_offeringInfo",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "marketplaceOrderId",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+    },{
+        "name": "itemMetadata_SkuName",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "StartsWithCurrencySymbol",
+        "type": "BOOLEAN",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_selectedAddresses_country",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_CLIENT_lastName",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_slas_shippingEstimate_02",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_lockTTL",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_ITEM_parentItemIndex",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_price",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_ITEM_freightCommission",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "affiliateId",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+    },{
+        "name": "seller_name",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "DIM_SHIPPING_DATA_shippingEstimateDate",
+        "type": "DATE",
+        "mode": "NULLABLE"
+    },{
+        "name": "orderId",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    }
     
     project_id = '999847639598'
     dataset_id = 'test'
@@ -1497,6 +2688,7 @@ def run():
     table = dataset.table(table_id)
     job_config = bigquery.LoadJobConfig()
     #job_config.write_disposition = "WRITE_TRUNCATE"
+    job_config.schema = format_schema(table_schema)
     job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
     job = client.load_table_from_json(json_object, table, job_config = job_config)
     print(job.result())
