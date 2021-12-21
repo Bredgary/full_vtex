@@ -2007,7 +2007,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "DIM_SHIPPING_DATA_complement",
-        "type": "FLOAT",
+        "type": "STRING",
         "mode": "NULLABLE"
     },{
         "name": "DIM_SHIPPING_DATA_neighborhood",
