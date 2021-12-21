@@ -2543,7 +2543,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "DIM_ITEMS_imageUrl",
-        "type": "DATE",
+        "type": "STRING",
         "mode": "NULLABLE"
     },{
         "name": "payments_cardHolder",
