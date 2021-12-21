@@ -2427,7 +2427,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "DIM_ITEM_unitMultiplier",
-        "type": "INTEGER",
+        "type": "FLOAT",
         "mode": "NULLABLE"
     },{
         "name": "DIM_TOTAL_value_discounts",
