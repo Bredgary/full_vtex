@@ -1755,7 +1755,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "payments_firstDigits",
-        "type": "STRING",
+        "type": "INTEGER",
         "mode": "NULLABLE"
     },{
         "name": "payments_value",
