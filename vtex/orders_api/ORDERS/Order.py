@@ -2099,7 +2099,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "DIM_CLIENT_corporateDocument",
-        "type": "FLOAT",
+        "type": "STRING",
         "mode": "NULLABLE"
     },{
         "name": "DIM_CLIENT_tradeName",
