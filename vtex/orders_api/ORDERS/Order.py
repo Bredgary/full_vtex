@@ -1791,7 +1791,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "DIM_SHIPPING_DATA_selectedAddresses_number",
-        "type": "INTEGER",
+        "type": "STRING",
         "mode": "NULLABLE"
     },{
         "name": "DIM_SHIPPING_DATA_selectedAddresses_street",
