@@ -2159,7 +2159,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "DIM_ITEM_AInfo_dim_height",
-        "type": "INTEGER",
+        "type": "FLOAT",
         "mode": "NULLABLE"
     },{
         "name": "transactionId",
