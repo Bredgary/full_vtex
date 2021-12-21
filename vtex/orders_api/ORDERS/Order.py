@@ -1743,7 +1743,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "payments_lastDigits",
-        "type": "STRING",
+        "type": "INTEGER",
         "mode": "NULLABLE"
     },{
         "name": "invoicedDate",
