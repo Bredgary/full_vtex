@@ -1611,7 +1611,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "seller_logo",
-        "type": "FLOAT",
+        "type": "STRING",
         "mode": "NULLABLE"
     },{
         "name": "seller_id",
