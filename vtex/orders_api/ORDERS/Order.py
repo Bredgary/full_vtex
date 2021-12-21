@@ -1919,7 +1919,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "DIM_SHIPPING_DATA_polygonName",
-        "type": "FLOAT",
+        "type": "STRING",
         "mode": "NULLABLE"
     },{
         "name": "DIM_SHIPPING_DATA_quantity_delivery",
