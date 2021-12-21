@@ -2095,7 +2095,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "invoiceValue",
-        "type": "INTEGER",
+        "type": "STRING",
         "mode": "NULLABLE"
     },{
         "name": "DIM_CLIENT_corporateDocument",
