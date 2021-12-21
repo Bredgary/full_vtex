@@ -1446,7 +1446,7 @@ def get_order(id,reg):
             'trackingNumber': str(init.trackingNumber),
             'invoiceKey': str(init.invoiceKey),
             'trackingUrl': str(init.trackingUrl),
-            'embeddedInvoice': str(init.embeddedInvoice),
+            'embeddedInvoice': init.embeddedInvoice,
             'type': str(init.type),
             'cfop': str(init.cfop),
             'restitutions': str(init.restitutions),
@@ -1535,7 +1535,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "embeddedInvoice",
-        "type": "FLOAT",
+        "type": "STRING",
         "mode": "NULLABLE"
     },{
         "name": "trackingUrl",
