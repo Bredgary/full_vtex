@@ -1659,7 +1659,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "payments_authId",
-        "type": "INTEGER",
+        "type": "STRING",
         "mode": "NULLABLE"
     },{
         "name": "payments_Message",
