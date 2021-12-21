@@ -1495,7 +1495,7 @@ def run():
     
     table_schema = {
         "name": "CancellationDate",
-        "type": "STRING",
+        "type": "TIMESTAMP",
         "mode": "NULLABLE"
     },{
         "name": "Reason",
@@ -1543,7 +1543,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "issuanceDate",
-        "type": "STRING",
+        "type": "TIMESTAMP",
         "mode": "NULLABLE"
     },{
         "name": "invoiceUrl",
@@ -1747,7 +1747,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "invoicedDate",
-        "type": "STRING",
+        "type": "TIMESTAMP",
         "mode": "NULLABLE"
     },{
         "name": "itemMetadata_ImageUrl",
@@ -2339,7 +2339,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "payments_dueDate",
-        "type": "STRING",
+        "type": "TIMESTAMP",
         "mode": "NULLABLE"
     },{
         "name": "DIM_ITEMS_ean",
@@ -2475,7 +2475,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "DIM_ITEM_preSaleDate",
-        "type": "STRING",
+        "type": "TIMESTAMP",
         "mode": "NULLABLE"
     },{
         "name": "DIM_ITEMS_items_id",
@@ -2671,7 +2671,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "DIM_SHIPPING_DATA_shippingEstimateDate",
-        "type": "DATE",
+        "type": "TIMESTAMP",
         "mode": "NULLABLE"
     },{
         "name": "orderId",
@@ -2687,7 +2687,7 @@ def run():
     dataset  = client.dataset(dataset_id)
     table = dataset.table(table_id)
     job_config = bigquery.LoadJobConfig()
-    #job_config.write_disposition = "WRITE_TRUNCATE"
+    job_config.write_disposition = "WRITE_TRUNCATE"
     job_config.schema = format_schema(table_schema)
     job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
     job = client.load_table_from_json(json_object, table, job_config = job_config)
