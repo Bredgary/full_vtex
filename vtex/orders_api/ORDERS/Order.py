@@ -1751,7 +1751,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "itemMetadata_ImageUrl",
-        "type": "DATE",
+        "type": "STRING",
         "mode": "NULLABLE"
     },{
         "name": "payments_firstDigits",
