@@ -2599,7 +2599,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "lastChange",
-        "type": "TIMESTAMP",
+        "type": "DATE",
         "mode": "NULLABLE"
     },{
         "name": "callCenterOperatorData",
