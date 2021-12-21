@@ -2335,7 +2335,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "creationDate",
-        "type": "DATE",
+        "type": "TIMESTAMP",
         "mode": "NULLABLE"
     },{
         "name": "payments_dueDate",
