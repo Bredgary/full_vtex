@@ -2623,7 +2623,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "marketplaceOrderId",
-        "type": "FLOAT",
+        "type": "STRING",
         "mode": "NULLABLE"
     },{
         "name": "itemMetadata_SkuName",
