@@ -1831,7 +1831,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "DIM_SHIPPING_DATA_courierId_delivery",
-        "type": "INTEGER",
+        "type": "STRING",
         "mode": "NULLABLE"
     },{
         "name": "invoiceNumber",
