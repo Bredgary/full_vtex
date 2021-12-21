@@ -2511,7 +2511,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "DIM_SHIPPING_DATA_slas_pickupStoreInfo_additionalInfo_01",
-        "type": "FLOAT",
+        "type": "STRING",
         "mode": "NULLABLE"
     },{
         "name": "cfop",
