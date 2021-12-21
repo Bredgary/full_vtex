@@ -2207,7 +2207,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "DIM_CLIENT_document",
-        "type": "INTEGER",
+        "type": "STRING",
         "mode": "NULLABLE"
     },{
         "name": "DIM_SHIPPING_DATA_slas_id_02",
