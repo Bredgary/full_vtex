@@ -1399,7 +1399,7 @@ def get_order(id,reg):
             'payments_Tid': str(init.payments_Tid),
             'payments_ReturnCode': init.payments_ReturnCode,
             'payments_Message': str(init.payments_Message),
-            'payments_authId': str(init.payments_authId),
+            'payments_authId': int(init.payments_authId),
             'payments_acquirer': str(init.payments_acquirer),
             'billingAddress_postalCode': str(init.billingAddress_postalCode),
             'billingAddress_city': str(init.billingAddress_city),
