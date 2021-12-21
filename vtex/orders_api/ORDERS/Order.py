@@ -2679,6 +2679,7 @@ def run():
         "mode": "NULLABLE"
     }
     
+    
     project_id = '999847639598'
     dataset_id = 'test'
     table_id = 'shopstar_vtex_order'
