@@ -744,7 +744,9 @@ def get_order(id,reg):
             isCertified = marketplace["isCertified"]
             name = marketplace["name"]
         except:
-            cache = 2
+            baseURL = None
+            isCertified = None
+            name = None
         
         try:
             client_email = decrypt_email(str(client_email))
