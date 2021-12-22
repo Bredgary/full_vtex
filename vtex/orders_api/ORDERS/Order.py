@@ -1021,7 +1021,7 @@ def get_order(id,reg):
             'payments_Message': str(payments_Message),
             'payments_authId': str(payments_authId),
             'payments_acquirer': str(payments_acquirer),
-            'billingAddress_postalCode': str(billingAddress_postalCode),
+            'billingAddress_postalCode': billingAddress_postalCode,
             'billingAddress_city': str(billingAddress_city),
             'billingAddress_state': str(billingAddress_state),
             'billingAddress_country': str(billingAddress_country),
