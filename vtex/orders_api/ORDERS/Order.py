@@ -46,7 +46,10 @@ def get_order(id,reg):
         except:
             emailTracked = None
             
-        approvedBy = Fjson["approvedBy"]
+        try:
+            approvedBy = Fjson["approvedBy"]
+        except:
+            approvedBy = None
         cancelledBy = Fjson["cancelledBy"]
         cancelReason = Fjson["cancelReason"]
         orderId = Fjson["orderId"]
