@@ -901,7 +901,6 @@ def get_order(id,reg):
             Reason = None
             CancellationDate = None
         
-        print(invoicedDate)
     
         df1 = pd.DataFrame({
             'orderId': str(id),
@@ -919,11 +918,11 @@ def get_order(id,reg):
             'merchantName': str(merchantName),
             'status': str(status),
             'statusDescription': str(statusDescription),
-            #'value': value,
-            #'creationDate': creationDate,
-            #'lastChange': lastChange,
-            #'orderGroup': orderGroup,
-            #'giftRegistryData': str(giftRegistryData),
+            'value': value,
+            'creationDate': creationDate,
+            'lastChange': lastChange,
+            'orderGroup': orderGroup,
+            'giftRegistryData': str(giftRegistryData),
             #'callCenterOperatorData': str(callCenterOperatorData),
             #'followUpEmail': str(followUpEmail),
             #'lastMessage': str(lastMessage),
