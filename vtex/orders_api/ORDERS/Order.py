@@ -910,9 +910,9 @@ def get_order(id,reg):
             'sequence': sequence,
             'marketplaceOrderId': str(marketplaceOrderId),
             'marketplaceServicesEndpoint': str(marketplaceServicesEndpoint),
-            'sellerOrderId': str(sellerOrderId)}, index=[0])
+            'sellerOrderId': str(sellerOrderId),
+            'origin': str(origin)}, index=[0])
         '''
-            'origin': str(origin),
             'affiliateId': str(affiliateId),
             'salesChannel': salesChannel,
             'merchantName': str(merchantName),
