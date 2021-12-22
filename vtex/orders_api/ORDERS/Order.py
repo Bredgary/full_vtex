@@ -1005,6 +1005,7 @@ def get_order(id,reg):
             'CancellationDate':str(CancellationDate),
             'invoicedDate': str(invoicedDate)}, index=[0])
         init.df = df.append(df1)
+        print(df1)
     except:
         cache = 2
 
