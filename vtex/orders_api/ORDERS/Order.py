@@ -8,6 +8,7 @@ from datetime import datetime
 import requests
 from datetime import datetime, timezone
 from os.path import join
+from _overlapped import NULL
 
 class init:
     productList = []
@@ -41,7 +42,10 @@ def get_order(id,reg):
         taxData = Fjson["taxData"]
         checkedInPickupPointId = Fjson["checkedInPickupPointId"]
         cancellationData = Fjson["cancellationData"]
-        emailTracked = Fjson["emailTracked"]
+        try:
+            emailTracked = Fjson["emailTracked"]
+        except:
+            emailTracked = NULL
         
         if "approvedBy" in Fjson:
         	approvedBy = Fjson["approvedBy"]
