@@ -31,7 +31,7 @@ def decrypt_email(email):
         cache = 2
      
 def get_order(id,reg):
-    try:
+    #try:
         print("Registro: "+str(reg))
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
         response = requests.request("GET", url, headers=init.headers)
@@ -1006,8 +1006,8 @@ def get_order(id,reg):
             'invoicedDate': str(invoicedDate)}, index=[0])
         init.df = df.append(df1)
         print(df1)
-    except:
-        cache = 2
+    #except:
+    #    cache = 2
 
 def delete_duplicate():
     try:
