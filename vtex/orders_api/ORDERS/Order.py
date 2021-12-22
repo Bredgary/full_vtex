@@ -903,8 +903,7 @@ def get_order(id,reg):
     
         df1 = pd.DataFrame({
             'orderId': str(id),
-            'emailTracked': str(emailTracked)}, index=[0])
-        '''
+            'emailTracked': str(emailTracked),
             'approvedBy': str(approvedBy),
             'cancelledBy': str(cancelledBy),
             'cancelReason': str(cancelReason),
@@ -926,7 +925,8 @@ def get_order(id,reg):
             'callCenterOperatorData': str(callCenterOperatorData),
             'followUpEmail': str(followUpEmail),
             'lastMessage': str(lastMessage),
-            'hostname': str(hostname),
+            'hostname': str(hostname)}, index=[0])
+        '''
             'openTextField': str(openTextField),
             'roundingError': roundingError,
             'orderFormId': str(orderFormId),
