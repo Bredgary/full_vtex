@@ -1012,7 +1012,6 @@ def get_order(id,reg):
             'DIM_SHIPPING_DATA_slas_price_02': slas_price_02,
             'DIM_SHIPPING_DATA_slas_deliveryChannel_02': str(slas_deliveryChannel_02),
             'DIM_SHIPPING_DATA_slas_polygonName_02': str(slas_polygonName_02),
-            'DIM_SHIPPING_DATA_slas_pickupStoreInfo_additionalInfo_02': str(slas_pickupStoreInfo_additionalInfo_02),
             'DIM_SHIPPING_DATA_slas_pickupStoreInfo_dockId_02': str(slas_pickupStoreInfo_dockId_02),
             'DIM_SHIPPING_DATA_slas_pickupStoreInfo_friendlyName_02': str(slas_pickupStoreInfo_friendlyName_02),
             'DIM_SHIPPING_DATA_slas_pickupStoreInfo_isPickupStore_02': slas_pickupStoreInfo_isPickupStore_02,
