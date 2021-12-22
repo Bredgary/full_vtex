@@ -646,7 +646,6 @@ def get_order(id,reg):
             payments_giftCardCaption = payments["giftCardCaption"]
             payments_redemptionCode = payments["redemptionCode"]
             payments_group = payments["group"]
-            payments_tid = payments["tid"]
             payments_dueDate = payments["dueDate"]
             payments_cardNumber = payments["cardNumber"]
             payments_cvv2 = payments["cvv2"]
@@ -663,6 +662,10 @@ def get_order(id,reg):
             payments_bankIssuedInvoiceBarCodeType = payments["bankIssuedInvoiceBarCodeType"]
         except:
             cache = 2
+        try:
+            payments_tid = payments["tid"]
+        except:
+            payments_tid = None
         try:
             connectorResponses = payments["connectorResponses"]
             payments_ReturnCode = connectorResponses["ReturnCode"]
