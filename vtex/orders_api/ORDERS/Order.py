@@ -875,7 +875,6 @@ def get_order(id,reg):
             'DIM_ITEM_AInfo_dim_length': length,
             'DIM_ITEM_AInfo_dim_weight': weight,
             'DIM_ITEM_AInfo_dim_width': width,
-            'DIM_ITEM_calculatedSellingPrice': str(calculatedSellingPrice),
             'DIM_ITEM_priceDefinition_total': str(total),
             'DIM_CLIENT': str(client_id),
             'DIM_CLIENT_email': str(client_email),
