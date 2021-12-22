@@ -831,8 +831,6 @@ def get_order(id,reg):
             'DIM_TOTAL_id_tax': str(total_id_tax),
             'DIM_TOTAL_name_tax': str(total_name_tax),
             'DIM_TOTAL_value_tax': total_value_tax,
-            'DIM_TOTAL_name_change': str(total_name_change),
-            'DIM_TOTAL_value_change': str(total_value_change),
             'DIM_ITEMS_uniqueId': str(items_uniqueId),
             'DIM_ITEMS_items_id': items_id,
             'DIM_ITEMS_productId': items_productId,
