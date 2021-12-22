@@ -2315,7 +2315,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "itemMetadata_Ean",
-        "type": "STRING",
+        "type": "INTEGER",
         "mode": "NULLABLE"
     },{
         "name": "DIM_ITEMS_detailUrl",
