@@ -900,6 +900,8 @@ def get_order(id,reg):
             RequestedByPaymentNotification = None
             Reason = None
             CancellationDate = None
+        
+        print(invoicedDate)
     
         df1 = pd.DataFrame({
             'orderId': str(id),
