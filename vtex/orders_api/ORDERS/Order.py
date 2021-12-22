@@ -903,6 +903,7 @@ def get_order(id,reg):
     
         df1 = pd.DataFrame({
             'orderId': str(id),
+            '''
             'emailTracked': str(emailTracked),
             'approvedBy': str(approvedBy),
             'cancelledBy': str(cancelledBy),
@@ -1193,6 +1194,7 @@ def get_order(id,reg):
             'RequestedByPaymentNotification':str(RequestedByPaymentNotification),
             'Reason':str(Reason),
             'CancellationDate':str(CancellationDate),
+            '''
             'invoicedDate': str(invoicedDate)}, index=[0])
         init.df = init.df.append(df1)
     except:
