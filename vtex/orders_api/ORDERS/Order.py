@@ -901,7 +901,6 @@ def get_order(id,reg):
             Reason = ""
             CancellationDate = ""
         
-        print(creationDate)
     
         df1 = pd.DataFrame({
             'orderId': id,
