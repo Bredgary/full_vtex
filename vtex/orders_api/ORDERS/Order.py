@@ -820,7 +820,9 @@ def get_order(id,reg):
             invoice_address = dim_invoiceData["address"]
             userPaymentInfo = dim_invoiceData["userPaymentInfo"]
         except:
-            cache = 2
+            dim_invoiceData = None
+            invoice_address = None
+            userPaymentInfo = None
         
         try:    
             isActive = transactions["isActive"]
