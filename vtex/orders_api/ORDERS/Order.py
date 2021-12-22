@@ -907,7 +907,8 @@ def get_order(id,reg):
             'approvedBy': str(approvedBy),
             'cancelledBy': str(cancelledBy),
             'cancelReason': str(cancelReason),
-            'sequence': sequence,
+            'sequence': sequence}, index=[0])
+        '''
             'marketplaceOrderId': str(marketplaceOrderId),
             'marketplaceServicesEndpoint': str(marketplaceServicesEndpoint),
             'sellerOrderId': str(sellerOrderId),
@@ -925,8 +926,7 @@ def get_order(id,reg):
             'callCenterOperatorData': str(callCenterOperatorData),
             'followUpEmail': str(followUpEmail),
             'lastMessage': str(lastMessage),
-            'hostname': str(hostname)}, index=[0])
-        '''
+            'hostname': str(hostname)
             'openTextField': str(openTextField),
             'roundingError': roundingError,
             'orderFormId': str(orderFormId),
