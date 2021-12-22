@@ -902,9 +902,9 @@ def get_order(id,reg):
             CancellationDate = None
     
         df1 = pd.DataFrame({
-            'orderId': str(id)}, index=[0])
+            'orderId': str(id),
+            'emailTracked': str(emailTracked)}, index=[0])
         '''
-            'emailTracked': str(emailTracked),
             'approvedBy': str(approvedBy),
             'cancelledBy': str(cancelledBy),
             'cancelReason': str(cancelReason),
