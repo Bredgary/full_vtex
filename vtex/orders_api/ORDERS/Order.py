@@ -833,6 +833,7 @@ def get_order(id,reg):
             
         try:
             cancellationData = Fjson["cancellationData"]
+            CancellationDate = cancellationData["CancellationDate"]
             RequestedByUser = cancellationData["RequestedByUser"]
             RequestedBySystem = cancellationData["RequestedBySystem"]
             RequestedBySellerNotification = cancellationData["RequestedBySellerNotification"]
@@ -845,6 +846,7 @@ def get_order(id,reg):
             RequestedBySellerNotification = None
             RequestedByPaymentNotification = None
             Reason = None
+            CancellationDate = None
     
         df1 = pd.DataFrame({
             'orderId': str(id),
