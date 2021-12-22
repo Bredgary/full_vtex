@@ -783,9 +783,7 @@ def get_order(id,reg):
                 trackingUrl = x["trackingUrl"]
                 embeddedInvoice = x["embeddedInvoice"]
                 type = x["type"]
-                courierStatus = x["courierStatus"]
                 cfop = x["cfop"]
-                restitutions = packages["restitutions"]
                 volumes = x["volumes"]
                 EnableInferItems = x["EnableInferItems"]
         except:
@@ -1095,7 +1093,6 @@ def get_order(id,reg):
             'embeddedInvoice': embeddedInvoice,
             'type': str(type),
             'cfop': str(cfop),
-            'restitutions': str(restitutions),
             'volumes': str(volumes),
             'EnableInferItems': str(EnableInferItems),
             'invoice_address': str(invoice_address),
