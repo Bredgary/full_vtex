@@ -1227,7 +1227,7 @@ def run():
     table_schema = [
   {
     "name": "CancellationDate",
-    "type": "STRING",
+    "type": "TIMESTAMP",
     "mode": "NULLABLE"
   },
   {
