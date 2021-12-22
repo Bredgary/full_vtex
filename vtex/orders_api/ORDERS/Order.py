@@ -678,19 +678,37 @@ def get_order(id,reg):
         except:
             payments_acquirer = None
         try:
-            billingAddress_state = billingAddress["state"]
-            billingAddress_country = billingAddress["country"]
-            billingAddress_street = billingAddress["street"]
-            billingAddress_number = billingAddress["number"]
-            billingAddress_neighborhood = billingAddress["neighborhood"]
-            billingAddress_complement = billingAddress["complement"]
-            billingAddress_reference = billingAddress["reference"]
-        except:
-            cache = 2
-        try:
             billingAddress_city = billingAddress["city"]
         except:
             billingAddress_city = None
+        try:
+            billingAddress_state = billingAddress["state"]
+        except:
+            billingAddress_state = None
+        try:
+            billingAddress_country = billingAddress["country"]
+        except:
+            billingAddress_country = None
+        try:
+            billingAddress_street = billingAddress["street"]
+        except:
+            billingAddress_street = None
+        try:
+            billingAddress_number = billingAddress["number"]
+        except:
+            billingAddress_number = None
+        try:
+            billingAddress_neighborhood = billingAddress["neighborhood"]
+        except:
+            billingAddress_neighborhood = None
+        try:
+            billingAddress_complement = billingAddress["complement"]
+        except:
+            billingAddress_complement = None
+        try:
+            billingAddress_reference = billingAddress["reference"]
+        except:
+            billingAddress_reference = None
         try:
             billingAddress_postalCode = billingAddress["postalCode"]
         except:
