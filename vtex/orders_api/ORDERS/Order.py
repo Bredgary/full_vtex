@@ -678,7 +678,6 @@ def get_order(id,reg):
         except:
             payments_acquirer = None
         try:
-            billingAddress_postalCode = billingAddress["postalCode"]
             billingAddress_city = billingAddress["city"]
             billingAddress_state = billingAddress["state"]
             billingAddress_country = billingAddress["country"]
@@ -689,6 +688,10 @@ def get_order(id,reg):
             billingAddress_reference = billingAddress["reference"]
         except:
             cache = 2
+        try:
+            billingAddress_postalCode = billingAddress["postalCode"]
+        except:
+            billingAddress_postalCode = None
         try:
             seller_id = sellers["id"]
             seller_name = sellers["name"]
