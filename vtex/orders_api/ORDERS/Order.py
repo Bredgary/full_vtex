@@ -38,167 +38,167 @@ def get_order(id,reg):
         try:
             subscriptionData = Fjson["subscriptionData"]
         except:
-            subscriptionData = None
+            subscriptionData = ""
         try:
             taxData = Fjson["taxData"]
         except:
-            taxData = None
+            taxData = ""
         try:
             checkedInPickupPointId = Fjson["checkedInPickupPointId"]
         except:
-            checkedInPickupPointId = None
+            checkedInPickupPointId = ""
         try:
             cancellationData = Fjson["cancellationData"]
         except:
-            cancellationData = None
+            cancellationData = ""
         try:
             emailTracked = Fjson["emailTracked"]
         except:
-            emailTracked = None
+            emailTracked = ""
         try:
             approvedBy = Fjson["approvedBy"]
         except:
-            approvedBy = None
+            approvedBy = ""
         try:
             cancelledBy = Fjson["cancelledBy"]
         except:
-            cancelledBy = None
+            cancelledBy = ""
         try:
             cancelReason = Fjson["cancelReason"]
         except:
-            cancelReason = None
+            cancelReason = ""
         try:
             orderId = Fjson["orderId"]
         except:
-            orderId = None
+            orderId = ""
         try:
             sequence = Fjson["sequence"]
         except:
-            sequence = None
+            sequence = ""
         try:
             marketplaceOrderId = Fjson["marketplaceOrderId"]
         except:
-            marketplaceOrderId = None
+            marketplaceOrderId = ""
         try:
             marketplaceServicesEndpoint = Fjson["marketplaceServicesEndpoint"]
         except:
-            marketplaceServicesEndpoint = None
+            marketplaceServicesEndpoint = ""
         try:
             sellerOrderId = Fjson["sellerOrderId"]
         except:
-            sellerOrderId = None
+            sellerOrderId = ""
         try:
             origin = Fjson["origin"]
         except:
-            origin = None
+            origin = ""
         try:
             affiliateId = Fjson["affiliateId"]
         except:
-            affiliateId = None
+            affiliateId = ""
         try:
             salesChannel = Fjson["salesChannel"]
         except:
-            salesChannel = None
+            salesChannel = ""
         try:
             merchantName = Fjson["merchantName"]
         except:
-            merchantName = None
+            merchantName = ""
         try:
             status = Fjson["status"]
         except:
-            status = None
+            status = ""
         try:
             statusDescription = Fjson["statusDescription"]
         except:
-            statusDescription = None
+            statusDescription = ""
         try:
             value = Fjson["value"]
         except:
-            value = None
+            value = ""
         try:
             creationDate = Fjson["creationDate"]
         except:
-            creationDate = None
+            creationDate = ""
         try:
             lastChange = Fjson["lastChange"]
         except:
-            lastChange = None
+            lastChange = ""
         try:
             orderGroup = Fjson["orderGroup"]
         except:
-            orderGroup = None
+            orderGroup = ""
         try:
             giftRegistryData = Fjson["giftRegistryData"]
         except:
-            giftRegistryData = None
+            giftRegistryData = ""
         try:
             marketingData = Fjson["marketingData"]
         except:
-            marketingData = None
+            marketingData = ""
         try:
             callCenterOperatorData = Fjson["callCenterOperatorData"]
         except:
-            callCenterOperatorData = None
+            callCenterOperatorData = ""
         try:
             followUpEmail = Fjson["followUpEmail"]
         except:
-            followUpEmail = None
+            followUpEmail = ""
         try:
             lastMessage = Fjson["lastMessage"]
         except:
-            lastMessage = None
+            lastMessage = ""
         try:
             hostname = Fjson["hostname"]
         except:
-            hostname = None
+            hostname = ""
         try:
             invoiceData = Fjson["invoiceData"]
         except:
-            invoiceData = None
+            invoiceData = ""
         try:
             openTextField = Fjson["openTextField"]
         except:
-            openTextField = None
+            openTextField = ""
         try:
             roundingError = Fjson["roundingError"]
         except:
-            roundingError = None
+            roundingError = ""
         try:
             orderFormId = Fjson["orderFormId"]
         except:
-            orderFormId = None
+            orderFormId = ""
         try:
             commercialConditionData = Fjson["commercialConditionData"]
         except:
-            commercialConditionData = None
+            commercialConditionData = ""
         try:
             isCompleted = Fjson["isCompleted"]
         except:
-            isCompleted = None
+            isCompleted = ""
         try:
             customData = Fjson["customData"]
         except:
-            customData = None
+            customData = ""
         try:
             allowCancellation = Fjson["allowCancellation"]
         except:
-            allowCancellation = None
+            allowCancellation = ""
         try:
             allowEdition = Fjson["allowEdition"]
         except:
-            allowEdition = None
+            allowEdition = ""
         try:
             isCheckedIn = Fjson["isCheckedIn"]
         except:
-            isCheckedIn = None
+            isCheckedIn = ""
         try:
             authorizedDate = Fjson["authorizedDate"]
         except:
-            authorizedDate = None
+            authorizedDate = ""
         try:
             invoicedDate = Fjson["invoicedDate"]
         except:
-            invoicedDate = None
+            invoicedDate = ""
         
         
         '''
@@ -545,13 +545,13 @@ def get_order(id,reg):
             slas_deliveryChannel_01 = slas_1["deliveryChannel"]
             slas_polygonName_01 = slas_1["polygonName"]
         except:
-            slas_id_01 = None
-            slas_name_01 = None
-            slas_shippingEstimate_01 = None
-            slas_deliveryWindow_01 = None
-            slas_price_01 = None
-            slas_deliveryChannel_01 = None
-            slas_polygonName_01 = None
+            slas_id_01 = ""
+            slas_name_01 = ""
+            slas_shippingEstimate_01 = ""
+            slas_deliveryWindow_01 = ""
+            slas_price_01 = ""
+            slas_deliveryChannel_01 = ""
+            slas_polygonName_01 = ""
         try:
             slas_pickupStoreInfo_additionalInfo_01 = pickupStoreInfo_1["additionalInfo"]
             slas_pickupStoreInfo_address_01 = pickupStoreInfo_1["address"]
@@ -559,11 +559,11 @@ def get_order(id,reg):
             slas_pickupStoreInfo_friendlyName_01 = pickupStoreInfo_1["friendlyName"]
             slas_pickupStoreInfo_isPickupStore_01 = pickupStoreInfo_1["isPickupStore"]
         except:
-            slas_pickupStoreInfo_additionalInfo_01 = None
-            slas_pickupStoreInfo_address_01 = None
-            slas_pickupStoreInfo_dockId_01 = None
-            slas_pickupStoreInfo_friendlyName_01  = None
-            slas_pickupStoreInfo_isPickupStore_01 = None
+            slas_pickupStoreInfo_additionalInfo_01 = ""
+            slas_pickupStoreInfo_address_01 = ""
+            slas_pickupStoreInfo_dockId_01 = ""
+            slas_pickupStoreInfo_friendlyName_01  = ""
+            slas_pickupStoreInfo_isPickupStore_01 = ""
         
         try:
             slas_id_02 = slas_2["id"]
@@ -574,13 +574,13 @@ def get_order(id,reg):
             slas_deliveryChannel_02 = slas_2["deliveryChannel"]
             slas_polygonName_02 = slas_2["polygonName"]
         except:
-            slas_id_02 = None
-            slas_name_02 = None
-            slas_shippingEstimate_02 = None
-            slas_deliveryWindow_02 = None
-            slas_price_02 = None
-            slas_deliveryChannel_02 = None
-            slas_polygonName_02 = None
+            slas_id_02 = ""
+            slas_name_02 = ""
+            slas_shippingEstimate_02 = ""
+            slas_deliveryWindow_02 = ""
+            slas_price_02 = ""
+            slas_deliveryChannel_02 = ""
+            slas_polygonName_02 = ""
         try:
             slas_pickupStoreInfo_additionalInfo_02 = pickupStoreInfo_2["additionalInfo"]
             slas_pickupStoreInfo_address_02 = pickupStoreInfo_2["address"]
@@ -588,11 +588,11 @@ def get_order(id,reg):
             slas_pickupStoreInfo_friendlyName_02 = pickupStoreInfo_2["friendlyName"]
             slas_pickupStoreInfo_isPickupStore_02 = pickupStoreInfo_2["isPickupStore"]
         except:
-            slas_pickupStoreInfo_additionalInfo_02 = None
-            slas_pickupStoreInfo_address_02 = None
-            slas_pickupStoreInfo_dockId_02 = None
-            slas_pickupStoreInfo_friendlyName_02 = None
-            slas_pickupStoreInfo_isPickupStore_02 = None
+            slas_pickupStoreInfo_additionalInfo_02 = ""
+            slas_pickupStoreInfo_address_02 = ""
+            slas_pickupStoreInfo_dockId_02 = ""
+            slas_pickupStoreInfo_friendlyName_02 = ""
+            slas_pickupStoreInfo_isPickupStore_02 = ""
             
         try:
             slas_id_03 = slas_3["id"]
@@ -603,13 +603,13 @@ def get_order(id,reg):
             slas_deliveryChannel_03 = slas_3["deliveryChannel"]
             slas_polygonName_03 = slas_3["polygonName"]
         except:
-            slas_id_03 = None
-            slas_name_03 = None
-            slas_shippingEstimate_03 = None
-            slas_deliveryWindow_03 = None
-            slas_price_03 = None
-            slas_deliveryChannel_03 = None
-            slas_polygonName_03 = None
+            slas_id_03 = ""
+            slas_name_03 = ""
+            slas_shippingEstimate_03 = ""
+            slas_deliveryWindow_03 = ""
+            slas_price_03 = ""
+            slas_deliveryChannel_03 = ""
+            slas_polygonName_03 = ""
         try: 
             slas_pickupStoreInfo_additionalInfo_03 = pickupStoreInfo_3["additionalInfo"]
             slas_pickupStoreInfo_address_03 = pickupStoreInfo_3["address"]
@@ -617,11 +617,11 @@ def get_order(id,reg):
             slas_pickupStoreInfo_friendlyName_03 = pickupStoreInfo_3["friendlyName"]
             slas_pickupStoreInfo_isPickupStore_03 = pickupStoreInfo_3["isPickupStore"]
         except:
-            slas_pickupStoreInfo_additionalInfo_03 = None
-            slas_pickupStoreInfo_address_03 = None
-            slas_pickupStoreInfo_dockId_03 = None
-            slas_pickupStoreInfo_friendlyName_03 = None
-            slas_pickupStoreInfo_isPickupStore_03 = None
+            slas_pickupStoreInfo_additionalInfo_03 = ""
+            slas_pickupStoreInfo_address_03 = ""
+            slas_pickupStoreInfo_dockId_03 = ""
+            slas_pickupStoreInfo_friendlyName_03 = ""
+            slas_pickupStoreInfo_isPickupStore_03 = ""
         try:
             courierId = deliveryIds["courierId"]
             courierName = deliveryIds["courierName"]
@@ -629,11 +629,11 @@ def get_order(id,reg):
             quantity = deliveryIds["quantity"]
             warehouseId = deliveryIds["warehouseId"]
         except:
-            courierId = None
-            courierName = None
-            dockId = None
-            quantity = None
-            warehouseId = None
+            courierId = ""
+            courierName = ""
+            dockId = ""
+            quantity = ""
+            warehouseId = ""
         try: 
             pickupStoreInfo_additionalInfo = pickupStoreInfo["additionalInfo"]
             pickupStoreInfo_address = pickupStoreInfo["address"]
@@ -641,11 +641,11 @@ def get_order(id,reg):
             pickupStoreInfo_friendlyName = pickupStoreInfo["friendlyName"]
             pickupStoreInfo_isPickupStore = pickupStoreInfo["isPickupStore"]
         except:
-            pickupStoreInfo_additionalInfo = None
-            pickupStoreInfo_address = None
-            pickupStoreInfo_dockId = None
-            pickupStoreInfo_friendlyName = None
-            pickupStoreInfo_isPickupStore = None
+            pickupStoreInfo_additionalInfo = ""
+            pickupStoreInfo_address = ""
+            pickupStoreInfo_dockId = ""
+            pickupStoreInfo_friendlyName = ""
+            pickupStoreInfo_isPickupStore = ""
         try:
             selectedAddresses_addressId = selectedAddresses["addressId"]
             selectedAddresses_addressType = selectedAddresses["addressType"]
@@ -660,26 +660,26 @@ def get_order(id,reg):
             selectedAddresses_country = selectedAddresses["country"]
             selectedAddresses_reference = selectedAddresses["reference"]
         except:
-            selectedAddresses_addressId = None
-            selectedAddresses_addressType = None
-            selectedAddresses_receiverName = None
-            selectedAddresses_street = None
-            selectedAddresses_number = None
-            selectedAddresses_complement = None
-            selectedAddresses_neighborhood = None
-            selectedAddresses_postalCode = None
-            selectedAddresses_city = None
-            selectedAddresses_state = None
-            selectedAddresses_country = None
-            selectedAddresses_reference = None
+            selectedAddresses_addressId = ""
+            selectedAddresses_addressType = ""
+            selectedAddresses_receiverName = ""
+            selectedAddresses_street = ""
+            selectedAddresses_number = ""
+            selectedAddresses_complement = ""
+            selectedAddresses_neighborhood = ""
+            selectedAddresses_postalCode = ""
+            selectedAddresses_city = ""
+            selectedAddresses_state = ""
+            selectedAddresses_country = ""
+            selectedAddresses_reference = ""
         try:
             transactions_isActive = transactions["isActive"]
             transactions_transactionId = transactions["transactionId"]
             transactions_merchantName = transactions["merchantName"]
         except:
-            transactions_isActive = None
-            transactions_transactionId = None
-            transactions_merchantName = None
+            transactions_isActive = ""
+            transactions_transactionId = ""
+            transactions_merchantName = ""
         try:
             payments_id = payments["id"]
             payments_paymentSystem = payments["paymentSystem"]
@@ -715,57 +715,57 @@ def get_order(id,reg):
         try:
             payments_tid = payments["tid"]
         except:
-            payments_tid = None
+            payments_tid = ""
         try:
             connectorResponses = payments["connectorResponses"]
             payments_ReturnCode = connectorResponses["ReturnCode"]
             payments_Message = connectorResponses["Message"]
             payments_authId = connectorResponses["authId"]
         except:
-            connectorResponses = None
-            payments_ReturnCode = None
-            payments_Message = None
-            payments_authId = None
+            connectorResponses = ""
+            payments_ReturnCode = ""
+            payments_Message = ""
+            payments_authId = ""
         try:
             payments_acquirer = connectorResponses["acquirer"]
         except:
-            payments_acquirer = None
+            payments_acquirer = ""
         try:
             billingAddress_city = billingAddress["city"]
         except:
-            billingAddress_city = None
+            billingAddress_city = ""
         try:
             billingAddress_state = billingAddress["state"]
         except:
-            billingAddress_state = None
+            billingAddress_state = ""
         try:
             billingAddress_country = billingAddress["country"]
         except:
-            billingAddress_country = None
+            billingAddress_country = ""
         try:
             billingAddress_street = billingAddress["street"]
         except:
-            billingAddress_street = None
+            billingAddress_street = ""
         try:
             billingAddress_number = billingAddress["number"]
         except:
-            billingAddress_number = None
+            billingAddress_number = ""
         try:
             billingAddress_neighborhood = billingAddress["neighborhood"]
         except:
-            billingAddress_neighborhood = None
+            billingAddress_neighborhood = ""
         try:
             billingAddress_complement = billingAddress["complement"]
         except:
-            billingAddress_complement = None
+            billingAddress_complement = ""
         try:
             billingAddress_reference = billingAddress["reference"]
         except:
-            billingAddress_reference = None
+            billingAddress_reference = ""
         try:
             billingAddress_postalCode = billingAddress["postalCode"]
         except:
-            billingAddress_postalCode = None
+            billingAddress_postalCode = ""
         try:
             seller_id = sellers["id"]
             seller_name = sellers["name"]
@@ -797,14 +797,14 @@ def get_order(id,reg):
             isCertified = marketplace["isCertified"]
             name = marketplace["name"]
         except:
-            baseURL = None
-            isCertified = None
-            name = None
+            baseURL = ""
+            isCertified = ""
+            name = ""
         
         try:
             client_email = decrypt_email(str(client_email))
         except:
-            client_email = None
+            client_email = ""
             
         
         
@@ -825,19 +825,19 @@ def get_order(id,reg):
             cache = 2
         
         try:
-            courier = None
-            invoiceNumber = None
-            invoiceValue = None
-            invoiceUrl = None
-            issuanceDate = None
-            trackingNumber = None
-            invoiceKey = None
-            trackingUrl = None
-            embeddedInvoice = None
-            packages_type = None
-            cfop = None
-            volumes = None
-            EnableInferItems = None
+            courier = ""
+            invoiceNumber = ""
+            invoiceValue = ""
+            invoiceUrl = ""
+            issuanceDate = ""
+            trackingNumber = ""
+            invoiceKey = ""
+            trackingUrl = ""
+            embeddedInvoice = ""
+            packages_type = ""
+            cfop = ""
+            volumes = ""
+            EnableInferItems = ""
             for x in packages:
                 courier = x["courier"]
                 invoiceNumber = x["invoiceNumber"]
@@ -853,19 +853,19 @@ def get_order(id,reg):
                 volumes = x["volumes"]
                 EnableInferItems = x["EnableInferItems"]
         except:
-            courier = None
-            invoiceNumber = None
-            invoiceValue = None
-            invoiceUrl = None
-            issuanceDate = None
-            trackingNumber = None
-            invoiceKey = None
-            trackingUrl = None
-            embeddedInvoice = None
-            packages_type = None
-            cfop = None
-            volumes = None
-            EnableInferItems = None
+            courier = ""
+            invoiceNumber = ""
+            invoiceValue = ""
+            invoiceUrl = ""
+            issuanceDate = ""
+            trackingNumber = ""
+            invoiceKey = ""
+            trackingUrl = ""
+            embeddedInvoice = ""
+            packages_type = ""
+            cfop = ""
+            volumes = ""
+            EnableInferItems = ""
             
     
         try:
@@ -873,9 +873,9 @@ def get_order(id,reg):
             invoice_address = dim_invoiceData["address"]
             userPaymentInfo = dim_invoiceData["userPaymentInfo"]
         except:
-            dim_invoiceData = None
-            invoice_address = None
-            userPaymentInfo = None
+            dim_invoiceData = ""
+            invoice_address = ""
+            userPaymentInfo = ""
         
         try:    
             isActive = transactions["isActive"]
@@ -893,13 +893,13 @@ def get_order(id,reg):
             RequestedByPaymentNotification = cancellationData["RequestedByPaymentNotification"]
             Reason = cancellationData["Reason"]
         except:
-            cancellationData = None
-            RequestedByUser = None
-            RequestedBySystem = None
-            RequestedBySellerNotification = None
-            RequestedByPaymentNotification = None
-            Reason = None
-            CancellationDate = None
+            cancellationData = ""
+            RequestedByUser = ""
+            RequestedBySystem = ""
+            RequestedBySellerNotification = ""
+            RequestedByPaymentNotification = ""
+            Reason = ""
+            CancellationDate = ""
         
         print(creationDate)
     
