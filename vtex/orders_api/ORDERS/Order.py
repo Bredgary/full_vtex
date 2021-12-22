@@ -564,7 +564,13 @@ def get_order(id,reg):
             slas_deliveryChannel_02 = slas_2["deliveryChannel"]
             slas_polygonName_02 = slas_2["polygonName"]
         except:
-            cache = 2
+            slas_id_02 = None
+            slas_name_02 = None
+            slas_shippingEstimate_02 = None
+            slas_deliveryWindow_02 = None
+            slas_price_02 = None
+            slas_deliveryChannel_02 = None
+            slas_polygonName_02 = None
         try:
             slas_pickupStoreInfo_additionalInfo_02 = pickupStoreInfo_2["additionalInfo"]
             slas_pickupStoreInfo_address_02 = pickupStoreInfo_2["address"]
