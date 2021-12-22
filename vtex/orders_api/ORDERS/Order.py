@@ -1237,7 +1237,7 @@ def run():
   },
   {
     "name": "RequestedBySystem",
-    "type": "BOOLEAN",
+    "type": "STRING",
     "mode": "NULLABLE"
   },
   {
