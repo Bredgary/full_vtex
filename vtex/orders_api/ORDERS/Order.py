@@ -1907,7 +1907,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "DIM_ITEM_AInfo_productClusterId",
-        "type": "STRING",
+        "type": "FLOAT",
         "mode": "NULLABLE"
     },{
         "name": "DIM_SHIPPING_DATA_pickupStoreInfo_additionalInfo",
@@ -2027,7 +2027,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "DIM_ITEM_AInfo_dim_length",
-        "type": "STRING",
+        "type": "FLOAT",
         "mode": "NULLABLE"
     },{
         "name": "DIM_SHIPPING_DATA_shippingData_id",
@@ -2143,7 +2143,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "DIM_ITEM_AInfo_dim_width",
-        "type": "STRING",
+        "type": "FLOAT",
         "mode": "NULLABLE"
     },{
         "name": "DIM_SHIPPING_DATA_city",
@@ -2159,7 +2159,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "DIM_ITEM_AInfo_dim_height",
-        "type": "STRING",
+        "type": "FLOAT",
         "mode": "NULLABLE"
     },{
         "name": "transactionId",
@@ -2259,7 +2259,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "DIM_ITEM_AInfo_dim_weight",
-        "type": "STRING",
+        "type": "FLOAT",
         "mode": "NULLABLE"
     },{
         "name": "DIM_ITEM_isGift",
@@ -2427,7 +2427,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "DIM_ITEM_unitMultiplier",
-        "type": "STRING",
+        "type": "FLOAT",
         "mode": "NULLABLE"
     },{
         "name": "DIM_TOTAL_value_discounts",
@@ -2607,7 +2607,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "DIM_ITEM_AInfo_cubicweight",
-        "type": "STRING",
+        "type": "FLOAT",
         "mode": "NULLABLE"
     },{
         "name": "DIM_SHIPPING_DATA_selectedAddresses_state",
