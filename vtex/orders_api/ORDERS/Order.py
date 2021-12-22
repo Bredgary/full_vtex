@@ -1227,7 +1227,7 @@ def run():
     table_schema = [
   {
     "name": "CancellationDate",
-    "type": "TIMESTAMP",
+    "type": "DATE",
     "mode": "NULLABLE"
   },
   {
@@ -1266,13 +1266,18 @@ def run():
     "mode": "NULLABLE"
   },
   {
+    "name": "restitutions",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
     "name": "type",
     "type": "STRING",
     "mode": "NULLABLE"
   },
   {
     "name": "embeddedInvoice",
-    "type": "FLOAT",
+    "type": "STRING",
     "mode": "NULLABLE"
   },
   {
@@ -1392,7 +1397,7 @@ def run():
   },
   {
     "name": "billingAddress_number",
-    "type": "STRING",
+    "type": "INTEGER",
     "mode": "NULLABLE"
   },
   {
@@ -1427,17 +1432,17 @@ def run():
   },
   {
     "name": "payments_authId",
-    "type": "STRING",
+    "type": "INTEGER",
     "mode": "NULLABLE"
   },
   {
     "name": "payments_Message",
-    "type": "STRING",
+    "type": "TIMESTAMP",
     "mode": "NULLABLE"
   },
   {
     "name": "itemMetadata_RefId",
-    "type": "INTEGER",
+    "type": "STRING",
     "mode": "NULLABLE"
   },
   {
@@ -1447,7 +1452,7 @@ def run():
   },
   {
     "name": "payments_ReturnCode",
-    "type": "STRING",
+    "type": "INTEGER",
     "mode": "NULLABLE"
   },
   {
@@ -1537,7 +1542,7 @@ def run():
   },
   {
     "name": "invoicedDate",
-    "type": "DATE",
+    "type": "STRING",
     "mode": "NULLABLE"
   },
   {
@@ -1561,17 +1566,17 @@ def run():
     "mode": "NULLABLE"
   },
   {
-    "name": "DIM_SHIPPING_DATA_selectedAddresses_reference",
-    "type": "STRING",
-    "mode": "NULLABLE"
-  },
-  {
-    "name": "DIM_SHIPPING_DATA_postalCode",
+    "name": "payments_paymentSystem",
     "type": "INTEGER",
     "mode": "NULLABLE"
   },
   {
-    "name": "transactions_transactionId",
+    "name": "payments_id",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "transactions_merchantName",
     "type": "STRING",
     "mode": "NULLABLE"
   },
@@ -1592,7 +1597,7 @@ def run():
   },
   {
     "name": "DIM_SHIPPING_DATA_selectedAddresses_number",
-    "type": "STRING",
+    "type": "INTEGER",
     "mode": "NULLABLE"
   },
   {
@@ -1617,12 +1622,12 @@ def run():
   },
   {
     "name": "DIM_SHIPPING_DATA_slas_pickupStoreInfo_isPickupStore_01",
-    "type": "STRING",
+    "type": "BOOLEAN",
     "mode": "NULLABLE"
   },
   {
     "name": "DIM_SHIPPING_DATA_slas_pickupStoreInfo_isPickupStore_02",
-    "type": "STRING",
+    "type": "BOOLEAN",
     "mode": "NULLABLE"
   },
   {
@@ -1657,11 +1662,31 @@ def run():
   },
   {
     "name": "DIM_SHIPPING_DATA_slas_price_03",
-    "type": "STRING",
+    "type": "INTEGER",
     "mode": "NULLABLE"
   },
   {
     "name": "DIM_SHIPPING_DATA_slas_name_03",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "authorizedDate",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "sequence",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "DIM_CLIENT_email",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "DIM_SHIPPING_DATA_slas_pickupStoreInfo_additionalInfo_02",
     "type": "STRING",
     "mode": "NULLABLE"
   },
@@ -1752,7 +1777,7 @@ def run():
   },
   {
     "name": "DIM_SHIPPING_DATA_slas_price_01",
-    "type": "STRING",
+    "type": "INTEGER",
     "mode": "NULLABLE"
   },
   {
@@ -1852,7 +1877,7 @@ def run():
   },
   {
     "name": "DIM_SHIPPING_DATA_number",
-    "type": "STRING",
+    "type": "INTEGER",
     "mode": "NULLABLE"
   },
   {
@@ -1867,7 +1892,7 @@ def run():
   },
   {
     "name": "DIM_ITEM_AInfo_dim_length",
-    "type": "INTEGER",
+    "type": "FLOAT",
     "mode": "NULLABLE"
   },
   {
@@ -1896,18 +1921,23 @@ def run():
     "mode": "NULLABLE"
   },
   {
-    "name": "DIM_SHIPPING_DATA_addressId",
+    "name": "transactions_transactionId",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "DIM_SHIPPING_DATA_selectedAddresses_reference",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "DIM_SHIPPING_DATA_postalCode",
     "type": "INTEGER",
     "mode": "NULLABLE"
   },
   {
-    "name": "DIM_SHIPPING_DATA_slas_name_01",
-    "type": "STRING",
-    "mode": "NULLABLE"
-  },
-  {
-    "name": "DIM_SHIPPING_DATA_addressType",
-    "type": "STRING",
+    "name": "DIM_SHIPPING_DATA_addressId",
+    "type": "INTEGER",
     "mode": "NULLABLE"
   },
   {
@@ -1952,7 +1982,7 @@ def run():
   },
   {
     "name": "DIM_CLIENT_corporateDocument",
-    "type": "FLOAT",
+    "type": "STRING",
     "mode": "NULLABLE"
   },
   {
@@ -1977,52 +2007,37 @@ def run():
   },
   {
     "name": "DIM_CLIENT_corporateName",
-    "type": "FLOAT",
-    "mode": "NULLABLE"
-  },
-  {
-    "name": "DIM_SHIPPING_DATA_slas_price_02",
     "type": "STRING",
     "mode": "NULLABLE"
   },
   {
-    "name": "serialNumbers",
+    "name": "DIM_CLIENT_documentType",
     "type": "STRING",
     "mode": "NULLABLE"
   },
   {
-    "name": "DIM_TOTAL_id_discounts",
+    "name": "DIM_SHIPPING_DATA_slas_pickupStoreInfo_isPickupStore_03",
+    "type": "BOOLEAN",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "DIM_CLIENT_firstName",
     "type": "STRING",
     "mode": "NULLABLE"
   },
   {
-    "name": "invoice_address",
-    "type": "STRING",
-    "mode": "NULLABLE"
-  },
-  {
-    "name": "DIM_TOTAL_id_tax",
-    "type": "STRING",
-    "mode": "NULLABLE"
-  },
-  {
-    "name": "DIM_ITEM_sellingPrice",
-    "type": "INTEGER",
-    "mode": "NULLABLE"
-  },
-  {
-    "name": "DIM_CLIENT_lastName",
+    "name": "DIM_ITEM_calculatedSellingPrice",
     "type": "STRING",
     "mode": "NULLABLE"
   },
   {
     "name": "DIM_SHIPPING_DATA_warehouseId",
-    "type": "INTEGER",
+    "type": "STRING",
     "mode": "NULLABLE"
   },
   {
     "name": "DIM_ITEM_AInfo_dim_width",
-    "type": "INTEGER",
+    "type": "FLOAT",
     "mode": "NULLABLE"
   },
   {
@@ -2042,7 +2057,7 @@ def run():
   },
   {
     "name": "DIM_ITEM_AInfo_dim_height",
-    "type": "INTEGER",
+    "type": "FLOAT",
     "mode": "NULLABLE"
   },
   {
@@ -2062,7 +2077,7 @@ def run():
   },
   {
     "name": "DIM_ITEMS_refId",
-    "type": "INTEGER",
+    "type": "STRING",
     "mode": "NULLABLE"
   },
   {
@@ -2077,11 +2092,6 @@ def run():
   },
   {
     "name": "DIM_ITEM_AInfo_offeringType",
-    "type": "STRING",
-    "mode": "NULLABLE"
-  },
-  {
-    "name": "payments_id",
     "type": "STRING",
     "mode": "NULLABLE"
   },
@@ -2116,6 +2126,11 @@ def run():
     "mode": "NULLABLE"
   },
   {
+    "name": "DIM_ITEM_priceDefinition_total",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
     "name": "statusDescription",
     "type": "STRING",
     "mode": "NULLABLE"
@@ -2137,7 +2152,7 @@ def run():
   },
   {
     "name": "billingAddress_postalCode",
-    "type": "STRING",
+    "type": "INTEGER",
     "mode": "NULLABLE"
   },
   {
@@ -2167,7 +2182,7 @@ def run():
   },
   {
     "name": "DIM_ITEM_AInfo_dim_weight",
-    "type": "FLOAT",
+    "type": "INTEGER",
     "mode": "NULLABLE"
   },
   {
@@ -2211,21 +2226,6 @@ def run():
     "mode": "NULLABLE"
   },
   {
-    "name": "authorizedDate",
-    "type": "DATE",
-    "mode": "NULLABLE"
-  },
-  {
-    "name": "sequence",
-    "type": "INTEGER",
-    "mode": "NULLABLE"
-  },
-  {
-    "name": "DIM_CLIENT_email",
-    "type": "STRING",
-    "mode": "NULLABLE"
-  },
-  {
     "name": "changesAttachment_id",
     "type": "STRING",
     "mode": "NULLABLE"
@@ -2247,11 +2247,6 @@ def run():
   },
   {
     "name": "DIM_ITEMS_name",
-    "type": "STRING",
-    "mode": "NULLABLE"
-  },
-  {
-    "name": "transactions_merchantName",
     "type": "STRING",
     "mode": "NULLABLE"
   },
@@ -2301,8 +2296,43 @@ def run():
     "mode": "NULLABLE"
   },
   {
-    "name": "payments_paymentSystem",
-    "type": "INTEGER",
+    "name": "openTextField",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "DIM_SHIPPING_DATA_selectedAddresses_city",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "DIM_ITEM_measurementUnit",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "approvedBy",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "DIM_ITEMS_uniqueId",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "DIM_SHIPPING_DATA_slas_name_01",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "DIM_SHIPPING_DATA_addressType",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "DIM_TOTAL_id_change",
+    "type": "STRING",
     "mode": "NULLABLE"
   },
   {
@@ -2317,6 +2347,21 @@ def run():
   },
   {
     "name": "followUpEmail",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "invoice_address",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "DIM_ITEM_sellingPrice",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "DIM_TOTAL_id_tax",
     "type": "STRING",
     "mode": "NULLABLE"
   },
@@ -2376,6 +2421,26 @@ def run():
     "mode": "NULLABLE"
   },
   {
+    "name": "DIM_SHIPPING_DATA_slas_price_02",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "serialNumbers",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "DIM_TOTAL_name_change",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "DIM_TOTAL_id_discounts",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
     "name": "DIM_TOTAL_name_items",
     "type": "STRING",
     "mode": "NULLABLE"
@@ -2411,6 +2476,11 @@ def run():
     "mode": "NULLABLE"
   },
   {
+    "name": "DIM_TOTAL_value_change",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
     "name": "DIM_ITEM_AInfo_categoriesIds",
     "type": "STRING",
     "mode": "NULLABLE"
@@ -2423,11 +2493,6 @@ def run():
   {
     "name": "allowCancellation",
     "type": "BOOLEAN",
-    "mode": "NULLABLE"
-  },
-  {
-    "name": "DIM_CLIENT_documentType",
-    "type": "STRING",
     "mode": "NULLABLE"
   },
   {
@@ -2491,31 +2556,6 @@ def run():
     "mode": "NULLABLE"
   },
   {
-    "name": "openTextField",
-    "type": "STRING",
-    "mode": "NULLABLE"
-  },
-  {
-    "name": "DIM_SHIPPING_DATA_selectedAddresses_city",
-    "type": "STRING",
-    "mode": "NULLABLE"
-  },
-  {
-    "name": "DIM_ITEM_measurementUnit",
-    "type": "STRING",
-    "mode": "NULLABLE"
-  },
-  {
-    "name": "approvedBy",
-    "type": "STRING",
-    "mode": "NULLABLE"
-  },
-  {
-    "name": "DIM_ITEMS_uniqueId",
-    "type": "STRING",
-    "mode": "NULLABLE"
-  },
-  {
     "name": "DIM_SHIPPING_DATA_slas_polygonName_03",
     "type": "STRING",
     "mode": "NULLABLE"
@@ -2527,16 +2567,6 @@ def run():
   },
   {
     "name": "sellerOrderId",
-    "type": "STRING",
-    "mode": "NULLABLE"
-  },
-  {
-    "name": "DIM_SHIPPING_DATA_slas_pickupStoreInfo_isPickupStore_03",
-    "type": "STRING",
-    "mode": "NULLABLE"
-  },
-  {
-    "name": "DIM_CLIENT_firstName",
     "type": "STRING",
     "mode": "NULLABLE"
   },
@@ -2587,7 +2617,7 @@ def run():
   },
   {
     "name": "DIM_ITEM_AInfo_cubicweight",
-    "type": "FLOAT",
+    "type": "INTEGER",
     "mode": "NULLABLE"
   },
   {
@@ -2631,6 +2661,11 @@ def run():
     "mode": "NULLABLE"
   },
   {
+    "name": "DIM_CLIENT_lastName",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
     "name": "DIM_SHIPPING_DATA_slas_shippingEstimate_02",
     "type": "STRING",
     "mode": "NULLABLE"
@@ -2667,7 +2702,7 @@ def run():
   },
   {
     "name": "DIM_SHIPPING_DATA_shippingEstimateDate",
-    "type": "DATE",
+    "type": "STRING",
     "mode": "NULLABLE"
   },
   {
@@ -2704,7 +2739,7 @@ def get_params():
     registro = 0
     for row in rows:
         registro += 1
-        get_order(row.orderId,registro)
+        get_order("1010300865648-01",registro)
         if registro == 1:
             run()
         if registro == 100:
