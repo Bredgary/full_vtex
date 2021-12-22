@@ -1659,15 +1659,15 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "payments_authId",
-        "type": "STRING",
+        "type": "INTEGER",
         "mode": "NULLABLE"
     },{
         "name": "payments_Message",
-        "type": "STRING",
+        "type": "INTEGER",
         "mode": "NULLABLE"
     },{
         "name": "itemMetadata_RefId",
-        "type": "STRING",
+        "type": "INTEGER",
         "mode": "NULLABLE"
     },{
         "name": "storePreferencesData_currencyLocale",
@@ -1675,7 +1675,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "payments_ReturnCode",
-        "type": "STRING",
+        "type": "INTEGER",
         "mode": "NULLABLE"
     },{
         "name": "payments_Tid",
@@ -1823,7 +1823,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "DIM_SHIPPING_DATA_dockId_delivery",
-        "type": "STRING",
+        "type": "INTEGER",
         "mode": "NULLABLE"
     },{
         "name": "DIM_SHIPPING_DATA_courierName_delivery",
