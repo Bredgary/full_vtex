@@ -545,7 +545,13 @@ def get_order(id,reg):
             slas_deliveryChannel_01 = slas_1["deliveryChannel"]
             slas_polygonName_01 = slas_1["polygonName"]
         except:
-            cache = 2
+            slas_id_01 = None
+            slas_name_01 = None
+            slas_shippingEstimate_01 = None
+            slas_deliveryWindow_01 = None
+            slas_price_01 = None
+            slas_deliveryChannel_01 = None
+            slas_polygonName_01 = None
         try:
             slas_pickupStoreInfo_additionalInfo_01 = pickupStoreInfo_1["additionalInfo"]
             slas_pickupStoreInfo_address_01 = pickupStoreInfo_1["address"]
@@ -553,7 +559,11 @@ def get_order(id,reg):
             slas_pickupStoreInfo_friendlyName_01 = pickupStoreInfo_1["friendlyName"]
             slas_pickupStoreInfo_isPickupStore_01 = pickupStoreInfo_1["isPickupStore"]
         except:
-            cache = 2
+            slas_pickupStoreInfo_additionalInfo_01 = None
+            slas_pickupStoreInfo_address_01 = None
+            slas_pickupStoreInfo_dockId_01 = None
+            slas_pickupStoreInfo_friendlyName_01  = None
+            slas_pickupStoreInfo_isPickupStore_01 = None
         
         try:
             slas_id_02 = slas_2["id"]
