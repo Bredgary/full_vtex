@@ -922,7 +922,7 @@ def get_order(id,reg):
             'creationDate': creationDate,
             'lastChange': lastChange,
             'orderGroup': orderGroup,
-            'giftRegistryData': str(giftRegistryData),
+            #'giftRegistryData': str(giftRegistryData),
             #'callCenterOperatorData': str(callCenterOperatorData),
             #'followUpEmail': str(followUpEmail),
             #'lastMessage': str(lastMessage),
