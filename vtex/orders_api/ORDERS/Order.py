@@ -36,55 +36,170 @@ def get_order(id,reg):
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
-        
-        subscriptionData = Fjson["subscriptionData"]
-        taxData = Fjson["taxData"]
-        checkedInPickupPointId = Fjson["checkedInPickupPointId"]
-        cancellationData = Fjson["cancellationData"]
+        try:
+            subscriptionData = Fjson["subscriptionData"]
+        except:
+            subscriptionData = None
+        try:
+            taxData = Fjson["taxData"]
+        except:
+            taxData = None
+        try:
+            checkedInPickupPointId = Fjson["checkedInPickupPointId"]
+        except:
+            checkedInPickupPointId = None
+        try:
+            cancellationData = Fjson["cancellationData"]
+        except:
+            cancellationData = None
         try:
             emailTracked = Fjson["emailTracked"]
         except:
             emailTracked = None
-            
         try:
             approvedBy = Fjson["approvedBy"]
         except:
             approvedBy = None
-        cancelledBy = Fjson["cancelledBy"]
-        cancelReason = Fjson["cancelReason"]
-        orderId = Fjson["orderId"]
-        sequence = Fjson["sequence"]
-        marketplaceOrderId = Fjson["marketplaceOrderId"]
-        marketplaceServicesEndpoint = Fjson["marketplaceServicesEndpoint"]
-        sellerOrderId = Fjson["sellerOrderId"]
-        origin = Fjson["origin"]
-        affiliateId = Fjson["affiliateId"]
-        salesChannel = Fjson["salesChannel"]
-        merchantName = Fjson["merchantName"]
-        status = Fjson["status"]
-        statusDescription = Fjson["statusDescription"]
-        value = Fjson["value"]
-        creationDate = Fjson["creationDate"]
-        lastChange = Fjson["lastChange"]
-        orderGroup = Fjson["orderGroup"]
-        giftRegistryData = Fjson["giftRegistryData"]
-        marketingData = Fjson["marketingData"]
-        callCenterOperatorData = Fjson["callCenterOperatorData"]
-        followUpEmail = Fjson["followUpEmail"]
-        lastMessage = Fjson["lastMessage"]
-        hostname = Fjson["hostname"]
-        invoiceData = Fjson["invoiceData"]
-        openTextField = Fjson["openTextField"]
-        roundingError = Fjson["roundingError"]
-        orderFormId = Fjson["orderFormId"]
-        commercialConditionData = Fjson["commercialConditionData"]
-        isCompleted = Fjson["isCompleted"]
-        customData = Fjson["customData"]
-        allowCancellation = Fjson["allowCancellation"]
-        allowEdition = Fjson["allowEdition"]
-        isCheckedIn = Fjson["isCheckedIn"]
-        authorizedDate = Fjson["authorizedDate"]
-        invoicedDate = Fjson["invoicedDate"]
+        try:
+            cancelledBy = Fjson["cancelledBy"]
+        except:
+            cancelledBy = None
+        try:
+            cancelReason = Fjson["cancelReason"]
+        except:
+            cancelReason = None
+        try:
+            orderId = Fjson["orderId"]
+        except:
+            orderId = None
+        try:
+            sequence = Fjson["sequence"]
+        except:
+            sequence = None
+        try:
+            marketplaceOrderId = Fjson["marketplaceOrderId"]
+        except:
+            marketplaceOrderId = None
+        try:
+            marketplaceServicesEndpoint = Fjson["marketplaceServicesEndpoint"]
+        except:
+            marketplaceServicesEndpoint = None
+        try:
+            sellerOrderId = Fjson["sellerOrderId"]
+        except:
+            sellerOrderId = None
+        try:
+            origin = Fjson["origin"]
+        except:
+            origin = None
+        try:
+            affiliateId = Fjson["affiliateId"]
+        except:
+            affiliateId = None
+        try:
+            salesChannel = Fjson["salesChannel"]
+        except:
+            salesChannel = None
+        try:
+            merchantName = Fjson["merchantName"]
+        except:
+            merchantName = None
+        try:
+            status = Fjson["status"]
+        except:
+            status = None
+        try:
+            statusDescription = Fjson["statusDescription"]
+        except:
+            statusDescription = None
+        try:
+            value = Fjson["value"]
+        except:
+            value = None
+        try:
+            creationDate = Fjson["creationDate"]
+        except:
+            creationDate = None
+        try:
+            lastChange = Fjson["lastChange"]
+        except:
+            lastChange = None
+        try:
+            orderGroup = Fjson["orderGroup"]
+        except:
+            orderGroup = None
+        try:
+            giftRegistryData = Fjson["giftRegistryData"]
+        except:
+            giftRegistryData = None
+        try:
+            marketingData = Fjson["marketingData"]
+        except:
+            marketingData = None
+        try:
+            callCenterOperatorData = Fjson["callCenterOperatorData"]
+        except:
+            callCenterOperatorData = None
+        try:
+            followUpEmail = Fjson["followUpEmail"]
+        except:
+            followUpEmail = None
+        try:
+            lastMessage = Fjson["lastMessage"]
+        except:
+            lastMessage = None
+        try:
+            hostname = Fjson["hostname"]
+        except:
+            hostname = None
+        try:
+            invoiceData = Fjson["invoiceData"]
+        except:
+            invoiceData = None
+        try:
+            openTextField = Fjson["openTextField"]
+        except:
+            openTextField = None
+        try:
+            roundingError = Fjson["roundingError"]
+        except:
+            roundingError = None
+        try:
+            orderFormId = Fjson["orderFormId"]
+        except:
+            orderFormId = None
+        try:
+            commercialConditionData = Fjson["commercialConditionData"]
+        except:
+            commercialConditionData = None
+        try:
+            isCompleted = Fjson["isCompleted"]
+        except:
+            isCompleted = None
+        try:
+            customData = Fjson["customData"]
+        except:
+            customData = None
+        try:
+            allowCancellation = Fjson["allowCancellation"]
+        except:
+            allowCancellation = None
+        try:
+            allowEdition = Fjson["allowEdition"]
+        except:
+            allowEdition = None
+        try:
+            isCheckedIn = Fjson["isCheckedIn"]
+        except:
+            isCheckedIn = None
+        try:
+            authorizedDate = Fjson["authorizedDate"]
+        except:
+            authorizedDate = None
+        try:
+            invoicedDate = Fjson["invoicedDate"]
+        except:
+            invoicedDate = None
         
         
         '''
