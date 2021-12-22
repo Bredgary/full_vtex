@@ -2239,7 +2239,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "DIM_ITEMS_quantity",
-        "type": "STRING",
+        "type": "INTEGER",
         "mode": "NULLABLE"
     },{
         "name": "DIM_SHIPPING_DATA_slas_deliveryChannel_03",
