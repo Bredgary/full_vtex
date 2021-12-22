@@ -2175,7 +2175,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "DIM_ITEMS_refId",
-        "type": "STRING",
+        "type": "INTEGER",
         "mode": "NULLABLE"
     },{
         "name": "DIM_ITEM_AInfo_commercialConditionId",
