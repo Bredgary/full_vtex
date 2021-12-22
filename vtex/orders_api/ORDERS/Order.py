@@ -1013,7 +1013,7 @@ def get_order(id,reg):
             'payments_bankIssuedInvoiceIdentificationNumberFormatted': str(payments_bankIssuedInvoiceIdentificationNumberFormatted),
             'payments_bankIssuedInvoiceBarCodeNumber': str(payments_bankIssuedInvoiceBarCodeNumber),
             'payments_bankIssuedInvoiceBarCodeType': str(payments_bankIssuedInvoiceBarCodeType),
-            'payments_Tid': str(payments_Tid),
+            'payments_Tid': str(payments_tid),
             'payments_ReturnCode': payments_ReturnCode,
             'payments_Message': str(payments_Message),
             'payments_authId': str(payments_authId),
