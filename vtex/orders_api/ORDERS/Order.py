@@ -1195,7 +1195,7 @@ def get_order(id,reg):
             #'RequestedByPaymentNotification':str(RequestedByPaymentNotification),
             #'Reason':str(Reason),
             #'CancellationDate':str(CancellationDate),
-            'invoicedDate': str(invoicedDate)}, index=[0])
+            'invoicedDate': invoicedDate}, index=[0])
         init.df = init.df.append(df1)
     except:
         cache = 2
