@@ -772,6 +772,19 @@ def get_order(id,reg):
             cache = 2
         
         try:
+            courier = None
+            invoiceNumber = None
+            invoiceValue = None
+            invoiceUrl = None
+            issuanceDate = None
+            trackingNumber = None
+            invoiceKey = None
+            trackingUrl = None
+            embeddedInvoice = None
+            packages_type = None
+            cfop = None
+            volumes = None
+            EnableInferItems = None
             for x in packages:
                 courier = x["courier"]
                 invoiceNumber = x["invoiceNumber"]
