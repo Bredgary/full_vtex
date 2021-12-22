@@ -671,9 +671,12 @@ def get_order(id,reg):
             payments_ReturnCode = connectorResponses["ReturnCode"]
             payments_Message = connectorResponses["Message"]
             payments_authId = connectorResponses["authId"]
-            payments_acquirer = connectorResponses["acquirer"]
         except:
             cache = 2
+        try:
+            payments_acquirer = connectorResponses["acquirer"]
+        except:
+            payments_acquirer = None
         try:
             billingAddress_postalCode = billingAddress["postalCode"]
             billingAddress_city = billingAddress["city"]
