@@ -1563,7 +1563,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "itemMetadata_ProductId",
-        "type": "STRING",
+        "type": "INTEGER",
         "mode": "NULLABLE"
     },{
         "name": "itemMetadata_Id",
