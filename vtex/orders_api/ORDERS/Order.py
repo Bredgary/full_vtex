@@ -839,7 +839,12 @@ def get_order(id,reg):
             RequestedByPaymentNotification = cancellationData["RequestedByPaymentNotification"]
             Reason = cancellationData["Reason"]
         except:
-            cache = 2
+            cancellationData = None
+            RequestedByUser = None
+            RequestedBySystem = None
+            RequestedBySellerNotification = None
+            RequestedByPaymentNotification = None
+            Reason = None
     
         df1 = pd.DataFrame({
             'orderId': str(id),
