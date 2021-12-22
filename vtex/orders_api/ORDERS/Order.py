@@ -12,7 +12,6 @@ from os.path import join
 class init:
     productList = []
     df = pd.DataFrame()
-    
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
 def dicMemberCheck(key, dicObj):
@@ -1143,7 +1142,6 @@ def get_order(id,reg):
             'CancellationDate':str(CancellationDate),
             'invoicedDate': str(invoicedDate)}, index=[0])
         init.df = df.append(df1)
-        print(df1)
     #except:
     #    cache = 2
 
