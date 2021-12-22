@@ -909,9 +909,9 @@ def get_order(id,reg):
             'cancelReason': str(cancelReason),
             'sequence': sequence,
             'marketplaceOrderId': str(marketplaceOrderId),
-            'marketplaceServicesEndpoint': str(marketplaceServicesEndpoint)}, index=[0])
+            'marketplaceServicesEndpoint': str(marketplaceServicesEndpoint),
+            'sellerOrderId': str(sellerOrderId)}, index=[0])
         '''
-            'sellerOrderId': str(sellerOrderId),
             'origin': str(origin),
             'affiliateId': str(affiliateId),
             'salesChannel': salesChannel,
