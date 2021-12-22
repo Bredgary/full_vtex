@@ -2721,9 +2721,9 @@ def run():
     dataset  = client.dataset(dataset_id)
     table = dataset.table(table_id)
     job_config = bigquery.LoadJobConfig()
-    #job_config.write_disposition = "WRITE_TRUNCATE"
-    #job_config.autodetect = True
-    job_config.schema = format_schema(table_schema)
+    job_config.write_disposition = "WRITE_TRUNCATE"
+    job_config.autodetect = True
+    #job_config.schema = format_schema(table_schema)
     job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
     job = client.load_table_from_json(json_object, table, job_config = job_config)
     print(job.result())
@@ -2739,8 +2739,10 @@ def get_params():
     registro = 0
     for row in rows:
         registro += 1
-        get_order("1010300865648-01",registro)
+        get_order(row.orderId,registro)
         if registro == 1:
+            run()
+        if registro == 5:
             run()
         if registro == 100:
             run()
