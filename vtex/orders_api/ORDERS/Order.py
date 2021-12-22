@@ -578,7 +578,11 @@ def get_order(id,reg):
             slas_pickupStoreInfo_friendlyName_02 = pickupStoreInfo_2["friendlyName"]
             slas_pickupStoreInfo_isPickupStore_02 = pickupStoreInfo_2["isPickupStore"]
         except:
-            cache = 2
+            slas_pickupStoreInfo_additionalInfo_02 = None
+            slas_pickupStoreInfo_address_02 = None
+            slas_pickupStoreInfo_dockId_02 = None
+            slas_pickupStoreInfo_friendlyName_02 = None
+            slas_pickupStoreInfo_isPickupStore_02 = None
             
         try:
             slas_id_03 = slas_3["id"]
@@ -589,7 +593,13 @@ def get_order(id,reg):
             slas_deliveryChannel_03 = slas_3["deliveryChannel"]
             slas_polygonName_03 = slas_3["polygonName"]
         except:
-            cache = 2
+            slas_id_03 = None
+            slas_name_03 = None
+            slas_shippingEstimate_03 = None
+            slas_deliveryWindow_03 = None
+            slas_price_03 = None
+            slas_deliveryChannel_03 = None
+            slas_polygonName_03 = None
         try: 
             slas_pickupStoreInfo_additionalInfo_03 = pickupStoreInfo_3["additionalInfo"]
             slas_pickupStoreInfo_address_03 = pickupStoreInfo_3["address"]
@@ -597,7 +607,11 @@ def get_order(id,reg):
             slas_pickupStoreInfo_friendlyName_03 = pickupStoreInfo_3["friendlyName"]
             slas_pickupStoreInfo_isPickupStore_03 = pickupStoreInfo_3["isPickupStore"]
         except:
-            cache = 2
+            slas_pickupStoreInfo_additionalInfo_03 = None
+            slas_pickupStoreInfo_address_03 = None
+            slas_pickupStoreInfo_dockId_03 = None
+            slas_pickupStoreInfo_friendlyName_03 = None
+            slas_pickupStoreInfo_isPickupStore_03 = None
         try:
             courierId = deliveryIds["courierId"]
             courierName = deliveryIds["courierName"]
@@ -605,7 +619,11 @@ def get_order(id,reg):
             quantity = deliveryIds["quantity"]
             warehouseId = deliveryIds["warehouseId"]
         except:
-            cache = 2
+            courierId = None
+            courierName = None
+            dockId = None
+            quantity = None
+            warehouseId = None
         try: 
             pickupStoreInfo_additionalInfo = pickupStoreInfo["additionalInfo"]
             pickupStoreInfo_address = pickupStoreInfo["address"]
@@ -613,7 +631,11 @@ def get_order(id,reg):
             pickupStoreInfo_friendlyName = pickupStoreInfo["friendlyName"]
             pickupStoreInfo_isPickupStore = pickupStoreInfo["isPickupStore"]
         except:
-            cache = 2
+            pickupStoreInfo_additionalInfo = None
+            pickupStoreInfo_address = None
+            pickupStoreInfo_dockId = None
+            pickupStoreInfo_friendlyName = None
+            pickupStoreInfo_isPickupStore = None
         try:
             selectedAddresses_addressId = selectedAddresses["addressId"]
             selectedAddresses_addressType = selectedAddresses["addressType"]
@@ -628,13 +650,26 @@ def get_order(id,reg):
             selectedAddresses_country = selectedAddresses["country"]
             selectedAddresses_reference = selectedAddresses["reference"]
         except:
-            cache = 2
+            selectedAddresses_addressId = None
+            selectedAddresses_addressType = None
+            selectedAddresses_receiverName = None
+            selectedAddresses_street = None
+            selectedAddresses_number = None
+            selectedAddresses_complement = None
+            selectedAddresses_neighborhood = None
+            selectedAddresses_postalCode = None
+            selectedAddresses_city = None
+            selectedAddresses_state = None
+            selectedAddresses_country = None
+            selectedAddresses_reference = None
         try:
             transactions_isActive = transactions["isActive"]
             transactions_transactionId = transactions["transactionId"]
             transactions_merchantName = transactions["merchantName"]
         except:
-            cache = 2
+            transactions_isActive = None
+            transactions_transactionId = None
+            transactions_merchantName = None
         try:
             payments_id = payments["id"]
             payments_paymentSystem = payments["paymentSystem"]
@@ -677,7 +712,10 @@ def get_order(id,reg):
             payments_Message = connectorResponses["Message"]
             payments_authId = connectorResponses["authId"]
         except:
-            cache = 2
+            connectorResponses = None
+            payments_ReturnCode = None
+            payments_Message = None
+            payments_authId = None
         try:
             payments_acquirer = connectorResponses["acquirer"]
         except:
