@@ -37,17 +37,12 @@ def get_order(id,reg):
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
         
-        if "subscriptionData" in Fjson:
-            subscriptionData = Fjson["subscriptionData"]
-        if "taxData" in Fjson:
-            taxData = Fjson["taxData"]
-        if "checkedInPickupPointId" in Fjson:
-            checkedInPickupPointId = Fjson["checkedInPickupPointId"]
-        if "cancellationData" in Fjson:
-            cancellationData = Fjson["cancellationData"]
+        subscriptionData = Fjson["subscriptionData"]
+        taxData = Fjson["taxData"]
+        checkedInPickupPointId = Fjson["checkedInPickupPointId"]
+        cancellationData = Fjson["cancellationData"]
+        emailTracked = Fjson["emailTracked"]
         
-        if "emailTracked" in Fjson:
-        	emailTracked = Fjson["emailTracked"]
         if "approvedBy" in Fjson:
         	approvedBy = Fjson["approvedBy"]
         if "cancelledBy" in Fjson:
