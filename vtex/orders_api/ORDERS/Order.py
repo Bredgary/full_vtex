@@ -782,12 +782,24 @@ def get_order(id,reg):
                 invoiceKey = x["invoiceKey"]
                 trackingUrl = x["trackingUrl"]
                 embeddedInvoice = x["embeddedInvoice"]
-                type = x["type"]
+                packages_type = x["type"]
                 cfop = x["cfop"]
                 volumes = x["volumes"]
                 EnableInferItems = x["EnableInferItems"]
         except:
-            cache = 2
+            courier = None
+            invoiceNumber = None
+            invoiceValue = None
+            invoiceUrl = None
+            issuanceDate = None
+            trackingNumber = None
+            invoiceKey = None
+            trackingUrl = None
+            embeddedInvoice = None
+            packages_type = None
+            cfop = None
+            volumes = None
+            EnableInferItems = None
             
     
         try:
@@ -1091,7 +1103,7 @@ def get_order(id,reg):
             'invoiceKey': str(invoiceKey),
             'trackingUrl': str(trackingUrl),
             'embeddedInvoice': embeddedInvoice,
-            'type': str(type),
+            'type': str(packages_type),
             'cfop': str(cfop),
             'volumes': str(volumes),
             'EnableInferItems': str(EnableInferItems),
