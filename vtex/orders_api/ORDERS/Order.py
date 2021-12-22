@@ -1141,7 +1141,7 @@ def get_order(id,reg):
             'Reason':str(Reason),
             'CancellationDate':str(CancellationDate),
             'invoicedDate': str(invoicedDate)}, index=[0])
-        init.df = df.append(df1)
+        init.df = init.df.append(df1)
     #except:
     #    cache = 2
 
