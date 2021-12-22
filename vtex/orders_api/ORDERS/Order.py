@@ -45,79 +45,43 @@ def get_order(id,reg):
             emailTracked = Fjson["emailTracked"]
         except:
             emailTracked = None
-        
-        if "approvedBy" in Fjson:
-        	approvedBy = Fjson["approvedBy"]
-        if "cancelledBy" in Fjson:
-        	cancelledBy = Fjson["cancelledBy"]
-        if "cancelReason" in Fjson:
-        	cancelReason = Fjson["cancelReason"]
-        if "orderId" in Fjson:
-        	orderId = Fjson["orderId"]
-        if "sequence" in Fjson:
-        	sequence = Fjson["sequence"]
-        if "marketplaceOrderId" in Fjson:
-        	marketplaceOrderId = Fjson["marketplaceOrderId"]
-        if "marketplaceServicesEndpo" in Fjson:
-        	marketplaceServicesEndpoint = Fjson["marketplaceServicesEndpoint"]
-        if "sellerOrderId" in Fjson:
-        	sellerOrderId = Fjson["sellerOrderId"]
-        if "origin" in Fjson:
-        	origin = Fjson["origin"]
-        if "affiliateId" in Fjson:
-        	affiliateId = Fjson["affiliateId"]
-        if "salesChannel" in Fjson:
-        	salesChannel = Fjson["salesChannel"]
-        if "merchantName" in Fjson:
-        	merchantName = Fjson["merchantName"]
-        if "status" in Fjson:
-        	status = Fjson["status"]
-        if "statusDescription" in Fjson:
-        	statusDescription = Fjson["statusDescription"]
-        if "value" in Fjson:
-        	value = Fjson["value"]
-        if "creationDate" in Fjson:
-        	creationDate = Fjson["creationDate"]
-        if "lastChange" in Fjson:
-        	lastChange = Fjson["lastChange"]
-        if "orderGroup" in Fjson:
-        	orderGroup = Fjson["orderGroup"]
-        if "giftRegistryData" in Fjson:
-        	giftRegistryData = Fjson["giftRegistryData"]
-        if "marketingData" in Fjson:
-        	marketingData = Fjson["marketingData"]
-        if "callCenterOperatorData" in Fjson:
-        	callCenterOperatorData = Fjson["callCenterOperatorData"]
-        if "followUpEmail" in Fjson:
-        	followUpEmail = Fjson["followUpEmail"]
-        if "lastMessage" in Fjson:
-        	lastMessage = Fjson["lastMessage"]
-        if "hostname" in Fjson:
-        	hostname = Fjson["hostname"]
-        if "invoiceData" in Fjson:
-        	invoiceData = Fjson["invoiceData"]
-        if "openTextField" in Fjson:
-        	openTextField = Fjson["openTextField"]
-        if "roundingError" in Fjson:
-        	roundingError = Fjson["roundingError"]
-        if "orderFormId" in Fjson:
-        	orderFormId = Fjson["orderFormId"]
-        if "commercialConditionData" in Fjson:
-        	commercialConditionData = Fjson["commercialConditionData"]
-        if "isCompleted" in Fjson:
-        	isCompleted = Fjson["isCompleted"]
-        if "customData" in Fjson:
-        	customData = Fjson["customData"]
-        if "allowCancellation" in Fjson:
-        	allowCancellation = Fjson["allowCancellation"]
-        if "allowEdition" in Fjson:
-        	allowEdition = Fjson["allowEdition"]
-        if "isCheckedIn" in Fjson:
-        	isCheckedIn = Fjson["isCheckedIn"]
-        if "authorizedDate" in Fjson:
-        	authorizedDate = Fjson["authorizedDate"]
-        if "invoicedDate" in Fjson:
-        	invoicedDate = Fjson["invoicedDate"]
+            
+        approvedBy = Fjson["approvedBy"]
+        cancelledBy = Fjson["cancelledBy"]
+        cancelReason = Fjson["cancelReason"]
+        orderId = Fjson["orderId"]
+        sequence = Fjson["sequence"]
+        marketplaceOrderId = Fjson["marketplaceOrderId"]
+        marketplaceServicesEndpoint = Fjson["marketplaceServicesEndpoint"]
+        sellerOrderId = Fjson["sellerOrderId"]
+        origin = Fjson["origin"]
+        affiliateId = Fjson["affiliateId"]
+        salesChannel = Fjson["salesChannel"]
+        merchantName = Fjson["merchantName"]
+        status = Fjson["status"]
+        statusDescription = Fjson["statusDescription"]
+        value = Fjson["value"]
+        creationDate = Fjson["creationDate"]
+        lastChange = Fjson["lastChange"]
+        orderGroup = Fjson["orderGroup"]
+        giftRegistryData = Fjson["giftRegistryData"]
+        marketingData = Fjson["marketingData"]
+        callCenterOperatorData = Fjson["callCenterOperatorData"]
+        followUpEmail = Fjson["followUpEmail"]
+        lastMessage = Fjson["lastMessage"]
+        hostname = Fjson["hostname"]
+        invoiceData = Fjson["invoiceData"]
+        openTextField = Fjson["openTextField"]
+        roundingError = Fjson["roundingError"]
+        orderFormId = Fjson["orderFormId"]
+        commercialConditionData = Fjson["commercialConditionData"]
+        isCompleted = Fjson["isCompleted"]
+        customData = Fjson["customData"]
+        allowCancellation = Fjson["allowCancellation"]
+        allowEdition = Fjson["allowEdition"]
+        isCheckedIn = Fjson["isCheckedIn"]
+        authorizedDate = Fjson["authorizedDate"]
+        invoicedDate = Fjson["invoicedDate"]
         
         
         '''
