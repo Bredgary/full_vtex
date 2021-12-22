@@ -919,7 +919,7 @@ def get_order(id,reg):
             'status': str(status),
             'statusDescription': str(statusDescription),
             #'value': value,
-            'creationDate': creationDate,
+            #'creationDate': creationDate,
             #'lastChange': lastChange,
             #'orderGroup': orderGroup,
             #'giftRegistryData': str(giftRegistryData),
