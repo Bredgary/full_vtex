@@ -20,10 +20,12 @@ def get_order(id,email,reg):
     querystring = {"email":""+str(email)+""}
     response = requests.request("GET", url, headers=init.headers, params=querystring)
     Fjson = json.loads(response.text)
-    
-    userProfileId = Fjson["userProfileId"]
-    profileProvider = Fjson["profileProvider"]
-    isComplete = Fjson["isComplete"]
+    try:
+      userProfileId = Fjson["userProfileId"]
+      profileProvider = Fjson["profileProvider"]
+      isComplete = Fjson["isComplete"]
+    except:
+      userProfileId = "Vacio"
     try:
       availableAccounts = Fjson["availableAccounts"]
       for x in availableAccounts:
