@@ -46,11 +46,12 @@ def get_order(email,reg):
     profileCompleteOnLoading = userProfile["profileCompleteOnLoading"]
     profileErrorOnLoading = userProfile["profileErrorOnLoading"]
     customerClass = userProfile["customerClass"]
+    print(email)
     
     df1 = pd.DataFrame({
-      'userProfileId': userProfileId,
+      #'userProfileId': userProfileId,
       #'profileProvider': profileProvider,
-      #'email': email,
+      'email': email}, index=[0])
       #'firstName': firstName,
       #'lastName': lastName,
       #'document': document,
@@ -65,7 +66,7 @@ def get_order(email,reg):
       #'profileCompleteOnLoading': profileCompleteOnLoading,
       #'profileErrorOnLoading': profileErrorOnLoading,
       #'customerClass': customerClass,
-      'isComplete': isComplete}, index=[0])
+      #'isComplete': isComplete}, index=[0])
     init.df = init.df.append(df1)
     print("Registro: "+str(reg))
   #except:
