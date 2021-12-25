@@ -197,7 +197,8 @@ def run():
     table = dataset.table(table_id)
     
     job_config = bigquery.LoadJobConfig()
-    job_config.schema = format_schema(table_schema)
+    #job_config.schema = format_schema(table_schema)
+    job_config.autodetect = True
     job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
     job = client.load_table_from_json(json_object, table, job_config = job_config)
     print(job.result())
