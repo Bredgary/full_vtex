@@ -26,6 +26,21 @@ def get_order(id,reg):
         Fjson = json.loads(response.text)
         packageAttachment = Fjson["packageAttachment"]
         packages = packageAttachment["packages"]
+        
+        courier = ""
+        invoiceNumber = ""
+        invoiceValue = ""
+        invoiceUrl = ""
+        issuanceDate = ""
+        trackingNumber = ""
+        invoiceKey = ""
+        trackingUrl = ""
+        embeddedInvoice = ""
+        package_type = ""
+        cfop  = ""
+        volumes  = ""
+        EnableInferItems = ""
+        
         for x in packages:
             items = x["items"]
             courier = x["courier"]
@@ -41,6 +56,9 @@ def get_order(id,reg):
             cfop = x["cfop"]
             volumes = x["volumes"]
             EnableInferItems = x["EnableInferItems"]
+            
+        for x in packages:
+            items = x["items"]
             for y in items:
                 itemIndex = y["itemIndex"]
                 quantity = y["quantity"]
