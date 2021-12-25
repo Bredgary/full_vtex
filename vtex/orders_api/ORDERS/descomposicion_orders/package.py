@@ -82,24 +82,10 @@ def get_order(id,reg):
                     'description': description,
                     'unitMultiplier': unitMultiplier}, index=[0])
                 init.df = init.df.append(df1)
-                reg += 1
                 print("Registro: "+str(reg))
     #except:
     #    print("No packages "+str(reg))    
 
-def get_params():
-    print("Cargando consulta")
-    client = bigquery.Client()
-    QUERY = ('SELECT DISTINCT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`')
-    query_job = client.query(QUERY)
-    rows = query_job.result()
-    registro = 0
-    for row in rows:
-        get_order("1040711467154-01",registro)
-        if registro == 2:
-            run()
-            break
-    run()
         
 def delete_duplicate():
     try:
@@ -222,5 +208,21 @@ def run():
     job_config.schema = format_schema(table_schema)
     job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
     job = client.load_table_from_json(json_object, table, job_config = job_config)
+    
+    
+def get_params():
+    print("Cargando consulta")
+    client = bigquery.Client()
+    QUERY = ('SELECT DISTINCT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`')
+    query_job = client.query(QUERY)
+    rows = query_job.result()
+    registro = 0
+    for row in rows:
+        registro += 1
+        get_order("1040711467154-01",registro)
+        if registro == 1:
+            run()
+            break
+    run()
     
 get_params()
