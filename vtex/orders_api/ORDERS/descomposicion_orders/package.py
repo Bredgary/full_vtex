@@ -87,7 +87,7 @@ def get_order(id):
                     'unitMultiplier': unitMultiplier}, index=[0])
                 init.df = init.df.append(df1)
     except:
-        print("No packages "+str(reg))    
+        print("No packages ")    
 
         
 def delete_duplicate():
@@ -107,7 +107,6 @@ def run():
     df.reset_index(drop=True, inplace=True)
     json_data = df.to_json(orient = 'records')
     json_object = json.loads(json_data)
-    print(df)
     table_schema = [
         {
             "name": "orderId",
