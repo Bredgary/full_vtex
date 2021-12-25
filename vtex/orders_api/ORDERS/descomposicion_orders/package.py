@@ -19,8 +19,8 @@ def format_schema(schema):
     return formatted_schema
 
 
-def get_order(id,reg):
-   # try:
+def get_order(id):
+    try:
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
@@ -86,9 +86,8 @@ def get_order(id,reg):
                     'description': description,
                     'unitMultiplier': unitMultiplier}, index=[0])
                 init.df = init.df.append(df1)
-                print("Registro: "+str(reg))
-    #except:
-    #    print("No packages "+str(reg))    
+    except:
+        print("No packages "+str(reg))    
 
         
 def delete_duplicate():
@@ -207,16 +206,68 @@ def run():
 def get_params():
     print("Cargando consulta")
     client = bigquery.Client()
-    QUERY = ('SELECT DISTINCT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`')
+    QUERY = ('SELECT DISTINCT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`WHERE (orderId NOT IN (SELECT orderId FROM `shopstar-datalake.test.shopstar_order_package`))')
     query_job = client.query(QUERY)
     rows = query_job.result()
     registro = 0
     for row in rows:
         registro += 1
-        get_order("1040711467154-01",registro)
-        if registro == 1:
+        get_order(row.orderId)
+        print("Registro: "+str(registro))
+        if registro == 15:
             run()
-            break
+        if registro == 100:
+            run()
+        if registro == 200:
+            run()
+        if registro == 300:
+            run()
+        if registro == 400:
+            run()
+        if registro == 500:
+            run()
+        if registro == 600:
+            run()
+        if registro == 700:
+            run()
+        if registro == 800:
+            run()
+        if registro == 900:
+            run()
+        if registro == 1000:
+            run()
+        if registro == 2000:
+            run()
+        if registro == 3000:
+            run()
+        if registro == 4000:
+            run()
+        if registro == 5000:
+            run()
+        if registro == 6000:
+            run()
+        if registro == 7000:
+            run()
+        if registro == 8000:
+            run()
+        if registro == 9000:
+            run()
+        if registro == 10000:
+            run()
+        if registro == 20000:
+            run()
+        if registro == 30000:
+            run()
+        if registro == 40000:
+            run()
+        if registro == 50000:
+            run()
+        if registro == 60000:
+            run()
+        if registro == 70000:
+            run()
+        if registro == 80000:
+            run()
     run()
     
 get_params()
