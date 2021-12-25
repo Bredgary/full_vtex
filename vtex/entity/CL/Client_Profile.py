@@ -50,7 +50,7 @@ def get_order(email,reg):
     
     df1 = pd.DataFrame({
       #'userProfileId': userProfileId,
-      #'profileProvider': profileProvider,
+      'profileProvider': profileProvider,
       'email': email,
       'firstName': firstName,
       'lastName': lastName,
@@ -65,8 +65,8 @@ def get_order(email,reg):
       'isCorporate': isCorporate,
       'profileCompleteOnLoading': profileCompleteOnLoading,
       'profileErrorOnLoading': profileErrorOnLoading,
-      'customerClass': customerClass}, index=[0])
-      #'isComplete': isComplete}, index=[0])
+      'customerClass': customerClass,
+      'isComplete': isComplete}, index=[0])
     init.df = init.df.append(df1)
     print("Registro: "+str(reg))
   #except:
@@ -86,17 +86,6 @@ def get_params():
     if registro == 2:
         break
   run()
-        
-def delete_duplicate():
-  try:
-    print("Eliminando duplicados")
-    client = bigquery.Client()
-    QUERY = ('CREATE OR REPLACE TABLE `shopstar-datalake.test.shopstar_vtex_client_profile`')
-    query_job = client.query(QUERY)
-    rows = query_job.result()
-    print(rows)
-  except:
-    print("Consulta SQL no ejecutada")
 
 
 def run():
