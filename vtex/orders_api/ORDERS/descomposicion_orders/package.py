@@ -41,11 +41,6 @@ def get_order(id,reg):
             cfop = x["cfop"]
             volumes = x["volumes"]
             EnableInferItems = x["EnableInferItems"]
-            courierStatus = x["courierStatus"]
-            for j in courierStatus:
-                status = j["status"]
-                finished = j["finished"]
-                deliveredDate = j["deliveredDate"]
             for y in items:
                 itemIndex = y["itemIndex"]
                 quantity = y["quantity"]
@@ -67,9 +62,6 @@ def get_order(id,reg):
                     "cfop":cfop,
                     "volumes":volumes,
                     "EnableInferItems":EnableInferItems,
-                    'status': status,
-                    'finished': finished,
-                    'deliveredDate': deliveredDate,
                     'itemIndex': itemIndex,
                     'quantity': quantity,
                     'price': price,
@@ -142,18 +134,6 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "type",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "status",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "finished",
-        "type": "BOOLEAN",
-        "mode": "NULLABLE"
-    },{
-        "name": "deliveredDate",
         "type": "STRING",
         "mode": "NULLABLE"
     },{
