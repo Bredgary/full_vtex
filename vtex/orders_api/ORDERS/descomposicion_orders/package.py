@@ -98,6 +98,7 @@ def get_params():
         get_order("1040711467154-01",registro)
         if registro == 1:
             run()
+            break
     run()
         
 def delete_duplicate():
