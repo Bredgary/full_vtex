@@ -46,26 +46,26 @@ def get_order(email,reg):
     profileCompleteOnLoading = userProfile["profileCompleteOnLoading"]
     profileErrorOnLoading = userProfile["profileErrorOnLoading"]
     customerClass = userProfile["customerClass"]
-    print(email)
+ 
     
     df1 = pd.DataFrame({
       #'userProfileId': userProfileId,
       #'profileProvider': profileProvider,
-      'email': email}, index=[0])
-      #'firstName': firstName,
-      #'lastName': lastName,
-      #'document': document,
-      #'documentType': documentType,
-      #'phone': phone,
-      #'corporateName': corporateName,
-      #'tradeName': tradeName,
-      #'corporateDocument': corporateDocument,
-      #'stateInscription': stateInscription,
-      #'corporatePhone': corporatePhone,
-      #'isCorporate': isCorporate,
-      #'profileCompleteOnLoading': profileCompleteOnLoading,
-      #'profileErrorOnLoading': profileErrorOnLoading,
-      #'customerClass': customerClass,
+      'email': email,
+      'firstName': firstName,
+      'lastName': lastName,
+      'document': document,
+      'documentType': documentType,
+      'phone': phone,
+      'corporateName': corporateName,
+      'tradeName': tradeName,
+      'corporateDocument': corporateDocument,
+      'stateInscription': stateInscription,
+      'corporatePhone': corporatePhone,
+      'isCorporate': isCorporate,
+      'profileCompleteOnLoading': profileCompleteOnLoading,
+      'profileErrorOnLoading': profileErrorOnLoading,
+      'customerClass': customerClass}, index=[0])
       #'isComplete': isComplete}, index=[0])
     init.df = init.df.append(df1)
     print("Registro: "+str(reg))
