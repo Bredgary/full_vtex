@@ -14,712 +14,130 @@ class init:
     df = pd.DataFrame()
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
-
-     
-def get_order(id,reg):
+def get_order(id):
     try:
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
-        additionalInfo = Items["additionalInfo"]
         
         items = Fjson["items"]
-        items_uniqueId = Items["uniqueId"]
-        items_id = Items["id"]
-        items_productId = Items["productId"]
-        items_ean = Items["ean"]
-        items_lockId = Items["lockId"]
-        item_quantity = Items["quantity"]
-        item_seller = Items["seller"]
-        item_name = Items["name"]
-        item_refId = Items["refId"]
-        item_price = Items["price"]
-        item_listPrice = Items["listPrice"]
-        item_manualPrice = Items["manualPrice"]
-        item_imageUrl = Items["imageUrl"]
-        item_detailUrl = Items["detailUrl"]
-        item_sellerSku = Items["sellerSku"]
-        item_priceValidUntil = Items["priceValidUntil"]
-        item_commission = Items["commission"]
-        item_tax = Items["tax"]
-        item_preSaleDate = Items["preSaleDate"]
-        item_measurementUnit = Items["measurementUnit"]
-        item_unitMultiplier = Items["unitMultiplier"]
-        item_sellingPrice = Items["sellingPrice"]
-        item_isGift = Items["isGift"]
-        item_shippingPrice = Items["shippingPrice"]
-        item_rewardValue = Items["rewardValue"]
-        item_freightCommission = Items["freightCommission"]
-        item_taxCode = Items["taxCode"]
-        item_parentItemIndex = Items["parentItemIndex"]
-        item_parentAssemblyBinding = Items["parentAssemblyBinding"]
-        item_price_definition = Items["priceDefinition"]
-        item_serialNumbers = Items["serialNumbers"]
-        brandName = additionalInfo["brandName"]
-        brandId = additionalInfo["brandId"]
-        categoriesIds = additionalInfo["categoriesIds"]
-        productClusterId = additionalInfo["productClusterId"]
-        commercialConditionId = additionalInfo["commercialConditionId"]
-        offeringInfo = additionalInfo["offeringInfo"]
-        offeringType = additionalInfo["offeringType"]
-        offeringTypeId = additionalInfo["offeringTypeId"]
-        except:
-            print("No hay datos. additionalInfo")
-        try:
-            init.cubicweight = dimension["cubicweight"]
-            init.height = dimension["height"]
-            init.length = dimension["length"]
-            init.weight = dimension["weight"]
-            init.width = dimension["width"]
-        except:
-            print("No hay datos. dimension")
-        try:
-            init.item_itemAttachment_name = itemAttachment["name"]
-        except:
-            print("No hay datos. itemAttachment")   
-        try:
-            init.client_id = clientProfileData["id"]
-            init.client_email = clientProfileData["email"]
-            init.client_firstName = clientProfileData["firstName"]
-            init.client_lastName = clientProfileData["lastName"]
-            init.client_documentType = clientProfileData["documentType"]
-            init.client_document = clientProfileData["document"]
-            init.client_phone = clientProfileData["phone"]
-            init.client_corporateName = clientProfileData["corporateName"]
-            init.client_tradeName = clientProfileData["tradeName"]
-            init.client_corporateDocument = clientProfileData["corporateDocument"]
-            init.client_stateInscription = clientProfileData["stateInscription"]
-            init.client_corporatePhone = clientProfileData["corporatePhone"]
-            init.client_isCorporate = clientProfileData["isCorporate"]
-            init.client_userProfileId = clientProfileData["userProfileId"]
-            init.client_customerClass = clientProfileData["customerClass"]     
-        except:
-            print("No se pudo cargar Client Profile") 
-        try:
-            init.id_ratesAndBenefits = ratesAndBenefitsData["id"]
-        except:
-            print("No se pudo cargar ratesAndBenefitsData")
-        try:
-            init.shippingData_id = shippingData["id"]
-        except:
-            print("No se pudo cargar shippingData")
-        try:
-            init.addressType = address["addressType"]
-            init.receiverName = address["receiverName"]
-            init.addressId = address["addressId"]
-            init.postalCode = address["postalCode"]
-            init.city = address["city"]
-            init.state = address["state"]
-            init.country = address["country"]
-            init.street = address["street"]
-            init.number = address["number"]
-            init.neighborhood = address["neighborhood"]
-            init.complement = address["complement"]
-            init.reference = address["reference"]
-        except:
-            print("No se pudo cargar address")
-            
-        try:
-            init.trackingHints = logisticsInfo_0[0]
-            init.deliveryChannel = logisticsInfo["deliveryChannel"]
-            init.addressId = logisticsInfo["addressId"]
-            init.polygonName = logisticsInfo["polygonName"]
-            init.itemIndex = logisticsInfo["itemIndex"]
-            init.selectedSla = logisticsInfo["selectedSla"]
-            init.lockTTL = logisticsInfo["lockTTL"]
-            init.price = logisticsInfo["price"]
-            init.listPrice = logisticsInfo["listPrice"]
-            init.sellingPrice = logisticsInfo["sellingPrice"]
-            init.deliveryWindow = logisticsInfo["deliveryWindow"]
-            init.deliveryCompany = logisticsInfo["deliveryCompany"]
-            init.shippingEstimate = logisticsInfo["shippingEstimate"]
-            init.shippingEstimateDate = logisticsInfo["shippingEstimateDate"]
-        except:
-            print("No se pudo cargar address")
-        try:
-            init.slas_id = slas_0["id"]
-            init.slas_name = slas_0["name"]
-            init.slas_shippingEstimate = slas_0["shippingEstimate"]
-            init.slas_deliveryWindow = slas_0["deliveryWindow"]
-            init.slas_price = slas_0["price"]
-            init.slas_deliveryChannel = slas_0["deliveryChannel"]
-            init.slas_polygonName = slas_0["polygonName"]
-        except:
-            print("No hay datos slas")
-            
-        try:
-            init.slas_pickupStoreInfo_additionalInfo = pickupStoreInfo["additionalInfo"]
-            init.slas_pickupStoreInfo_address = pickupStoreInfo["address"]
-            init.slas_pickupStoreInfo_dockId = pickupStoreInfo["dockId"]
-            init.slas_pickupStoreInfo_friendlyName = pickupStoreInfo["friendlyName"]
-            init.slas_pickupStoreInfo_isPickupStore = pickupStoreInfo["isPickupStore"]
-        except:
-            print("No hay datos pickupStoreInfo")
-        try:
-            init.slas_id_01 = slas_1["id"]
-            init.slas_name_01 = slas_1["name"]
-            init.slas_shippingEstimate_01 = slas_1["shippingEstimate"]
-            init.slas_deliveryWindow_01 = slas_1["deliveryWindow"]
-            init.slas_price_01 = slas_1["price"]
-            init.slas_deliveryChannel_01 = slas_1["deliveryChannel"]
-            init.slas_polygonName_01 = slas_1["polygonName"]
-        except:
-            print("No hay datos slas_1")
-        try:
-            init.slas_pickupStoreInfo_additionalInfo_01 = pickupStoreInfo_1["additionalInfo"]
-            init.slas_pickupStoreInfo_address_01 = pickupStoreInfo_1["address"]
-            init.slas_pickupStoreInfo_dockId_01 = pickupStoreInfo_1["dockId"]
-            init.slas_pickupStoreInfo_friendlyName_01 = pickupStoreInfo_1["friendlyName"]
-            init.slas_pickupStoreInfo_isPickupStore_01 = pickupStoreInfo_1["isPickupStore"]
-        except:
-            print("No hay datos pickupStoreInfo_1")
-        
-        try:
-            init.slas_id_02 = slas_2["id"]
-            init.slas_name_02 = slas_2["name"]
-            init.slas_shippingEstimate_02 = slas_2["shippingEstimate"]
-            init.slas_deliveryWindow_02 = slas_2["deliveryWindow"]
-            init.slas_price_02 = slas_2["price"]
-            init.slas_deliveryChannel_02 = slas_2["deliveryChannel"]
-            init.slas_polygonName_02 = slas_2["polygonName"]
-        except:
-            print("No hay datos slas_2")
-        try:
-            init.slas_pickupStoreInfo_additionalInfo_02 = pickupStoreInfo_2["additionalInfo"]
-            init.slas_pickupStoreInfo_address_02 = pickupStoreInfo_2["address"]
-            init.slas_pickupStoreInfo_dockId_02 = pickupStoreInfo_2["dockId"]
-            init.slas_pickupStoreInfo_friendlyName_02 = pickupStoreInfo_2["friendlyName"]
-            init.slas_pickupStoreInfo_isPickupStore_02 = pickupStoreInfo_2["isPickupStore"]
-        except:
-            print("No hay datos pickupStoreInfo_2")
-            
-        try:
-            init.slas_id_03 = slas_3["id"]
-            init.slas_name_03 = slas_3["name"]
-            init.slas_shippingEstimate_03 = slas_3["shippingEstimate"]
-            init.slas_deliveryWindow_03 = slas_3["deliveryWindow"]
-            init.slas_price_03 = slas_3["price"]
-            init.slas_deliveryChannel_03 = slas_3["deliveryChannel"]
-            init.slas_polygonName_03 = slas_3["polygonName"]
-        except:
-            print("No hay datos slas_3")
-        try: 
-            init.slas_pickupStoreInfo_additionalInfo_03 = pickupStoreInfo_3["additionalInfo"]
-            init.slas_pickupStoreInfo_address_03 = pickupStoreInfo_3["address"]
-            init.slas_pickupStoreInfo_dockId_03 = pickupStoreInfo_3["dockId"]
-            init.slas_pickupStoreInfo_friendlyName_03 = pickupStoreInfo_3["friendlyName"]
-            init.slas_pickupStoreInfo_isPickupStore_03 = pickupStoreInfo_3["isPickupStore"]
-        except:
-            print("No hay datos pickupStoreInfo_3")
-        try:
-            init.courierId = deliveryIds["courierId"]
-            init.courierName = deliveryIds["courierName"]
-            init.dockId = deliveryIds["dockId"]
-            init.quantity = deliveryIds["quantity"]
-            init.warehouseId = deliveryIds["warehouseId"]
-        except:
-            print("No hay datos deliveryIds")
-        try: 
-            init.pickupStoreInfo_additionalInfo = pickupStoreInfo["additionalInfo"]
-            init.pickupStoreInfo_address = pickupStoreInfo["address"]
-            init.pickupStoreInfo_dockId = pickupStoreInfo["dockId"]
-            init.pickupStoreInfo_friendlyName = pickupStoreInfo["friendlyName"]
-            init.pickupStoreInfo_isPickupStore = pickupStoreInfo["isPickupStore"]
-        except:
-            print("No hay datos pickupStoreInfo")
-        try:
-            init.selectedAddresses_addressId = selectedAddresses["addressId"]
-            init.selectedAddresses_addressType = selectedAddresses["addressType"]
-            init.selectedAddresses_receiverName = selectedAddresses["receiverName"]
-            init.selectedAddresses_street = selectedAddresses["street"]
-            init.selectedAddresses_number = selectedAddresses["number"]
-            init.selectedAddresses_complement = selectedAddresses["complement"]
-            init.selectedAddresses_neighborhood = selectedAddresses["neighborhood"]
-            init.selectedAddresses_postalCode = selectedAddresses["postalCode"]
-            init.selectedAddresses_city = selectedAddresses["city"]
-            init.selectedAddresses_state = selectedAddresses["state"]
-            init.selectedAddresses_country = selectedAddresses["country"]
-            init.selectedAddresses_reference = selectedAddresses["reference"]
-        except:
-            print("No hay datos selectedAddresses")
-        try:
-            init.transactions_isActive = transactions["isActive"]
-            init.transactions_transactionId = transactions["transactionId"]
-            init.transactions_merchantName = transactions["merchantName"]
-        except:
-            print("No hay datos transactions")
-        try:
-            init.payments_id = payments["id"]
-            init.payments_paymentSystem = payments["paymentSystem"]
-            init.payments_paymentSystemName = payments["paymentSystemName"]
-            init.payments_value = payments["value"]
-            init.payments_installments = payments["installments"]
-            init.payments_referenceValue = payments["referenceValue"]
-            init.payments_cardHolder = payments["cardHolder"]
-            init.payments_firstDigits = payments["firstDigits"]
-            init.payments_lastDigits = payments["lastDigits"]
-            init.payments_url = payments["url"]
-            init.payments_giftCardId = payments["giftCardId"]
-            init.payments_giftCardName = payments["giftCardName"]
-            init.payments_giftCardCaption = payments["giftCardCaption"]
-            init.payments_redemptionCode = payments["redemptionCode"]
-            init.payments_group = payments["group"]
-            init.payments_tid = payments["tid"]
-            init.payments_dueDate = payments["dueDate"]
-            init.payments_cardNumber = payments["cardNumber"]
-            init.payments_cvv2 = payments["cvv2"]
-            init.payments_expireMonth = payments["expireMonth"]
-            init.payments_expireYear = payments["expireYear"]
-            init.payments_giftCardProvider = payments["giftCardProvider"]
-            init.payments_giftCardAsDiscount = payments["giftCardAsDiscount"]
-            init.payments_koinUrl = payments["koinUrl"]
-            init.payments_accountId = payments["accountId"]
-            init.payments_parentAccountId = payments["parentAccountId"]
-            init.payments_bankIssuedInvoiceIdentificationNumber = payments["bankIssuedInvoiceIdentificationNumber"]
-            init.payments_bankIssuedInvoiceIdentificationNumberFormatted = payments["bankIssuedInvoiceIdentificationNumberFormatted"]
-            init.payments_bankIssuedInvoiceBarCodeNumber = payments["bankIssuedInvoiceBarCodeNumber"]
-            init.payments_bankIssuedInvoiceBarCodeType = payments["bankIssuedInvoiceBarCodeType"]
-        except:
-            print("No hay datos payments")
-        try:
-            connectorResponses = payments["connectorResponses"]
-            init.payments_ReturnCode = connectorResponses["ReturnCode"]
-            init.payments_Message = connectorResponses["Message"]
-            init.payments_authId = connectorResponses["authId"]
-            init.payments_acquirer = connectorResponses["acquirer"]
-        except:
-            print("No hay datos connectorResponses")
-        try:
-            init.billingAddress_postalCode = billingAddress["postalCode"]
-            init.billingAddress_city = billingAddress["city"]
-            init.billingAddress_state = billingAddress["state"]
-            init.billingAddress_country = billingAddress["country"]
-            init.billingAddress_street = billingAddress["street"]
-            init.billingAddress_number = billingAddress["number"]
-            init.billingAddress_neighborhood = billingAddress["neighborhood"]
-            init.billingAddress_complement = billingAddress["complement"]
-            init.billingAddress_reference = billingAddress["reference"]
-        except:
-            print("No hay datos billingAddress")
-        try:
-            init.seller_id = sellers["id"]
-            init.seller_name = sellers["name"]
-            init.seller_logo = sellers["logo"]
-        except:
-            print("No hay datos seller")
-        try:
-            init.changesAttachment_id = Fjson["changesAttachment"]
-        except:
-            print("No hay datos changesAttachment")
-        try:
-            init.storePreferencesData_countryCode = storePreferencesData["countryCode"]
-            init.storePreferencesData_currencyCode = storePreferencesData["currencyCode"]
-            init.storePreferencesData_currencyLocale = storePreferencesData["currencyLocale"]
-            init.storePreferencesData_currencySymbol = storePreferencesData["currencySymbol"]
-            init.storePreferencesData_timeZone = storePreferencesData["timeZone"]
-        except:
-            print("No hay datos storePreferencesData")
-        try:
-            init.CurrencyDecimalDigits = currencyFormatInfo["CurrencyDecimalDigits"]
-            init.CurrencyDecimalSeparator = currencyFormatInfo["CurrencyDecimalSeparator"]
-            init.CurrencyGroupSeparator = currencyFormatInfo["CurrencyGroupSeparator"]
-            init.CurrencyGroupSize = currencyFormatInfo["CurrencyGroupSize"]
-            init.StartsWithCurrencySymbol = currencyFormatInfo["StartsWithCurrencySymbol"]
-        except:
-            print("No hay datos currencyFormatInfo")
-        try:
-            init.baseURL = marketplace["baseURL"]
-            init.isCertified = marketplace["isCertified"]
-            init.name = marketplace["name"]
-        except:
-            print("No hay datos marketplace")
-        
-        try:
-            client_email = decrypt_email(str(init.client_email))
-        except:
-            client_email = None
-            print("nulo")
-        
-        
-        
-        
-        try:
-            for x in ItemMetadata:
-                init.itemMetadata_Id = x["Id"]
-                init.itemMetadata_Seller = x["Seller"]
-                init.itemMetadata_Name = x["Name"]
-                init.itemMetadata_SkuName = x["SkuName"]
-                init.itemMetadata_ProductId = x["ProductId"]
-                init.itemMetadata_RefId = x["RefId"]
-                init.itemMetadata_Ean = x["Ean"]
-                init.itemMetadata_ImageUrl = x["ImageUrl"]
-                init.itemMetadata_DetailUrl = x["DetailUrl"]
-        except:
-            print("vacio")
-        
-        try:
-            for x in packages:
-                init.courier = x["courier"]
-                init.invoiceNumber = x["invoiceNumber"]
-                init.invoiceValue = x["invoiceValue"]
-                init.invoiceUrl = x["invoiceUrl"]
-                init.issuanceDate = x["issuanceDate"]
-                init.trackingNumber = x["trackingNumber"]
-                init.invoiceKey = x["invoiceKey"]
-                init.trackingUrl = x["trackingUrl"]
-                init.embeddedInvoice = x["embeddedInvoice"]
-                init.type = x["type"]
-                init.courierStatus = x["courierStatus"]
-                init.cfop = x["cfop"]
-                init.restitutions = packages["restitutions"]
-                init.volumes = x["volumes"]
-                init.EnableInferItems = x["EnableInferItems"]
-        except:
-            print("vacio")
-            
-    
-        try:
-            dim_invoiceData = Fjson["invoiceData"]
-            init.invoice_address = dim_invoiceData["address"]
-            init.userPaymentInfo = dim_invoiceData["userPaymentInfo"]
-        except:
-            print("vacio")
-        
-        try:    
-            init.isActive = transactions["isActive"]
-            init.transactionId = transactions["transactionId"]
-            init.merchantName = transactions["merchantName"]
-        except:
-            print("vacio")
-            
-        try:
-            init.cancellationData = Fjson["cancellationData"]
-            init.RequestedByUser = cancellationData["RequestedByUser"]
-            init.RequestedBySystem = cancellationData["RequestedBySystem"]
-            init.RequestedBySellerNotification = cancellationData["RequestedBySellerNotification"]
-            init.RequestedByPaymentNotification = cancellationData["RequestedByPaymentNotification"]
-            init.Reason = cancellationData["Reason"]
-            init.CancellationDate = cancellationData["CancellationDate"]
-        except:
-            print("cancellationData")
-    
-        df1 = pd.DataFrame({
-            'orderId': id,
-            'emailTracked': init.emailTracked,
-            'approvedBy': init.approvedBy,
-            'cancelledBy': init.cancelledBy,
-            'cancelReason': init.cancelReason,
-            'sequence': init.sequence,
-            'marketplaceOrderId': init.marketplaceOrderId,
-            'marketplaceServicesEndpoint': init.marketplaceServicesEndpoint,
-            'sellerOrderId': init.sellerOrderId,
-            'origin': init.origin,
-            'affiliateId': init.affiliateId,
-            'salesChannel': init.salesChannel,
-            'merchantName': init.merchantName,
-            'status': init.status,
-            'statusDescription': init.statusDescription,
-            'value': init.value,
-            'creationDate': init.creationDate,
-            'lastChange': init.lastChange,
-            'orderGroup': init.orderGroup,
-            'giftRegistryData': init.giftRegistryData,
-            'marketingData': init.marketingData,
-            'callCenterOperatorData': init.callCenterOperatorData,
-            'followUpEmail': init.followUpEmail,
-            'lastMessage': init.lastMessage,
-            'hostname': init.hostname,
-            'invoiceData': init.invoiceData,
-            'openTextField': init.openTextField,
-            'roundingError': init.roundingError,
-            'orderFormId': init.orderFormId,
-            'commercialConditionData': init.commercialConditionData,
-            'isCompleted': init.isCompleted,
-            'customData': init.customData,
-            'allowCancellation': init.allowCancellation,
-            'allowEdition': init.allowEdition,
-            'isCheckedIn': init.isCheckedIn,
-            'authorizedDate': init.authorizedDate,
-            'DIM_TOTAL_id_items': init.total_id_items,
-            'DIM_TOTAL_name_items': init.total_name_items,
-            'DIM_TOTAL_value_items': init.total_value_items,
-            'DIM_TOTAL_id_discounts': init.total_id_discounts,
-            'DIM_TOTAL_name_discounts': init.total_name_discounts,
-            'DIM_TOTAL_value_discounts': init.total_value_discounts,
-            'DIM_TOTAL_id_shipping': init.total_id_shipping,
-            'DIM_TOTAL_name_shipping': init.total_name_shipping,
-            'DIM_TOTAL_value_shipping': init.total_value_shipping,
-            'DIM_TOTAL_id_tax': init.total_id_tax,
-            'DIM_TOTAL_name_tax': init.total_name_tax,
-            'DIM_TOTAL_value_tax': init.total_value_tax,
-            'DIM_TOTAL_id_change': init.total_id_change,
-            'DIM_TOTAL_name_change': init.total_name_change,
-            'DIM_TOTAL_value_change': init.total_value_change,
-            'DIM_ITEMS_uniqueId': init.items_uniqueId,
-            'DIM_ITEMS_items_id': init.items_id,
-            'DIM_ITEMS_productId': init.items_productId,
-            'DIM_ITEMS_ean': init.items_ean,
-            'DIM_ITEMS_lockId': init.items_lockId,
-            'DIM_ITEMS_quantity': init.item_quantity,
-            'DIM_ITEMS_seller': init.item_seller,
-            'DIM_ITEMS_name': init.item_name,
-            'DIM_ITEMS_refId': init.item_refId,
-            'DIM_ITEMS_price': init.item_price,
-            'DIM_ITEMS_listPrice': init.item_listPrice,
-            'DIM_ITEMS_manualPrice': init.item_manualPrice,
-            'DIM_ITEMS_imageUrl': init.item_imageUrl,
-            'DIM_ITEMS_detailUrl': init.item_detailUrl,
-            'DIM_ITEMS_sellerSku': init.item_sellerSku,
-            'DIM_ITEMS_priceValidUntil': init.item_priceValidUntil,
-            'DIM_ITEMS_commission': init.item_commission,
-            'DIM_ITEMS_tax': init.item_tax,
-            'DIM_ITEM_preSaleDate': init.item_preSaleDate,
-            'DIM_ITEM_measurementUnit': init.item_measurementUnit,
-            'DIM_ITEM_unitMultiplier': init.item_unitMultiplier,
-            'DIM_ITEM_sellingPrice': init.item_sellingPrice,
-            'DIM_ITEM_isGift': init.item_isGift,
-            'DIM_ITEM_shippingPrice': init.item_shippingPrice,
-            'DIM_ITEM_rewardValue': init.item_rewardValue,
-            'DIM_ITEM_freightCommission': init.item_freightCommission,
-            'DIM_ITEM_priceDefinition': init.item_price_definition,
-            'DIM_ITEM_taxCode': init.item_taxCode,
-            'DIM_ITEM_parentItemIndex': init.item_parentItemIndex,
-            'DIM_ITEM_parentAssemblyBinding': init.item_parentAssemblyBinding,
-            'DIM_ITEM_itemAttachment_name': init.item_itemAttachment_name,
-            'DIM_ITEM_AInfo_brandName': init.brandName,
-            'DIM_ITEM_AInfo_brandId': init.brandId,
-            'DIM_ITEM_AInfo_categoriesIds': init.categoriesIds,
-            'DIM_ITEM_AInfo_productClusterId': init.productClusterId,
-            'DIM_ITEM_AInfo_commercialConditionId': init.commercialConditionId,
-            'DIM_ITEM_AInfo_offeringInfo': init.offeringInfo,
-            'DIM_ITEM_AInfo_offeringType': init.offeringType,
-            'DIM_ITEM_AInfo_offeringTypeId': init.offeringTypeId,
-            'DIM_ITEM_AInfo_cubicweight': init.cubicweight,
-            'DIM_ITEM_AInfo_dim_height': init.height,
-            'DIM_ITEM_AInfo_dim_length': init.length,
-            'DIM_ITEM_AInfo_dim_weight': init.weight,
-            'DIM_ITEM_AInfo_dim_width': init.width,
-            'DIM_ITEM_calculatedSellingPrice': init.calculatedSellingPrice,
-            'DIM_ITEM_priceDefinition_total': init.total,
-            'DIM_CLIENT': init.client_id,
-            'DIM_CLIENT_email': client_email,
-            'DIM_CLIENT_firstName': init.client_firstName,
-            'DIM_CLIENT_lastName': init.client_lastName,
-            'DIM_CLIENT_documentType': init.client_documentType,
-            'DIM_CLIENT_document': init.client_document,
-            'DIM_CLIENT_phone': init.client_phone,
-            'DIM_CLIENT_corporateName': init.client_corporateName,
-            'DIM_CLIENT_tradeName': init.client_tradeName,
-            'DIM_CLIENT_corporateDocument': init.client_corporateDocument,
-            'DIM_CLIENT_stateInscription': init.client_stateInscription,
-            'DIM_CLIENT_corporatePhone': init.client_corporatePhone,
-            'DIM_CLIENT_isCorporate': init.client_isCorporate,
-            'DIM_CLIENT_userProfileId': init.client_userProfileId,
-            'DIM_CLIENT_customerClass': init.client_customerClass,
-            'id_ratesAndBenefits': init.id_ratesAndBenefits,
-            'DIM_SHIPPING_DATA_shippingData_id': init.shippingData_id,
-            'DIM_SHIPPING_DATA_addressType': init.addressType,
-            'DIM_SHIPPING_DATA_receiverName': init.receiverName,
-            'DIM_SHIPPING_DATA_addressId': init.addressId,
-            'DIM_SHIPPING_DATA_postalCode': init.postalCode,
-            'DIM_SHIPPING_DATA_city': init.city,
-            'DIM_SHIPPING_DATA_state': init.state,
-            'DIM_SHIPPING_DATA_country': init.country,
-            'DIM_SHIPPING_DATA_street': init.street,
-            'DIM_SHIPPING_DATA_number': init.number,
-            'DIM_SHIPPING_DATA_neighborhood': init.neighborhood,
-            'DIM_SHIPPING_DATA_complement': init.complement,
-            'DIM_SHIPPING_DATA_reference': init.reference,
-            'DIM_SHIPPING_DATA_trackingHints': init.trackingHints,
-            'DIM_SHIPPING_DATA_deliveryChannel': init.deliveryChannel,
-            'DIM_SHIPPING_DATA_addressId': init.addressId,
-            'DIM_SHIPPING_DATA_polygonName': init.polygonName,
-            'DIM_SHIPPING_DATA_itemIndex': init.itemIndex,
-            'DIM_SHIPPING_DATA_selectedSla': init.selectedSla,
-            'DIM_SHIPPING_DATA_lockTTL': init.lockTTL,
-            'DIM_SHIPPING_DATA_price': init.price,
-            'DIM_SHIPPING_DATA_listPrice': init.listPrice,
-            'DIM_SHIPPING_DATA_sellingPrice': init.sellingPrice,
-            'DIM_SHIPPING_DATA_deliveryWindow': init.deliveryWindow,
-            'DIM_SHIPPING_DATA_deliveryCompany': init.deliveryCompany,
-            'DIM_SHIPPING_DATA_shippingEstimate': init.shippingEstimate,
-            'DIM_SHIPPING_DATA_shippingEstimateDate': init.shippingEstimateDate,
-            'DIM_SHIPPING_DATA_slas_id': init.slas_id,
-            'DIM_SHIPPING_DATA_slas_name': init.slas_name,
-            'DIM_SHIPPING_DATA_slas_shippingEstimate': init.slas_shippingEstimate,
-            'DIM_SHIPPING_DATA_slas_deliveryWindow': init.slas_deliveryWindow,
-            'DIM_SHIPPING_DATA_slas_price': init.slas_price,
-            'DIM_SHIPPING_DATA_slas_deliveryChannel': init.slas_deliveryChannel,
-            'DIM_SHIPPING_DATA_slas_polygonName': init.slas_polygonName,
-            'DIM_SHIPPING_DATA_slas_pickupStoreInfo_additionalInfo': init.slas_pickupStoreInfo_additionalInfo,
-            'DIM_SHIPPING_DATA_slas_pickupStoreInfo_address': init.slas_pickupStoreInfo_address,
-            'DIM_SHIPPING_DATA_slas_pickupStoreInfo_dockId': init.slas_pickupStoreInfo_dockId,
-            'DIM_SHIPPING_DATA_slas_pickupStoreInfo_friendlyName': init.slas_pickupStoreInfo_friendlyName,
-            'DIM_SHIPPING_DATA_slas_pickupStoreInfo_isPickupStore': init.slas_pickupStoreInfo_isPickupStore,
-            'DIM_SHIPPING_DATA_slas_id_01': init.slas_id_01,
-            'DIM_SHIPPING_DATA_slas_name_01': init.slas_name_01,
-            'DIM_SHIPPING_DATA_slas_shippingEstimate_01': init.slas_shippingEstimate_01,
-            'DIM_SHIPPING_DATA_slas_deliveryWindow_01': init.slas_deliveryWindow_01,
-            'DIM_SHIPPING_DATA_slas_price_01': init.slas_price_01,
-            'DIM_SHIPPING_DATA_slas_deliveryChannel_01': init.slas_deliveryChannel_01,
-            'DIM_SHIPPING_DATA_slas_polygonName_01': init.slas_polygonName_01,
-            'DIM_SHIPPING_DATA_slas_pickupStoreInfo_additionalInfo_01': init.slas_pickupStoreInfo_additionalInfo_01,
-            'DIM_SHIPPING_DATA_slas_pickupStoreInfo_address_01': init.slas_pickupStoreInfo_address_01,
-            'DIM_SHIPPING_DATA_slas_pickupStoreInfo_dockId_01': init.slas_pickupStoreInfo_dockId_01,
-            'DIM_SHIPPING_DATA_slas_pickupStoreInfo_friendlyName_01': init.slas_pickupStoreInfo_friendlyName_01,
-            'DIM_SHIPPING_DATA_slas_pickupStoreInfo_isPickupStore_01': init.slas_pickupStoreInfo_isPickupStore_01,
-            'DIM_SHIPPING_DATA_slas_id_02': init.slas_id_02,
-            'DIM_SHIPPING_DATA_slas_name_02': init.slas_name_02,
-            'DIM_SHIPPING_DATA_slas_shippingEstimate_02': init.slas_shippingEstimate_02,
-            'DIM_SHIPPING_DATA_slas_deliveryWindow_02': init.slas_deliveryWindow_02,
-            'DIM_SHIPPING_DATA_slas_price_02': init.slas_price_02,
-            'DIM_SHIPPING_DATA_slas_deliveryChannel_02': init.slas_deliveryChannel_02,
-            'DIM_SHIPPING_DATA_slas_polygonName_02': init.slas_polygonName_02,
-            'DIM_SHIPPING_DATA_slas_pickupStoreInfo_additionalInfo_02': init.slas_pickupStoreInfo_additionalInfo_02,
-            'DIM_SHIPPING_DATA_slas_pickupStoreInfo_address_02': init.slas_pickupStoreInfo_address_02,
-            'DIM_SHIPPING_DATA_slas_pickupStoreInfo_dockId_02': init.slas_pickupStoreInfo_dockId_02,
-            'DIM_SHIPPING_DATA_slas_pickupStoreInfo_friendlyName_02': init.slas_pickupStoreInfo_friendlyName_02,
-            'DIM_SHIPPING_DATA_slas_pickupStoreInfo_isPickupStore_02': init.slas_pickupStoreInfo_isPickupStore_02,
-            'DIM_SHIPPING_DATA_slas_id_03': init.slas_id_03,
-            'DIM_SHIPPING_DATA_slas_name_03': init.slas_name_03,
-            'DIM_SHIPPING_DATA_slas_shippingEstimate_03': init.slas_shippingEstimate_03,
-            'DIM_SHIPPING_DATA_slas_deliveryWindow_03': init.slas_deliveryWindow_03,
-            'DIM_SHIPPING_DATA_slas_price_03': init.slas_price_03,
-            'DIM_SHIPPING_DATA_slas_deliveryChannel_03': init.slas_deliveryChannel_03,
-            'DIM_SHIPPING_DATA_slas_polygonName_03': init.slas_polygonName_03,
-            'DIM_SHIPPING_DATA_slas_pickupStoreInfo_additionalInfo_03': init.slas_pickupStoreInfo_additionalInfo_03,
-            'DIM_SHIPPING_DATA_slas_pickupStoreInfo_address_03': init.slas_pickupStoreInfo_address_03,
-            'DIM_SHIPPING_DATA_slas_pickupStoreInfo_dockId_03': init.slas_pickupStoreInfo_dockId_03,
-            'DIM_SHIPPING_DATA_slas_pickupStoreInfo_friendlyName_03': init.slas_pickupStoreInfo_friendlyName_03,
-            'DIM_SHIPPING_DATA_slas_pickupStoreInfo_isPickupStore_03': init.slas_pickupStoreInfo_isPickupStore_03,
-            'DIM_SHIPPING_DATA_courierId_delivery': init.courierId,
-            'DIM_SHIPPING_DATA_courierName_delivery': init.courierName,
-            'DIM_SHIPPING_DATA_dockId_delivery': init.dockId,
-            'DIM_SHIPPING_DATA_quantity_delivery': init.quantity,
-            'DIM_SHIPPING_DATA_warehouseId': init.warehouseId,
-            'DIM_SHIPPING_DATA_pickupStoreInfo_additionalInfo': init.pickupStoreInfo_additionalInfo,
-            'DIM_SHIPPING_DATA_pickupStoreInfo_address': init.pickupStoreInfo_address,
-            'DIM_SHIPPING_DATA_pickupStoreInfo_dockId': init.pickupStoreInfo_dockId,
-            'DIM_SHIPPING_DATA_pickupStoreInfo_friendlyName': init.pickupStoreInfo_friendlyName,
-            'DIM_SHIPPING_DATA_pickupStoreInfo_isPickupStore': init.pickupStoreInfo_isPickupStore,
-            'DIM_SHIPPING_DATA_selectedAddresses_addressId': init.selectedAddresses_addressId,
-            'DIM_SHIPPING_DATA_selectedAddresses_addressType': init.selectedAddresses_addressType,
-            'DIM_SHIPPING_DATA_selectedAddresses_receiverName': init.selectedAddresses_receiverName,
-            'DIM_SHIPPING_DATA_selectedAddresses_street': init.selectedAddresses_street,
-            'DIM_SHIPPING_DATA_selectedAddresses_number': init.selectedAddresses_number,
-            'DIM_SHIPPING_DATA_selectedAddresses_complement': init.selectedAddresses_complement,
-            'DIM_SHIPPING_DATA_selectedAddresses_neighborhood': init.selectedAddresses_neighborhood,
-            'DIM_SHIPPING_DATA_selectedAddresses_postalCode': init.selectedAddresses_postalCode,
-            'DIM_SHIPPING_DATA_selectedAddresses_city': init.selectedAddresses_city,
-            'DIM_SHIPPING_DATA_selectedAddresses_state': init.selectedAddresses_state,
-            'DIM_SHIPPING_DATA_selectedAddresses_country': init.selectedAddresses_country,
-            'DIM_SHIPPING_DATA_selectedAddresses_reference': init.selectedAddresses_reference,
-            'transactions_isActive': init.transactions_isActive,
-            'transactions_transactionId': init.transactions_transactionId,
-            'transactions_merchantName': init.transactions_merchantName,
-            'payments_id': init.payments_id,
-            'payments_paymentSystem': init.payments_paymentSystem,
-            'payments_paymentSystemName': init.payments_paymentSystemName,
-            'payments_value': init.payments_value,
-            'payments_installments': init.payments_installments,
-            'payments_referenceValue': init.payments_referenceValue,
-            'payments_cardHolder': init.payments_cardHolder,
-            'payments_firstDigits': init.payments_firstDigits,
-            'payments_lastDigits': init.payments_lastDigits,
-            'payments_url': init.payments_url,
-            'payments_giftCardId': init.payments_giftCardId,
-            'payments_giftCardName': init.payments_giftCardName,
-            'payments_giftCardCaption': init.payments_giftCardCaption,
-            'payments_redemptionCode': init.payments_redemptionCode,
-            'payments_group': init.payments_group,
-            'payments_dueDate': init.payments_dueDate,
-            'payments_cardNumber': init.payments_cardNumber,
-            'payments_cvv2': init.payments_cvv2,
-            'payments_expireMonth': init.payments_expireMonth,
-            'payments_expireYear': init.payments_expireYear,
-            'payments_giftCardProvider': init.payments_giftCardProvider,
-            'payments_giftCardAsDiscount': init.payments_giftCardAsDiscount,
-            'payments_koinUrl': init.payments_koinUrl,
-            'payments_accountId': init.payments_accountId,
-            'payments_parentAccountId': init.payments_parentAccountId,
-            'payments_bankIssuedInvoiceIdentificationNumber': init.payments_bankIssuedInvoiceIdentificationNumber,
-            'payments_bankIssuedInvoiceIdentificationNumberFormatted': init.payments_bankIssuedInvoiceIdentificationNumberFormatted,
-            'payments_bankIssuedInvoiceBarCodeNumber': init.payments_bankIssuedInvoiceBarCodeNumber,
-            'payments_bankIssuedInvoiceBarCodeType': init.payments_bankIssuedInvoiceBarCodeType,
-            'payments_Tid': init.payments_Tid,
-            'payments_ReturnCode': init.payments_ReturnCode,
-            'payments_Message': init.payments_Message,
-            'payments_authId': init.payments_authId,
-            'payments_acquirer': init.payments_acquirer,
-            'billingAddress_postalCode': init.billingAddress_postalCode,
-            'billingAddress_city': init.billingAddress_city,
-            'billingAddress_state': init.billingAddress_state,
-            'billingAddress_country': init.billingAddress_country,
-            'billingAddress_street': init.billingAddress_street,
-            'billingAddress_number': init.billingAddress_number,
-            'billingAddress_neighborhood': init.billingAddress_neighborhood,
-            'billingAddress_complement': init.billingAddress_complement,
-            'billingAddress_reference': init.billingAddress_reference,
-            'seller_id': init.seller_id,
-            'seller_name': init.seller_name,
-            'seller_logo': init.seller_logo,
-            'changesAttachment_id': init.changesAttachment_id,
-            'storePreferencesData_countryCode': init.storePreferencesData_countryCode,
-            'storePreferencesData_currencyCode': init.storePreferencesData_currencyCode,
-            'storePreferencesData_currencyLocale': init.storePreferencesData_currencyLocale,
-            'storePreferencesData_currencySymbol': init.storePreferencesData_currencySymbol,
-            'storePreferencesData_timeZone': init.storePreferencesData_timeZone,
-            'CurrencyDecimalDigits': init.CurrencyDecimalDigits,
-            'CurrencyDecimalSeparator': init.CurrencyDecimalSeparator,
-            'CurrencyGroupSeparator': init.CurrencyGroupSeparator,
-            'CurrencyGroupSize': init.CurrencyGroupSize,
-            'StartsWithCurrencySymbol': init.StartsWithCurrencySymbol,
-            'marketplace_baseURL': init.baseURL,
-            'marketplace_isCertified': init.isCertified,
-            'marketplace_name': init.name,
-            'itemMetadata_Id': init.itemMetadata_Id,
-            'itemMetadata_Seller': init.itemMetadata_Seller,
-            'itemMetadata_Name': init.itemMetadata_Name,
-            'itemMetadata_SkuName': init.itemMetadata_SkuName,
-            'itemMetadata_ProductId': init.itemMetadata_ProductId,
-            'itemMetadata_RefId': init.itemMetadata_RefId,
-            'itemMetadata_Ean': init.itemMetadata_Ean,
-            'itemMetadata_ImageUrl': init.itemMetadata_ImageUrl,
-            'itemMetadata_DetailUrl': init.itemMetadata_DetailUrl,
-            'subscriptionData': init.subscriptionData,
-            'taxData': init.taxData,
-            'cancellationData': init.cancellationData,
-            'courier': init.courier,
-            'invoiceNumber': init.invoiceNumber,
-            'invoiceValue': init.invoiceValue,
-            'invoiceUrl': init.invoiceUrl,
-            'issuanceDate': init.issuanceDate,
-            'trackingNumber': init.trackingNumber,
-            'invoiceKey': init.invoiceKey,
-            'trackingUrl': init.trackingUrl,
-            'embeddedInvoice': init.embeddedInvoice,
-            'type': init.type,
-            'courierStatus': init.courierStatus,
-            'cfop': init.cfop,
-            'restitutions': init.restitutions,
-            'volumes': init.volumes,
-            'EnableInferItems': init.EnableInferItems,
-            'invoice_address': init.invoice_address,
-            'userPaymentInfo': init.userPaymentInfo,
-            'serialNumbers':init.item_serialNumbers,
-            'isActive':init.isActive,
-            'transactionId':init.transactionId,
-            'merchantName':init.merchantName,
-            'RequestedByUser':init.RequestedByUser,
-            'RequestedBySystem':init.RequestedBySystem,
-            'RequestedBySellerNotification':init.RequestedBySellerNotification,
-            'RequestedByPaymentNotification':init.RequestedByPaymentNotification,
-            'Reason':init.Reason,
-            'CancellationDate':init.CancellationDate,
-            'invoicedDate': init.invoicedDate}, index=[0])
-        init.df = init.df.append(df1)
-        
-        print("Registro: "+str(reg))
+        for x in items:
+            items_uniqueId = x["uniqueId"]
+            items_id = x["id"]
+            items_productId = x["productId"]
+            items_ean = x["ean"]
+            items_lockId = x["lockId"]
+            item_quantity = x["quantity"]
+            item_seller = x["seller"]
+            item_name = x["name"]
+            item_refId = x["refId"]
+            item_price = x["price"]
+            item_listPrice = x["listPrice"]
+            item_manualPrice = x["manualPrice"]
+            item_imageUrl = x["imageUrl"]
+            item_detailUrl = x["detailUrl"]
+            item_sellerSku = x["sellerSku"]
+            item_priceValidUntil = x["priceValidUntil"]
+            item_commission = x["commission"]
+            item_tax = x["tax"]
+            item_preSaleDate = x["preSaleDate"]
+            item_measurementUnit = x["measurementUnit"]
+            item_unitMultiplier = x["unitMultiplier"]
+            item_sellingPrice = x["sellingPrice"]
+            item_isGift = x["isGift"]
+            item_shippingPrice = x["shippingPrice"]
+            item_rewardValue = x["rewardValue"]
+            item_freightCommission = x["freightCommission"]
+            item_taxCode = x["taxCode"]
+            item_parentItemIndex = x["parentItemIndex"]
+            item_parentAssemblyBinding = x["parentAssemblyBinding"]
+            item_price_definition = x["priceDefinition"]
+            item_serialNumbers = x["serialNumbers"]
+            try:
+                additionalInfo = x["additionalInfo"]
+                brandName = additionalInfo["brandName"]
+                brandId = additionalInfo["brandId"]
+                categoriesIds = additionalInfo["categoriesIds"]
+                productClusterId = additionalInfo["productClusterId"]
+                commercialConditionId = additionalInfo["commercialConditionId"]
+                offeringInfo = additionalInfo["offeringInfo"]
+                offeringType = additionalInfo["offeringType"]
+                offeringTypeId = additionalInfo["offeringTypeId"]
+            except:
+                additionalInfo = ''
+                brandName = ''
+                brandId = ''
+                categoriesIds = ''
+                productClusterId = ''
+                commercialConditionId = ''
+                offeringInfo = ''
+                offeringType = ''
+                offeringTypeId = ''
+            try:
+                dimension = additionalInfo["dimension"]
+                cubicweight = dimension["cubicweight"]
+                height = dimension["height"]
+                length = dimension["length"]
+                weight = dimension["weight"]
+                width = dimension["width"]
+            except:
+                cubicweight = ''
+                height = ''
+                length = ''
+                weight = ''
+                width = ''
+            try:
+                itemAttachment = x["itemAttachment"]
+                item_itemAttachment_name = itemAttachment["name"]
+            except:
+                item_itemAttachment_name = ''
+            df1 = pd.DataFrame({
+                'orderId': id,
+                'uniqueId': items_uniqueId,
+                'id': items_id,
+                'productId': items_productId,
+                'ean': items_ean,
+                'lockId': items_lockId,
+                'quantity': item_quantity,
+                'seller': item_seller,
+                'name': item_name,
+                'refId': item_refId,
+                'price': item_price,
+                'listPrice': item_listPrice,
+                'manualPrice': item_manualPrice,
+                'imageUrl': item_imageUrl,
+                'detailUrl': item_detailUrl,
+                'sellerSku': item_sellerSku,
+                'priceValidUntil': item_priceValidUntil,
+                'commission': item_commission,
+                'tax': item_tax,
+                'preSaleDate': item_preSaleDate,
+                'measurementUnit': item_measurementUnit,
+                'unitMultiplier': item_unitMultiplier,
+                'sellingPrice': item_sellingPrice,
+                'isGift': item_isGift,
+                'shippingPrice': item_shippingPrice,
+                'rewardValue': item_rewardValue,
+                'freightCommission': item_freightCommission,
+                'taxCode': item_taxCode,
+                'parentItemIndex': item_parentItemIndex,
+                'parentAssemblyBinding': item_parentAssemblyBinding,
+                'item_price_definition': item_price_definition,
+                'item_serialNumbers': item_serialNumbers,
+                'brandName': brandName,
+                'brandId': brandId,
+                'categoriesIds': categoriesIds,
+                'productClusterId': productClusterId,
+                'commercialConditionId': commercialConditionId,
+                'offeringInfo': offeringInfo,
+                'offeringType': offeringType,
+                'offeringTypeId': offeringTypeId,
+                'cubicweight': cubicweight,
+                'height': height,
+                'length': length,
+                'weight': weight,
+                'width': width,'item_itemAttachment_name': item_itemAttachment_name}, index=[0])
+            init.df = init.df.append(df1)
     except:
         print("vacio")
 
@@ -728,7 +146,7 @@ def delete_duplicate():
         print("Eliminando duplicados")
         client = bigquery.Client()
         QUERY = (
-            'CREATE OR REPLACE TABLE `shopstar-datalake.test.shopstar_vtex_order` AS SELECT DISTINCT * FROM `shopstar-datalake.test.shopstar_vtex_order`')
+            'CREATE OR REPLACE TABLE `shopstar-datalake.test.shopstar_vtex_item` AS SELECT DISTINCT * FROM `shopstar-datalake.test.shopstar_vtex_item`')
         query_job = client.query(QUERY)
         rows = query_job.result()
         print(rows)
@@ -744,13 +162,12 @@ def run():
     
     project_id = '999847639598'
     dataset_id = 'test'
-    table_id = 'shopstar_vtex_order'
+    table_id = 'shopstar_vtex_item'
     
     client  = bigquery.Client(project = project_id)
     dataset  = client.dataset(dataset_id)
     table = dataset.table(table_id)
     job_config = bigquery.LoadJobConfig()
-    job_config.write_disposition = "WRITE_TRUNCATE"
     job_config.autodetect = True
     job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
     job = client.load_table_from_json(json_object, table, job_config = job_config)
@@ -761,14 +178,15 @@ def run():
 def get_params():
     print("Cargando consulta")
     client = bigquery.Client()
-    QUERY = ('SELECT DISTINCT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`WHERE (orderId NOT IN (SELECT orderId FROM `shopstar-datalake.test.shopstar_order_items`))')
+    QUERY = ('SELECT DISTINCT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order')
     query_job = client.query(QUERY)  
     rows = query_job.result()
     registro = 0
     for row in rows:
         registro += 1
-        get_order(row.orderId,registro)
-        if registro == 5:
+        get_order("1040711467154-01")
+        print("Registro: "+str(registro))
+        if registro == 1:
             run()
         if registro == 10000:
             run()
