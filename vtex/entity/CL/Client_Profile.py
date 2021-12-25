@@ -21,7 +21,7 @@ def format_schema(schema):
 
 
 def get_order(email,reg):
-  try:
+  #try:
     url = "https://mercury.vtexcommercestable.com.br/api/checkout/pub/profiles"
     querystring = {"email":""+str(email)+""}
     response = requests.request("GET", url, headers=init.headers, params=querystring)
@@ -68,8 +68,8 @@ def get_order(email,reg):
       'isComplete': init.isComplete}, index=[0])
     init.df = init.df.append(df1)
     print("Registro: "+str(reg))
-  except:
-    print("No data profile "+str(reg))
+  #except:
+  #  print("No data profile "+str(reg))
         
         
 def get_params():
