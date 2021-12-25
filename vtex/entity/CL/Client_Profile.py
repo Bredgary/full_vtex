@@ -49,8 +49,8 @@ def get_order(email,reg):
  
     
     df1 = pd.DataFrame({
-      #'userProfileId': userProfileId,
-      'profileProvider': profileProvider,
+      'userProfileId': userProfileId,
+      #'profileProvider': profileProvider,
       'email': email,
       'firstName': firstName,
       'lastName': lastName,
