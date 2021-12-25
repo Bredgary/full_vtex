@@ -84,8 +84,7 @@ def get_params():
   for row in rows:
     registro += 1
     get_order('tg.arquitectos@gmail.com',registro)
-    if registro == 2:
-        break
+    break
   run()
 
 
