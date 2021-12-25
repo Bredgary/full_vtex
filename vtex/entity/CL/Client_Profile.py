@@ -79,10 +79,10 @@ def get_order(email,reg):
         
 def get_params():
   print("Cargando consulta")
-  client = bigquery.Client()
-  QUERY = ('SELECT DISTINCT email  FROM `shopstar-datalake.staging_zone.shopstar_vtex_client`WHERE (id NOT IN (SELECT id FROM `shopstar-datalake.test.shopstar_vtex_client`))')
-  query_job = client.query(QUERY)
-  rows = query_job.result()
+  #client = bigquery.Client()
+  #QUERY = ('SELECT DISTINCT email  FROM `shopstar-datalake.staging_zone.shopstar_vtex_client`WHERE (id NOT IN (SELECT id FROM `shopstar-datalake.test.shopstar_vtex_client`))')
+  #query_job = client.query(QUERY)
+  #rows = query_job.result()
   registro = 0
   for row in rows:
     registro += 1
