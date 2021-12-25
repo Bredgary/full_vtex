@@ -44,9 +44,9 @@ def get_order(id,reg):
             try:
                 courierStatus = x["courierStatus"]
                 for j in courierStatus:
-                    status = j[0]
-                    finished = j[1]
-                    deliveredDate = j[2]
+                    status = j["status"]
+                    finished = j["finished"]
+                    deliveredDate = j["deliveredDate"]
             except:
                 courierStatus =""
                 status =""
