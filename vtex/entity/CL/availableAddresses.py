@@ -65,7 +65,7 @@ def get_order(email):
                 'reference': reference}, index=[0])
             init.df = init.df.append(df1)
     except:
-        print("No data profile")
+        print("No data")
         
 def run():
     df = init.df
@@ -147,17 +147,28 @@ def run():
     project_id = '999847639598'
     dataset_id = 'test'
     table_id = 'shopstar_vtex_client_availableAddresses'
-    
-    client  = bigquery.Client(project = project_id)
-    dataset  = client.dataset(dataset_id)
-    table = dataset.table(table_id)
-    job_config = bigquery.LoadJobConfig()
-    #job_config.autodetect = True
-    job_config.schema = format_schema(table_schema)
-    job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-    job = client.load_table_from_json(json_object, table, job_config = job_config)
-    print(job.result())
-    
+    try:
+        client  = bigquery.Client(project = project_id)
+        dataset  = client.dataset(dataset_id)
+        table = dataset.table(table_id)
+        job_config = bigquery.LoadJobConfig()
+        #job_config.autodetect = True
+        job_config.schema = format_schema(table_schema)
+        job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+        job = client.load_table_from_json(json_object, table, job_config = job_config)
+        print(job.result())
+    except:
+        client  = bigquery.Client(project = project_id)
+        dataset  = client.dataset(dataset_id)
+        table = dataset.table(table_id)
+        job_config = bigquery.LoadJobConfig()
+        job_config.autodetect = True
+        #job_config.schema = format_schema(table_schema)
+        job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+        job = client.load_table_from_json(json_object, table, job_config = job_config)
+        print(job.result())
+        
+        
 def get_params():
   print("Cargando consulta")
   client = bigquery.Client()

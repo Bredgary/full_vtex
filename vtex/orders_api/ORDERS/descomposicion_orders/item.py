@@ -15,167 +15,54 @@ class init:
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
 
-def decrypt_email(email):
-    try:
-        url = "https://conversationtracker.vtex.com.br/api/pvt/emailMapping?an=mercury&alias="+email+""
-        headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-        response = requests.request("GET", url, headers=headers)
-        formatoJ = json.loads(response.text)
-        return formatoJ["email"]
-    except:
-        print("No se pudo desencriptar Email: "+str(email))
      
 def get_order(id,reg):
     try:
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
+        additionalInfo = Items["additionalInfo"]
         
         items = Fjson["items"]
-        except:
-            print("items No tiene datos")
-        try:
-            changesAttachment = Fjson["changesAttachment"]
-        except:
-            print("changesAttachment No tiene datos")
-        try:
-            paymentData = Fjson["paymentData"]
-            transactions = paymentData["transactions"]
-        except:
-            print("paymentData No tiene datos")
-        try:
-            sellers_ = Fjson["sellers"]
-        except:
-            print("sellers_ No tiene datos")
-        try:
-            sellers = sellers_[0]
-        except:
-            print("sellers No tiene datos")
-        try:
-            transactions_ = paymentData["transactions"]
-        except:
-            print("transactions_ No tiene datos")
-        try:
-            transactions = transactions_[0]
-        except:
-            print("transactions No tiene datos")
-        try:
-            payments_ = transactions["payments"]
-        except:
-            print("payments_ No tiene datos")
-        try:
-            payments = payments_[0]
-        except:
-            print("payments No tiene datos")
-        try:
-            billingAddress = payments["billingAddress"]
-        except:
-            print("billingAddress No tiene datos")
-        try:
-            Items = items[0]
-        except:
-            print("Items No tiene datos")
-        try:
-            itemAttachment = Items["itemAttachment"]
-        except:
-            print("itemAttachment No tiene datos")
-        try:
-            additionalInfo = Items["additionalInfo"]
-        except:
-            print("additionalInfo No tiene datos")
-        try:
-            priceDefinition = Items["priceDefinition"]
-        except:
-            print("priceDefinition No tiene datos")
-        try:
-            sellingPrice = Items["sellingPrice"]
-        except:
-            print("sellingPrice No tiene datos")
-        try:
-            dimension = additionalInfo["dimension"]
-        except:
-            print("dimension No tiene datos")
-        
-        '''
-        END DIMENSION
-        '''
-        
-        
-        try:
-            if Total[0]:
-                items = Total[0]
-                init.total_id_items = items["id"]
-                init.total_name_items = items["name"]
-                init.total_value_items = items["value"]
-        except:
-            print("No hay datos items")
-        try:
-            if Total[1]:
-                discounts = Total[1]
-                init.total_id_discounts = discounts["id"]
-                init.total_name_discounts = discounts["name"]
-                init.total_value_discounts = discounts["value"]
-        except:
-            print("No hay datos discounts")
-        try:
-            if Total[2]:
-                shipping = Total[2]
-                init.total_id_shipping = shipping["id"]
-                init.total_name_shipping = shipping["name"]
-                init.total_value_shipping = shipping["value"]
-        except:
-            print("No hay datos shipping")
-        try:
-            if Total[3]:
-                tax = Total[3]
-                init.total_id_tax = tax["id"]
-                init.total_name_tax = tax["name"]
-                init.total_value_tax = tax["value"]
-        except:
-            print("No hay datos tax")
-        try:
-            init.items_uniqueId = Items["uniqueId"]
-            init.items_id = Items["id"]
-            init.items_productId = Items["productId"]
-            init.items_ean = Items["ean"]
-            init.items_lockId = Items["lockId"]
-            init.item_quantity = Items["quantity"]
-            init.item_seller = Items["seller"]
-            init.item_name = Items["name"]
-            init.item_refId = Items["refId"]
-            init.item_price = Items["price"]
-            init.item_listPrice = Items["listPrice"]
-            init.item_manualPrice = Items["manualPrice"]
-            init.item_imageUrl = Items["imageUrl"]
-            init.item_detailUrl = Items["detailUrl"]
-            init.item_sellerSku = Items["sellerSku"]
-            init.item_priceValidUntil = Items["priceValidUntil"]
-            init.item_commission = Items["commission"]
-            init.item_tax = Items["tax"]
-            init.item_preSaleDate = Items["preSaleDate"]
-            init.item_measurementUnit = Items["measurementUnit"]
-            init.item_unitMultiplier = Items["unitMultiplier"]
-            init.item_sellingPrice = Items["sellingPrice"]
-            init.item_isGift = Items["isGift"]
-            init.item_shippingPrice = Items["shippingPrice"]
-            init.item_rewardValue = Items["rewardValue"]
-            init.item_freightCommission = Items["freightCommission"]
-            init.item_taxCode = Items["taxCode"]
-            init.item_parentItemIndex = Items["parentItemIndex"]
-            init.item_parentAssemblyBinding = Items["parentAssemblyBinding"]
-            init.item_price_definition = Items["priceDefinition"]
-            init.item_serialNumbers = Items["serialNumbers"]
-        except:
-            print("No hay datos dim Items")
-        try:
-            init.brandName = additionalInfo["brandName"]
-            init.brandId = additionalInfo["brandId"]
-            init.categoriesIds = additionalInfo["categoriesIds"]
-            init.productClusterId = additionalInfo["productClusterId"]
-            init.commercialConditionId = additionalInfo["commercialConditionId"]
-            init.offeringInfo = additionalInfo["offeringInfo"]
-            init.offeringType = additionalInfo["offeringType"]
-            init.offeringTypeId = additionalInfo["offeringTypeId"]
+        items_uniqueId = Items["uniqueId"]
+        items_id = Items["id"]
+        items_productId = Items["productId"]
+        items_ean = Items["ean"]
+        items_lockId = Items["lockId"]
+        item_quantity = Items["quantity"]
+        item_seller = Items["seller"]
+        item_name = Items["name"]
+        item_refId = Items["refId"]
+        item_price = Items["price"]
+        item_listPrice = Items["listPrice"]
+        item_manualPrice = Items["manualPrice"]
+        item_imageUrl = Items["imageUrl"]
+        item_detailUrl = Items["detailUrl"]
+        item_sellerSku = Items["sellerSku"]
+        item_priceValidUntil = Items["priceValidUntil"]
+        item_commission = Items["commission"]
+        item_tax = Items["tax"]
+        item_preSaleDate = Items["preSaleDate"]
+        item_measurementUnit = Items["measurementUnit"]
+        item_unitMultiplier = Items["unitMultiplier"]
+        item_sellingPrice = Items["sellingPrice"]
+        item_isGift = Items["isGift"]
+        item_shippingPrice = Items["shippingPrice"]
+        item_rewardValue = Items["rewardValue"]
+        item_freightCommission = Items["freightCommission"]
+        item_taxCode = Items["taxCode"]
+        item_parentItemIndex = Items["parentItemIndex"]
+        item_parentAssemblyBinding = Items["parentAssemblyBinding"]
+        item_price_definition = Items["priceDefinition"]
+        item_serialNumbers = Items["serialNumbers"]
+        brandName = additionalInfo["brandName"]
+        brandId = additionalInfo["brandId"]
+        categoriesIds = additionalInfo["categoriesIds"]
+        productClusterId = additionalInfo["productClusterId"]
+        commercialConditionId = additionalInfo["commercialConditionId"]
+        offeringInfo = additionalInfo["offeringInfo"]
+        offeringType = additionalInfo["offeringType"]
+        offeringTypeId = additionalInfo["offeringTypeId"]
         except:
             print("No hay datos. additionalInfo")
         try:
