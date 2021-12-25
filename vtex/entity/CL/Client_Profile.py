@@ -64,7 +64,7 @@ def get_order(email,reg):
       'isCorporate': isCorporate,
       'profileCompleteOnLoading': profileCompleteOnLoading,
       'profileErrorOnLoading': profileErrorOnLoading,
-      'customerClass': customerClass,
+      #'customerClass': customerClass,
       'isComplete': isComplete}, index=[0])
     init.df = init.df.append(df1)
     print("Registro: "+str(reg))
@@ -82,7 +82,7 @@ def get_params():
   for row in rows:
     registro += 1
     get_order('tg.arquitectos@gmail.com',registro)
-    if registro == 15:
+    if registro == 2:
         break
   run()
         
