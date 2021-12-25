@@ -20,7 +20,7 @@ def format_schema(schema):
 
 
 def get_order(id,reg):
-    try:
+   # try:
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
@@ -83,8 +83,8 @@ def get_order(id,reg):
                     'unitMultiplier': init.unitMultiplier}, index=[0])
                 init.df = init.df.append(df1)
                 print("Registro: "+str(reg))
-    except:
-        print("No packages "+str(reg))    
+    #except:
+    #    print("No packages "+str(reg))    
 
 def get_params():
     print("Cargando consulta")
