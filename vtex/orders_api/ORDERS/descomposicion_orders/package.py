@@ -104,7 +104,7 @@ def run():
     df.reset_index(drop=True, inplace=True)
     json_data = df.to_json(orient = 'records')
     json_object = json.loads(json_data)
-    
+    print(df)
     table_schema = [
         {
             "name": "orderId",
@@ -208,6 +208,7 @@ def run():
     job_config.schema = format_schema(table_schema)
     job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
     job = client.load_table_from_json(json_object, table, job_config = job_config)
+    print(job.result())
     
     
 def get_params():
