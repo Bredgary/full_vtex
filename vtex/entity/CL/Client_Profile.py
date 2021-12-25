@@ -21,69 +21,68 @@ def format_schema(schema):
 
 
 def get_order(email,reg):
-  #try:
-    url = "https://mercury.vtexcommercestable.com.br/api/checkout/pub/profiles"
-    querystring = {"email":""+str(email)+""}
-    response = requests.request("GET", url, headers=init.headers, params=querystring)
-    Fjson = json.loads(response.text)
-    
-    userProfileId = Fjson["userProfileId"]
-    profileProvider = Fjson["profileProvider"]
-    isComplete = Fjson["isComplete"]
-    
-    userProfile = Fjson["userProfile"]
-    email = userProfile["email"]
-    firstName = userProfile["firstName"]
-    lastName = userProfile["lastName"]
-    document = userProfile["document"]
-    documentType = userProfile["documentType"]
-    phone = userProfile["phone"]
-    corporateName = userProfile["corporateName"]
-    tradeName = userProfile["tradeName"]
-    corporateDocument = userProfile["corporateDocument"]
-    stateInscription = userProfile["stateInscription"]
-    corporatePhone = userProfile["corporatePhone"]
-    isCorporate = userProfile["isCorporate"]
-    profileCompleteOnLoading = userProfile["profileCompleteOnLoading"]
-    profileErrorOnLoading = userProfile["profileErrorOnLoading"]
-    customerClass = userProfile["customerClass"]
- 
-    
-    df1 = pd.DataFrame({
-      'userProfileId': userProfileId,
-      'profileProvider': profileProvider,
-      'isComplete': isComplete,
-      'email': email,
-      'firstName': firstName,
-      'lastName': lastName,
-      'document': document,
-      'documentType': documentType,
-      'phone': phone,
-      'corporateName': corporateName,
-      'tradeName': tradeName,
-      'corporateDocument': corporateDocument,
-      'stateInscription': stateInscription,
-      'corporatePhone': corporatePhone,
-      'isCorporate': isCorporate,
-      'profileCompleteOnLoading': profileCompleteOnLoading,
-      'profileErrorOnLoading': profileErrorOnLoading,
-      'customerClass': customerClass}, index=[0])
-    init.df = init.df.append(df1)
-    print("Registro: "+str(reg))
-  #except:
-  #  print("No data profile "+str(reg))
+    try:
+        url = "https://mercury.vtexcommercestable.com.br/api/checkout/pub/profiles"
+        querystring = {"email":""+str(email)+""}
+        response = requests.request("GET", url, headers=init.headers, params=querystring)
+        Fjson = json.loads(response.text)
+        
+        userProfileId = Fjson["userProfileId"]
+        profileProvider = Fjson["profileProvider"]
+        isComplete = Fjson["isComplete"]
+        
+        userProfile = Fjson["userProfile"]
+        email = userProfile["email"]
+        firstName = userProfile["firstName"]
+        lastName = userProfile["lastName"]
+        document = userProfile["document"]
+        documentType = userProfile["documentType"]
+        phone = userProfile["phone"]
+        corporateName = userProfile["corporateName"]
+        tradeName = userProfile["tradeName"]
+        corporateDocument = userProfile["corporateDocument"]
+        stateInscription = userProfile["stateInscription"]
+        corporatePhone = userProfile["corporatePhone"]
+        isCorporate = userProfile["isCorporate"]
+        profileCompleteOnLoading = userProfile["profileCompleteOnLoading"]
+        profileErrorOnLoading = userProfile["profileErrorOnLoading"]
+        customerClass = userProfile["customerClass"]
+        
+        df1 = pd.DataFrame({
+            'userProfileId': userProfileId,
+            'profileProvider': profileProvider,
+            'isComplete': isComplete,
+            'email': email,
+            'firstName': firstName,
+            'lastName': lastName,
+            'document': document,
+            'documentType': documentType,
+            'phone': phone,
+            'corporateName': corporateName,
+            'tradeName': tradeName,
+            'corporateDocument': corporateDocument,
+            'stateInscription': stateInscription,
+            'corporatePhone': corporatePhone,
+            'isCorporate': isCorporate,
+            'profileCompleteOnLoading': profileCompleteOnLoading,
+            'profileErrorOnLoading': profileErrorOnLoading,
+            'customerClass': customerClass}, index=[0])
+        init.df = init.df.append(df1)
+        print("Registro: "+str(reg))
+    except:
+        print("No data profile "+str(reg))
         
         
 def get_params():
   print("Cargando consulta")
   client = bigquery.Client()
-  QUERY = ('SELECT DISTINCT email  FROM `shopstar-datalake.staging_zone.shopstar_vtex_client`')
+  QUERY = ('SELECT DISTINCT email FROM `shopstar-datalake.staging_zone.shopstar_vtex_client`WHERE (email NOT IN (SELECT email FROM `shopstar-datalake.test.shopstar_vtex_client_profile`))')
   query_job = client.query(QUERY)
   rows = query_job.result()
   registro = 0
   for row in rows:
     registro += 1
-    get_order('tg.arquitectos@gmail.com',registro)
+    get_order(row.email,registro)
     break
   run()
 
