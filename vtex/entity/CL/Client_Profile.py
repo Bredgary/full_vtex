@@ -65,8 +65,8 @@ def get_order(email,reg):
       'isCorporate': isCorporate,
       'profileCompleteOnLoading': profileCompleteOnLoading,
       'profileErrorOnLoading': profileErrorOnLoading,
-      'customerClass': customerClass,
-      'isComplete': isComplete}, index=[0])
+      'customerClass': customerClass}, index=[0])
+      #'isComplete': isComplete}, index=[0])
     init.df = init.df.append(df1)
     print("Registro: "+str(reg))
   #except:
