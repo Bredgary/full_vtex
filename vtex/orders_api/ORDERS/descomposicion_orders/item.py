@@ -14,6 +14,12 @@ class init:
     df = pd.DataFrame()
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
+def format_schema(schema):
+    formatted_schema = []
+    for row in schema:
+        formatted_schema.append(bigquery.SchemaField(row['name'], row['type'], row['mode']))
+    return formatted_schema
+
 def get_order(id):
     try:
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
@@ -160,25 +166,223 @@ def run():
     json_data = df.to_json(orient = 'records')
     json_object = json.loads(json_data)
     
+    table_schema = [
+        {
+            "name": "length",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+    },{
+        "name": "cubicweight",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+    },{
+        "name": "offeringInfo",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "commercialConditionId",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "categoriesIds",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "brandId",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "brandName",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "parentAssemblyBinding",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "height",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "productClusterId",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "parentItemIndex",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "taxCode",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "item_itemAttachment_name",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "freightCommission",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "item_price_definition",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "rewardValue",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "width",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "shippingPrice",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "isGift",
+        "type": "BOOLEAN",
+        "mode": "NULLABLE"
+    },{
+        "name": "orderId",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "sellingPrice",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "name",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "measurementUnit",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "detailUrl",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "preSaleDate",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "tax",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "priceValidUntil",
+        "type": "DATE",
+        "mode": "NULLABLE"
+    },{
+        "name": "item_serialNumbers",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "sellerSku",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "id",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "manualPrice",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "commission",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "productId",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "unitMultiplier",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "price",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "seller",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "lockId",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "imageUrl",
+        "type": "DATE",
+        "mode": "NULLABLE"
+    },{
+        "name": "offeringType",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "quantity",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "refId",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "ean",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "listPrice",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "weight",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "offeringTypeId",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "uniqueId",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    }]
+    
     project_id = '999847639598'
     dataset_id = 'test'
     table_id = 'shopstar_vtex_item'
     
-    client  = bigquery.Client(project = project_id)
-    dataset  = client.dataset(dataset_id)
-    table = dataset.table(table_id)
-    job_config = bigquery.LoadJobConfig()
-    job_config.autodetect = True
-    job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-    job = client.load_table_from_json(json_object, table, job_config = job_config)
-    print(job.result())
-    delete_duplicate()        
+    try:
+        client  = bigquery.Client(project = project_id)
+        dataset  = client.dataset(dataset_id)
+        table = dataset.table(table_id)
+        job_config = bigquery.LoadJobConfig()
+        job_config.schema = format_schema(table_schema)
+        job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+        job = client.load_table_from_json(json_object, table, job_config = job_config)
+        print(job.result())
+        delete_duplicate()
+    except:
+        client  = bigquery.Client(project = project_id)
+        dataset  = client.dataset(dataset_id)
+        table = dataset.table(table_id)
+        job_config = bigquery.LoadJobConfig()
+        job_config.autodetect = True
+        job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+        job = client.load_table_from_json(json_object, table, job_config = job_config)
+        print(job.result())
+        delete_duplicate()   
 
 
 def get_params():
     print("Cargando consulta")
     client = bigquery.Client()
-    QUERY = ('SELECT DISTINCT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`')
+    QUERY = ('SELECT DISTINCT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`WHERE (orderId NOT IN (SELECT orderId FROM `shopstar-datalake.test.shopstar_vtex_item`))')
     query_job = client.query(QUERY)  
     rows = query_job.result()
     registro = 0
