@@ -82,6 +82,7 @@ def get_order(id,reg):
                     'description': description,
                     'unitMultiplier': unitMultiplier}, index=[0])
                 init.df = init.df.append(df1)
+                reg += 1
                 print("Registro: "+str(reg))
     #except:
     #    print("No packages "+str(reg))    
@@ -94,7 +95,6 @@ def get_params():
     rows = query_job.result()
     registro = 0
     for row in rows:
-        registro += 1
         get_order("1040711467154-01",registro)
         if registro == 2:
             run()
