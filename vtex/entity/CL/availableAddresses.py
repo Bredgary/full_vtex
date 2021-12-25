@@ -167,7 +167,7 @@ def get_params():
   registro = 0
   for row in rows:
     registro += 1
-    get_order('tg.arquitectos@gmail.com')
+    get_order(row.email)
     print("Registro: "+str(registro))
     if registro == 1:
         run()
