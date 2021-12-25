@@ -41,17 +41,11 @@ def get_order(id,reg):
             cfop = x["cfop"]
             volumes = x["volumes"]
             EnableInferItems = x["EnableInferItems"]
-            try:
-                courierStatus = x["courierStatus"]
-                for j in courierStatus:
-                    status = j["status"]
-                    finished = j["finished"]
-                    deliveredDate = j["deliveredDate"]
-            except:
-                courierStatus =""
-                status =""
-                finished =""
-                deliveredDate =""
+            courierStatus = x["courierStatus"]
+            for j in courierStatus:
+                status = j["status"]
+                finished = j["finished"]
+                deliveredDate = j["deliveredDate"]
             for y in items:
                 itemIndex = y["itemIndex"]
                 quantity = y["quantity"]
