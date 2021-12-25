@@ -96,7 +96,7 @@ def get_params():
     for row in rows:
         registro += 1
         get_order("1040711467154-01",registro)
-        if registro == 1:
+        if registro == 2:
             run()
             break
     run()
