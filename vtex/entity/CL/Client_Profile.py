@@ -47,15 +47,12 @@ def get_order(email,reg):
     profileCompleteOnLoading = userProfile["profileCompleteOnLoading"]
     profileErrorOnLoading = userProfile["profileErrorOnLoading"]
     customerClass = userProfile["customerClass"]
-    print(userProfileId)
-    print(profileProvider)
-    print(isComplete)
  
     
     df1 = pd.DataFrame({
-      #'userProfileId': userProfileId,
-      #'profileProvider': profileProvider,
-      #'isComplete': isComplete,
+      'userProfileId': userProfileId,
+      'profileProvider': profileProvider,
+      'isComplete': isComplete,
       'email': email,
       'firstName': firstName,
       'lastName': lastName,
@@ -99,6 +96,18 @@ def run():
     json_object = json.loads(json_data)
     
     table_schema = [{
+        "name": "userProfileId",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "profileProvider",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "isComplete",
+        "type": "BOOLEAN",
+        "mode": "NULLABLE"
+    },{
         "name": "email",
         "type": "STRING",
         "mode": "NULLABLE"
@@ -157,8 +166,7 @@ def run():
     },{
         "name": "customerClass",
         "type": "STRING",
-        "mode": "NULLABLE"
-    }]
+        "mode": "NULLABLE"}]
     
     project_id = '999847639598'
     dataset_id = 'test'
