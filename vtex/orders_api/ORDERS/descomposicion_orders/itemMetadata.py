@@ -12,61 +12,42 @@ from os.path import join
 class init:
     productList = []
     df = pd.DataFrame()
-    '''
-    itemMetadata
-    '''
-    itemMetadata_Id = None
-    itemMetadata_Seller = None
-    itemMetadata_Name = None
-    itemMetadata_SkuName = None
-    itemMetadata_ProductId = None
-    itemMetadata_RefId = None
-    itemMetadata_Ean = None
-    itemMetadata_ImageUrl = None
-    itemMetadata_DetailUrl = None
     
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
      
-def get_order(id,reg):
+def get_order(id):
     try:
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
-           
-        try:
-            itemMetadata = Fjson["itemMetadata"]
-            ItemMetadata = itemMetadata["Items"]
-        except:
-            print("ItemMetadata. No tiene datos")
-        try:
-            for x in ItemMetadata:
-                init.itemMetadata_Id = x["Id"]
-                init.itemMetadata_Seller = x["Seller"]
-                init.itemMetadata_Name = x["Name"]
-                init.itemMetadata_SkuName = x["SkuName"]
-                init.itemMetadata_ProductId = x["ProductId"]
-                init.itemMetadata_RefId = x["RefId"]
-                init.itemMetadata_Ean = x["Ean"]
-                init.itemMetadata_ImageUrl = x["ImageUrl"]
-                init.itemMetadata_DetailUrl = x["DetailUrl"]
-        except:
-            print("vacio")
         
-    
-        df1 = pd.DataFrame({
-            'itemMetadata_Id': str(init.itemMetadata_Id),
-            'itemMetadata_Seller': str(init.itemMetadata_Seller),
-            'itemMetadata_Name': str(init.itemMetadata_Name),
-            'itemMetadata_SkuName': str(init.itemMetadata_SkuName),
-            'itemMetadata_ProductId': str(init.itemMetadata_ProductId),
-            'itemMetadata_RefId': str(init.itemMetadata_RefId),
-            'itemMetadata_Ean': str(init.itemMetadata_Ean),
-            'itemMetadata_ImageUrl': str(init.itemMetadata_ImageUrl),
-            'itemMetadata_DetailUrl': str(init.itemMetadata_DetailUrl)}, index=[0])
-        init.df = init.df.append(df1)
+        itemMetadata = Fjson["itemMetadata"]
+        ItemMetadata = itemMetadata["Items"]
+        for x in ItemMetadata:
+            itemMetadata_Id = x["Id"]
+            itemMetadata_Seller = x["Seller"]
+            itemMetadata_Name = x["Name"]
+            itemMetadata_SkuName = x["SkuName"]
+            itemMetadata_ProductId = x["ProductId"]
+            itemMetadata_RefId = x["RefId"]
+            itemMetadata_Ean = x["Ean"]
+            itemMetadata_ImageUrl = x["ImageUrl"]
+            itemMetadata_DetailUrl = x["DetailUrl"]
+            df1 = pd.DataFrame({
+                'orderId': id,
+                'Id': itemMetadata_Id,
+                'Seller': itemMetadata_Seller,
+                'Name': itemMetadata_Name,
+                'SkuName': itemMetadata_SkuName,
+                'ProductId': itemMetadata_ProductId,
+                'RefId': itemMetadata_RefId,
+                'Ean': itemMetadata_Ean,
+                'ImageUrl': itemMetadata_ImageUrl,
+                'DetailUrl': itemMetadata_DetailUrl}, index=[0])
+            init.df = init.df.append(df1)
         
-        print("Registro: "+str(reg))
+        
     except:
         print("vacio")
 
@@ -75,7 +56,7 @@ def delete_duplicate():
         print("Eliminando duplicados")
         client = bigquery.Client()
         QUERY = (
-            'CREATE OR REPLACE TABLE `shopstar-datalake.test.shopstar_vtex_order` AS SELECT DISTINCT * FROM `shopstar-datalake.test.shopstar_vtex_order`')
+            'CREATE OR REPLACE TABLE `shopstar-datalake.test.shopstar_vtex_item_metadata` AS SELECT DISTINCT * FROM `shopstar-datalake.test.shopstar_vtex_item_metadata`')
         query_job = client.query(QUERY)
         rows = query_job.result()
         print(rows)
@@ -106,14 +87,52 @@ def run():
 def get_params():
     print("Cargando consulta")
     client = bigquery.Client()
-    #QUERY = ('SELECT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`')
-    QUERY = ('SELECT DISTINCT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`WHERE (orderId NOT IN (SELECT orderId FROM `shopstar-datalake.test.shopstar_vtex_order`))')
+    QUERY = ('SELECT DISTINCT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order')
     query_job = client.query(QUERY)  
     rows = query_job.result()
     registro = 0
     for row in rows:
         registro += 1
-        get_order(row.orderId,registro)
+        get_order("1040711467154-01")
+        print("Registro: "+str(registro))
+        if registro == 1:
+            run()
+        if registro == 100:
+            run()
+        if registro == 200:
+            run()
+        if registro == 300:
+            run()
+        if registro == 400:
+            run()
+        if registro == 500:
+            run()
+        if registro == 600:
+            run()
+        if registro == 700:
+            run()
+        if registro == 800:
+            run()
+        if registro == 900:
+            run()
+        if registro == 1000:
+            run()
+        if registro == 2000:
+            run()
+        if registro == 3000:
+            run()
+        if registro == 4000:
+            run()
+        if registro == 5000:
+            run()
+        if registro == 6000:
+            run()
+        if registro == 7000:
+            run()
+        if registro == 8000:
+            run()
+        if registro == 9000:
+            run()
         if registro == 10000:
             run()
         if registro == 20000:
@@ -123,6 +142,12 @@ def get_params():
         if registro == 40000:
             run()
         if registro == 50000:
+            run()
+        if registro == 60000:
+            run()
+        if registro == 70000:
+            run()
+        if registro == 80000:
             run()
     run()
         
