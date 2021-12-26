@@ -195,7 +195,212 @@ def run():
     json_data = df.to_json(orient = 'records')
     json_object = json.loads(json_data)
     
-    #table_schema = 
+    table_schema = [
+        {
+            "name": "giftRegistryData",
+            "type": "STRING",
+            "mode": "NULLABLE"
+    },{
+        "name": "RequestedByPaymentNotification",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+    },{
+        "name": "RequestedBySellerNotification",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+    },{
+        "name": "RequestedByUser",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+    },{
+        "name": "RequestedBySystem",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+    },{
+        "name": "CancellationDate",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+    },{
+        "name": "seller_name",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "seller_id",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "baseURL",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+    },{
+        "name": "name",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+    },{
+        "name": "changesAttachment",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "lastChange",
+        "type": "DATE",
+        "mode": "NULLABLE"
+    },{
+        "name": "isCertified",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+    },{
+        "name": "lastMessage",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "authorizedDate",
+        "type": "DATE",
+        "mode": "NULLABLE"
+    },{
+        "name": "allowEdition",
+        "type": "BOOLEAN",
+        "mode": "NULLABLE"
+    },{
+        "name": "allowCancellation",
+        "type": "BOOLEAN",
+        "mode": "NULLABLE"
+    },{
+        "name": "status",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "isCheckedIn",
+        "type": "BOOLEAN",
+        "mode": "NULLABLE"
+    },{
+        "name": "subscriptionData",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "commercialConditionData",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "isCompleted",
+        "type": "BOOLEAN",
+        "mode": "NULLABLE"
+    },{
+        "name": "roundingError",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "orderId",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "marketplace",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "callCenterOperatorData",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "orderGroup",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "creationDate",
+        "type": "DATE",
+        "mode": "NULLABLE"
+    },{
+        "name": "cancelReason",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "orderFormId",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "seller_logo",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+    },{
+        "name": "sellerOrderId",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "statusDescription",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "value",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "invoicedDate",
+        "type": "DATE",
+        "mode": "NULLABLE"
+    },{
+        "name": "customData",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "merchantName",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "sequence",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "affiliateId",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+    },{
+        "name": "followUpEmail",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "userProfileId",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "hostname",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "checkedInPickupPointId",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "origin",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "salesChannel",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "marketplaceServicesEndpoint",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "Reason",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+    },{
+        "name": "client_email",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "taxData",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "openTextField",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "marketplaceOrderId",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+    }]
 
     
     project_id = '999847639598'
@@ -208,8 +413,7 @@ def run():
         table = dataset.table(table_id)
         job_config = bigquery.LoadJobConfig()
         job_config.write_disposition = "WRITE_TRUNCATE"
-        job_config.autodetect = True
-        #job_config.schema = format_schema(table_schema)
+        job_config.schema = format_schema(table_schema)
         job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
         job = client.load_table_from_json(json_object, table, job_config = job_config)
         print(job.result())
@@ -230,7 +434,7 @@ def run():
 def get_params():
     print("Cargando consulta")
     client = bigquery.Client()
-    QUERY = ('SELECT DISTINCT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`')
+    QUERY = ('SELECT DISTINCT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`WHERE (orderId NOT IN (SELECT orderId FROM `shopstar-datalake.test.shopstar_vtex_ft_orders`))')
     query_job = client.query(QUERY)  
     rows = query_job.result()
     registro = 0
