@@ -14,6 +14,7 @@ encoding//vtex/orders_api/ORDERS/List_Order.py=latin1
 encoding//vtex/orders_api/ORDERS/List_order_History.py=latin1
 encoding//vtex/orders_api/ORDERS/Order.py=latin1
 encoding//vtex/orders_api/ORDERS/TestOrder.py=latin1
+encoding//vtex/orders_api/ORDERS/descomposicion_orders/ft_order.py=latin1
 encoding//vtex/orders_api/ORDERS/descomposicion_orders/item.py=latin1
 encoding//vtex/orders_api/ORDERS/descomposicion_orders/itemMetadata.py=latin1
 encoding//vtex/orders_api/ORDERS/descomposicion_orders/marketplace.py=latin1
