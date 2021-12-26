@@ -70,30 +70,87 @@ def run():
     json_data = df.to_json(orient = 'records')
     json_object = json.loads(json_data)
     
+    table_schema = [
+        {
+            "name": "ImageUrl",
+            "type": "STRING",
+            "mode": "NULLABLE"
+    },{
+        "name": "Ean",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "Seller",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "SkuName",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+    },{
+        "name": "ProductId",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "Name",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "Id",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "DetailUrl",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "RefId",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "orderId",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    }]
+    
     project_id = '999847639598'
     dataset_id = 'test'
     table_id = 'shopstar_vtex_item_metadata'
     
-    client  = bigquery.Client(project = project_id)
-    dataset  = client.dataset(dataset_id)
-    table = dataset.table(table_id)
-    job_config = bigquery.LoadJobConfig()
-    job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-    job = client.load_table_from_json(json_object, table, job_config = job_config)
-    print(job.result())
-    delete_duplicate()        
+    try:
+        client  = bigquery.Client(project = project_id)
+        dataset  = client.dataset(dataset_id)
+        table = dataset.table(table_id)
+        job_config = bigquery.LoadJobConfig()
+        job_config.write_disposition = "WRITE_TRUNCATE"
+        job_config.schema = format_schema(table_schema)
+        job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+        job = client.load_table_from_json(json_object, table, job_config = job_config)
+        print(job.result())
+        delete_duplicate()
+    except:
+        client  = bigquery.Client(project = project_id)
+        dataset  = client.dataset(dataset_id)
+        table = dataset.table(table_id)
+        job_config = bigquery.LoadJobConfig()
+        job_config.write_disposition = "WRITE_TRUNCATE"
+        job_config.autodetect = True
+        job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+        job = client.load_table_from_json(json_object, table, job_config = job_config)
+        print(job.result())
+        delete_duplicate()         
 
 
 def get_params():
     print("Cargando consulta")
     client = bigquery.Client()
-    QUERY = ('SELECT DISTINCT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`')
+    QUERY = ('SELECT DISTINCT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`WHERE (orderId NOT IN (SELECT orderId FROM `shopstar-datalake.test.shopstar_vtex_item_metadata`))')
     query_job = client.query(QUERY)  
     rows = query_job.result()
     registro = 0
     for row in rows:
         registro += 1
-        get_order("1040711467154-01")
+        get_order(row.orderId)
         print("Registro: "+str(registro))
         if registro == 1:
             run()
