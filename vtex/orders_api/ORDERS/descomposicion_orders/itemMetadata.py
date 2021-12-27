@@ -69,59 +69,59 @@ def delete_duplicate():
 
 
 def run():
-    try:
-        df = init.df
-        df.reset_index(drop=True, inplace=True)
-        json_data = df.to_json(orient = 'records')
-        json_object = json.loads(json_data)
+    df = init.df
+    df.reset_index(drop=True, inplace=True)
+    json_data = df.to_json(orient = 'records')
+    json_object = json.loads(json_data)
+
+    table_schema = [
+    {
+        "name": "ImageUrl",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "Ean",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "Seller",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "SkuName",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "ProductId",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "Name",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "Id",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "DetailUrl",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "RefId",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "orderId",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    }]
     
-        table_schema = [
-        {
-            "name": "ImageUrl",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "Ean",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "Seller",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "SkuName",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "ProductId",
-            "type": "INTEGER",
-            "mode": "NULLABLE"
-        },{
-            "name": "Name",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "Id",
-            "type": "INTEGER",
-            "mode": "NULLABLE"
-        },{
-            "name": "DetailUrl",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "RefId",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "orderId",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        }]
-        
-        project_id = '999847639598'
-        dataset_id = 'test'
-        table_id = 'shopstar_vtex_item_metadata'
-        
+    project_id = '999847639598'
+    dataset_id = 'test'
+    table_id = 'shopstar_vtex_item_metadata'
+    
+    try:
         client  = bigquery.Client(project = project_id)
         dataset  = client.dataset(dataset_id)
         table = dataset.table(table_id)
@@ -132,8 +132,16 @@ def run():
         print(job.result())
         delete_duplicate()
     except:
-        print("Datos Actualizados")
-
+        client  = bigquery.Client(project = project_id)
+        dataset  = client.dataset(dataset_id)
+        table = dataset.table(table_id)
+        job_config = bigquery.LoadJobConfig()
+        job_config.autodetect = True
+        job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+        job = client.load_table_from_json(json_object, table, job_config = job_config)
+        print(job.result())
+        delete_duplicate()
+            
 
 def get_params():
     print("Cargando consulta")

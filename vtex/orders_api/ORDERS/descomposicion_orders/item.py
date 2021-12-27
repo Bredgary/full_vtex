@@ -352,7 +352,7 @@ def run():
     }]
     
     project_id = '999847639598'
-    dataset_id = 'staging_zone'
+    dataset_id = 'test'
     table_id = 'shopstar_order_items'
     
     try:
