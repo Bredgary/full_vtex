@@ -331,7 +331,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "ean",
-        "type": "INTEGER",
+        "type": "STRING",
         "mode": "NULLABLE"
     },{
         "name": "listPrice",
