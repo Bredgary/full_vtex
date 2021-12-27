@@ -20,14 +20,14 @@ def format_schema(schema):
 
 
 def get_order(id):
-    #try:
+    try:
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
         packageAttachment = Fjson["packageAttachment"]
         packages = packageAttachment["packages"]
         
-        items = packages["items"]
+        items = ""
         courier = ""
         invoiceNumber = ""
         invoiceValue = ""
@@ -43,6 +43,7 @@ def get_order(id):
         EnableInferItems = ""
         
         for x in packages:
+            items = packages["items"]
             courier = x["courier"]
             invoiceNumber = x["invoiceNumber"]
             invoiceValue = x["invoiceValue"]
@@ -84,8 +85,8 @@ def get_order(id):
                 'description': description,
                 'unitMultiplier': unitMultiplier}, index=[0])
             init.df = init.df.append(df1)
-    #except:
-    #    print("No packages ")    
+    except:
+        print("No packages ")    
 
         
 def delete_duplicate():
