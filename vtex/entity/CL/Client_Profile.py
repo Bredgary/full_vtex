@@ -83,64 +83,6 @@ def get_params():
   for row in rows:
     registro += 1
     get_order(row.email,registro)
-    if registro == 15:
-        run()
-    if registro == 100:
-        run()
-    if registro == 200:
-        run()
-    if registro == 300:
-        run()
-    if registro == 400:
-        run()
-    if registro == 500:
-        run()
-    if registro == 600:
-        run()
-    if registro == 700:
-        run()
-    if registro == 800:
-        run()
-    if registro == 900:
-        run()
-    if registro == 1000:
-        run()
-    if registro == 2000:
-        run()
-    if registro == 3000:
-        run()
-    if registro == 4000:
-        run()
-    if registro == 5000:
-        run()
-    if registro == 6000:
-        run()
-    if registro == 7000:
-        run()
-    if registro == 8000:
-        run()
-    if registro == 9000:
-        run()
-    if registro == 10000:
-        run()
-    if registro == 20000:
-        run()
-    if registro == 30000:
-        run()
-    if registro == 40000:
-        run()
-    if registro == 50000:
-        run()
-    if registro == 60000:
-        run()
-    if registro == 70000:
-        run()
-    if registro == 80000:
-        run()
-    if registro == 90000:
-        run()
-    if registro == 100000:
-        run()
   run()
 
 
@@ -236,8 +178,6 @@ def run():
         dataset  = client.dataset(dataset_id)
         table = dataset.table(table_id)
         job_config = bigquery.LoadJobConfig()
-        job_config.write_disposition = "WRITE_TRUNCATE"
-        #job_config.autodetect = True
         job_config.schema = format_schema(table_schema)
         job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
         job = client.load_table_from_json(json_object, table, job_config = job_config)
@@ -248,8 +188,6 @@ def run():
         table = dataset.table(table_id)
         job_config = bigquery.LoadJobConfig()
         job_config.autodetect = True
-        job_config.write_disposition = "WRITE_TRUNCATE"
-        #job_config.schema = format_schema(table_schema)
         job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
         job = client.load_table_from_json(json_object, table, job_config = job_config)
         print(job.result())
