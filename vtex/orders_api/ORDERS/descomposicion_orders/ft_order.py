@@ -214,7 +214,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "RequestedBySystem",
-        "type": "FLOAT",
+        "type": "BOOLEAN",
         "mode": "NULLABLE"
     },{
         "name": "CancellationDate",
