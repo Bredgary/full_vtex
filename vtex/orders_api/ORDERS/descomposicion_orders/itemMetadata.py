@@ -15,7 +15,11 @@ class init:
     
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
-
+def format_schema(schema):
+    formatted_schema = []
+    for row in schema:
+        formatted_schema.append(bigquery.SchemaField(row['name'], row['type'], row['mode']))
+    return formatted_schema
 
   
 def get_order(id):
