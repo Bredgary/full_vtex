@@ -74,71 +74,71 @@ def get_order(email,reg):
         
         
 def get_params():
-  print("Cargando consulta")
-  client = bigquery.Client()
-  QUERY = ('SELECT DISTINCT email FROM `shopstar-datalake.staging_zone.shopstar_vtex_client`WHERE (email NOT IN (SELECT email FROM `shopstar-datalake.test.shopstar_vtex_client_profile`))')
-  query_job = client.query(QUERY)
-  rows = query_job.result()
-  registro = 0
-  for row in rows:
-    registro += 1
-    get_order(row.email,registro)
-    if registro == 100:
-        run()
-    if registro == 200:
-        run()
-    if registro == 300:
-        run()
-    if registro == 400:
-        run()
-    if registro == 500:
-        run()
-    if registro == 600:
-        run()
-    if registro == 700:
-        run()
-    if registro == 800:
-        run()
-    if registro == 900:
-        run()
-    if registro == 1000:
-        run()
-    if registro == 1000:
-        run()
-    if registro == 1000:
-        run()
-    if registro == 1000:
-        run()
-    if registro == 1000:
-        run()
-    if registro == 1000:
-        run()
-    if registro == 1000:
-        run()
-    if registro == 1000:
-        run()
-    if registro == 1000:
-        run()
-    if registro == 10000:
-        run()
-    if registro == 20000:
-        run()
-    if registro == 30000:
-        run()
-    if registro == 40000:
-        run()
-    if registro == 50000:
-        run()
-    if registro == 60000:
-        run()
-    if registro == 70000:
-        run()
-    if registro == 80000:
-        run()
-    if registro == 90000:
-        run()
-    if registro == 100000:
-        run()
+    print("Cargando consulta")
+    client = bigquery.Client()
+    QUERY = ('SELECT DISTINCT email FROM `shopstar-datalake.staging_zone.shopstar_vtex_client`WHERE (email NOT IN (SELECT email FROM `shopstar-datalake.test.shopstar_vtex_client_profile`))')
+    query_job = client.query(QUERY)
+    rows = query_job.result()
+    registro = 0
+    for row in rows:
+        registro += 1
+        get_order(row.email,registro)
+        if registro == 100:
+            run()
+        if registro == 200:
+            run()
+        if registro == 300:
+            run()
+        if registro == 400:
+            run()
+        if registro == 500:
+            run()
+        if registro == 600:
+            run()
+        if registro == 700:
+            run()
+        if registro == 800:
+            run()
+        if registro == 900:
+            run()
+        if registro == 1000:
+            run()
+        if registro == 1000:
+            run()
+        if registro == 1000:
+            run()
+        if registro == 1000:
+            run()
+        if registro == 1000:
+            run()
+        if registro == 1000:
+            run()
+        if registro == 1000:
+            run()
+        if registro == 1000:
+            run()
+        if registro == 1000:
+            run()
+        if registro == 10000:
+            run()
+        if registro == 20000:
+            run()
+        if registro == 30000:
+            run()
+        if registro == 40000:
+            run()
+        if registro == 50000:
+            run()
+        if registro == 60000:
+            run()
+        if registro == 70000:
+            run()
+        if registro == 80000:
+            run()
+        if registro == 90000:
+            run()
+        if registro == 100000:
+            run()
     run()
 
 
