@@ -44,7 +44,7 @@ def get_order(id):
             item_priceValidUntil = x["priceValidUntil"]
             item_commission = x["commission"]
             item_tax = x["tax"]
-            item_preSaleDate = x["preSaleDate"]
+            item_preSaleDate = str(x["preSaleDate"])
             item_measurementUnit = x["measurementUnit"]
             item_unitMultiplier = x["unitMultiplier"]
             item_sellingPrice = x["sellingPrice"]
@@ -263,7 +263,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "preSaleDate",
-        "type": "TIMESTAMP",
+        "type": "STRING",
         "mode": "NULLABLE"
     },{
         "name": "tax",
