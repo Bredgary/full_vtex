@@ -263,7 +263,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "preSaleDate",
-        "type": "STRING",
+        "type": "TIMESTAMP",
         "mode": "NULLABLE"
     },{
         "name": "tax",
