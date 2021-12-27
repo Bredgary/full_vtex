@@ -27,6 +27,7 @@ def get_order(id):
         packageAttachment = Fjson["packageAttachment"]
         packages = packageAttachment["packages"]
         
+        items = packages["items"]
         courier = ""
         invoiceNumber = ""
         invoiceValue = ""
@@ -42,7 +43,6 @@ def get_order(id):
         EnableInferItems = ""
         
         for x in packages:
-            items = x["items"]
             courier = x["courier"]
             invoiceNumber = x["invoiceNumber"]
             invoiceValue = x["invoiceValue"]
@@ -57,35 +57,33 @@ def get_order(id):
             volumes = x["volumes"]
             EnableInferItems = x["EnableInferItems"]
             
-        for x in packages:
-            items = x["items"]
-            for y in items:
-                itemIndex = y["itemIndex"]
-                quantity = y["quantity"]
-                price = y["price"]
-                description = y["description"]
-                unitMultiplier = y["unitMultiplier"]
-                df1 = pd.DataFrame({
-                    'orderId': id,
-                    'courier': courier,
-                    'invoiceNumber': invoiceNumber,
-                    'invoiceValue': invoiceValue,
-                    'invoiceUrl': invoiceUrl,
-                    'issuanceDate': issuanceDate,
-                    'trackingNumber': trackingNumber,
-                    'invoiceKey': invoiceKey,
-                    'trackingUrl': trackingUrl,
-                    'embeddedInvoice': embeddedInvoice,
-                    'package_type': package_type,
-                    "cfop":cfop,
-                    "volumes":volumes,
-                    "EnableInferItems":EnableInferItems,
-                    'itemIndex': itemIndex,
-                    'quantity': quantity,
-                    'price': price,
-                    'description': description,
-                    'unitMultiplier': unitMultiplier}, index=[0])
-                init.df = init.df.append(df1)
+        for y in items:
+            itemIndex = y["itemIndex"]
+            quantity = y["quantity"]
+            price = y["price"]
+            description = y["description"]
+            unitMultiplier = y["unitMultiplier"]
+            df1 = pd.DataFrame({
+                'orderId': id,
+                'courier': courier,
+                'invoiceNumber': invoiceNumber,
+                'invoiceValue': invoiceValue,
+                'invoiceUrl': invoiceUrl,
+                'issuanceDate': issuanceDate,
+                'trackingNumber': trackingNumber,
+                'invoiceKey': invoiceKey,
+                'trackingUrl': trackingUrl,
+                'embeddedInvoice': embeddedInvoice,
+                'package_type': package_type,
+                "cfop":cfop,
+                "volumes":volumes,
+                "EnableInferItems":EnableInferItems,
+                'itemIndex': itemIndex,
+                'quantity': quantity,
+                'price': price,
+                'description': description,
+                'unitMultiplier': unitMultiplier}, index=[0])
+            init.df = init.df.append(df1)
     except:
         print("No packages ")    
 
@@ -195,11 +193,26 @@ def run():
     dataset  = client.dataset(dataset_id)
     table = dataset.table(table_id)
     
-    job_config = bigquery.LoadJobConfig()
-    job_config.schema = format_schema(table_schema)
-    job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-    job = client.load_table_from_json(json_object, table, job_config = job_config)
-    print(job.result())
+    try:
+        client  = bigquery.Client(project = project_id)
+        dataset  = client.dataset(dataset_id)
+        table = dataset.table(table_id)
+        job_config = bigquery.LoadJobConfig()
+        job_config.schema = format_schema(table_schema)
+        job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+        job = client.load_table_from_json(json_object, table, job_config = job_config)
+        print(job.result())
+        delete_duplicate()
+    except:
+        client  = bigquery.Client(project = project_id)
+        dataset  = client.dataset(dataset_id)
+        table = dataset.table(table_id)
+        job_config = bigquery.LoadJobConfig()
+        job_config.autodetect = True
+        job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+        job = client.load_table_from_json(json_object, table, job_config = job_config)
+        print(job.result())
+        delete_duplicate()
     
     
 def get_params():
