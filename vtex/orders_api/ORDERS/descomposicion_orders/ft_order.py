@@ -170,7 +170,7 @@ def get_order(id):
             'RequestedByUser': RequestedByUser,
             'RequestedBySystem': RequestedBySystem,
             'RequestedBySellerNotification': RequestedBySellerNotification,
-            'RequestedByPaymentNotification': RequestedByPaymentNotification,
+            'RequestedByPaymentNotification': str(RequestedByPaymentNotification),
             'Reason': Reason,
             'giftRegistryData': giftRegistryData}, index=[0])
         init.df = init.df.append(df1)
@@ -202,7 +202,7 @@ def run():
           "mode": "NULLABLE"
   },{
       "name": "RequestedByPaymentNotification",
-      "type": "BOOLEAN",
+      "type": "STRING",
       "mode": "NULLABLE"
   },{
       "name": "RequestedBySellerNotification",
