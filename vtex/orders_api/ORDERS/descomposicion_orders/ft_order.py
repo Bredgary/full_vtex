@@ -96,9 +96,9 @@ def get_order(id):
             seller_logo = ''
         try:
             cancellationData = Fjson["cancellationData"]
-            CancellationDate = cancellationData["CancellationDate"]
+            CancellationDate = str(cancellationData["CancellationDate"])
         except:
-            CancellationDate = None
+            CancellationDate = ""
         try:
             RequestedByUser = cancellationData["RequestedByUser"]
             RequestedBySystem = cancellationData["RequestedBySystem"]
@@ -165,7 +165,7 @@ def get_order(id):
             'seller_id': seller_id,
             'seller_name': seller_name,
             'seller_logo': seller_logo,
-            'CancellationDate': CancellationDate,
+            'CancellationDate': str(CancellationDate),
             'RequestedByUser': RequestedByUser,
             'RequestedBySystem': RequestedBySystem,
             'RequestedBySellerNotification': RequestedBySellerNotification,
@@ -217,7 +217,7 @@ def run():
           "mode": "NULLABLE"
       },{
           "name": "CancellationDate",
-          "type": "DATE",
+          "type": "STRING",
           "mode": "NULLABLE"
       },{
           "name": "seller_name",
