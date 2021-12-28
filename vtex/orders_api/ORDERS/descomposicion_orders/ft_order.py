@@ -111,7 +111,6 @@ def get_order(id):
             RequestedBySellerNotification = False
             RequestedByPaymentNotification = False
             Reason = ""
-            CancellationDate = ""
         
         try:
             dim_invoiceData = Fjson["invoiceData"]
@@ -218,7 +217,7 @@ def run():
           "mode": "NULLABLE"
       },{
           "name": "CancellationDate",
-          "type": "FLOAT",
+          "type": "DATE",
           "mode": "NULLABLE"
       },{
           "name": "seller_name",
