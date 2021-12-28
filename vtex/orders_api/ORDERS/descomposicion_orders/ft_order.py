@@ -210,7 +210,7 @@ def run():
           "mode": "NULLABLE"
       },{
           "name": "RequestedByUser",
-          "type": "FLOAT",
+          "type": "BOOLEAN",
           "mode": "NULLABLE"
       },{
           "name": "RequestedBySystem",
