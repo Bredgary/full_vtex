@@ -109,7 +109,7 @@ def get_order(id):
             RequestedByUser = ""
             RequestedBySystem = False
             RequestedBySellerNotification = False
-            RequestedByPaymentNotification = "False"
+            RequestedByPaymentNotification = False
             Reason = ""
             CancellationDate = ""
         
@@ -170,7 +170,7 @@ def get_order(id):
             'RequestedByUser': RequestedByUser,
             'RequestedBySystem': RequestedBySystem,
             'RequestedBySellerNotification': RequestedBySellerNotification,
-            'RequestedByPaymentNotification': str(RequestedByPaymentNotification),
+            'RequestedByPaymentNotification': RequestedByPaymentNotification,
             'Reason': Reason,
             'giftRegistryData': giftRegistryData}, index=[0])
         init.df = init.df.append(df1)
@@ -202,7 +202,7 @@ def run():
           "mode": "NULLABLE"
   },{
       "name": "RequestedByPaymentNotification",
-      "type": "STRING",
+      "type": "BOOLEAN",
       "mode": "NULLABLE"
   },{
       "name": "RequestedBySellerNotification",
