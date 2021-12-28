@@ -103,7 +103,7 @@ def get_order(id):
             RequestedByUser = cancellationData["RequestedByUser"]
             RequestedBySystem = cancellationData["RequestedBySystem"]
             RequestedBySellerNotification = cancellationData["RequestedBySellerNotification"]
-            RequestedByPaymentNotification = cancellationData["RequestedByPaymentNotification"]
+            RequestedByPaymentNotification = str(cancellationData["RequestedByPaymentNotification"])
             Reason = cancellationData["Reason"]
         except:
             RequestedByUser = ""
