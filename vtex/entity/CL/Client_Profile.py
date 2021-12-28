@@ -35,7 +35,7 @@ def get_order(email,reg):
         email = userProfile["email"]
         firstName = userProfile["firstName"]
         lastName = userProfile["lastName"]
-        document = userProfile["document"]
+        document = str(userProfile["document"])
         documentType = userProfile["documentType"]
         phone = userProfile["phone"]
         corporateName = userProfile["corporateName"]
@@ -55,7 +55,7 @@ def get_order(email,reg):
             'email': email,
             'firstName': firstName,
             'lastName': lastName,
-            'document': document,
+            'document': str(document),
             'documentType': documentType,
             'phone': phone,
             'corporateName': corporateName,
@@ -174,7 +174,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "document",
-        "type": "INTEGER",
+        "type": "STRING",
         "mode": "NULLABLE"
     },{
         "name": "documentType",
