@@ -38,7 +38,7 @@ def get_order(id):
         client_email = clientProfileData["email"]
         userProfileId = clientProfileData["userProfileId"]
         sequence = Fjson["sequence"]
-        marketplaceOrderId = Fjson["marketplaceOrderId"]
+        marketplaceOrderId = str(Fjson["marketplaceOrderId"])
         marketplaceServicesEndpoint = Fjson["marketplaceServicesEndpoint"]
         sellerOrderId = Fjson["sellerOrderId"]
         origin = Fjson["origin"]
@@ -76,7 +76,7 @@ def get_order(id):
         client_email = decrypt_email(str(client_email))
         
         try:
-            marketplaceOrderId = Fjson["marketplaceOrderId"]
+            marketplaceOrderId = str(Fjson["marketplaceOrderId"])
             baseURL = marketplace["baseURL"]
             isCertified = marketplace["isCertified"]
             name = marketplace["name"]
@@ -125,7 +125,7 @@ def get_order(id):
             'client_email': client_email,
             'userProfileId': userProfileId,
             'sequence': sequence,
-            'marketplaceOrderId': marketplaceOrderId,
+            'marketplaceOrderId': str(marketplaceOrderId),
             'marketplaceServicesEndpoint': marketplaceServicesEndpoint,
             'sellerOrderId':sellerOrderId,
             'origin': origin,
@@ -397,7 +397,7 @@ def run():
           "mode": "NULLABLE"
       },{
           "name": "marketplaceOrderId",
-          "type": "FLOAT",
+          "type": "STRING",
           "mode": "NULLABLE"
     }]
     
