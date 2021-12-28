@@ -30,7 +30,7 @@ def decrypt_email(email):
         print(str(email))
 
 def get_order(id):
-    try:
+ #   try:
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
@@ -173,8 +173,8 @@ def get_order(id):
             'Reason': Reason,
             'giftRegistryData': giftRegistryData}, index=[0])
         init.df = init.df.append(df1)
-    except:
-        print("vacio")
+    #except:
+     #   print("vacio")
 
 def delete_duplicate():
     try:
