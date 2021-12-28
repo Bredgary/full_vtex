@@ -159,222 +159,225 @@ def delete_duplicate():
 
 
 def run():
-    df = init.df
-    df.reset_index(drop=True, inplace=True)
-    json_data = df.to_json(orient = 'records')
-    json_object = json.loads(json_data)
-    
-    table_schema = [
-        {
-          "name": "length",
-          "type": "FLOAT",
-          "mode": "NULLABLE"
-        },{
-          "name": "cubicweight",
-          "type": "FLOAT",
-          "mode": "NULLABLE"
-        },{
-          "name": "offeringInfo",
-          "type": "STRING",
-          "mode": "NULLABLE"
-        },{
-          "name": "commercialConditionId",
-          "type": "INTEGER",
-          "mode": "NULLABLE"
-        },{
-          "name": "categoriesIds",
-          "type": "STRING",
-          "mode": "NULLABLE"
-        },{
-          "name": "brandId",
-          "type": "INTEGER",
-          "mode": "NULLABLE"
-        },{
-          "name": "brandName",
-          "type": "STRING",
-          "mode": "NULLABLE"
-        },{
-          "name": "parentAssemblyBinding",
-          "type": "STRING",
-          "mode": "NULLABLE"
-        },{
-          "name": "height",
-          "type": "FLOAT",
-          "mode": "NULLABLE"
-        },{
-          "name": "productClusterId",
-          "type": "FLOAT",
-          "mode": "NULLABLE"
-        },{
-          "name": "parentItemIndex",
-          "type": "STRING",
-          "mode": "NULLABLE"
-        },{
-          "name": "taxCode",
-          "type": "STRING",
-          "mode": "NULLABLE"
-        },{
-          "name": "item_itemAttachment_name",
-          "type": "STRING",
-          "mode": "NULLABLE"
-        },{
-          "name": "freightCommission",
-          "type": "INTEGER",
-          "mode": "NULLABLE"
-        },{
-          "name": "item_price_definition",
-          "type": "STRING",
-          "mode": "NULLABLE"
-        },{
-          "name": "rewardValue",
-          "type": "INTEGER",
-          "mode": "NULLABLE"
-        },{
-          "name": "width",
-          "type": "FLOAT",
-          "mode": "NULLABLE"
-        },{
-          "name": "shippingPrice",
-          "type": "STRING",
-          "mode": "NULLABLE"
-        },{
-          "name": "isGift",
-          "type": "BOOLEAN",
-          "mode": "NULLABLE"
-        },{
-          "name": "orderId",
-          "type": "STRING",
-          "mode": "NULLABLE"
-        },{
-          "name": "sellingPrice",
-          "type": "INTEGER",
-          "mode": "NULLABLE"
-        },{
-          "name": "name",
-          "type": "STRING",
-          "mode": "NULLABLE"
-        },{
-          "name": "measurementUnit",
-          "type": "STRING",
-          "mode": "NULLABLE"
-        },{
-          "name": "detailUrl",
-          "type": "STRING",
-          "mode": "NULLABLE"
-        },{
-          "name": "preSaleDate",
-          "type": "STRING",
-          "mode": "NULLABLE"
-        },{
-          "name": "tax",
-          "type": "INTEGER",
-          "mode": "NULLABLE"
-        },{
-          "name": "priceValidUntil",
-          "type": "TIMESTAMP",
-          "mode": "NULLABLE"
-        },{
-          "name": "item_serialNumbers",
-          "type": "STRING",
-          "mode": "NULLABLE"
-        },{
-          "name": "sellerSku",
-          "type": "INTEGER",
-          "mode": "NULLABLE"
-        },{
-          "name": "id",
-          "type": "INTEGER",
-          "mode": "NULLABLE"
-        },{
-          "name": "manualPrice",
-          "type": "STRING",
-          "mode": "NULLABLE"
-        },{
-          "name": "commission",
-          "type": "INTEGER",
-          "mode": "NULLABLE"
-        },{
-          "name": "productId",
-          "type": "INTEGER",
-          "mode": "NULLABLE"
-        },{
-          "name": "unitMultiplier",
-          "type": "FLOAT",
-          "mode": "NULLABLE"
-        },{
-          "name": "price",
-          "type": "INTEGER",
-          "mode": "NULLABLE"
-        },{
-          "name": "seller",
-          "type": "STRING",
-          "mode": "NULLABLE"
-        },{
-          "name": "lockId",
-          "type": "STRING",
-          "mode": "NULLABLE"
-        },{
-          "name": "imageUrl",
-          "type": "STRING",
-          "mode": "NULLABLE"
-        },{
-          "name": "offeringType",
-          "type": "STRING",
-          "mode": "NULLABLE"
-        },{
-          "name": "quantity",
-          "type": "INTEGER",
-          "mode": "NULLABLE"
-        },{
-          "name": "refId",
-          "type": "STRING",
-          "mode": "NULLABLE"
-        },{
-          "name": "ean",
-          "type": "STRING",
-          "mode": "NULLABLE"
-        },{
-          "name": "listPrice",
-          "type": "INTEGER",
-          "mode": "NULLABLE"
-        },{
-          "name": "weight",
-          "type": "FLOAT",
-          "mode": "NULLABLE"
-        },{
-          "name": "offeringTypeId",
-          "type": "STRING",
-          "mode": "NULLABLE"
-        },{
-          "name": "uniqueId",
-          "type": "STRING",
-          "mode": "NULLABLE"
-        }]
-    
-    project_id = '999847639598'
-    dataset_id = 'staging_zone'
-    table_id = 'shopstar_order_items'
-    
     try:
-        client  = bigquery.Client(project = project_id)
-        dataset  = client.dataset(dataset_id)
-        table = dataset.table(table_id)
-        job_config = bigquery.LoadJobConfig()
-        job_config.schema = format_schema(table_schema)
-        job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-        job = client.load_table_from_json(json_object, table, job_config = job_config)
-        print(job.result())
-        delete_duplicate()
+        df = init.df
+        df.reset_index(drop=True, inplace=True)
+        json_data = df.to_json(orient = 'records')
+        json_object = json.loads(json_data)
+        
+        table_schema = [
+            {
+              "name": "length",
+              "type": "FLOAT",
+              "mode": "NULLABLE"
+            },{
+              "name": "cubicweight",
+              "type": "FLOAT",
+              "mode": "NULLABLE"
+            },{
+              "name": "offeringInfo",
+              "type": "STRING",
+              "mode": "NULLABLE"
+            },{
+              "name": "commercialConditionId",
+              "type": "INTEGER",
+              "mode": "NULLABLE"
+            },{
+              "name": "categoriesIds",
+              "type": "STRING",
+              "mode": "NULLABLE"
+            },{
+              "name": "brandId",
+              "type": "INTEGER",
+              "mode": "NULLABLE"
+            },{
+              "name": "brandName",
+              "type": "STRING",
+              "mode": "NULLABLE"
+            },{
+              "name": "parentAssemblyBinding",
+              "type": "STRING",
+              "mode": "NULLABLE"
+            },{
+              "name": "height",
+              "type": "FLOAT",
+              "mode": "NULLABLE"
+            },{
+              "name": "productClusterId",
+              "type": "FLOAT",
+              "mode": "NULLABLE"
+            },{
+              "name": "parentItemIndex",
+              "type": "STRING",
+              "mode": "NULLABLE"
+            },{
+              "name": "taxCode",
+              "type": "STRING",
+              "mode": "NULLABLE"
+            },{
+              "name": "item_itemAttachment_name",
+              "type": "STRING",
+              "mode": "NULLABLE"
+            },{
+              "name": "freightCommission",
+              "type": "INTEGER",
+              "mode": "NULLABLE"
+            },{
+              "name": "item_price_definition",
+              "type": "STRING",
+              "mode": "NULLABLE"
+            },{
+              "name": "rewardValue",
+              "type": "INTEGER",
+              "mode": "NULLABLE"
+            },{
+              "name": "width",
+              "type": "FLOAT",
+              "mode": "NULLABLE"
+            },{
+              "name": "shippingPrice",
+              "type": "STRING",
+              "mode": "NULLABLE"
+            },{
+              "name": "isGift",
+              "type": "BOOLEAN",
+              "mode": "NULLABLE"
+            },{
+              "name": "orderId",
+              "type": "STRING",
+              "mode": "NULLABLE"
+            },{
+              "name": "sellingPrice",
+              "type": "INTEGER",
+              "mode": "NULLABLE"
+            },{
+              "name": "name",
+              "type": "STRING",
+              "mode": "NULLABLE"
+            },{
+              "name": "measurementUnit",
+              "type": "STRING",
+              "mode": "NULLABLE"
+            },{
+              "name": "detailUrl",
+              "type": "STRING",
+              "mode": "NULLABLE"
+            },{
+              "name": "preSaleDate",
+              "type": "STRING",
+              "mode": "NULLABLE"
+            },{
+              "name": "tax",
+              "type": "INTEGER",
+              "mode": "NULLABLE"
+            },{
+              "name": "priceValidUntil",
+              "type": "TIMESTAMP",
+              "mode": "NULLABLE"
+            },{
+              "name": "item_serialNumbers",
+              "type": "STRING",
+              "mode": "NULLABLE"
+            },{
+              "name": "sellerSku",
+              "type": "INTEGER",
+              "mode": "NULLABLE"
+            },{
+              "name": "id",
+              "type": "INTEGER",
+              "mode": "NULLABLE"
+            },{
+              "name": "manualPrice",
+              "type": "STRING",
+              "mode": "NULLABLE"
+            },{
+              "name": "commission",
+              "type": "INTEGER",
+              "mode": "NULLABLE"
+            },{
+              "name": "productId",
+              "type": "INTEGER",
+              "mode": "NULLABLE"
+            },{
+              "name": "unitMultiplier",
+              "type": "FLOAT",
+              "mode": "NULLABLE"
+            },{
+              "name": "price",
+              "type": "INTEGER",
+              "mode": "NULLABLE"
+            },{
+              "name": "seller",
+              "type": "STRING",
+              "mode": "NULLABLE"
+            },{
+              "name": "lockId",
+              "type": "STRING",
+              "mode": "NULLABLE"
+            },{
+              "name": "imageUrl",
+              "type": "STRING",
+              "mode": "NULLABLE"
+            },{
+              "name": "offeringType",
+              "type": "STRING",
+              "mode": "NULLABLE"
+            },{
+              "name": "quantity",
+              "type": "INTEGER",
+              "mode": "NULLABLE"
+            },{
+              "name": "refId",
+              "type": "STRING",
+              "mode": "NULLABLE"
+            },{
+              "name": "ean",
+              "type": "STRING",
+              "mode": "NULLABLE"
+            },{
+              "name": "listPrice",
+              "type": "INTEGER",
+              "mode": "NULLABLE"
+            },{
+              "name": "weight",
+              "type": "FLOAT",
+              "mode": "NULLABLE"
+            },{
+              "name": "offeringTypeId",
+              "type": "STRING",
+              "mode": "NULLABLE"
+            },{
+              "name": "uniqueId",
+              "type": "STRING",
+              "mode": "NULLABLE"
+            }]
+        
+        project_id = '999847639598'
+        dataset_id = 'staging_zone'
+        table_id = 'shopstar_order_items'
+        
+        try:
+            client  = bigquery.Client(project = project_id)
+            dataset  = client.dataset(dataset_id)
+            table = dataset.table(table_id)
+            job_config = bigquery.LoadJobConfig()
+            job_config.schema = format_schema(table_schema)
+            job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+            job = client.load_table_from_json(json_object, table, job_config = job_config)
+            print(job.result())
+            delete_duplicate()
+        except:
+            client = bigquery.Client(project = project_id)
+            dataset  = client.dataset(dataset_id)
+            table = dataset.table(table_id)
+            job_config = bigquery.LoadJobConfig()
+            job_config.autodetect = True
+            job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+            job = client.load_table_from_json(json_object, table, job_config = job_config)
+            print(job.result())
+            delete_duplicate() 
     except:
-        client = bigquery.Client(project = project_id)
-        dataset  = client.dataset(dataset_id)
-        table = dataset.table(table_id)
-        job_config = bigquery.LoadJobConfig()
-        job_config.autodetect = True
-        job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-        job = client.load_table_from_json(json_object, table, job_config = job_config)
-        print(job.result())
-        delete_duplicate()   
+        print("Data actualizada")  
 
 def get_params():
   try:
