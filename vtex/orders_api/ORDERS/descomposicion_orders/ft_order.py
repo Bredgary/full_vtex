@@ -202,11 +202,11 @@ def run():
           "mode": "NULLABLE"
   },{
       "name": "RequestedByPaymentNotification",
-      "type": "FLOAT",
+      "type": "BOOLEAN",
       "mode": "NULLABLE"
   },{
       "name": "RequestedBySellerNotification",
-      "type": "FLOAT",
+      "type": "BOOLEAN",
       "mode": "NULLABLE"
   },{
       "name": "RequestedByUser",
