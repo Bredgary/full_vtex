@@ -98,7 +98,7 @@ def get_order(id):
             cancellationData = Fjson["cancellationData"]
             CancellationDate = cancellationData["CancellationDate"]
         except:
-            cache=2
+            CancellationDate = datetime
         try:
             RequestedByUser = cancellationData["RequestedByUser"]
             RequestedBySystem = cancellationData["RequestedBySystem"]
