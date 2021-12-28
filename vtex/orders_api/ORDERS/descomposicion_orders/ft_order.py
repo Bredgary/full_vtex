@@ -109,7 +109,7 @@ def get_order(id):
             RequestedByUser = ""
             RequestedBySystem = False
             RequestedBySellerNotification = False
-            RequestedByPaymentNotification = False
+            RequestedByPaymentNotification = "False"
             Reason = ""
             CancellationDate = ""
         
