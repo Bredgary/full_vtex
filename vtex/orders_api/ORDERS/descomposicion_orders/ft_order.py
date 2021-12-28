@@ -217,7 +217,7 @@ def run():
           "mode": "NULLABLE"
       },{
           "name": "CancellationDate",
-          "type": "DATE",
+          "type": "TIMESTAMP",
           "mode": "NULLABLE"
       },{
           "name": "seller_name",
