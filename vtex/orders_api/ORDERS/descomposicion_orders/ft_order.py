@@ -99,6 +99,9 @@ def get_order(id):
         try:
             cancellationData = Fjson["cancellationData"]
             CancellationDate = cancellationData["CancellationDate"]
+        except:
+            cache=2
+        try:
             RequestedByUser = cancellationData["RequestedByUser"]
             RequestedBySystem = cancellationData["RequestedBySystem"]
             RequestedBySellerNotification = cancellationData["RequestedBySellerNotification"]
@@ -106,7 +109,7 @@ def get_order(id):
             Reason = cancellationData["Reason"]
         except:
             RequestedByUser = ""
-            #RequestedBySystem = ""
+            RequestedBySystem = False
             RequestedBySellerNotification = ""
             RequestedByPaymentNotification = ""
             Reason = ""
