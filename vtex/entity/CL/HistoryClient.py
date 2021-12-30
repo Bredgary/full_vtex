@@ -14,7 +14,7 @@ def cl_client(fecha):
 	headers = {
 		"Content-Type": "application/json",
 		"Accept": "application/vnd.vtex.ds.v10+json",
-		"REST-Range": "resources=0-1000",
+		"REST-Range": "resources=0-100",
 		"X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA",
 		"X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"
 	}
@@ -211,8 +211,8 @@ def run(variFecha):
 	  }
 
 	project_id = '999847639598'
-	dataset_id = 'staging_zone'
-	table_id = 'shopstar_vtex_client_02'
+	dataset_id = 'test'
+	table_id = 'shopstar_vtex_client'
 	
 	client  = bigquery.Client(project = project_id)
 	dataset  = client.dataset(dataset_id)
@@ -231,8 +231,8 @@ def daterange(start_date, end_date):
     for n in range(int((end_date - start_date).days)):
         yield start_date + timedelta(n)
 
-start_date = date(2021, 5, 21)
-end_date = date(2021, 12, 16)
+start_date = date(2019, 1, 1)
+end_date = date(2021, 12, 30)
 for single_date in daterange(start_date, end_date):
     variFecha = single_date.strftime("%Y-%m-%d")
     print("Dia: "+str(variFecha))
