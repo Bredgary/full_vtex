@@ -458,7 +458,7 @@ def run():
         "type": "STRING",
         "mode": "NULLABLE"
     },{
-        "name": "total_value_items",
+        "name": "totals_value_items",
         "type": "INTEGER",
         "mode": "NULLABLE"
     },{
