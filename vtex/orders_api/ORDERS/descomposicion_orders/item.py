@@ -56,10 +56,7 @@ def items():
             cfop = x["cfop"]
             volumes = x["volumes"]
             EnableInferItems = x["EnableInferItems"]
-        
-        for y in items:
-            print(y)
-        '''  
+
         for y in items:
             itemIndex = y["itemIndex"]
             quantity = y["quantity"]
@@ -86,7 +83,6 @@ def items():
                 'description': description,
                 'unitMultiplier': unitMultiplier}, index=[0])
             init.df = init.df.append(df1)
-            '''
     except:
         print("No packages ")
 
