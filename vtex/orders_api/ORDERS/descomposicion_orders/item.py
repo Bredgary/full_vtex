@@ -188,7 +188,7 @@ def get_order_package(id):
         
     for y in items:
         itemIndex = y["itemIndex"]
-        quantity = y["quantity"]
+        package_quantity = y["quantity"]
         price = y["price"]
         description = y["description"]
         unitMultiplier = y["unitMultiplier"]
