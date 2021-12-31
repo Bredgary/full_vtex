@@ -57,11 +57,11 @@ def items(id):
         EnableInferItems = x["EnableInferItems"]
 
     for y in items:
-        itemIndex = y["itemIndex"]
-        quantity = y["quantity"]
-        price = y["price"]
-        description = y["description"]
-        unitMultiplier = y["unitMultiplier"]
+        itemIndex = y[0]
+        quantity = y[1]
+        price = y[2]
+        description = y[3]
+        unitMultiplier = y[4]
         df1 = pd.DataFrame({
             'courier': courier,
             'invoiceNumber': invoiceNumber,
