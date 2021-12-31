@@ -192,8 +192,7 @@ def get_order_package(id):
         price = y["price"]
         description = y["description"]
         unitMultiplier = y["unitMultiplier"]
-        df1 = pd.DataFrame({
-            'orderId': id,
+        df2 = pd.DataFrame({
             'courier': courier,
             'invoiceNumber': invoiceNumber,
             'invoiceValue': invoiceValue,
@@ -212,7 +211,7 @@ def get_order_package(id):
             'price': price,
             'description': description,
             'unitMultiplier': unitMultiplier}, index=[0])
-        init.df = init.df.append(df1)       
+        init.df = init.df.append(df2)       
 
 
 def delete_duplicate():
@@ -233,7 +232,6 @@ def run():
     df.reset_index(drop=True, inplace=True)
     json_data = df.to_json(orient = 'records')
     json_object = json.loads(json_data)
-    print(df)
     
     table_schema = [
     {
@@ -535,7 +533,6 @@ def get_params():
         get_order_package(row.orderId)
         get_order(row.orderId)
         print("Registro: "+str(registro))
-        break
     run()
     
         
