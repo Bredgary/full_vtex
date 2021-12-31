@@ -105,7 +105,7 @@ def get_order(id):
             'productId': items_productId,
             'ean': items_ean,
             'lockId': items_lockId,
-            'quantity': item_quantity,
+            'item_quantity': item_quantity,
             'seller': item_seller,
             'name': item_name,
             'refId': item_refId,
@@ -208,7 +208,7 @@ def get_order_package(id):
                 "volumes":volumes,
                 "EnableInferItems":EnableInferItems,
                 'itemIndex': itemIndex,
-                'quantity': quantity,
+                'package_quantity': package_quantity,
                 'price': price,
                 'description': description,
                 'unitMultiplier': unitMultiplier}, index=[0])
@@ -393,7 +393,7 @@ def run():
         "type": "STRING",
         "mode": "NULLABLE"
     },{
-        "name": "quantity",
+        "name": "item_quantity",
         "type": "INTEGER",
         "mode": "NULLABLE"
     },{
@@ -477,7 +477,7 @@ def run():
         "type": "INTEGER",
         "mode": "NULLABLE"
     },{
-        "name": "quantity",
+        "name": "package_quantity",
         "type": "INTEGER",
         "mode": "NULLABLE"
     },{
