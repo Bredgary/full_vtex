@@ -167,6 +167,7 @@ def get_order(id):
                 
             
         for y in items:
+            print(id)
             df1 = pd.DataFrame({
                 'orderId': id,
                 'uniqueId': items_uniqueId,
