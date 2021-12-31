@@ -96,41 +96,24 @@ def get_order(id):
             except:
                 item_itemAttachment_name = ''
                 
-            packageAttachment = Fjson["packageAttachment"]
-            packages = packageAttachment["packages"]
             
-            for x in packages:
-                item = packages["items"]
-                courier = x["courier"]
-                invoiceNumber = x["invoiceNumber"]
-                invoiceValue = x["invoiceValue"]
-                invoiceUrl = x["invoiceUrl"]
-                issuanceDate = x["issuanceDate"]
-                trackingNumber = x["trackingNumber"]
-                invoiceKey = x["invoiceKey"]
-                trackingUrl = x["trackingUrl"]
-                embeddedInvoice = x["embeddedInvoice"]
-                package_type = x["type"]
-                cfop = x["cfop"]
-                volumes = x["volumes"]
-                EnableInferItems = x["EnableInferItems"]
-            
-            for y in item:
-                itemIndex = y["itemIndex"]
-                quantity = y["quantity"]
-                price = y["price"]
-                description = y["description"]
-                unitMultiplier = y["unitMultiplier"]
-                df1 = pd.DataFrame({
-                    'uniqueId': items_uniqueId,
-                    'id': items_id,
-                    'productId': items_productId,
-                    'ean': items_ean,
-                    'lockId': items_lockId,
-                    'quantity': item_quantity,
-                    'seller': item_seller,
-                    'name': item_name,
-                    'refId': item_refId,
+        for y in items:
+            itemIndex = y["itemIndex"]
+            quantity = y["quantity"]
+            price = y["price"]
+            description = y["description"]
+            unitMultiplier = y["unitMultiplier"]
+            df1 = pd.DataFrame({
+                'orderId': id,
+                'uniqueId': items_uniqueId,
+                'id': items_id,
+                'productId': items_productId,
+                'ean': items_ean,
+                'lockId': items_lockId,
+                'quantity': item_quantity,
+                'seller': item_seller,
+                'name': item_name,
+                'refId': item_refId,
                 'price': item_price,
                 'listPrice': item_listPrice,
                 'manualPrice': item_manualPrice,
@@ -165,8 +148,58 @@ def get_order(id):
                 'height': height,
                 'length': length,
                 'weight': weight,
-                'width': width,
-                'item_itemAttachment_name': item_itemAttachment_name,
+                'width': width,'item_itemAttachment_name': item_itemAttachment_name}, index=[0])
+            init.df = init.df.append(df1)
+            items()
+    except:
+        print("vacio")
+        
+def items():
+    try:
+        url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
+        response = requests.request("GET", url, headers=init.headers)
+        Fjson = json.loads(response.text)
+        packageAttachment = Fjson["packageAttachment"]
+        packages = packageAttachment["packages"]
+        
+        items = ""
+        courier = ""
+        invoiceNumber = ""
+        invoiceValue = ""
+        invoiceUrl = ""
+        issuanceDate = ""
+        trackingNumber = ""
+        invoiceKey = ""
+        trackingUrl = ""
+        embeddedInvoice = ""
+        package_type = ""
+        cfop  = ""
+        volumes  = ""
+        EnableInferItems = ""
+        
+        for x in packages:
+            items = packages["items"]
+            courier = x["courier"]
+            invoiceNumber = x["invoiceNumber"]
+            invoiceValue = x["invoiceValue"]
+            invoiceUrl = x["invoiceUrl"]
+            issuanceDate = x["issuanceDate"]
+            trackingNumber = x["trackingNumber"]
+            invoiceKey = x["invoiceKey"]
+            trackingUrl = x["trackingUrl"]
+            embeddedInvoice = x["embeddedInvoice"]
+            package_type = x["type"]
+            cfop = x["cfop"]
+            volumes = x["volumes"]
+            EnableInferItems = x["EnableInferItems"]
+            
+        for y in items:
+            itemIndex = y["itemIndex"]
+            quantity = y["quantity"]
+            price = y["price"]
+            description = y["description"]
+            unitMultiplier = y["unitMultiplier"]
+            df1 = pd.DataFrame({
                 'courier': courier,
                 'invoiceNumber': invoiceNumber,
                 'invoiceValue': invoiceValue,
@@ -187,7 +220,8 @@ def get_order(id):
                 'unitMultiplier': unitMultiplier}, index=[0])
             init.df = init.df.append(df1)
     except:
-        print("vacio")
+        print("No packages ")    
+    
 
 def delete_duplicate():
     try:
@@ -207,7 +241,8 @@ def run():
     df.reset_index(drop=True, inplace=True)
     json_data = df.to_json(orient = 'records')
     json_object = json.loads(json_data)
-    
+    print(df)
+    '''
     table_schema = [
     {
         "name": "length",
@@ -393,6 +428,78 @@ def run():
         "name": "uniqueId",
         "type": "STRING",
         "mode": "NULLABLE"
+    },{
+        "name": "courier",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "invoiceNumber",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "invoiceValue",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "invoiceUrl",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "issuanceDate",
+        "type": "TIMESTAMP",
+        "mode": "NULLABLE"
+    },{
+        "name": "trackingNumber",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "invoiceKey",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "trackingUrl",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "embeddedInvoice",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "package_type",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "cfop",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "volumes",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "EnableInferItems",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "itemIndex",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "quantity",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "price",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "description",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "unitMultiplier",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
     }]
     
     project_id = '999847639598'
@@ -433,6 +540,7 @@ def get_params():
         get_order(row.orderId)
         print("Registro: "+str(registro))
     run()
+    '''
         
     
 get_params()
