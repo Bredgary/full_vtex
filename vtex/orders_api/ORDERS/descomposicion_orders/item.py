@@ -171,6 +171,7 @@ def get_order_package(id):
     
     for x in packages:
         package_items = packages[0]
+        items = package_items["items"]
         courier = x["courier"]
         invoiceNumber = x["invoiceNumber"]
         invoiceValue = x["invoiceValue"]
@@ -185,7 +186,7 @@ def get_order_package(id):
         volumes = x["volumes"]
         EnableInferItems = x["EnableInferItems"]
         
-    for y in package_items:
+    for y in items:
         print(y)
         #itemIndex = y["itemIndex"]
         #quantity = y["quantity"]
