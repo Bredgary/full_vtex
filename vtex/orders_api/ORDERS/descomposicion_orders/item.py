@@ -18,7 +18,7 @@ def format_schema(schema):
         formatted_schema.append(bigquery.SchemaField(row['name'], row['type'], row['mode']))
     return formatted_schema
 
-def items():
+def items(id):
     try:
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
         response = requests.request("GET", url, headers=init.headers)
@@ -215,7 +215,7 @@ def get_order(id):
                 'width': width,
                 'item_itemAttachment_name': item_itemAttachment_name}, index=[0])
             init.df = init.df.append(df1)
-        items()
+        items(id)
     except:
         print("vacio")
         
