@@ -120,7 +120,7 @@ def get_order(id):
             'tax': item_tax,
             'preSaleDate': item_preSaleDate,
             'measurementUnit': item_measurementUnit,
-            'unitMultiplier': item_unitMultiplier,
+            'item_unitMultiplier': item_unitMultiplier,
             'sellingPrice': item_sellingPrice,
             'isGift': item_isGift,
             'shippingPrice': item_shippingPrice,
@@ -367,7 +367,7 @@ def run():
         "type": "INTEGER",
         "mode": "NULLABLE"
     },{
-        "name": "unitMultiplier",
+        "name": "item_unitMultiplier",
         "type": "FLOAT",
         "mode": "NULLABLE"
     },{
@@ -501,7 +501,7 @@ def run():
         dataset  = client.dataset(dataset_id)
         table = dataset.table(table_id)
         job_config = bigquery.LoadJobConfig()
-        job_config.write_disposition = "WRITE_TRUNCATE"
+        #job_config.write_disposition = "WRITE_TRUNCATE"
         job_config.schema = format_schema(table_schema)
         job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
         job = client.load_table_from_json(json_object, table, job_config = job_config)
@@ -512,7 +512,7 @@ def run():
         dataset  = client.dataset(dataset_id)
         table = dataset.table(table_id)
         job_config = bigquery.LoadJobConfig()
-        job_config.write_disposition = "WRITE_TRUNCATE"
+        #job_config.write_disposition = "WRITE_TRUNCATE"
         job_config.autodetect = True
         job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
         job = client.load_table_from_json(json_object, table, job_config = job_config)
