@@ -18,7 +18,7 @@ def format_schema(schema):
         formatted_schema.append(bigquery.SchemaField(row['name'], row['type'], row['mode']))
     return formatted_schema
 
-def items(id):
+def get_order_package(id):
     url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
     response = requests.request("GET", url, headers=init.headers)
     Fjson = json.loads(response.text)
@@ -41,7 +41,7 @@ def items(id):
     EnableInferItems = ""
     
     for x in packages:
-        items = packages[0]
+        items = packages["items"]
         courier = x["courier"]
         invoiceNumber = x["invoiceNumber"]
         invoiceValue = x["invoiceValue"]
@@ -55,14 +55,15 @@ def items(id):
         cfop = x["cfop"]
         volumes = x["volumes"]
         EnableInferItems = x["EnableInferItems"]
-
+        
     for y in items:
-        itemIndex = y[0]
-        quantity = y[1]
-        price = y[2]
-        description = y[3]
+        itemIndex = y["itemIndex"]
+        quantity = y["quantity"]
+        price = y["price"]
+        description = y["description"]
         unitMultiplier = y["unitMultiplier"]
         df1 = pd.DataFrame({
+            'orderId': id,
             'courier': courier,
             'invoiceNumber': invoiceNumber,
             'invoiceValue': invoiceValue,
@@ -530,7 +531,7 @@ def get_params():
     registro = 0
     for row in rows:
         registro += 1
-        items(row.orderId)
+        get_order_package(row.orderId)
         get_order(row.orderId)
         print("Registro: "+str(registro))
         break

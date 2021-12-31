@@ -19,7 +19,7 @@ def format_schema(schema):
     return formatted_schema
 
 
-def get_order(id):
+def get_order_package(id):
     try:
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
         response = requests.request("GET", url, headers=init.headers)
@@ -225,7 +225,7 @@ def get_params():
     registro = 0
     for row in rows:
         registro += 1
-        get_order(row.orderId)
+        get_order_package(row.orderId)
         print("Registro: "+str(registro))
     run()
     
