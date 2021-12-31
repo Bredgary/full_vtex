@@ -98,11 +98,6 @@ def get_order(id):
                 
             
         for y in items:
-            itemIndex = y["itemIndex"]
-            quantity = y["quantity"]
-            price = y["price"]
-            description = y["description"]
-            unitMultiplier = y["unitMultiplier"]
             df1 = pd.DataFrame({
                 'orderId': id,
                 'uniqueId': items_uniqueId,
@@ -148,7 +143,8 @@ def get_order(id):
                 'height': height,
                 'length': length,
                 'weight': weight,
-                'width': width,'item_itemAttachment_name': item_itemAttachment_name}, index=[0])
+                'width': width,
+                'item_itemAttachment_name': item_itemAttachment_name}, index=[0])
             init.df = init.df.append(df1)
             items()
     #3except:
