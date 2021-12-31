@@ -61,7 +61,7 @@ def items(id):
         quantity = y[1]
         price = y[2]
         description = y[3]
-        unitMultiplier = y[4]
+        unitMultiplier = y["unitMultiplier"]
         df1 = pd.DataFrame({
             'courier': courier,
             'invoiceNumber': invoiceNumber,
