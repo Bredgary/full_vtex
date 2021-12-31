@@ -95,17 +95,42 @@ def get_order(id):
                 item_itemAttachment_name = itemAttachment["name"]
             except:
                 item_itemAttachment_name = ''
-            df1 = pd.DataFrame({
-                'orderId': id,
-                'uniqueId': items_uniqueId,
-                'id': items_id,
-                'productId': items_productId,
-                'ean': items_ean,
-                'lockId': items_lockId,
-                'quantity': item_quantity,
-                'seller': item_seller,
-                'name': item_name,
-                'refId': item_refId,
+                
+            packageAttachment = Fjson["packageAttachment"]
+            packages = packageAttachment["packages"]
+            
+            for x in packages:
+                item = packages["items"]
+                courier = x["courier"]
+                invoiceNumber = x["invoiceNumber"]
+                invoiceValue = x["invoiceValue"]
+                invoiceUrl = x["invoiceUrl"]
+                issuanceDate = x["issuanceDate"]
+                trackingNumber = x["trackingNumber"]
+                invoiceKey = x["invoiceKey"]
+                trackingUrl = x["trackingUrl"]
+                embeddedInvoice = x["embeddedInvoice"]
+                package_type = x["type"]
+                cfop = x["cfop"]
+                volumes = x["volumes"]
+                EnableInferItems = x["EnableInferItems"]
+            
+            for y in item:
+                itemIndex = y["itemIndex"]
+                quantity = y["quantity"]
+                price = y["price"]
+                description = y["description"]
+                unitMultiplier = y["unitMultiplier"]
+                df1 = pd.DataFrame({
+                    'uniqueId': items_uniqueId,
+                    'id': items_id,
+                    'productId': items_productId,
+                    'ean': items_ean,
+                    'lockId': items_lockId,
+                    'quantity': item_quantity,
+                    'seller': item_seller,
+                    'name': item_name,
+                    'refId': item_refId,
                 'price': item_price,
                 'listPrice': item_listPrice,
                 'manualPrice': item_manualPrice,
@@ -140,7 +165,26 @@ def get_order(id):
                 'height': height,
                 'length': length,
                 'weight': weight,
-                'width': width,'item_itemAttachment_name': item_itemAttachment_name}, index=[0])
+                'width': width,
+                'item_itemAttachment_name': item_itemAttachment_name,
+                'courier': courier,
+                'invoiceNumber': invoiceNumber,
+                'invoiceValue': invoiceValue,
+                'invoiceUrl': invoiceUrl,
+                'issuanceDate': issuanceDate,
+                'trackingNumber': trackingNumber,
+                'invoiceKey': invoiceKey,
+                'trackingUrl': trackingUrl,
+                'embeddedInvoice': embeddedInvoice,
+                'package_type': package_type,
+                "cfop":cfop,
+                "volumes":volumes,
+                "EnableInferItems":EnableInferItems,
+                'itemIndex': itemIndex,
+                'quantity': quantity,
+                'price': price,
+                'description': description,
+                'unitMultiplier': unitMultiplier}, index=[0])
             init.df = init.df.append(df1)
     except:
         print("vacio")
