@@ -18,72 +18,6 @@ def format_schema(schema):
         formatted_schema.append(bigquery.SchemaField(row['name'], row['type'], row['mode']))
     return formatted_schema
 
-def get_order_package(id):
-    url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
-    response = requests.request("GET", url, headers=init.headers)
-    Fjson = json.loads(response.text)
-    packageAttachment = Fjson["packageAttachment"]
-    packages = packageAttachment["packages"]
-    
-    items = ""
-    courier = ""
-    invoiceNumber = ""
-    invoiceValue = ""
-    invoiceUrl = ""
-    issuanceDate = ""
-    trackingNumber = ""
-    invoiceKey = ""
-    trackingUrl = ""
-    embeddedInvoice = ""
-    package_type = ""
-    cfop  = ""
-    volumes  = ""
-    EnableInferItems = ""
-    
-    for x in packages:
-        items = packages["items"]
-        courier = x["courier"]
-        invoiceNumber = x["invoiceNumber"]
-        invoiceValue = x["invoiceValue"]
-        invoiceUrl = x["invoiceUrl"]
-        issuanceDate = x["issuanceDate"]
-        trackingNumber = x["trackingNumber"]
-        invoiceKey = x["invoiceKey"]
-        trackingUrl = x["trackingUrl"]
-        embeddedInvoice = x["embeddedInvoice"]
-        package_type = x["type"]
-        cfop = x["cfop"]
-        volumes = x["volumes"]
-        EnableInferItems = x["EnableInferItems"]
-        
-    for y in items:
-        itemIndex = y["itemIndex"]
-        quantity = y["quantity"]
-        price = y["price"]
-        description = y["description"]
-        unitMultiplier = y["unitMultiplier"]
-        df1 = pd.DataFrame({
-            'orderId': id,
-            'courier': courier,
-            'invoiceNumber': invoiceNumber,
-            'invoiceValue': invoiceValue,
-            'invoiceUrl': invoiceUrl,
-            'issuanceDate': issuanceDate,
-            'trackingNumber': trackingNumber,
-            'invoiceKey': invoiceKey,
-            'trackingUrl': trackingUrl,
-            'embeddedInvoice': embeddedInvoice,
-            'package_type': package_type,
-            "cfop":cfop,
-            "volumes":volumes,
-            "EnableInferItems":EnableInferItems,
-            'itemIndex': itemIndex,
-            'quantity': quantity,
-            'price': price,
-            'description': description,
-            'unitMultiplier': unitMultiplier}, index=[0])
-        init.df = init.df.append(df1)
-
 
 def get_order(id):
     url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
@@ -213,7 +147,71 @@ def get_order(id):
             'item_itemAttachment_name': item_itemAttachment_name}, index=[0])
         init.df = init.df.append(df1)
         
+def get_order_package(id):
+    url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
+    response = requests.request("GET", url, headers=init.headers)
+    Fjson = json.loads(response.text)
+    packageAttachment = Fjson["packageAttachment"]
+    packages = packageAttachment["packages"]
+    
+    items = ""
+    courier = ""
+    invoiceNumber = ""
+    invoiceValue = ""
+    invoiceUrl = ""
+    issuanceDate = ""
+    trackingNumber = ""
+    invoiceKey = ""
+    trackingUrl = ""
+    embeddedInvoice = ""
+    package_type = ""
+    cfop  = ""
+    volumes  = ""
+    EnableInferItems = ""
+    
+    for x in packages:
+        items = packages["items"]
+        courier = x["courier"]
+        invoiceNumber = x["invoiceNumber"]
+        invoiceValue = x["invoiceValue"]
+        invoiceUrl = x["invoiceUrl"]
+        issuanceDate = x["issuanceDate"]
+        trackingNumber = x["trackingNumber"]
+        invoiceKey = x["invoiceKey"]
+        trackingUrl = x["trackingUrl"]
+        embeddedInvoice = x["embeddedInvoice"]
+        package_type = x["type"]
+        cfop = x["cfop"]
+        volumes = x["volumes"]
+        EnableInferItems = x["EnableInferItems"]
         
+    for y in items:
+        itemIndex = y["itemIndex"]
+        quantity = y["quantity"]
+        price = y["price"]
+        description = y["description"]
+        unitMultiplier = y["unitMultiplier"]
+        df1 = pd.DataFrame({
+            'orderId': id,
+            'courier': courier,
+            'invoiceNumber': invoiceNumber,
+            'invoiceValue': invoiceValue,
+            'invoiceUrl': invoiceUrl,
+            'issuanceDate': issuanceDate,
+            'trackingNumber': trackingNumber,
+            'invoiceKey': invoiceKey,
+            'trackingUrl': trackingUrl,
+            'embeddedInvoice': embeddedInvoice,
+            'package_type': package_type,
+            "cfop":cfop,
+            "volumes":volumes,
+            "EnableInferItems":EnableInferItems,
+            'itemIndex': itemIndex,
+            'quantity': quantity,
+            'price': price,
+            'description': description,
+            'unitMultiplier': unitMultiplier}, index=[0])
+        init.df = init.df.append(df1)       
 
 
 def delete_duplicate():
