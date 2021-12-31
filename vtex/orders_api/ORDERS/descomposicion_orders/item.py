@@ -148,71 +148,73 @@ def get_order(id):
         init.df = init.df.append(df1)
         
 def get_order_package(id):
-    url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
-    response = requests.request("GET", url, headers=init.headers)
-    Fjson = json.loads(response.text)
-    packageAttachment = Fjson["packageAttachment"]
-    packages = packageAttachment["packages"]
-    
-    items = ""
-    courier = ""
-    invoiceNumber = ""
-    invoiceValue = ""
-    invoiceUrl = ""
-    issuanceDate = ""
-    trackingNumber = ""
-    invoiceKey = ""
-    trackingUrl = ""
-    embeddedInvoice = ""
-    package_type = ""
-    cfop  = ""
-    volumes  = ""
-    EnableInferItems = ""
-    
-    for x in packages:
-        package_items = packages[0]
-        items = package_items["items"]
-        courier = x["courier"]
-        invoiceNumber = x["invoiceNumber"]
-        invoiceValue = x["invoiceValue"]
-        invoiceUrl = x["invoiceUrl"]
-        issuanceDate = x["issuanceDate"]
-        trackingNumber = x["trackingNumber"]
-        invoiceKey = x["invoiceKey"]
-        trackingUrl = x["trackingUrl"]
-        embeddedInvoice = x["embeddedInvoice"]
-        package_type = x["type"]
-        cfop = x["cfop"]
-        volumes = x["volumes"]
-        EnableInferItems = x["EnableInferItems"]
+    try:
+        url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
+        response = requests.request("GET", url, headers=init.headers)
+        Fjson = json.loads(response.text)
+        packageAttachment = Fjson["packageAttachment"]
+        packages = packageAttachment["packages"]
         
-    for y in items:
-        itemIndex = y["itemIndex"]
-        quantity = y["quantity"]
-        price = y["price"]
-        description = y["description"]
-        unitMultiplier = y["unitMultiplier"]
-        df2 = pd.DataFrame({
-            'courier': courier,
-            'invoiceNumber': invoiceNumber,
-            'invoiceValue': invoiceValue,
-            'invoiceUrl': invoiceUrl,
-            'issuanceDate': issuanceDate,
-            'trackingNumber': trackingNumber,
-            'invoiceKey': invoiceKey,
-            'trackingUrl': trackingUrl,
-            'embeddedInvoice': embeddedInvoice,
-            'package_type': package_type,
-            "cfop":cfop,
-            "volumes":volumes,
-            "EnableInferItems":EnableInferItems,
-            'itemIndex': itemIndex,
-            'quantity': quantity,
-            'price': price,
-            'description': description,
-            'unitMultiplier': unitMultiplier}, index=[0])
-        init.df = init.df.append(df2)       
-
+        items = ""
+        courier = ""
+        invoiceNumber = ""
+        invoiceValue = ""
+        invoiceUrl = ""
+        issuanceDate = ""
+        trackingNumber = ""
+        invoiceKey = ""
+        trackingUrl = ""
+        embeddedInvoice = ""
+        package_type = ""
+        cfop  = ""
+        volumes  = ""
+        EnableInferItems = ""
+        
+        for x in packages:
+            package_items = packages[0]
+            items = package_items["items"]
+            courier = x["courier"]
+            invoiceNumber = x["invoiceNumber"]
+            invoiceValue = x["invoiceValue"]
+            invoiceUrl = x["invoiceUrl"]
+            issuanceDate = x["issuanceDate"]
+            trackingNumber = x["trackingNumber"]
+            invoiceKey = x["invoiceKey"]
+            trackingUrl = x["trackingUrl"]
+            embeddedInvoice = x["embeddedInvoice"]
+            package_type = x["type"]
+            cfop = x["cfop"]
+            volumes = x["volumes"]
+            EnableInferItems = x["EnableInferItems"]
+            
+        for y in items:
+            itemIndex = y["itemIndex"]
+            quantity = y["quantity"]
+            price = y["price"]
+            description = y["description"]
+            unitMultiplier = y["unitMultiplier"]
+            df2 = pd.DataFrame({
+                'courier': courier,
+                'invoiceNumber': invoiceNumber,
+                'invoiceValue': invoiceValue,
+                'invoiceUrl': invoiceUrl,
+                'issuanceDate': issuanceDate,
+                'trackingNumber': trackingNumber,
+                'invoiceKey': invoiceKey,
+                'trackingUrl': trackingUrl,
+                'embeddedInvoice': embeddedInvoice,
+                'package_type': package_type,
+                "cfop":cfop,
+                "volumes":volumes,
+                "EnableInferItems":EnableInferItems,
+                'itemIndex': itemIndex,
+                'quantity': quantity,
+                'price': price,
+                'description': description,
+                'unitMultiplier': unitMultiplier}, index=[0])
+            init.df = init.df.append(df2)
+    except:
+        print("No package")
 
 def delete_duplicate():
     try:
@@ -524,19 +526,56 @@ def run():
 def get_params():
     print("Cargando consulta")
     client = bigquery.Client()
-    QUERY = ('SELECT DISTINCT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`')
+    QUERY = ('SELECT DISTINCT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`WHERE (orderId NOT IN (SELECT orderId FROM `shopstar-datalake.test.shopstar_order_items_package`))')
     query_job = client.query(QUERY)  
     rows = query_job.result()
     registro = 0
     for row in rows:
         registro += 1
-        #get_order(row.orderId)
         print(row.orderId)
+        get_order(row.orderId)
         get_order_package(row.orderId)
         print("Registro: "+str(registro))
-        break
+        if registro == 5:
+            run()
+        if registro == 10:
+            run()
+        if registro == 100:
+            run()
+        if registro == 200:
+            run()
+        if registro == 500:
+            run()
+        if registro == 10000:
+            run()
+        if registro == 12000:
+            run()
+        if registro == 15000:
+            run()
+        if registro == 20000:
+            run()
+        if registro == 30000:
+            run()
+        if registro == 35000:
+            run()
+        if registro == 40000:
+            run()
+        if registro == 45000:
+            run()
+        if registro == 50000:
+            run()
+        if registro == 60000:
+            run()
+        if registro == 70000:
+            run()
+        if registro == 80000:
+            run()
+        if registro == 85000:
+            run()
+        if registro == 90000:
+            run()
+        if registro == 95000:
+            run()
     run()
-    
-        
     
 get_params()
