@@ -206,12 +206,12 @@ def get_order_package(id):
             'package_type': package_type,
             "cfop":cfop,
             "volumes":volumes,
-            "EnableInferItems":EnableInferItems,
-            'itemIndex': itemIndex,
-            'quantity': quantity,
-            'price': price,
-            'description': description,
-            'unitMultiplier': unitMultiplier}, index=[0])
+            "EnableInferItems":EnableInferItems}, index=[0])
+            #'itemIndex': itemIndex,
+            #'quantity': quantity,
+            #'price': price,
+            #'description': description,
+            #'unitMultiplier': unitMultiplier}, index=[0])
         init.df = init.df.append(df1)       
 
 
