@@ -533,6 +533,7 @@ def get_params():
         get_order_package(row.orderId)
         get_order(row.orderId)
         print("Registro: "+str(registro))
+        break
     run()
     
         
