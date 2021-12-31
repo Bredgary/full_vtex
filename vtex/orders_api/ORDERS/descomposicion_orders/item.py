@@ -234,7 +234,7 @@ def run():
     json_data = df.to_json(orient = 'records')
     json_object = json.loads(json_data)
     print(df)
-    '''
+    
     table_schema = [
     {
         "name": "length",
@@ -496,13 +496,14 @@ def run():
     
     project_id = '999847639598'
     dataset_id = 'test'
-    table_id = 'shopstar_order_items'
+    table_id = 'shopstar_order_items_package'
     
     try:
         client  = bigquery.Client(project = project_id)
         dataset  = client.dataset(dataset_id)
         table = dataset.table(table_id)
         job_config = bigquery.LoadJobConfig()
+        job_config.write_disposition = "WRITE_TRUNCATE"
         job_config.schema = format_schema(table_schema)
         job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
         job = client.load_table_from_json(json_object, table, job_config = job_config)
@@ -513,18 +514,19 @@ def run():
         dataset  = client.dataset(dataset_id)
         table = dataset.table(table_id)
         job_config = bigquery.LoadJobConfig()
+        job_config.write_disposition = "WRITE_TRUNCATE"
         job_config.autodetect = True
         job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
         job = client.load_table_from_json(json_object, table, job_config = job_config)
         print(job.result())
         delete_duplicate() 
-    '''  
+    
 
 
 def get_params():
     print("Cargando consulta")
     client = bigquery.Client()
-    QUERY = ('SELECT DISTINCT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`WHERE (orderId NOT IN (SELECT orderId FROM `shopstar-datalake.test.shopstar_order_items`))')
+    QUERY = ('SELECT DISTINCT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order')
     query_job = client.query(QUERY)  
     rows = query_job.result()
     registro = 0
