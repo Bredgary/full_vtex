@@ -41,7 +41,7 @@ def items(id):
     EnableInferItems = ""
     
     for x in packages:
-        items = packages["items"]
+        items = packages[0]
         courier = x["courier"]
         invoiceNumber = x["invoiceNumber"]
         invoiceValue = x["invoiceValue"]
