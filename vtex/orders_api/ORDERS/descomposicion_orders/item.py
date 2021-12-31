@@ -23,7 +23,7 @@ def items(id):
     response = requests.request("GET", url, headers=init.headers)
     Fjson = json.loads(response.text)
     packageAttachment = Fjson["packageAttachment"]
-    packages = packageAttachment['"packages"']
+    packages = packageAttachment["packages"]
     
     items = ""
     courier = ""
