@@ -187,12 +187,11 @@ def get_order_package(id):
         EnableInferItems = x["EnableInferItems"]
         
     for y in items:
-        print(y)
-        #itemIndex = y["itemIndex"]
-        #quantity = y["quantity"]
-        #price = y["price"]
-        #description = y["description"]
-        #unitMultiplier = y["unitMultiplier"]
+        itemIndex = y["itemIndex"]
+        quantity = y["quantity"]
+        price = y["price"]
+        description = y["description"]
+        unitMultiplier = y["unitMultiplier"]
         df1 = pd.DataFrame({
             'orderId': id,
             'courier': courier,
@@ -207,12 +206,12 @@ def get_order_package(id):
             'package_type': package_type,
             "cfop":cfop,
             "volumes":volumes,
-            "EnableInferItems":EnableInferItems}, index=[0])
-            #'itemIndex': itemIndex,
-            #'quantity': quantity,
-            #'price': price,
-            #'description': description,
-            #'unitMultiplier': unitMultiplier}, index=[0])
+            "EnableInferItems":EnableInferItems,
+            'itemIndex': itemIndex,
+            'quantity': quantity,
+            'price': price,
+            'description': description,
+            'unitMultiplier': unitMultiplier}, index=[0])
         init.df = init.df.append(df1)       
 
 
