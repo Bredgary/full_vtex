@@ -215,7 +215,6 @@ def get_order(id):
                 'width': width,
                 'item_itemAttachment_name': item_itemAttachment_name}, index=[0])
             init.df = init.df.append(df1)
-        items(id)
     #except:
      #   print("vacio")
         
@@ -538,6 +537,7 @@ def get_params():
     for row in rows:
         registro += 1
         get_order(row.orderId)
+        items(row.orderId)
         print("Registro: "+str(registro))
         break
     run()
