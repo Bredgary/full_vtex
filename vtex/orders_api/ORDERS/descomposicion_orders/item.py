@@ -19,7 +19,7 @@ def format_schema(schema):
     return formatted_schema
 
 def items(id):
-    try:
+    #try:
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
@@ -83,8 +83,8 @@ def items(id):
                 'description': description,
                 'unitMultiplier': unitMultiplier}, index=[0])
             init.df = init.df.append(df1)
-    except:
-        print("No packages ")
+    #except:
+     #   print("No packages ")
 
 
 def get_order(id):
