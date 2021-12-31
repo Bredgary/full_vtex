@@ -533,9 +533,12 @@ def get_params():
     for row in rows:
         registro += 1
         print(row.orderId)
+        '''
         get_order(row.orderId)
         get_order_package(row.orderId)
         print("Registro: "+str(registro))
+        '''
+        break
         if registro == 5:
             run()
         if registro == 10:
