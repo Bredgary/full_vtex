@@ -530,7 +530,7 @@ def get_params():
     registro = 0
     for row in rows:
         registro += 1
-        get_order(row.orderId)
+        #get_order(row.orderId)
         get_order_package(row.orderId)
         print("Registro: "+str(registro))
         break
