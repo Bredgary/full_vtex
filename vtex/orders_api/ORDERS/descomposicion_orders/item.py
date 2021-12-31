@@ -170,7 +170,7 @@ def get_order_package(id):
     EnableInferItems = ""
     
     for x in packages:
-        items = packages["items"]
+        items = packages[0]
         courier = x["courier"]
         invoiceNumber = x["invoiceNumber"]
         invoiceValue = x["invoiceValue"]
@@ -186,11 +186,12 @@ def get_order_package(id):
         EnableInferItems = x["EnableInferItems"]
         
     for y in items:
-        itemIndex = y["itemIndex"]
-        quantity = y["quantity"]
-        price = y["price"]
-        description = y["description"]
-        unitMultiplier = y["unitMultiplier"]
+        print(y)
+        #itemIndex = y["itemIndex"]
+        #quantity = y["quantity"]
+        #price = y["price"]
+        #description = y["description"]
+        #unitMultiplier = y["unitMultiplier"]
         df1 = pd.DataFrame({
             'orderId': id,
             'courier': courier,
