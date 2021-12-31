@@ -109,7 +109,7 @@ def get_order(id):
             'seller': item_seller,
             'name': item_name,
             'refId': item_refId,
-            'price': item_price,
+            'item_price': item_price,
             'listPrice': item_listPrice,
             'manualPrice': item_manualPrice,
             'imageUrl': item_imageUrl,
@@ -209,7 +209,7 @@ def get_order_package(id):
                 "EnableInferItems":EnableInferItems,
                 'itemIndex': itemIndex,
                 'package_quantity': package_quantity,
-                'price': price,
+                'package_price': price,
                 'description': description,
                 'unitMultiplier': unitMultiplier}, index=[0])
             init.df = init.df.append(df2)
@@ -373,7 +373,7 @@ def run():
         "type": "FLOAT",
         "mode": "NULLABLE"
     },{
-        "name": "price",
+        "name": "item_price",
         "type": "INTEGER",
         "mode": "NULLABLE"
     },{
@@ -481,7 +481,7 @@ def run():
         "type": "INTEGER",
         "mode": "NULLABLE"
     },{
-        "name": "price",
+        "name": "package_price",
         "type": "INTEGER",
         "mode": "NULLABLE"
     },{
