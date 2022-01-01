@@ -439,7 +439,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "volumes",
-        "type": "INTEGER",
+        "type": "FLOAT",
         "mode": "NULLABLE"
     },{
         "name": "EnableInferItems",
