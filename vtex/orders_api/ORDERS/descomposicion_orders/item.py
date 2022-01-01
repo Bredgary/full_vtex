@@ -23,78 +23,61 @@ def get_order(id):
     url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
     response = requests.request("GET", url, headers=init.headers)
     Fjson = json.loads(response.text)
-    
-    items = Fjson["items"]
-    for x in items:
-        items_uniqueId = x["uniqueId"]
-        items_id = x["id"]
-        items_productId = x["productId"]
-        items_ean = x["ean"]
-        items_lockId = x["lockId"]
-        item_quantity = x["quantity"]
-        item_seller = x["seller"]
-        item_name = x["name"]
-        item_refId = x["refId"]
-        item_price = x["price"]
-        item_listPrice = x["listPrice"]
-        item_manualPrice = x["manualPrice"]
-        item_imageUrl = x["imageUrl"]
-        item_detailUrl = x["detailUrl"]
-        item_sellerSku = x["sellerSku"]
-        item_priceValidUntil = x["priceValidUntil"]
-        item_commission = x["commission"]
-        item_tax = x["tax"]
-        item_preSaleDate = str(x["preSaleDate"])
-        item_measurementUnit = x["measurementUnit"]
-        item_unitMultiplier = x["unitMultiplier"]
-        item_sellingPrice = x["sellingPrice"]
-        item_isGift = x["isGift"]
-        item_shippingPrice = x["shippingPrice"]
-        item_rewardValue = x["rewardValue"]
-        item_freightCommission = x["freightCommission"]
-        item_taxCode = x["taxCode"]
-        item_parentItemIndex = x["parentItemIndex"]
-        item_parentAssemblyBinding = x["parentAssemblyBinding"]
-        item_price_definition = x["priceDefinition"]
-        item_serialNumbers = x["serialNumbers"]
-        try:
-            additionalInfo = x["additionalInfo"]
-            brandName = additionalInfo["brandName"]
-            brandId = additionalInfo["brandId"]
-            categoriesIds = additionalInfo["categoriesIds"]
-            productClusterId = additionalInfo["productClusterId"]
-            commercialConditionId = additionalInfo["commercialConditionId"]
-            offeringInfo = additionalInfo["offeringInfo"]
-            offeringType = additionalInfo["offeringType"]
-            offeringTypeId = additionalInfo["offeringTypeId"]
-        except:
-            additionalInfo = ''
-            brandName = ''
-            brandId = ''
-            categoriesIds = ''
-            productClusterId = ''
-            commercialConditionId = ''
-            offeringInfo = ''
-            offeringType = ''
-            offeringTypeId = ''
-        try:
-            dimension = additionalInfo["dimension"]
-            cubicweight = dimension["cubicweight"]
-            height = dimension["height"]
-            length = dimension["length"]
-            weight = dimension["weight"]
-            width = dimension["width"]
-        except:
-            cubicweight = ''
-            height = ''
-            length = ''
-            weight = ''
-            width = ''
-        try:
-            itemAttachment = x["itemAttachment"]
-            item_itemAttachment_name = itemAttachment["name"]
-        except:
-            item_itemAttachment_name = ''
+    if Fjson:
+        items = Fjson["items"]
+        for x in items:
+            items_uniqueId = x["uniqueId"]
+            items_id = x["id"]
+            items_productId = x["productId"]
+            items_ean = x["ean"]
+            items_lockId = x["lockId"]
+            item_quantity = x["quantity"]
+            item_seller = x["seller"]
+            item_name = x["name"]
+            item_refId = x["refId"]
+            item_price = x["price"]
+            item_listPrice = x["listPrice"]
+            item_manualPrice = x["manualPrice"]
+            item_imageUrl = x["imageUrl"]
+            item_detailUrl = x["detailUrl"]
+            item_sellerSku = x["sellerSku"]
+            item_priceValidUntil = x["priceValidUntil"]
+            item_commission = x["commission"]
+            item_tax = x["tax"]
+            item_preSaleDate = str(x["preSaleDate"])
+            item_measurementUnit = x["measurementUnit"]
+            item_unitMultiplier = x["unitMultiplier"]
+            item_sellingPrice = x["sellingPrice"]
+            item_isGift = x["isGift"]
+            item_shippingPrice = x["shippingPrice"]
+            item_rewardValue = x["rewardValue"]
+            item_freightCommission = x["freightCommission"]
+            item_taxCode = x["taxCode"]
+            item_parentItemIndex = x["parentItemIndex"]
+            item_parentAssemblyBinding = x["parentAssemblyBinding"]
+            item_price_definition = x["priceDefinition"]
+            item_serialNumbers = x["serialNumbers"]
+            if x["additionalInfo"]:
+                additionalInfo = x["additionalInfo"]
+                brandName = additionalInfo["brandName"]
+                brandId = additionalInfo["brandId"]
+                categoriesIds = additionalInfo["categoriesIds"]
+                productClusterId = additionalInfo["productClusterId"]
+                commercialConditionId = additionalInfo["commercialConditionId"]
+                offeringInfo = additionalInfo["offeringInfo"]
+                offeringType = additionalInfo["offeringType"]
+                offeringTypeId = additionalInfo["offeringTypeId"]
+                if dimension:
+                    dimension = additionalInfo["dimension"]
+                    cubicweight = dimension["cubicweight"]
+                    height = dimension["height"]
+                    length = dimension["length"]
+                    weight = dimension["weight"]
+                    width = dimension["width"]
+                    
+            if x["itemAttachment"]:
+                itemAttachment = x["itemAttachment"]
+                item_itemAttachment_name = itemAttachment["name"]
             
         
     for y in items:
@@ -148,70 +131,61 @@ def get_order(id):
         init.df = init.df.append(df1)
         
 def get_order_package(id):
-    url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
-    response = requests.request("GET", url, headers=init.headers)
-    Fjson = json.loads(response.text)
-    packageAttachment = Fjson["packageAttachment"]
-    packages = packageAttachment["packages"]
-    
-    items = ""
-    courier = ""
-    invoiceNumber = ""
-    invoiceValue = ""
-    invoiceUrl = ""
-    issuanceDate = ""
-    trackingNumber = ""
-    invoiceKey = ""
-    trackingUrl = ""
-    embeddedInvoice = ""
-    package_type = ""
-    cfop  = ""
-    volumes  = ""
-    EnableInferItems = ""
-    
-    for x in packages:
-        package_items = packages[0]
-        items = package_items["items"]
-        courier = x["courier"]
-        invoiceNumber = x["invoiceNumber"]
-        invoiceValue = x["invoiceValue"]
-        invoiceUrl = x["invoiceUrl"]
-        issuanceDate = x["issuanceDate"]
-        trackingNumber = x["trackingNumber"]
-        invoiceKey = x["invoiceKey"]
-        trackingUrl = x["trackingUrl"]
-        embeddedInvoice = x["embeddedInvoice"]
-        package_type = x["type"]
-        cfop = x["cfop"]
-        volumes = x["volumes"]
-        EnableInferItems = x["EnableInferItems"]
-        
-    for y in items:
-        itemIndex = y["itemIndex"]
-        package_quantity = y["quantity"]
-        price = y["price"]
-        description = y["description"]
-        unitMultiplier = y["unitMultiplier"]
-        df2 = pd.DataFrame({
-            'courier': courier,
-            'invoiceNumber': invoiceNumber,
-            'invoiceValue': invoiceValue,
-            'invoiceUrl': invoiceUrl,
-            'issuanceDate': issuanceDate,
-            'trackingNumber': trackingNumber,
-            'invoiceKey': invoiceKey,
-            'trackingUrl': trackingUrl,
-            'embeddedInvoice': embeddedInvoice,
-            'package_type': package_type,
-            "cfop":cfop,
-            "volumes":volumes,
-            "EnableInferItems":EnableInferItems,
-            'itemIndex': itemIndex,
-            'package_quantity': package_quantity,
-            'package_price': price,
-            'description': description,
-            'unitMultiplier': unitMultiplier}, index=[0])
-        init.df = init.df.append(df2)
+    try:
+        url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
+        response = requests.request("GET", url, headers=init.headers)
+        Fjson = json.loads(response.text)
+        if packageAttachment:
+            if packages:
+                if items:
+                    packageAttachment = Fjson["packageAttachment"]
+                    packages = packageAttachment["packages"]
+                    
+                    for x in packages:
+                        package_items = packages[0]
+                        items = package_items["items"]
+                        courier = x["courier"]
+                        invoiceNumber = x["invoiceNumber"]
+                        invoiceValue = x["invoiceValue"]
+                        invoiceUrl = x["invoiceUrl"]
+                        issuanceDate = x["issuanceDate"]
+                        trackingNumber = x["trackingNumber"]
+                        invoiceKey = x["invoiceKey"]
+                        trackingUrl = x["trackingUrl"]
+                        embeddedInvoice = x["embeddedInvoice"]
+                        package_type = x["type"]
+                        cfop = x["cfop"]
+                        volumes = x["volumes"]
+                        EnableInferItems = x["EnableInferItems"]
+                        
+                        for y in items:
+                            itemIndex = y["itemIndex"]
+                            package_quantity = y["quantity"]
+                            price = y["price"]
+                            description = y["description"]
+                            unitMultiplier = y["unitMultiplier"]
+                            df2 = pd.DataFrame({
+                                'courier': courier,
+                                'invoiceNumber': invoiceNumber,
+                                'invoiceValue': invoiceValue,
+                                'invoiceUrl': invoiceUrl,
+                                'issuanceDate': issuanceDate,
+                                'trackingNumber': trackingNumber,
+                                'invoiceKey': invoiceKey,
+                                'trackingUrl': trackingUrl,
+                                'embeddedInvoice': embeddedInvoice,
+                                'package_type': package_type,
+                                "cfop":cfop,
+                                "volumes":volumes,
+                                "EnableInferItems":EnableInferItems,
+                                'itemIndex': itemIndex,
+                                'package_quantity': package_quantity,
+                                'package_price': price,
+                                'description': description,
+                                'unitMultiplier': unitMultiplier}, index=[0])
+                            init.df = init.df.append(df2)
+    except:
+        print("no package")
 
 def delete_duplicate():
     try:
@@ -500,7 +474,7 @@ def run():
         dataset  = client.dataset(dataset_id)
         table = dataset.table(table_id)
         job_config = bigquery.LoadJobConfig()
-        job_config.write_disposition = "WRITE_TRUNCATE"
+        #job_config.write_disposition = "WRITE_TRUNCATE"
         job_config.schema = format_schema(table_schema)
         job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
         job = client.load_table_from_json(json_object, table, job_config = job_config)
@@ -511,7 +485,7 @@ def run():
         dataset  = client.dataset(dataset_id)
         table = dataset.table(table_id)
         job_config = bigquery.LoadJobConfig()
-        job_config.write_disposition = "WRITE_TRUNCATE"
+        #job_config.write_disposition = "WRITE_TRUNCATE"
         job_config.autodetect = True
         job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
         job = client.load_table_from_json(json_object, table, job_config = job_config)
