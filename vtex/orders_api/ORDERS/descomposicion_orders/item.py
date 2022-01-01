@@ -335,7 +335,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "commission",
-        "type": "INTEGER",
+        "type": "FLOAT",
         "mode": "NULLABLE"
     },{
         "name": "productId",
