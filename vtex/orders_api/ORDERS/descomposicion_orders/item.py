@@ -137,6 +137,7 @@ def get_order_package(id):
         Fjson = json.loads(response.text)
         if Fjson:
             if Fjson["packageAttachment"]:
+                packageAttachment = Fjson["packageAttachment"]
                 if packageAttachment["packages"]:
                     
                     packageAttachment = Fjson["packageAttachment"]
