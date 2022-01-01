@@ -65,7 +65,7 @@ def get_order(id):
     allowCancellation = Fjson["allowCancellation"]
     allowEdition = Fjson["allowEdition"]
     isCheckedIn = Fjson["isCheckedIn"]
-    marketplace = Fjson["marketplace"]
+    marketplace = Fjson["marketplaceItems"]
     authorizedDate = Fjson["authorizedDate"]
     invoicedDate = Fjson["invoicedDate"]
     cancelReason = Fjson["cancelReason"]
