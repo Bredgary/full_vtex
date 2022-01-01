@@ -519,6 +519,10 @@ def get_params():
             run()
         if registro == 200:
             run()
+        if registro == 300:
+            run()
+        if registro == 400:
+            run()
         if registro == 500:
             run()
         if registro == 10000:
