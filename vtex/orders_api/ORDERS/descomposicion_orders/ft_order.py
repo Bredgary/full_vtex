@@ -108,9 +108,9 @@ def get_order(id):
         total_name_tax = tax["name"]
         total_value_tax = tax["value"]
     except:
-        total_id_tax = ""
-        total_name_tax = ""
-        total_value_tax = 0
+        total_id_tax = None
+        total_name_tax = None
+        total_value_tax = None
     
     try:
         marketplaceOrderId = str(Fjson["marketplaceOrderId"])
