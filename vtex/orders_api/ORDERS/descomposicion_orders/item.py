@@ -129,66 +129,63 @@ def get_order(id):
             'weight': weight,
             'width': width,
             'item_itemAttachment_name': item_itemAttachment_name}, index=[0])
-        init_2.df = init_2.df.append(df1)
+        init.df_2 = init.df_2.append(df1)
         
 def get_order_package(id):
-    try:
-        url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
-        response = requests.request("GET", url, headers=init.headers)
-        Fjson = json.loads(response.text)
-        if Fjson:
-            if Fjson["packageAttachment"]:
+    url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
+    response = requests.request("GET", url, headers=init.headers)
+    Fjson = json.loads(response.text)
+    if Fjson:
+        if Fjson["packageAttachment"]:
+            packageAttachment = Fjson["packageAttachment"]
+            if packageAttachment["packages"]:
+                
                 packageAttachment = Fjson["packageAttachment"]
-                if packageAttachment["packages"]:
+                packages = packageAttachment["packages"]
+                
+                for x in packages:
+                    package_items = packages[0]
+                    items = package_items["items"]
+                    courier = x["courier"]
+                    invoiceNumber = x["invoiceNumber"]
+                    invoiceValue = x["invoiceValue"]
+                    invoiceUrl = x["invoiceUrl"]
+                    issuanceDate = x["issuanceDate"]
+                    trackingNumber = x["trackingNumber"]
+                    invoiceKey = x["invoiceKey"]
+                    trackingUrl = x["trackingUrl"]
+                    embeddedInvoice = x["embeddedInvoice"]
+                    package_type = x["type"]
+                    cfop = x["cfop"]
+                    volumes = x["volumes"]
+                    EnableInferItems = x["EnableInferItems"]
                     
-                    packageAttachment = Fjson["packageAttachment"]
-                    packages = packageAttachment["packages"]
-                    
-                    for x in packages:
-                        package_items = packages[0]
-                        items = package_items["items"]
-                        courier = x["courier"]
-                        invoiceNumber = x["invoiceNumber"]
-                        invoiceValue = x["invoiceValue"]
-                        invoiceUrl = x["invoiceUrl"]
-                        issuanceDate = x["issuanceDate"]
-                        trackingNumber = x["trackingNumber"]
-                        invoiceKey = x["invoiceKey"]
-                        trackingUrl = x["trackingUrl"]
-                        embeddedInvoice = x["embeddedInvoice"]
-                        package_type = x["type"]
-                        cfop = x["cfop"]
-                        volumes = x["volumes"]
-                        EnableInferItems = x["EnableInferItems"]
-                        
-                        for y in items:
-                            itemIndex = str(y["itemIndex"])
-                            package_quantity = y["quantity"]
-                            price = y["price"]
-                            description = y["description"]
-                            unitMultiplier = y["unitMultiplier"]
-                            df2 = pd.DataFrame({
-                                'courier': courier,
-                                'invoiceNumber': invoiceNumber,
-                                'invoiceValue': invoiceValue,
-                                'invoiceUrl': invoiceUrl,
-                                'issuanceDate': issuanceDate,
-                                'trackingNumber': trackingNumber,
-                                'invoiceKey': invoiceKey,
-                                'trackingUrl': trackingUrl,
-                                'embeddedInvoice': embeddedInvoice,
-                                'package_type': package_type,
-                                "cfop":cfop,
-                                "volumes":volumes,
-                                "EnableInferItems":EnableInferItems,
-                                'itemIndex': str(itemIndex),
-                                'package_quantity': package_quantity,
-                                'package_price': price,
-                                'description': description,
-                                'unitMultiplier': unitMultiplier}, index=[1])
-                            init.df_1 = init.df_1.append(df2)
-    except:
-        print("no package")
+                    for y in items:
+                        itemIndex = str(y["itemIndex"])
+                        package_quantity = y["quantity"]
+                        price = y["price"]
+                        description = y["description"]
+                        unitMultiplier = y["unitMultiplier"]
+                        df2 = pd.DataFrame({
+                            'courier': courier,
+                            'invoiceNumber': invoiceNumber,
+                            'invoiceValue': invoiceValue,
+                            'invoiceUrl': invoiceUrl,
+                            'issuanceDate': issuanceDate,
+                            'trackingNumber': trackingNumber,
+                            'invoiceKey': invoiceKey,
+                            'trackingUrl': trackingUrl,
+                            'embeddedInvoice': embeddedInvoice,
+                            'package_type': package_type,
+                            "cfop":cfop,
+                            "volumes":volumes,
+                            "EnableInferItems":EnableInferItems,
+                            'itemIndex': str(itemIndex),
+                            'package_quantity': package_quantity,
+                            'package_price': price,
+                            'description': description,
+                            'unitMultiplier': unitMultiplier}, index=[1])
+                        init.df_1 = init.df_1.append(df2)
 
 def delete_duplicate():
     try:
