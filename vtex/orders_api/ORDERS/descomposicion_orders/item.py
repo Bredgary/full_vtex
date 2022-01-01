@@ -135,9 +135,10 @@ def get_order_package(id):
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
-        if packageAttachment:
-            if packages:
-                if items:
+        if Fjson:
+            if Fjson["packageAttachment"]:
+                if packageAttachment["packages"]:
+                    
                     packageAttachment = Fjson["packageAttachment"]
                     packages = packageAttachment["packages"]
                     
