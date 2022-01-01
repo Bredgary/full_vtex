@@ -526,56 +526,59 @@ def run():
         delete_duplicate()
 
 def get_params():
-    print("Cargando consulta")
-    client = bigquery.Client()
-    QUERY = ('SELECT DISTINCT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`WHERE (orderId NOT IN (SELECT orderId FROM `shopstar-datalake.test.shopstar_ft_orders`))')
-    query_job = client.query(QUERY)  
-    rows = query_job.result()
-    registro = 0
-    for row in rows:
-        registro += 1
-        get_order(row.orderId)
-        print("Registro: "+str(registro))
-        if registro == 5:
-            run()
-        if registro == 10:
-            run()
-        if registro == 100:
-            run()
-        if registro == 200:
-            run()
-        if registro == 500:
-            run()
-        if registro == 10000:
-            run()
-        if registro == 12000:
-            run()
-        if registro == 15000:
-            run()
-        if registro == 20000:
-            run()
-        if registro == 30000:
-            run()
-        if registro == 35000:
-            run()
-        if registro == 40000:
-            run()
-        if registro == 45000:
-            run()
-        if registro == 50000:
-            run()
-        if registro == 60000:
-            run()
-        if registro == 70000:
-            run()
-        if registro == 80000:
-            run()
-        if registro == 85000:
-            run()
-        if registro == 90000:
-            run()
-        if registro == 95000:
-            run()
-    run()
+    try:
+        print("Cargando consulta")
+        client = bigquery.Client()
+        QUERY = ('SELECT DISTINCT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`WHERE (orderId NOT IN (SELECT orderId FROM `shopstar-datalake.test.shopstar_ft_orders`))')
+        query_job = client.query(QUERY)  
+        rows = query_job.result()
+        registro = 0
+        for row in rows:
+            registro += 1
+            get_order(row.orderId)
+            print("Registro: "+str(registro))
+            if registro == 5:
+                run()
+            if registro == 10:
+                run()
+            if registro == 100:
+                run()
+            if registro == 200:
+                run()
+            if registro == 500:
+                run()
+            if registro == 10000:
+                run()
+            if registro == 12000:
+                run()
+            if registro == 15000:
+                run()
+            if registro == 20000:
+                run()
+            if registro == 30000:
+                run()
+            if registro == 35000:
+                run()
+            if registro == 40000:
+                run()
+            if registro == 45000:
+                run()
+            if registro == 50000:
+                run()
+            if registro == 60000:
+                run()
+            if registro == 70000:
+                run()
+            if registro == 80000:
+                run()
+            if registro == 85000:
+                run()
+            if registro == 90000:
+                run()
+            if registro == 95000:
+                run()
+        run()
+    except:
+        print("vacio")
 
 get_params()
