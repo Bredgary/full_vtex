@@ -204,7 +204,6 @@ def run():
     
     frames = [init.df_1, init.df_2]
     df = pd.concat(frames)
-    print(df)
     
     df.reset_index(drop=True, inplace=True)
     json_data = df.to_json(orient = 'records')
