@@ -161,7 +161,7 @@ def get_order_package(id):
                         EnableInferItems = x["EnableInferItems"]
                         
                         for y in items:
-                            itemIndex = y["itemIndex"]
+                            itemIndex = str(y["itemIndex"])
                             package_quantity = y["quantity"]
                             price = y["price"]
                             description = y["description"]
@@ -180,7 +180,7 @@ def get_order_package(id):
                                 "cfop":cfop,
                                 "volumes":volumes,
                                 "EnableInferItems":EnableInferItems,
-                                'itemIndex': itemIndex,
+                                'itemIndex': str(itemIndex),
                                 'package_quantity': package_quantity,
                                 'package_price': price,
                                 'description': description,
@@ -447,7 +447,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "itemIndex",
-        "type": "INTEGER",
+        "type": "STRING",
         "mode": "NULLABLE"
     },{
         "name": "package_quantity",
