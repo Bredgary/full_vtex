@@ -132,7 +132,7 @@ def get_order(id):
         init_2.df = init_2.df.append(df1)
         
 def get_order_package(id):
-    #try:
+    try:
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
@@ -187,8 +187,8 @@ def get_order_package(id):
                                 'description': description,
                                 'unitMultiplier': unitMultiplier}, index=[1])
                             init.df_1 = init.df_1.append(df2)
-    #except:
-     #   print("no package")
+    except:
+        print("no package")
 
 def delete_duplicate():
     try:
