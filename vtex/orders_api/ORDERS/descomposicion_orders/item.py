@@ -185,7 +185,7 @@ def get_order_package(id):
                                 'package_quantity': package_quantity,
                                 'package_price': price,
                                 'description': description,
-                                'unitMultiplier': unitMultiplier}, index=[1])
+                                'unitMultiplier': unitMultiplier}, index=[0])
                             init.df_1 = init.df_1.append(df2)
     except:
         print("no package")
