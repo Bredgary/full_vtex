@@ -133,7 +133,7 @@ def get_order(id):
         seller_logo = ''
     try:
         cancellationData = Fjson["cancellationData"]
-        CancellationDate = str(cancellationData["CancellationDate"])
+        CancellationDate = cancellationData["CancellationDate"]
     except:
         CancellationDate = ""
     try:
@@ -202,7 +202,7 @@ def get_order(id):
         'seller_id': seller_id,
         'seller_name': seller_name,
         'seller_logo': seller_logo,
-        'CancellationDate': str(CancellationDate),
+        'CancellationDate': CancellationDate,
         'RequestedByUser': RequestedByUser,
         'RequestedBySystem': RequestedBySystem,
         'RequestedBySellerNotification': RequestedBySellerNotification,
