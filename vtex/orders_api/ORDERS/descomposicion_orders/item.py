@@ -9,7 +9,8 @@ from os.path import join
 
 class init:
     productList = []
-    df = pd.DataFrame()
+    df_1 = pd.DataFrame()
+    df_2 = pd.DataFrame()
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
 def format_schema(schema):
@@ -128,7 +129,7 @@ def get_order(id):
             'weight': weight,
             'width': width,
             'item_itemAttachment_name': item_itemAttachment_name}, index=[0])
-        init.df = init.df.append(df1)
+        init_2.df = init_2.df.append(df1)
         
 def get_order_package(id):
     #try:
@@ -184,8 +185,8 @@ def get_order_package(id):
                                 'package_quantity': package_quantity,
                                 'package_price': price,
                                 'description': description,
-                                'unitMultiplier': unitMultiplier}, index=[0])
-                            init.df = init.df.append(df2)
+                                'unitMultiplier': unitMultiplier}, index=[1])
+                            init.df_1 = init.df_1.append(df2)
     #except:
      #   print("no package")
 
@@ -203,7 +204,10 @@ def delete_duplicate():
 
 
 def run():
-    df = init.df
+    
+    frames = [init.df_1, init.df_2]
+    df = pd.concat(frames)
+    
     df.reset_index(drop=True, inplace=True)
     json_data = df.to_json(orient = 'records')
     json_object = json.loads(json_data)
