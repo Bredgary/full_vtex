@@ -67,7 +67,7 @@ def get_order(id):
                 offeringInfo = additionalInfo["offeringInfo"]
                 offeringType = additionalInfo["offeringType"]
                 offeringTypeId = additionalInfo["offeringTypeId"]
-                if dimension:
+                if additionalInfo["dimension"]:
                     dimension = additionalInfo["dimension"]
                     cubicweight = dimension["cubicweight"]
                     height = dimension["height"]
