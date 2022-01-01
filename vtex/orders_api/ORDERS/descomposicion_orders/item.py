@@ -29,7 +29,7 @@ def get_order(id):
             items_uniqueId = x["uniqueId"]
             items_id = x["id"]
             items_productId = x["productId"]
-            items_ean = x["ean"]
+            items_ean = str(x["ean"])
             items_lockId = x["lockId"]
             item_quantity = x["quantity"]
             item_seller = x["seller"]
@@ -86,7 +86,7 @@ def get_order(id):
             'uniqueId': items_uniqueId,
             'id': items_id,
             'productId': items_productId,
-            'ean': items_ean,
+            'ean': str(items_ean),
             'lockId': items_lockId,
             'item_quantity': item_quantity,
             'seller': item_seller,
