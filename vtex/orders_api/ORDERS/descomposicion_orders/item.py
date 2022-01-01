@@ -185,7 +185,7 @@ def get_order_package(id):
                                 'package_quantity': package_quantity,
                                 'package_price': price,
                                 'description': description,
-                                'unitMultiplier': unitMultiplier}, index=[0])
+                                'unitMultiplier': unitMultiplier}, index=[1])
                             init.df_1 = init.df_1.append(df2)
     except:
         print("no package")
@@ -480,13 +480,24 @@ def run():
     table = dataset.table(table_id)
     job_config = bigquery.LoadJobConfig()
     job_config.write_disposition = "WRITE_TRUNCATE"
-    job_config.autodetect = True
+    job_config.schema = format_schema(table_schema)
     job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
     job = client.load_table_from_json(json_object, table, job_config = job_config)
     print(job.result())
-    delete_duplicate() 
+    delete_duplicate()
     
-    #try:
+    #client  = bigquery.Client(project = project_id)
+    #dataset  = client.dataset(dataset_id)
+    #table = dataset.table(table_id)
+    #job_config = bigquery.LoadJobConfig()
+    #job_config.write_disposition = "WRITE_TRUNCATE"
+    #job_config.autodetect = True
+    #job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+    #job = client.load_table_from_json(json_object, table, job_config = job_config)
+    #print(job.result())
+    #delete_duplicate() 
+    
+    
     #    client  = bigquery.Client(project = project_id)
     #    dataset  = client.dataset(dataset_id)
     #    table = dataset.table(table_id)
@@ -497,7 +508,6 @@ def run():
     #    job = client.load_table_from_json(json_object, table, job_config = job_config)
     #    print(job.result())
     #    delete_duplicate()
-    #except:
     
 
 
