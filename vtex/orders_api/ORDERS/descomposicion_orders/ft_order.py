@@ -136,7 +136,7 @@ def get_order(id):
             cancellationData = Fjson["cancellationData"]
             CancellationDate = str(cancellationData["CancellationDate"])
         except:
-            CancellationDate = ""
+            CancellationDate = None
         try:
             RequestedByUser = cancellationData["RequestedByUser"]
             RequestedBySystem = cancellationData["RequestedBySystem"]
@@ -267,7 +267,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "CancellationDate",
-        "type": "STRING",
+        "type": "DATE",
         "mode": "NULLABLE"
     },{
         "name": "seller_name",
@@ -295,7 +295,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "isCertified",
-        "type": "STRING",
+        "type": "BOOLEAN",
         "mode": "NULLABLE"
     },{
         "name": "lastMessage",
@@ -506,9 +506,9 @@ def run():
     dataset  = client.dataset(dataset_id)
     table = dataset.table(table_id)
     job_config = bigquery.LoadJobConfig()
-    #job_config.schema = format_schema(table_schema)
+    job_config.schema = format_schema(table_schema)
     job_config.write_disposition = "WRITE_TRUNCATE"
-    job_config.autodetect = True
+    #job_config.autodetect = True
     job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
     job = client.load_table_from_json(json_object, table, job_config = job_config)
     print(job.result())
