@@ -497,47 +497,5 @@ def get_params():
     for row in rows:
         registro += 1
         print(row.orderId)
-        if get_order(row.orderId):
-            continue
-        if get_order_package(row.orderId):
-            continue
-        print("Registro: "+str(registro))
-        if registro == 300:
-            run()
-        if registro == 400:
-            run()
-        if registro == 500:
-            run()
-        if registro == 10000:
-            run()
-        if registro == 12000:
-            run()
-        if registro == 15000:
-            run()
-        if registro == 20000:
-            run()
-        if registro == 30000:
-            run()
-        if registro == 35000:
-            run()
-        if registro == 40000:
-            run()
-        if registro == 45000:
-            run()
-        if registro == 50000:
-            run()
-        if registro == 60000:
-            run()
-        if registro == 70000:
-            run()
-        if registro == 80000:
-            run()
-        if registro == 85000:
-            run()
-        if registro == 90000:
-            run()
-        if registro == 95000:
-            run()
-    run()
-    
+        
 get_params()
