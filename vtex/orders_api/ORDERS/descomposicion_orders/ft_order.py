@@ -147,7 +147,7 @@ def get_order(id):
             RequestedByUser = False
             RequestedBySystem = False
             RequestedBySellerNotification = False
-            RequestedByPaymentNotification = False
+            RequestedByPaymentNotification = ""
             Reason = ""
         
         try:
@@ -251,7 +251,7 @@ def run():
           "mode": "NULLABLE"
     },{
         "name": "RequestedByPaymentNotification",
-        "type": "BOOLEAN",
+        "type": "STRING",
         "mode": "NULLABLE"
     },{
         "name": "RequestedBySellerNotification",
