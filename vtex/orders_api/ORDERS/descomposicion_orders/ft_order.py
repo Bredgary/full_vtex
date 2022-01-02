@@ -28,200 +28,203 @@ def decrypt_email(email):
     print(str(email))
 
 def get_order(id):
-    url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
-    response = requests.request("GET", url, headers=init.headers)
-    Fjson = json.loads(response.text)
-    clientProfileData = Fjson["clientProfileData"]
-    client_email = clientProfileData["email"]
-    orderId = Fjson["orderId"]
-    client_email = clientProfileData["email"]
-    userProfileId = clientProfileData["userProfileId"]
-    sequence = Fjson["sequence"]
-    marketplaceOrderId = str(Fjson["marketplaceOrderId"])
-    marketplaceServicesEndpoint = Fjson["marketplaceServicesEndpoint"]
-    sellerOrderId = Fjson["sellerOrderId"]
-    origin = Fjson["origin"]
-    affiliateId = Fjson["affiliateId"]
-    checkedInPickupPointId = Fjson["checkedInPickupPointId"]
-    salesChannel = Fjson["salesChannel"]
-    merchantName = Fjson["merchantName"]
-    status = Fjson["status"]
-    statusDescription = Fjson["statusDescription"]
-    value = Fjson["value"]
-    creationDate = Fjson["creationDate"]
-    lastChange = Fjson["lastChange"]
-    orderGroup  = Fjson["orderGroup"]
-    callCenterOperatorData = Fjson["callCenterOperatorData"]
-    followUpEmail = Fjson["followUpEmail"]
-    lastMessage = Fjson["lastMessage"]
-    hostname = Fjson["hostname"]
-    changesAttachment = Fjson["changesAttachment"]
-    openTextField = Fjson["openTextField"]
-    roundingError = Fjson["roundingError"]
-    orderFormId = Fjson["orderFormId"]
-    commercialConditionData = Fjson["commercialConditionData"]
-    isCompleted = Fjson["isCompleted"]
-    customData = Fjson["customData"]
-    allowCancellation = Fjson["allowCancellation"]
-    allowEdition = Fjson["allowEdition"]
-    isCheckedIn = Fjson["isCheckedIn"]
-    marketplace = Fjson["marketplace"]
-    authorizedDate = Fjson["authorizedDate"]
-    invoicedDate = Fjson["invoicedDate"]
-    cancelReason = Fjson["cancelReason"]
-    subscriptionData = Fjson["subscriptionData"]
-    taxData = Fjson["taxData"]
-    giftRegistryData = Fjson["giftRegistryData"]
-    client_email = decrypt_email(str(client_email))
-    Total = Fjson["totals"]
-    
     try:
-        items = Total[0]
-        total_id_items = items["id"]
-        total_name_items = items["name"]
-        total_value_items = items["value"]
-    except:
-        total_id_items = ""
-        total_name_items = ""
-        total_value_items = 0
-    try:
-        discounts = Total[1]
-        total_id_discounts = discounts["id"]
-        total_name_discounts = discounts["name"]
-        total_value_discounts = discounts["value"]
-    except:
-        total_id_discounts = ""
-        total_name_discounts =""
-        total_value_discounts = 0
-    try:
-        shipping = Total[2]
-        total_id_shipping = shipping["id"]
-        total_name_shipping = shipping["name"]
-        total_value_shipping = shipping["value"]
-    except:
-        total_id_shipping = ""
-        total_name_shipping = ""
-        total_value_shipping = 0
-    try:
-        tax = Total[3]
-        total_id_tax = tax["id"]
-        total_name_tax = tax["name"]
-        total_value_tax = tax["value"]
-    except:
-        total_id_tax = None
-        total_name_tax = None
-        total_value_tax = None
-    
-    try:
+        url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
+        response = requests.request("GET", url, headers=init.headers)
+        Fjson = json.loads(response.text)
+        clientProfileData = Fjson["clientProfileData"]
+        client_email = clientProfileData["email"]
+        orderId = Fjson["orderId"]
+        client_email = clientProfileData["email"]
+        userProfileId = clientProfileData["userProfileId"]
+        sequence = Fjson["sequence"]
         marketplaceOrderId = str(Fjson["marketplaceOrderId"])
-        baseURL = marketplace["baseURL"]
-        isCertified = marketplace["isCertified"]
-        name = marketplace["name"]
-    except:
-        baseURL = ''
-        isCertified = ''
-        name = ''
-    try:
-        sellers_ = Fjson["sellers"]
-        sellers = sellers_[0]
-        seller_id = sellers["id"]
-        seller_name = sellers["name"]
-        seller_logo = sellers["logo"]
-    except:
-        seller_id = ''
-        seller_name = ''
-        seller_logo = ''
-    try:
-        cancellationData = Fjson["cancellationData"]
-        CancellationDate = cancellationData["CancellationDate"]
-    except:
-        CancellationDate = ""
-    try:
-        RequestedByUser = cancellationData["RequestedByUser"]
-        RequestedBySystem = cancellationData["RequestedBySystem"]
-        RequestedBySellerNotification = cancellationData["RequestedBySellerNotification"]
-        RequestedByPaymentNotification = str(cancellationData["RequestedByPaymentNotification"])
-        Reason = cancellationData["Reason"]
-    except:
-        RequestedByUser = False
-        RequestedBySystem = False
-        RequestedBySellerNotification = False
-        RequestedByPaymentNotification = False
-        Reason = ""
-    
-    try:
-        dim_invoiceData = Fjson["invoiceData"]
-        invoice_address = dim_invoiceData["address"]
-        userPaymentInfo = dim_invoiceData["userPaymentInfo"]
-    except:
-        invoice_address = ''
-        userPaymentInfo = ''
+        marketplaceServicesEndpoint = Fjson["marketplaceServicesEndpoint"]
+        sellerOrderId = Fjson["sellerOrderId"]
+        origin = Fjson["origin"]
+        affiliateId = Fjson["affiliateId"]
+        checkedInPickupPointId = Fjson["checkedInPickupPointId"]
+        salesChannel = Fjson["salesChannel"]
+        merchantName = Fjson["merchantName"]
+        status = Fjson["status"]
+        statusDescription = Fjson["statusDescription"]
+        value = Fjson["value"]
+        creationDate = Fjson["creationDate"]
+        lastChange = Fjson["lastChange"]
+        orderGroup  = Fjson["orderGroup"]
+        callCenterOperatorData = Fjson["callCenterOperatorData"]
+        followUpEmail = Fjson["followUpEmail"]
+        lastMessage = Fjson["lastMessage"]
+        hostname = Fjson["hostname"]
+        changesAttachment = Fjson["changesAttachment"]
+        openTextField = Fjson["openTextField"]
+        roundingError = Fjson["roundingError"]
+        orderFormId = Fjson["orderFormId"]
+        commercialConditionData = Fjson["commercialConditionData"]
+        isCompleted = Fjson["isCompleted"]
+        customData = Fjson["customData"]
+        allowCancellation = Fjson["allowCancellation"]
+        allowEdition = Fjson["allowEdition"]
+        isCheckedIn = Fjson["isCheckedIn"]
+        marketplace = Fjson["marketplace"]
+        authorizedDate = Fjson["authorizedDate"]
+        invoicedDate = Fjson["invoicedDate"]
+        cancelReason = Fjson["cancelReason"]
+        subscriptionData = Fjson["subscriptionData"]
+        taxData = Fjson["taxData"]
+        giftRegistryData = Fjson["giftRegistryData"]
+        client_email = decrypt_email(str(client_email))
+        Total = Fjson["totals"]
         
-    df1 = pd.DataFrame({
-        'orderId': id,
-        'client_email': client_email,
-        'userProfileId': userProfileId,
-        'sequence': sequence,
-        'marketplaceOrderId': str(marketplaceOrderId),
-        'marketplaceServicesEndpoint': marketplaceServicesEndpoint,
-        'sellerOrderId':sellerOrderId,
-        'origin': origin,
-        'affiliateId': affiliateId,
-        'checkedInPickupPointId': checkedInPickupPointId,
-        'salesChannel': salesChannel,
-        'merchantName': merchantName,
-        'status': status,
-        'statusDescription': statusDescription,
-        'value': value,
-        'creationDate': creationDate,
-        'lastChange': lastChange,
-        'orderGroup': orderGroup,
-        'callCenterOperatorData': callCenterOperatorData,
-        'followUpEmail': followUpEmail,
-        'lastMessage': lastMessage,
-        'hostname': hostname,
-        'changesAttachment': changesAttachment,
-        'openTextField': openTextField,
-        'roundingError': roundingError,
-        'orderFormId': orderFormId,
-        'commercialConditionData': commercialConditionData,
-        'isCompleted': isCompleted,
-        'customData': customData,
-        'allowCancellation': allowCancellation,
-        'allowEdition': allowEdition,
-        'isCheckedIn': isCheckedIn,
-        'marketplace': marketplace,
-        'authorizedDate': authorizedDate,
-        'invoicedDate': invoicedDate,
-        'cancelReason': cancelReason,
-        'subscriptionData': subscriptionData,
-        'taxData': taxData,
-        'baseURL': baseURL,
-        'isCertified': isCertified,
-        'name': name,
-        'seller_id': seller_id,
-        'seller_name': seller_name,
-        'seller_logo': seller_logo,
-        'CancellationDate': CancellationDate,
-        'RequestedByUser': RequestedByUser,
-        'RequestedBySystem': RequestedBySystem,
-        'RequestedBySellerNotification': RequestedBySellerNotification,
-        'RequestedByPaymentNotification': RequestedByPaymentNotification,
-        'Reason': Reason,
-        'giftRegistryData': giftRegistryData,
-        'totals_id_items': total_id_items,
-        'totals_name_items': total_name_items,
-        'totals_value_items': total_value_items,
-        'totals_id_discounts': total_id_discounts,
-        'totals_name_discounts': total_name_discounts,
-        'totals_value_discounts': total_value_discounts,
-        'totals_id_shipping': total_id_shipping,
-        'totals_name_shipping': total_name_shipping,
-        'totals_value_shipping': total_value_shipping,
-        'totals_id_tax': total_id_tax,
-        'totals_name_tax': total_name_tax,
-        'totals_value_tax': total_value_tax}, index=[0])
-    init.df = init.df.append(df1)
+        try:
+            items = Total[0]
+            total_id_items = items["id"]
+            total_name_items = items["name"]
+            total_value_items = items["value"]
+        except:
+            total_id_items = ""
+            total_name_items = ""
+            total_value_items = 0
+        try:
+            discounts = Total[1]
+            total_id_discounts = discounts["id"]
+            total_name_discounts = discounts["name"]
+            total_value_discounts = discounts["value"]
+        except:
+            total_id_discounts = ""
+            total_name_discounts =""
+            total_value_discounts = 0
+        try:
+            shipping = Total[2]
+            total_id_shipping = shipping["id"]
+            total_name_shipping = shipping["name"]
+            total_value_shipping = shipping["value"]
+        except:
+            total_id_shipping = ""
+            total_name_shipping = ""
+            total_value_shipping = 0
+        try:
+            tax = Total[3]
+            total_id_tax = tax["id"]
+            total_name_tax = tax["name"]
+            total_value_tax = tax["value"]
+        except:
+            total_id_tax = None
+            total_name_tax = None
+            total_value_tax = None
+        
+        try:
+            marketplaceOrderId = str(Fjson["marketplaceOrderId"])
+            baseURL = marketplace["baseURL"]
+            isCertified = marketplace["isCertified"]
+            name = marketplace["name"]
+        except:
+            baseURL = ''
+            isCertified = ''
+            name = ''
+        try:
+            sellers_ = Fjson["sellers"]
+            sellers = sellers_[0]
+            seller_id = sellers["id"]
+            seller_name = sellers["name"]
+            seller_logo = sellers["logo"]
+        except:
+            seller_id = ''
+            seller_name = ''
+            seller_logo = ''
+        try:
+            cancellationData = Fjson["cancellationData"]
+            CancellationDate = cancellationData["CancellationDate"]
+        except:
+            CancellationDate = ""
+        try:
+            RequestedByUser = cancellationData["RequestedByUser"]
+            RequestedBySystem = cancellationData["RequestedBySystem"]
+            RequestedBySellerNotification = cancellationData["RequestedBySellerNotification"]
+            RequestedByPaymentNotification = str(cancellationData["RequestedByPaymentNotification"])
+            Reason = cancellationData["Reason"]
+        except:
+            RequestedByUser = False
+            RequestedBySystem = False
+            RequestedBySellerNotification = False
+            RequestedByPaymentNotification = False
+            Reason = ""
+        
+        try:
+            dim_invoiceData = Fjson["invoiceData"]
+            invoice_address = dim_invoiceData["address"]
+            userPaymentInfo = dim_invoiceData["userPaymentInfo"]
+        except:
+            invoice_address = ''
+            userPaymentInfo = ''
+            
+        df1 = pd.DataFrame({
+            'orderId': id,
+            'client_email': client_email,
+            'userProfileId': userProfileId,
+            'sequence': sequence,
+            'marketplaceOrderId': str(marketplaceOrderId),
+            'marketplaceServicesEndpoint': marketplaceServicesEndpoint,
+            'sellerOrderId':sellerOrderId,
+            'origin': origin,
+            'affiliateId': affiliateId,
+            'checkedInPickupPointId': checkedInPickupPointId,
+            'salesChannel': salesChannel,
+            'merchantName': merchantName,
+            'status': status,
+            'statusDescription': statusDescription,
+            'value': value,
+            'creationDate': creationDate,
+            'lastChange': lastChange,
+            'orderGroup': orderGroup,
+            'callCenterOperatorData': callCenterOperatorData,
+            'followUpEmail': followUpEmail,
+            'lastMessage': lastMessage,
+            'hostname': hostname,
+            'changesAttachment': changesAttachment,
+            'openTextField': openTextField,
+            'roundingError': roundingError,
+            'orderFormId': orderFormId,
+            'commercialConditionData': commercialConditionData,
+            'isCompleted': isCompleted,
+            'customData': customData,
+            'allowCancellation': allowCancellation,
+            'allowEdition': allowEdition,
+            'isCheckedIn': isCheckedIn,
+            'marketplace': marketplace,
+            'authorizedDate': authorizedDate,
+            'invoicedDate': invoicedDate,
+            'cancelReason': cancelReason,
+            'subscriptionData': subscriptionData,
+            'taxData': taxData,
+            'baseURL': baseURL,
+            'isCertified': isCertified,
+            'name': name,
+            'seller_id': seller_id,
+            'seller_name': seller_name,
+            'seller_logo': seller_logo,
+            'CancellationDate': CancellationDate,
+            'RequestedByUser': RequestedByUser,
+            'RequestedBySystem': RequestedBySystem,
+            'RequestedBySellerNotification': RequestedBySellerNotification,
+            'RequestedByPaymentNotification': RequestedByPaymentNotification,
+            'Reason': Reason,
+            'giftRegistryData': giftRegistryData,
+            'totals_id_items': total_id_items,
+            'totals_name_items': total_name_items,
+            'totals_value_items': total_value_items,
+            'totals_id_discounts': total_id_discounts,
+            'totals_name_discounts': total_name_discounts,
+            'totals_value_discounts': total_value_discounts,
+            'totals_id_shipping': total_id_shipping,
+            'totals_name_shipping': total_name_shipping,
+            'totals_value_shipping': total_value_shipping,
+            'totals_id_tax': total_id_tax,
+            'totals_name_tax': total_name_tax,
+            'totals_value_tax': total_value_tax}, index=[0])
+        init.df = init.df.append(df1)
+    except:
+        print("terminado")
 
 def delete_duplicate():
   try:
