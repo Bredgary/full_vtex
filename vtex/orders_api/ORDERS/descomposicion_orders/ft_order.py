@@ -6,6 +6,7 @@ from datetime import datetime
 import requests
 from datetime import datetime, timezone
 from os.path import join
+from _queue import Empty
 
 class init:
   productList = []
@@ -33,9 +34,11 @@ def get_order(id):
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
         clientProfileData = Fjson["clientProfileData"]
-        client_email = clientProfileData["email"]
+        if Fjson["clientProfileData"] is not Empty:
+            clientProfileData = Fjson["clientProfileData"]
+            client_email = clientProfileData["email"]
+            client_email = decrypt_email(str(client_email))
         orderId = Fjson["orderId"]
-        client_email = clientProfileData["email"]
         userProfileId = clientProfileData["userProfileId"]
         sequence = Fjson["sequence"]
         marketplaceOrderId = str(Fjson["marketplaceOrderId"])
@@ -56,7 +59,11 @@ def get_order(id):
         followUpEmail = Fjson["followUpEmail"]
         lastMessage = Fjson["lastMessage"]
         hostname = Fjson["hostname"]
-        changesAttachment = Fjson["changesAttachment"]
+        if Fjson["changesAttachment"] is not Empty:
+            changesAttachment = Fjson["changesAttachment"]
+            changesAttachment_id = changesAttachment["id"]
+        else:
+            changesAttachment_id = ""
         openTextField = Fjson["openTextField"]
         roundingError = Fjson["roundingError"]
         orderFormId = Fjson["orderFormId"]
@@ -70,10 +77,11 @@ def get_order(id):
         authorizedDate = Fjson["authorizedDate"]
         invoicedDate = Fjson["invoicedDate"]
         cancelReason = Fjson["cancelReason"]
+        marketplaceOrderId = Fjson["marketplaceOrderId"]
         subscriptionData = Fjson["subscriptionData"]
         taxData = Fjson["taxData"]
         giftRegistryData = Fjson["giftRegistryData"]
-        client_email = decrypt_email(str(client_email))
+        
         Total = Fjson["totals"]
         
         try:
@@ -112,15 +120,19 @@ def get_order(id):
             total_id_tax = None
             total_name_tax = None
             total_value_tax = None
-        
         try:
-            marketplaceOrderId = str(Fjson["marketplaceOrderId"])
+            shippingData = Fjson["shippingData"]
+            shippingData_id = shippingData["id"]
+        except:
+            shippingData_id =""
+        try:
+            marketplace = Fjson["marketplace"]
             baseURL = marketplace["baseURL"]
             isCertified = marketplace["isCertified"]
             name = marketplace["name"]
         except:
             baseURL = ''
-            isCertified = ''
+            isCertified = False
             name = ''
         try:
             sellers_ = Fjson["sellers"]
@@ -158,12 +170,30 @@ def get_order(id):
             invoice_address = ''
             userPaymentInfo = ''
             
+        try:
+            shippingData = Fjson["shippingData"]
+            shipping_address = shippingData["address"]
+            shipping_addressType = address["addressType"]
+            shipping_receiverName = address["receiverName"]
+            shipping_addressId = address["addressId"]
+            shipping_postalCode = address["postalCode"]
+            shipping_city = address["city"]
+            shipping_state = address["state"]
+            shipping_country = address["country"]
+            shipping_street = address["street"]
+            shipping_number = address["number"]
+            shipping_neighborhood = address["neighborhood"]
+            shipping_complement = address["complement"]
+            shipping_reference = address["reference"]
+        except:
+            print("No shippingData")
+            
         df1 = pd.DataFrame({
             'orderId': id,
             'client_email': client_email,
             'userProfileId': userProfileId,
             'sequence': sequence,
-            'marketplaceOrderId': str(marketplaceOrderId),
+            'marketplaceOrderId': marketplaceOrderId,
             'marketplaceServicesEndpoint': marketplaceServicesEndpoint,
             'sellerOrderId':sellerOrderId,
             'origin': origin,
@@ -221,7 +251,22 @@ def get_order(id):
             'totals_value_shipping': total_value_shipping,
             'totals_id_tax': total_id_tax,
             'totals_name_tax': total_name_tax,
-            'totals_value_tax': total_value_tax}, index=[0])
+            'totals_value_tax': total_value_tax,
+            'invoice_address': invoice_address,
+            'userPaymentInfo': userPaymentInfo,
+            'shipping_address': shipping_address,
+            'shipping_addressType': shipping_addressType,
+            'shipping_receiverName': shipping_receiverName,
+            'shipping_addressId': shipping_addressId,
+            'shipping_postalCode': shipping_postalCode,
+            'shipping_city': shipping_city,
+            'shipping_state': shipping_state,
+            'shipping_country': shipping_country,
+            'shipping_street': shipping_street,
+            'shipping_number': shipping_number,
+            'shipping_neighborhood': shipping_neighborhood,
+            'shipping_complement': shipping_complement,
+            'shipping_reference': shipping_reference}, index=[0])
         init.df = init.df.append(df1)
     except:
         print("terminado")
@@ -497,7 +542,68 @@ def run():
         "name": "totals_value_tax",
         "type": "INTEGER",
         "mode": "NULLABLE"
+    },{
+        "name": "invoice_address",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "userPaymentInfo",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "shipping_address",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "shipping_addressType",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "shipping_receiverName",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "shipping_addressId",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "shipping_postalCode",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "shipping_city",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "shipping_state",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "shipping_country",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "shipping_street",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "shipping_number",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "shipping_neighborhood",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "shipping_complement",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "shipping_reference",
+        "type": "STRING",
+        "mode": "NULLABLE"
     }]
+    
     
     project_id = '999847639598'
     dataset_id = 'test'
@@ -507,7 +613,7 @@ def run():
     table = dataset.table(table_id)
     job_config = bigquery.LoadJobConfig()
     #job_config.schema = format_schema(table_schema)
-    #job_config.write_disposition = "WRITE_TRUNCATE"
+    job_config.write_disposition = "WRITE_TRUNCATE"
     job_config.autodetect = True
     job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
     job = client.load_table_from_json(json_object, table, job_config = job_config)
@@ -517,7 +623,7 @@ def run():
 def get_params():
     print("Cargando consulta")
     client = bigquery.Client()
-    QUERY = ('SELECT DISTINCT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`WHERE (orderId NOT IN (SELECT orderId FROM `shopstar-datalake.test.shopstar_ft_orders`))')
+    QUERY = ('SELECT DISTINCT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`')
     query_job = client.query(QUERY)  
     rows = query_job.result()
     registro = 0
