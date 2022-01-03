@@ -158,7 +158,7 @@ def get_order(id):
         cancellationData = Fjson["cancellationData"]
         CancellationDate = cancellationData["CancellationDate"]
     else:
-        CancellationDate = time.strftime('%d.%m.%Y')
+        CancellationDate = '1900-01-01 15:15:18.051893 UTC'
     
     if Fjson["cancellationData"] is not None:
         cancellationData = Fjson["cancellationData"]
@@ -642,10 +642,10 @@ def get_params():
         registro += 1
         get_order(row.orderId)
         print("Registro: "+str(registro))
-        #if registro == 5:
-        #    run()
-        #if registro == 10:
-        #    run()
+        if registro == 5:
+            run()
+        if registro == 10:
+            run()
         if registro == 100:
             run()
         if registro == 200:
