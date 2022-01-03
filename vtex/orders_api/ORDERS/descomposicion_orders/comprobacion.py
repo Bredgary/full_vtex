@@ -45,3 +45,5 @@ def get_params():
         registro += 1
         get_order(row.orderId)
         print("Registro: "+str(registro))
+        
+get_params()
