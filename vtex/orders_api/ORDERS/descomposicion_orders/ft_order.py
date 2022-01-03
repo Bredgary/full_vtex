@@ -8,6 +8,7 @@ from datetime import datetime, timezone
 from os.path import join
 from _queue import Empty
 import datetime
+from _overlapped import NULL
 
 class init:
   productList = []
@@ -157,8 +158,7 @@ def get_order(id):
         cancellationData = Fjson["cancellationData"]
         CancellationDate = cancellationData["CancellationDate"]
     else:
-        today = datetime.date.today()
-        CancellationDate = '{:%b, %d %Y}'.format(today) 
+        CancellationDate = NULL
 
     
     if Fjson["cancellationData"] is not None:
