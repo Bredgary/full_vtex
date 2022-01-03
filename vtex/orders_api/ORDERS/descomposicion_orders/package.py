@@ -223,7 +223,7 @@ def run():
         dataset  = client.dataset(dataset_id)
         table = dataset.table(table_id)
         job_config = bigquery.LoadJobConfig()
-        job_config.autodetect = True
+        #job_config.autodetect = True
         job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
         job = client.load_table_from_json(json_object, table, job_config = job_config)
         print(job.result())
@@ -241,6 +241,20 @@ def get_params():
         registro += 1
         get_order_package(row.orderId)
         print("Registro: "+str(registro))
-    run()
+        if registro == 5:
+            run()
+        if registro == 100:
+            run()
+        if registro == 200:
+            run()
+        if registro == 500:
+            run()
+        if registro == 1000:
+            run()
+        if registro == 5000:
+            run()
+        if registro == 10000:
+            run()
+        run()
     
 get_params()
