@@ -40,6 +40,11 @@ def get_order_package(id):
     cfop  = ""
     volumes  = ""
     EnableInferItems = ""
+    itemIndex = ""
+    quantity = ""
+    price = ""
+    description = ""
+    unitMultiplier = ""
     
     for x in packages:
         items = packages["items"]

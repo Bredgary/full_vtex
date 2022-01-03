@@ -400,7 +400,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "roundingError",
-        "type": "INTEGER",
+        "type": "STRING",
         "mode": "NULLABLE"
     },{
         "name": "orderId",
@@ -412,7 +412,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "orderGroup",
-        "type": "INTEGER",
+        "type": "STRING",
         "mode": "NULLABLE"
     },{
         "name": "creationDate",
@@ -440,7 +440,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "value",
-        "type": "INTEGER",
+        "type": "STRING",
         "mode": "NULLABLE"
     },{
         "name": "invoicedDate",
@@ -456,7 +456,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "sequence",
-        "type": "INTEGER",
+        "type": "STRING",
         "mode": "NULLABLE"
     },{
         "name": "affiliateId",
@@ -484,7 +484,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "salesChannel",
-        "type": "INTEGER",
+        "type": "STRING",
         "mode": "NULLABLE"
     },{
         "name": "marketplaceServicesEndpoint",
@@ -584,7 +584,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "shipping_postalCode",
-        "type": "INTEGER",
+        "type": "STRING",
         "mode": "NULLABLE"
     },{
         "name": "shipping_city",
@@ -623,14 +623,14 @@ def run():
     
     project_id = '999847639598'
     dataset_id = 'test'
-    table_id = 'shopstar_ft_orders_'
+    table_id = 'shopstar_ft_order'
     client  = bigquery.Client(project = project_id)
     dataset  = client.dataset(dataset_id)
     table = dataset.table(table_id)
     job_config = bigquery.LoadJobConfig()
-    #job_config.schema = format_schema(table_schema)
-    job_config.write_disposition = "WRITE_TRUNCATE"
-    job_config.autodetect = True
+    job_config.schema = format_schema(table_schema)
+    #job_config.write_disposition = "WRITE_TRUNCATE"
+    #job_config.autodetect = True
     job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
     job = client.load_table_from_json(json_object, table, job_config = job_config)
     print(job.result())
