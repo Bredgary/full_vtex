@@ -284,7 +284,7 @@ def get_order(id):
         'shipping_state': shipping_state,
         'shipping_country': shipping_country,
         'shipping_street': shipping_street,
-        'shipping_number': shipping_number,
+        'shipping_number': str(shipping_number),
         'shipping_neighborhood': shipping_neighborhood,
         'shipping_complement': shipping_complement,
         'shipping_reference': shipping_reference}, index=[0])
