@@ -34,7 +34,7 @@ def get_order(id):
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
         clientProfileData = Fjson["clientProfileData"]
-        if Fjson["clientProfileData"] is not Empty:
+        if Fjson["clientProfileData"] is not None:
             clientProfileData = Fjson["clientProfileData"]
             client_email = clientProfileData["email"]
             client_email = decrypt_email(str(client_email))
@@ -59,7 +59,7 @@ def get_order(id):
         followUpEmail = Fjson["followUpEmail"]
         lastMessage = Fjson["lastMessage"]
         hostname = Fjson["hostname"]
-        if Fjson["changesAttachment"] is not Empty:
+        if Fjson["changesAttachment"] is not None:
             changesAttachment = Fjson["changesAttachment"]
             changesAttachment_id = changesAttachment["id"]
         else:
