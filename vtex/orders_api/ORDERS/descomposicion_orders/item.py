@@ -198,7 +198,19 @@ def delete_duplicate():
         print("Eliminando duplicados")
         client = bigquery.Client()
         QUERY = (
-            'CREATE OR REPLACE TABLE `shopstar-datalake.test.shopstar_order_items_package` AS SELECT DISTINCT * FROM `shopstar-datalake.test.shopstar_order_items_package`')
+            'CREATE OR REPLACE TABLE `shopstar-datalake.test.shopstar_order_item` AS SELECT DISTINCT * FROM `shopstar-datalake.test.shopstar_order_item`')
+        query_job = client.query(QUERY)
+        rows = query_job.result()
+        print(rows)
+    except:
+        print("Consulta SQL no ejecutada")
+        
+def delete_duplicateP():
+    try:
+        print("Eliminando duplicados")
+        client = bigquery.Client()
+        QUERY = (
+            'CREATE OR REPLACE TABLE `shopstar-datalake.test.shopstar_order_package` AS SELECT DISTINCT * FROM `shopstar-datalake.test.shopstar_order_package`')
         query_job = client.query(QUERY)
         rows = query_job.result()
         print(rows)
@@ -207,498 +219,503 @@ def delete_duplicate():
 
 
 def run():
-    
-    df = init.df_1
-    
-    df.reset_index(drop=True, inplace=True)
-    json_data = df.to_json(orient = 'records')
-    json_object = json.loads(json_data)
-    
-    table_schema = [
-    {
-        "name": "length",
-        "type": "FLOAT",
-        "mode": "NULLABLE"
-    },{
-        "name": "cubicweight",
-        "type": "FLOAT",
-        "mode": "NULLABLE"
-    },{
-        "name": "offeringInfo",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "commercialConditionId",
-        "type": "INTEGER",
-        "mode": "NULLABLE"
-    },{
-        "name": "categoriesIds",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "brandId",
-        "type": "INTEGER",
-        "mode": "NULLABLE"
-    },{
-        "name": "brandName",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "parentAssemblyBinding",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "height",
-        "type": "FLOAT",
-        "mode": "NULLABLE"
-    },{
-        "name": "productClusterId",
-        "type": "FLOAT",
-        "mode": "NULLABLE"
-    },{
-        "name": "parentItemIndex",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "taxCode",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "item_itemAttachment_name",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "freightCommission",
-        "type": "FLOAT",
-        "mode": "NULLABLE"
-    },{
-        "name": "item_price_definition",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "rewardValue",
-        "type": "FLOAT",
-        "mode": "NULLABLE"
-    },{
-        "name": "width",
-        "type": "FLOAT",
-        "mode": "NULLABLE"
-    },{
-        "name": "shippingPrice",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "isGift",
-        "type": "BOOLEAN",
-        "mode": "NULLABLE"
-    },{
-        "name": "orderId",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "sellingPrice",
-        "type": "FLOAT",
-        "mode": "NULLABLE"
-    },{
-        "name": "name",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "measurementUnit",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "detailUrl",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "preSaleDate",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "tax",
-        "type": "FLOAT",
-        "mode": "NULLABLE"
-    },{
-        "name": "priceValidUntil",
-        "type": "TIMESTAMP",
-        "mode": "NULLABLE"
-    },{
-        "name": "item_serialNumbers",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "sellerSku",
-        "type": "INTEGER",
-        "mode": "NULLABLE"
-    },{
-        "name": "id",
-        "type": "INTEGER",
-        "mode": "NULLABLE"
-    },{
-        "name": "manualPrice",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "commission",
-        "type": "FLOAT",
-        "mode": "NULLABLE"
-    },{
-        "name": "productId",
-        "type": "INTEGER",
-        "mode": "NULLABLE"
-    },{
-        "name": "item_unitMultiplier",
-        "type": "FLOAT",
-        "mode": "NULLABLE"
-    },{
-        "name": "item_price",
-        "type": "FLOAT",
-        "mode": "NULLABLE"
-    },{
-        "name": "seller",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "lockId",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "imageUrl",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "offeringType",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "item_quantity",
-        "type": "FLOAT",
-        "mode": "NULLABLE"
-    },{
-        "name": "refId",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "ean",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "listPrice",
-        "type": "FLOAT",
-        "mode": "NULLABLE"
-    },{
-        "name": "weight",
-        "type": "FLOAT",
-        "mode": "NULLABLE"
-    },{
-        "name": "offeringTypeId",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "uniqueId",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    }]
-    
-    project_id = '999847639598'
-    dataset_id = 'test'
-    table_id = 'shopstar_order_item'
-    
-    client  = bigquery.Client(project = project_id)
-    dataset  = client.dataset(dataset_id)
-    table = dataset.table(table_id)
-    job_config = bigquery.LoadJobConfig()
-    job_config.write_disposition = "WRITE_TRUNCATE"
-    job_config.autodetect = True
-    #job_config.schema = format_schema(table_schema)
-    job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-    job = client.load_table_from_json(json_object, table, job_config = job_config)
-    print(job.result())
-    delete_duplicate()
-    runItem()
+    try:
+        
+        df = init.df_1
+        
+        df.reset_index(drop=True, inplace=True)
+        json_data = df.to_json(orient = 'records')
+        json_object = json.loads(json_data)
+        
+        table_schema = [
+        {
+            "name": "length",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "cubicweight",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "offeringInfo",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "commercialConditionId",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "categoriesIds",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "brandId",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "brandName",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "parentAssemblyBinding",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "height",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "productClusterId",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "parentItemIndex",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "taxCode",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "item_itemAttachment_name",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "freightCommission",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "item_price_definition",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "rewardValue",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "width",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "shippingPrice",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "isGift",
+            "type": "BOOLEAN",
+            "mode": "NULLABLE"
+        },{
+            "name": "orderId",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "sellingPrice",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "name",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "measurementUnit",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "detailUrl",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "preSaleDate",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "tax",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "priceValidUntil",
+            "type": "TIMESTAMP",
+            "mode": "NULLABLE"
+        },{
+            "name": "item_serialNumbers",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "sellerSku",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "id",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "manualPrice",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "commission",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "productId",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "item_unitMultiplier",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "item_price",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "seller",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "lockId",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "imageUrl",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "offeringType",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "item_quantity",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "refId",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "ean",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "listPrice",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "weight",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "offeringTypeId",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "uniqueId",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        }]
+        
+        project_id = '999847639598'
+        dataset_id = 'test'
+        table_id = 'shopstar_order_item'
+        
+        client  = bigquery.Client(project = project_id)
+        dataset  = client.dataset(dataset_id)
+        table = dataset.table(table_id)
+        job_config = bigquery.LoadJobConfig()
+        job_config.write_disposition = "WRITE_TRUNCATE"
+        job_config.autodetect = True
+        #job_config.schema = format_schema(table_schema)
+        job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+        job = client.load_table_from_json(json_object, table, job_config = job_config)
+        print(job.result())
+        delete_duplicate()
+    except:
+        print("No items")
 
 def runItem():
-    df = init.df_2
-    
-    df.reset_index(drop=True, inplace=True)
-    json_data = df.to_json(orient = 'records')
-    json_object = json.loads(json_data)
-    
-    table_schema = [
-    {
-        "name": "length",
-        "type": "FLOAT",
-        "mode": "NULLABLE"
-    },{
-        "name": "cubicweight",
-        "type": "FLOAT",
-        "mode": "NULLABLE"
-    },{
-        "name": "offeringInfo",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "commercialConditionId",
-        "type": "INTEGER",
-        "mode": "NULLABLE"
-    },{
-        "name": "categoriesIds",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "brandId",
-        "type": "INTEGER",
-        "mode": "NULLABLE"
-    },{
-        "name": "brandName",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "parentAssemblyBinding",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "height",
-        "type": "FLOAT",
-        "mode": "NULLABLE"
-    },{
-        "name": "productClusterId",
-        "type": "FLOAT",
-        "mode": "NULLABLE"
-    },{
-        "name": "parentItemIndex",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "taxCode",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "item_itemAttachment_name",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "freightCommission",
-        "type": "FLOAT",
-        "mode": "NULLABLE"
-    },{
-        "name": "item_price_definition",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "rewardValue",
-        "type": "FLOAT",
-        "mode": "NULLABLE"
-    },{
-        "name": "width",
-        "type": "FLOAT",
-        "mode": "NULLABLE"
-    },{
-        "name": "shippingPrice",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "isGift",
-        "type": "BOOLEAN",
-        "mode": "NULLABLE"
-    },{
-        "name": "orderId",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "sellingPrice",
-        "type": "FLOAT",
-        "mode": "NULLABLE"
-    },{
-        "name": "name",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "measurementUnit",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "detailUrl",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "preSaleDate",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "tax",
-        "type": "FLOAT",
-        "mode": "NULLABLE"
-    },{
-        "name": "priceValidUntil",
-        "type": "TIMESTAMP",
-        "mode": "NULLABLE"
-    },{
-        "name": "item_serialNumbers",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "sellerSku",
-        "type": "INTEGER",
-        "mode": "NULLABLE"
-    },{
-        "name": "id",
-        "type": "INTEGER",
-        "mode": "NULLABLE"
-    },{
-        "name": "manualPrice",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "commission",
-        "type": "FLOAT",
-        "mode": "NULLABLE"
-    },{
-        "name": "productId",
-        "type": "INTEGER",
-        "mode": "NULLABLE"
-    },{
-        "name": "item_unitMultiplier",
-        "type": "FLOAT",
-        "mode": "NULLABLE"
-    },{
-        "name": "item_price",
-        "type": "FLOAT",
-        "mode": "NULLABLE"
-    },{
-        "name": "seller",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "lockId",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "imageUrl",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "offeringType",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "item_quantity",
-        "type": "FLOAT",
-        "mode": "NULLABLE"
-    },{
-        "name": "refId",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "ean",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "listPrice",
-        "type": "FLOAT",
-        "mode": "NULLABLE"
-    },{
-        "name": "weight",
-        "type": "FLOAT",
-        "mode": "NULLABLE"
-    },{
-        "name": "offeringTypeId",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "uniqueId",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "courier",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "invoiceNumber",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "invoiceValue",
-        "type": "FLOAT",
-        "mode": "NULLABLE"
-    },{
-        "name": "invoiceUrl",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "issuanceDate",
-        "type": "TIMESTAMP",
-        "mode": "NULLABLE"
-    },{
-        "name": "trackingNumber",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "invoiceKey",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "trackingUrl",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "embeddedInvoice",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "package_type",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "cfop",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "volumes",
-        "type": "FLOAT",
-        "mode": "NULLABLE"
-    },{
-        "name": "EnableInferItems",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "itemIndex",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "package_quantity",
-        "type": "INTEGER",
-        "mode": "NULLABLE"
-    },{
-        "name": "package_price",
-        "type": "INTEGER",
-        "mode": "NULLABLE"
-    },{
-        "name": "description",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "unitMultiplier",
-        "type": "FLOAT",
-        "mode": "NULLABLE"
-    }]
-    
-    project_id = '999847639598'
-    dataset_id = 'test'
-    table_id = 'shopstar_order_package'
-    
-    client  = bigquery.Client(project = project_id)
-    dataset  = client.dataset(dataset_id)
-    table = dataset.table(table_id)
-    job_config = bigquery.LoadJobConfig()
-    job_config.write_disposition = "WRITE_TRUNCATE"
-    job_config.autodetect = True
-    #job_config.schema = format_schema(table_schema)
-    job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-    job = client.load_table_from_json(json_object, table, job_config = job_config)
-    print(job.result())
-    delete_duplicate()
+    try:
+        df = init.df_2
+        
+        df.reset_index(drop=True, inplace=True)
+        json_data = df.to_json(orient = 'records')
+        json_object = json.loads(json_data)
+        
+        table_schema = [
+        {
+            "name": "length",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "cubicweight",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "offeringInfo",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "commercialConditionId",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "categoriesIds",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "brandId",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "brandName",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "parentAssemblyBinding",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "height",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "productClusterId",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "parentItemIndex",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "taxCode",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "item_itemAttachment_name",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "freightCommission",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "item_price_definition",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "rewardValue",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "width",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "shippingPrice",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "isGift",
+            "type": "BOOLEAN",
+            "mode": "NULLABLE"
+        },{
+            "name": "orderId",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "sellingPrice",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "name",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "measurementUnit",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "detailUrl",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "preSaleDate",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "tax",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "priceValidUntil",
+            "type": "TIMESTAMP",
+            "mode": "NULLABLE"
+        },{
+            "name": "item_serialNumbers",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "sellerSku",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "id",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "manualPrice",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "commission",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "productId",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "item_unitMultiplier",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "item_price",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "seller",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "lockId",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "imageUrl",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "offeringType",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "item_quantity",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "refId",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "ean",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "listPrice",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "weight",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "offeringTypeId",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "uniqueId",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "courier",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "invoiceNumber",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "invoiceValue",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "invoiceUrl",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "issuanceDate",
+            "type": "TIMESTAMP",
+            "mode": "NULLABLE"
+        },{
+            "name": "trackingNumber",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "invoiceKey",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "trackingUrl",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "embeddedInvoice",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "package_type",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "cfop",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "volumes",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "EnableInferItems",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "itemIndex",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "package_quantity",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "package_price",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "description",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "unitMultiplier",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        }]
+        
+        project_id = '999847639598'
+        dataset_id = 'test'
+        table_id = 'shopstar_order_package'
+        
+        client  = bigquery.Client(project = project_id)
+        dataset  = client.dataset(dataset_id)
+        table = dataset.table(table_id)
+        job_config = bigquery.LoadJobConfig()
+        job_config.write_disposition = "WRITE_TRUNCATE"
+        job_config.autodetect = True
+        #job_config.schema = format_schema(table_schema)
+        job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+        job = client.load_table_from_json(json_object, table, job_config = job_config)
+        print(job.result())
+        delete_duplicateP()
+    except:
+        print("No hay datos")
     
     
 
