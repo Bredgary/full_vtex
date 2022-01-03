@@ -168,9 +168,9 @@ def get_order(id):
         RequestedByPaymentNotification = cancellationData["RequestedByPaymentNotification"]
         Reason = cancellationData["Reason"]
     else:
-        RequestedByUser = None
-        RequestedBySystem = None
-        RequestedBySellerNotification = None
+        RequestedByUser = False
+        RequestedBySystem = False
+        RequestedBySellerNotification = False
         RequestedByPaymentNotification = None
         Reason = None
     
