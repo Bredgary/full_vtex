@@ -8,7 +8,7 @@ from datetime import datetime, timezone
 from os.path import join
 from _queue import Empty
 import datetime
-from contextlib import nullcontext
+from _winapi import NULL
 
 class init:
   productList = []
@@ -158,7 +158,7 @@ def get_order(id):
         cancellationData = Fjson["cancellationData"]
         CancellationDate = cancellationData["CancellationDate"]
     else:
-        CancellationDate = nullcontext
+        CancellationDate = NULL
 
     
     if Fjson["cancellationData"] is not None:
