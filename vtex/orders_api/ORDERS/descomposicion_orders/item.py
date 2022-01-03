@@ -131,6 +131,7 @@ def get_order(id):
                 'width': width,
                 'item_itemAttachment_name': item_itemAttachment_name}, index=[0])
             init.df_1 = init.df_1.append(df1)
+            get_order_package()
     except:
         print("No items")
         
@@ -429,10 +430,11 @@ def run():
         job = client.load_table_from_json(json_object, table, job_config = job_config)
         print(job.result())
         delete_duplicate()
+        runPack()
     except:
-        print("No items")
+        print("No runPack")
 
-def runItem():
+def runPack():
     try:
         df = init.df_2
         
@@ -731,7 +733,6 @@ def get_params():
         registro += 1
         print(row.orderId)
         get_order(row.orderId)
-        get_order_package(row.orderId)
         print("Registro: "+str(registro))
         if registro == 5:
             run()
