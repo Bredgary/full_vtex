@@ -172,7 +172,7 @@ def get_order(id):
             
         if Fjson["shippingData"] is not None:
             shippingData = Fjson["shippingData"]
-            shipping_address = shippingData["address"]
+            address = shippingData["address"]
             shipping_addressType = address["addressType"]
             shipping_receiverName = address["receiverName"]
             shipping_addressId = address["addressId"]
