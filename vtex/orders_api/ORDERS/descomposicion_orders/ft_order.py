@@ -68,7 +68,7 @@ def get_order(id):
         changesAttachment = Fjson["changesAttachment"]
         changesAttachment_id = changesAttachment["id"]
     else:
-        changesAttachment_id = None
+        changesAttachment_id = ""
     openTextField = Fjson["openTextField"]
     roundingError = Fjson["roundingError"]
     orderFormId = Fjson["orderFormId"]
@@ -93,9 +93,9 @@ def get_order(id):
         total_name_items = items["name"]
         total_value_items = items["value"]
     else:
-        total_id_items = None
-        total_name_items = None
-        total_value_items = None
+        total_id_items = ""
+        total_name_items = ""
+        total_value_items = 0
         
     if Total[1] is not None:
         discounts = Total[1]
@@ -103,9 +103,9 @@ def get_order(id):
         total_name_discounts = discounts["name"]
         total_value_discounts = discounts["value"]
     else:
-        total_id_discounts = None
-        total_name_discounts = None
-        total_value_discounts = None
+        total_id_discounts = ""
+        total_name_discounts = ""
+        total_value_discounts = 0
 
     if Total[2] is not None:
         shipping = Total[2]
@@ -113,9 +113,9 @@ def get_order(id):
         total_name_shipping = shipping["name"]
         total_value_shipping = shipping["value"]
     else:
-        total_id_shipping = None
-        total_name_shipping = None
-        total_value_shipping = None
+        total_id_shipping = ""
+        total_name_shipping = ""
+        total_value_shipping = 0
         
     if Total[3] is not None:
         tax = Total[3]
@@ -123,15 +123,15 @@ def get_order(id):
         total_name_tax = tax["name"]
         total_value_tax = tax["value"]
     else:
-        total_id_tax = None
-        total_name_tax = None
-        total_value_tax = None
+        total_id_tax = ""
+        total_name_tax = ""
+        total_value_tax = 0
 
     if Fjson["shippingData"]:
         shippingData = Fjson["shippingData"]
         shippingData_id = shippingData["id"]
     else:
-        shippingData_id = None
+        shippingData_id = ""
 
     if Fjson["marketplace"] is not None:
         marketplace = Fjson["marketplace"]
@@ -139,9 +139,9 @@ def get_order(id):
         isCertified = marketplace["isCertified"]
         name = marketplace["name"]
     else:
-        baseURL = None
+        baseURL = ""
         isCertified = False
-        name = None
+        name = ""
 
     if Fjson["sellers"] is None:
         sellers_ = Fjson["sellers"]
@@ -150,9 +150,9 @@ def get_order(id):
         seller_name = sellers["name"]
         seller_logo = sellers["logo"]
     else:
-        seller_id = None
-        seller_name = None
-        seller_logo = None
+        seller_id = ""
+        seller_name = ""
+        seller_logo = ""
 
     if Fjson["cancellationData"] is not None:
         cancellationData = Fjson["cancellationData"]
@@ -171,16 +171,16 @@ def get_order(id):
         RequestedByUser = False
         RequestedBySystem = False
         RequestedBySellerNotification = False
-        RequestedByPaymentNotification = None
-        Reason = None
+        RequestedByPaymentNotification = ""
+        Reason = ""
     
     if Fjson["invoiceData"] is not None:
         dim_invoiceData = Fjson["invoiceData"]
         invoice_address = dim_invoiceData["address"]
         userPaymentInfo = dim_invoiceData["userPaymentInfo"]
     else:
-        invoice_address = None
-        userPaymentInfo = None
+        invoice_address = ""
+        userPaymentInfo = ""
         
     if Fjson["shippingData"] is not None:
         shippingData = Fjson["shippingData"]
@@ -198,18 +198,18 @@ def get_order(id):
         shipping_complement = address["complement"]
         shipping_reference = address["reference"]
     else:
-        shipping_addressType = None
-        shipping_receiverName = None
-        shipping_addressId = None
-        shipping_postalCode = None
-        shipping_city = None
-        shipping_state = None
-        shipping_country = None
-        shipping_street = None
-        shipping_number = None
-        shipping_neighborhood = None
-        shipping_complement = None
-        shipping_reference = None
+        shipping_addressType = ""
+        shipping_receiverName = ""
+        shipping_addressId = ""
+        shipping_postalCode = ""
+        shipping_city = ""
+        shipping_state = ""
+        shipping_country = ""
+        shipping_street = ""
+        shipping_number = ""
+        shipping_neighborhood = ""
+        shipping_complement = ""
+        shipping_reference = ""
         
     df1 = pd.DataFrame({
         'orderId': id,
@@ -276,6 +276,7 @@ def get_order(id):
         'totals_value_tax': total_value_tax,
         'invoice_address': invoice_address,
         'userPaymentInfo': userPaymentInfo,
+        'shippingData_id': shippingData_id,
         'shipping_addressType': shipping_addressType,
         'shipping_receiverName': shipping_receiverName,
         'shipping_addressId': shipping_addressId,
@@ -563,6 +564,10 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "userPaymentInfo",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "shippingData_id",
         "type": "STRING",
         "mode": "NULLABLE"
     },{
