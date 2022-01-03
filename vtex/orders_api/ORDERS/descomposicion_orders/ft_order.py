@@ -156,7 +156,8 @@ def get_order(id):
         cancellationData = Fjson["cancellationData"]
         CancellationDate = cancellationData["CancellationDate"]
     else:
-        CancellationDate = date
+        CancellationDate = datetime.datetime(1900, 1, 1)
+
     
     if Fjson["cancellationData"] is not None:
         cancellationData = Fjson["cancellationData"]
