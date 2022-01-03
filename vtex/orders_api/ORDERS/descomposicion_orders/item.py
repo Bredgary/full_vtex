@@ -208,7 +208,7 @@ def delete_duplicate():
 
 def run():
     
-    df = init.df_2
+    df = init.df_1
     
     df.reset_index(drop=True, inplace=True)
     json_data = df.to_json(orient = 'records')
@@ -403,7 +403,7 @@ def run():
     
     project_id = '999847639598'
     dataset_id = 'test'
-    table_id = 'shopstar_order_package'
+    table_id = 'shopstar_order_item'
     
     client  = bigquery.Client(project = project_id)
     dataset  = client.dataset(dataset_id)
@@ -419,7 +419,7 @@ def run():
     runItem()
 
 def runItem():
-    df = init.df_1
+    df = init.df_2
     
     df.reset_index(drop=True, inplace=True)
     json_data = df.to_json(orient = 'records')
