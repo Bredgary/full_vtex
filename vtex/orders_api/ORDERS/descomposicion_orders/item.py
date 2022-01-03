@@ -131,7 +131,6 @@ def get_order(id):
                 'width': width,
                 'item_itemAttachment_name': item_itemAttachment_name}, index=[0])
             init.df_1 = init.df_1.append(df1)
-            get_order_package()
     except:
         print("No items")
         
