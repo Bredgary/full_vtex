@@ -224,7 +224,7 @@ def get_order(id):
             'followUpEmail': followUpEmail,
             'lastMessage': lastMessage,
             'hostname': hostname,
-            'changesAttachment': changesAttachment,
+            'changesAttachment_id': changesAttachment_id,
             'openTextField': openTextField,
             'roundingError': roundingError,
             'orderFormId': orderFormId,
@@ -344,7 +344,7 @@ def run():
         "type": "STRING",
         "mode": "NULLABLE"
     },{
-        "name": "changesAttachment",
+        "name": "changesAttachment_id",
         "type": "STRING",
         "mode": "NULLABLE"
     },{
