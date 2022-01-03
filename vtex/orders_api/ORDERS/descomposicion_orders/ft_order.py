@@ -8,7 +8,6 @@ from datetime import datetime, timezone
 from os.path import join
 from _queue import Empty
 import datetime
-from _winapi import NULL
 
 class init:
   productList = []
