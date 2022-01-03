@@ -140,7 +140,7 @@ def get_order(id):
         name = marketplace["name"]
     else:
         baseURL = None
-        isCertified = None
+        isCertified = False
         name = None
 
     if Fjson["sellers"] is None:
