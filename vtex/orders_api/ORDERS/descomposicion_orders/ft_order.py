@@ -170,7 +170,7 @@ def get_order(id):
             invoice_address = ''
             userPaymentInfo = ''
             
-        try:
+        if Fjson["shippingData"] is not None:
             shippingData = Fjson["shippingData"]
             shipping_address = shippingData["address"]
             shipping_addressType = address["addressType"]
@@ -185,8 +185,21 @@ def get_order(id):
             shipping_neighborhood = address["neighborhood"]
             shipping_complement = address["complement"]
             shipping_reference = address["reference"]
-        except:
-            print("No shippingData")
+        else:
+            shippingData = None
+            shipping_address = None
+            shipping_addressType = None
+            shipping_receiverName = None
+            shipping_addressId = None
+            shipping_postalCode = None
+            shipping_city = None
+            shipping_state = None
+            shipping_country = None
+            shipping_street = None
+            shipping_number = None
+            shipping_neighborhood = None
+            shipping_complement  = None
+            shipping_reference = None
             
         df1 = pd.DataFrame({
             'orderId': id,
