@@ -27,7 +27,6 @@ def get_order_package(id):
         packageAttachment = Fjson["packageAttachment"]
         packages = packageAttachment["packages"]
         
-        items = ""
         courier = ""
         invoiceNumber = ""
         invoiceValue = ""
@@ -48,7 +47,10 @@ def get_order_package(id):
         unitMultiplier = ""
         
         for x in packages:
-            items = packages["items"]
+            try:
+                items = packages["items"]
+            except:
+                items = packages[0]
             courier = x["courier"]
             invoiceNumber = x["invoiceNumber"]
             invoiceValue = x["invoiceValue"]
