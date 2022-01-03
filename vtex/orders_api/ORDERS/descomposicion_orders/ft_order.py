@@ -642,10 +642,10 @@ def get_params():
         registro += 1
         get_order(row.orderId)
         print("Registro: "+str(registro))
-        if registro == 5:
-            run()
-        if registro == 10:
-            run()
+        #if registro == 5:
+        #    run()
+        #if registro == 10:
+        #    run()
         if registro == 100:
             run()
         if registro == 200:
