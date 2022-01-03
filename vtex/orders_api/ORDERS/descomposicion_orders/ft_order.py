@@ -159,6 +159,7 @@ def get_order(id):
         CancellationDate = None
     
     if Fjson["cancellationData"] is not None:
+        cancellationData = Fjson["cancellationData"]
         RequestedByUser = cancellationData["RequestedByUser"]
         RequestedBySystem = cancellationData["RequestedBySystem"]
         RequestedBySellerNotification = cancellationData["RequestedBySellerNotification"]
