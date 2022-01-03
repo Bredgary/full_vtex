@@ -193,7 +193,7 @@ def get_order(id):
         shipping_state = address["state"]
         shipping_country = address["country"]
         shipping_street = address["street"]
-        shipping_number = str(address["number"])
+        shipping_number = address["number"]
         shipping_neighborhood = address["neighborhood"]
         shipping_complement = address["complement"]
         shipping_reference = address["reference"]
@@ -206,7 +206,7 @@ def get_order(id):
         shipping_state = None
         shipping_country = None
         shipping_street = None
-        shipping_number = ""
+        shipping_number = None
         shipping_neighborhood = None
         shipping_complement = None
         shipping_reference = None
@@ -284,7 +284,7 @@ def get_order(id):
         'shipping_state': shipping_state,
         'shipping_country': shipping_country,
         'shipping_street': shipping_street,
-        'shipping_number': str(shipping_number),
+        'shipping_number': shipping_number,
         'shipping_neighborhood': shipping_neighborhood,
         'shipping_complement': shipping_complement,
         'shipping_reference': shipping_reference}, index=[0])
@@ -623,9 +623,9 @@ def run():
     dataset  = client.dataset(dataset_id)
     table = dataset.table(table_id)
     job_config = bigquery.LoadJobConfig()
-    #job_config.schema = format_schema(table_schema)
+    job_config.schema = format_schema(table_schema)
     #job_config.write_disposition = "WRITE_TRUNCATE"
-    job_config.autodetect = True
+    #job_config.autodetect = True
     job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
     job = client.load_table_from_json(json_object, table, job_config = job_config)
     print(job.result())
