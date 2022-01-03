@@ -7,6 +7,7 @@ import requests
 from datetime import datetime, timezone
 from os.path import join
 from _queue import Empty
+import datetime
 
 class init:
   productList = []
@@ -156,7 +157,7 @@ def get_order(id):
         cancellationData = Fjson["cancellationData"]
         CancellationDate = cancellationData["CancellationDate"]
     else:
-        CancellationDate = datetime.date(1900, 1, 1)
+        CancellationDate = datetime.datetime(1900,1,1)
 
     
     if Fjson["cancellationData"] is not None:
