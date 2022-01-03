@@ -186,8 +186,6 @@ def get_order(id):
             shipping_complement = address["complement"]
             shipping_reference = address["reference"]
         else:
-            shippingData = None
-            shipping_address = None
             shipping_addressType = None
             shipping_receiverName = None
             shipping_addressId = None
@@ -198,7 +196,7 @@ def get_order(id):
             shipping_street = None
             shipping_number = None
             shipping_neighborhood = None
-            shipping_complement  = None
+            shipping_complement = None
             shipping_reference = None
             
         df1 = pd.DataFrame({
@@ -267,7 +265,6 @@ def get_order(id):
             'totals_value_tax': total_value_tax,
             'invoice_address': invoice_address,
             'userPaymentInfo': userPaymentInfo,
-            'shipping_address': shipping_address,
             'shipping_addressType': shipping_addressType,
             'shipping_receiverName': shipping_receiverName,
             'shipping_addressId': shipping_addressId,
