@@ -144,11 +144,11 @@ def get_order(id):
             seller_id = ''
             seller_name = ''
             seller_logo = ''
-        try:
+        if Fjson["cancellationData"] is not None:
             cancellationData = Fjson["cancellationData"]
             CancellationDate = cancellationData["CancellationDate"]
-        except:
-            print("No CancellationDate")
+        else:
+            CancellationDate = None
         try:
             RequestedByUser = cancellationData["RequestedByUser"]
             RequestedBySystem = cancellationData["RequestedBySystem"]
@@ -244,7 +244,7 @@ def get_order(id):
             'seller_id': seller_id,
             'seller_name': seller_name,
             'seller_logo': seller_logo,
-            'CancellationDate': str(CancellationDate),
+            'CancellationDate': CancellationDate,
             'RequestedByUser': RequestedByUser,
             'RequestedBySystem': RequestedBySystem,
             'RequestedBySellerNotification': RequestedBySellerNotification,
