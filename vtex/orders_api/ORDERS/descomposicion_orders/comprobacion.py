@@ -32,7 +32,7 @@ def get_order(id):
     url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
     response = requests.request("GET", url, headers=init.headers)
     Fjson = json.loads(response.text)
-    print(Fjson["invoice_address"])
+    print(Fjson["invoiceData"])
 
 def get_params():
     print("Cargando consulta")
