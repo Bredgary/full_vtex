@@ -158,18 +158,18 @@ def get_order(id):
     else:
         CancellationDate = None
     
-    if cancellationData["RequestedByUser"] is not None:
+    if Fjson["cancellationData"] is not None:
         RequestedByUser = cancellationData["RequestedByUser"]
         RequestedBySystem = cancellationData["RequestedBySystem"]
         RequestedBySellerNotification = cancellationData["RequestedBySellerNotification"]
-        RequestedByPaymentNotification = str(cancellationData["RequestedByPaymentNotification"])
+        RequestedByPaymentNotification = cancellationData["RequestedByPaymentNotification"]
         Reason = cancellationData["Reason"]
     else:
         RequestedByUser = None
         RequestedBySystem = None
         RequestedBySellerNotification = None
-        RequestedByPaymentNotification = ""
-        Reason = ""
+        RequestedByPaymentNotification = None
+        Reason = None
     
     if Fjson["invoiceData"] is not None:
         dim_invoiceData = Fjson["invoiceData"]
