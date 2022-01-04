@@ -11,82 +11,47 @@ class init:
     productList = []
     df = pd.DataFrame()
     
-    id = None
-    email = None
-    firstName = None
-    lastName = None
-    documentType = None
-    document = None
-    phone = None
-    corporateName = None
-    tradeName = None
-    corporateDocument = None
-    stateInscription = None
-    corporatePhone = None
-    isCorporate = None
-    userProfileId = None
-    customerClass = None
-    
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
         
-def get_order(id,reg):
+def get_order(id):
     try:
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
-        try:
-            clientProfileData = Fjson["clientProfileData"]
-            init.id = clientProfileData["id"]
-            init.email = clientProfileData["email"]
-            init.firstName = clientProfileData["firstName"]
-            init.lastName = clientProfileData["lastName"]
-            init.documentType = clientProfileData["documentType"]
-            init.document = clientProfileData["document"]
-            init.phone = clientProfileData["phone"]
-            init.corporateName = clientProfileData["corporateName"]
-            init.tradeName = clientProfileData["tradeName"]
-            init.corporateDocument = clientProfileData["corporateDocument"]
-            init.stateInscription = clientProfileData["stateInscription"]
-            init.corporatePhone = clientProfileData["corporatePhone"]
-            init.isCorporate = clientProfileData["isCorporate"]
-            init.userProfileId = clientProfileData["userProfileId"]
-        except:
-            print("vacio")
         
+        clientProfileData = Fjson["clientProfileData"]
+        email = clientProfileData["email"]
+        firstName = clientProfileData["firstName"]
+        lastName = clientProfileData["lastName"]
+        documentType = clientProfileData["documentType"]
+        document = clientProfileData["document"]
+        phone = clientProfileData["phone"]
+        corporateName = clientProfileData["corporateName"]
+        tradeName = clientProfileData["tradeName"]
+        corporateDocument = clientProfileData["corporateDocument"]
+        stateInscription = clientProfileData["stateInscription"]
+        corporatePhone = clientProfileData["corporatePhone"]
+        isCorporate = clientProfileData["isCorporate"]
+        userProfileId = clientProfileData["userProfileId"]
+       
         df1 = pd.DataFrame({
-            'orderId': str(id),
-            'dim_client': str(init.id),
-            'email': str(init.email),
-            'firstName': str(init.firstName),
-            'lastName': str(init.lastName),
-            'documentType': str(init.documentType),
-            'document': str(init.document),
-            'phone': str(init.phone),
-            'corporateName': str(init.corporateName),
-            'tradeName': str(init.tradeName),
-            'corporateDocument': str(init.corporateDocument),
-            'stateInscription': str(init.stateInscription),
-            'corporatePhone': str(init.corporatePhone),
-            'isCorporate': str(init.isCorporate),
-            'userProfileId': str(init.userProfileId)}, index=[0])
+            'orderId': id,
+            'email': email,
+            'firstName': firstName,
+            'lastName': lastName,
+            'documentType': documentType,
+            'document': document,
+            'phone': phone,
+            'corporateName': corporateName,
+            'tradeName': tradeName,
+            'corporateDocument': corporateDocument,
+            'stateInscription': stateInscription,
+            'corporatePhone': corporatePhone,
+            'isCorporate': isCorporate,
+            'userProfileId': userProfileId}, index=[0])
         init.df = init.df.append(df1)
-        print("Registro: "+str(reg))
     except:
-        print("vacio")
-        
-def get_params():
-    print("Cargando consulta")
-    client = bigquery.Client()
-    QUERY = (
-        'SELECT orderId FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`')
-    query_job = client.query(QUERY)  
-    rows = query_job.result()
-    registro = 0
-    for row in rows:
-        registro += 1
-        get_order(row.orderId,registro)
-    run()
-            
+        print("vacio") 
             
         
 def delete_duplicate():
@@ -121,5 +86,59 @@ def run():
     job = client.load_table_from_json(json_object, table, job_config = job_config)
     print(job.result())
     delete_duplicate()
-    
+
+def get_params():
+    print("Cargando consulta")
+    client = bigquery.Client()
+    QUERY = (
+        'SELECT orderId FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`')
+    query_job = client.query(QUERY)  
+    rows = query_job.result()
+    registro = 0
+    for row in rows:
+        registro += 1
+        get_order(row.orderId)
+        print("Registro: "+str(registro))
+        if registro == 100:
+            run()
+        if registro == 200:
+            run()
+        if registro == 500:
+            run()
+        if registro == 1000:
+            run()
+        if registro == 5000:
+            run()
+        if registro == 10000:
+            run()
+        if registro == 12000:
+            run()
+        if registro == 15000:
+            run()
+        if registro == 20000:
+            run()
+        if registro == 30000:
+            run()
+        if registro == 35000:
+            run()
+        if registro == 40000:
+            run()
+        if registro == 45000:
+            run()
+        if registro == 50000:
+            run()
+        if registro == 60000:
+            run()
+        if registro == 70000:
+            run()
+        if registro == 80000:
+            run()
+        if registro == 85000:
+            run()
+        if registro == 90000:
+            run()
+        if registro == 95000:
+            run()
+    run()
+           
 get_params()
