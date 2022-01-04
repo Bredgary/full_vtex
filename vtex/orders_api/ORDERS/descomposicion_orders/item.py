@@ -224,7 +224,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "sellingPrice",
-        "type": "FLOAT",
+        "type": "INTEGER",
         "mode": "NULLABLE"
     },{
         "name": "name",
