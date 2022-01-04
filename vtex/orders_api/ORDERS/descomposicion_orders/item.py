@@ -244,7 +244,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "tax",
-        "type": "FLOAT",
+        "type": "INTEGER",
         "mode": "NULLABLE"
     },{
         "name": "priceValidUntil",
