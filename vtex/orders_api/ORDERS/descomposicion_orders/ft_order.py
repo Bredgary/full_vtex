@@ -34,7 +34,6 @@ def get_order(id):
     url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
     response = requests.request("GET", url, headers=init.headers)
     Fjson = json.loads(response.text)
-    clientProfileData = Fjson["clientProfileData"]
     try:
         clientProfileData = Fjson["clientProfileData"]
         client_email = clientProfileData["email"]
