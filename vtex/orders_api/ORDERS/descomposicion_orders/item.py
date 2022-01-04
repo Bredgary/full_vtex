@@ -280,7 +280,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "item_price",
-        "type": "FLOAT",
+        "type": "INTEGER",
         "mode": "NULLABLE"
     },{
         "name": "seller",
