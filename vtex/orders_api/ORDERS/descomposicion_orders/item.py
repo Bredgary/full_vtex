@@ -204,7 +204,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "rewardValue",
-        "type": "FLOAT",
+        "type": "INTEGER",
         "mode": "NULLABLE"
     },{
         "name": "width",
