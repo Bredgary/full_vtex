@@ -197,7 +197,7 @@ def run():
             "mode": "NULLABLE"
         },{
             "name": "freightCommission",
-            "type": "FLOAT",
+            "type": "INTEGER",
             "mode": "NULLABLE"
         },{
             "name": "item_price_definition",
@@ -337,9 +337,9 @@ def run():
         dataset  = client.dataset(dataset_id)
         table = dataset.table(table_id)
         job_config = bigquery.LoadJobConfig()
-        job_config.write_disposition = "WRITE_TRUNCATE"
-        job_config.autodetect = True
-        #job_config.schema = format_schema(table_schema)
+        #job_config.write_disposition = "WRITE_TRUNCATE"
+        #job_config.autodetect = True
+        job_config.schema = format_schema(table_schema)
         job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
         job = client.load_table_from_json(json_object, table, job_config = job_config)
         print(job.result())
@@ -350,7 +350,7 @@ def run():
 def get_params():
     print("Cargando consulta")
     client = bigquery.Client()
-    QUERY = ('SELECT DISTINCT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`')
+    QUERY = ('SELECT DISTINCT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`WHERE (orderId NOT IN (SELECT orderId FROM `shopstar-datalake.test.shopstar_order_item`))')
     query_job = client.query(QUERY)  
     rows = query_job.result()
     registro = 0
@@ -358,38 +358,6 @@ def get_params():
         registro += 1
         get_order(row.orderId)
         print("Registro: "+str(registro))
-        if registro == 5:
-            run()
-        if registro == 10000:
-            run()
-        if registro == 12000:
-            run()
-        if registro == 15000:
-            run()
-        if registro == 20000:
-            run()
-        if registro == 30000:
-            run()
-        if registro == 35000:
-            run()
-        if registro == 40000:
-            run()
-        if registro == 45000:
-            run()
-        if registro == 50000:
-            run()
-        if registro == 60000:
-            run()
-        if registro == 70000:
-            run()
-        if registro == 80000:
-            run()
-        if registro == 85000:
-            run()
-        if registro == 90000:
-            run()
-        if registro == 95000:
-            run()
     run()
     
 get_params()
