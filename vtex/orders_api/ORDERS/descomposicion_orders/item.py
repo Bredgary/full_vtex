@@ -18,6 +18,16 @@ def format_schema(schema):
         formatted_schema.append(bigquery.SchemaField(row['name'], row['type'], row['mode']))
     return formatted_schema
 
+def delete_duplicate():
+  try:
+    print("Eliminando duplicados")
+    client = bigquery.Client()
+    QUERY = ('CREATE OR REPLACE TABLE `shopstar-datalake.test.shopstar_order_item` AS SELECT DISTINCT * FROM `shopstar-datalake.test.shopstar_order_item`')
+    query_job = client.query(QUERY)
+    rows = query_job.result()
+    print(rows)
+  except:
+    print("Consulta SQL no ejecutada")
 
 def get_order(id):
     try:
