@@ -42,12 +42,14 @@ def get_order_package(id):
         cfop  = ""
         volumes  = ""
         EnableInferItems = ""
+        itemIndex = ""
+        quantity = ""
+        price = ""
+        description = ""
+        unitMultiplier = ""
         
         for x in packages:
-            try:
-                items = packages["items"]
-            except:
-                items = packages[0]
+            items = packages["items"]
             courier = x["courier"]
             invoiceNumber = x["invoiceNumber"]
             invoiceValue = x["invoiceValue"]
@@ -62,33 +64,33 @@ def get_order_package(id):
             volumes = x["volumes"]
             EnableInferItems = x["EnableInferItems"]
             
-        for y in items:
-            itemIndex = y["itemIndex"]
-            quantity = y["quantity"]
-            price = y["price"]
-            description = y["description"]
-            unitMultiplier = y["unitMultiplier"]
-            df1 = pd.DataFrame({
-                'orderId': id,
-                'courier': courier,
-                'invoiceNumber': invoiceNumber,
-                'invoiceValue': invoiceValue,
-                'invoiceUrl': invoiceUrl,
-                'issuanceDate': issuanceDate,
-                'trackingNumber': trackingNumber,
-                'invoiceKey': invoiceKey,
-                'trackingUrl': trackingUrl,
-                'embeddedInvoice': embeddedInvoice,
-                'package_type': package_type,
-                "cfop":cfop,
-                "volumes":volumes,
-                "EnableInferItems":EnableInferItems,
-                'itemIndex': itemIndex,
-                'quantity': quantity,
-                'price': price,
-                'description': description,
-                'unitMultiplier': unitMultiplier}, index=[0])
-            init.df = init.df.append(df1)
+            for y in items:
+                itemIndex = y["itemIndex"]
+                quantity = y["quantity"]
+                price = y["price"]
+                description = y["description"]
+                unitMultiplier = y["unitMultiplier"]
+                df1 = pd.DataFrame({
+                    'orderId': id,
+                    'courier': courier,
+                    'invoiceNumber': invoiceNumber,
+                    'invoiceValue': invoiceValue,
+                    'invoiceUrl': invoiceUrl,
+                    'issuanceDate': issuanceDate,
+                    'trackingNumber': trackingNumber,
+                    'invoiceKey': invoiceKey,
+                    'trackingUrl': trackingUrl,
+                    'embeddedInvoice': embeddedInvoice,
+                    'package_type': package_type,
+                    "cfop":cfop,
+                    "volumes":volumes,
+                    "EnableInferItems":EnableInferItems,
+                    'itemIndex': itemIndex,
+                    'quantity': quantity,
+                    'price': price,
+                    'description': description,
+                    'unitMultiplier': unitMultiplier}, index=[0])
+                init.df = init.df.append(df1)
     except:
         print("No package")
         
