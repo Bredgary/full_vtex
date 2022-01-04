@@ -20,7 +20,7 @@ def format_schema(schema):
 
 
 def get_order_package(id):
-    #try:
+    try:
         print(id)
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
         response = requests.request("GET", url, headers=init.headers)
@@ -42,11 +42,6 @@ def get_order_package(id):
         cfop  = ""
         volumes  = ""
         EnableInferItems = ""
-        itemIndex = ""
-        quantity = ""
-        price = ""
-        description = ""
-        unitMultiplier = ""
         
         for x in packages:
             try:
@@ -68,18 +63,11 @@ def get_order_package(id):
             EnableInferItems = x["EnableInferItems"]
             
         for y in items:
-            try:
-                itemIndex = y["itemIndex"]
-                quantity = y["quantity"]
-                price = y["price"]
-                description = y["description"]
-                unitMultiplier = y["unitMultiplier"]
-            except:
-                itemIndex = y[0]
-                quantity = y[1]
-                price = y[2]
-                description = y[3]
-                #unitMultiplier = y[4]
+            itemIndex = y["itemIndex"]
+            quantity = y["quantity"]
+            price = y["price"]
+            description = y["description"]
+            unitMultiplier = y["unitMultiplier"]
             df1 = pd.DataFrame({
                 'orderId': id,
                 'courier': courier,
@@ -101,8 +89,8 @@ def get_order_package(id):
                 'description': description,
                 'unitMultiplier': unitMultiplier}, index=[0])
             init.df = init.df.append(df1)
-    #except:
-    #    print("No package")
+    except:
+        print("No package")
         
 def delete_duplicate():
     try:
