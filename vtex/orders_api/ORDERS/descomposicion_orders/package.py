@@ -231,8 +231,6 @@ def get_params():
         registro += 1
         get_order_package(row.orderId)
         print("Registro: "+str(registro))
-        if registro == 5:
-            run()
         if registro == 100:
             run()
         if registro == 200:
@@ -241,9 +239,9 @@ def get_params():
             run()
         if registro == 1000:
             run()
-        if registro == 5000:
-            run()
         if registro == 10000:
+            run()
+        if registro == 50000:
             run()
     run()
     
