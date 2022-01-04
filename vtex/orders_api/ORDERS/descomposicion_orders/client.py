@@ -77,12 +77,73 @@ def run():
     dataset_id = 'test'
     table_id = 'shopstar_order_client'
     
+    table_schema = [
+        {
+          "name": "corporatePhone",
+          "type": "STRING",
+          "mode": "NULLABLE"
+    },{
+        "name": "isCorporate",
+        "type": "BOOLEAN",
+        "mode": "NULLABLE"
+    },{
+        "name": "document",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "stateInscription",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "userProfileId",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "corporateDocument",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },{
+        "name": "orderId",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "corporateName",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "phone",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "documentType",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "lastName",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "tradeName",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "firstName",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "email",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    }]
+    
+    
     client  = bigquery.Client(project = project_id)
     dataset  = client.dataset(dataset_id)
     table = dataset.table(table_id)
     job_config = bigquery.LoadJobConfig()
     #job_config.write_disposition = "WRITE_TRUNCATE"
     #job_config.autodetect = True
+    job_config.schema = format_schema(table_schema)
     job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
     job = client.load_table_from_json(json_object, table, job_config = job_config)
     print(job.result())
