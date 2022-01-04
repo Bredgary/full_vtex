@@ -18,7 +18,16 @@ def format_schema(schema):
   for row in schema:
     formatted_schema.append(bigquery.SchemaField(row['name'], row['type'], row['mode']))
     return formatted_schema
-      
+
+def decrypt_email(email):
+  try:
+    url = "https://conversationtracker.vtex.com.br/api/pvt/emailMapping?an=mercury&alias="+email+""
+    response = requests.request("GET", url, headers=init.headers)
+    formatoJ = json.loads(response.text)
+    return formatoJ["email"]
+  except:
+    print(str(email))
+    
 def get_order(id):
     try:
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
@@ -26,7 +35,8 @@ def get_order(id):
         Fjson = json.loads(response.text)
         
         clientProfileData = Fjson["clientProfileData"]
-        email = clientProfileData["email"]
+        client_email = clientProfileData["email"]
+        client_email = decrypt_email(str(client_email))
         firstName = clientProfileData["firstName"]
         lastName = clientProfileData["lastName"]
         documentType = clientProfileData["documentType"]
@@ -42,7 +52,7 @@ def get_order(id):
        
         df1 = pd.DataFrame({
             'orderId': id,
-            'email': email,
+            'email': client_email,
             'firstName': firstName,
             'lastName': lastName,
             'documentType': documentType,
@@ -81,7 +91,7 @@ def run():
     json_object = json.loads(json_data)
     project_id = '999847639598'
     dataset_id = 'test'
-    table_id = 'shopstar_order_client_01'
+    table_id = 'shopstar_order_client'
     
     table_schema = [
         {
