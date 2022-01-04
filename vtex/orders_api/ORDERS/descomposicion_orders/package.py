@@ -20,7 +20,8 @@ def format_schema(schema):
 
 
 def get_order_package(id):
-    try:
+    #try:
+        print(id)
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
@@ -100,8 +101,8 @@ def get_order_package(id):
                 'description': description,
                 'unitMultiplier': unitMultiplier}, index=[0])
             init.df = init.df.append(df1)
-    except:
-        print("No package")
+    #except:
+    #    print("No package")
         
 def delete_duplicate():
     try:
