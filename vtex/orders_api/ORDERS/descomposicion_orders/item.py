@@ -312,7 +312,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "listPrice",
-        "type": "FLOAT",
+        "type": "INTEGER",
         "mode": "NULLABLE"
     },{
         "name": "weight",
