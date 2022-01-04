@@ -300,7 +300,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "item_quantity",
-        "type": "FLOAT",
+        "type": "INTEGER",
         "mode": "NULLABLE"
     },{
         "name": "refId",
