@@ -20,7 +20,7 @@ def format_schema(schema):
 
 
 def get_order_package(id):
-  #  try:
+    try:
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
@@ -100,8 +100,8 @@ def get_order_package(id):
                 'description': description,
                 'unitMultiplier': unitMultiplier}, index=[0])
             init.df = init.df.append(df1)
-    #except:
-     #   print("No package")
+    except:
+        print("No package")
         
 def delete_duplicate():
     try:
@@ -208,27 +208,16 @@ def run():
     dataset  = client.dataset(dataset_id)
     table = dataset.table(table_id)
     
-    try:
-        client  = bigquery.Client(project = project_id)
-        dataset  = client.dataset(dataset_id)
-        table = dataset.table(table_id)
-        job_config = bigquery.LoadJobConfig()
-        job_config.schema = format_schema(table_schema)
-        job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-        job = client.load_table_from_json(json_object, table, job_config = job_config)
-        print(job.result())
-        delete_duplicate()
-    except:
-        client  = bigquery.Client(project = project_id)
-        dataset  = client.dataset(dataset_id)
-        table = dataset.table(table_id)
-        job_config = bigquery.LoadJobConfig()
-        job_config.write_disposition = "WRITE_TRUNCATE"
-        job_config.autodetect = True
-        job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-        job = client.load_table_from_json(json_object, table, job_config = job_config)
-        print(job.result())
-        delete_duplicate()
+    client  = bigquery.Client(project = project_id)
+    dataset  = client.dataset(dataset_id)
+    table = dataset.table(table_id)
+    job_config = bigquery.LoadJobConfig()
+    job_config.write_disposition = "WRITE_TRUNCATE"
+    job_config.autodetect = True
+    job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+    job = client.load_table_from_json(json_object, table, job_config = job_config)
+    print(job.result())
+    delete_duplicate()
     
     
 def get_params():
