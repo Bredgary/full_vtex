@@ -25,10 +25,11 @@ def get_order_package(id):
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
-        if Fjson["packageAttachment"] is not Empty:
+        if Fjson["packageAttachment"] is not None:
             packageAttachment = Fjson["packageAttachment"]
-        if packageAttachment["packages"] is not Empty:
+        if packageAttachment["packages"] is not None:
             packages = packageAttachment["packages"]
+            items = ""
             for x in packages:
                 items = packages["items"]
                 courier = x["courier"]
@@ -45,33 +46,35 @@ def get_order_package(id):
                 volumes = x["volumes"]
                 EnableInferItems = x["EnableInferItems"]
                 
-                for y in items:
-                    itemIndex = y["itemIndex"]
-                    quantity = y["quantity"]
-                    price = y["price"]
-                    description = y["description"]
-                    unitMultiplier = y["unitMultiplier"]
-                    df1 = pd.DataFrame({
-                        'orderId': id,
-                        'courier': courier,
-                        'invoiceNumber': invoiceNumber,
-                        'invoiceValue': invoiceValue,
-                        'invoiceUrl': invoiceUrl,
-                        'issuanceDate': issuanceDate,
-                        'trackingNumber': trackingNumber,
-                        'invoiceKey': invoiceKey,
-                        'trackingUrl': trackingUrl,
-                        'embeddedInvoice': embeddedInvoice,
-                        'package_type': package_type,
-                        "cfop":cfop,
-                        "volumes":volumes,
-                        "EnableInferItems":EnableInferItems,
-                        'itemIndex': itemIndex,
-                        'quantity': quantity,
-                        'price': price,
-                        'description': description,
-                        'unitMultiplier': unitMultiplier}, index=[0])
-                    init.df = init.df.append(df1)
+            for y in items:
+                itemIndex = y["itemIndex"]
+                quantity = y["quantity"]
+                price = y["price"]
+                description = y["description"]
+                unitMultiplier = y["unitMultiplier"]
+                df1 = pd.DataFrame({
+                    'orderId': id,
+                    'courier': courier,
+                    'invoiceNumber': invoiceNumber,
+                    'invoiceValue': invoiceValue,
+                    'invoiceUrl': invoiceUrl,
+                    'issuanceDate': issuanceDate,
+                    'trackingNumber': trackingNumber,
+                    'invoiceKey': invoiceKey,
+                    'trackingUrl': trackingUrl,
+                    'embeddedInvoice': embeddedInvoice,
+                    'package_type': package_type,
+                    "cfop":cfop,
+                    "volumes":volumes,
+                    "EnableInferItems":EnableInferItems,
+                    'itemIndex': itemIndex,
+                    'quantity': quantity,
+                    'price': price,
+                    'description': description,
+                    'unitMultiplier': unitMultiplier}, index=[0])
+                init.df = init.df.append(df1)
+        else:
+            print("No data")
     except:
         print("No package")
         
