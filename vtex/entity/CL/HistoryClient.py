@@ -245,7 +245,7 @@ def daterange(start_date, end_date):
 
 def time():	
 	start_date = date(2019, 1, 1)
-	end_date = date(2020, 1, 1)
+	end_date = date(2022, 1, 4)
 	for single_date in daterange(start_date, end_date):
 		variFecha = single_date.strftime("%Y-%m-%d")
 		print("Dia: "+str(variFecha))
