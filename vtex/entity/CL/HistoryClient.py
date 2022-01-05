@@ -8,6 +8,9 @@ from datetime import datetime, timezone
 from datetime import date, timedelta
 import logging
 
+class init:
+	dataframe = pd.DataFrame()
+
 def cl_client(fecha):
 	print("Cargando")
 	url = "https://mercury.vtexcommercestable.com.br/api/dataentities/CL/search"
@@ -41,12 +44,14 @@ def delete_duplicate():
 	except:
 		print("Consulta SQL no ejecutada")
 
-def run(variFecha):
+def ingest(variFecha):
+	df = pd.DataFrame(cl_client(variFecha),columns=['beneficio','beneficio2','crearGiftcard','profilePicture','proteccionDatos','terminosCondiciones','terminosPago','tradeName','rclastcart','rclastsession','rclastsessiondate','homePhone','phone','stateRegistration','email','userId','firstName','lastName','document','localeDefault','attach','approved','birthDate','businessPhone','corporateDocument','corporateName','documentType','gender','customerClass','priceTables','id','accountId','accountName','dataEntityId','createdBy','createdIn','updatedBy','updatedIn','lastInteractionBy','lastInteractionIn'])
+	df.reset_index(drop=True, inplace=True)
+	init.dataframe = init.dataframe.append(df)
+
+def run():
 	try:
-		df = pd.DataFrame(cl_client(variFecha),
-						columns=['beneficio','beneficio2','crearGiftcard','profilePicture','proteccionDatos','terminosCondiciones','terminosPago','tradeName','rclastcart','rclastsession','rclastsessiondate','homePhone','phone','stateRegistration','email','userId','firstName','lastName','document','localeDefault','attach','approved','birthDate','businessPhone','corporateDocument','corporateName','documentType','gender','customerClass','priceTables','id','accountId','accountName','dataEntityId','createdBy','createdIn','updatedBy','updatedIn','lastInteractionBy','lastInteractionIn'])
-		df.reset_index(drop=True, inplace=True)
-	
+		df = init.dataframe
 		json_data = df.to_json(orient = 'records')
 		json_object = json.loads(json_data)
 		
@@ -232,19 +237,20 @@ def run(variFecha):
 	except:
 		print("Error.")
 		logging.exception("message")
-#Dia:   2020-06-21
 
 
 def daterange(start_date, end_date):
-    for n in range(int((end_date - start_date).days)):
-        yield start_date + timedelta(n)
-
-start_date = date(2019, 1, 1)
-end_date = date(2022, 1, 4)
-for single_date in daterange(start_date, end_date):
-    variFecha = single_date.strftime("%Y-%m-%d")
-    print("Dia: "+str(variFecha))
-    run(variFecha)
+	for n in range(int((end_date - start_date).days)):
+		yield start_date + timedelta(n)
+	
+	start_date = date(2019, 1, 1)
+	end_date = date(2020, 1, 1)
+	for single_date in daterange(start_date, end_date):
+		variFecha = single_date.strftime("%Y-%m-%d")
+		print("Dia: "+str(variFecha))
+		ingest(variFecha)
+	run()
+   
 
 
 
