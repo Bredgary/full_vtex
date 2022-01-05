@@ -52,9 +52,16 @@ def ingest(variFecha):
 def run():
 	try:
 		df = init.dataframe
+		df = DataFrame(eval(df))
+		
+		text_file = open("/home/bred_valenzuela/full_vtex/vtex/entity/CL/clientHistory.json", "w")
+		text_file.write(str(df))
+		text_file.close()
+		
 		json_data = df.to_json(orient = 'records')
 		json_object = json.loads(json_data)
 		
+		'''
 		table_schema = {
 		    "name": "id",
 		    "type": "STRING",
@@ -216,7 +223,8 @@ def run():
 		    "type": "STRING",
 		    "mode": "NULLABLE"
 		  }
-	
+		  '''
+		
 		project_id = '999847639598'
 		dataset_id = 'test'
 		table_id = 'shopstar_vtex_client_test'
