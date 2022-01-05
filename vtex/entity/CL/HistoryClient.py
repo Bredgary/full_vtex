@@ -251,7 +251,8 @@ def time():
 		print("Dia: "+str(variFecha))
 		ingest(variFecha)
 	run()
-   
+
+time()  
 
 
 
