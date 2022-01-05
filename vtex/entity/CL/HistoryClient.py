@@ -14,7 +14,7 @@ class init:
 def cl_client(fecha):
 	print("Cargando")
 	url = "https://mercury.vtexcommercestable.com.br/api/dataentities/CL/search"
-	querystring = {"_fields":"beneficio,beneficio2,crearGiftcard,profilePicture,proteccionDatos,terminosCondiciones,terminosPago,tradeName,rclastcart,rclastsession,rclastsessiondate,homePhone,phone,stateRegistration,email,userId,firstName,lastName,document,localeDefault,attach,approved,birthDate,businessPhone,corporateDocument,corporateName,documentType,gender,customerClass,priceTables,id,accountId,accountName,dataEntityId,createdBy,createdIn,updatedBy,updatedIn,lastInteractionBy,lastInteractionIn,followers,auto_filter","_where":"createdIn="+fecha+""}
+	querystring = {"_fields":"beneficio,beneficio2,crearGiftcard,profilePicture,proteccionDatos,terminosCondiciones,terminosPago,tradeName,rclastcart,rclastsession,rclastsessiondate,homePhone,phone,stateRegistration,email,userId,firstName,lastName,document,localeDefault,attach,approved,birthDate,businessPhone,corporateDocument,corporateName,documentType,gender,customerClass,priceTables,id,accountId,accountName,dataEntityId,createdBy,createdIn,updatedBy,updatedIn,lastInteractionBy,lastInteractionIn","_where":"createdIn="+fecha+""}
 	headers = {
 		"Content-Type": "application/json",
 		"Accept": "application/vnd.vtex.ds.v10+json",
@@ -52,7 +52,6 @@ def ingest(variFecha):
 def run():
 	try:
 		df = init.dataframe
-		df = DataFrame(eval(df))
 		
 		text_file = open("/home/bred_valenzuela/full_vtex/vtex/entity/CL/clientHistory.json", "w")
 		text_file.write(str(df))
