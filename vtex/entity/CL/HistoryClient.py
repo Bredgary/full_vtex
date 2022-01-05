@@ -9,22 +9,49 @@ from datetime import date, timedelta
 import logging
 
 class init:
-	dataframe = pd.DataFrame()
+	df = pd.DataFrame()
 
 def cl_client(fecha):
-	print("Cargando")
 	url = "https://mercury.vtexcommercestable.com.br/api/dataentities/CL/search"
 	querystring = {"_fields":"profilePicture,proteccionDatos,terminosCondiciones,terminosPago,tradeName,homePhone,phone,stateRegistration,email,userId,firstName,lastName,document,attach,approved,birthDate,businessPhone,corporateDocument,corporateName,documentType,gender,priceTables,id,accountId,accountName,dataEntityId,createdBy,createdIn,updatedBy,updatedIn,lastInteractionBy,lastInteractionIn","_where":"createdIn="+fecha+""}
-	headers = {
-		"Content-Type": "application/json",
-		"Accept": "application/vnd.vtex.ds.v10+json",
-		"REST-Range": "resources=0-1000",
-		"X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA",
-		"X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"
-	}
+	headers = {"Content-Type": "application/json","Accept": "application/vnd.vtex.ds.v10+json","REST-Range": "resources=0-1000","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 	response = requests.request("GET", url, headers=headers, params=querystring)
 	Fjson = json.loads(response.text)
-	return Fjson
+	for x in Fjson:
+		df1 = pd.DataFrame({
+			'email': x["email"],
+			'userId': x["userId"],
+			'firstName': x["firstName"],
+			'lastName': x["lastName"],
+			'document': x["document"],
+			'attach': x["attach"],
+			'approved': x["approved"],
+			'birthDate': x["birthDate"],
+			'businessPhone': x["businessPhone"],
+			'corporateDocument': x["corporateDocument"],
+			'corporateName': x["corporateName"],
+			'documentType': x["documentType"],
+			'gender': x["gender"],
+			'priceTables': x["priceTables"],
+			'id': x["id"],
+			'accountId': x["accountId"],
+			'accountName': x["accountName"],
+			'dataEntityId': x["dataEntityId"],
+			'createdBy': x["createdBy"],
+			'createdIn': x["createdIn"],
+			'updatedBy': x["updatedBy"],
+			'updatedIn': x["updatedIn"],
+			'lastInteractionBy': x["lastInteractionBy"],
+			'lastInteractionIn': x["lastInteractionIn"],
+			'profilePicture': x["profilePicture"],
+			'proteccionDatos': x["proteccionDatos"],
+			'terminosCondiciones': x["terminosCondiciones"],
+			'terminosPago': x["terminosPago"],
+			'tradeName': x["tradeName"],
+			'homePhone': x["homePhone"],
+			'phone': x["phone"],
+			'stateRegistration': x["stateRegistration"]}, index=[0])
+		init.df = init.df.append(df1)
 
 def format_schema(schema):
     formatted_schema = []
@@ -44,19 +71,11 @@ def delete_duplicate():
 	except:
 		print("Consulta SQL no ejecutada")
 
-def ingest(variFecha):
-	df = pd.DataFrame(cl_client(variFecha),columns=['profilePicture','proteccionDatos','terminosCondiciones','terminosPago','tradeName','homePhone','phone','stateRegistration','email','userId','firstName','lastName','document','attach','approved','birthDate','businessPhone','corporateDocument','corporateName','documentType','gender','priceTables','id','accountId','accountName','dataEntityId','createdBy','createdIn','updatedBy','updatedIn','lastInteractionBy','lastInteractionIn'])
-	df.reset_index(drop=True, inplace=True)
-	init.dataframe = init.dataframe.append(df)
-
 def run():
 	try:
-		df = init.dataframe
+		df = init.df
 		
-		text_file = open("/home/bred_valenzuela/full_vtex/vtex/entity/CL/clientHistory.json", "w")
-		text_file.write(str(df))
-		text_file.close()
-		
+		df.reset_index(drop=True, inplace=True)
 		json_data = df.to_json(orient = 'records')
 		json_object = json.loads(json_data)
 		
@@ -253,11 +272,11 @@ def daterange(start_date, end_date):
 
 def time():	
 	start_date = date(2019, 1, 1)
-	end_date = date(2022, 1, 4)
+	end_date = date(2022, 1, 5)
 	for single_date in daterange(start_date, end_date):
 		variFecha = single_date.strftime("%Y-%m-%d")
 		print("Dia: "+str(variFecha))
-		ingest(variFecha)
+		cl_client(variFecha)
 	run()
 
 time()  
