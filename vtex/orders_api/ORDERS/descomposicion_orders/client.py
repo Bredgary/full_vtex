@@ -6,6 +6,7 @@ from datetime import datetime
 import requests
 from datetime import datetime, timezone
 from os.path import join
+import logging
 
 class init:
     productList = []
@@ -167,6 +168,7 @@ def run():
         delete_duplicate()
     except:
         print("Error")
+        logging.exception("message")
 
 def get_params():
     print("Cargando consulta")

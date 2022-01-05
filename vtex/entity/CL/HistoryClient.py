@@ -6,6 +6,7 @@ from datetime import datetime
 import requests
 from datetime import datetime, timezone
 from datetime import date, timedelta
+import logging
 
 def cl_client(fecha):
 	print("Cargando")
@@ -230,6 +231,7 @@ def run(variFecha):
 			delete_duplicate()
 	except:
 		print("Error.")
+		logging.exception("message")
 #Dia:   2020-06-21
 
 
