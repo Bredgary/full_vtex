@@ -173,7 +173,7 @@ def run():
         
          
         project_id = '999847639598'
-        dataset_id = 'test'
+        dataset_id = 'staging_zone'
         table_id = 'shopstar_order_package'
         
         client  = bigquery.Client(project = project_id)
@@ -208,43 +208,5 @@ def get_params():
         registro += 1
         get_order_package(row.orderId)
         print("Registro: "+str(registro))
-        if registro == 100:
-            run()
-        if registro == 200:
-            run()
-        if registro == 300:
-            run()
-        if registro == 400:
-            run()
-        if registro == 500:
-            run()
-        if registro == 600:
-            run()
-        if registro == 700:
-            run()
-        if registro == 800:
-            run()
-        if registro == 900:
-            run()
-        if registro == 1000:
-            run()
-        if registro == 1100:
-            run()
-        if registro == 2200:
-            run()
-        if registro == 3300:
-            run()
-        if registro == 4400:
-            run()
-        if registro == 5500:
-            run()
-        if registro == 6500:
-            run()
-        if registro == 7500:
-            run()
-        if registro == 10000:
-            run()
-        if registro == 12000:
-            run()
     run()
 get_params()
