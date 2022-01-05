@@ -403,7 +403,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "roundingError",
-        "type": "STRING",
+        "type": "INTEGER",
         "mode": "NULLABLE"
     },{
         "name": "orderId",
@@ -415,7 +415,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "orderGroup",
-        "type": "STRING",
+        "type": "INTEGER",
         "mode": "NULLABLE"
     },{
         "name": "creationDate",
@@ -443,7 +443,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "value",
-        "type": "STRING",
+        "type": "INTEGER",
         "mode": "NULLABLE"
     },{
         "name": "invoicedDate",
@@ -459,7 +459,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "sequence",
-        "type": "STRING",
+        "type": "INTEGER",
         "mode": "NULLABLE"
     },{
         "name": "affiliateId",
@@ -487,7 +487,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "salesChannel",
-        "type": "STRING",
+        "type": "INTEGER",
         "mode": "NULLABLE"
     },{
         "name": "marketplaceServicesEndpoint",
@@ -631,9 +631,8 @@ def run():
     dataset  = client.dataset(dataset_id)
     table = dataset.table(table_id)
     job_config = bigquery.LoadJobConfig()
-    #job_config.schema = format_schema(table_schema)
-    #job_config.write_disposition = "WRITE_TRUNCATE"
-    job_config.autodetect = True
+    job_config.schema = format_schema(table_schema)
+    #job_config.autodetect = True
     job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
     job = client.load_table_from_json(json_object, table, job_config = job_config)
     print(job.result())
