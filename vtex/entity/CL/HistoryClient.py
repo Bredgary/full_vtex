@@ -41,7 +41,7 @@ def delete_duplicate():
 		print("Consulta SQL no ejecutada")
 
 def run(variFecha):
-	#try:
+	try:
 		df = pd.DataFrame(cl_client(variFecha),
 						columns=['beneficio','beneficio2','crearGiftcard','profilePicture','proteccionDatos','terminosCondiciones','terminosPago','tradeName','rclastcart','rclastsession','rclastsessiondate','homePhone','phone','stateRegistration','email','userId','firstName','lastName','document','localeDefault','attach','approved','birthDate','businessPhone','corporateDocument','corporateName','documentType','gender','customerClass','priceTables','id','accountId','accountName','dataEntityId','createdBy','createdIn','updatedBy','updatedIn','lastInteractionBy','lastInteractionIn'])
 		df.reset_index(drop=True, inplace=True)
@@ -215,19 +215,21 @@ def run(variFecha):
 		dataset_id = 'test'
 		table_id = 'shopstar_vtex_client_test'
 		
-		client  = bigquery.Client(project = project_id)
-		dataset  = client.dataset(dataset_id)
-		table = dataset.table(table_id)
-		
-		job_config = bigquery.LoadJobConfig()
-		job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-		#job_config.schema = format_schema(table_schema)
-		job_config.autodetect = True
-		job = client.load_table_from_json(json_object, table, job_config = job_config)
-		print(job.result())
-		delete_duplicate()
-	#except:
-	#	print("400 Schema has no fields.")
+		if df.empty:
+			print('DataFrame is empty!')
+		else:
+			client  = bigquery.Client(project = project_id)
+			dataset  = client.dataset(dataset_id)
+			table = dataset.table(table_id)
+			job_config = bigquery.LoadJobConfig()
+			job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+			#job_config.schema = format_schema(table_schema)
+			job_config.autodetect = True
+			job = client.load_table_from_json(json_object, table, job_config = job_config)
+			print(job.result())
+			delete_duplicate()
+	except:
+		print("Error.")
 #Dia:   2020-06-21
 
 
@@ -235,7 +237,7 @@ def daterange(start_date, end_date):
     for n in range(int((end_date - start_date).days)):
         yield start_date + timedelta(n)
 
-start_date = date(2020, 6, 21)
+start_date = date(2019, 1, 1)
 end_date = date(2022, 1, 4)
 for single_date in daterange(start_date, end_date):
     variFecha = single_date.strftime("%Y-%m-%d")
