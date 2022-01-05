@@ -306,337 +306,345 @@ def delete_duplicate():
 
 
 def run():
-    df = init.df
-    df.reset_index(drop=True, inplace=True)
-    json_data = df.to_json(orient = 'records')
-    json_object = json.loads(json_data)
-    
-    
-    table_schema = [
-        {
-          "name": "giftRegistryData",
-          "type": "STRING",
-          "mode": "NULLABLE"
-    },{
-        "name": "RequestedByPaymentNotification",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "RequestedBySellerNotification",
-        "type": "BOOLEAN",
-        "mode": "NULLABLE"
-    },{
-        "name": "RequestedByUser",
-        "type": "BOOLEAN",
-        "mode": "NULLABLE"
-    },{
-        "name": "RequestedBySystem",
-        "type": "BOOLEAN",
-        "mode": "NULLABLE"
-    },{
-        "name": "CancellationDate",
-        "type": "DATE",
-        "mode": "NULLABLE"
-    },{
-        "name": "seller_name",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "seller_id",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "baseURL",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "name",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "changesAttachment_id",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "lastChange",
-        "type": "DATE",
-        "mode": "NULLABLE"
-    },{
-        "name": "isCertified",
-        "type": "BOOLEAN",
-        "mode": "NULLABLE"
-    },{
-        "name": "lastMessage",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "authorizedDate",
-        "type": "DATE",
-        "mode": "NULLABLE"
-    },{
-        "name": "allowEdition",
-        "type": "BOOLEAN",
-        "mode": "NULLABLE"
-    },{
-        "name": "allowCancellation",
-        "type": "BOOLEAN",
-        "mode": "NULLABLE"
-    },{
-        "name": "status",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "isCheckedIn",
-        "type": "BOOLEAN",
-        "mode": "NULLABLE"
-    },{
-        "name": "subscriptionData",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "commercialConditionData",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "isCompleted",
-        "type": "BOOLEAN",
-        "mode": "NULLABLE"
-    },{
-        "name": "roundingError",
-        "type": "INTEGER",
-        "mode": "NULLABLE"
-    },{
-        "name": "orderId",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "callCenterOperatorData",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "orderGroup",
-        "type": "INTEGER",
-        "mode": "NULLABLE"
-    },{
-        "name": "creationDate",
-        "type": "DATE",
-        "mode": "NULLABLE"
-    },{
-        "name": "cancelReason",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "orderFormId",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "seller_logo",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "sellerOrderId",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "statusDescription",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "value",
-        "type": "INTEGER",
-        "mode": "NULLABLE"
-    },{
-        "name": "invoicedDate",
-        "type": "DATE",
-        "mode": "NULLABLE"
-    },{
-        "name": "customData",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "merchantName",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "sequence",
-        "type": "INTEGER",
-        "mode": "NULLABLE"
-    },{
-        "name": "affiliateId",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "followUpEmail",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "userProfileId",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "hostname",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "checkedInPickupPointId",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "origin",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "salesChannel",
-        "type": "INTEGER",
-        "mode": "NULLABLE"
-    },{
-        "name": "marketplaceServicesEndpoint",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "Reason",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "client_email",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "taxData",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "openTextField",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "marketplaceOrderId",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "totals_id_items",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "totals_name_items",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "totals_value_items",
-        "type": "INTEGER",
-        "mode": "NULLABLE"
-    },{
-        "name": "totals_id_discounts",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "totals_name_discounts",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "totals_value_discounts",
-        "type": "INTEGER",
-        "mode": "NULLABLE"
-    },{
-        "name": "totals_id_shipping",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "totals_name_shipping",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "totals_value_shipping",
-        "type": "INTEGER",
-        "mode": "NULLABLE"
-    },{
-        "name": "totals_id_tax",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "totals_name_tax",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "totals_value_tax",
-        "type": "INTEGER",
-        "mode": "NULLABLE"
-    },{
-        "name": "invoice_address",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "userPaymentInfo",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "shippingData_id",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "shipping_addressType",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "shipping_receiverName",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "shipping_addressId",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "shipping_postalCode",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "shipping_city",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "shipping_state",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "shipping_country",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "shipping_street",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "shipping_number",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "shipping_neighborhood",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "shipping_complement",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "shipping_reference",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    }]
-    
-    
-    project_id = '999847639598'
-    dataset_id = 'test'
-    table_id = 'shopstar_ft_orders_'
-    client  = bigquery.Client(project = project_id)
-    dataset  = client.dataset(dataset_id)
-    table = dataset.table(table_id)
-    job_config = bigquery.LoadJobConfig()
-    #job_config.schema = format_schema(table_schema)
-    #job_config.autodetect = True
-    job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-    job = client.load_table_from_json(json_object, table, job_config = job_config)
-    print(job.result())
-    delete_duplicate()
+    try:
+        df = init.df
+        df.reset_index(drop=True, inplace=True)
+        json_data = df.to_json(orient = 'records')
+        json_object = json.loads(json_data)
+        
+        
+        table_schema = [
+            {
+              "name": "giftRegistryData",
+              "type": "STRING",
+              "mode": "NULLABLE"
+        },{
+            "name": "RequestedByPaymentNotification",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "RequestedBySellerNotification",
+            "type": "BOOLEAN",
+            "mode": "NULLABLE"
+        },{
+            "name": "RequestedByUser",
+            "type": "BOOLEAN",
+            "mode": "NULLABLE"
+        },{
+            "name": "RequestedBySystem",
+            "type": "BOOLEAN",
+            "mode": "NULLABLE"
+        },{
+            "name": "CancellationDate",
+            "type": "DATE",
+            "mode": "NULLABLE"
+        },{
+            "name": "seller_name",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "seller_id",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "baseURL",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "name",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "changesAttachment_id",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "lastChange",
+            "type": "DATE",
+            "mode": "NULLABLE"
+        },{
+            "name": "isCertified",
+            "type": "BOOLEAN",
+            "mode": "NULLABLE"
+        },{
+            "name": "lastMessage",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "authorizedDate",
+            "type": "DATE",
+            "mode": "NULLABLE"
+        },{
+            "name": "allowEdition",
+            "type": "BOOLEAN",
+            "mode": "NULLABLE"
+        },{
+            "name": "allowCancellation",
+            "type": "BOOLEAN",
+            "mode": "NULLABLE"
+        },{
+            "name": "status",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "isCheckedIn",
+            "type": "BOOLEAN",
+            "mode": "NULLABLE"
+        },{
+            "name": "subscriptionData",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "commercialConditionData",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "isCompleted",
+            "type": "BOOLEAN",
+            "mode": "NULLABLE"
+        },{
+            "name": "roundingError",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "orderId",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "callCenterOperatorData",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "orderGroup",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "creationDate",
+            "type": "DATE",
+            "mode": "NULLABLE"
+        },{
+            "name": "cancelReason",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "orderFormId",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "seller_logo",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "sellerOrderId",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "statusDescription",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "value",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "invoicedDate",
+            "type": "DATE",
+            "mode": "NULLABLE"
+        },{
+            "name": "customData",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "merchantName",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "sequence",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "affiliateId",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "followUpEmail",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "userProfileId",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "hostname",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "checkedInPickupPointId",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "origin",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "salesChannel",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "marketplaceServicesEndpoint",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "Reason",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "client_email",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "taxData",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "openTextField",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "marketplaceOrderId",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "totals_id_items",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "totals_name_items",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "totals_value_items",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "totals_id_discounts",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "totals_name_discounts",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "totals_value_discounts",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "totals_id_shipping",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "totals_name_shipping",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "totals_value_shipping",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "totals_id_tax",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "totals_name_tax",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "totals_value_tax",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "invoice_address",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "userPaymentInfo",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "shippingData_id",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "shipping_addressType",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "shipping_receiverName",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "shipping_addressId",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "shipping_postalCode",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "shipping_city",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "shipping_state",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "shipping_country",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "shipping_street",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "shipping_number",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "shipping_neighborhood",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "shipping_complement",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "shipping_reference",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        }]
+        
+        
+        project_id = '999847639598'
+        dataset_id = 'test'
+        table_id = 'shopstar_ft_orders_'
+        
+        if df.empty:
+            print('DataFrame is empty!')
+        else:
+            client  = bigquery.Client(project = project_id)
+            dataset  = client.dataset(dataset_id)
+            table = dataset.table(table_id)
+            job_config = bigquery.LoadJobConfig()
+            #job_config.schema = format_schema(table_schema)
+            #job_config.autodetect = True
+            job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+            job = client.load_table_from_json(json_object, table, job_config = job_config)
+            print(job.result())
+            delete_duplicate()
+    except:
+        print("Error.")
+        logging.exception("message")
 
 def get_params():
     print("Cargando consulta")
