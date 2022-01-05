@@ -14,7 +14,7 @@ def cl_client(fecha):
 	headers = {
 		"Content-Type": "application/json",
 		"Accept": "application/vnd.vtex.ds.v10+json",
-		"REST-Range": "resources=0-100",
+		"REST-Range": "resources=0-1000",
 		"X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA",
 		"X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"
 	}
