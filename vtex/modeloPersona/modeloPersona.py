@@ -9,18 +9,60 @@ from os.path import join
 import logging
 
 
-def delete_duplicate():
+def create_customer():
   try:
     print("Eliminando duplicados")
     client = bigquery.Client()
     QUERY = ('''
-    CREATE OR REPLACE TABLE `shopstar-datalake.test.shopstar_order_item` AS 
-    SELECT DISTINCT * FROM `shopstar-datalake.test.shopstar_order_item`''')
+    CREATE OR REPLACE TABLE `shopstar-datalake.cons_zone.dm_customer` AS
+    SELECT
+    id customer_id,
+    email,
+    userId,
+    firstName,
+    lastName,
+    document,
+    localeDefault,
+    attach,
+    accountId,
+    accountName,
+    dataEntityId,
+    createdBy,
+    createdIn,
+    updatedBy,
+    beneficio2,
+    crearGiftcard,
+    profilePicture,
+    proteccionDatos,
+    terminosCondiciones,
+    terminosPago,
+    tradeName,
+    rclastcart,
+    rclastsession,
+    rclastsessiondate,
+    homePhone,
+    phone,
+    stateRegistration,
+    approved,
+    birthDate,
+    businessPhone,
+    corporateDocument,
+    corporateName,
+    documentType,
+    gender,
+    customerClass,
+    priceTables,
+    beneficio,
+    updatedIn,
+    lastInteractionBy,
+    lastInteractionIn
+    FROM `shopstar-datalake.staging_zone.shopstar_vtex_client`''')
     query_job = client.query(QUERY)
     rows = query_job.result()
     print(rows)
+    print("dm_cosutomer actualizado exitosamente")
   except:
-    print("Consulta SQL no ejecutada")
+    print("Error create_customer!!")
     logging.exception("message")
     
-delete_duplicate()
+create_customer()
