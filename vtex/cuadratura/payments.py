@@ -44,7 +44,6 @@ class init:
     
 def get_order(id,reg):
     try:
-        reg +=1
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
@@ -129,10 +128,10 @@ def get_params():
     QUERY = ('SELECT DISTINCT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`WHERE (orderId NOT IN (SELECT orderId FROM `shopstar-datalake.staging_zone.shopstar_order_payments`))')
     query_job = client.query(QUERY)
     rows = query_job.result()
-    registro = 1
+    registro = 0
     for row in rows:
-        get_order(row.orderId,registro)
         registro += 1
+        get_order(row.orderId,registro)
         
 def delete_duplicate():
     try:
