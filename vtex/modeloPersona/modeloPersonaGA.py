@@ -11,7 +11,7 @@ import logging
 
 def run():
   try:
-    print("creation geoNetwork")
+    print("Creacion geoNetwork")
     client = bigquery.Client()
     QUERY = ('''
     CREATE OR REPLACE TABLE `shopstar-datalake.cons_zone.geoNetwork` AS 
@@ -40,7 +40,7 @@ def run():
     
 def create_visitors():
   try:
-    print("creation visitors")
+    print("Creacion visitors")
     client = bigquery.Client()
     QUERY = ('''
     CREATE OR REPLACE TABLE `shopstar-datalake.cons_zone.visitors` AS 
@@ -66,7 +66,38 @@ def create_visitors():
     
 def create_totals():
   try:
-    print("creation totals")
+    print("Creacion totals")
+    client = bigquery.Client()
+    QUERY = ('''
+    CREATE OR REPLACE TABLE `shopstar-datalake.cons_zone.totals` AS 
+    SELECT GENERATE_UUID() id_Metric,
+    visitId id_visitor,
+    totals.visits visits,
+    totals.hits hits,
+    totals.pageviews pageviews,
+    totals.timeOnSite timeOnSite,
+    totals.bounces bounces,
+    totals.transactions transactions,
+    totals.transactionRevenue transactionRevenue,
+    totals.newVisits newVisits,
+    totals.screenviews screenviews,
+    totals.uniqueScreenviews uniqueScreenviews,
+    totals.timeOnScreen timeOnScreen,
+    totals.totalTransactionRevenue totalTransactionRevenue,
+    totals.sessionQualityDim 
+    sessionQualityDim 
+    FROM `shopstar-datalake.191656782.ga_sessions*`''')
+    query_job = client.query(QUERY)
+    rows = query_job.result()
+    print("totals actualizado exitosamente")
+    create_totals()
+  except:
+    print("Error totals!!")
+    logging.exception("message")
+    
+def create_totals():
+  try:
+    print("Creacion totals")
     client = bigquery.Client()
     QUERY = ('''
     CREATE OR REPLACE TABLE `shopstar-datalake.cons_zone.totals` AS 
@@ -97,7 +128,7 @@ def create_totals():
     
 def create_trafficSource():
   try:
-    print("creation trafficSource")
+    print("Creacion trafficSource")
     client = bigquery.Client()
     QUERY = ('''
     CREATE OR REPLACE TABLE `shopstar-datalake.cons_zone.trafficSource` AS 
@@ -121,10 +152,34 @@ def create_trafficSource():
     print("Error trafficSource!!")
     logging.exception("message")
     
+def create_adwordsClickInfo():
+  try:
+    print("Creacion adwordsClickInfo")
+    client = bigquery.Client()
+    QUERY = ('''
+    CREATE OR REPLACE TABLE `shopstar-datalake.cons_zone.adwordsClickInfo` AS 
+    SELECT GENERATE_UUID() id_adwordsClickInfo,
+    trafficSource.adwordsClickInfo.adGroupId adGroupId,
+    trafficSource.adwordsClickInfo.creativeId creativeId,
+    trafficSource.adwordsClickInfo.criteriaId criteriaId,
+    trafficSource.adwordsClickInfo.page page,
+    trafficSource.adwordsClickInfo.slot slot,
+    trafficSource.adwordsClickInfo.criteriaParameters criteriaParameters,
+    trafficSource.adwordsClickInfo.gclId gclId,
+    trafficSource.adwordsClickInfo.customerId customerId,
+    trafficSource.adwordsClickInfo.adNetworkType adNetworkType,
+    trafficSource.adwordsClickInfo.isVideoAd isVideoAd
+    FROM `shopstar-datalake.191656782.ga_sessions*`''')
+    query_job = client.query(QUERY)
+    rows = query_job.result()
+    print("adwordsClickInfo actualizado exitosamente")
+  except:
+    print("Error adwordsClickInfo!!")
+    logging.exception("message")
     
 def create_adwordsClickInfo():
   try:
-    print("creation adwordsClickInfo")
+    print("Creacion adwordsClickInfo")
     client = bigquery.Client()
     QUERY = ('''
     CREATE OR REPLACE TABLE `shopstar-datalake.cons_zone.adwordsClickInfo` AS 
@@ -150,7 +205,7 @@ def create_adwordsClickInfo():
     
 def create_device():
   try:
-    print("creation device")
+    print("Creacion device")
     client = bigquery.Client()
     QUERY = ('''
     CREATE OR REPLACE TABLE `shopstar-datalake.cons_zone.device` AS
@@ -183,7 +238,7 @@ def create_device():
     
 def create_hits():
   try:
-    print("creation hits")
+    print("Creacion hits")
     client = bigquery.Client()
     QUERY = ('''
     CREATE OR REPLACE TABLE `shopstar-datalake.cons_zone.hits` AS 
@@ -213,7 +268,7 @@ def create_hits():
 
 def create_transaction():
   try:
-    print("creation transaction")
+    print("Creacion transaction")
     client = bigquery.Client()
     QUERY = ('''
     CREATE OR REPLACE TABLE `shopstar-datalake.cons_zone.transaction` AS
@@ -232,15 +287,15 @@ def create_transaction():
     FROM `shopstar-datalake.191656782.ga_sessions*`,UNNEST(hits) as h''')
     query_job = client.query(QUERY)
     rows = query_job.result()
-    print("transaction actualizado exitosamente")
     create_product()
+    print("transaction actualizado exitosamente")
   except:
     print("Error transaction!!")
     logging.exception("message")
     
 def create_product():
   try:
-    print("creation product")
+    print("Creacion transaction")
     client = bigquery.Client()
     QUERY = ('''
     CREATE OR REPLACE TABLE `shopstar-datalake.cons_zone.product` AS 
@@ -267,8 +322,8 @@ def create_product():
     UNNEST (hits.product) product''')
     query_job = client.query(QUERY)
     rows = query_job.result()
-    print("product actualizado exitosamente")
+    print("transaction actualizado exitosamente")
   except:
-    print("Error product!!")
+    print("Error transaction!!")
     logging.exception("message")
 run()

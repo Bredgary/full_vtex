@@ -117,6 +117,7 @@ def get_order(id,reg):
             'bankIssuedInvoiceBarCodeNumber': str(init.bankIssuedInvoiceBarCodeNumber),
             'bankIssuedInvoiceBarCodeType': str(init.bankIssuedInvoiceBarCodeType)}, index=[0])
         init.df = init.df.append(df1)
+        print("Registro: "+str(reg))
     except:
         print("Vacio")
         print("Registro: "+str(reg))
