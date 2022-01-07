@@ -232,8 +232,8 @@ def create_transaction():
     FROM `shopstar-datalake.191656782.ga_sessions*`,UNNEST(hits) as h''')
     query_job = client.query(QUERY)
     rows = query_job.result()
-    create_product()
     print("transaction actualizado exitosamente")
+    create_product()
   except:
     print("Error transaction!!")
     logging.exception("message")
