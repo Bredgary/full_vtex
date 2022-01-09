@@ -93,7 +93,7 @@ def run():
         json_object = json.loads(json_data)
         project_id = '999847639598'
         dataset_id = 'test'
-        table_id = 'shopstar_order_client'
+        table_id = 'shopstar_order_client_'
         
         table_schema = [
             {
