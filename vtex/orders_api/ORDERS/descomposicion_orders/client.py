@@ -43,11 +43,30 @@ def get_order(id):
             documentType = clientProfileData["documentType"]
             document = clientProfileData["document"]
             phone = clientProfileData["phone"]
-            corporateName = clientProfileData["corporateName"]
-            tradeName = clientProfileData["tradeName"]
-            corporateDocument = clientProfileData["corporateDocument"]
-            stateInscription = clientProfileData["stateInscription"]
-            corporatePhone = clientProfileData["corporatePhone"]
+            if clientProfileData["corporateName"] is None:
+                corporateName = ""
+            else:
+                corporateName = clientProfileData["corporateName"]
+                
+            if clientProfileData["tradeName"] is None:
+                tradeName = ""
+            else:
+                tradeName = clientProfileData["tradeName"]
+                
+            if clientProfileData["corporateDocument"] is None:
+                corporateDocument = 0
+            else:
+                corporateDocument = clientProfileData["corporateDocument"]
+                
+            if clientProfileData["stateInscription"] is None:
+                stateInscription = ""
+            else:
+                stateInscription = clientProfileData["stateInscription"]
+                
+            if clientProfileData["corporatePhone"] is None:
+                corporatePhone = ""
+            else: 
+                corporatePhone = clientProfileData["corporatePhone"]
             isCorporate = clientProfileData["isCorporate"]
             userProfileId = clientProfileData["userProfileId"]
        
