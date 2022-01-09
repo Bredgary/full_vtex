@@ -153,7 +153,7 @@ def run():
         
         project_id = '999847639598'
         dataset_id = 'test'
-        table_id = 'shopstar_order_client'
+        table_id = 'shopstar_order_client_1'
         
         client  = bigquery.Client(project = project_id)
         dataset  = client.dataset(dataset_id)
@@ -173,7 +173,7 @@ def run():
 def get_params():
     print("Cargando consulta")
     client = bigquery.Client()
-    QUERY = ('SELECT DISTINCT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`WHERE (orderId NOT IN (SELECT orderId FROM `shopstar-datalake.test.shopstar_order_client`))')
+    QUERY = ('SELECT DISTINCT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`WHERE (orderId NOT IN (SELECT orderId FROM `shopstar-datalake.test.shopstar_order_client_1`))')
     query_job = client.query(QUERY)  
     rows = query_job.result()
     registro = 0
