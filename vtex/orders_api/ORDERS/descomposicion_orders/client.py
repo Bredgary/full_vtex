@@ -89,10 +89,12 @@ def delete_duplicate():
 def run():
     try:
         df = init.df
+        
         df.reset_index(drop=True, inplace=True)
         json_data = df.to_json(orient = 'records')
-        
         json_object = json.loads(json_data)
+        
+        print(json_object)
         
         table_schema = [
             {
@@ -183,6 +185,8 @@ def get_params():
         registro += 1
         get_order(row.orderId)
         print("Registro: "+str(registro))
+        if registro == 1:
+            run()
         if registro == 300:
             run()
         if registro == 400:
