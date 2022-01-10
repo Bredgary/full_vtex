@@ -66,10 +66,7 @@ def get_order(email):
                 'reference': reference}, index=[0])
             init.df = init.df.append(df1)
     except:
-        df2 = pd.DataFrame({
-            'email': email,
-            'NoAddress': None}, index=[0])
-        init.df2 = init.df2.append(df2)
+        print("Vacio")
 
 def run():
     try:
@@ -173,25 +170,29 @@ def run():
     except:
         print("Vacio")
 
-def run2():
-    df = init.df2
-    df.reset_index(drop=True, inplace=True)
-    json_data = df.to_json(orient = 'records')
-    json_object = json.loads(json_data)
-    
-    project_id = '999847639598'
-    dataset_id = 'test'
-    table_id = 'shopstar_vtex_client_availableAddresses_No_Data'
-    
-    client  = bigquery.Client(project = project_id)
-    dataset  = client.dataset(dataset_id)
-    table = dataset.table(table_id)
-    job_config = bigquery.LoadJobConfig()
-    job_config.write_disposition = "WRITE_TRUNCATE"
-    job_config.autodetect = True
-    job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-    job = client.load_table_from_json(json_object, table, job_config = job_config)
-    print(job.result())
+def run2(email):
+    df = init.df
+    if df.empty:
+        df = pd.DataFrame({
+            'email': email,
+            'Data': False}, index=[0])
+        
+        df.reset_index(drop=True, inplace=True)
+        json_data = df.to_json(orient = 'records')
+        json_object = json.loads(json_data)
+        
+        project_id = '999847639598'
+        dataset_id = 'test'
+        table_id = 'shopstar_vtex_client_availableAddresses_No_Data'
+        client  = bigquery.Client(project = project_id)
+        dataset  = client.dataset(dataset_id)
+        table = dataset.table(table_id)
+        job_config = bigquery.LoadJobConfig()
+        job_config.write_disposition = "WRITE_TRUNCATE"
+        job_config.autodetect = True
+        job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+        job = client.load_table_from_json(json_object, table, job_config = job_config)
+        print(job.result())
         
         
 def get_params():
@@ -207,99 +208,99 @@ def get_params():
     print("Registro: "+str(registro))
     if registro == 1:
         run()
-        run2()
+        run2(row.email)
     if registro == 300:
         run()
-        run2()
+        run2(row.email)
     if registro == 400:
         run()
-        run2()
+        run2(row.email)
     if registro == 500:
         run()
-        run2()
+        run2(row.email)
     if registro == 600:
         run()
-        run2()
+        run2(row.email)
     if registro == 700:
         run()
-        run2()
+        run2(row.email)
     if registro == 800:
         run()
-        run2()
+        run2(row.email)
     if registro == 900:
         run()
-        run2()
+        run2(row.email)
     if registro == 1000:
         run()
-        run2()
+        run2(row.email)
     if registro == 1100:
         run()
-        run2()
+        run2(row.email)
     if registro == 1200:
         run()
-        run2()
+        run2(row.email)
     if registro == 1300:
         run()
-        run2()
+        run2(row.email)
     if registro == 1400:
         run()
-        run2()
+        run2(row.email)
     if registro == 1500:
         run()
-        run2()
+        run2(row.email)
     if registro == 10000:
         run()
-        run2()
+        run2(row.email)
     if registro == 15000:
         run()
-        run2()
+        run2(row.email)
     if registro == 20000:
         run()
-        run2()
+        run2(row.email)
     if registro == 25000:
         run()
-        run2()
+        run2(row.email)
     if registro == 30000:
         run()
-        run2()
+        run2(row.email)
     if registro == 35000:
         run()
-        run2()
+        run2(row.email)
     if registro == 40000:
         run()
-        run2()
+        run2(row.email)
     if registro == 45000:
         run()
-        run2()
+        run2(row.email)
     if registro == 50000:
         run()
-        run2()
+        run2(row.email)
     if registro == 55000:
         run()
-        run2()
+        run2(row.email)
     if registro == 60000:
         run()
-        run2()
+        run2(row.email)
     if registro == 65000:
         run()
-        run2()
+        run2(row.email)
     if registro == 70000:
         run()
-        run2()
+        run2(row.email)
     if registro == 75000:
         run()
-        run2()
+        run2(row.email)
     if registro == 80000:
         run()
-        run2()
+        run2(row.email)
     if registro == 85000:
         run()
-        run2()
+        run2(row.email)
     if registro == 90000:
         run()
-        run2()
+        run2(row.email)
   run()
-  run2()
+  run2(row.email)
 
   
 get_params()
