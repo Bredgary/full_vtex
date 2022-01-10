@@ -172,15 +172,15 @@ def run():
         
         project_id = '999847639598'
         dataset_id = 'test'
-        table_id = 'shopstar_order_client_1'
+        table_id = 'shopstar_order_client'
         
         client  = bigquery.Client(project = project_id)
         dataset  = client.dataset(dataset_id)
         table = dataset.table(table_id)
         job_config = bigquery.LoadJobConfig()
-        #job_config.write_disposition = "WRITE_TRUNCATE"
-        #job_config.autodetect = True
-        job_config.schema = format_schema(table_schema)
+        job_config.write_disposition = "WRITE_TRUNCATE"
+        job_config.autodetect = True
+        #job_config.schema = format_schema(table_schema)
         job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
         job = client.load_table_from_json(json_object, table, job_config = job_config)
         print(job.result())
