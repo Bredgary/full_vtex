@@ -26,7 +26,7 @@ def get_order(id):
             id_seller = x["id"]
             name = x["name"]
             logo = x["logo"]
-            fulfillmentEndpoint = ["fulfillmentEndpoint"]
+            fulfillmentEndpoint = x["fulfillmentEndpoint"]
             
         df1 = pd.DataFrame({
             'orderId': id,
