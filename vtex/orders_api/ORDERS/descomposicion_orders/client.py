@@ -34,9 +34,7 @@ def get_order(id):
      response = requests.request("GET", url, headers=init.headers)
      Fjson = json.loads(response.text)
      clientProfileData = Fjson["clientProfileData"]
-     for x in clientProfileData:
-         print(x[0])
-     '''
+     
      client_email = clientProfileData["email"]
      client_email = decrypt_email(str(client_email))
      firstName = clientProfileData["firstName"]
@@ -72,22 +70,22 @@ def get_order(id):
      userProfileId = clientProfileData["userProfileId"]
 
      df1 = pd.DataFrame({
-         'orderId': id,
-         'email': client_email,
-         'firstName': firstName,
-         'lastName': lastName,
-         'documentType': documentType,
-         'document': document,
-         'phone': phone,
-         'corporateName': corporateName,
-         'tradeName': tradeName,
-         'corporateDocument': corporateDocument,
-         'stateInscription': stateInscription,
-         'corporatePhone': corporatePhone,
-         'isCorporate': isCorporate,
-         'userProfileId': userProfileId}, index=[0])
+         "orderId": id,
+         "email": client_email,
+         "firstName": firstName,
+         "lastName": lastName,
+         "documentType": documentType,
+         "document": document,
+         "phone": phone,
+         "corporateName": corporateName,
+         "tradeName": tradeName,
+         "corporateDocument": corporateDocument,
+         "stateInscription": stateInscription,
+         "corporatePhone": corporatePhone,
+         "isCorporate": isCorporate,
+         "userProfileId": userProfileId}, index=[0])
      init.df = init.df.append(df1)
-     '''
+     
             
         
 def delete_duplicate():
