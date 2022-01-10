@@ -173,7 +173,7 @@ def run():
         job = client.load_table_from_json(json_object, table, job_config = job_config)
 
 def run2():
-    df = init2.df
+    df = init.df2
     df.reset_index(drop=True, inplace=True)
     json_data = df.to_json(orient = 'records')
     json_object = json.loads(json_data)
