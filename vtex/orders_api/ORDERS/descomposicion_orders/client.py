@@ -35,10 +35,10 @@ def get_order(id):
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
         try:
-            for x in Fjson:
+            clientProfileData = Fjson["clientProfileData"]
+            for x in clientProfileData:
                 print(x)
             '''
-            clientProfileData = Fjson["clientProfileData"]
             client_email = clientProfileData["email"]
             client_email = decrypt_email(str(client_email))
             firstName = clientProfileData["firstName"]
