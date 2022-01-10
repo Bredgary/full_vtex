@@ -65,104 +65,127 @@ def get_order(email):
                 'complement': complement,
                 'reference': reference}, index=[0])
             init.df = init.df.append(df1)
-            if df1.empty:
-                df2 = pd.DataFrame({
-                    'email': email,
-                    'NoAddress': None}, index=[0])
-                init.df2 = init.df2.append(df2)
+        if df1.empty:
+            df2 = pd.DataFrame({
+                'email': email,
+                'NoAddress': None}, index=[0])
+            init.df2 = init.df2.append(df2)
     except:
         print("No data")
 
 def run():
-    df = init.df
-    df.reset_index(drop=True, inplace=True)
-    json_data = df.to_json(orient = 'records')
-    json_object = json.loads(json_data)
-    
-    table_schema = [
-    {
-        "name": "email",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "userProfileId",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "profileProvider",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "addressType",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "receiverName",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "addressId",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "isDisposable",
-        "type": "BOOLEAN",
-        "mode": "NULLABLE"
-    },{
-        "name": "postalCode",
-        "type": "INTEGER",
-        "mode": "NULLABLE"
-    },{
-        "name": "city",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "state",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "country",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "street",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "number",
-        "type": "INTEGER",
-        "mode": "NULLABLE"
-    },{
-        "name": "neighborhood",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "complement",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "reference",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "isComplete",
-        "type": "BOOLEAN",
-        "mode": "NULLABLE"
-    }]
-    
-    project_id = '999847639598'
-    dataset_id = 'test'
-    table_id = 'shopstar_vtex_client_availableAddresses'
     try:
-        client  = bigquery.Client(project = project_id)
-        dataset  = client.dataset(dataset_id)
-        table = dataset.table(table_id)
-        job_config = bigquery.LoadJobConfig()
-        job_config.schema = format_schema(table_schema)
-        job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-        job = client.load_table_from_json(json_object, table, job_config = job_config)
-        print(job.result())
+        df = init.df
+        df.reset_index(drop=True, inplace=True)
+        json_data = df.to_json(orient = 'records')
+        json_object = json.loads(json_data)
+        
+        table_schema = [
+        {
+            "name": "email",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "userProfileId",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "profileProvider",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "addressType",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "receiverName",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "addressId",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "isDisposable",
+            "type": "BOOLEAN",
+            "mode": "NULLABLE"
+        },{
+            "name": "postalCode",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "city",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "state",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "country",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "street",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "number",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "neighborhood",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "complement",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "reference",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "isComplete",
+            "type": "BOOLEAN",
+            "mode": "NULLABLE"
+        }]
+        
+        project_id = '999847639598'
+        dataset_id = 'test'
+        table_id = 'shopstar_vtex_client_availableAddresses'
+        try:
+            client  = bigquery.Client(project = project_id)
+            dataset  = client.dataset(dataset_id)
+            table = dataset.table(table_id)
+            job_config = bigquery.LoadJobConfig()
+            job_config.schema = format_schema(table_schema)
+            job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+            job = client.load_table_from_json(json_object, table, job_config = job_config)
+            print(job.result())
+        except:
+            client  = bigquery.Client(project = project_id)
+            dataset  = client.dataset(dataset_id)
+            table = dataset.table(table_id)
+            job_config = bigquery.LoadJobConfig()
+            job_config.write_disposition = "WRITE_TRUNCATE"
+            job_config.autodetect = True
+            job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+            job = client.load_table_from_json(json_object, table, job_config = job_config)
     except:
+        print("Vacio")
+
+def run2():
+    try:
+        df = init.df2
+        df.reset_index(drop=True, inplace=True)
+        json_data = df.to_json(orient = 'records')
+        json_object = json.loads(json_data)
+        
+        project_id = '999847639598'
+        dataset_id = 'test'
+        table_id = 'shopstar_vtex_client_availableAddresses_No_Data'
+        
         client  = bigquery.Client(project = project_id)
         dataset  = client.dataset(dataset_id)
         table = dataset.table(table_id)
@@ -171,26 +194,9 @@ def run():
         job_config.autodetect = True
         job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
         job = client.load_table_from_json(json_object, table, job_config = job_config)
-
-def run2():
-    df = init.df2
-    df.reset_index(drop=True, inplace=True)
-    json_data = df.to_json(orient = 'records')
-    json_object = json.loads(json_data)
-    
-    project_id = '999847639598'
-    dataset_id = 'test'
-    table_id = 'shopstar_vtex_client_availableAddresses_No_Data'
-    
-    client  = bigquery.Client(project = project_id)
-    dataset  = client.dataset(dataset_id)
-    table = dataset.table(table_id)
-    job_config = bigquery.LoadJobConfig()
-    job_config.write_disposition = "WRITE_TRUNCATE"
-    job_config.autodetect = True
-    job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-    job = client.load_table_from_json(json_object, table, job_config = job_config)
-    print(job.result())
+        print(job.result())
+    except:
+        print("Vacio")
         
         
 def get_params():
