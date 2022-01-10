@@ -37,7 +37,7 @@ def get_order(id):
         try:
             clientProfileData = Fjson["clientProfileData"]
             for x in clientProfileData:
-                print(x)
+                print(x["email"])
             '''
             client_email = clientProfileData["email"]
             client_email = decrypt_email(str(client_email))
