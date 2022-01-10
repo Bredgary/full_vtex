@@ -65,13 +65,11 @@ def get_order(email):
                 'complement': complement,
                 'reference': reference}, index=[0])
             init.df = init.df.append(df1)
-        if df1.empty:
-            df2 = pd.DataFrame({
-                'email': email,
-                'NoAddress': None}, index=[0])
-            init.df2 = init.df2.append(df2)
     except:
-        print("No data")
+        df2 = pd.DataFrame({
+            'email': email,
+            'NoAddress': None}, index=[0])
+        init.df2 = init.df2.append(df2)
 
 def run():
     try:
