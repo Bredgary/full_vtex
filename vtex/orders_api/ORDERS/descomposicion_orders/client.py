@@ -112,7 +112,6 @@ def run():
         df.reset_index(drop=True, inplace=True)
         json_data = df.to_json(orient = 'records')
         json_object = json.loads(json_data)
-        json_object = "".join( repr(e) for e in json_object )
         print(json_object)
         
         
