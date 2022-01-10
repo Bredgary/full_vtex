@@ -34,64 +34,61 @@ def get_order(id):
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
-        try:
-            clientProfileData = Fjson["clientProfileData"]
-            for x in clientProfileData:
-                print(x["email"])
-            '''
-            client_email = clientProfileData["email"]
-            client_email = decrypt_email(str(client_email))
-            firstName = clientProfileData["firstName"]
-            lastName = clientProfileData["lastName"]
-            documentType = clientProfileData["documentType"]
-            document = clientProfileData["document"]
-            phone = clientProfileData["phone"]
-            if clientProfileData["corporateName"] is None:
-                corporateName = ""
-            else:
-                corporateName = clientProfileData["corporateName"]
-                
-            if clientProfileData["tradeName"] is None:
-                tradeName = ""
-            else:
-                tradeName = clientProfileData["tradeName"]
-                
-            if clientProfileData["corporateDocument"] is None:
-                corporateDocument = 0
-            else:
-                corporateDocument = clientProfileData["corporateDocument"]
-                
-            if clientProfileData["stateInscription"] is None:
-                stateInscription = ""
-            else:
-                stateInscription = clientProfileData["stateInscription"]
-                
-            if clientProfileData["corporatePhone"] is None:
-                corporatePhone = ""
-            else: 
-                corporatePhone = clientProfileData["corporatePhone"]
-            isCorporate = clientProfileData["isCorporate"]
-            userProfileId = clientProfileData["userProfileId"]
-       
-            df1 = pd.DataFrame({
-                'orderId': id,
-                'email': client_email,
-                'firstName': firstName,
-                'lastName': lastName,
-                'documentType': documentType,
-                'document': document,
-                'phone': phone,
-                'corporateName': corporateName,
-                'tradeName': tradeName,
-                'corporateDocument': corporateDocument,
-                'stateInscription': stateInscription,
-                'corporatePhone': corporatePhone,
-                'isCorporate': isCorporate,
-                'userProfileId': userProfileId}, index=[0])
-            init.df = init.df.append(df1)
-            '''
-        except:
-            print("Sin Datos")
+        clientProfileData = Fjson["clientProfileData"]
+        for x in clientProfileData:
+            print(x["email"])
+        '''
+        client_email = clientProfileData["email"]
+        client_email = decrypt_email(str(client_email))
+        firstName = clientProfileData["firstName"]
+        lastName = clientProfileData["lastName"]
+        documentType = clientProfileData["documentType"]
+        document = clientProfileData["document"]
+        phone = clientProfileData["phone"]
+        if clientProfileData["corporateName"] is None:
+            corporateName = ""
+        else:
+            corporateName = clientProfileData["corporateName"]
+            
+        if clientProfileData["tradeName"] is None:
+            tradeName = ""
+        else:
+            tradeName = clientProfileData["tradeName"]
+            
+        if clientProfileData["corporateDocument"] is None:
+            corporateDocument = 0
+        else:
+            corporateDocument = clientProfileData["corporateDocument"]
+            
+        if clientProfileData["stateInscription"] is None:
+            stateInscription = ""
+        else:
+            stateInscription = clientProfileData["stateInscription"]
+            
+        if clientProfileData["corporatePhone"] is None:
+            corporatePhone = ""
+        else: 
+            corporatePhone = clientProfileData["corporatePhone"]
+        isCorporate = clientProfileData["isCorporate"]
+        userProfileId = clientProfileData["userProfileId"]
+   
+        df1 = pd.DataFrame({
+            'orderId': id,
+            'email': client_email,
+            'firstName': firstName,
+            'lastName': lastName,
+            'documentType': documentType,
+            'document': document,
+            'phone': phone,
+            'corporateName': corporateName,
+            'tradeName': tradeName,
+            'corporateDocument': corporateDocument,
+            'stateInscription': stateInscription,
+            'corporatePhone': corporatePhone,
+            'isCorporate': isCorporate,
+            'userProfileId': userProfileId}, index=[0])
+        init.df = init.df.append(df1)
+        '''
     except:
         print("vacio") 
             
