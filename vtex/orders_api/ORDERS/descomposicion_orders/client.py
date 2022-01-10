@@ -35,6 +35,9 @@ def get_order(id):
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
         try:
+            for x in Fjson:
+                print(x)
+            '''
             clientProfileData = Fjson["clientProfileData"]
             client_email = clientProfileData["email"]
             client_email = decrypt_email(str(client_email))
@@ -86,6 +89,7 @@ def get_order(id):
                 'isCorporate': isCorporate,
                 'userProfileId': userProfileId}, index=[0])
             init.df = init.df.append(df1)
+            '''
         except:
             print("Sin Datos")
     except:
