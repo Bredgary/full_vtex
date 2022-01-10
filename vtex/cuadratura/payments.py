@@ -82,7 +82,6 @@ def get_order(id,reg):
             init.bankIssuedInvoiceIdentificationNumberFormatted = pay["bankIssuedInvoiceIdentificationNumberFormatted"]
             init.bankIssuedInvoiceBarCodeNumber = pay["bankIssuedInvoiceBarCodeNumber"]
             init.bankIssuedInvoiceBarCodeType = pay["bankIssuedInvoiceBarCodeType"]
-            print("Registro: "+str(reg))
         df1 = pd.DataFrame({
             'orderId': str(id),
             'id_payments': str(init.id),
@@ -119,7 +118,6 @@ def get_order(id,reg):
         print("Registro: "+str(reg))
     except:
         print("Vacio")
-        print("Registro: "+str(reg))
         
         
 def get_params():
