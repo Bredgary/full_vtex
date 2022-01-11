@@ -10,11 +10,13 @@ from datetime import timedelta
 from os import system
 from google.cloud import bigquery
 import logging
+from datetime import date, timedelta
 
 class init:
-  today = datetime.date.today()
+  #today = datetime.date.today()
   yesterday = today - datetime.timedelta(days=1)
   before_yesterday = today - datetime.timedelta(days=2)
+  today = ""
   ordenes = {}
   salir = 0
   df = pd.DataFrame()
@@ -72,6 +74,9 @@ def format_schema(schema):
       formatted_schema.append(bigquery.SchemaField(row['name'], row['type'], row['mode']))
   return formatted_schema
 
+def daterange(start_date, end_date):
+    for n in range(int((end_date - start_date).days)):
+        yield start_date + timedelta(n)
 
 def get_order_list(page,hora):
   url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders?page="+str(page)+""
@@ -118,7 +123,7 @@ def delete_duplicate():
   try:
     print("Eliminando duplicados")
     client = bigquery.Client()
-    QUERY = ('CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_vtex_list_order` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`')
+    QUERY = ('CREATE OR REPLACE TABLE `shopstar-datalake.test.shopstar_vtex_list_order` AS SELECT DISTINCT * FROM `shopstar-datalake.test.shopstar_vtex_list_order`')
     query_job = client.query(QUERY)
     rows = query_job.result()
     print(rows)
@@ -127,30 +132,36 @@ def delete_duplicate():
 
 
 def run():
-  for x in range(30):
-    init.registro += 1
-    get_order_list(init.registro,init.hora_0)
-    get_order_list(init.registro,init.hora_1)
-    get_order_list(init.registro,init.hora_2)
-    get_order_list(init.registro,init.hora_3)
-    get_order_list(init.registro,init.hora_4)
-    get_order_list(init.registro,init.hora_5)
-    get_order_list(init.registro,init.hora_6)
-    get_order_list(init.registro,init.hora_7)
-    get_order_list(init.registro,init.hora_8)
-    get_order_list(init.registro,init.hora_9)
-    get_order_list(init.registro,init.hora_10)
-    get_order_list(init.registro,init.hora_11)
-    get_order_list(init.registro,init.hora_13)
-    get_order_list(init.registro,init.hora_14)
-    get_order_list(init.registro,init.hora_15)
-    get_order_list(init.registro,init.hora_16)
-    get_order_list(init.registro,init.hora_17)
-    get_order_list(init.registro,init.hora_18)
-    get_order_list(init.registro,init.hora_19)
-    get_order_list(init.registro,init.hora_20)
-    get_order_list(init.registro,init.hora_21)
-    get_order_list(init.registro,init.hora_22)
+    start_date = date(2019, 1, 1)
+    end_date = date(2022, 1, 10)
+    for single_date in daterange(start_date, end_date):
+        variFecha = single_date.strftime("%Y-%m-%d")
+        init.today = variFecha
+        print("Dia N° "+str(init.today))
+        for x in range(30):
+            init.registro += 1
+            get_order_list(init.registro,init.hora_0)
+            get_order_list(init.registro,init.hora_1)
+            get_order_list(init.registro,init.hora_2)
+            get_order_list(init.registro,init.hora_3)
+            get_order_list(init.registro,init.hora_4)
+            get_order_list(init.registro,init.hora_5)
+            get_order_list(init.registro,init.hora_6)
+            get_order_list(init.registro,init.hora_7)
+            get_order_list(init.registro,init.hora_8)
+            get_order_list(init.registro,init.hora_9)
+            get_order_list(init.registro,init.hora_10)
+            get_order_list(init.registro,init.hora_11)
+            get_order_list(init.registro,init.hora_13)
+            get_order_list(init.registro,init.hora_14)
+            get_order_list(init.registro,init.hora_15)
+            get_order_list(init.registro,init.hora_16)
+            get_order_list(init.registro,init.hora_17)
+            get_order_list(init.registro,init.hora_18)
+            get_order_list(init.registro,init.hora_19)
+            get_order_list(init.registro,init.hora_20)
+            get_order_list(init.registro,init.hora_21)
+            get_order_list(init.registro,init.hora_22)
     
 
     
@@ -165,7 +176,7 @@ def run():
       "mode": "NULLABLE"
     },{
       "name": "creationDate",
-      "type": "STRING",
+      "type": "DATE",
       "mode": "NULLABLE"
     },{
       "name": "clientName",
@@ -260,28 +271,27 @@ def run():
       "type": "STRING",
       "mode": "NULLABLE"
     }
+    project_id = '999847639598'
+    dataset_id = 'test'
+    table_id = 'shopstar_vtex_list_order'
+    table_temp = 'order_write'
     
-  project_id = '999847639598'
-  dataset_id = 'staging_zone'
-  table_id = 'shopstar_vtex_list_order'
-  table_temp = 'order_write'
-  
-  client  = bigquery.Client(project = project_id)
-  dataset  = client.dataset(dataset_id)
-  tableO = dataset.table(table_id)
-  job_config = bigquery.LoadJobConfig()
-  job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-  job_config.schema = format_schema(table_schema)
-  job = client.load_table_from_json(json_object, tableO, job_config = job_config)
-  print(job.result())
-  
-  tableT = dataset.table(table_temp)
-  job_config_temp = bigquery.LoadJobConfig()
-  job_config_temp.write_disposition = "WRITE_TRUNCATE"
-  job_config_temp.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-  job_config.schema = format_schema(table_schema)
-  job = client.load_table_from_json(json_object, tableT, job_config = job_config_temp)
-  print(job.result())
-  delete_duplicate()
+    client  = bigquery.Client(project = project_id)
+    dataset  = client.dataset(dataset_id)
+    tableO = dataset.table(table_id)
+    job_config = bigquery.LoadJobConfig()
+    job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+    job_config.schema = format_schema(table_schema)
+    job = client.load_table_from_json(json_object, tableO, job_config = job_config)
+    print(job.result())
+    
+    tableT = dataset.table(table_temp)
+    job_config_temp = bigquery.LoadJobConfig()
+    job_config_temp.write_disposition = "WRITE_TRUNCATE"
+    job_config_temp.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+    job_config.schema = format_schema(table_schema)
+    job = client.load_table_from_json(json_object, tableT, job_config = job_config_temp)
+    print(job.result())
+    delete_duplicate()
 
 run()
