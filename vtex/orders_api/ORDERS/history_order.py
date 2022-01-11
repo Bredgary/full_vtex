@@ -16,8 +16,8 @@ from datetime import date, timedelta
 
 class init:
   #today = datetime.date.today()
-  yesterday = today - datetime.timedelta(days=1)
-  before_yesterday = today - datetime.timedelta(days=2)
+  #yesterday = today - datetime.timedelta(days=1)
+  #before_yesterday = today - datetime.timedelta(days=2)
   today = ""
   ordenes = {}
   salir = 0
