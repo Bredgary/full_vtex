@@ -4,31 +4,10 @@ from google.cloud import bigquery
 import os, json
 from datetime import datetime
 import requests
-from datetime import datetime, timezone
 from os.path import join
-from _queue import Empty
-import datetime
-import time
 
 class init:
-  productList = []
   df = pd.DataFrame()
-  headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-
-def format_schema(schema):
-  formatted_schema = []
-  for row in schema:
-    formatted_schema.append(bigquery.SchemaField(row['name'], row['type'], row['mode']))
-    return formatted_schema
-
-def decrypt_email(email):
-  try:
-    url = "https://conversationtracker.vtex.com.br/api/pvt/emailMapping?an=mercury&alias="+email+""
-    response = requests.request("GET", url, headers=init.headers)
-    formatoJ = json.loads(response.text)
-    return formatoJ["email"]
-  except:
-    print(str(email))
 
 def get_order(id):
     try:
@@ -78,7 +57,7 @@ def delete_duplicate():
   try:
     print("Eliminando duplicados")
     client = bigquery.Client()
-    QUERY = ('CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_ft_orders` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.shopstar_ft_orders`')
+    QUERY = ('CREATE OR REPLACE TABLE `shopstar-datalake.test.shipping_logisticsInfo` AS SELECT DISTINCT * FROM `shopstar-datalake.test.shipping_logisticsInfo`')
     query_job = client.query(QUERY)
     rows = query_job.result()
     print(rows)
@@ -118,7 +97,7 @@ def run():
 def get_params():
     print("Cargando consulta")
     client = bigquery.Client()
-    QUERY = ('SELECT DISTINCT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`WHERE (orderId NOT IN (SELECT orderId FROM `shopstar-datalake.staging_zone.shopstar_ft_orders`))')
+    QUERY = ('SELECT DISTINCT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`')
     query_job = client.query(QUERY)  
     rows = query_job.result()
     registro = 0
