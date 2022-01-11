@@ -33,6 +33,7 @@ def get_order(id):
                 'price': price}, index=[0])
             init.df = init.df.append(df1)
     except:
+        print(id)
         print("Vacio")
 
 def delete_duplicate():
