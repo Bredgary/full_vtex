@@ -5,6 +5,7 @@ import os, json
 from datetime import datetime
 import requests
 from datetime import datetime, timezone
+from datetime import date, timedelta
 
 naive_dt = datetime.now()
 aware_dt = naive_dt.astimezone()
@@ -19,9 +20,9 @@ date = date_str.replace("+00:00", "Z")
 now = datetime.now()
 format = now.strftime('%Y-%m-%d')
 
-def cl_client():
+def cl_client(fecha):
 	url = "https://mercury.vtexcommercestable.com.br/api/dataentities/CL/search"
-	querystring = {"_fields":"beneficio,beneficio2,crearGiftcard,profilePicture,proteccionDatos,terminosCondiciones,terminosPago,tradeName,rclastcart,rclastsession,rclastsessiondate,homePhone,phone,stateRegistration,email,userId,firstName,lastName,document,localeDefault,attach,approved,birthDate,businessPhone,corporateDocument,corporateName,documentType,gender,customerClass,priceTables,id,accountId,accountName,dataEntityId,createdBy,createdIn,updatedBy,updatedIn,lastInteractionBy,lastInteractionIn","_where":"createdIn="+format+""}
+	querystring = {"_fields":"isCorporate,beneficio,beneficio2,crearGiftcard,profilePicture,proteccionDatos,terminosCondiciones,terminosPago,tradeName,rclastcart,rclastsession,rclastsessiondate,homePhone,phone,stateRegistration,email,userId,firstName,lastName,document,localeDefault,attach,approved,birthDate,businessPhone,corporateDocument,corporateName,documentType,gender,customerClass,priceTables,id,accountId,accountName,dataEntityId,createdBy,createdIn,updatedBy,updatedIn,lastInteractionBy,lastInteractionIn","_where":"createdIn="+fecha+""}
 	headers = {
 		"Content-Type": "application/json",
 		"Accept": "application/vnd.vtex.ds.v10+json",
@@ -51,8 +52,8 @@ def delete_duplicate():
 	except:
 		print("Consulta SQL no ejecutada")
 
-def run():
-	df = pd.DataFrame(cl_client(),
+def run(fecha):
+	df = pd.DataFrame(cl_client(fecha),
 					columns=['beneficio','beneficio2','crearGiftcard','profilePicture','proteccionDatos','terminosCondiciones','terminosPago','tradeName','rclastcart','rclastsession','rclastsessiondate','homePhone','phone','stateRegistration','email','userId','firstName','lastName','document','localeDefault','attach','approved','birthDate','businessPhone','corporateDocument','corporateName','documentType','gender','customerClass','priceTables','id','accountId','accountName','dataEntityId','createdBy','createdIn','updatedBy','updatedIn','lastInteractionBy','lastInteractionIn'])
 	df.reset_index(drop=True, inplace=True)
 
@@ -109,7 +110,7 @@ def run():
 	    "mode": "NULLABLE"
 	  },{
 	    "name": "createdIn",
-	    "type": "STRING",
+	    "type": "DATE",
 	    "mode": "NULLABLE"
 	  },{
 	    "name": "updatedBy",
@@ -173,7 +174,7 @@ def run():
 	    "mode": "NULLABLE"
 	  },{
 	    "name": "birthDate",
-	    "type": "STRING",
+	    "type": "DATE",
 	    "mode": "NULLABLE"
 	  },{
 	    "name": "businessPhone",
@@ -219,10 +220,14 @@ def run():
 	    "name": "lastInteractionIn",
 	    "type": "STRING",
 	    "mode": "NULLABLE"
+	  },{
+	    "name": "isCorporate",
+	    "type": "STRING",
+	    "mode": "NULLABLE"
 	  }
 
 	project_id = '999847639598'
-	dataset_id = 'staging_zone'
+	dataset_id = 'test'
 	table_id = 'shopstar_vtex_client'
 	
 	client  = bigquery.Client(project = project_id)
@@ -236,5 +241,14 @@ def run():
 	job = client.load_table_from_json(json_object, table, job_config = job_config)
 	print(job.result())
 	delete_duplicate()
-	runTemp()
-run()
+
+def daterange(start_date, end_date):
+    for n in range(int((end_date - start_date).days)):
+        yield start_date + timedelta(n)
+
+start_date = date(2016, 1, 1)
+end_date = date(2021, 12, 15)
+for single_date in daterange(start_date, end_date):
+    variFecha = single_date.strftime("%Y-%m-%d")
+    print(variFecha)
+    run(variFecha)
