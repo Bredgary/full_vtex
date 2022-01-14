@@ -295,7 +295,7 @@ def delete_duplicate():
   try:
     print("Eliminando duplicados")
     client = bigquery.Client()
-    QUERY = ('CREATE OR REPLACE TABLE `shopstar-datalake.test.ft_orders` AS SELECT DISTINCT * FROM `shopstar-datalake.test.ft_orders`')
+    QUERY = ('CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.ft_orders` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.ft_orders`')
     query_job = client.query(QUERY)
     rows = query_job.result()
     print(rows)
@@ -312,8 +312,8 @@ def run():
         
         
         project_id = '999847639598'
-        dataset_id = 'test'
-        table_id = 'ft_orders'
+        dataset_id = 'staging_zone'
+        table_id = 'shopstar_ft_orders'
         
         if df.empty:
             print('DataFrame is empty!')
@@ -334,7 +334,7 @@ def run():
 def get_params():
     print("Cargando consulta")
     client = bigquery.Client()
-    QUERY = ('SELECT DISTINCT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`WHERE (orderId NOT IN (SELECT orderId FROM `shopstar-datalake.test.ft_orders`))')
+    QUERY = ('SELECT DISTINCT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`WHERE (orderId NOT IN (SELECT orderId FROM `shopstar-datalake.staging_zone.shopstar_ft_orders`))')
     query_job = client.query(QUERY)  
     rows = query_job.result()
     registro = 0
