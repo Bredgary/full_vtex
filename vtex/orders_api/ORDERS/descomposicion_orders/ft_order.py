@@ -252,7 +252,7 @@ def get_order(id):
             'seller_id': seller_id,
             'seller_name': seller_name,
             'seller_logo': seller_logo,
-            'seller_fulfillmentEndpoint': seller_logo,
+            'seller_fulfillmentEndpoint': seller_fulfillmentEndpoint,
             'CancellationDate': CancellationDate,
             'RequestedByUser': RequestedByUser,
             'RequestedBySystem': RequestedBySystem,
