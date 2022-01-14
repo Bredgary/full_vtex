@@ -304,7 +304,7 @@ def delete_duplicate():
 
 
 def run():
-    try:
+    #try:
         df = init.df
         df.reset_index(drop=True, inplace=True)
         json_data = df.to_json(orient = 'records')
@@ -328,8 +328,8 @@ def run():
             job = client.load_table_from_json(json_object, table, job_config = job_config)
             print(job.result())
             delete_duplicate()
-    except:
-        print("Error.")
+    #except:
+    #    print("Error.")
 
 def get_params():
     print("Cargando consulta")
