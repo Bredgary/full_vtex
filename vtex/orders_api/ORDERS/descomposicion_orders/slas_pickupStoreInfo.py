@@ -69,8 +69,8 @@ def run():
             dataset  = client.dataset(dataset_id)
             table = dataset.table(table_id)
             job_config = bigquery.LoadJobConfig()
-            #job_config.write_disposition = "WRITE_TRUNCATE"
-            #job_config.autodetect = True
+            job_config.write_disposition = "WRITE_TRUNCATE"
+            job_config.autodetect = True
             job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
             job = client.load_table_from_json(json_object, table, job_config = job_config)
             print(job.result())
@@ -82,7 +82,7 @@ def run():
 def get_params():
     print("Cargando consulta")
     client = bigquery.Client()
-    QUERY = ('SELECT DISTINCT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`WHERE (orderId NOT IN (SELECT orderId FROM `shopstar-datalake.staging_zone.shipping_logisticsInfo`))')
+    QUERY = ('SELECT DISTINCT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`WHERE (orderId NOT IN (SELECT orderId FROM `shopstar-datalake.staging_zone.slas_pickupStoreInfo`))')
     query_job = client.query(QUERY)  
     rows = query_job.result()
     registro = 0
