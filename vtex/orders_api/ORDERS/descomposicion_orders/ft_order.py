@@ -330,7 +330,6 @@ def run():
             delete_duplicate()
     except:
         print("Error.")
-        logging.exception("message")
 
 def get_params():
     print("Cargando consulta")
