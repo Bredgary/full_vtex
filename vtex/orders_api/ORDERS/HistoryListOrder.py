@@ -245,7 +245,7 @@ def time():
         init.registro = 0
     run()
     
-
+time()
 
 
 
