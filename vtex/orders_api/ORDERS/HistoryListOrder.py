@@ -27,7 +27,7 @@ class init:
 
 
 def get_order_list(page,hora):
-    try:
+    #try:
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders?page="+str(page)+""
         response = requests.request("GET", url, headers=init.headers, params=hora)
         FJTemp = json.loads(response.text)
@@ -62,6 +62,8 @@ def get_order_list(page,hora):
                 'currencyCode': x["currencyCode"]}, index=[0])
             print("Registro: "+str(init.reg))
             init.df = init.df.append(df1)
+            if init.reg == 2:
+                run()
             if init.reg == 300:
                 run()
             if init.reg == 400:
@@ -122,8 +124,8 @@ def get_order_list(page,hora):
                 run()
             if init.reg == 90000:
                 run()
-    except:
-        print("Vacio")
+    #except:
+     #   print("Vacio")
 
 
 
