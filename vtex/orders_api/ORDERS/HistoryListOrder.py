@@ -62,8 +62,6 @@ def get_order_list(page,hora):
                 'currencyCode': x["currencyCode"]}, index=[0])
             print("Registro: "+str(init.reg))
             init.df = init.df.append(df1)
-            if init.reg == 2:
-                run()
             if init.reg == 300:
                 run()
             if init.reg == 400:
