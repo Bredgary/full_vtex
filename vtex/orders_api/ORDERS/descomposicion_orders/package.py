@@ -128,5 +128,62 @@ def get_params():
         registro += 1
         get_order_package(row.orderId)
         print("Registro: "+str(registro))
+        get_order(row.email,registro)
+        if registro == 100:
+            run()
+        if registro == 200:
+            run()
+        if registro == 300:
+            run()
+        if registro == 400:
+            run()
+        if registro == 500:
+            run()
+        if registro == 600:
+            run()
+        if registro == 700:
+            run()
+        if registro == 800:
+            run()
+        if registro == 900:
+            run()
+        if registro == 1000:
+            run()
+        if registro == 1000:
+            run()
+        if registro == 1000:
+            run()
+        if registro == 1000:
+            run()
+        if registro == 1000:
+            run()
+        if registro == 1000:
+            run()
+        if registro == 1000:
+            run()
+        if registro == 1000:
+            run()
+        if registro == 1000:
+            run()
+        if registro == 10000:
+            run()
+        if registro == 20000:
+            run()
+        if registro == 30000:
+            run()
+        if registro == 40000:
+            run()
+        if registro == 50000:
+            run()
+        if registro == 60000:
+            run()
+        if registro == 70000:
+            run()
+        if registro == 80000:
+            run()
+        if registro == 90000:
+            run()
+        if registro == 100000:
+            run()
     run()
 get_params()
