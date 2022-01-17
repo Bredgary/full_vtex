@@ -92,85 +92,6 @@ def run():
         df.reset_index(drop=True, inplace=True)
         json_data = df.to_json(orient = 'records')
         json_object = json.loads(json_data)
-        table_schema = [
-            {
-                "name": "orderId",
-                "type": "STRING",
-                "mode": "NULLABLE"
-        },{
-            "name": "courier",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "invoiceNumber",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "invoiceValue",
-            "type": "INTEGER",
-            "mode": "NULLABLE"
-        },{
-            "name": "invoiceUrl",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "issuanceDate",
-            "type": "TIMESTAMP",
-            "mode": "NULLABLE"
-        },{
-            "name": "trackingNumber",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "invoiceKey",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "trackingUrl",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "embeddedInvoice",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "package_type",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "cfop",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "volumes",
-            "type": "INTEGER",
-            "mode": "NULLABLE"
-        },{
-            "name": "EnableInferItems",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "itemIndex",
-            "type": "INTEGER",
-            "mode": "NULLABLE"
-        },{
-            "name": "quantity",
-            "type": "INTEGER",
-            "mode": "NULLABLE"
-        },{
-            "name": "price",
-            "type": "INTEGER",
-            "mode": "NULLABLE"
-        },{
-            "name": "description",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "unitMultiplier",
-            "type": "FLOAT",
-            "mode": "NULLABLE"
-        }]
-        
          
         project_id = '999847639598'
         dataset_id = 'staging_zone'
@@ -200,7 +121,7 @@ def run():
 def get_params():
     print("Cargando consulta")
     client = bigquery.Client()
-    QUERY = ('SELECT DISTINCT orderId  FROM `shopstar-datalake.staging_zone.order_write`WHERE (orderId NOT IN (SELECT orderId FROM `shopstar-datalake.test.shopstar_order_package`))')
+    QUERY = ('SELECT DISTINCT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`WHERE (orderId NOT IN (SELECT orderId FROM `shopstar-datalake.staging_zone.shopstar_order_package`))')
     query_job = client.query(QUERY)
     rows = query_job.result()
     registro = 0

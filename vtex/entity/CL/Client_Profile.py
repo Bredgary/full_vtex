@@ -6,6 +6,7 @@ from datetime import datetime
 import requests
 from datetime import datetime, timezone
 from os.path import join
+import logging
 
 class init:
   productList = []
@@ -143,109 +144,108 @@ def get_params():
 
 
 def run():
-    df = init.df
-    df.reset_index(drop=True, inplace=True)
-    json_data = df.to_json(orient = 'records')
-    json_object = json.loads(json_data)
-    
-    table_schema = [{
-        "name": "userProfileId",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "profileProvider",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "isComplete",
-        "type": "BOOLEAN",
-        "mode": "NULLABLE"
-    },{
-        "name": "email",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "firstName",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "lastName",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "document",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "documentType",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "phone",
-        "type": "INTEGER",
-        "mode": "NULLABLE"
-    },{
-        "name": "corporateName",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "tradeName",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "corporateDocument",
-        "type": "INTEGER",
-        "mode": "NULLABLE"
-    },{
-        "name": "stateInscription",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "corporatePhone",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "isCorporate",
-        "type": "BOOLEAN",
-        "mode": "NULLABLE"
-    },{
-        "name": "profileCompleteOnLoading",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "profileErrorOnLoading",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },{
-        "name": "customerClass",
-        "type": "STRING",
-        "mode": "NULLABLE"}]
-    
-    project_id = '999847639598'
-    dataset_id = 'test'
-    table_id = 'shopstar_vtex_client_profile'
-    
-    client  = bigquery.Client(project = project_id)
-    dataset  = client.dataset(dataset_id)
-    table = dataset.table(table_id)
-    
     try:
+        df = init.df
+        df.reset_index(drop=True, inplace=True)
+        json_data = df.to_json(orient = 'records')
+        json_object = json.loads(json_data)
+        
+        table_schema = [{
+            "name": "userProfileId",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "profileProvider",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "isComplete",
+            "type": "BOOLEAN",
+            "mode": "NULLABLE"
+        },{
+            "name": "email",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "firstName",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "lastName",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "document",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "documentType",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "phone",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "corporateName",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "tradeName",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "corporateDocument",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "stateInscription",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "corporatePhone",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "isCorporate",
+            "type": "BOOLEAN",
+            "mode": "NULLABLE"
+        },{
+            "name": "profileCompleteOnLoading",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "profileErrorOnLoading",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "customerClass",
+            "type": "STRING",
+            "mode": "NULLABLE"}]
+        
+        project_id = '999847639598'
+        dataset_id = 'test'
+        table_id = 'shopstar_vtex_client_profile'
+        
         client  = bigquery.Client(project = project_id)
         dataset  = client.dataset(dataset_id)
         table = dataset.table(table_id)
-        job_config = bigquery.LoadJobConfig()
-        job_config.schema = format_schema(table_schema)
-        job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-        job = client.load_table_from_json(json_object, table, job_config = job_config)
-        print(job.result())
+        
+        if df.empty:
+            print('DataFrame is empty!')
+        else:
+            client  = bigquery.Client(project = project_id)
+            dataset  = client.dataset(dataset_id)
+            table = dataset.table(table_id)
+            job_config = bigquery.LoadJobConfig()
+            #job_config.write_disposition = "WRITE_TRUNCATE"
+            #job_config.autodetect = True
+            job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+            job = client.load_table_from_json(json_object, table, job_config = job_config)
+            print(job.result())
+            delete_duplicate()
     except:
-        client  = bigquery.Client(project = project_id)
-        dataset  = client.dataset(dataset_id)
-        table = dataset.table(table_id)
-        job_config = bigquery.LoadJobConfig()
-        job_config.autodetect = True
-        job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-        job = client.load_table_from_json(json_object, table, job_config = job_config)
-        print(job.result())
+        print("Error.")
+        logging.exception("message")
   
 get_params()
