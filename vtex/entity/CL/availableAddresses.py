@@ -20,7 +20,7 @@ def format_schema(schema):
     return formatted_schema
 
 
-def get_order(email):
+def get_order(email,reg):
     try:
         url = "https://mercury.vtexcommercestable.com.br/api/checkout/pub/profiles"
         querystring = {"email":""+str(email)+""}
@@ -64,8 +64,9 @@ def get_order(email):
                 'complement': complement,
                 'reference': reference}, index=[0])
             init.df = init.df.append(df1)
+            print("Registro: "+str(reg))
     except:
-        print("No availableAddresses")     
+        print("No availableAddresses "+str(reg))
 
 def run():
     try:
