@@ -169,7 +169,6 @@ def run():
             job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
             job = client.load_table_from_json(json_object, table, job_config = job_config)
             print(job.result())
-            delete_duplicate()
     except:
         print("Error.")
         logging.exception("message")
