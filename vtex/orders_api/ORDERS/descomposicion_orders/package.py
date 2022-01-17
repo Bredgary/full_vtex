@@ -128,7 +128,6 @@ def get_params():
         registro += 1
         get_order_package(row.orderId)
         print("Registro: "+str(registro))
-        get_order(row.email,registro)
         if registro == 100:
             run()
         if registro == 200:
