@@ -27,46 +27,30 @@ def get_order(id,reg):
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
-        try:
-            paymentData = Fjson["paymentData"]
-            transactions = paymentData["transactions"]
-            for x in transactions:
-                payments = x["payments"]
-                for x in payments:
-                    connectorResponses = x["connectorResponses"]
-                    init.Tid = connectorResponses["Tid"]
-                    init.ReturnCode= connectorResponses["ReturnCode"]
-                    init.Message= connectorResponses["Message"]
-                    init.authId= connectorResponses["authId"]
-                    init.orderId= connectorResponses["orderId"]
-                    init.state= connectorResponses["state"]
-            print("Registro: "+str(reg))
-        except:
-            print("Registro: "+str(reg))
-        df1 = pd.DataFrame({
-            'orderId': str(id),
-            'Tid': str(init.Tid),
-            'ReturnCode': str(init.ReturnCode),
-            'Message': str(init.Message),
-            'authId': str(init.authId),
-            'C_orderId': str(init.orderId),
-            'state': str(init.state)}, index=[0])
-        init.df = init.df.append(df1)
+        paymentData = Fjson["paymentData"]
+        transactions = paymentData["transactions"]
+        for x in transactions:
+            payments = x["payments"]
+            for x in payments:
+                connectorResponses = x["connectorResponses"]
+                init.Tid = connectorResponses["Tid"]
+                init.ReturnCode= connectorResponses["ReturnCode"]
+                init.Message= connectorResponses["Message"]
+                init.authId= connectorResponses["authId"]
+                init.orderId= connectorResponses["orderId"]
+                init.state= connectorResponses["state"]
+                
+                df1 = pd.DataFrame({
+                    'orderId': str(id),
+                    'Tid': str(init.Tid),
+                    'ReturnCode': str(init.ReturnCode),
+                    'Message': str(init.Message),
+                    'authId': str(init.authId),
+                    'C_orderId': str(init.orderId),
+                    'state': str(init.state)}, index=[0])
+                init.df = init.df.append(df1)
     except:
         print("Vacio")
-        print("Registro: "+str(reg))
-        
-        
-def get_params():
-    print("Cargando consulta")
-    client = bigquery.Client()
-    QUERY = ('SELECT DISTINCT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`WHERE (orderId NOT IN (SELECT orderId FROM `shopstar-datalake.staging_zone.shopstar_order_connectorResponses`))')
-    query_job = client.query(QUERY)  
-    rows = query_job.result()
-    registro = 1
-    for row in rows:
-        get_order(row.orderId,registro)
-        registro += 1
         
 def delete_duplicate():
     try:
@@ -83,7 +67,6 @@ def delete_duplicate():
 
 def run():
     try:
-        get_params()
         df = init.df
         df.reset_index(drop=True, inplace=True)
         json_data = df.to_json(orient = 'records')
@@ -107,5 +90,16 @@ def run():
     except:
         print("Error.")
         logging.exception("message")
-    
-run()
+
+def get_params():
+    print("Cargando consulta")
+    client = bigquery.Client()
+    QUERY = ('SELECT DISTINCT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`WHERE (orderId NOT IN (SELECT orderId FROM `shopstar-datalake.staging_zone.shopstar_order_connectorResponses`))')
+    query_job = client.query(QUERY)  
+    rows = query_job.result()
+    registro = 0
+    for row in rows:
+        get_order(row.orderId,registro)
+        registro += 1
+    run()
+get_params()
