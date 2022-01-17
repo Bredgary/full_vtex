@@ -33,7 +33,7 @@ def get_order(email,reg):
         expirationDate = x["expirationDate"]
         isExpired = x["isExpired"]
         df1 = pd.DataFrame({
-            'email': str(email),
+            'email': email,
             'userProfileId': userProfileId,
             'profileProvider': profileProvider,
             'accountId': accountId,
