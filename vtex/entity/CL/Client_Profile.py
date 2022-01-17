@@ -77,7 +77,7 @@ def get_order(email,reg):
 def get_params():
     print("Cargando consulta")
     client = bigquery.Client()
-    QUERY = ('SELECT DISTINCT email FROM `shopstar-datalake.staging_zone.shopstar_vtex_client_temp`WHERE (email NOT IN (SELECT email FROM `shopstar-datalake.test.shopstar_vtex_client_profile`))')
+    QUERY = ('SELECT email FROM `shopstar-datalake.cons_zone.dm_customer`')
     query_job = client.query(QUERY)
     rows = query_job.result()
     registro = 0
@@ -142,86 +142,12 @@ def get_params():
             run()
     run()
 
-
 def run():
     try:
         df = init.df
         df.reset_index(drop=True, inplace=True)
         json_data = df.to_json(orient = 'records')
         json_object = json.loads(json_data)
-        
-        table_schema = [{
-            "name": "userProfileId",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "profileProvider",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "isComplete",
-            "type": "BOOLEAN",
-            "mode": "NULLABLE"
-        },{
-            "name": "email",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "firstName",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "lastName",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "document",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "documentType",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "phone",
-            "type": "INTEGER",
-            "mode": "NULLABLE"
-        },{
-            "name": "corporateName",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "tradeName",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "corporateDocument",
-            "type": "INTEGER",
-            "mode": "NULLABLE"
-        },{
-            "name": "stateInscription",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "corporatePhone",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "isCorporate",
-            "type": "BOOLEAN",
-            "mode": "NULLABLE"
-        },{
-            "name": "profileCompleteOnLoading",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "profileErrorOnLoading",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "customerClass",
-            "type": "STRING",
-            "mode": "NULLABLE"}]
         
         project_id = '999847639598'
         dataset_id = 'test'
@@ -238,8 +164,8 @@ def run():
             dataset  = client.dataset(dataset_id)
             table = dataset.table(table_id)
             job_config = bigquery.LoadJobConfig()
-            #job_config.write_disposition = "WRITE_TRUNCATE"
-            #job_config.autodetect = True
+            job_config.write_disposition = "WRITE_TRUNCATE"
+            job_config.autodetect = True
             job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
             job = client.load_table_from_json(json_object, table, job_config = job_config)
             print(job.result())
