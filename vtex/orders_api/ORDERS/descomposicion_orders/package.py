@@ -94,7 +94,7 @@ def run():
         json_object = json.loads(json_data)
          
         project_id = '999847639598'
-        dataset_id = 'staging_zone'
+        dataset_id = 'test'
         table_id = 'shopstar_order_package'
         
         client  = bigquery.Client(project = project_id)
@@ -120,7 +120,7 @@ def run():
 def get_params():
     print("Cargando consulta")
     client = bigquery.Client()
-    QUERY = ('SELECT DISTINCT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`WHERE (orderId NOT IN (SELECT orderId FROM `shopstar-datalake.staging_zone.shopstar_order_package`))')
+    QUERY = ('SELECT DISTINCT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`')
     query_job = client.query(QUERY)
     rows = query_job.result()
     registro = 0
