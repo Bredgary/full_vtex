@@ -15,7 +15,6 @@ class init:
     
 def get_order(email,reg):
   try:
-    print(email)
     url = "https://mercury.vtexcommercestable.com.br/api/checkout/pub/profiles"
     querystring = {"email":""+str(email)+""}
     response = requests.request("GET", url, headers=init.headers, params=querystring)
