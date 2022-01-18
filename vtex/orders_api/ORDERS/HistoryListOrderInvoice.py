@@ -22,6 +22,12 @@ class init:
     reg = 0 
     headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
+def format_schema(schema):
+  formatted_schema = []
+  for row in schema:
+      formatted_schema.append(bigquery.SchemaField(row['name'], row['type'], row['mode']))
+  return formatted_schema
+
 def get_order_list(page):
     #try:
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders?page="+str(page)+""
