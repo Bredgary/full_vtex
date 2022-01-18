@@ -296,7 +296,7 @@ def delete_duplicate():
   try:
     print("Eliminando duplicados")
     client = bigquery.Client()
-    QUERY = ('CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.ft_orders` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.ft_orders`')
+    QUERY = ('CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_ft_orders` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.shopstar_ft_orders`')
     query_job = client.query(QUERY)
     rows = query_job.result()
     print(rows)
