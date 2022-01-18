@@ -16,7 +16,6 @@ class init:
     
 def get_order(id,reg):
     try:
-        reg +=1
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
@@ -95,6 +94,7 @@ def get_params():
     rows = query_job.result()
     registro = 0
     for row in rows:
+        registro =+ 1
         get_order(row.orderId,registro)
         if registro == 300:
             run()
