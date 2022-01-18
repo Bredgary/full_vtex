@@ -152,11 +152,11 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "ShippingEstimatedDateMin",
-        "type": "DATE",
+        "type": "TIMESTAMP",
         "mode": "NULLABLE"
     },{
         "name": "ShippingEstimatedDate",
-        "type": "DATE",
+        "type": "TIMESTAMP",
         "mode": "NULLABLE"
     },{
         "name": "origin",
@@ -192,11 +192,11 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "ShippingEstimatedDateMax",
-        "type": "DATE",
+        "type": "TIMESTAMP",
         "mode": "NULLABLE"
     },{
         "name": "creationDate",
-        "type": "DATE",
+        "type": "TIMESTAMP",
         "mode": "NULLABLE"
     },{
         "name": "lastMessageUnread",
