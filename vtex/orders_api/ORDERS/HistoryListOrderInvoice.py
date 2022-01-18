@@ -140,7 +140,7 @@ def run():
         "mode": "NULLABLE"
     },{
         "name": "authorizedDate",
-        "type": "DATE",
+        "type": "TIMESTAMP",
         "mode": "NULLABLE"
     },{
         "name": "orderIsComplete",
