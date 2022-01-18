@@ -44,7 +44,7 @@ def get_order(id,reg):
         print("Registro: "+str(reg))
     except:
         #print(id)
-        print("No data.")
+        print("No data. "+str(reg))
         #logging.exception("message")
         
 def delete_duplicate():
