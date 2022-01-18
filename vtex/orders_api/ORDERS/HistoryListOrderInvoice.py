@@ -240,6 +240,7 @@ def get_params():
     for x in range(1):
         init.registro += 1
         get_order_list(init.registro)
+    run()
 
 
 get_params()
