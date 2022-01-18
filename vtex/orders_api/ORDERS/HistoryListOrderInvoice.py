@@ -29,7 +29,7 @@ def format_schema(schema):
   return formatted_schema
 
 def get_order_list(page):
-    #try:
+    try:
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders?page="+str(page)+""
         querystring = {"f_creationDate":"creationDate:["+str(init.yesterday)+"T02:00:00.000Z TO "+str(init.today)+"T01:59:59.999Z]","f_hasInputInvoice":"true"}
         response = requests.request("GET", url, headers=init.headers, params=querystring)
@@ -46,8 +46,8 @@ def get_order_list(page):
                 'clientName': clientName}, index=[0])
             print("Registro: "+str(init.reg))
             init.df = init.df.append(df1)
-    #except:
-    #    print("No Data")
+    except:
+        print("No Data")
 
 
 
