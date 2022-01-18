@@ -43,7 +43,7 @@ def get_order_list(page):
             salesChannel = x["salesChannel"],
             affiliateId = x["affiliateId"],
             origin = x["origin"],
-            workflowInErrorSta1te = x["workflowInErrorSta1te"],
+            workflowInErrorState = x["workflowInErrorState"],
             workflowInRetry = x["workflowInRetry"],
             lastMessageUnread = x["lastMessageUnread"],
             ShippingEstimatedDate = x["ShippingEstimatedDate"],
