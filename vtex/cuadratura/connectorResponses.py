@@ -12,13 +12,6 @@ class init:
     productList = []
     df = pd.DataFrame()
     
-    Tid = None
-    ReturnCode= None
-    Message= None
-    authId= None
-    orderId= None
-    state= None
-    
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
     
 def get_order(id,reg):
@@ -33,21 +26,21 @@ def get_order(id,reg):
             payments = x["payments"]
             for x in payments:
                 connectorResponses = x["connectorResponses"]
-                init.Tid = connectorResponses["Tid"]
-                init.ReturnCode= connectorResponses["ReturnCode"]
-                init.Message= connectorResponses["Message"]
-                init.authId= connectorResponses["authId"]
-                init.orderId= connectorResponses["orderId"]
-                init.state= connectorResponses["state"]
+                Tid = connectorResponses["Tid"]
+                ReturnCode= connectorResponses["ReturnCode"]
+                Message= connectorResponses["Message"]
+                authId= connectorResponses["authId"]
+                orderId= connectorResponses["orderId"]
+                state= connectorResponses["state"]
                 
                 df1 = pd.DataFrame({
-                    'orderId': str(id),
-                    'Tid': str(init.Tid),
-                    'ReturnCode': str(init.ReturnCode),
-                    'Message': str(init.Message),
-                    'authId': str(init.authId),
-                    'C_orderId': str(init.orderId),
-                    'state': str(init.state)}, index=[0])
+                    'orderId': id,
+                    'Tid': Tid,
+                    'ReturnCode': ReturnCode,
+                    'Message': Message,
+                    'authId': sauthId,
+                    'C_orderId': orderId,
+                    'state': state}, index=[0])
                 init.df = init.df.append(df1)
     except:
         print("Vacio")
