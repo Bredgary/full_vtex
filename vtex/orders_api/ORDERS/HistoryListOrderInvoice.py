@@ -216,22 +216,25 @@ def run():
     table_id = 'shopstar_vtex_list_order'
     table_temp = 'order_write'
     
-    client  = bigquery.Client(project = project_id)
-    dataset  = client.dataset(dataset_id)
-    tableO = dataset.table(table_id)
-    job_config = bigquery.LoadJobConfig()
-    job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-    job_config.schema = format_schema(table_schema)
-    job = client.load_table_from_json(json_object, tableO, job_config = job_config)
-    print(job.result())
-    
-    tableT = dataset.table(table_temp)
-    job_config_temp = bigquery.LoadJobConfig()
-    job_config_temp.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-    job_config.schema = format_schema(table_schema)
-    job = client.load_table_from_json(json_object, tableT, job_config = job_config_temp)
-    print(job.result())
-    delete_duplicate()
+    if df.empty:
+        print('DataFrame is empty!')
+    else:
+        client  = bigquery.Client(project = project_id)
+        dataset  = client.dataset(dataset_id)
+        tableO = dataset.table(table_id)
+        job_config = bigquery.LoadJobConfig()
+        job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+        job_config.schema = format_schema(table_schema)
+        job = client.load_table_from_json(json_object, tableO, job_config = job_config)
+        print(job.result())
+        
+        tableT = dataset.table(table_temp)
+        job_config_temp = bigquery.LoadJobConfig()
+        job_config_temp.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+        job_config_temp.schema = format_schema(table_schema)
+        job = client.load_table_from_json(json_object, tableT, job_config = job_config_temp)
+        print(job.result())
+        delete_duplicate()
 
 def get_params():
     for x in range(1):
