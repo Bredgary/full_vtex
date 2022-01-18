@@ -9,6 +9,7 @@ from os.path import join
 from _queue import Empty
 import datetime
 import time
+import logging
 
 class init:
   productList = []
@@ -330,6 +331,7 @@ def run():
             delete_duplicate()
     except:
         print("Error.")
+        logging.exception("message")
 
 def get_params():
     print("Cargando consulta")
