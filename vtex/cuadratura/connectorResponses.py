@@ -38,14 +38,14 @@ def get_order(id,reg):
                     'Tid': Tid,
                     'ReturnCode': ReturnCode,
                     'Message': Message,
-                    'authId': sauthId,
+                    'authId': authId,
                     'C_orderId': orderId,
                     'state': state}, index=[0])
                 init.df = init.df.append(df1)
     except:
-        print(id)
-        print("Error.")
-        logging.exception("message")
+        #print(id)
+        print("No data.")
+        #logging.exception("message")
         
 def delete_duplicate():
     try:
