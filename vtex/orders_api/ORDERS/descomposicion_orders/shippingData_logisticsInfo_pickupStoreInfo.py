@@ -5,6 +5,7 @@ import os, json
 from datetime import datetime
 import requests
 from os.path import join
+import logging
 
 class init:
   df = pd.DataFrame()
