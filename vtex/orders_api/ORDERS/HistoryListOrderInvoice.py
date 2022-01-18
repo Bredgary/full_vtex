@@ -38,6 +38,8 @@ def get_order_list(page):
         for x in FJson:
             init.reg +=1
             orderId = x["orderId"]
+            print(init.today)
+            print(init.yesterday)
             creationDate = x["creationDate"]
             clientName = x["clientName"]
             df1 = pd.DataFrame({
