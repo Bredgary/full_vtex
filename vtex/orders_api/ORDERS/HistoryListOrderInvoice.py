@@ -46,7 +46,7 @@ def get_order_list(page):
             workflowInErrorState = x["workflowInErrorState"]
             workflowInRetry = x["workflowInRetry"]
             lastMessageUnread = x["lastMessageUnread"]
-            ShippingEstimatedDate = 'null'
+            ShippingEstimatedDate = 'NULL'
             ShippingEstimatedDateMax = x["ShippingEstimatedDateMax"]
             ShippingEstimatedDateMin = x["ShippingEstimatedDateMin"]
             orderIsComplete = x["orderIsComplete"]
