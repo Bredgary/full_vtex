@@ -31,15 +31,13 @@ def format_schema(schema):
 def get_order_list(page):
     #try:
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders?page="+str(page)+""
-        querystring = {"f_creationDate":"creationDate:[2019-01-01T02:00:00.000Z TO 2022-01-18T01:59:59.999Z]","f_hasInputInvoice":"true"}
+        querystring = {"f_creationDate":"creationDate:["+str(init.yesterday)+"T02:00:00.000Z TO "+str(init.today)+"T01:59:59.999Z]","f_hasInputInvoice":"true"}
         response = requests.request("GET", url, headers=init.headers, params=querystring)
         FJTemp = json.loads(response.text)
         FJson = FJTemp["list"]
         for x in FJson:
             init.reg +=1
             orderId = x["orderId"]
-            print(init.today)
-            print(init.yesterday)
             creationDate = x["creationDate"]
             clientName = x["clientName"]
             df1 = pd.DataFrame({
