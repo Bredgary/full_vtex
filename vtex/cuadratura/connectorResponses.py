@@ -41,7 +41,7 @@ def get_order(id,reg):
                     'C_orderId': orderId,
                     'state': state}, index=[0])
                 init.df = init.df.append(df1)
-        print("Registro: "+str(reg))
+            print("Registro: "+str(reg))
     except:
         #print(id)
         print("No data. "+str(reg))
@@ -94,7 +94,7 @@ def get_params():
     rows = query_job.result()
     registro = 0
     for row in rows:
-        registro =+ 1
+        registro += 1
         get_order(row.orderId,registro)
         if registro == 300:
             run()
