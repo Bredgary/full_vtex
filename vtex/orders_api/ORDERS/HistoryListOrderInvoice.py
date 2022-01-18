@@ -23,7 +23,7 @@ class init:
     headers = {"Accept": "application/json","Content-Type": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
 def get_order_list(page):
-    try:
+    #try:
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders?page="+str(page)+""
         querystring = {"f_creationDate":"creationDate:[2019-01-01T02:00:00.000Z TO 2022-01-18T01:59:59.999Z]","f_hasInputInvoice":"true"}
         response = requests.request("GET", url, headers=init.headers, params=querystring)
@@ -84,8 +84,8 @@ def get_order_list(page):
                 'currencyCode': currencyCode}, index=[0])
             print("Registro: "+str(init.reg))
             init.df = init.df.append(df1)
-    except:
-        print("No Data")
+    #except:
+    #    print("No Data")
 
 
 
