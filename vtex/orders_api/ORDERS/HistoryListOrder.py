@@ -159,8 +159,8 @@ def run():
     dataset  = client.dataset(dataset_id)
     table = dataset.table(table_id)
     job_config = bigquery.LoadJobConfig()
-    job_config.write_disposition = "WRITE_TRUNCATE"
-    job_config.autodetect = True
+    #job_config.write_disposition = "WRITE_TRUNCATE"
+    #job_config.autodetect = True
     job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
     job = client.load_table_from_json(json_object, table, job_config = job_config)
 
@@ -169,8 +169,8 @@ def daterange(start_date, end_date):
         yield start_date + timedelta(n)
 
 def time():
-    start_date = date(2019, 1, 1)
-    end_date = date(2022, 1, 15)
+    start_date = date(2022, 1, 15)
+    end_date = date(2022, 1, 17)
     for single_date in daterange(start_date, end_date):
         today = single_date.strftime("%Y-%m-%d")
         hora_0 = {"f_creationDate":"creationDate:["+str(today)+"T01:00:00.000Z TO "+str(today)+"T01:59:59.999Z]","f_hasInputInvoice":"false"}
