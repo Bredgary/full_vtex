@@ -31,6 +31,8 @@ def get_order_list(page):
         FJson = FJTemp["list"]
         for x in FJson:
             init.reg +=1
+            print(x["ShippingEstimatedDate"])
+            print(type(x["ShippingEstimatedDate"]))
             df1 = pd.DataFrame({
                 'orderId': x["orderId"],
                 'creationDate': x["creationDate"],
