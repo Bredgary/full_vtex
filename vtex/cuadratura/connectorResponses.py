@@ -43,7 +43,8 @@ def get_order(id,reg):
                     'state': state}, index=[0])
                 init.df = init.df.append(df1)
     except:
-        print("Vacio")
+        print("Error.")
+        logging.exception("message")
         
 def delete_duplicate():
     try:
