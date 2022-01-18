@@ -40,54 +40,10 @@ def get_order_list(page):
             orderId = x["orderId"]
             creationDate = x["creationDate"]
             clientName = x["clientName"]
-            totalValue = x["totalValue"]
-            paymentNames = x["paymentNames"]
-            status = x["status"]
-            statusDescription = x["statusDescription"]
-            marketPlaceOrderId = x["marketPlaceOrderId"]
-            sequence = x["sequence"]
-            salesChannel = x["salesChannel"]
-            affiliateId = x["affiliateId"]
-            origin = x["origin"]
-            workflowInErrorState = x["workflowInErrorState"]
-            workflowInRetry = x["workflowInRetry"]
-            lastMessageUnread = x["lastMessageUnread"]
-            ShippingEstimatedDate = x["ShippingEstimatedDate"]
-            ShippingEstimatedDateMax = x["ShippingEstimatedDateMax"]
-            ShippingEstimatedDateMin = x["ShippingEstimatedDateMin"]
-            orderIsComplete = x["orderIsComplete"]
-            listId = x["listId"]
-            listType = x["listType"]
-            authorizedDate = x["authorizedDate"]
-            callCenterOperatorName = x["callCenterOperatorName"]
-            totalItems = x["totalItems"]
-            currencyCode = x["currencyCode"]
             df1 = pd.DataFrame({
                 'orderId': orderId,
                 'creationDate': creationDate,
-                'clientName': clientName,
-                'totalValue': totalValue,
-                'paymentNames': paymentNames,
-                'status': status,
-                'statusDescription': statusDescription,
-                'marketPlaceOrderId': marketPlaceOrderId,
-                'sequence': sequence,
-                'salesChannel': salesChannel,
-                'affiliateId': affiliateId,
-                'origin': origin,
-                'workflowInErrorState': workflowInErrorState,
-                'workflowInRetry': workflowInRetry,
-                'lastMessageUnread': lastMessageUnread,
-                'ShippingEstimatedDate': ShippingEstimatedDate,
-                'ShippingEstimatedDateMax': ShippingEstimatedDateMax,
-                'ShippingEstimatedDateMin': ShippingEstimatedDateMin,
-                'orderIsComplete': orderIsComplete,
-                'listId': listId,
-                'listType': listType,
-                'authorizedDate': authorizedDate,
-                'callCenterOperatorName': callCenterOperatorName,
-                'totalItems': totalItems,
-                'currencyCode': currencyCode}, index=[0])
+                'clientName': clientName}, index=[0])
             print("Registro: "+str(init.reg))
             init.df = init.df.append(df1)
     #except:
