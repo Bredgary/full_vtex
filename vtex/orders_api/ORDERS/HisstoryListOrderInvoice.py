@@ -105,7 +105,6 @@ def run():
             dataset  = client.dataset(dataset_id)
             tableT = dataset.table(table_temp)
             job_config_temp = bigquery.LoadJobConfig()
-            job_config_temp.write_disposition = "WRITE_TRUNCATE"
             job_config_temp.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
             job = client.load_table_from_json(json_object, tableT, job_config = job_config_temp)
             print(job.result())
@@ -116,7 +115,7 @@ def run():
 
 def get_params():
     print("Cargando consulta")
-    for x in range(30):
+    for x in range(1):
         init.registro += 1
         get_order_list(init.registro)
     run()
