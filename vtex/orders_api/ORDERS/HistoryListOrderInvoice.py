@@ -69,7 +69,7 @@ def get_order_list(page):
                 'salesChannel': salesChannel,
                 'affiliateId': affiliateId,
                 'origin': origin,
-                'workflowInErrorSta1te': workflowInErrorState,
+                'workflowInErrorState': workflowInErrorState,
                 'workflowInRetry': workflowInRetry,
                 'lastMessageUnread': lastMessageUnread,
                 'ShippingEstimatedDate': ShippingEstimatedDate,
