@@ -185,18 +185,79 @@ def run():
         print("Error.")
         logging.exception("message")
 
-def get_params(requests):
-  try:
-    print("Cargando consulta")
-    client = bigquery.Client()
-    QUERY = ('SELECT DISTINCT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`WHERE (orderId NOT IN (SELECT orderId FROM `shopstar-datalake.staging_zone.shopstar_order_items`))')
-    query_job = client.query(QUERY)
-    rows = query_job.result()
-    registro = 0
-    for row in rows:
-      registro += 1
-      get_order(row.orderId)
-    run()
-  except:
-    print("Datos actualizados")
-    
+def get_params():
+    try:
+        print("Cargando consulta")
+        client = bigquery.Client()
+        QUERY = ('SELECT DISTINCT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`WHERE (orderId NOT IN (SELECT orderId FROM `shopstar-datalake.staging_zone.shopstar_order_items`))')
+        query_job = client.query(QUERY)
+        rows = query_job.result()
+        registro = 0
+        for row in rows:
+            registro += 1
+            get_order(row.orderId)
+            if registro == 300:
+                run()
+            if registro == 400:
+                run()
+            if registro == 500:
+                run()
+            if registro == 600:
+                run()
+            if registro == 700:
+                run()
+            if registro == 800:
+                run()
+            if registro == 900:
+                run()
+            if registro == 1000:
+                run()
+            if registro == 1100:
+                run()
+            if registro == 1200:
+                run()
+            if registro == 1300:
+                run()
+            if registro == 1400:
+                run()
+            if registro == 1500:
+                run()
+            if registro == 10000:
+                run()
+            if registro == 15000:
+                run()
+            if registro == 20000:
+                run()
+            if registro == 25000:
+                run()
+            if registro == 30000:
+                run()
+            if registro == 35000:
+                run()
+            if registro == 40000:
+                run()
+            if registro == 45000:
+                run()
+            if registro == 50000:
+                run()
+            if registro == 55000:
+                run()
+            if registro == 60000:
+                run()
+            if registro == 65000:
+                run()
+            if registro == 70000:
+                run()
+            if registro == 75000:
+                run()
+            if registro == 80000:
+                run()
+            if registro == 85000:
+                run()
+            if registro == 90000:
+                run()
+            run()
+    except:
+        print("Datos actualizados")
+
+get_params()
