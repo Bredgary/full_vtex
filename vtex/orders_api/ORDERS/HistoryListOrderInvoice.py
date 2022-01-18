@@ -46,7 +46,7 @@ def get_order_list(page):
             workflowInErrorState = x["workflowInErrorState"]
             workflowInRetry = x["workflowInRetry"]
             lastMessageUnread = x["lastMessageUnread"]
-            ShippingEstimatedDate = 'NULL'
+            ShippingEstimatedDate = x["ShippingEstimatedDate"]
             ShippingEstimatedDateMax = x["ShippingEstimatedDateMax"]
             ShippingEstimatedDateMin = x["ShippingEstimatedDateMin"]
             orderIsComplete = x["orderIsComplete"]
@@ -115,8 +115,8 @@ def run():
             json_object = json.loads(json_data)
             
             project_id = '999847639598'
-            dataset_id = 'staging_zone'
-            table_id = 'shopstar_vtex_list_order'
+            dataset_id = 'test'
+            table_id = 'shopstar_vtex_list_order_'
             table_temp = 'order_write'
             
             client  = bigquery.Client(project = project_id)
@@ -124,13 +124,16 @@ def run():
             dataset  = client.dataset(dataset_id)
             tableO = dataset.table(table_id)
             job_config = bigquery.LoadJobConfig()
+            job_config_temp.write_disposition = "WRITE_TRUNCATE"
+            job_config.autodetect = True
             job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
             job = client.load_table_from_json(json_object, tableO, job_config = job_config)
             print(job.result())
             
-            dataset  = client.dataset(dataset_id)
             tableT = dataset.table(table_temp)
             job_config_temp = bigquery.LoadJobConfig()
+            job_config_temp.write_disposition = "WRITE_TRUNCATE"
+            job_config.autodetect = True
             job_config_temp.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
             job = client.load_table_from_json(json_object, tableT, job_config = job_config_temp)
             print(job.result())

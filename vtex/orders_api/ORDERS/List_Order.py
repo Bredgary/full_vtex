@@ -128,7 +128,6 @@ def run():
             job = client.load_table_from_json(json_object, tableO, job_config = job_config)
             print(job.result())
             
-            
             tableT = dataset.table(table_temp)
             job_config_temp = bigquery.LoadJobConfig()
             job_config_temp.write_disposition = "WRITE_TRUNCATE"
