@@ -47,7 +47,7 @@ def get_order(id,reg):
                     'C_orderId': orderId,
                     'state': state}, index=[0])
                 init.df = init.df.append(df1)
-            print("Registro: "+str(reg))
+                print("Registro: "+str(reg))
     except:
         print("No data. "+str(reg))
         
