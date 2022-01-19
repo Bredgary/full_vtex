@@ -153,6 +153,7 @@ def get_params():
     for row in rows:
         registro += 1
         get_order(row.orderId)
+        print("Registro: "+str(registro))
         if registro == 2:
             run()
         if registro == 300:
@@ -191,7 +192,6 @@ def get_params():
             run()
         if registro == 30000:
             run()
-        print("Registro: "+str(registro))
     run()
         
     
