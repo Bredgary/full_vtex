@@ -26,6 +26,8 @@ def get_order(email,reg):
         querystring = {"_fields":"beneficio,beneficio2,crearGiftcard,profilePicture,proteccionDatos,terminosCondiciones,terminosPago,tradeName,rclastcart,rclastsession,rclastsessiondate,homePhone,phone,stateRegistration,email,userId,firstName,lastName,document,localeDefault,attach,approved,birthDate,businessPhone,corporateDocument,corporateName,documentType,gender,customerClass,priceTables,id,accountId,accountName,dataEntityId,createdBy,createdIn,updatedBy,updatedIn,lastInteractionBy,lastInteractionIn"}
         response = requests.request("GET", url, headers=headers, params=querystring)
         Fjson = json.loads(response.text)
+        print(type(Fjson))
+        print(type(Fjson))
         
         for x in Fjson:
             beneficio = x["beneficio"]
@@ -114,7 +116,37 @@ def get_order(email,reg):
             print("Registro: "+str(reg))
     except:
         print("No data "+str(reg))
+
+def run():
+    try:
+        df = init.df
+        df.reset_index(drop=True, inplace=True)
+        json_data = df.to_json(orient = 'records')
+        json_object = json.loads(json_data)
         
+        project_id = '999847639598'
+        dataset_id = 'test'
+        table_id = 'shopstar_vtex_client_history'
+        
+        client  = bigquery.Client(project = project_id)
+        dataset  = client.dataset(dataset_id)
+        table = dataset.table(table_id)
+        
+        if df.empty:
+            print('DataFrame is empty!')
+        else:
+            client  = bigquery.Client(project = project_id)
+            dataset  = client.dataset(dataset_id)
+            table = dataset.table(table_id)
+            job_config = bigquery.LoadJobConfig()
+            job_config.write_disposition = "WRITE_TRUNCATE"
+            job_config.autodetect = True
+            job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+            job = client.load_table_from_json(json_object, table, job_config = job_config)
+            print(job.result())
+    except:
+        print("Error.")
+        logging.exception("message")
         
 def get_params():
     print("Cargando consulta")
@@ -183,36 +215,5 @@ def get_params():
         if registro == 100000:
             run()
     run()
-
-def run():
-    try:
-        df = init.df
-        df.reset_index(drop=True, inplace=True)
-        json_data = df.to_json(orient = 'records')
-        json_object = json.loads(json_data)
-        
-        project_id = '999847639598'
-        dataset_id = 'test'
-        table_id = 'shopstar_vtex_client_history'
-        
-        client  = bigquery.Client(project = project_id)
-        dataset  = client.dataset(dataset_id)
-        table = dataset.table(table_id)
-        
-        if df.empty:
-            print('DataFrame is empty!')
-        else:
-            client  = bigquery.Client(project = project_id)
-            dataset  = client.dataset(dataset_id)
-            table = dataset.table(table_id)
-            job_config = bigquery.LoadJobConfig()
-            job_config.write_disposition = "WRITE_TRUNCATE"
-            job_config.autodetect = True
-            job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-            job = client.load_table_from_json(json_object, table, job_config = job_config)
-            print(job.result())
-    except:
-        print("Error.")
-        logging.exception("message")
   
 get_params()
