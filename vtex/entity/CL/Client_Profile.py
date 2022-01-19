@@ -73,74 +73,55 @@ def get_order(email,reg):
     except:
         print("No data profile "+str(reg))
         
-        
-def get_params():
-    print("Cargando consulta")
-    client = bigquery.Client()
-    QUERY = ('SELECT email FROM `shopstar-datalake.cons_zone.dm_customer`')
-    query_job = client.query(QUERY)
-    rows = query_job.result()
-    registro = 0
-    for row in rows:
-        registro += 1
-        get_order(row.email,registro)
-        if registro == 100:
-            run()
-        if registro == 200:
-            run()
-        if registro == 300:
-            run()
-        if registro == 400:
-            run()
-        if registro == 500:
-            run()
-        if registro == 600:
-            run()
-        if registro == 700:
-            run()
-        if registro == 800:
-            run()
-        if registro == 900:
-            run()
-        if registro == 1000:
-            run()
-        if registro == 1000:
-            run()
-        if registro == 1000:
-            run()
-        if registro == 1000:
-            run()
-        if registro == 1000:
-            run()
-        if registro == 1000:
-            run()
-        if registro == 1000:
-            run()
-        if registro == 1000:
-            run()
-        if registro == 1000:
-            run()
-        if registro == 10000:
-            run()
-        if registro == 20000:
-            run()
-        if registro == 30000:
-            run()
-        if registro == 40000:
-            run()
-        if registro == 50000:
-            run()
-        if registro == 60000:
-            run()
-        if registro == 70000:
-            run()
-        if registro == 80000:
-            run()
-        if registro == 90000:
-            run()
-        if registro == 100000:
-            run()
-    run()
+
+def delete_duplicate():
+    try:
+        print("Eliminando duplicados")
+        client = bigquery.Client()
+        QUERY = ('CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_vtex_client_profile` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.shopstar_vtex_client_profile`')
+        query_job = client.query(QUERY)
+        rows = query_job.result()
+        print(rows)
+    except:
+        print("Consulta SQL no ejecutada")
+
+def clientJoin():
+    try:
+        print("Creacion shopstar_vtex_client_profile")
+        client = bigquery.Client()
+        QUERY = ('''
+        CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_vtex_client_profile` AS 
+        SELECT
+        a.email,
+        b.profileErrorOnLoading,
+        b.corporateName,
+        b.phone,
+        b.isCorporate,
+        b.stateInscription,
+        b.document,
+        b.documentType,
+        b.lastName,
+        b.profileCompleteOnLoading,
+        b.tradeName,
+        b.firstName,
+        b.profileProvider,
+        b.corporatePhone,
+        b.isComplete,
+        b.customerClass,
+        b.corporateDocument,
+        b.userProfileId    
+        FROM `shopstar-datalake.staging_zone.shopstar_vtex_client` a
+        LEFT JOIN 
+        `shopstar-datalake.staging_zone.shopstar_vtex_client_profile` b
+        ON
+        a.email = b.email;''')
+        query_job = client.query(QUERY)
+        rows = query_job.result()
+        print("shopstar_vtex_client_profile actualizado exitosamente")
+    except:
+        print("Error shopstar_vtex_client_profile!!")
+        logging.exception("message")
+    
 
 def run():
     try:
@@ -150,7 +131,7 @@ def run():
         json_object = json.loads(json_data)
         
         project_id = '999847639598'
-        dataset_id = 'test'
+        dataset_id = 'staging_zone'
         table_id = 'shopstar_vtex_client_profile'
         
         client  = bigquery.Client(project = project_id)
@@ -164,13 +145,27 @@ def run():
             dataset  = client.dataset(dataset_id)
             table = dataset.table(table_id)
             job_config = bigquery.LoadJobConfig()
-            job_config.write_disposition = "WRITE_TRUNCATE"
-            job_config.autodetect = True
+            #job_config.write_disposition = "WRITE_TRUNCATE"
+            #job_config.autodetect = True
             job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
             job = client.load_table_from_json(json_object, table, job_config = job_config)
             print(job.result())
+            clientJoin()
+            delete_duplicate()
     except:
         print("Error.")
         logging.exception("message")
+        
+def get_params():
+    print("Cargando consulta")
+    client = bigquery.Client()
+    QUERY = ('SELECT email  FROM `shopstar-datalake.staging_zone.shopstar_vtex_client`WHERE (email NOT IN (SELECT email FROM `shopstar-datalake.staging_zone.shopstar_vtex_client_profile`))')
+    query_job = client.query(QUERY)
+    rows = query_job.result()
+    registro = 0
+    for row in rows:
+        registro += 1
+        get_order(row.email,registro)
+    run()
   
 get_params()
