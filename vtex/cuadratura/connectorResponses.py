@@ -13,7 +13,13 @@ class init:
     df = pd.DataFrame()
     
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-    
+
+def format_schema(schema):
+    formatted_schema = []
+    for row in schema:
+        formatted_schema.append(bigquery.SchemaField(row['name'], row['type'], row['mode']))
+    return formatted_schema
+
 def get_order(id,reg):
     try:
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
@@ -65,6 +71,36 @@ def run():
         json_data = df.to_json(orient = 'records')
         json_object = json.loads(json_data)
         
+        table_schema = {
+        "name": "state",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      },{
+        "name": "C_orderId",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      },{
+        "name": "Tid",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      },{
+        "name": "authId",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      },{
+        "name": "Message",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      },{
+        "name": "ReturnCode",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      },{
+        "name": "orderId",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      }    
+        
         project_id = '999847639598'
         dataset_id = 'staging_zone'
         table_id = 'shopstar_order_connectorResponses'
@@ -77,6 +113,7 @@ def run():
             table = dataset.table(table_id)
             job_config = bigquery.LoadJobConfig()
             job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+            job_config.schema = format_schema(table_schema)
             job = client.load_table_from_json(json_object, table, job_config = job_config)
             print(job.result())
             delete_duplicate()
