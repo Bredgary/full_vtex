@@ -122,6 +122,7 @@ def run():
     table_id = 'shopstar_vtex_item_metadata'
     if df.empty:
         print('DataFrame is empty!')
+    else:
         try:
             client  = bigquery.Client(project = project_id)
             dataset  = client.dataset(dataset_id)
