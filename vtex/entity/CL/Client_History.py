@@ -114,7 +114,7 @@ def get_order(email,reg):
     except:
         print("No data "+str(reg))
 
-def run(email,reg):
+def run():
     try:
         df = init.df
         df.reset_index(drop=True, inplace=True)
