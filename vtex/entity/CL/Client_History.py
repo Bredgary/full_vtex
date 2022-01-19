@@ -33,7 +33,7 @@ def get_order(email,reg):
 
 def run():
     try:
-        df = pd.DataFrame(init.productList(),
+        df = pd.DataFrame(init.productList,
                     columns=['beneficio','beneficio2','crearGiftcard','profilePicture','proteccionDatos','terminosCondiciones','terminosPago','tradeName','rclastcart','rclastsession','rclastsessiondate','homePhone','phone','stateRegistration','email','userId','firstName','lastName','document','localeDefault','attach','approved','birthDate','businessPhone','corporateDocument','corporateName','documentType','gender','customerClass','priceTables','id','accountId','accountName','dataEntityId','createdBy','createdIn','updatedBy','updatedIn','lastInteractionBy','lastInteractionIn'])
         df.reset_index(drop=True, inplace=True)
         
