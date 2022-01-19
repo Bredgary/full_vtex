@@ -19,25 +19,108 @@ def get_order(email,reg):
         headers = {
             "Content-Type": "application/json",
             "Accept": "application/vnd.vtex.ds.v10+json",
-            "REST-Range": "resources=0-1000",
+            "REST-Range": "resources=0-50",
             "X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA",
             "X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
         
         querystring = {"_fields":"beneficio,beneficio2,crearGiftcard,profilePicture,proteccionDatos,terminosCondiciones,terminosPago,tradeName,rclastcart,rclastsession,rclastsessiondate,homePhone,phone,stateRegistration,email,userId,firstName,lastName,document,localeDefault,attach,approved,birthDate,businessPhone,corporateDocument,corporateName,documentType,gender,customerClass,priceTables,id,accountId,accountName,dataEntityId,createdBy,createdIn,updatedBy,updatedIn,lastInteractionBy,lastInteractionIn"}
         response = requests.request("GET", url, headers=headers, params=querystring)
         Fjson = json.loads(response.text)
-        return Fjson
-        print("Registro "+str(reg))
+        for x in Fjson:
+            beneficio = x["beneficio"]
+            beneficio2 = x["beneficio2"]
+            crearGiftcard = x["crearGiftcard"]
+            profilePicture = x["profilePicture"]
+            proteccionDatos = x["proteccionDatos"]
+            terminosCondiciones = x["terminosCondiciones"]
+            terminosPago = x["terminosPago"]
+            tradeName = x["tradeName"]
+            rclastcart = x["rclastcart"]
+            rclastsession = x["rclastsession"]
+            rclastsessiondate = x["rclastsessiondate"]
+            homePhone = x["homePhone"]
+            phone = x["phone"]
+            stateRegistration = x["stateRegistration"]
+            email = x["email"]
+            userId = x["userId"]
+            firstName = x["firstName"]
+            lastName = x["lastName"]
+            document = x["document"]
+            localeDefault = x["localeDefault"]
+            attach = x["attach"]
+            approved = x["approved"]
+            birthDate = x["birthDate"]
+            businessPhone = x["businessPhone"]
+            corporateDocument = x["corporateDocument"]
+            corporateName = x["corporateName"]
+            documentType = x["documentType"]
+            gender = x["gender"]
+            customerClass = x["customerClass"]
+            priceTables = x["priceTables"]
+            id = x["id"]
+            accountId = x["accountId"]
+            accountName = x["accountName"]
+            dataEntityId = x["dataEntityId"]
+            createdBy = x["createdBy"]
+            createdIn = x["createdIn"]
+            updatedBy = x["updatedBy"]
+            updatedIn = x["updatedIn"]
+            lastInteractionBy = x["lastInteractionBy"]
+            lastInteractionIn = x["lastInteractionIn"]
+            
+            df1 = pd.DataFrame({
+                'beneficio':beneficio,
+                'beneficio2':beneficio2,
+                'crearGiftcard':crearGiftcard,
+                'profilePicture':profilePicture,
+                'proteccionDatos':proteccionDatos,
+                'terminosCondiciones':terminosCondiciones,
+                'terminosPago':terminosPago,
+                'tradeName':tradeName,
+                'rclastcart':rclastcart,
+                'rclastsession':rclastsession,
+                'rclastsessiondate':rclastsessiondate,
+                'homePhone':homePhone,
+                'phone':phone,
+                'stateRegistration':stateRegistration,
+                'email':email,
+                'userId':userId,
+                'firstName':firstName,
+                'lastName':lastName,
+                'document':document,
+                'localeDefault':localeDefault,
+                'attach':attach,
+                'approved':approved,
+                'birthDate':birthDate,
+                'businessPhone':businessPhone,
+                'corporateDocument':corporateDocument,
+                'corporateName':corporateName,
+                'documentType':documentType,
+                'gender':gender,
+                'customerClass':customerClass,
+                'priceTables':priceTables,
+                'id':id,
+                'accountId':accountId,
+                'accountName':accountName,
+                'dataEntityId':dataEntityId,
+                'createdBy':createdBy,
+                'createdIn':createdIn,
+                'updatedBy':updatedBy,
+                'updatedIn':updatedIn,
+                'lastInteractionBy':lastInteractionBy,
+                'lastInteractionIn':lastInteractionIn}, index=[0])
+            init.df = init.df.append(df1)
+            print("Registro: "+str(reg))
     except:
         print("No data "+str(reg))
 
 def run(email,reg):
     try:
-        df = pd.DataFrame(get_order(email,reg),columns=['beneficio','beneficio2','crearGiftcard','profilePicture','proteccionDatos','terminosCondiciones','terminosPago','tradeName','rclastcart','rclastsession','rclastsessiondate','homePhone','phone','stateRegistration','email','userId','firstName','lastName','document','localeDefault','attach','approved','birthDate','businessPhone','corporateDocument','corporateName','documentType','gender','customerClass','priceTables','id','accountId','accountName','dataEntityId','createdBy','createdIn','updatedBy','updatedIn','lastInteractionBy','lastInteractionIn'])
+        df = init.df
         df.reset_index(drop=True, inplace=True)
-        
         json_data = df.to_json(orient = 'records')
-        json_object = json.loads(json_data)
+        json_object = json.loads(json_data)    
+        
         
         project_id = '999847639598'
         dataset_id = 'test'
@@ -72,7 +155,44 @@ def get_params():
     registro = 0
     for row in rows:
         registro += 1
-        run(row.email,registro)
-        
-  
+        get_order(row.email,registro)
+        if registro == 1:
+            run()
+        if registro == 300:
+            run()
+        if registro == 400:
+            run()
+        if registro == 500:
+            run()
+        if registro == 600:
+            run()
+        if registro == 700:
+            run()
+        if registro == 800:
+            run()
+        if registro == 900:
+            run()
+        if registro == 1000:
+            run()
+        if registro == 1100:
+            run()
+        if registro == 1200:
+            run()
+        if registro == 1300:
+            run()
+        if registro == 1400:
+            run()
+        if registro == 1500:
+            run()
+        if registro == 10000:
+            run()
+        if registro == 15000:
+            run()
+        if registro == 20000:
+            run()
+        if registro == 25000:
+            run()
+        if registro == 30000:
+            run()
+    run()
 get_params()
