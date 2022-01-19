@@ -34,8 +34,8 @@ def get_order(id,reg):
                 Tid = connectorResponses["Tid"]
                 ReturnCode= connectorResponses["ReturnCode"]
                 Message= connectorResponses["Message"]
-                authId= connectorResponses["authId"]
-                orderId= connectorResponses["orderId"]
+                #authId= connectorResponses["authId"]
+                #orderId= connectorResponses["orderId"]
                 state= connectorResponses["state"]
                 
                 df1 = pd.DataFrame({
