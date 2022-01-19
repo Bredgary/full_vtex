@@ -26,15 +26,14 @@ def get_order(email,reg):
         querystring = {"_fields":"beneficio,beneficio2,crearGiftcard,profilePicture,proteccionDatos,terminosCondiciones,terminosPago,tradeName,rclastcart,rclastsession,rclastsessiondate,homePhone,phone,stateRegistration,email,userId,firstName,lastName,document,localeDefault,attach,approved,birthDate,businessPhone,corporateDocument,corporateName,documentType,gender,customerClass,priceTables,id,accountId,accountName,dataEntityId,createdBy,createdIn,updatedBy,updatedIn,lastInteractionBy,lastInteractionIn"}
         response = requests.request("GET", url, headers=headers, params=querystring)
         Fjson = json.loads(response.text)
-        init.productList.append(Fjson)
+        return Fjson
         print("Registro "+str(reg))
     except:
         print("No data "+str(reg))
 
-def run():
+def run(email,reg):
     try:
-        df = pd.DataFrame(init.productList,
-                    columns=['beneficio','beneficio2','crearGiftcard','profilePicture','proteccionDatos','terminosCondiciones','terminosPago','tradeName','rclastcart','rclastsession','rclastsessiondate','homePhone','phone','stateRegistration','email','userId','firstName','lastName','document','localeDefault','attach','approved','birthDate','businessPhone','corporateDocument','corporateName','documentType','gender','customerClass','priceTables','id','accountId','accountName','dataEntityId','createdBy','createdIn','updatedBy','updatedIn','lastInteractionBy','lastInteractionIn'])
+        df = pd.DataFrame(get_order(email,reg),columns=['beneficio','beneficio2','crearGiftcard','profilePicture','proteccionDatos','terminosCondiciones','terminosPago','tradeName','rclastcart','rclastsession','rclastsessiondate','homePhone','phone','stateRegistration','email','userId','firstName','lastName','document','localeDefault','attach','approved','birthDate','businessPhone','corporateDocument','corporateName','documentType','gender','customerClass','priceTables','id','accountId','accountName','dataEntityId','createdBy','createdIn','updatedBy','updatedIn','lastInteractionBy','lastInteractionIn'])
         df.reset_index(drop=True, inplace=True)
         
         json_data = df.to_json(orient = 'records')
@@ -73,63 +72,7 @@ def get_params():
     registro = 0
     for row in rows:
         registro += 1
-        get_order(row.email,registro)
-        if registro == 100:
-            run()
-        if registro == 200:
-            run()
-        if registro == 300:
-            run()
-        if registro == 400:
-            run()
-        if registro == 500:
-            run()
-        if registro == 600:
-            run()
-        if registro == 700:
-            run()
-        if registro == 800:
-            run()
-        if registro == 900:
-            run()
-        if registro == 1000:
-            run()
-        if registro == 1000:
-            run()
-        if registro == 1000:
-            run()
-        if registro == 1000:
-            run()
-        if registro == 1000:
-            run()
-        if registro == 1000:
-            run()
-        if registro == 1000:
-            run()
-        if registro == 1000:
-            run()
-        if registro == 1000:
-            run()
-        if registro == 10000:
-            run()
-        if registro == 20000:
-            run()
-        if registro == 30000:
-            run()
-        if registro == 40000:
-            run()
-        if registro == 50000:
-            run()
-        if registro == 60000:
-            run()
-        if registro == 70000:
-            run()
-        if registro == 80000:
-            run()
-        if registro == 90000:
-            run()
-        if registro == 100000:
-            run()
-    run()
+        run(row.email,registro)
+        
   
 get_params()
