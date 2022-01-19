@@ -63,7 +63,7 @@ def delete_duplicate():
 
 def clientJoin():
     try:
-        print("Creacion shopstar_vtex_client_profile")
+        print("Creacion shopstar_vtex_availableAccounts")
         client = bigquery.Client()
         QUERY = ('''
         CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_vtex_availableAccounts` AS 
@@ -86,9 +86,9 @@ def clientJoin():
         a.email = b.email;''')
         query_job = client.query(QUERY)
         rows = query_job.result()
-        print("shopstar_vtex_client_profile actualizado exitosamente")
+        print("shopstar_vtex_availableAccounts actualizado exitosamente")
     except:
-        print("Error shopstar_vtex_client_profile!!")
+        print("Error shopstar_vtex_availableAccounts!!")
         logging.exception("message")
 
 def run():

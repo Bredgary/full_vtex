@@ -43,9 +43,9 @@ def get_order(id,reg):
                 init.df = init.df.append(df1)
             print("Registro: "+str(reg))
     except:
-        #print(id)
+        print(id)
         print("No data. "+str(reg))
-        #logging.exception("message")
+        logging.exception("message")
         
 def delete_duplicate():
     try:
