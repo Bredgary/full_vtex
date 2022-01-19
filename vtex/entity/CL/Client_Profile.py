@@ -134,6 +134,80 @@ def run():
         dataset_id = 'staging_zone'
         table_id = 'shopstar_vtex_client_profile'
         
+        table_schema = {
+        "name": "email",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      },{
+        "name": "profileErrorOnLoading",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      },{
+        "name": "corporateName",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      },{
+        "name": "phone",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+      },{
+        "name": "isCorporate",
+        "type": "BOOLEAN",
+        "mode": "NULLABLE"
+      },{
+        "name": "stateInscription",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      },{
+        "name": "document",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      },{
+        "name": "documentType",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      },{
+        "name": "profileCompleteOnLoading",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      },{
+        "name": "tradeName",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      },{
+        "name": "firstName",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      },{
+        "name": "lastName",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      },{
+        "name": "profileProvider",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      },{
+        "name": "corporatePhone",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      },{
+        "name": "isComplete",
+        "type": "BOOLEAN",
+        "mode": "NULLABLE"
+      },{
+        "name": "customerClass",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      },{
+        "name": "corporateDocument",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+      },{
+        "name": "userProfileId",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      }  
+        
         client  = bigquery.Client(project = project_id)
         dataset  = client.dataset(dataset_id)
         table = dataset.table(table_id)
@@ -147,6 +221,7 @@ def run():
             job_config = bigquery.LoadJobConfig()
             #job_config.write_disposition = "WRITE_TRUNCATE"
             #job_config.autodetect = True
+            job_config.schema = format_schema(table_schema)
             job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
             job = client.load_table_from_json(json_object, table, job_config = job_config)
             print(job.result())
