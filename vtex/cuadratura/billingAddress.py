@@ -30,42 +30,40 @@ def get_order(id,reg):
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
-        try:
-            paymentData = Fjson["paymentData"]
-            transactions = paymentData["transactions"]
-            for x in transactions:
-                payments = x["payments"]
-                for x in payments:
-                    billingAddress = x["billingAddress"]
-                    init.geoCoordinates = billingAddress["geoCoordinates"]
-                    init.postalCode = billingAddress["postalCode"]
-                    init.city = billingAddress["city"]
-                    init.state = billingAddress["state"]
-                    init.country = billingAddress["country"]
-                    init.street = billingAddress["street"]
-                    init.number = billingAddress["number"]
-                    init.neighborhood = billingAddress["neighborhood"]
-                    init.complement = billingAddress["complement"]
-                    init.reference = billingAddress["reference"]
-                    init.lot = geoCoordinates[0]
-                    init.lan = geoCoordinates[1]
-            print("Registro: "+str(reg))
-        except:
-            print("Registro: "+str(reg))
-        df1 = pd.DataFrame({
-            'orderId': str(id),
-            'postalCode': str(init.postalCode),
-            'city': str(init.city),
-            'state': str(init.state),
-            'country': str(init.country),
-            'street': str(init.street),
-            'number': str(init.number),
-            'neighborhood': str(init.neighborhood),
-            'complement': str(init.complement),
-            'reference': str(init.reference),
-            'lon': str(init.lon),
-            'lat': str(init.lat)}, index=[0])
-        init.df = init.df.append(df1)
+        paymentData = Fjson["paymentData"]
+        transactions = paymentData["transactions"]
+        for x in transactions:
+            payments = x["payments"]
+            for x in payments:
+                billingAddress = x["billingAddress"]
+                geoCoordinates = billingAddress["geoCoordinates"]
+                postalCode = billingAddress["postalCode"]
+                city = billingAddress["city"]
+                state = billingAddress["state"]
+                country = billingAddress["country"]
+                street = billingAddress["street"]
+                number = billingAddress["number"]
+                neighborhood = billingAddress["neighborhood"]
+                complement = billingAddress["complement"]
+                reference = billingAddress["reference"]
+                lot = geoCoordinates[0]
+                lan = geoCoordinates[1]
+                
+                df1 = pd.DataFrame({
+                    'orderId': id,
+                    'postalCode': postalCode,
+                    'city': city,
+                    'state': state,
+                    'country': country,
+                    'street': street,
+                    'number': number,
+                    'neighborhood': neighborhood,
+                    'complement': complement,
+                    'reference': reference,
+                    'lon': lon,
+                    'lat': lat}, index=[0])
+                init.df = init.df.append(df1)
+        print("Registro: "+str(reg))
     except:
         print("Vacio")
         print("Registro: "+str(reg))
