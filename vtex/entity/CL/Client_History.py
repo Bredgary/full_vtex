@@ -12,6 +12,11 @@ class init:
   productList = []
   df = pd.DataFrame()
   
+def format_schema(schema):
+    formatted_schema = []
+    for row in schema:
+        formatted_schema.append(bigquery.SchemaField(row['name'], row['type'], row['mode']))
+    return formatted_schema
 
 def get_order(email,reg):
     try:
@@ -121,6 +126,169 @@ def run():
         json_data = df.to_json(orient = 'records')
         json_object = json.loads(json_data)    
         
+        table_schema = [
+        {
+            "name": "lastInteractionBy",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "updatedBy",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "createdIn",
+            "type": "TIMESTAMP",
+            "mode": "NULLABLE"
+        },{
+            "name": "createdBy",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "dataEntityId",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "priceTables",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "customerClass",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "gender",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "documentType",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "corporateName",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "corporateDocument",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "businessPhone",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "accountName",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "lastName",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "homePhone",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "email",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "firstName",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "lastInteractionIn",
+            "type": "TIMESTAMP",
+            "mode": "NULLABLE"
+        },{
+            "name": "userId",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "stateRegistration",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "tradeName",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "updatedIn",
+            "type": "TIMESTAMP",
+            "mode": "NULLABLE"
+        },{
+            "name": "terminosCondiciones",
+            "type": "BOOLEAN",
+            "mode": "NULLABLE"
+        },{
+            "name": "birthDate",
+            "type": "TIMESTAMP",
+            "mode": "NULLABLE"
+        },{
+            "name": "attach",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "rclastsessiondate",
+            "type": "TIMESTAMP",
+            "mode": "NULLABLE"
+        },{
+            "name": "rclastsession",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "profilePicture",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "approved",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "phone",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "beneficio2",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "proteccionDatos",
+            "type": "BOOLEAN",
+            "mode": "NULLABLE"
+        },{
+            "name": "document",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "id",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "crearGiftcard",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "terminosPago",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "rclastcart",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "accountId",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "localeDefault",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "beneficio",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        }]
+           
         
         project_id = '999847639598'
         dataset_id = 'test'
@@ -139,6 +307,7 @@ def run():
             job_config = bigquery.LoadJobConfig()
             #job_config.write_disposition = "WRITE_TRUNCATE"
             #job_config.autodetect = True
+            job_config.schema = format_schema(table_schema)
             job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
             job = client.load_table_from_json(json_object, table, job_config = job_config)
             print(job.result())
