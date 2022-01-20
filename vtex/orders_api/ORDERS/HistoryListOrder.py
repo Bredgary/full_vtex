@@ -169,8 +169,8 @@ def daterange(start_date, end_date):
         yield start_date + timedelta(n)
 
 def time():
-    start_date = date(2022, 1, 15)
-    end_date = date(2022, 1, 17)
+    start_date = date(2022, 1, 1)
+    end_date = date(2022, 1, 20)
     for single_date in daterange(start_date, end_date):
         today = single_date.strftime("%Y-%m-%d")
         hora_0 = {"f_creationDate":"creationDate:["+str(today)+"T01:00:00.000Z TO "+str(today)+"T01:59:59.999Z]","f_hasInputInvoice":"false"}
