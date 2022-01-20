@@ -14,7 +14,7 @@ class init:
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
     
 def get_order(id,reg):
-    #try:
+    try:
         reg +=1
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
         response = requests.request("GET", url, headers=init.headers)
@@ -53,8 +53,8 @@ def get_order(id,reg):
                     'lat': lat}, index=[0])
                 init.df = init.df.append(df1)
         print("Registro: "+str(reg))
-    #except:
-    #    print("Vacio")
+    except:
+        print("Vacio")
     #    print("Registro: "+str(reg))
         
         
