@@ -95,10 +95,61 @@ def run():
     dataset_id = 'staging_zone'
     table_id = 'shopstar_order_billingAddress'
     
+    table_schema = {
+        "name": "orderId",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "neighborhood",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "number",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "street",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "state",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "reference",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "country",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "complement",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "city",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "postalCode",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "lat",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },{
+        "name": "lon",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    }   
+         
     client  = bigquery.Client(project = project_id)
     dataset  = client.dataset(dataset_id)
     table = dataset.table(table_id)
     job_config = bigquery.LoadJobConfig()
+    job_config.schema = format_schema(table_schema)
     job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
     job = client.load_table_from_json(json_object, table, job_config = job_config)
     print(job.result())
