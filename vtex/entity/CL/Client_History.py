@@ -124,7 +124,7 @@ def run():
         
         project_id = '999847639598'
         dataset_id = 'test'
-        table_id = 'shopstar_vtex_client_history'
+        table_id = 'shopstar_vtex_client_history_'
         
         client  = bigquery.Client(project = project_id)
         dataset  = client.dataset(dataset_id)
@@ -193,6 +193,44 @@ def get_params():
         if registro == 25000:
             run()
         if registro == 30000:
+            run()
+        if registro == 35000:
+            run()
+        if registro == 40000:
+            run()
+        if registro == 45000:
+            run()
+        if registro == 50000:
+            run()
+        if registro == 55000:
+            run()
+        if registro == 60000:
+            run()
+        if registro == 65000:
+            run()
+        if registro == 70000:
+            run()
+        if registro == 75000:
+            run()
+        if registro == 80000:
+            run()
+        if registro == 85000:
+            run()
+        if registro == 90000:
+            run()
+        if registro == 95000:
+            run()
+        if registro == 100000:
+            run()
+        if registro == 105000:
+            run()
+        if registro == 110000:
+            run()
+        if registro == 115000:
+            run()
+        if registro == 120000:
+            run()
+        if registro == 125000:
             run()
     run()
 get_params()
