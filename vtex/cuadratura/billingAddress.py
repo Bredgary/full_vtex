@@ -15,7 +15,6 @@ class init:
     
 def get_order(id,reg):
     #try:
-        reg +=1
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
@@ -114,10 +113,72 @@ def get_params():
     QUERY = ('SELECT DISTINCT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`WHERE (orderId NOT IN (SELECT orderId FROM `shopstar-datalake.staging_zone.shopstar_order_billingAddress`))')
     query_job = client.query(QUERY)  
     rows = query_job.result()
-    registro = 1
+    registro = 0
     for row in rows:
-        get_order("979901675347-01",registro)
-        break
         registro += 1
+        get_order(row.orderId,registro)
+        if registro == 100:
+            run()
+        if registro == 300:
+            run()
+        if registro == 400:
+            run()
+        if registro == 500:
+            run()
+        if registro == 600:
+            run()
+        if registro == 700:
+            run()
+        if registro == 800:
+            run()
+        if registro == 900:
+            run()
+        if registro == 1000:
+            run()
+        if registro == 1100:
+            run()
+        if registro == 1200:
+            run()
+        if registro == 1300:
+            run()
+        if registro == 1400:
+            run()
+        if registro == 1500:
+            run()
+        if registro == 10000:
+            run()
+        if registro == 15000:
+            run()
+        if registro == 20000:
+            run()
+        if registro == 25000:
+            run()
+        if registro == 30000:
+            run()
+        if registro == 35000:
+            run()
+        if registro == 40000:
+            run()
+        if registro == 45000:
+            run()
+        if registro == 50000:
+            run()
+        if registro == 55000:
+            run()
+        if registro == 60000:
+            run()
+        if registro == 65000:
+            run()
+        if registro == 70000:
+            run()
+        if registro == 75000:
+            run()
+        if registro == 80000:
+            run()
+        if registro == 85000:
+            run()
+        if registro == 90000:
+            run()
+    run()
     
 get_params()
