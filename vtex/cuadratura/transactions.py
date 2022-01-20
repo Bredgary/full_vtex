@@ -11,10 +11,6 @@ class init:
     productList = []
     df = pd.DataFrame()
     
-    isActive = None
-    transactionId = None
-    merchantName = None
-    
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
     
 def get_order(id,reg):
@@ -30,9 +26,9 @@ def get_order(id,reg):
             merchantName = x["merchantName"]
             df1 = pd.DataFrame({
                 'orderId': id,
-                'isActive': str(init.isActive),
-                'transactionId': str(init.transactionId),
-                'merchantName': str(init.merchantName)}, index=[0])
+                'isActive': isActive,
+                'transactionId': transactionId,
+                'merchantName': merchantName}, index=[0])
             init.df = init.df.append(df1)
         print("Registro: "+str(reg))
     except:
