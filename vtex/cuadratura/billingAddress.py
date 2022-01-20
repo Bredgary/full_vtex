@@ -84,7 +84,7 @@ def geolocation():
         print("SQL ST_GEOGPOINT")
         client = bigquery.Client()
         QUERY = (
-            'CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_order_billingAddress` AS SELECT *,ST_GEOGPOINT(lon, lat) FROM `shopstar-datalake.staging_zone.shopstar_order_billingAddress`')
+            'CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_order_billingAddress` AS SELECT *,ST_GEOGPOINT(CAST(lon AS INT64), CAST(lat AS INT64)) FROM `shopstar-datalake.staging_zone.shopstar_order_billingAddress`')
         query_job = client.query(QUERY)
         rows = query_job.result()
         print(rows)
