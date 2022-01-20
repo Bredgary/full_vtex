@@ -39,8 +39,8 @@ def get_order(id,reg):
                     lot = geoCoordinates[0]
                     lan = geoCoordinates[1]
                 except:
-                    lot = None
-                    lan = None
+                    lon = None
+                    lat = None
                 
                 df1 = pd.DataFrame({
                     'orderId': id,
