@@ -23,37 +23,22 @@ def get_order(id,reg):
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
-        try:
-            paymentData = Fjson["paymentData"]
-            transactions = paymentData["transactions"]
-            for x in transactions:
-                init.isActive = x["isActive"]
-                init.transactionId = x["transactionId"]
-                init.merchantName = x["merchantName"]
-            print("Registro: "+str(reg))
-        except:
-            print("Registro: "+str(reg))
-        df1 = pd.DataFrame({
-            'orderId': str(id),
-            'isActive': str(init.isActive),
-            'transactionId': str(init.transactionId),
-            'merchantName': str(init.merchantName)}, index=[0])
-        init.df = init.df.append(df1)
+        paymentData = Fjson["paymentData"]
+        transactions = paymentData["transactions"]
+        for x in transactions:
+            isActive = x["isActive"]
+            transactionId = x["transactionId"]
+            merchantName = x["merchantName"]
+            df1 = pd.DataFrame({
+                'orderId': id,
+                'isActive': str(init.isActive),
+                'transactionId': str(init.transactionId),
+                'merchantName': str(init.merchantName)}, index=[0])
+            init.df = init.df.append(df1)
+        print("Registro: "+str(reg))
     except:
         print("Vacio")
-        print("Registro: "+str(reg))
         
-        
-def get_params():
-    print("Cargando consulta")
-    client = bigquery.Client()
-    QUERY = ('SELECT DISTINCT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`WHERE (orderId NOT IN (SELECT orderId FROM `shopstar-datalake.staging_zone.shopstar_order_transactions`))')
-    query_job = client.query(QUERY)  
-    rows = query_job.result()
-    registro = 1
-    for row in rows:
-        get_order(row.orderId,registro)
-        registro += 1
         
 def delete_duplicate():
     try:
@@ -69,7 +54,6 @@ def delete_duplicate():
 
 
 def run():
-    get_params()
     df = init.df
     df.reset_index(drop=True, inplace=True)
     json_data = df.to_json(orient = 'records')
@@ -89,4 +73,15 @@ def run():
     print(job.result())
     delete_duplicate()
     
-run()
+def get_params():
+    print("Cargando consulta")
+    client = bigquery.Client()
+    QUERY = ('SELECT DISTINCT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`WHERE (orderId NOT IN (SELECT orderId FROM `shopstar-datalake.staging_zone.shopstar_order_transactions`))')
+    query_job = client.query(QUERY)  
+    rows = query_job.result()
+    registro = 0
+    for row in rows:
+        registro += 1
+        get_order(row.orderId,registro)
+        
+get_params()
