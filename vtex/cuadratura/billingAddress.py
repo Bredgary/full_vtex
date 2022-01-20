@@ -25,7 +25,6 @@ def get_order(id,reg):
             payments = x["payments"]
             for x in payments:
                 billingAddress = x["billingAddress"]
-                geoCoordinates = billingAddress["geoCoordinates"]
                 postalCode = billingAddress["postalCode"]
                 city = billingAddress["city"]
                 state = billingAddress["state"]
@@ -35,8 +34,13 @@ def get_order(id,reg):
                 neighborhood = billingAddress["neighborhood"]
                 complement = billingAddress["complement"]
                 reference = billingAddress["reference"]
-                lot = geoCoordinates[0]
-                lan = geoCoordinates[1]
+                try:
+                    geoCoordinates = billingAddress["geoCoordinates"]
+                    lot = geoCoordinates[0]
+                    lan = geoCoordinates[1]
+                except:
+                    lot = None
+                    lan = None
                 
                 df1 = pd.DataFrame({
                     'orderId': id,
