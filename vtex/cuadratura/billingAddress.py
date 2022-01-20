@@ -14,7 +14,7 @@ class init:
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
     
 def get_order(id,reg):
-    try:
+    #try:
         reg +=1
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
         response = requests.request("GET", url, headers=init.headers)
@@ -57,22 +57,12 @@ def get_order(id,reg):
                     'lat': lat}, index=[0])
                 init.df = init.df.append(df1)
         print("Registro: "+str(reg))
-    except:
-        print(id)
-        print("Vacio")
+    #except:
+    #    print(id)
+    #    print("Vacio")
     #    print("Registro: "+str(reg))
         
         
-def get_params():
-    print("Cargando consulta")
-    client = bigquery.Client()
-    QUERY = ('SELECT DISTINCT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`WHERE (orderId NOT IN (SELECT orderId FROM `shopstar-datalake.staging_zone.shopstar_order_billingAddress`))')
-    query_job = client.query(QUERY)  
-    rows = query_job.result()
-    registro = 1
-    for row in rows:
-        get_order(row.orderId,registro)
-        registro += 1
         
 def delete_duplicate():
     try:
@@ -99,7 +89,6 @@ def geolocation():
         print("Consulta SQL no ejecutada")
 
 def run():
-    get_params()
     df = init.df
     df.reset_index(drop=True, inplace=True)
     json_data = df.to_json(orient = 'records')
@@ -119,4 +108,16 @@ def run():
     delete_duplicate()
     geolocation()
     
-run()
+def get_params():
+    print("Cargando consulta")
+    client = bigquery.Client()
+    QUERY = ('SELECT DISTINCT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`WHERE (orderId NOT IN (SELECT orderId FROM `shopstar-datalake.staging_zone.shopstar_order_billingAddress`))')
+    query_job = client.query(QUERY)  
+    rows = query_job.result()
+    registro = 1
+    for row in rows:
+        get_order("979901675347-01",registro)
+        break
+        registro += 1
+    
+get_params()
