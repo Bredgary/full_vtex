@@ -137,8 +137,8 @@ def run():
             dataset  = client.dataset(dataset_id)
             table = dataset.table(table_id)
             job_config = bigquery.LoadJobConfig()
-            job_config.write_disposition = "WRITE_TRUNCATE"
-            job_config.autodetect = True
+            #job_config.write_disposition = "WRITE_TRUNCATE"
+            j#ob_config.autodetect = True
             job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
             job = client.load_table_from_json(json_object, table, job_config = job_config)
             print(job.result())
@@ -149,7 +149,7 @@ def run():
 def get_params():
     print("Cargando consulta")
     client = bigquery.Client()
-    QUERY = ('SELECT email FROM `shopstar-datalake.cons_zone.dm_customer`')
+    QUERY = ('SELECT DISTINCT email  FROM `shopstar-datalake.cons_zone.dm_customer`WHERE (email NOT IN (SELECT email FROM `shopstar-datalake.test.shopstar_vtex_client_history_`))')
     query_job = client.query(QUERY)
     rows = query_job.result()
     registro = 0
