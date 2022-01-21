@@ -43,7 +43,7 @@ def get_order(email,reg):
             rclastcart = x["rclastcart"]
             rclastsession = x["rclastsession"]
             rclastsessiondate = x["rclastsessiondate"]
-            homePhone = x["homePhone"]
+            homePhone = None
             phone = x["phone"]
             stateRegistration = x["stateRegistration"]
             email = x["email"]
