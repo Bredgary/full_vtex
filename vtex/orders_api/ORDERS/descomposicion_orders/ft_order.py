@@ -311,7 +311,7 @@ def delete_duplicate():
   try:
     print("Eliminando duplicados")
     client = bigquery.Client()
-    QUERY = ('CREATE OR REPLACE TABLE `shopstar-datalake.test.shopstar_ft_orders` AS SELECT DISTINCT * FROM `shopstar-datalake.test.shopstar_ft_orders`')
+    QUERY = ('CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_ft_orders` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.shopstar_ft_orders`')
     query_job = client.query(QUERY)
     rows = query_job.result()
     print(rows)
@@ -327,7 +327,7 @@ def run():
         json_object = json.loads(json_data)        
         
         project_id = '999847639598'
-        dataset_id = 'test'
+        dataset_id = 'staging_zone'
         table_id = 'shopstar_ft_orders'
         
         '''
