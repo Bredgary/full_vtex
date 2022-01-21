@@ -46,11 +46,17 @@ def get_order(id):
             userProfileId = None
         orderId = Fjson["orderId"]
         sequence = Fjson["sequence"]
-        marketplaceOrderId = Fjson["marketplaceOrderId"]
+        try:
+            marketplaceOrderId = Fjson["marketplaceOrderId"]
+        except:
+            marketplaceOrderId = None
         marketplaceServicesEndpoint = Fjson["marketplaceServicesEndpoint"]
         sellerOrderId = Fjson["sellerOrderId"]
         origin = Fjson["origin"]
-        affiliateId = Fjson["affiliateId"]
+        try:
+            affiliateId = Fjson["affiliateId"]
+        except:
+            affiliateId = None
         checkedInPickupPointId = Fjson["checkedInPickupPointId"]
         salesChannel = Fjson["salesChannel"]
         merchantName = Fjson["merchantName"]
@@ -69,7 +75,7 @@ def get_order(id):
             changesAttachment = Fjson["changesAttachment"]
             changesAttachment_id = changesAttachment["id"]
         else:
-            changesAttachment_id = ""
+            changesAttachment_id = None
         openTextField = Fjson["openTextField"]
         roundingError = Fjson["roundingError"]
         orderFormId = Fjson["orderFormId"]
@@ -149,11 +155,17 @@ def get_order(id):
     
         sellers = Fjson["sellers"]
         
-        for x in sellers:
-            seller_id = x["id"]
-            seller_name = x["name"]
-            seller_logo = x["logo"]
-            seller_fulfillmentEndpoint = x["fulfillmentEndpoint"]
+        try:
+            for x in sellers:
+                seller_id = x["id"]
+                seller_name = x["name"]
+                seller_logo = x["logo"]
+                seller_fulfillmentEndpoint = x["fulfillmentEndpoint"]
+        except:
+            seller_id = None
+            seller_name = None
+            seller_logo = None
+            seller_fulfillmentEndpoint = None
     
         if Fjson["cancellationData"] is not None:
             cancellationData = Fjson["cancellationData"]
