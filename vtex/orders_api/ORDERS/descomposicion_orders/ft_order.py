@@ -169,7 +169,7 @@ def get_order(id):
             RequestedByUser = False
             RequestedBySystem = False
             RequestedBySellerNotification = False
-            RequestedByPaymentNotification = None
+            RequestedByPaymentNotification = False
             Reason = None
         
         if Fjson["invoiceData"] is not None:
