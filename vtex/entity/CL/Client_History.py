@@ -327,6 +327,16 @@ def get_params():
         get_order(row.email,registro)
         if registro == 1:
             run()
+        if registro == 50:
+            run()
+        if registro == 100:
+            run()
+        if registro == 150:
+            run()
+        if registro == 200:
+            run()
+        if registro == 250:
+            run()
         if registro == 300:
             run()
         if registro == 400:
