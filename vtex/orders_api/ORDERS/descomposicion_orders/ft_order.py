@@ -318,6 +318,8 @@ def run():
         dataset_id = 'test'
         table_id = 'ft_orders'
         
+        print(json_object)
+        
         table_schema = {
             "name": "shipping_neighborhood",
             "type": "STRING",
