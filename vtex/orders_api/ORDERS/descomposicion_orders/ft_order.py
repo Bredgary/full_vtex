@@ -316,7 +316,7 @@ def run():
         
         project_id = '999847639598'
         dataset_id = 'test'
-        table_id = 'shopstar_ft_orders'
+        table_id = 'ft_orders'
         
         if df.empty:
             print('DataFrame is empty!')
@@ -349,6 +349,16 @@ def get_params():
         print("Registro: "+str(registro))
         if registro == 1:
             run()
+        if registro == 50:
+            run()
+        if registro == 100:
+            run()
+        if registro == 150:
+            run()
+        if registro == 200:
+            run()
+        if registro == 200:
+            run()
         if registro == 300:
             run()
         if registro == 400:
@@ -375,6 +385,38 @@ def get_params():
             run()
         if registro == 1500:
             run()
+        if registro == 2000:
+            run()
+        if registro == 2500:
+            run()
+        if registro == 3000:
+            run()
+        if registro == 3500:
+            run()
+        if registro == 4000:
+            run()
+        if registro == 4500:
+            run()
+        if registro == 5000:
+            run()
+        if registro == 5500:
+            run()
+        if registro == 6000:
+            run()
+        if registro == 6500:
+            run()
+        if registro == 7000:
+            run()
+        if registro == 7500:
+            run()
+        if registro == 8000:
+            run()
+        if registro == 8500:
+            run()
+        if registro == 9000:
+            run()
+        if registro == 9500:
+            run()
         if registro == 10000:
             run()
         if registro == 15000:
@@ -384,6 +426,44 @@ def get_params():
         if registro == 25000:
             run()
         if registro == 30000:
+            run()
+        if registro == 35000:
+            run()
+        if registro == 40000:
+            run()
+        if registro == 45000:
+            run()
+        if registro == 50000:
+            run()
+        if registro == 55000:
+            run()
+        if registro == 60000:
+            run()
+        if registro == 65000:
+            run()
+        if registro == 70000:
+            run()
+        if registro == 75000:
+            run()
+        if registro == 80000:
+            run()
+        if registro == 85000:
+            run()
+        if registro == 90000:
+            run()
+        if registro == 95000:
+            run()
+        if registro == 100000:
+            run()
+        if registro == 105000:
+            run()
+        if registro == 110000:
+            run()
+        if registro == 115000:
+            run()
+        if registro == 120000:
+            run()
+        if registro == 125000:
             run()
     run()
 
