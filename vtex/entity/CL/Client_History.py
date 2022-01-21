@@ -115,6 +115,7 @@ def get_order(email,reg):
                 'lastInteractionBy':lastInteractionBy,
                 'lastInteractionIn':lastInteractionIn}, index=[0])
             init.df = init.df.append(df1)
+            print(init.df)
         print("Registro: "+str(reg))
     except:
         print("No data "+str(reg))
