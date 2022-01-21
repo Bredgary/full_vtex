@@ -80,7 +80,10 @@ def get_order(id):
         allowEdition = Fjson["allowEdition"]
         isCheckedIn = Fjson["isCheckedIn"]
         authorizedDate = Fjson["authorizedDate"]
-        invoicedDate = Fjson["invoicedDate"]
+        try:
+            invoicedDate = Fjson["invoicedDate"]
+        except:
+            invoicedDate = '1900-01-01 15:15:18.051893 UTC'
         cancelReason = Fjson["cancelReason"]
         subscriptionData = Fjson["subscriptionData"]
         taxData = Fjson["taxData"]
