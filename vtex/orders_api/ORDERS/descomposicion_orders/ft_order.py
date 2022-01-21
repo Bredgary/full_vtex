@@ -328,10 +328,9 @@ def run():
         
         project_id = '999847639598'
         dataset_id = 'test'
-        table_id = 'ft_orders'
+        table_id = 'shopstar_ft_orders'
         
-        print(json_object)
-        
+        '''
         table_schema = [{
             "name": "shipping_neighborhood",
             "type": "STRING",
@@ -645,6 +644,7 @@ def run():
             "type": "STRING",
             "mode": "NULLABLE"
         }]
+        '''
  
  
 
@@ -656,9 +656,9 @@ def run():
             dataset  = client.dataset(dataset_id)
             table = dataset.table(table_id)
             job_config = bigquery.LoadJobConfig()
-            job_config.schema = format_schema(table_schema)
-            #job_config.write_disposition = "WRITE_TRUNCATE"
-            #job_config.autodetect = True
+            #job_config.schema = format_schema(table_schema)
+            job_config.write_disposition = "WRITE_TRUNCATE"
+            job_config.autodetect = True
             job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
             job = client.load_table_from_json(json_object, table, job_config = job_config)
             print(job.result())
