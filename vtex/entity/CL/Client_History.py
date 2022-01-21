@@ -327,63 +327,63 @@ def get_params():
         get_order(row.email,registro)
         if registro == 1:
             run()
-        if registro == 50:
+        if registro == 2:
             run()
-        if registro == 100:
+        if registro == 3:
             run()
-        if registro == 150:
+        if registro == 4:
             run()
-        if registro == 200:
+        if registro == 5:
             run()
-        if registro == 250:
+        if registro == 6:
             run()
-        if registro == 300:
+        if registro == 7:
             run()
-        if registro == 400:
+        if registro == 8:
             run()
-        if registro == 500:
+        if registro == 9:
             run()
-        if registro == 600:
+        if registro == 10:
             run()
-        if registro == 700:
+        if registro == 11:
             run()
-        if registro == 800:
+        if registro == 12:
             run()
-        if registro == 900:
+        if registro == 13:
             run()
-        if registro == 1000:
+        if registro == 14:
             run()
-        if registro == 1100:
+        if registro == 15:
             run()
-        if registro == 1200:
+        if registro == 16:
             run()
-        if registro == 1300:
+        if registro == 17:
             run()
-        if registro == 1400:
+        if registro == 18:
             run()
-        if registro == 1500:
+        if registro == 19:
             run()
-        if registro == 2000:
+        if registro == 20:
             run()
-        if registro == 2500:
+        if registro == 21:
             run()
-        if registro == 3000:
+        if registro == 22:
             run()
-        if registro == 3500:
+        if registro == 23:
             run()
-        if registro == 4000:
+        if registro == 24:
             run()
-        if registro == 4500:
+        if registro == 25:
             run()
-        if registro == 5000:
+        if registro == 26:
             run()
-        if registro == 5500:
+        if registro == 27:
             run()
-        if registro == 6000:
+        if registro == 28:
             run()
-        if registro == 6500:
+        if registro == 29:
             run()
-        if registro == 7000:
+        if registro == 30:
             run()
         if registro == 7500:
             run()
