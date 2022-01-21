@@ -353,6 +353,38 @@ def get_params():
             run()
         if registro == 1500:
             run()
+        if registro == 2000:
+            run()
+        if registro == 2500:
+            run()
+        if registro == 3000:
+            run()
+        if registro == 3500:
+            run()
+        if registro == 4000:
+            run()
+        if registro == 4500:
+            run()
+        if registro == 5000:
+            run()
+        if registro == 5500:
+            run()
+        if registro == 6000:
+            run()
+        if registro == 6500:
+            run()
+        if registro == 7000:
+            run()
+        if registro == 7500:
+            run()
+        if registro == 8000:
+            run()
+        if registro == 8500:
+            run()
+        if registro == 9000:
+            run()
+        if registro == 9500:
+            run()
         if registro == 10000:
             run()
         if registro == 15000:
