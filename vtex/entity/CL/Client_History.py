@@ -20,7 +20,7 @@ def format_schema(schema):
 
 def get_order(email,reg):
     try:
-        url = "https://mercury.vtexcommercestable.com.br/api/dataentities/CL/search?_where=email=*"+str(email)+""
+        url = "https://mercury.vtexcommercestable.com.br/api/dataentities/CL/search"
         headers = {
             "Content-Type": "application/json",
             "Accept": "application/vnd.vtex.ds.v10+json",
@@ -28,7 +28,7 @@ def get_order(email,reg):
             "X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA",
             "X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
         
-        querystring = {"_fields":"beneficio,beneficio2,crearGiftcard,profilePicture,proteccionDatos,terminosCondiciones,terminosPago,tradeName,rclastcart,rclastsession,rclastsessiondate,homePhone,phone,stateRegistration,email,userId,firstName,lastName,document,localeDefault,attach,approved,birthDate,businessPhone,corporateDocument,corporateName,documentType,gender,customerClass,priceTables,id,accountId,accountName,dataEntityId,createdBy,createdIn,updatedBy,updatedIn,lastInteractionBy,lastInteractionIn"}
+        querystring = {"_fields":"beneficio,beneficio2,crearGiftcard,profilePicture,proteccionDatos,terminosCondiciones,terminosPago,tradeName,rclastcart,rclastsession,rclastsessiondate,homePhone,phone,stateRegistration,email,userId,firstName,lastName,document,localeDefault,attach,approved,birthDate,businessPhone,corporateDocument,corporateName,documentType,gender,customerClass,priceTables,id,accountId,accountName,dataEntityId,createdBy,createdIn,updatedBy,updatedIn,lastInteractionBy,lastInteractionIn","_where":"email = "+str(email)+""}
         response = requests.request("GET", url, headers=headers, params=querystring)
         Fjson = json.loads(response.text)
         for x in Fjson:
