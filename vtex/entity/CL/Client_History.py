@@ -326,6 +326,7 @@ def get_params():
     for row in rows:
         registro += 1
         get_order(row.email,registro)
+        print(row.email)
         if registro == 1:
             run()
         if registro == 50:
