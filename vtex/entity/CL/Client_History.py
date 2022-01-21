@@ -115,7 +115,7 @@ def get_order(email,reg):
                 'lastInteractionBy':lastInteractionBy,
                 'lastInteractionIn':lastInteractionIn}, index=[0])
             init.df = init.df.append(df1)
-            print(init.df)
+            #print(init.df)
         print("Registro: "+str(reg))
     except:
         print("No data "+str(reg))
@@ -326,7 +326,7 @@ def get_params():
     for row in rows:
         registro += 1
         get_order(row.email,registro)
-        print(row.email)
+        #print(row.email)
         if registro == 1:
             run()
         if registro == 50:
