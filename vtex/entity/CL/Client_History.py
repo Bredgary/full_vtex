@@ -43,7 +43,7 @@ def get_order(email,reg):
             rclastcart = x["rclastcart"]
             rclastsession = x["rclastsession"]
             rclastsessiondate = x["rclastsessiondate"]
-            homePhone = None
+            homePhone = x["homePhone"]
             phone = x["phone"]
             stateRegistration = x["stateRegistration"]
             email = x["email"]
@@ -115,7 +115,6 @@ def get_order(email,reg):
                 'lastInteractionBy':lastInteractionBy,
                 'lastInteractionIn':lastInteractionIn}, index=[0])
             init.df = init.df.append(df1)
-            #print(init.df)
         print("Registro: "+str(reg))
     except:
         print("No data "+str(reg))
@@ -326,7 +325,6 @@ def get_params():
     for row in rows:
         registro += 1
         get_order(row.email,registro)
-        #print(row.email)
         if registro == 1:
             run()
         if registro == 50:
