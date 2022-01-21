@@ -320,7 +320,7 @@ def run():
         
         print(json_object)
         
-        table_schema = {
+        table_schema = [{
             "name": "shipping_neighborhood",
             "type": "STRING",
             "mode": "NULLABLE"
@@ -632,7 +632,7 @@ def run():
             "name": "seller_fulfillmentEndpoint",
             "type": "STRING",
             "mode": "NULLABLE"
-        }
+        }]
  
  
 
