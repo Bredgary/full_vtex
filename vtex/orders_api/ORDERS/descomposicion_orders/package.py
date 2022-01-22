@@ -92,6 +92,85 @@ def run():
         df.reset_index(drop=True, inplace=True)
         json_data = df.to_json(orient = 'records')
         json_object = json.loads(json_data)
+        
+        table_schema = [
+        {
+            "name": "description",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "itemIndex",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "price",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "EnableInferItems",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "cfop",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "embeddedInvoice",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "invoiceNumber",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "invoiceKey",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "issuanceDate",
+            "type": "TIMESTAMP",
+            "mode": "NULLABLE"
+        },{
+            "name": "orderId",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "invoiceValue",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "unitMultiplier",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "trackingNumber",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "quantity",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "courier",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "volumes",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "package_type",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "trackingUrl",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "invoiceUrl",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        }] 
          
         project_id = '999847639598'
         dataset_id = 'staging_zone'
@@ -108,6 +187,7 @@ def run():
             dataset  = client.dataset(dataset_id)
             table = dataset.table(table_id)
             job_config = bigquery.LoadJobConfig()
+            job_config.schema = format_schema(table_schema)
             #job_config.write_disposition = "WRITE_TRUNCATE"
             #job_config.autodetect = True
             job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
