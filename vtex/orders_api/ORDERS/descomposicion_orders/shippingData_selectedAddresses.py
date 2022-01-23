@@ -5,7 +5,6 @@ import os, json
 from datetime import datetime
 import requests
 from os.path import join
-import logging
 
 class init:
   df = pd.DataFrame()
@@ -83,7 +82,7 @@ def run():
         json_object = json.loads(json_data)
         
         project_id = '999847639598'
-        dataset_id = 'test'
+        dataset_id = 'staging_zone'
         table_id = 'shippingData_selectedAddresses'
         
         if df.empty:
@@ -103,7 +102,7 @@ def run():
         print("Error.")
         logging.exception("message")
 
-def get_params():
+def get_params(requests):
     print("Cargando consulta")
     client = bigquery.Client()
     QUERY = ('SELECT DISTINCT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`WHERE (orderId NOT IN (SELECT orderId FROM `shopstar-datalake.staging_zone.shippingData_selectedAddresses`))')
@@ -114,66 +113,5 @@ def get_params():
         registro += 1
         get_order(row.orderId)
         print("Registro: "+str(registro))
-        if registro == 300:
-            run()
-        if registro == 400:
-            run()
-        if registro == 500:
-            run()
-        if registro == 600:
-            run()
-        if registro == 700:
-            run()
-        if registro == 800:
-            run()
-        if registro == 900:
-            run()
-        if registro == 1000:
-            run()
-        if registro == 1100:
-            run()
-        if registro == 1200:
-            run()
-        if registro == 1300:
-            run()
-        if registro == 1400:
-            run()
-        if registro == 1500:
-            run()
-        if registro == 10000:
-            run()
-        if registro == 15000:
-            run()
-        if registro == 20000:
-            run()
-        if registro == 25000:
-            run()
-        if registro == 30000:
-            run()
-        if registro == 35000:
-            run()
-        if registro == 40000:
-            run()
-        if registro == 45000:
-            run()
-        if registro == 50000:
-            run()
-        if registro == 55000:
-            run()
-        if registro == 60000:
-            run()
-        if registro == 65000:
-            run()
-        if registro == 70000:
-            run()
-        if registro == 75000:
-            run()
-        if registro == 80000:
-            run()
-        if registro == 85000:
-            run()
-        if registro == 90000:
-            run()
     run()
 
-get_params()
