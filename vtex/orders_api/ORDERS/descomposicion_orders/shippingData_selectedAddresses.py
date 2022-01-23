@@ -102,7 +102,7 @@ def run():
         print("Error.")
         logging.exception("message")
 
-def get_params(requests):
+def get_params():
     print("Cargando consulta")
     client = bigquery.Client()
     QUERY = ('SELECT DISTINCT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`WHERE (orderId NOT IN (SELECT orderId FROM `shopstar-datalake.staging_zone.shippingData_selectedAddresses`))')
@@ -114,4 +114,4 @@ def get_params(requests):
         get_order(row.orderId)
         print("Registro: "+str(registro))
     run()
-
+get_params()
