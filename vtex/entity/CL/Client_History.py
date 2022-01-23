@@ -291,8 +291,8 @@ def run():
            
         
         project_id = '999847639598'
-        dataset_id = 'test'
-        table_id = 'shopstar_vtex_client_history_'
+        dataset_id = 'staging_zone'
+        table_id = 'shopstar_vtex_client_history'
         
         client  = bigquery.Client(project = project_id)
         dataset  = client.dataset(dataset_id)
@@ -318,7 +318,7 @@ def run():
 def get_params():
     print("Cargando consulta")
     client = bigquery.Client()
-    QUERY = ('SELECT DISTINCT email  FROM `shopstar-datalake.cons_zone.dm_customer`WHERE (email NOT IN (SELECT email FROM `shopstar-datalake.test.shopstar_vtex_client_history_`))')
+    QUERY = ('SELECT DISTINCT email  FROM `shopstar-datalake.staging_zone.shopstar_vtex_client`WHERE (email NOT IN (SELECT email FROM `shopstar-datalake.staging_zone.shopstar_vtex_client_history`))')
     query_job = client.query(QUERY)
     rows = query_job.result()
     registro = 0
