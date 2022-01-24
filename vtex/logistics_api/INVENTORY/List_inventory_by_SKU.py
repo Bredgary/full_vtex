@@ -37,7 +37,7 @@ def get_inventory(id):
 				'hasUnlimitedQuantity': hasUnlimitedQuantity,
 				'timeToRefill': timeToRefill,
 				'dateOfSupplyUtc': dateOfSupplyUtc}, index=[0])
-        	init.df = init.df.append(df1)
+			init.df = init.df.append(df1)
 	except:
 		print("Vacio")
 
