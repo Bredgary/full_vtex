@@ -85,7 +85,7 @@ def run():
 def get_params():
     print("Cargando consulta")
     client = bigquery.Client()
-    QUERY = ('SELECT DISTINCT id  FROM `shopstar-datalake.staging_zone.shopstar_vtex_SKU_ID`')
+    QUERY = ('SELECT DISTINCT id  FROM `shopstar-datalake.staging_zone.shopstar_vtex_sku`WHERE (id NOT IN (SELECT id FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_inventory_by_sku`))')
     query_job = client.query(QUERY)  
     rows = query_job.result()
     registro = 0
