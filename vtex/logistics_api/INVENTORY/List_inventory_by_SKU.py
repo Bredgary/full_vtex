@@ -85,7 +85,7 @@ def run():
 def get_params():
     print("Cargando consulta")
     client = bigquery.Client()
-    QUERY = ('SELECT DISTINCT id  FROM `shopstar-datalake.staging_zone.shopstar_vtex_sku`WHERE (id NOT IN (SELECT id FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_inventory_by_sku`))')
+    QUERY = ('SELECT DISTINCT id  FROM `shopstar-datalake.staging_zone.shopstar_vtex_sku`')
     query_job = client.query(QUERY)  
     rows = query_job.result()
     registro = 0
@@ -93,65 +93,65 @@ def get_params():
         registro += 1
         get_inventory(row.id)
         print("Registro: "+str(registro))
-        if registro == 300:
-            run()
-        if registro == 400:
-            run()
-        if registro == 500:
-            run()
-        if registro == 600:
-            run()
-        if registro == 700:
-            run()
-        if registro == 800:
-            run()
-        if registro == 900:
-            run()
-        if registro == 1000:
-            run()
-        if registro == 1100:
-            run()
-        if registro == 1200:
-            run()
-        if registro == 1300:
-            run()
-        if registro == 1400:
-            run()
-        if registro == 1500:
-            run()
         if registro == 10000:
-            run()
-        if registro == 15000:
             run()
         if registro == 20000:
             run()
-        if registro == 25000:
-            run()
         if registro == 30000:
-            run()
-        if registro == 35000:
             run()
         if registro == 40000:
             run()
-        if registro == 45000:
-            run()
         if registro == 50000:
-            run()
-        if registro == 55000:
             run()
         if registro == 60000:
             run()
-        if registro == 65000:
-            run()
         if registro == 70000:
-            run()
-        if registro == 75000:
             run()
         if registro == 80000:
             run()
-        if registro == 85000:
-            run()
         if registro == 90000:
+            run()
+        if registro == 100000:
+            run()
+        if registro == 110000:
+            run()
+        if registro == 120000:
+            run()
+        if registro == 130000:
+            run()
+        if registro == 140000:
+            run()
+        if registro == 150000:
+            run()
+        if registro == 160000:
+            run()
+        if registro == 170000:
+            run()
+        if registro == 180000:
+            run()
+        if registro == 190000:
+            run()
+        if registro == 200000:
+            run()
+        if registro == 210000:
+            run()
+        if registro == 220000:
+            run()
+        if registro == 230000:
+            run()
+        if registro == 240000:
+            run()
+        if registro == 250000:
+            run()
+        if registro == 260000:
+            run()
+        if registro == 270000:
+            run()
+        if registro == 280000:
+            run()
+        if registro == 290000:
+            run()
+        if registro == 300000:
             run()
     run()
 
