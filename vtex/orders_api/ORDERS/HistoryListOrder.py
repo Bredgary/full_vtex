@@ -131,7 +131,7 @@ def delete_duplicate():
     try:
         print("Eliminando duplicados")
         client = bigquery.Client()
-        QUERY = ('CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_vtex_list_order` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`')
+        QUERY = ('CREATE OR REPLACE TABLE `shopstar-datalake.test.shopstar_vtex_list_order` AS SELECT DISTINCT * FROM `shopstar-datalake.test.shopstar_vtex_list_order`')
         query_job = client.query(QUERY)
         rows = query_job.result()
         print(rows)
@@ -147,32 +147,37 @@ def get_params(params):
 def run():
     
     df = init.df
-    df.reset_index(drop=True, inplace=True)
-    json_data = df.to_json(orient = 'records')
-    json_object = json.loads(json_data)
     
-    project_id = '999847639598'
-    dataset_id = 'test'
-    table_id = 'shopstar_vtex_list_order'
-    
-    client  = bigquery.Client(project = project_id)
-    dataset  = client.dataset(dataset_id)
-    table = dataset.table(table_id)
-    job_config = bigquery.LoadJobConfig()
-    #job_config.write_disposition = "WRITE_TRUNCATE"
-    #job_config.autodetect = True
-    job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-    job = client.load_table_from_json(json_object, table, job_config = job_config)
+    if df.empty:
+        print('DataFrame is empty!')
+    else:
+        df.reset_index(drop=True, inplace=True)
+        json_data = df.to_json(orient = 'records')
+        json_object = json.loads(json_data)
+        
+        project_id = '999847639598'
+        dataset_id = 'test'
+        table_id = 'shopstar_vtex_list_order'
+        
+        client  = bigquery.Client(project = project_id)
+        dataset  = client.dataset(dataset_id)
+        table = dataset.table(table_id)
+        job_config = bigquery.LoadJobConfig()
+        job_config.write_disposition = "WRITE_TRUNCATE"
+        job_config.autodetect = True
+        job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+        job = client.load_table_from_json(json_object, table, job_config = job_config)
 
 def daterange(start_date, end_date):
     for n in range(int((end_date - start_date).days)):
         yield start_date + timedelta(n)
 
 def time():
-    start_date = date(2022, 1, 1)
-    end_date = date(2022, 1, 20)
+    start_date = date(2019, 1, 1)
+    end_date = date(2022, 1, 30)
     for single_date in daterange(start_date, end_date):
         today = single_date.strftime("%Y-%m-%d")
+        print(today)
         hora_0 = {"f_creationDate":"creationDate:["+str(today)+"T01:00:00.000Z TO "+str(today)+"T01:59:59.999Z]","f_hasInputInvoice":"false"}
         hora_1 = {"f_creationDate":"creationDate:["+str(today)+"T02:00:00.000Z TO "+str(today)+"T02:59:59.999Z]","f_hasInputInvoice":"false"}
         hora_2 = {"f_creationDate":"creationDate:["+str(today)+"T03:00:00.000Z TO "+str(today)+"T03:59:59.999Z]","f_hasInputInvoice":"false"}
