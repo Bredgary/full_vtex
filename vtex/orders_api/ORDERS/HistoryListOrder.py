@@ -145,7 +145,6 @@ def get_params(params):
     
 
 def run():
-    
     df = init.df
     
     if df.empty:
