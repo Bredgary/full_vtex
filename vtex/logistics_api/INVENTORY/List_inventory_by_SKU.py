@@ -93,6 +93,26 @@ def get_params():
         registro += 1
         get_inventory(row.id)
         print("Registro: "+str(registro))
+        if registro == 1000:
+            run()
+        if registro == 2000:
+            run()
+        if registro == 3000:
+            run()
+        if registro == 4000:
+            run()
+        if registro == 5000:
+            run()
+        if registro == 6000:
+            run()
+        if registro == 7000:
+            run()
+        if registro == 8000:
+            run()
+        if registro == 9000:
+            run()
+        if registro == 9500:
+            run()
         if registro == 10000:
             run()
         if registro == 20000:
