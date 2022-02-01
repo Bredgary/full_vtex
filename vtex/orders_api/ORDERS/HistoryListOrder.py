@@ -161,7 +161,7 @@ def run():
         client  = bigquery.Client(project = project_id)
         dataset  = client.dataset(dataset_id)
         table = dataset.table(table_id)
-        #job_config = bigquery.LoadJobConfig()
+        job_config = bigquery.LoadJobConfig()
         #job_config.write_disposition = "WRITE_TRUNCATE"
         #job_config.autodetect = True
         job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
