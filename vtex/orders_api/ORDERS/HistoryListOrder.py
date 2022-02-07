@@ -155,7 +155,7 @@ def run():
         json_object = json.loads(json_data)
         
         project_id = '999847639598'
-        dataset_id = 'test'
+        dataset_id = 'staging_zone'
         table_id = 'shopstar_vtex_list_order'
         
         client  = bigquery.Client(project = project_id)
@@ -172,8 +172,8 @@ def daterange(start_date, end_date):
         yield start_date + timedelta(n)
 
 def time():
-    start_date = date(2022, 1, 15)
-    end_date = date(2022, 2, 1)
+    start_date = date(2022, 1, 1)
+    end_date = date(2022, 2, 8)
     for single_date in daterange(start_date, end_date):
         today = single_date.strftime("%Y-%m-%d")
         print(today)
