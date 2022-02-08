@@ -60,8 +60,8 @@ def get_order_list(page,hora):
                 'callCenterOperatorName': x["callCenterOperatorName"],
                 'totalItems': x["totalItems"],
                 'currencyCode': x["currencyCode"]}, index=[0])
-            print("Registro: "+str(init.reg))
             init.df = init.df.append(df1)
+            print("Registro: "+str(init.reg))
             if init.reg == 300:
                 run()
             if init.reg == 400:
@@ -155,24 +155,25 @@ def run():
         json_object = json.loads(json_data)
         
         project_id = '999847639598'
-        dataset_id = 'staging_zone'
+        dataset_id = 'test'
         table_id = 'shopstar_vtex_list_order'
         
         client  = bigquery.Client(project = project_id)
         dataset  = client.dataset(dataset_id)
         table = dataset.table(table_id)
         job_config = bigquery.LoadJobConfig()
-        #job_config.write_disposition = "WRITE_TRUNCATE"
-        #job_config.autodetect = True
+        job_config.write_disposition = "WRITE_TRUNCATE"
+        job_config.autodetect = True
         job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
         job = client.load_table_from_json(json_object, table, job_config = job_config)
+        print(job.result())
 
 def daterange(start_date, end_date):
     for n in range(int((end_date - start_date).days)):
         yield start_date + timedelta(n)
 
 def time():
-    start_date = date(2022, 1, 1)
+    start_date = date(2019, 1, 1)
     end_date = date(2022, 2, 8)
     for single_date in daterange(start_date, end_date):
         today = single_date.strftime("%Y-%m-%d")
@@ -200,6 +201,7 @@ def time():
         hora_20 = {"f_creationDate":"creationDate:["+str(today)+"T21:00:00.000Z TO "+str(today)+"T21:59:59.999Z]","f_hasInputInvoice":"false"}
         hora_21 = {"f_creationDate":"creationDate:["+str(today)+"T22:00:00.000Z TO "+str(today)+"T22:59:59.999Z]","f_hasInputInvoice":"false"}
         hora_22 = {"f_creationDate":"creationDate:["+str(today)+"T23:00:00.000Z TO "+str(today)+"T23:59:59.999Z]","f_hasInputInvoice":"false"}
+        hora_23 = {"f_creationDate":"creationDate:["+str(today)+"T00:00:00.000Z TO "+str(today)+"T00:59:59.999Z]","f_hasInputInvoice":"false"}
         init.registro = 0
         get_params(hora_0)
         init.registro = 0
@@ -246,6 +248,8 @@ def time():
         get_params(hora_21)
         init.registro = 0
         get_params(hora_22)
+        init.registro = 0
+        get_params(hora_23)
         init.registro = 0
     run()
     
