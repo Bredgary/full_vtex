@@ -53,7 +53,9 @@ def get_order(id):
                 'DetailUrl': itemMetadata_DetailUrl}, index=[0])
             init.df = init.df.append(df1)
     except:
-        print("vacio")
+        df1 = pd.DataFrame({
+            'orderId': id}, index=[0])
+        init.df = init.df.append(df1)
 
 def delete_duplicate():
     try:
@@ -147,7 +149,7 @@ def run():
 def get_params():
     print("Cargando consulta")
     client = bigquery.Client()
-    QUERY = ('SELECT DISTINCT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`WHERE (orderId NOT IN (SELECT orderId FROM `shopstar-datalake.staging_zone.shopstar_vtex_item_metadata`))')
+    QUERY = ('SELECT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`WHERE (orderId NOT IN (SELECT orderId FROM `shopstar-datalake.staging_zone.shopstar_vtex_item_metadata`))')
     query_job = client.query(QUERY)  
     rows = query_job.result()
     registro = 0
@@ -156,6 +158,12 @@ def get_params():
         get_order(row.orderId)
         print("Registro: "+str(registro))
         if registro == 2:
+            run()
+        if registro == 100:
+            run()
+        if registro == 200:
+            run()
+        if registro == 300:
             run()
         if registro == 300:
             run()
