@@ -122,6 +122,16 @@ def get_order_list(page,hora):
                 run()
             if init.reg == 90000:
                 run()
+            if init.reg == 110000:
+                run()
+            if init.reg == 120000:
+                run()
+            if init.reg == 130000:
+                run()
+            if init.reg == 140000:
+                run()
+            if init.reg == 150000:
+                run()
     except:
         print("Vacio")
 
