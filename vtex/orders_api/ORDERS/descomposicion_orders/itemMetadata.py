@@ -62,7 +62,7 @@ def delete_duplicate():
         print("Eliminando duplicados")
         client = bigquery.Client()
         QUERY = (
-            'CREATE OR REPLACE TABLE `shopstar-datalake.test.shopstar_vtex_item_metadata` AS SELECT DISTINCT * FROM `shopstar-datalake.test.shopstar_vtex_item_metadata`')
+            'CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_vtex_item_metadata` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.shopstar_vtex_item_metadata`')
         query_job = client.query(QUERY)
         rows = query_job.result()
         print(rows)
