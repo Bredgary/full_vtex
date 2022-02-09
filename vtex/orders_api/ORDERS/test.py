@@ -86,7 +86,7 @@ def get_order(id):
         allowEdition = Fjson["allowEdition"]
         isCheckedIn = Fjson["isCheckedIn"]
         authorizedDate = Fjson["authorizedDate"]
-        if Fjson["invoicedDate"] is None:
+        if Fjson["invoicedDate"] is not None:
             invoicedDate = Fjson["invoicedDate"]
         else:
             invoicedDate = '1900-01-01 15:15:18.051893 UTC'
@@ -558,7 +558,7 @@ def run():
             "mode": "NULLABLE"
         },{
             "name": "invoicedDate",
-            "type": "DATE",
+            "type": "TIMESTAMP",
             "mode": "NULLABLE"
         },{
             "name": "customData",
