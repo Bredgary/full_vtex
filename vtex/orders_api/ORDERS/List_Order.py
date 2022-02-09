@@ -31,7 +31,7 @@ class init:
     hora_5 = {"f_creationDate":"creationDate:["+str(today)+"T06:00:00.000Z TO "+str(today)+"T06:59:59.999Z]","f_hasInputInvoice":"false"}
     hora_6 = {"f_creationDate":"creationDate:["+str(today)+"T07:00:00.000Z TO "+str(today)+"T07:59:59.999Z]","f_hasInputInvoice":"false"}
     hora_7 = {"f_creationDate":"creationDate:["+str(today)+"T08:00:00.000Z TO "+str(today)+"T08:59:59.999Z]","f_hasInputInvoice":"false"}
-    hora_8 = {"f_creationDate":"creationDate:["+str(today)+"T09:00:00.000Z TO "+str(today)+"T19:59:59.999Z]","f_hasInputInvoice":"false"}
+    hora_8 = {"f_creationDate":"creationDate:["+str(today)+"T09:00:00.000Z TO "+str(today)+"T09:59:59.999Z]","f_hasInputInvoice":"false"}
     hora_9 = {"f_creationDate":"creationDate:["+str(today)+"T10:00:00.000Z TO "+str(today)+"T10:59:59.999Z]","f_hasInputInvoice":"false"}
     hora_10 = {"f_creationDate":"creationDate:["+str(today)+"T11:00:00.000Z TO "+str(today)+"T11:59:59.999Z]","f_hasInputInvoice":"false"}
     hora_11 = {"f_creationDate":"creationDate:["+str(today)+"T12:00:00.000Z TO "+str(today)+"T12:59:59.999Z]","f_hasInputInvoice":"false"}
