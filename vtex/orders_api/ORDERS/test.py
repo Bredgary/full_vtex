@@ -558,7 +558,7 @@ def run():
             "mode": "NULLABLE"
         },{
             "name": "invoicedDate",
-            "type": "TIMESTAMP",
+            "type": "DATE",
             "mode": "NULLABLE"
         },{
             "name": "customData",
