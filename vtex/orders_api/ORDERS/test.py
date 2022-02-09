@@ -227,7 +227,10 @@ def get_order(id):
             shipping_state = address["state"]
             shipping_country = address["country"]
             shipping_street = address["street"]
-            shipping_number = str(address["number"])
+            if address["number"] is not None:
+                shipping_number = address["number"]
+            else:
+                shipping_number = None
             shipping_neighborhood = address["neighborhood"]
             shipping_complement = address["complement"]
             shipping_reference = address["reference"]
