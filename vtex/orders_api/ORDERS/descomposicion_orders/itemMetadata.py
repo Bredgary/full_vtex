@@ -159,6 +159,16 @@ def get_params():
         print("Registro: "+str(registro))
         if registro == 2:
             run()
+        if registro == 10:
+            run()
+        if registro == 20:
+            run()
+        if registro == 30:
+            run()
+        if registro == 40:
+            run()
+        if registro == 50:
+            run()
         if registro == 100:
             run()
         if registro == 200:

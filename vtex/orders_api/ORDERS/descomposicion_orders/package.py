@@ -72,7 +72,9 @@ def get_order_package(id):
                     'unitMultiplier': unitMultiplier}, index=[0])
                 init.df = init.df.append(df1)
     except:
-        print("No package")
+        df1 = pd.DataFrame({
+            'orderId': id}, index=[0])
+        init.df = init.df.append(df1)
         
 def delete_duplicate():
     try:
@@ -183,17 +185,30 @@ def run():
         if df.empty:
             print('DataFrame is empty!')
         else:
-            client  = bigquery.Client(project = project_id)
-            dataset  = client.dataset(dataset_id)
-            table = dataset.table(table_id)
-            job_config = bigquery.LoadJobConfig()
-            job_config.schema = format_schema(table_schema)
-            #job_config.write_disposition = "WRITE_TRUNCATE"
-            #job_config.autodetect = True
-            job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-            job = client.load_table_from_json(json_object, table, job_config = job_config)
-            print(job.result())
-            delete_duplicate()
+            try:
+                client  = bigquery.Client(project = project_id)
+                dataset  = client.dataset(dataset_id)
+                table = dataset.table(table_id)
+                job_config = bigquery.LoadJobConfig()
+                job_config.schema = format_schema(table_schema)
+                #job_config.write_disposition = "WRITE_TRUNCATE"
+                #job_config.autodetect = True
+                job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+                job = client.load_table_from_json(json_object, table, job_config = job_config)
+                print(job.result())
+                delete_duplicate()
+            except:
+                client  = bigquery.Client(project = project_id)
+                dataset  = client.dataset(dataset_id)
+                table = dataset.table(table_id)
+                job_config = bigquery.LoadJobConfig()
+                #job_config.schema = format_schema(table_schema)
+                #job_config.write_disposition = "WRITE_TRUNCATE"
+                #job_config.autodetect = True
+                job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+                job = client.load_table_from_json(json_object, table, job_config = job_config)
+                print(job.result())
+                delete_duplicate()
     except:
         print("Error.")
         logging.exception("message")
@@ -202,7 +217,7 @@ def run():
 def get_params():
     print("Cargando consulta")
     client = bigquery.Client()
-    QUERY = ('SELECT DISTINCT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`WHERE (orderId NOT IN (SELECT orderId FROM `shopstar-datalake.staging_zone.shopstar_order_package`))')
+    QUERY = ('SELECT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`WHERE (orderId NOT IN (SELECT orderId FROM `shopstar-datalake.staging_zone.shopstar_order_package`))')
     query_job = client.query(QUERY)
     rows = query_job.result()
     registro = 0

@@ -84,43 +84,6 @@ def delete_duplicate():
         print(rows)
     except:
         print("Consulta SQL no ejecutada")
-
-def clientJoin():
-    try:
-        print("Creacion shopstar_vtex_client_profile")
-        client = bigquery.Client()
-        QUERY = ('''
-        CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_vtex_client_profile` AS 
-        SELECT
-        a.email,
-        b.profileErrorOnLoading,
-        b.corporateName,
-        b.phone,
-        b.isCorporate,
-        b.stateInscription,
-        b.document,
-        b.documentType,
-        b.lastName,
-        b.profileCompleteOnLoading,
-        b.tradeName,
-        b.firstName,
-        b.profileProvider,
-        b.corporatePhone,
-        b.isComplete,
-        b.customerClass,
-        b.corporateDocument,
-        b.userProfileId    
-        FROM `shopstar-datalake.staging_zone.shopstar_vtex_client` a
-        LEFT JOIN 
-        `shopstar-datalake.staging_zone.shopstar_vtex_client_profile` b
-        ON
-        a.email = b.email;''')
-        query_job = client.query(QUERY)
-        rows = query_job.result()
-        print("shopstar_vtex_client_profile actualizado exitosamente")
-    except:
-        print("Error shopstar_vtex_client_profile!!")
-        logging.exception("message")
     
 
 def run():
