@@ -393,7 +393,7 @@ def run():
             "mode": "NULLABLE"
         },{
             "name": "RequestedByPaymentNotification",
-            "type": "STRING",
+            "type": "BOOLEAN",
             "mode": "NULLABLE"
         },{
             "name": "totals_id_discounts",
