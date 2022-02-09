@@ -175,11 +175,32 @@ def get_order(id):
         
         if Fjson["cancellationData"] is not None:
             cancellationData = Fjson["cancellationData"]
-            RequestedByUser = cancellationData["RequestedByUser"]
-            RequestedBySystem = cancellationData["RequestedBySystem"]
-            RequestedBySellerNotification = cancellationData["RequestedBySellerNotification"]
-            RequestedByPaymentNotification = cancellationData["RequestedByPaymentNotification"]
-            Reason = cancellationData["Reason"]
+            
+            if cancellationData["RequestedByUser"] is None:
+                RequestedByUser = False
+            else:
+                RequestedByUser = cancellationData["RequestedByUser"]
+            
+            if cancellationData["RequestedBySystem"] is None:
+                RequestedBySystem = False
+            else:
+                RequestedBySystem = cancellationData["RequestedBySystem"]
+            
+            if cancellationData["RequestedBySellerNotification"] is None:
+                RequestedBySellerNotification = False
+            else:
+                RequestedBySellerNotification = cancellationData["RequestedBySellerNotification"]
+            
+            if cancellationData["RequestedByPaymentNotification"] is None:
+                RequestedByPaymentNotification = False
+            else:
+                RequestedByPaymentNotification = cancellationData["RequestedByPaymentNotification"]
+                
+            if cancellationData["Reason"] is None:
+                Reason = None
+            else:
+                Reason = cancellationData["Reason"]
+            
         else:
             RequestedByUser = False
             RequestedBySystem = False
