@@ -66,6 +66,10 @@ def get_order(email,reg):
                 'reference': reference}, index=[0])
             init.df = init.df.append(df1)
         print("Registro: "+str(reg))
+        if df.empty:
+            df1 = pd.DataFrame({
+                'email': email}, index=[0])
+            init.df = init.df.append(df1)
     except:
         df1 = pd.DataFrame({
             'email': email}, index=[0])
