@@ -193,7 +193,7 @@ def run():
         print("Error.")
         logging.exception("message")
 
-def get_params(requests):
+def get_params():
     print("Cargando consulta")
     client = bigquery.Client()
     QUERY = ('SELECT email  FROM `shopstar-datalake.staging_zone.shopstar_vtex_client`WHERE (email NOT IN (SELECT email FROM `shopstar-datalake.staging_zone.shopstar_vtex_client_availableAddresses`))')
@@ -218,3 +218,4 @@ def get_params(requests):
         if registro == 100:
             run()
     run()
+get_params()
