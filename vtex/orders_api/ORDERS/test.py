@@ -229,6 +229,8 @@ def get_order(id):
             shipping_street = address["street"]
             if address["number"] is not None:
                 shipping_number = str('sn - '+address["number"])
+            else:
+                shipping_number = None
             shipping_neighborhood = address["neighborhood"]
             shipping_complement = address["complement"]
             shipping_reference = address["reference"]
