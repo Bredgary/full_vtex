@@ -143,7 +143,7 @@ def run():
             "mode": "NULLABLE"
         },{
             "name": "invoiceValue",
-            "type": "INTEGER",
+            "type": "FLOAT",
             "mode": "NULLABLE"
         },{
             "name": "unitMultiplier",
