@@ -28,6 +28,7 @@ def get_order_package(id):
         Fjson = json.loads(response.text)
         packageAttachment = Fjson["packageAttachment"]
         packages = packageAttachment["packages"]
+        lastChange = Fjson["lastChange"]
         for x in packages:
             items = x["items"]
             courier = x["courier"]
@@ -68,7 +69,8 @@ def get_order_package(id):
                     'quantity': quantity,
                     'price': price,
                     'description': description,
-                    'unitMultiplier': unitMultiplier}, index=[0])
+                    'unitMultiplier': unitMultiplier,
+                    'lastChange': lastChange}, index=[0])
                 init.df = init.df.append(df1)
         if init.df.empty:
             df1 = pd.DataFrame({
