@@ -109,7 +109,7 @@ def get_order(id):
             'quantity': item_quantity,
             'seller': item_seller,
             'name': item_name,
-            'refId': item_refId,
+            'item_refId': item_refId,
             'price': item_price,
             'listPrice': item_listPrice,
             'manualPrice': item_manualPrice,
