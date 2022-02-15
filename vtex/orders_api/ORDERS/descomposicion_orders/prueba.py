@@ -197,7 +197,7 @@ def run():
         print("Error.")
         logging.exception("message")
 
-def get_params(requests):
+def get_params():
     print("Cargando consulta")
     client = bigquery.Client()
     QUERY = ('SELECT email  FROM `shopstar-datalake.test.temp`;')
@@ -222,3 +222,5 @@ def get_params(requests):
         if registro == 100:
             run()
     run()
+    
+get_params()
