@@ -104,7 +104,7 @@ def get_order(id):
             'uniqueId': items_uniqueId,
             'id': items_id,
             'productId': items_productId,
-            'ean': items_ean,
+            'items_ean': items_ean,
             'lockId': items_lockId,
             'quantity': item_quantity,
             'seller': item_seller,
@@ -341,7 +341,7 @@ def run():
               "type": "STRING",
               "mode": "NULLABLE"
             },{
-              "name": "ean",
+              "name": "items_ean",
               "type": "STRING",
               "mode": "NULLABLE"
             },{
