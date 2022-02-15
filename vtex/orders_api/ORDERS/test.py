@@ -44,6 +44,7 @@ def get_order_package(id):
             package_type = x["type"]
             cfop = x["cfop"]
             volumes = x["volumes"]
+            print(volumes)
             EnableInferItems = x["EnableInferItems"]
             for y in items:
                 itemIndex = y["itemIndex"]
