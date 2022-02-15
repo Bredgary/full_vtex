@@ -388,19 +388,39 @@ def run():
         print("Data actualizada")  
 
 def get_params():
-  try:
-    print("Cargando consulta")
-    client = bigquery.Client()
-    QUERY = ('SELECT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`WHERE (orderId NOT IN (SELECT orderId FROM `shopstar-datalake.staging_zone.shopstar_order_items`))')
-    query_job = client.query(QUERY)
-    rows = query_job.result()
-    registro = 0
-    for row in rows:
-      registro += 1
-      get_order(row.orderId)
-      print("Registro: "+str(registro))
-    run()
-  except:
-    print("Datos actualizados")
+    try:
+        print("Cargando consulta")
+        client = bigquery.Client()
+        QUERY = ('SELECT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`WHERE (orderId NOT IN (SELECT orderId FROM `shopstar-datalake.staging_zone.shopstar_order_items`))')
+        query_job = client.query(QUERY)
+        rows = query_job.result()
+        registro = 0
+        for row in rows:
+            registro += 1
+            get_order(row.orderId)
+            print("Registro: "+str(registro))
+            if registro == 10:
+                run()
+            if registro == 20:
+                run()
+            if registro == 30:
+                run()
+            if registro == 40:
+                run()
+            if registro == 50:
+                run()
+            if registro == 60:
+                run()
+            if registro == 70:
+                run()
+            if registro == 80:
+                run()
+            if registro == 90:
+                run()
+            if registro == 100:
+                run()
+        run()
+    except:
+        print("Datos actualizados")
     
 get_params()
