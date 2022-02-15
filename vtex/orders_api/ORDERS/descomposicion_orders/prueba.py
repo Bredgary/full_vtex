@@ -152,8 +152,8 @@ def get_order(id):
                 'orderId': id}, index=[0])
             init.df = init.df.append(df1)
     except:
-            print("Error.")
-            logging.exception("message")
+        print("Error.")
+        logging.exception("message")
 
 def delete_duplicate():
     try:
@@ -385,7 +385,8 @@ def run():
             print(job.result())
             delete_duplicate() 
     except:
-        print("Data actualizada")  
+        print("Error.")
+        logging.exception("message")
 
 def get_params():
     try:
@@ -421,6 +422,7 @@ def get_params():
                 run()
         run()
     except:
-        print("Datos actualizados")
+        print("Error.")
+        logging.exception("message")
     
 get_params()
