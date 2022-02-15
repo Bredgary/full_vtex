@@ -31,7 +31,7 @@ def get_order(id):
             items_uniqueId = x["uniqueId"]
             items_id = x["id"]
             items_productId = x["productId"]
-            items_ean = x["ean"]
+            ean = x["ean"]
             items_lockId = x["lockId"]
             item_quantity = x["quantity"]
             item_seller = x["seller"]
@@ -104,7 +104,7 @@ def get_order(id):
             'uniqueId': items_uniqueId,
             'id': items_id,
             'productId': items_productId,
-            'items_ean': items_ean,
+            'ean': ean,
             'lockId': items_lockId,
             'quantity': item_quantity,
             'seller': item_seller,
@@ -341,7 +341,7 @@ def run():
               "type": "STRING",
               "mode": "NULLABLE"
             },{
-              "name": "items_ean",
+              "name": "ean",
               "type": "STRING",
               "mode": "NULLABLE"
             },{
