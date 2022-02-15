@@ -24,7 +24,6 @@ def format_schema(schema):
 def get_order_package(id):
     try:
         df1 = pd.DataFrame()
-        volumes = 0
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
@@ -74,7 +73,6 @@ def get_order_package(id):
                     'unitMultiplier': unitMultiplier,
                     'lastChange': lastChange}, index=[0])
                 init.df = init.df.append(df1)
-        print(volumes)
         if df1.empty:
             df1 = pd.DataFrame({
                 'orderId': id}, index=[0])
@@ -165,7 +163,7 @@ def run():
             "mode": "NULLABLE"
         },{
             "name": "volumes",
-            "type": "INTEGER",
+            "type": "STRING",
             "mode": "NULLABLE"
         },{
             "name": "package_type",
