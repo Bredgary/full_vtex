@@ -70,10 +70,10 @@ def get_order_package(id):
                     'description': description,
                     'unitMultiplier': unitMultiplier}, index=[0])
                 init.df = init.df.append(df1)
-                if init.df.empty:
-                    df1 = pd.DataFrame({
-                        'orderId': id}, index=[0])
-                    init.df = init.df.append(df1)
+        if init.df.empty:
+            df1 = pd.DataFrame({
+                'orderId': id}, index=[0])
+            init.df = init.df.append(df1)
         print(init.df)
     except:
         print("Error.")
