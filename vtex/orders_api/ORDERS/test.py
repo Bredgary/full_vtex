@@ -23,6 +23,7 @@ def format_schema(schema):
 
 def get_order_package(id):
     try:
+        df1 = pd.DataFrame()
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
