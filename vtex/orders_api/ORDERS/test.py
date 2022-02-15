@@ -74,6 +74,7 @@ def get_order_package(id):
                     df1 = pd.DataFrame({
                         'orderId': id}, index=[0])
                     init.df = init.df.append(df1)
+        print(init.df)
     except:
         print("Error.")
         logging.exception("message")
