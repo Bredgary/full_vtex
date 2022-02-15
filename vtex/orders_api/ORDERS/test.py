@@ -46,7 +46,7 @@ def get_order_package(id):
             volumes = x["volumes"]
             EnableInferItems = x["EnableInferItems"]
             for y in items:
-                itemIndex = y["itemIndex"]
+                itemIndex = int(y["itemIndex"])
                 quantity = y["quantity"]
                 price = y["price"]
                 description = y["description"]
