@@ -45,7 +45,6 @@ def get_order_package(id):
             package_type = x["type"]
             cfop = x["cfop"]
             volumes = x["volumes"]
-            print(volumes)
             EnableInferItems = x["EnableInferItems"]
             for y in items:
                 itemIndex = y["itemIndex"]
@@ -75,6 +74,7 @@ def get_order_package(id):
                     'unitMultiplier': unitMultiplier,
                     'lastChange': lastChange}, index=[0])
                 init.df = init.df.append(df1)
+        print(volumes)
         if df1.empty:
             df1 = pd.DataFrame({
                 'orderId': id}, index=[0])
