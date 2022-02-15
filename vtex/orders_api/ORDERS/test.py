@@ -72,7 +72,7 @@ def get_order_package(id):
                     'unitMultiplier': unitMultiplier,
                     'lastChange': lastChange}, index=[0])
                 init.df = init.df.append(df1)
-        if init.df.empty:
+        if df1.empty:
             df1 = pd.DataFrame({
                 'orderId': id}, index=[0])
             init.df = init.df.append(df1)
