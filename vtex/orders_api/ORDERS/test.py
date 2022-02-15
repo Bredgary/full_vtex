@@ -6,13 +6,13 @@ from datetime import datetime
 import requests
 from datetime import datetime, timezone
 from os.path import join
+from pip._vendor.pyparsing import empty
 import logging
 
 class init:
-  productList = []
-  df = pd.DataFrame()
-  
-  headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
+    df = pd.DataFrame()
+    headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
+
 
 def format_schema(schema):
     formatted_schema = []
@@ -21,70 +21,72 @@ def format_schema(schema):
     return formatted_schema
 
 
-def get_order(email,reg):
+def get_order_package(id):
     try:
-        url = "https://mercury.vtexcommercestable.com.br/api/checkout/pub/profiles"
-        querystring = {"email":""+str(email)+""}
-        response = requests.request("GET", url, headers=init.headers, params=querystring)
+        url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
+        response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
-        
-        userProfileId = Fjson["userProfileId"]
-        profileProvider = Fjson["profileProvider"]
-        isComplete = Fjson["isComplete"]
-        availableAddresses = Fjson["availableAddresses"]
-        for x in availableAddresses:
-            addressType = x["addressType"]
-            receiverName = x["receiverName"]
-            addressId = x["addressId"]
-            isDisposable = x["isDisposable"]
-            postalCode = x["postalCode"]
-            city = x["city"]
-            state = x["state"]
-            country = x["country"]
-            street = x["street"]
-            number = x["number"]
-            neighborhood = x["neighborhood"]
-            complement = x["complement"]
-            reference = x["reference"]
-            df1 = pd.DataFrame({
-                'email': email,
-                'userProfileId': userProfileId,
-                'profileProvider': profileProvider,
-                'isComplete': isComplete,
-                'addressType': addressType,
-                'receiverName': receiverName,
-                'addressId': addressId,
-                'isDisposable': isDisposable,
-                'postalCode': postalCode,
-                'city': city,
-                'state': state,
-                'country': country,
-                'street': street,
-                'number': number,
-                'neighborhood': neighborhood,
-                'complement': complement,
-                'reference': reference}, index=[0])
-            init.df = init.df.append(df1)
-        print("Registro: "+str(reg))
-        if df.empty:
-            df1 = pd.DataFrame({
-                'email': email}, index=[0])
-            init.df = init.df.append(df1)
+        packageAttachment = Fjson["packageAttachment"]
+        packages = packageAttachment["packages"]
+        items = ""
+        for x in packages:
+            items = x["items"]
+            courier = x["courier"]
+            invoiceNumber = x["invoiceNumber"]
+            invoiceValue = x["invoiceValue"]
+            invoiceUrl = x["invoiceUrl"]
+            issuanceDate = x["issuanceDate"]
+            trackingNumber = x["trackingNumber"]
+            invoiceKey = x["invoiceKey"]
+            trackingUrl = x["trackingUrl"]
+            embeddedInvoice = x["embeddedInvoice"]
+            package_type = x["type"]
+            cfop = x["cfop"]
+            volumes = x["volumes"]
+            EnableInferItems = x["EnableInferItems"]
+            for y in items:
+                itemIndex = y["itemIndex"]
+                quantity = y["quantity"]
+                price = y["price"]
+                description = y["description"]
+                unitMultiplier = y["unitMultiplier"]
+                df1 = pd.DataFrame({
+                    'orderId': id,
+                    'courier': courier,
+                    'invoiceNumber': invoiceNumber,
+                    'invoiceValue': invoiceValue,
+                    'invoiceUrl': invoiceUrl,
+                    'issuanceDate': issuanceDate,
+                    'trackingNumber': trackingNumber,
+                    'invoiceKey': invoiceKey,
+                    'trackingUrl': trackingUrl,
+                    'embeddedInvoice': embeddedInvoice,
+                    'package_type': package_type,
+                    "cfop":cfop,
+                    "volumes":volumes,
+                    "EnableInferItems":EnableInferItems,
+                    'itemIndex': itemIndex,
+                    'quantity': quantity,
+                    'price': price,
+                    'description': description,
+                    'unitMultiplier': unitMultiplier}, index=[0])
+                init.df = init.df.append(df1)
     except:
         df1 = pd.DataFrame({
-            'email': email}, index=[0])
+            'orderId': id}, index=[0])
         init.df = init.df.append(df1)
-
+        
 def delete_duplicate():
     try:
         print("Eliminando duplicados")
         client = bigquery.Client()
-        QUERY = ('CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_vtex_client_availableAddresses` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.shopstar_vtex_client_availableAddresses`')
+        QUERY = ('CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_order_package` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.shopstar_order_package`')
         query_job = client.query(QUERY)
         rows = query_job.result()
         print(rows)
     except:
         print("Consulta SQL no ejecutada")
+
 
 def run():
     try:
@@ -93,9 +95,88 @@ def run():
         json_data = df.to_json(orient = 'records')
         json_object = json.loads(json_data)
         
+        table_schema = [
+        {
+            "name": "description",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "itemIndex",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "price",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "EnableInferItems",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "cfop",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "embeddedInvoice",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "invoiceNumber",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "invoiceKey",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "issuanceDate",
+            "type": "TIMESTAMP",
+            "mode": "NULLABLE"
+        },{
+            "name": "orderId",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "invoiceValue",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "unitMultiplier",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "trackingNumber",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "quantity",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "courier",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "volumes",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "package_type",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "trackingUrl",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "invoiceUrl",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        }] 
+         
         project_id = '999847639598'
         dataset_id = 'staging_zone'
-        table_id = 'shopstar_vtex_client_availableAddresses'
+        table_id = 'shopstar_order_package'
         
         client  = bigquery.Client(project = project_id)
         dataset  = client.dataset(dataset_id)
@@ -104,76 +185,6 @@ def run():
         if df.empty:
             print('DataFrame is empty!')
         else:
-            table_schema = {
-                "name": "email",
-                "type": "STRING",
-                "mode": "NULLABLE"
-            },{
-                "name": "neighborhood",
-                "type": "STRING",
-                "mode": "NULLABLE"
-            },{
-                "name": "number",
-                "type": "STRING",
-                "mode": "NULLABLE"
-            },{
-                "name": "street",
-                "type": "STRING",
-                "mode": "NULLABLE"
-            },{
-                "name": "reference",
-                "type": "STRING",
-                "mode": "NULLABLE"
-            },{
-                "name": "country",
-                "type": "STRING",
-                "mode": "NULLABLE"
-            },{
-                "name": "addressType",
-                "type": "STRING",
-                "mode": "NULLABLE"
-            },{
-                "name": "state",
-                "type": "STRING",
-                "mode": "NULLABLE"
-            },{
-                "name": "isDisposable",
-                "type": "BOOLEAN",
-                "mode": "NULLABLE"
-            },{
-                "name": "addressId",
-                "type": "STRING",
-                "mode": "NULLABLE"
-            },{
-                "name": "city",
-                "type": "STRING",
-                "mode": "NULLABLE"
-            },{
-                "name": "receiverName",
-                "type": "STRING",
-                "mode": "NULLABLE"
-            },{
-                "name": "complement",
-                "type": "STRING",
-                "mode": "NULLABLE"
-            },{
-                "name": "profileProvider",
-                "type": "STRING",
-                "mode": "NULLABLE"
-            },{
-                "name": "postalCode",
-                "type": "INTEGER",
-                "mode": "NULLABLE"
-            },{
-                "name": "isComplete",
-                "type": "BOOLEAN",
-                "mode": "NULLABLE"
-            },{
-                "name": "userProfileId",
-                "type": "STRING",
-                "mode": "NULLABLE"
-            }
-            
             try:
                 client  = bigquery.Client(project = project_id)
                 dataset  = client.dataset(dataset_id)
@@ -196,19 +207,19 @@ def run():
     except:
         print("Error.")
         logging.exception("message")
-
+    
+    
 def get_params():
     print("Cargando consulta")
     client = bigquery.Client()
-    QUERY = ('SELECT email  FROM `shopstar-datalake.staging_zone.shopstar_vtex_client`WHERE (email NOT IN (SELECT email FROM `shopstar-datalake.staging_zone.shopstar_vtex_client_availableAddresses`))')
+    QUERY = ('SELECT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`WHERE (orderId NOT IN (SELECT orderId FROM `shopstar-datalake.staging_zone.shopstar_order_package`))')
     query_job = client.query(QUERY)
     rows = query_job.result()
     registro = 0
     for row in rows:
         registro += 1
-        get_order(row.email,registro)
-        if registro == 2:
-            run()
+        get_order_package(row.orderId)
+        print("Registro: "+str(registro))
         if registro == 10:
             run()
         if registro == 20:
@@ -219,7 +230,130 @@ def get_params():
             run()
         if registro == 50:
             run()
+        if registro == 60:
+            run()
+        if registro == 70:
+            run()
+        if registro == 80:
+            run()
+        if registro == 90:
+            run()
         if registro == 100:
             run()
+        if registro == 150:
+            run()
+        if registro == 200:
+            run()
+        if registro == 200:
+            run()
+        if registro == 300:
+            run()
+        if registro == 400:
+            run()
+        if registro == 500:
+            run()
+        if registro == 600:
+            run()
+        if registro == 700:
+            run()
+        if registro == 800:
+            run()
+        if registro == 900:
+            run()
+        if registro == 1000:
+            run()
+        if registro == 1100:
+            run()
+        if registro == 1200:
+            run()
+        if registro == 1300:
+            run()
+        if registro == 1400:
+            run()
+        if registro == 1500:
+            run()
+        if registro == 2000:
+            run()
+        if registro == 2500:
+            run()
+        if registro == 3000:
+            run()
+        if registro == 3500:
+            run()
+        if registro == 4000:
+            run()
+        if registro == 4500:
+            run()
+        if registro == 5000:
+            run()
+        if registro == 5500:
+            run()
+        if registro == 6000:
+            run()
+        if registro == 6500:
+            run()
+        if registro == 7000:
+            run()
+        if registro == 7500:
+            run()
+        if registro == 8000:
+            run()
+        if registro == 8500:
+            run()
+        if registro == 9000:
+            run()
+        if registro == 9500:
+            run()
+        if registro == 10000:
+            run()
+        if registro == 15000:
+            run()
+        if registro == 20000:
+            run()
+        if registro == 25000:
+            run()
+        if registro == 30000:
+            run()
+        if registro == 35000:
+            run()
+        if registro == 40000:
+            run()
+        if registro == 45000:
+            run()
+        if registro == 50000:
+            run()
+        if registro == 55000:
+            run()
+        if registro == 60000:
+            run()
+        if registro == 65000:
+            run()
+        if registro == 70000:
+            run()
+        if registro == 75000:
+            run()
+        if registro == 80000:
+            run()
+        if registro == 85000:
+            run()
+        if registro == 90000:
+            run()
+        if registro == 95000:
+            run()
+        if registro == 100000:
+            run()
+        if registro == 105000:
+            run()
+        if registro == 110000:
+            run()
+        if registro == 115000:
+            run()
+        if registro == 120000:
+            run()
+        if registro == 125000:
+            run()
+        if registro == 130000:
+            run()
     run()
+    
 get_params()
