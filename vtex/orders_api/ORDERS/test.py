@@ -66,7 +66,7 @@ def get_order_package(id):
                     "cfop":cfop,
                     "volumes":volumes,
                     "EnableInferItems":EnableInferItems,
-                    'itemIndex': itemIndex,
+                    'itemIndex': int(itemIndex),
                     'quantity': quantity,
                     'price': price,
                     'description': description,
