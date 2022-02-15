@@ -155,7 +155,7 @@ def run():
             "mode": "NULLABLE"
         },{
             "name": "quantity",
-            "type": "INTEGER",
+            "type": "FLOAT",
             "mode": "NULLABLE"
         },{
             "name": "courier",
