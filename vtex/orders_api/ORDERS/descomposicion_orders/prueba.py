@@ -20,10 +20,11 @@ def format_schema(schema):
 
 def get_order(id):
     try:
+        df1 = pd.DataFrame()
         url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
         response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
-        
+        lastChange = Fjson["lastChange"]
         items = Fjson["items"]
         for x in items:
             items_uniqueId = x["uniqueId"]
@@ -63,100 +64,107 @@ def get_order(id):
                 brandId = additionalInfo["brandId"]
                 categoriesIds = additionalInfo["categoriesIds"]
                 productClusterId = additionalInfo["productClusterId"]
-        commercialConditionId = additionalInfo["commercialConditionId"]
-        offeringInfo = additionalInfo["offeringInfo"]
-        offeringType = additionalInfo["offeringType"]
-        offeringTypeId = additionalInfo["offeringTypeId"]
-      except:
-        additionalInfo = ''
-        brandName = ''
-        brandId = ''
-        categoriesIds = ''
-        productClusterId = ''
-        commercialConditionId = ''
-        offeringInfo = ''
-        offeringType = ''
-        offeringTypeId = ''
-      try:
-        dimension = additionalInfo["dimension"]
-        cubicweight = dimension["cubicweight"]
-        height = dimension["height"]
-        length = dimension["length"]
-        weight = dimension["weight"]
-        width = dimension["width"]
-      except:
-        cubicweight = ''
-        height = ''
-        length = ''
-        weight = ''
-        width = ''
-      try:
-        itemAttachment = x["itemAttachment"]
-        item_itemAttachment_name = itemAttachment["name"]
-      except:
-        item_itemAttachment_name = ''
-      
-      df1 = pd.DataFrame({
-        'orderId': id,
-        'uniqueId': items_uniqueId,
-        'id': items_id,
-        'productId': items_productId,
-        'ean': items_ean,
-        'lockId': items_lockId,
-        'quantity': item_quantity,
-        'seller': item_seller,
-        'name': item_name,
-        'refId': item_refId,
-        'price': item_price,
-        'listPrice': item_listPrice,
-        'manualPrice': item_manualPrice,
-        'imageUrl': item_imageUrl,
-        'detailUrl': item_detailUrl,
-        'sellerSku': item_sellerSku,
-        'priceValidUntil': item_priceValidUntil,
-        'commission': item_commission,
-        'tax': item_tax,
-        'preSaleDate': item_preSaleDate,
-        'measurementUnit': item_measurementUnit,
-        'unitMultiplier': item_unitMultiplier,
-        'sellingPrice': item_sellingPrice,
-        'isGift': item_isGift,
-        'shippingPrice': item_shippingPrice,
-        'rewardValue': item_rewardValue,
-        'freightCommission': item_freightCommission,
-        'taxCode': item_taxCode,
-        'parentItemIndex': item_parentItemIndex,
-        'parentAssemblyBinding': item_parentAssemblyBinding,
-        'item_price_definition': item_price_definition,
-        'item_serialNumbers': item_serialNumbers,
-        'brandName': brandName,
-        'brandId': brandId,
-        'categoriesIds': categoriesIds,
-        'productClusterId': productClusterId,
-        'commercialConditionId': commercialConditionId,
-        'offeringInfo': offeringInfo,
-        'offeringType': offeringType,
-        'offeringTypeId': offeringTypeId,
-        'cubicweight': cubicweight,
-        'height': height,
-        'length': length,
-        'weight': weight,
-        'width': width,'item_itemAttachment_name': item_itemAttachment_name}, index=[0])
-      init.df = init.df.append(df1)
-      
-  except:
-    print("vacio")
+                commercialConditionId = additionalInfo["commercialConditionId"]
+                offeringInfo = additionalInfo["offeringInfo"]
+                offeringType = additionalInfo["offeringType"]
+                offeringTypeId = additionalInfo["offeringTypeId"]
+            except:
+                additionalInfo = ''
+                brandName = ''
+                brandId = ''
+                categoriesIds = ''
+                productClusterId = ''
+                commercialConditionId = ''
+                offeringInfo = ''
+                offeringType = ''
+                offeringTypeId = ''
+            
+            try:
+                dimension = additionalInfo["dimension"]
+                cubicweight = dimension["cubicweight"]
+                height = dimension["height"]
+                length = dimension["length"]
+                weight = dimension["weight"]
+                width = dimension["width"]
+            except:
+                cubicweight = ''
+                height = ''
+                length = ''
+                weight = ''
+                width = ''
+            try:
+                itemAttachment = x["itemAttachment"]
+                item_itemAttachment_name = itemAttachment["name"]
+            except:
+                item_itemAttachment_name = ''
+                
+        df1 = pd.DataFrame({
+            'orderId': id,
+            'uniqueId': items_uniqueId,
+            'id': items_id,
+            'productId': items_productId,
+            'ean': items_ean,
+            'lockId': items_lockId,
+            'quantity': item_quantity,
+            'seller': item_seller,
+            'name': item_name,
+            'refId': item_refId,
+            'price': item_price,
+            'listPrice': item_listPrice,
+            'manualPrice': item_manualPrice,
+            'imageUrl': item_imageUrl,
+            'detailUrl': item_detailUrl,
+            'sellerSku': item_sellerSku,
+            'priceValidUntil': item_priceValidUntil,
+            'commission': item_commission,
+            'tax': item_tax,
+            'preSaleDate': item_preSaleDate,
+            'measurementUnit': item_measurementUnit,
+            'unitMultiplier': item_unitMultiplier,
+            'sellingPrice': item_sellingPrice,
+            'isGift': item_isGift,
+            'shippingPrice': item_shippingPrice,
+            'rewardValue': item_rewardValue,
+            'freightCommission': item_freightCommission,
+            'taxCode': item_taxCode,
+            'parentItemIndex': item_parentItemIndex,
+            'parentAssemblyBinding': item_parentAssemblyBinding,
+            'item_price_definition': item_price_definition,
+            'item_serialNumbers': item_serialNumbers,
+            'brandName': brandName,
+            'brandId': brandId,
+            'categoriesIds': categoriesIds,
+            'productClusterId': productClusterId,
+            'commercialConditionId': commercialConditionId,
+            'offeringInfo': offeringInfo,
+            'offeringType': offeringType,
+            'offeringTypeId': offeringTypeId,
+            'cubicweight': cubicweight,
+            'lastChange': lastChange,
+            'height': height,
+            'length': length,
+            'weight': weight,
+            'width': width,
+            'item_itemAttachment_name': item_itemAttachment_name}, index=[0])
+        init.df = init.df.append(df1)
+        if df1.empty:
+            df1 = pd.DataFrame({
+                'orderId': id}, index=[0])
+            init.df = init.df.append(df1)
+    except:
+            print("Error.")
+            logging.exception("message")
 
 def delete_duplicate():
-  try:
-    print("Eliminando duplicados")
-    client = bigquery.Client()
-    QUERY = ('CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_order_items` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.shopstar_order_items`')
-    query_job = client.query(QUERY)
-    rows = query_job.result()
-    print(rows)
-  except:
-    print("Consulta SQL no ejecutada")
+    try:
+        print("Eliminando duplicados")
+        client = bigquery.Client()
+        QUERY = ('CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_order_items` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.shopstar_order_items`')
+        query_job = client.query(QUERY)
+        rows = query_job.result()
+        print(rows)
+    except:
+        print("Consulta SQL no ejecutada")
 
 
 def run():
