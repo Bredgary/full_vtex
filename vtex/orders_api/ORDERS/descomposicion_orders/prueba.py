@@ -6,6 +6,7 @@ from datetime import datetime
 import requests
 from datetime import datetime, timezone
 from os.path import join
+import logging
 
 class init:
     productList = []
