@@ -36,7 +36,7 @@ def get_order(id):
             item_quantity = x["quantity"]
             item_seller = x["seller"]
             item_name = x["name"]
-            item_refId = x["refId"]
+            refId = x["refId"]
             item_price = x["price"]
             item_listPrice = x["listPrice"]
             item_manualPrice = x["manualPrice"]
@@ -109,7 +109,7 @@ def get_order(id):
             'quantity': item_quantity,
             'seller': item_seller,
             'name': item_name,
-            'refId': item_refId,
+            'refId': str(refId),
             'price': item_price,
             'listPrice': item_listPrice,
             'manualPrice': item_manualPrice,
