@@ -47,7 +47,7 @@ def get_order_package(id):
             EnableInferItems = x["EnableInferItems"]
             for y in items:
                 quantity = y["quantity"]
-                price = y["price"]
+                price = int(y["price"])
                 description = y["description"]
                 unitMultiplier = y["unitMultiplier"]
                 df1 = pd.DataFrame({
