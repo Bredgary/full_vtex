@@ -28,7 +28,6 @@ def get_order_package(id):
         Fjson = json.loads(response.text)
         packageAttachment = Fjson["packageAttachment"]
         packages = packageAttachment["packages"]
-        items = ""
         for x in packages:
             items = x["items"]
             courier = x["courier"]
