@@ -46,6 +46,7 @@ def get_order_package(id):
             volumes = x["volumes"]
             EnableInferItems = x["EnableInferItems"]
             for y in items:
+                itemIndex = y["itemIndex"]
                 quantity = y["quantity"]
                 price = int(y["price"])
                 description = y["description"]
@@ -65,6 +66,7 @@ def get_order_package(id):
                     "cfop":cfop,
                     "volumes":volumes,
                     "EnableInferItems":EnableInferItems,
+                    'itemIndex': itemIndex,
                     'quantity': quantity,
                     'price': price,
                     'description': description,
@@ -105,11 +107,11 @@ def run():
             "mode": "NULLABLE"
         },{
             "name": "itemIndex",
-            "type": "INTEGER",
+            "type": "FLOAT",
             "mode": "NULLABLE"
         },{
             "name": "price",
-            "type": "INTEGER",
+            "type": "FLOAT",
             "mode": "NULLABLE"
         },{
             "name": "EnableInferItems",
