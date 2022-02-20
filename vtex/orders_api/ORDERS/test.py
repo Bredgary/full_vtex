@@ -43,7 +43,6 @@ def get_order(id):
             item_imageUrl = x["imageUrl"]
             item_detailUrl = x["detailUrl"]
             item_sellerSku = x["sellerSku"]
-            print(item_sellerSku)
             if x["priceValidUntil"] is not None:
                 item_priceValidUntil = x["priceValidUntil"]
             else:
@@ -295,7 +294,7 @@ def run():
               "mode": "NULLABLE"
             },{
               "name": "sellerSku",
-              "type": "INTEGER",
+              "type": "STRING",
               "mode": "NULLABLE"
             },{
               "name": "id",
