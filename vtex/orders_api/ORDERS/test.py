@@ -43,12 +43,12 @@ def get_order(id):
             item_imageUrl = x["imageUrl"]
             item_detailUrl = x["detailUrl"]
             item_sellerSku = x["sellerSku"]
+            print(item_sellerSku)
             if x["priceValidUntil"] is not None:
                 item_priceValidUntil = x["priceValidUntil"]
             else:
                 item_priceValidUntil = '1900-01-01 15:15:18.051893 UTC'
             
-            print(item_priceValidUntil)
             item_commission = x["commission"]
             item_tax = x["tax"]
             item_preSaleDate = str(x["preSaleDate"])
