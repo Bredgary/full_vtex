@@ -6,13 +6,12 @@ from datetime import datetime
 import requests
 from datetime import datetime, timezone
 from os.path import join
-import logging
 
 class init:
-  productList = []
-  df = pd.DataFrame()
-  
-  headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
+    productList = []
+    df = pd.DataFrame()
+    
+    headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
 def format_schema(schema):
     formatted_schema = []
@@ -20,41 +19,33 @@ def format_schema(schema):
         formatted_schema.append(bigquery.SchemaField(row['name'], row['type'], row['mode']))
     return formatted_schema
 
-
-def get_order(email,reg):
+def get_order(id,reg):
     try:
-        url = "https://mercury.vtexcommercestable.com.br/api/checkout/pub/profiles"
-        querystring = {"email":""+str(email)+""}
-        response = requests.request("GET", url, headers=init.headers, params=querystring)
+        reg +=1
+        url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
+        response = requests.request("GET", url, headers=init.headers)
         Fjson = json.loads(response.text)
-        
-        userProfileId = Fjson["userProfileId"]
-        profileProvider = Fjson["profileProvider"]
-        isComplete = Fjson["isComplete"]
-        availableAddresses = Fjson["availableAddresses"]
-        for x in availableAddresses:
-            addressType = x["addressType"]
-            receiverName = x["receiverName"]
-            addressId = x["addressId"]
-            isDisposable = x["isDisposable"]
-            postalCode = x["postalCode"]
-            city = x["city"]
-            state = x["state"]
-            country = x["country"]
-            street = x["street"]
-            number = x["number"]
-            neighborhood = x["neighborhood"]
-            complement = x["complement"]
-            reference = x["reference"]
+        paymentData = Fjson["paymentData"]
+        transactions = paymentData["transactions"]
+        for x in transactions:
+            payments = x["payments"]
+        for x in payments:
+            billingAddress = x["billingAddress"]
+            geoCoordinates = billingAddress["geoCoordinates"]
+            postalCode = billingAddress["postalCode"]
+            city = billingAddress["city"]
+            state = billingAddress["state"]
+            country = billingAddress["country"]
+            street = billingAddress["street"]
+            number = billingAddress["number"]
+            neighborhood = billingAddress["neighborhood"]
+            complement = billingAddress["complement"]
+            reference = billingAddress["reference"]
+            lot = geoCoordinates[0]
+            lan = geoCoordinates[1]
+            print("Registro: "+str(reg))
             df1 = pd.DataFrame({
-                'email': email,
-                'userProfileId': userProfileId,
-                'profileProvider': profileProvider,
-                'isComplete': isComplete,
-                'addressType': addressType,
-                'receiverName': receiverName,
-                'addressId': addressId,
-                'isDisposable': isDisposable,
+                'orderId': id,
                 'postalCode': postalCode,
                 'city': city,
                 'state': state,
@@ -63,23 +54,31 @@ def get_order(email,reg):
                 'number': number,
                 'neighborhood': neighborhood,
                 'complement': complement,
-                'reference': reference}, index=[0])
-            init.df = init.df.append(df1)
-        print("Registro: "+str(reg))
-        if df.empty:
-            df1 = pd.DataFrame({
-                'email': email}, index=[0])
+                'reference': reference,
+                'lon': lon,
+                'lat': lat}, index=[0])
             init.df = init.df.append(df1)
     except:
-        df1 = pd.DataFrame({
-            'email': email}, index=[0])
-        init.df = init.df.append(df1)
-
+        print("Vacio")
+        print("Registro: "+str(reg))
+        
+        
 def delete_duplicate():
     try:
         print("Eliminando duplicados")
         client = bigquery.Client()
-        QUERY = ('CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_vtex_client_availableAddresses` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.shopstar_vtex_client_availableAddresses`')
+        QUERY = ('CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_order_billingAddress` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.shopstar_order_billingAddress`')
+        query_job = client.query(QUERY)
+        rows = query_job.result()
+        print(rows)
+    except:
+        print("Consulta SQL no ejecutada")
+
+def geolocation():
+    try:
+        print("SQL ST_GEOGPOINT")
+        client = bigquery.Client()
+        QUERY = ('CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_order_billingAddress` AS SELECT *,ST_GEOGPOINT(lon, lat) FROM `shopstar-datalake.staging_zone.shopstar_order_billingAddress`')
         query_job = client.query(QUERY)
         rows = query_job.result()
         print(rows)
@@ -93,9 +92,60 @@ def run():
         json_data = df.to_json(orient = 'records')
         json_object = json.loads(json_data)
         
+        table_schema = [
+        {
+            "name": "lat",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "neighborhood",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "number",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "street",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "state",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "reference",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "country",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "lon",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "complement",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "STRING",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "city",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "postalCode",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        }] 
+        
         project_id = '999847639598'
         dataset_id = 'staging_zone'
-        table_id = 'shopstar_vtex_client_availableAddresses'
+        table_id = 'shopstar_order_billingAddress'
         
         client  = bigquery.Client(project = project_id)
         dataset  = client.dataset(dataset_id)
@@ -104,76 +154,6 @@ def run():
         if df.empty:
             print('DataFrame is empty!')
         else:
-            table_schema = {
-                "name": "email",
-                "type": "STRING",
-                "mode": "NULLABLE"
-            },{
-                "name": "neighborhood",
-                "type": "STRING",
-                "mode": "NULLABLE"
-            },{
-                "name": "number",
-                "type": "STRING",
-                "mode": "NULLABLE"
-            },{
-                "name": "street",
-                "type": "STRING",
-                "mode": "NULLABLE"
-            },{
-                "name": "reference",
-                "type": "STRING",
-                "mode": "NULLABLE"
-            },{
-                "name": "country",
-                "type": "STRING",
-                "mode": "NULLABLE"
-            },{
-                "name": "addressType",
-                "type": "STRING",
-                "mode": "NULLABLE"
-            },{
-                "name": "state",
-                "type": "STRING",
-                "mode": "NULLABLE"
-            },{
-                "name": "isDisposable",
-                "type": "BOOLEAN",
-                "mode": "NULLABLE"
-            },{
-                "name": "addressId",
-                "type": "STRING",
-                "mode": "NULLABLE"
-            },{
-                "name": "city",
-                "type": "STRING",
-                "mode": "NULLABLE"
-            },{
-                "name": "receiverName",
-                "type": "STRING",
-                "mode": "NULLABLE"
-            },{
-                "name": "complement",
-                "type": "STRING",
-                "mode": "NULLABLE"
-            },{
-                "name": "profileProvider",
-                "type": "STRING",
-                "mode": "NULLABLE"
-            },{
-                "name": "postalCode",
-                "type": "INTEGER",
-                "mode": "NULLABLE"
-            },{
-                "name": "isComplete",
-                "type": "BOOLEAN",
-                "mode": "NULLABLE"
-            },{
-                "name": "userProfileId",
-                "type": "STRING",
-                "mode": "NULLABLE"
-            }
-            
             try:
                 client  = bigquery.Client(project = project_id)
                 dataset  = client.dataset(dataset_id)
@@ -196,19 +176,19 @@ def run():
     except:
         print("Error.")
         logging.exception("message")
-
+    
+    
 def get_params():
     print("Cargando consulta")
     client = bigquery.Client()
-    QUERY = ('SELECT email  FROM `shopstar-datalake.test.temp`;')
+    QUERY = ('SELECT orderId  FROM `shopstar-datalake.staging_zone.order_write`WHERE (orderId NOT IN (SELECT orderId FROM `shopstar-datalake.staging_zone.shopstar_order_billingAddress`))')
     query_job = client.query(QUERY)
     rows = query_job.result()
     registro = 0
     for row in rows:
         registro += 1
-        get_order(row.email,registro)
-        if registro == 2:
-            run()
+        get_order_package(row.orderId)
+        print("Registro: "+str(registro))
         if registro == 10:
             run()
         if registro == 20:
@@ -219,8 +199,5 @@ def get_params():
             run()
         if registro == 50:
             run()
-        if registro == 100:
-            run()
     run()
     
-get_params()
