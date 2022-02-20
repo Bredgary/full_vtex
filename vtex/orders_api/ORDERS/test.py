@@ -187,7 +187,7 @@ def get_params():
     registro = 0
     for row in rows:
         registro += 1
-        get_order(row.orderId)
+        get_order(row.orderId,registro)
         print("Registro: "+str(registro))
         if registro == 10:
             run()
