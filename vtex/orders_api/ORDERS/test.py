@@ -44,6 +44,7 @@ def get_order(id):
             item_detailUrl = x["detailUrl"]
             item_sellerSku = x["sellerSku"]
             item_priceValidUntil = x["priceValidUntil"]
+            print(item_priceValidUntil)
             item_commission = x["commission"]
             item_tax = x["tax"]
             item_preSaleDate = str(x["preSaleDate"])
