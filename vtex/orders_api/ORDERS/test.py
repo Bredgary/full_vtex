@@ -200,4 +200,5 @@ def get_params():
         if registro == 50:
             run()
     run()
-    
+
+get_params() 
