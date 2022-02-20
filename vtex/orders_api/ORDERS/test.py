@@ -214,7 +214,7 @@ def run():
         logging.exception("message")
     
     
-def get_params(requests):
+def get_params():
     print("Cargando consulta")
     client = bigquery.Client()
     QUERY = ('SELECT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`WHERE (orderId NOT IN (SELECT orderId FROM `shopstar-datalake.staging_zone.shopstar_order_package`))')
@@ -360,4 +360,5 @@ def get_params(requests):
         if registro == 130000:
             run()
     run()
-    
+   
+get_params() 
