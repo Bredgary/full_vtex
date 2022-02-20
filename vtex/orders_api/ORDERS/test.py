@@ -389,7 +389,7 @@ def run():
         print("Error.")
         logging.exception("message")
 
-def get_params(requests):
+def get_params():
     try:
         print("Cargando consulta")
         client = bigquery.Client()
@@ -426,4 +426,4 @@ def get_params(requests):
         print("Error.")
         logging.exception("message")
     
-
+get_params()
