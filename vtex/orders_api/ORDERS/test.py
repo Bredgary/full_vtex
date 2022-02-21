@@ -205,7 +205,7 @@ def run():
             "mode": "NULLABLE"
         },{
             "name": "value",
-            "type": "INTEGER",
+            "type": "FLOAT",
             "mode": "NULLABLE"
         },{
             "name": "firstDigits",
