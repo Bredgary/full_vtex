@@ -18,6 +18,17 @@ def format_schema(schema):
         formatted_schema.append(bigquery.SchemaField(row['name'], row['type'], row['mode']))
     return formatted_schema
 
+def delete_duplicate():
+    try:
+        print("Eliminando duplicados")
+        client = bigquery.Client()
+        QUERY = ('CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_vtex_client_history` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.shopstar_vtex_client_history`')
+        query_job = client.query(QUERY)
+        rows = query_job.result()
+        print(rows)
+    except:
+        print("Consulta SQL no ejecutada")
+
 def get_order(email,reg):
     try:
         url = "https://mercury.vtexcommercestable.com.br/api/dataentities/CL/search"
@@ -301,16 +312,25 @@ def run():
         if df.empty:
             print('DataFrame is empty!')
         else:
-            client  = bigquery.Client(project = project_id)
-            dataset  = client.dataset(dataset_id)
-            table = dataset.table(table_id)
-            job_config = bigquery.LoadJobConfig()
-            #job_config.write_disposition = "WRITE_TRUNCATE"
-            #job_config.autodetect = True
-            job_config.schema = format_schema(table_schema)
-            job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-            job = client.load_table_from_json(json_object, table, job_config = job_config)
-            print(job.result())
+            try:
+                client  = bigquery.Client(project = project_id)
+                dataset  = client.dataset(dataset_id)
+                table = dataset.table(table_id)
+                job_config = bigquery.LoadJobConfig()
+                job_config.schema = format_schema(table_schema)
+                job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+                job = client.load_table_from_json(json_object, table, job_config = job_config)
+                print(job.result())
+                delete_duplicate()
+            except:
+                client  = bigquery.Client(project = project_id)
+                dataset  = client.dataset(dataset_id)
+                table = dataset.table(table_id)
+                job_config = bigquery.LoadJobConfig()
+                job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+                job = client.load_table_from_json(json_object, table, job_config = job_config)
+                print(job.result())
+                delete_duplicate()
     except:
         print("Error.")
         logging.exception("message")
