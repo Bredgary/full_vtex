@@ -55,6 +55,7 @@ def get_order(email,reg):
             rclastsession = x["rclastsession"]
             rclastsessiondate = x["rclastsessiondate"]
             homePhone = x["homePhone"]
+            print(homePhone)
             phone = x["phone"]
             stateRegistration = x["stateRegistration"]
             email = x["email"]
