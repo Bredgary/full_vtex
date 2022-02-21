@@ -58,10 +58,10 @@ def get_order(id,reg):
                 'lon': lon,
                 'lat': lat}, index=[0])
             init.df = init.df.append(df1)
-            if df1.empty:
-                df1 = pd.DataFrame({
-                'orderId': id}, index=[0])
-                init.df = init.df.append(df1)
+        if df1.empty:
+            df1 = pd.DataFrame({
+            'orderId': id}, index=[0])
+            init.df = init.df.append(df1)
     except:
         df1 = pd.DataFrame({
             'orderId': id}, index=[0])
