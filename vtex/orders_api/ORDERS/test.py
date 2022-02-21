@@ -55,7 +55,6 @@ def get_order(email,reg):
             rclastsession = x["rclastsession"]
             rclastsessiondate = x["rclastsessiondate"]
             homePhone = x["homePhone"]
-            print(homePhone)
             phone = x["phone"]
             stateRegistration = x["stateRegistration"]
             email = x["email"]
@@ -197,7 +196,7 @@ def run():
             "mode": "NULLABLE"
         },{
             "name": "homePhone",
-            "type": "INTEGER",
+            "type": "STRING",
             "mode": "NULLABLE"
         },{
             "name": "email",
