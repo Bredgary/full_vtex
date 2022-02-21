@@ -31,12 +31,12 @@ def get_order(id,reg):
                 'merchantName': merchantName}, index=[0])
             init.df = init.df.append(df1)
         print("Registro: "+str(reg))
-        if df.empty:
+        if df1.empty:
             df1 = pd.DataFrame({
                 'orderId': id}, index=[0])
             init.df = init.df.append(df1)
     except:
-        if df.empty:
+        if df1.empty:
             df1 = pd.DataFrame({
                 'orderId': id}, index=[0])
             init.df = init.df.append(df1)
