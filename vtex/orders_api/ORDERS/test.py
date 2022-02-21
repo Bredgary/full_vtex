@@ -237,7 +237,7 @@ def run():
             "mode": "NULLABLE"
         },{
             "name": "installments",
-            "type": "INTEGER",
+            "type": "FLOAT",
             "mode": "NULLABLE"
         },{
             "name": "expireMonth",
