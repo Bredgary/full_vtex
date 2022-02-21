@@ -52,7 +52,6 @@ def get_order(id,reg):
                     'C_orderId': orderId,
                     'state': state}, index=[0])
                 init.df = init.df.append(df1)
-                print("Registro: "+str(reg))
         if df1.empty:
             df1 = pd.DataFrame({
                 'orderId': id}, index=[0])
