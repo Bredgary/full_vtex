@@ -181,7 +181,7 @@ def run():
             "mode": "NULLABLE"
         },{
             "name": "referenceValue",
-            "type": "INTEGER",
+            "type": "FLOAT",
             "mode": "NULLABLE"
         },{
             "name": "cvv2",
