@@ -36,10 +36,9 @@ def get_order(id,reg):
                 'orderId': id}, index=[0])
             init.df = init.df.append(df1)
     except:
-        if df1.empty:
-            df1 = pd.DataFrame({
-                'orderId': id}, index=[0])
-            init.df = init.df.append(df1)
+        df1 = pd.DataFrame({
+            'orderId': id}, index=[0])
+        init.df = init.df.append(df1)
         
         
 def delete_duplicate():
