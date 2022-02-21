@@ -58,9 +58,14 @@ def get_order(id,reg):
                 'lon': lon,
                 'lat': lat}, index=[0])
             init.df = init.df.append(df1)
+            if df1.empty:
+                df1 = pd.DataFrame({
+                'orderId': id}, index=[0])
+                init.df = init.df.append(df1)
     except:
-        print("Vacio")
-        print("Registro: "+str(reg))
+        df1 = pd.DataFrame({
+            'orderId': id}, index=[0])
+        init.df = init.df.append(df1)
         
         
 def delete_duplicate():
@@ -130,7 +135,7 @@ def run():
             "type": "STRING",
             "mode": "NULLABLE"
         },{
-            "name": "STRING",
+            "name": "orderId",
             "type": "STRING",
             "mode": "NULLABLE"
         },{
