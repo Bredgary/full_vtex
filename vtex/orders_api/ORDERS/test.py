@@ -11,8 +11,15 @@ import logging
 class init:
     productList = []
     df = pd.DataFrame()
-    headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
     
+    headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
+
+def format_schema(schema):
+    formatted_schema = []
+    for row in schema:
+        formatted_schema.append(bigquery.SchemaField(row['name'], row['type'], row['mode']))
+    return formatted_schema
+
 def get_order(id,reg):
     try:
         df1 = pd.DataFrame
@@ -23,88 +30,44 @@ def get_order(id,reg):
         transactions = paymentData["transactions"]
         for x in transactions:
             payments = x["payments"]
-            for pay in payments:
-                id_payments = pay["id"]
-                paymentSystem = pay["paymentSystem"]
-                paymentSystemName = pay["paymentSystemName"]
-                value = pay["value"]
-                installments = pay["installments"]
-                referenceValue = pay["referenceValue"]
-                cardHolder = pay["cardHolder"]
-                cardNumber = pay["cardNumber"]
-                firstDigits = pay["firstDigits"]
-                lastDigits = pay["lastDigits"]
-                cvv2 = pay["cvv2"]
-                expireMonth = pay["expireMonth"]
-                expireYear = pay["expireYear"]
-                url = pay["url"]
-                giftCardId = pay["giftCardId"]
-                giftCardName = pay["giftCardName"]
-                giftCardCaption = pay["giftCardCaption"]
-                redemptionCode = pay["redemptionCode"]
-                group = pay["group"]
-                tid = pay["tid"]
-                dueDate = pay["dueDate"]
-                giftCardProvider = pay["giftCardProvider"]
-                giftCardAsDiscount = pay["giftCardAsDiscount"]
-                koinUrl = pay["koinUrl"]
-                accountId = pay["accountId"]
-                parentAccountId = pay["parentAccountId"]
-                bankIssuedInvoiceIdentificationNumber = pay["bankIssuedInvoiceIdentificationNumber"]
-                bankIssuedInvoiceIdentificationNumberFormatted = pay["bankIssuedInvoiceIdentificationNumberFormatted"]
-                bankIssuedInvoiceBarCodeNumber = pay["bankIssuedInvoiceBarCodeNumber"]
-                bankIssuedInvoiceBarCodeType = pay["bankIssuedInvoiceBarCodeType"]
+            for x in payments:
+                connectorResponses = x["connectorResponses"]
+                Tid = connectorResponses["Tid"]
+                ReturnCode= connectorResponses["ReturnCode"]
+                Message= connectorResponses["Message"]
+                try:
+                    authId= connectorResponses["authId"]
+                    orderId= connectorResponses["orderId"]
+                except:
+                    authId= None
+                    orderId= None
+                state= connectorResponses["state"]
                 
                 df1 = pd.DataFrame({
                     'orderId': id,
-                    'id_payments': id_payments,
-                    'paymentSystem': paymentSystem,
-                    'paymentSystemName': paymentSystemName,
-                    'value': value,
-                    'installments': installments,
-                    'referenceValue': referenceValue,
-                    'cardHolder': cardHolder,
-                    'cardNumber': cardNumber,
-                    'firstDigits': firstDigits,
-                    'lastDigits': lastDigits,
-                    'cvv2': cvv2,
-                    'expireMonth': expireMonth,
-                    'expireYear': expireYear,
-                    'url': url,
-                    'giftCardId': giftCardId,
-                    'giftCardName': giftCardName,
-                    'giftCardCaption': giftCardCaption,
-                    'redemptionCode': redemptionCode,
-                    'group': group,
-                    'tid': tid,
-                    'dueDate': dueDate,
-                    'giftCardProvider': giftCardProvider,
-                    'giftCardAsDiscount': giftCardAsDiscount,
-                    'koinUrl': koinUrl,
-                    'accountId': accountId,
-                    'parentAccountId': parentAccountId,
-                    'bankIssuedInvoiceIdentificationNumber': bankIssuedInvoiceIdentificationNumber,
-                    'bankIssuedInvoiceIdentificationNumberFormatted': bankIssuedInvoiceIdentificationNumberFormatted,
-                    'bankIssuedInvoiceBarCodeNumber': bankIssuedInvoiceBarCodeNumber,
-                    'bankIssuedInvoiceBarCodeType': bankIssuedInvoiceBarCodeType}, index=[0])
+                    'Tid': Tid,
+                    'ReturnCode': ReturnCode,
+                    'Message': Message,
+                    'authId': authId,
+                    'C_orderId': orderId,
+                    'state': state}, index=[0])
                 init.df = init.df.append(df1)
                 print("Registro: "+str(reg))
-        if df.empty:
+        if df1.empty:
             df1 = pd.DataFrame({
-                'orderId': id
-                }, index=[0])
+                'orderId': id}, index=[0])
             init.df = init.df.append(df1)
     except:
         df1 = pd.DataFrame({
             'orderId': id}, index=[0])
         init.df = init.df.append(df1)
         
-        
 def delete_duplicate():
     try:
         print("Eliminando duplicados")
         client = bigquery.Client()
-        QUERY = ('CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_order_payments` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.shopstar_order_payments`')
+        QUERY = (
+            'CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_order_connectorResponses` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.shopstar_order_connectorResponses`')
         query_job = client.query(QUERY)
         rows = query_job.result()
         print(rows)
@@ -120,134 +83,38 @@ def run():
         json_object = json.loads(json_data)
         
         table_schema = [{
-            "name": "bankIssuedInvoiceBarCodeNumber",
+            "name": "state",
             "type": "STRING",
             "mode": "NULLABLE"
         },{
-            "name": "bankIssuedInvoiceIdentificationNumberFormatted",
+            "name": "C_orderId",
             "type": "STRING",
             "mode": "NULLABLE"
         },{
-            "name": "bankIssuedInvoiceIdentificationNumber",
+            "name": "Tid",
             "type": "STRING",
             "mode": "NULLABLE"
         },{
-            "name": "accountId",
+            "name": "authId",
             "type": "STRING",
             "mode": "NULLABLE"
         },{
-            "name": "parentAccountId",
+            "name": "Message",
             "type": "STRING",
             "mode": "NULLABLE"
         },{
-            "name": "koinUrl",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "giftCardAsDiscount",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "dueDate",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "group",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "giftCardCaption",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "giftCardName",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "expireYear",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "giftCardId",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "cardHolder",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "cardNumber",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "referenceValue",
-            "type": "FLOAT",
-            "mode": "NULLABLE"
-        },{
-            "name": "cvv2",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "lastDigits",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "bankIssuedInvoiceBarCodeType",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "paymentSystem",
-            "type": "INTEGER",
-            "mode": "NULLABLE"
-        },{
-            "name": "url",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "value",
-            "type": "FLOAT",
-            "mode": "NULLABLE"
-        },{
-            "name": "firstDigits",
+            "name": "ReturnCode",
             "type": "STRING",
             "mode": "NULLABLE"
         },{
             "name": "orderId",
             "type": "STRING",
             "mode": "NULLABLE"
-        },{
-            "name": "paymentSystemName",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "redemptionCode",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "giftCardProvider",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "tid",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "id_payments",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "installments",
-            "type": "FLOAT",
-            "mode": "NULLABLE"
-        },{
-            "name": "expireMonth",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        }]
+        }]    
         
         project_id = '999847639598'
         dataset_id = 'staging_zone'
-        table_id = 'shopstar_order_payments'
+        table_id = 'shopstar_order_connectorResponses'
         
         if df.empty:
             print('DataFrame is empty!')
@@ -274,13 +141,12 @@ def run():
     except:
         print("Error.")
         logging.exception("message")
-    
 
 def get_params():
     print("Cargando consulta")
     client = bigquery.Client()
-    QUERY = ('SELECT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`WHERE (orderId NOT IN (SELECT orderId FROM `shopstar-datalake.staging_zone.shopstar_order_payments`))')
-    query_job = client.query(QUERY)
+    QUERY = ('SELECT orderId  FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_order`WHERE (orderId NOT IN (SELECT orderId FROM `shopstar-datalake.staging_zone.shopstar_order_connectorResponses`))')
+    query_job = client.query(QUERY)  
     rows = query_job.result()
     registro = 0
     for row in rows:
@@ -297,5 +163,5 @@ def get_params():
         if registro == 50:
             run()
     run()
-        
+    
 get_params()
