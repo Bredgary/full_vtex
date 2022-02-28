@@ -11,7 +11,7 @@ class init:
   df = pd.DataFrame()
   headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
-def get_inventory(id):
+def get_inventory():
     try:
         print("Cargando consulta")
         client = bigquery.Client()
@@ -170,3 +170,4 @@ def run():
         print("Error.")
         logging.exception("message")
 
+get_inventory()
