@@ -34,7 +34,7 @@ def get_inventory():
                 dateOfSupplyUtc = x["dateOfSupplyUtc"]
                 
                 df1 = pd.DataFrame({
-                    'SKU_ID': id,
+                    'SKU_ID': row.id,
                     'warehouseId': warehouseId,
                     'warehouseName': warehouseName,
                     'totalQuantity': totalQuantity,
