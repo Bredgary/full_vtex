@@ -24,6 +24,9 @@ def get_inventory():
             response = requests.request("GET", url, headers=init.headers)
             Fjson = json.loads(response.text)
             balance = Fjson["balance"]
+            registro_sku = 0
+            registro_sku += 1
+            print("registro_sku: "+str(registro_sku))
             for x in balance:
                 warehouseId = x["warehouseId"]
                 warehouseName = x["warehouseName"]
@@ -125,7 +128,15 @@ def get_inventory():
                     run()
                 if registro == 300000:
                     run()
-            run()
+                if registro == 1000000:
+                    run()
+                if registro == 2000000:
+                    run()
+                if registro == 3000000:
+                    run()
+                if registro == 4000000:
+                    run()
+        run()
     except:
         print("Vacio")
 
