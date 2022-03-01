@@ -26,6 +26,7 @@ def get_salespolicy():
             response = requests.request("GET", url, headers=init.headers)
             Fjson = json.loads(response.text)
             for x in Fjson:
+                ProductId = row.id
                 StoreId = x["StoreId"]
                 df1 = pd.DataFrame({
                     'ProductId': ProductId,
