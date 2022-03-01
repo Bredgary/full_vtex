@@ -20,6 +20,7 @@ def get_salespolicy():
         rows = query_job.result()
         registro = 0
         for row in rows:
+            print("ProductId: "+str(ProductId))
             url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/product/"+str(row.id)+"/salespolicy"
             response = requests.request("GET", url, headers=init.headers)
             Fjson = json.loads(response.text)
