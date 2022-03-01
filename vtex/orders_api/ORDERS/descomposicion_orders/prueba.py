@@ -122,7 +122,8 @@ def get_salespolicy():
                     run()
         run()
     except:
-        print("Vacio")
+        print("Error.")
+        logging.exception("message")
 
 
 def delete_duplicate():
