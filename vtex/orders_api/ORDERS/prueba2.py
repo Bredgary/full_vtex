@@ -20,10 +20,13 @@ def get_stores():
             id = x["id"]
             name = x["name"]
             hosts = x["hosts"]
+            hosts = hosts[0]
+            link = hosts[1]
             df1 = pd.DataFrame({
                 'id': id,
                 'name': name,
-                'hosts': hosts}, index=[0])
+                'hosts': hosts,
+                'link': link}, index=[0])
             init.df = init.df.append(df1)
         run()
     except:
