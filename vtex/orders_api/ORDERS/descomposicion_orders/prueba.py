@@ -20,12 +20,12 @@ def get_salespolicy():
         rows = query_job.result()
         registro = 0
         for row in rows:
+            ProductId = row.id
             print("ProductId: "+str(ProductId))
             url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/product/"+str(row.id)+"/salespolicy"
             response = requests.request("GET", url, headers=init.headers)
             Fjson = json.loads(response.text)
             for x in Fjson:
-                ProductId = row.id
                 StoreId = x["StoreId"]
                 df1 = pd.DataFrame({
                     'ProductId': ProductId,
