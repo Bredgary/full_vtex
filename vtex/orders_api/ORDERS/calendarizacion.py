@@ -7,12 +7,15 @@ import requests
 from os.path import join
 import logging
 from datetime import date
+import datetime
 
 class init:
   df = pd.DataFrame()
   headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
-  today = date.today()
-  datem = datetime.datetime.strptime(today, "%Y-%m-%d %H:%M:%S")
+  dt = datetime.datetime.today()
+  year = dt.year
+  month = dt.month
+  day = dt.day
 def get_product_cal():
     try:
         print("Cargando consulta")
@@ -26,9 +29,9 @@ def get_product_cal():
         query_job = client.query(QUERY)
         rows = query_job.result()
         registro = 0
-        print(init.datem.day)
-        print(init.datem.month)
-        print(init.datem.year)
+        print(init.day)
+        print(init.month)
+        print(init.year)
         for row in rows:
             print(row.productId)
             #url = "https://mercury.vtexcommercestable.com.br/api/logistics/pvt/inventory/skus/"+str(row.id)+""
