@@ -108,4 +108,4 @@ def run():
         print("Error.")
         logging.exception("message")
 
-get_inventory()
+get_product_cal()
