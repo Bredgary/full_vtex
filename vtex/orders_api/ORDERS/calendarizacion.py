@@ -19,7 +19,7 @@ def get_product_cal():
         client = bigquery.Client()
         QUERY = ('''SELECT 
         distinct productId, 
-        lastChange 
+        lastChange
         FROM `shopstar-datalake.staging_zone.shopstar_order_items` 
         WHERE 
         lastChange BETWEEN "2022-03-02 01:00:00" AND "2022-03-02 02:00:00"''')
