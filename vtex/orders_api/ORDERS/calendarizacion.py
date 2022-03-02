@@ -82,7 +82,8 @@ def get_product_cal():
             #    run()
     #run()
     except:
-        print("Vacio")
+        print("Error.")
+        logging.exception("message")
 
 
 def delete_duplicate():
