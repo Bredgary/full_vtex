@@ -128,17 +128,14 @@ def get_inventory():
                     run()
                 if registro == 300000:
                     run()
-                if registro == 1000000:
+                if registro == 400000:
                     run()
-                if registro == 2000000:
-                    run()
-                if registro == 3000000:
-                    run()
-                if registro == 4000000:
+                if registro == 450000:
                     run()
         run()
     except:
-        print("Vacio")
+        print("Error.")
+        logging.exception("message")
 
 
 def delete_duplicate():
@@ -162,7 +159,7 @@ def run():
         
         project_id = '999847639598'
         dataset_id = 'staging_zone'
-        table_id = 'shopstar_vtex_list_inventory_by_sku2'
+        table_id = 'shopstar_vtex_list_inventory_by_sku'
         
         if df.empty:
             print('DataFrame is empty!')

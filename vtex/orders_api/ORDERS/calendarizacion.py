@@ -25,46 +25,62 @@ def get_product_cal():
         rows = query_job.result()
         registro = 0
         for row in rows:
-            print(row.productId)
-            #url = "https://mercury.vtexcommercestable.com.br/api/logistics/pvt/inventory/skus/"+str(row.id)+""
-            #response = requests.request("GET", url, headers=init.headers)
-            #Fjson = json.loads(response.text)
-            #balance = Fjson["balance"]
-            #registro_sku = 0
-            #registro_sku += 1
-            #print("registro_sku: "+str(registro_sku))
-            #for x in balance:
-                #warehouseId = x["warehouseId"]
-                #warehouseName = x["warehouseName"]
-                #totalQuantity = x["totalQuantity"]
-                #reservedQuantity = x["reservedQuantity"]
-                #hasUnlimitedQuantity = x["hasUnlimitedQuantity"]
-                #timeToRefill = x["timeToRefill"]
-                #dateOfSupplyUtc = x["dateOfSupplyUtc"]
-                
-                #df1 = pd.DataFrame({
-                #    'SKU_ID': row.id,
-                #    'warehouseId': warehouseId,
-                #    'warehouseName': warehouseName,
-                #    'totalQuantity': totalQuantity,
-                #    'reservedQuantity': reservedQuantity,
-                #    'hasUnlimitedQuantity': hasUnlimitedQuantity,
-                #    'timeToRefill': timeToRefill,
-                #    'dateOfSupplyUtc': dateOfSupplyUtc}, index=[0])
-                #init.df = init.df.append(df1)
-                #registro += 1
-                #print("Registro: "+str(registro))
-                #if registro == 10:
-                #    run()
-                #if registro == 20:
-                #    run()
-                #if registro == 30:
-                #    run()
-                #if registro == 40:
-                #    run()
-                #if registro == 50:
-                #    run()
-        #run()
+            url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/product/"+str(row.productId)+""
+            response = requests.request("GET", url, headers=init.headers)
+            Fjson = json.loads(response.text)
+            score = Fjson["score"]
+            taxCode = Fjson["taxCode"]
+            isActive = Fjson["isActive"]
+            title = Fjson["title"]
+            showWithoutStock = Fjson["showWithoutStock"]
+            keyWords = Fjson["keyWords"]
+            supplierId = Fjson["supplierId"]
+            descriptionShort = Fjson["descriptionShort"]
+            description = Fjson["description"]
+            isVisible = Fjson["isVisible"]
+            metaTagDescription = Fjson["metaTagDescription"]
+            releaseDate = Fjson["releaseDate"]
+            lomadeeCampaignCode = Fjson["lomadeeCampaignCode"]
+            id = Fjson["id"]
+            linkId = Fjson["linkId"]
+            brandId = Fjson["brandId"]
+            refId = Fjson["refId"]
+            categoryId = Fjson["categoryId"]
+            adWordsRemarketingCode = Fjson["adWordsRemarketingCode"]
+            departmentId = Fjson["departmentId"]
+            name = Fjson["name"]
+            
+            #warehouseId = x["warehouseId"]
+            #warehouseName = x["warehouseName"]
+            #totalQuantity = x["totalQuantity"]
+            #reservedQuantity = x["reservedQuantity"]
+            #hasUnlimitedQuantity = x["hasUnlimitedQuantity"]
+            #timeToRefill = x["timeToRefill"]
+            #dateOfSupplyUtc = x["dateOfSupplyUtc"]
+            
+            #df1 = pd.DataFrame({
+            #    'SKU_ID': row.id,
+            #    'warehouseId': warehouseId,
+            #    'warehouseName': warehouseName,
+            #    'totalQuantity': totalQuantity,
+            #    'reservedQuantity': reservedQuantity,
+            #    'hasUnlimitedQuantity': hasUnlimitedQuantity,
+            #    'timeToRefill': timeToRefill,
+            #    'dateOfSupplyUtc': dateOfSupplyUtc}, index=[0])
+            #init.df = init.df.append(df1)
+            #registro += 1
+            #print("Registro: "+str(registro))
+            #if registro == 10:
+            #    run()
+            #if registro == 20:
+            #    run()
+            #if registro == 30:
+            #    run()
+            #if registro == 40:
+            #    run()
+            #if registro == 50:
+            #    run()
+    #run()
     except:
         print("Vacio")
 
@@ -90,7 +106,7 @@ def run():
         
         project_id = '999847639598'
         dataset_id = 'staging_zone'
-        table_id = 'shopstar_vtex_list_inventory_by_sku2'
+        table_id = 'shopstar_vtex_list_inventory_by_sku'
         
         if df.empty:
             print('DataFrame is empty!')
