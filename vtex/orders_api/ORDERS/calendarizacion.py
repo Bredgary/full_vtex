@@ -20,18 +20,10 @@ def get_product_cal():
     try:
         print("Cargando consulta")
         client = bigquery.Client()
-        QUERY = ('''SELECT 
-        distinct productId, 
-        lastChange
-        FROM `shopstar-datalake.staging_zone.shopstar_order_items` 
-        WHERE 
-        lastChange BETWEEN "2022-03-02 01:00:00" AND "2022-03-02 02:00:00"''')
+        QUERY = ('SELECT distinct productId, lastChange FROM `shopstar-datalake.staging_zone.shopstar_order_items` WHERE lastChange BETWEEN "'+str(init.year)+'-'+str(init.month)+'-'+str(init.day)+' 01:00:00" AND "'+str(init.year)+'-'+str(init.month)+'-'+str(init.day)+' 02:00:00"')
         query_job = client.query(QUERY)
         rows = query_job.result()
         registro = 0
-        print(init.day)
-        print(init.month)
-        print(init.year)
         for row in rows:
             print(row.productId)
             #url = "https://mercury.vtexcommercestable.com.br/api/logistics/pvt/inventory/skus/"+str(row.id)+""
