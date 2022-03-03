@@ -16,6 +16,13 @@ class init:
   year = dt.year
   month = dt.month
   day = dt.day
+  
+def format_schema(schema):
+    formatted_schema = []
+    for row in schema:
+        formatted_schema.append(bigquery.SchemaField(row['name'], row['type'], row['mode']))
+    return formatted_schema
+
 def get_product_cal():
     try:
         print("Cargando consulta")
@@ -29,6 +36,7 @@ def get_product_cal():
             url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/product/"+str(row.productId)+""
             response = requests.request("GET", url, headers=init.headers)
             Fjson = json.loads(response.text)
+            
             score = Fjson["Score"]
             taxCode = Fjson["TaxCode"]
             isActive = Fjson["IsActive"]
@@ -51,37 +59,41 @@ def get_product_cal():
             departmentId = Fjson["DepartmentId"]
             name = Fjson["Name"]
             
-            #warehouseId = x["warehouseId"]
-            #warehouseName = x["warehouseName"]
-            #totalQuantity = x["totalQuantity"]
-            #reservedQuantity = x["reservedQuantity"]
-            #hasUnlimitedQuantity = x["hasUnlimitedQuantity"]
-            #timeToRefill = x["timeToRefill"]
-            #dateOfSupplyUtc = x["dateOfSupplyUtc"]
-            
-            #df1 = pd.DataFrame({
-            #    'SKU_ID': row.id,
-            #    'warehouseId': warehouseId,
-            #    'warehouseName': warehouseName,
-            #    'totalQuantity': totalQuantity,
-            #    'reservedQuantity': reservedQuantity,
-            #    'hasUnlimitedQuantity': hasUnlimitedQuantity,
-            #    'timeToRefill': timeToRefill,
-            #    'dateOfSupplyUtc': dateOfSupplyUtc}, index=[0])
-            #init.df = init.df.append(df1)
-            #registro += 1
-            #print("Registro: "+str(registro))
-            #if registro == 10:
-            #    run()
-            #if registro == 20:
-            #    run()
-            #if registro == 30:
-            #    run()
-            #if registro == 40:
-            #    run()
-            #if registro == 50:
-            #    run()
-    #run()
+            df1 = pd.DataFrame({
+                'score': score,
+                'taxCode': taxCode,
+                'isActive': isActive,
+                'title': title,
+                'showWithoutStock': showWithoutStock,
+                'keyWords': keyWords,
+                'supplierId': supplierId,
+                'descriptionShort': descriptionShort,
+                'description': description,
+                'isVisible': isVisible,
+                'metaTagDescription': metaTagDescription,
+                'releaseDate': releaseDate,
+                'lomadeeCampaignCode': lomadeeCampaignCode,
+                'id': id,
+                'linkId': linkId,
+                'brandId': brandId,
+                'refId': refId,
+                'categoryId': categoryId,
+                'adWordsRemarketingCode': adWordsRemarketingCode,
+                'departmentId': departmentId}, index=[0])
+            init.df = init.df.append(df1)
+            registro += 1
+            print("Registro: "+str(registro))
+            if registro == 10:
+                run()
+            if registro == 20:
+                run()
+            if registro == 30:
+                run()
+            if registro == 40:
+                run()
+            if registro == 50:
+                run()
+        run()
     except:
         print("Error.")
         logging.exception("message")
@@ -91,7 +103,7 @@ def delete_duplicate():
   try:
     print("Eliminando duplicados")
     client = bigquery.Client()
-    QUERY = ('CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_vtex_list_inventory_by_sku` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.shopstar_vtex_list_inventory_by_sku`')
+    QUERY = ('CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_vtex_product` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.shopstar_vtex_product`')
     query_job = client.query(QUERY)
     rows = query_job.result()
     print(rows)
@@ -105,23 +117,120 @@ def run():
         df.reset_index(drop=True, inplace=True)
         json_data = df.to_json(orient = 'records')
         json_object = json.loads(json_data)
+           
+        
+        table_schema = [{
+            "name": "score",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "taxCode",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "isActive",
+            "type": "BOOLEAN",
+            "mode": "NULLABLE"
+        },{
+            "name": "title",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "showWithoutStock",
+            "type": "BOOLEAN",
+            "mode": "NULLABLE"
+        },{
+            "name": "keyWords",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "supplierId",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "descriptionShort",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "description",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "isVisible",
+            "type": "BOOLEAN",
+            "mode": "NULLABLE"
+        },{
+            "name": "metaTagDescription",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "releaseDate",
+            "type": "TIMESTAMP",
+            "mode": "NULLABLE"
+        },{
+            "name": "lomadeeCampaignCode",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "id",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "linkId",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "brandId",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "refId",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "categoryId",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "adWordsRemarketingCode",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "departmentId",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "name",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        }]
         
         project_id = '999847639598'
         dataset_id = 'staging_zone'
-        table_id = 'shopstar_vtex_list_inventory_by_sku'
+        table_id = 'shopstar_vtex_product'
         
         if df.empty:
             print('DataFrame is empty!')
         else:
-            client  = bigquery.Client(project = project_id)
-            dataset  = client.dataset(dataset_id)
-            table = dataset.table(table_id)
-            job_config = bigquery.LoadJobConfig()
-            job_config.autodetect = True
-            job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-            job = client.load_table_from_json(json_object, table, job_config = job_config)
-            print(job.result())
-            delete_duplicate()
+            try:
+                client  = bigquery.Client(project = project_id)
+                dataset  = client.dataset(dataset_id)
+                table = dataset.table(table_id)
+                job_config = bigquery.LoadJobConfig()
+                job_config.schema = format_schema(table_schema)
+                job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+                job = client.load_table_from_json(json_object, table, job_config = job_config)
+                print(job.result())
+                delete_duplicate()
+            except:
+                client  = bigquery.Client(project = project_id)
+                dataset  = client.dataset(dataset_id)
+                table = dataset.table(table_id)
+                job_config = bigquery.LoadJobConfig()
+                job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+                job = client.load_table_from_json(json_object, table, job_config = job_config)
+                print(job.result())
+                delete_duplicate()
     except:
         print("Error.")
         logging.exception("message")
