@@ -32,12 +32,10 @@ def get_product_cal():
         rows = query_job.result()
         registro = 0
         for row in rows:
-            print(row.productId)
-            url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/product/"+str(row.productId)+""
+            url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/productget/1"+str(row.productId)+""
             response = requests.request("GET", url, headers=init.headers)
             Fjson = json.loads(response.text)
             
-            score = Fjson["Score"]
             taxCode = Fjson["TaxCode"]
             isActive = Fjson["IsActive"]
             title = Fjson["Title"]
@@ -54,13 +52,13 @@ def get_product_cal():
             linkId = Fjson["LinkId"]
             brandId = Fjson["BrandId"]
             refId = Fjson["RefId"]
+            listStoreId = Fjson["ListStoreId"]
             categoryId = Fjson["CategoryId"]
             adWordsRemarketingCode = Fjson["AdWordsRemarketingCode"]
             departmentId = Fjson["DepartmentId"]
             name = Fjson["Name"]
             
             df1 = pd.DataFrame({
-                'score': score,
                 'taxCode': taxCode,
                 'isActive': isActive,
                 'title': title,
@@ -77,9 +75,11 @@ def get_product_cal():
                 'linkId': linkId,
                 'brandId': brandId,
                 'refId': refId,
+                'listStoreId': listStoreId,
                 'categoryId': categoryId,
                 'adWordsRemarketingCode': adWordsRemarketingCode,
-                'departmentId': departmentId}, index=[0])
+                'departmentId': departmentId,
+                'name': name}, index=[0])
             init.df = init.df.append(df1)
             registro += 1
             print("Registro: "+str(registro))
@@ -111,11 +111,8 @@ def run():
         json_object = json.loads(json_data)
            
         
-        table_schema = [{
-            "name": "score",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
+        table_schema = [
+        {
             "name": "taxCode",
             "type": "STRING",
             "mode": "NULLABLE"
@@ -180,6 +177,10 @@ def run():
             "type": "STRING",
             "mode": "NULLABLE"
         },{
+            "name": "ListStoreId",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
             "name": "categoryId",
             "type": "INTEGER",
             "mode": "NULLABLE"
@@ -199,7 +200,7 @@ def run():
         
         project_id = '999847639598'
         dataset_id = 'staging_zone'
-        table_id = 'shopstar_vtex_product'
+        table_id = 'shopstar_vtex_product_context'
         
         if df.empty:
             print('DataFrame is empty!')
