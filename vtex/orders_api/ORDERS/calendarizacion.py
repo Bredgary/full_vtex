@@ -32,6 +32,7 @@ def get_product_cal():
         rows = query_job.result()
         registro = 0
         for row in rows:
+            print(row.productId)
             url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/productget/1"+str(row.productId)+""
             response = requests.request("GET", url, headers=init.headers)
             Fjson = json.loads(response.text)
