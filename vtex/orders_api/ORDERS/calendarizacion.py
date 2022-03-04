@@ -84,6 +84,8 @@ def get_product_cal():
             print("Registro: "+str(registro))
             if registro == 50:
                 run()
+            if registro == 100:
+                run()
         run()
     except:
         print("Error.")
@@ -94,7 +96,7 @@ def delete_duplicate():
   try:
     print("Eliminando duplicados")
     client = bigquery.Client()
-    QUERY = ('CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_vtex_product` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.shopstar_vtex_product`')
+    QUERY = ('CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_vtex_product_context` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.shopstar_vtex_product_context`')
     query_job = client.query(QUERY)
     rows = query_job.result()
     print(rows)
