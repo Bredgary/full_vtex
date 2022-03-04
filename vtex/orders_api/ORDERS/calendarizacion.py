@@ -53,7 +53,6 @@ def get_product_cal():
             linkId = Fjson["LinkId"]
             brandId = Fjson["BrandId"]
             refId = Fjson["RefId"]
-            listStoreId = Fjson["ListStoreId"]
             categoryId = Fjson["CategoryId"]
             adWordsRemarketingCode = Fjson["AdWordsRemarketingCode"]
             departmentId = Fjson["DepartmentId"]
@@ -76,7 +75,6 @@ def get_product_cal():
                 'linkId': linkId,
                 'brandId': brandId,
                 'refId': refId,
-                'listStoreId': listStoreId,
                 'categoryId': categoryId,
                 'adWordsRemarketingCode': adWordsRemarketingCode,
                 'departmentId': departmentId,
