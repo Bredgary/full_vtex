@@ -22,117 +22,129 @@ def get_inventory():
         for row in rows:
             url = "https://mercury.vtexcommercestable.com.br/api/logistics/pvt/inventory/skus/"+str(row.id)+""
             response = requests.request("GET", url, headers=init.headers)
-            Fjson = json.loads(response.text)
-            balance = Fjson["balance"]
-            registro_sku = 0
-            registro_sku += 1
-            print("registro_sku: "+str(registro_sku))
-            for x in balance:
-                warehouseId = x["warehouseId"]
-                warehouseName = x["warehouseName"]
-                totalQuantity = x["totalQuantity"]
-                reservedQuantity = x["reservedQuantity"]
-                hasUnlimitedQuantity = x["hasUnlimitedQuantity"]
-                timeToRefill = x["timeToRefill"]
-                dateOfSupplyUtc = x["dateOfSupplyUtc"]
-                
+            try:
+                Fjson = json.loads(response.text)
+                balance = Fjson["balance"]
+                registro_sku = 0
+                registro_sku += 1
+                print("registro_sku: "+str(registro_sku))
+                for x in balance:
+                    warehouseId = x["warehouseId"]
+                    warehouseName = x["warehouseName"]
+                    totalQuantity = x["totalQuantity"]
+                    reservedQuantity = x["reservedQuantity"]
+                    hasUnlimitedQuantity = x["hasUnlimitedQuantity"]
+                    timeToRefill = x["timeToRefill"]
+                    dateOfSupplyUtc = x["dateOfSupplyUtc"]
+                    
+                    df1 = pd.DataFrame({
+                        'SKU_ID': row.id,
+                        'warehouseId': warehouseId,
+                        'warehouseName': warehouseName,
+                        'totalQuantity': totalQuantity,
+                        'reservedQuantity': reservedQuantity,
+                        'hasUnlimitedQuantity': hasUnlimitedQuantity,
+                        'timeToRefill': timeToRefill,
+                        'dateOfSupplyUtc': dateOfSupplyUtc}, index=[0])
+                    init.df = init.df.append(df1)
+                    registro += 1
+                    print("Registro: "+str(registro))
+                    if registro == 1000:
+                        run()
+                    if registro == 2000:
+                        run()
+                    if registro == 3000:
+                        run()
+                    if registro == 4000:
+                        run()
+                    if registro == 5000:
+                        run()
+                    if registro == 6000:
+                        run()
+                    if registro == 7000:
+                        run()
+                    if registro == 8000:
+                        run()
+                    if registro == 9000:
+                        run()
+                    if registro == 9500:
+                        run()
+                    if registro == 10000:
+                        run()
+                    if registro == 20000:
+                        run()
+                    if registro == 30000:
+                        run()
+                    if registro == 40000:
+                        run()
+                    if registro == 50000:
+                        run()
+                    if registro == 60000:
+                        run()
+                    if registro == 70000:
+                        run()
+                    if registro == 80000:
+                        run()
+                    if registro == 90000:
+                        run()
+                    if registro == 100000:
+                        run()
+                    if registro == 110000:
+                        run()
+                    if registro == 120000:
+                        run()
+                    if registro == 130000:
+                        run()
+                    if registro == 140000:
+                        run()
+                    if registro == 150000:
+                        run()
+                    if registro == 160000:
+                        run()
+                    if registro == 170000:
+                        run()
+                    if registro == 180000:
+                        run()
+                    if registro == 190000:
+                        run()
+                    if registro == 200000:
+                        run()
+                    if registro == 210000:
+                        run()
+                    if registro == 220000:
+                        run()
+                    if registro == 230000:
+                        run()
+                    if registro == 240000:
+                        run()
+                    if registro == 250000:
+                        run()
+                    if registro == 260000:
+                        run()
+                    if registro == 270000:
+                        run()
+                    if registro == 280000:
+                        run()
+                    if registro == 290000:
+                        run()
+                    if registro == 300000:
+                        run()
+                    if registro == 400000:
+                        run()
+                    if registro == 450000:
+                        run()
+                run()
+            except:
                 df1 = pd.DataFrame({
                     'SKU_ID': row.id,
-                    'warehouseId': warehouseId,
-                    'warehouseName': warehouseName,
-                    'totalQuantity': totalQuantity,
-                    'reservedQuantity': reservedQuantity,
-                    'hasUnlimitedQuantity': hasUnlimitedQuantity,
-                    'timeToRefill': timeToRefill,
-                    'dateOfSupplyUtc': dateOfSupplyUtc}, index=[0])
+                    'warehouseId': None,
+                    'warehouseName': None,
+                    'totalQuantity': None,
+                    'reservedQuantity': None,
+                    'hasUnlimitedQuantity': None,
+                    'timeToRefill': None,
+                    'dateOfSupplyUtc': None}, index=[0])
                 init.df = init.df.append(df1)
-                registro += 1
-                print("Registro: "+str(registro))
-                if registro == 1000:
-                    run()
-                if registro == 2000:
-                    run()
-                if registro == 3000:
-                    run()
-                if registro == 4000:
-                    run()
-                if registro == 5000:
-                    run()
-                if registro == 6000:
-                    run()
-                if registro == 7000:
-                    run()
-                if registro == 8000:
-                    run()
-                if registro == 9000:
-                    run()
-                if registro == 9500:
-                    run()
-                if registro == 10000:
-                    run()
-                if registro == 20000:
-                    run()
-                if registro == 30000:
-                    run()
-                if registro == 40000:
-                    run()
-                if registro == 50000:
-                    run()
-                if registro == 60000:
-                    run()
-                if registro == 70000:
-                    run()
-                if registro == 80000:
-                    run()
-                if registro == 90000:
-                    run()
-                if registro == 100000:
-                    run()
-                if registro == 110000:
-                    run()
-                if registro == 120000:
-                    run()
-                if registro == 130000:
-                    run()
-                if registro == 140000:
-                    run()
-                if registro == 150000:
-                    run()
-                if registro == 160000:
-                    run()
-                if registro == 170000:
-                    run()
-                if registro == 180000:
-                    run()
-                if registro == 190000:
-                    run()
-                if registro == 200000:
-                    run()
-                if registro == 210000:
-                    run()
-                if registro == 220000:
-                    run()
-                if registro == 230000:
-                    run()
-                if registro == 240000:
-                    run()
-                if registro == 250000:
-                    run()
-                if registro == 260000:
-                    run()
-                if registro == 270000:
-                    run()
-                if registro == 280000:
-                    run()
-                if registro == 290000:
-                    run()
-                if registro == 300000:
-                    run()
-                if registro == 400000:
-                    run()
-                if registro == 450000:
-                    run()
-        run()
     except:
         print("Error.")
         logging.exception("message")

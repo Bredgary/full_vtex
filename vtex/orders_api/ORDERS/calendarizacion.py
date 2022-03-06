@@ -23,7 +23,7 @@ def format_schema(schema):
         formatted_schema.append(bigquery.SchemaField(row['name'], row['type'], row['mode']))
     return formatted_schema
 
-def get_product_cal():
+def params_product():
     try:
         print("Cargando consulta")
         client = bigquery.Client()
@@ -229,4 +229,4 @@ def run():
         print("Error.")
         logging.exception("message")
 
-get_product_cal()
+params_product()
