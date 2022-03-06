@@ -35,7 +35,7 @@ def getListSpecificationsGroupByCategory():
                         'id': x["Id"],
                         'name': x["Name"],
                         'position': x["Position"],
-                        'categoryId': row.id}, index=[0])
+                        'categoryId': row.cat1}, index=[0])
                 print("Registro: "+str(registro))
                 init.df = init.df.append(df1)
         for row in rows:
@@ -48,7 +48,7 @@ def getListSpecificationsGroupByCategory():
                         'id': x["Id"],
                         'name': x["Name"],
                         'position': x["Position"],
-                        'categoryId': row.id}, index=[0])
+                        'categoryId': row.cat2}, index=[0])
                 print("Registro: "+str(registro))
                 init.df = init.df.append(df1)
         for row in rows:
@@ -61,7 +61,7 @@ def getListSpecificationsGroupByCategory():
                         'id': x["Id"],
                         'name': x["Name"],
                         'position': x["Position"],
-                        'categoryId': row.id}, index=[0])
+                        'categoryId': row.cat3}, index=[0])
                 print("Registro: "+str(registro))
                 init.df = init.df.append(df1)
         run()
