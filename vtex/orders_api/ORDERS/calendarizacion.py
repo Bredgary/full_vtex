@@ -38,7 +38,6 @@ def getListSpecificationsGroupByCategory():
                         'categoryId': row.cat1}, index=[0])
                 print("Registro: "+str(registro))
                 init.df = init.df.append(df1)
-                run()
         for row in rows:
             registro += 1
             url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/specification/groupbycategory/"+str(row.cat2)+""
@@ -52,7 +51,6 @@ def getListSpecificationsGroupByCategory():
                         'categoryId': row.cat2}, index=[0])
                 print("Registro: "+str(registro))
                 init.df = init.df.append(df1)
-                run()
         for row in rows:
             registro += 1
             url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/specification/groupbycategory/"+str(row.cat3)+""
@@ -66,7 +64,6 @@ def getListSpecificationsGroupByCategory():
                         'categoryId': row.cat3}, index=[0])
                 print("Registro: "+str(registro))
                 init.df = init.df.append(df1)
-                run()
         run()
     except:
         df1 = pd.DataFrame({
@@ -75,6 +72,7 @@ def getListSpecificationsGroupByCategory():
             'position': None,
             'categoryId': row.cat1}, index=[0])
         init.df = init.df.append(df1)
+        run()
         
 
 def format_schema(schema):
