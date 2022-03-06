@@ -70,7 +70,7 @@ def getListSpecificationsGroupByCategory():
             'id': None,
             'name': None,
             'position': None,
-            'categoryId': row.id}, index=[0])
+            'categoryId': row.cat1}, index=[0])
         init.df = init.df.append(df1)
         
 
