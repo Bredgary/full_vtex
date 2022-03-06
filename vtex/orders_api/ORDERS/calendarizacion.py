@@ -10,21 +10,50 @@ from datetime import date
 import datetime
 
 class init:
-    productList = []
-    df = pd.DataFrame()
-    headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
+  df = pd.DataFrame()
+  headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
+  dt = datetime.datetime.today()
+  year = dt.year
+  month = dt.month
+  day = dt.day
 
 def getListSpecificationsGroupByCategory():
     try:
         print("Cargando consulta")
         client = bigquery.Client()
-        QUERY = ('SELECT id FROM `shopstar-datalake.staging_zone.shopstar_vtex_category`')
+        QUERY = ('SELECT SPLIT(`categoriesIds`, "/")[safe_ordinal(2)] AS `cat1`,SPLIT(`categoriesIds`, "/")[safe_ordinal(3)] AS `cat2`,SPLIT(`categoriesIds`, "/")[safe_ordinal(4)] AS `cat3` FROM `shopstar-datalake.staging_zone.shopstar_order_items` WHERE lastChange BETWEEN "'+str(init.year)+'-'+str(init.month)+'-'+str(init.day)+' 00:00:00" AND "'+str(init.year)+'-'+str(init.month)+'-'+str(init.day)+' 23:59:59"')
         query_job = client.query(QUERY)
         rows = query_job.result()
         registro = 0
         for row in rows:
             registro += 1
-            url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/specification/groupbycategory/"+str(row.id)+""
+            url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/specification/groupbycategory/"+str(row.cat1)+""
+            response = requests.request("GET", url, headers=init.headers)
+            Fjson = json.loads(response.text)
+            for x in Fjson:
+                df1 = pd.DataFrame({
+                        'id': x["Id"],
+                        'name': x["Name"],
+                        'position': x["Position"],
+                        'categoryId': row.id}, index=[0])
+                print("Registro: "+str(registro))
+                init.df = init.df.append(df1)
+        for row in rows:
+            registro += 1
+            url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/specification/groupbycategory/"+str(row.cat2)+""
+            response = requests.request("GET", url, headers=init.headers)
+            Fjson = json.loads(response.text)
+            for x in Fjson:
+                df1 = pd.DataFrame({
+                        'id': x["Id"],
+                        'name': x["Name"],
+                        'position': x["Position"],
+                        'categoryId': row.id}, index=[0])
+                print("Registro: "+str(registro))
+                init.df = init.df.append(df1)
+        for row in rows:
+            registro += 1
+            url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/specification/groupbycategory/"+str(row.cat3)+""
             response = requests.request("GET", url, headers=init.headers)
             Fjson = json.loads(response.text)
             for x in Fjson:
