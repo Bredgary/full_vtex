@@ -72,7 +72,7 @@ def run():
             "mode": "NULLABLE"
         },{
             "name": "name",
-            "type": "INTEGER",
+            "type": "STRING",
             "mode": "NULLABLE"
         },{
             "name": "position",
@@ -80,7 +80,7 @@ def run():
             "mode": "NULLABLE"
         },{
             "name": "categoryId",
-            "type": "INTEGER",
+            "type": "STRING",
             "mode": "NULLABLE"
         }]
 
