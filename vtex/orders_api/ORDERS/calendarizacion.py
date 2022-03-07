@@ -27,7 +27,6 @@ def salespolicy():
         registro = 0
         for row in rows:
             try:
-                registro += 1
                 url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/product/"+str(row.productId)+"/salespolicy"
                 response = requests.request("GET", url, headers=init.headers)
                 Fjson = json.loads(response.text)
@@ -35,6 +34,7 @@ def salespolicy():
                     df1 = pd.DataFrame({
                         'productId': row.productId,
                         'storeId': x["StoreId"]}, index=[0])
+                    registro += 1
                     print("Registro: "+str(registro))
                     init.df = init.df.append(df1)
             except:
