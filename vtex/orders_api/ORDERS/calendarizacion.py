@@ -98,4 +98,5 @@ def run():
         print("Error.")
         logging.exception("message")
 
+
 salespolicy()
