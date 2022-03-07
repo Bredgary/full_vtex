@@ -36,7 +36,7 @@ def salespolicy():
                 registro += 1
                 print("Registro: "+str(registro))
                 init.df = init.df.append(df1)
-            run()
+        run()
                 
     except:
         df1 = pd.DataFrame({
