@@ -17,7 +17,7 @@ class init:
   month = dt.month
   day = dt.day
 
-def getListSpecificationsGroupByCategory():
+def salespolicy():
     try:
         print("Cargando consulta")
         client = bigquery.Client()
@@ -98,4 +98,5 @@ def run():
         print("Error.")
         logging.exception("message")
 
-getListSpecificationsGroupByCategory()
+salespolicy()
+
