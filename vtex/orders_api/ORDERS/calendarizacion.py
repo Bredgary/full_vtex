@@ -99,4 +99,3 @@ def run():
         logging.exception("message")
 
 salespolicy()
-
