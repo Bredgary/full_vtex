@@ -26,26 +26,23 @@ def salespolicy():
         rows = query_job.result()
         registro = 0
         for row in rows:
-            try:
-                url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/product/"+str(row.productId)+"/salespolicy"
-                response = requests.request("GET", url, headers=init.headers)
-                Fjson = json.loads(response.text)
-                for x in Fjson:
-                    df1 = pd.DataFrame({
-                        'productId': row.productId,
-                        'storeId': x["StoreId"]}, index=[0])
-                    registro += 1
-                    print("Registro: "+str(registro))
-                    init.df = init.df.append(df1)
-            except:
+            url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/product/"+str(row.productId)+"/salespolicy"
+            response = requests.request("GET", url, headers=init.headers)
+            Fjson = json.loads(response.text)
+            for x in Fjson:
                 df1 = pd.DataFrame({
-                    'position': None,
-                    'categoryId': row.productId}, index=[0])
-                run()
-        run()
+                    'productId': row.productId,
+                    'storeId': x["StoreId"]}, index=[0])
+                registro += 1
+                print("Registro: "+str(registro))
+                init.df = init.df.append(df1)
+            run()
+                
     except:
-        print("Error.")
-        logging.exception("message")
+        df1 = pd.DataFrame({
+            'position': None,
+            'categoryId': row.productId}, index=[0])
+        run()
         
         
 
