@@ -37,15 +37,11 @@ def product_specification():
                 init.df = init.df.append(df1)
                 registro += 1
                 print("Registro: "+str(registro))
-        #run()
+        run()
                 
     except:
-        df1 = pd.DataFrame({
-            'id': x["Id"],
-            'name': x["Name"],
-            'value': x["Value"]}, index=[0])
-        init.df = init.df.append(df1)
-        #run()
+        print("Error.")
+        logging.exception("message")
 
 def format_schema(schema):
     formatted_schema = []
@@ -60,7 +56,7 @@ def delete_duplicate():
     query_job = client.query(QUERY)  
     rows = query_job.result()
     print(rows)
-'''
+
 def run():
     try:
         df = init.df
@@ -114,4 +110,3 @@ def run():
         logging.exception("message")
 
 product_specification()
-'''
