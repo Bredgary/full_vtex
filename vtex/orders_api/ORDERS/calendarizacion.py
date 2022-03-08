@@ -17,34 +17,35 @@ class init:
   month = dt.month
   day = dt.day
 
-def salespolicy():
+def product_specification():
     try:
         print("Cargando consulta")
         client = bigquery.Client()
-        QUERY = ('SELECT distinct productId, lastChange FROM `shopstar-datalake.staging_zone.shopstar_order_items` WHERE lastChange BETWEEN "'+str(init.year)+'-'+str(init.month)+'-'+str(init.day)+' 12:00:00" AND "'+str(init.year)+'-'+str(init.month)+'-'+str(init.day)+' 18:00:00"')
+        QUERY = ('SELECT distinct productId, lastChange FROM `shopstar-datalake.staging_zone.shopstar_order_items` WHERE lastChange BETWEEN "'+str(init.year)+'-'+str(init.month)+'-'+str(init.day)+' 00:00:00" AND "'+str(init.year)+'-'+str(init.month)+'-'+str(init.day)+' 06:00:00"')
         query_job = client.query(QUERY)
         rows = query_job.result()
         registro = 0
         for row in rows:
-            url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/product/"+str(row.productId)+"/salespolicy"
+            url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/"+str(row.productId)+"/specification"
             response = requests.request("GET", url, headers=init.headers)
             Fjson = json.loads(response.text)
             for x in Fjson:
                 df1 = pd.DataFrame({
-                    'productId': row.productId,
-                    'storeId': x["StoreId"]}, index=[0])
+                    'id': x["Id"],
+                    'name': x["Name"],
+                    'value': x["Value"]}, index=[0])
+                init.df = init.df.append(df1)
                 registro += 1
                 print("Registro: "+str(registro))
-                init.df = init.df.append(df1)
         run()
                 
     except:
         df1 = pd.DataFrame({
-            'position': None,
-            'categoryId': row.productId}, index=[0])
+            'id': x["Id"],
+            'name': x["Name"],
+            'value': x["Value"]}, index=[0])
+        init.df = init.df.append(df1)
         run()
-        
-        
 
 def format_schema(schema):
     formatted_schema = []
@@ -55,7 +56,7 @@ def format_schema(schema):
 def delete_duplicate():
     client = bigquery.Client()
     QUERY = (
-        'CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_vtex_product_trade_policy` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.shopstar_vtex_product_trade_policy`')
+        'CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_vtex_product_specification` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.shopstar_vtex_product_specification`')
     query_job = client.query(QUERY)  
     rows = query_job.result()
     print(rows)
@@ -69,18 +70,22 @@ def run():
         
         table_schema = [
             {
-                "name": "ProductId",
-                "type": "INTEGER",
+                "name": "value",
+                "type": "STRING",
                 "mode": "NULLABLE"
             },{
-                "name": "StoreId",
+                "name": "name",
+                "type": "STRING",
+                "mode": "NULLABLE"
+            },{
+                "name": "id",
                 "type": "INTEGER",
                 "mode": "NULLABLE"
             }]
 
         project_id = '999847639598'
         dataset_id = 'staging_zone'
-        table_id = 'shopstar_vtex_product_trade_policy'
+        table_id = 'shopstar_vtex_product_specification'
 
         client  = bigquery.Client(project = project_id)
         dataset  = client.dataset(dataset_id)
@@ -95,5 +100,4 @@ def run():
         print("Error.")
         logging.exception("message")
 
-
-salespolicy()
+product_specification()
