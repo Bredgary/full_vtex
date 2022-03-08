@@ -16,8 +16,14 @@ class init:
   year = dt.year
   month = dt.month
   day = dt.day
+  
+def format_schema(schema):
+    formatted_schema = []
+    for row in schema:
+        formatted_schema.append(bigquery.SchemaField(row['name'], row['type'], row['mode']))
+    return formatted_schema
 
-def product_specification():
+def params_product():
     try:
         print("Cargando consulta")
         client = bigquery.Client()
@@ -26,36 +32,77 @@ def product_specification():
         rows = query_job.result()
         registro = 0
         for row in rows:
-            url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/"+str(row.productId)+"/specification"
+            url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/product/"+str(row.productId)+""
             response = requests.request("GET", url, headers=init.headers)
             Fjson = json.loads(response.text)
-            for specification in Fjson:
-                df1 = pd.DataFrame({
-                    'id': specification["Id"],
-                    'name': specification["Name"],
-                    'value': specification["Value"]}, index=[0])
-                init.df = init.df.append(df1)
-                registro += 1
-                print("Registro: "+str(registro))
+            
+            score = Fjson["Score"]
+            taxCode = Fjson["TaxCode"]
+            isActive = Fjson["IsActive"]
+            title = Fjson["Title"]
+            showWithoutStock = Fjson["ShowWithoutStock"]
+            keyWords = Fjson["KeyWords"]
+            supplierId = Fjson["SupplierId"]
+            descriptionShort = Fjson["DescriptionShort"]
+            description = Fjson["Description"]
+            isVisible = Fjson["IsVisible"]
+            metaTagDescription = Fjson["MetaTagDescription"]
+            releaseDate = Fjson["ReleaseDate"]
+            lomadeeCampaignCode = Fjson["LomadeeCampaignCode"]
+            id = Fjson["Id"]
+            linkId = Fjson["LinkId"]
+            brandId = Fjson["BrandId"]
+            refId = Fjson["RefId"]
+            categoryId = Fjson["CategoryId"]
+            adWordsRemarketingCode = Fjson["AdWordsRemarketingCode"]
+            departmentId = Fjson["DepartmentId"]
+            name = Fjson["Name"]
+            
+            df1 = pd.DataFrame({
+                'score': score,
+                'taxCode': taxCode,
+                'isActive': isActive,
+                'title': title,
+                'showWithoutStock': showWithoutStock,
+                'keyWords': keyWords,
+                'supplierId': supplierId,
+                'descriptionShort': descriptionShort,
+                'description': description,
+                'isVisible': isVisible,
+                'metaTagDescription': metaTagDescription,
+                'releaseDate': releaseDate,
+                'lomadeeCampaignCode': lomadeeCampaignCode,
+                'id': id,
+                'linkId': linkId,
+                'brandId': brandId,
+                'refId': refId,
+                'categoryId': categoryId,
+                'adWordsRemarketingCode': adWordsRemarketingCode,
+                'departmentId': departmentId}, index=[0])
+            init.df = init.df.append(df1)
+            registro += 1
+            print("Registro: "+str(registro))
+            if registro == 50:
+                run()
+            if registro == 100:
+                run()
         run()
-                
     except:
         print("Error.")
         logging.exception("message")
 
-def format_schema(schema):
-    formatted_schema = []
-    for row in schema:
-        formatted_schema.append(bigquery.SchemaField(row['name'], row['type'], row['mode']))
-    return formatted_schema
 
 def delete_duplicate():
+  try:
+    print("Eliminando duplicados")
     client = bigquery.Client()
-    QUERY = (
-        'CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_vtex_product_specification` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.shopstar_vtex_product_specification`')
-    query_job = client.query(QUERY)  
+    QUERY = ('CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_vtex_product` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.shopstar_vtex_product`')
+    query_job = client.query(QUERY)
     rows = query_job.result()
     print(rows)
+  except:
+    print("Consulta SQL no ejecutada")
+
 
 def run():
     try:
@@ -63,25 +110,97 @@ def run():
         df.reset_index(drop=True, inplace=True)
         json_data = df.to_json(orient = 'records')
         json_object = json.loads(json_data)
+           
         
-        table_schema = [
-            {
-                "name": "value",
-                "type": "STRING",
-                "mode": "NULLABLE"
-            },{
-                "name": "name",
-                "type": "STRING",
-                "mode": "NULLABLE"
-            },{
-                "name": "id",
-                "type": "INTEGER",
-                "mode": "NULLABLE"
-            }]
-
+        table_schema = [{
+            "name": "score",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "taxCode",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "isActive",
+            "type": "BOOLEAN",
+            "mode": "NULLABLE"
+        },{
+            "name": "title",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "showWithoutStock",
+            "type": "BOOLEAN",
+            "mode": "NULLABLE"
+        },{
+            "name": "keyWords",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "supplierId",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "descriptionShort",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "description",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "isVisible",
+            "type": "BOOLEAN",
+            "mode": "NULLABLE"
+        },{
+            "name": "metaTagDescription",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "releaseDate",
+            "type": "TIMESTAMP",
+            "mode": "NULLABLE"
+        },{
+            "name": "lomadeeCampaignCode",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "id",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "linkId",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "brandId",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "refId",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "categoryId",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "adWordsRemarketingCode",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "departmentId",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "name",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        }]
+        
         project_id = '999847639598'
         dataset_id = 'staging_zone'
-        table_id = 'shopstar_vtex_product_specification'
+        table_id = 'shopstar_vtex_product'
         
         if df.empty:
             print('DataFrame is empty!')
@@ -108,5 +227,5 @@ def run():
     except:
         print("Error.")
         logging.exception("message")
-        
-product_specification()
+
+params_product()
