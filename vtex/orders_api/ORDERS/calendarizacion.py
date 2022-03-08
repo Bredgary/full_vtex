@@ -29,11 +29,11 @@ def product_specification():
             url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/products/"+str(row.productId)+"/specification"
             response = requests.request("GET", url, headers=init.headers)
             Fjson = json.loads(response.text)
-            for x in Fjson:
+            for specification in Fjson:
                 df1 = pd.DataFrame({
-                    'id': x["Id"],
-                    'name': x["Name"],
-                    'value': x["Value"]}, index=[0])
+                    'id': specification["Id"],
+                    'name': specification["Name"],
+                    'value': specification["Value"]}, index=[0])
                 init.df = init.df.append(df1)
                 registro += 1
                 print("Registro: "+str(registro))
