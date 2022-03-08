@@ -108,5 +108,5 @@ def run():
     except:
         print("Error.")
         logging.exception("message")
-
+        
 product_specification()
