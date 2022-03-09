@@ -31,6 +31,8 @@ def sku():
             url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitByProductId/"+str(row.productId)+""
             response = requests.request("GET", url, headers=init.headers)
             Fjson = json.loads(response.text)
+            print(Fjson)
+            
             if Fjson is not 'Sku não encontrado.':
                 for x in Fjson:
                     IsPersisted = x["IsPersisted"]
