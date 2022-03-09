@@ -19,6 +19,7 @@ class init:
   month = dt.month
   day = dt.day
 
+
 def sku():
     try:
         print("Cargando consulta")
