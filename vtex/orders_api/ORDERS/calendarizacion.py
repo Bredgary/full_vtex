@@ -30,82 +30,79 @@ def sku():
             response = requests.request("GET", url, headers=init.headers)
             Fjson = json.loads(response.text)
             print(row.productId)
-            try:
-                for x in Fjson:
-                    IsPersisted = x["IsPersisted"]
-                    Id = x["Id"]
-                    ProductId = x["ProductId"]
-                    IsActive = x["IsActive"]
-                    Name = x["Name"]
-                    Height = x["Height"]
-                    RealHeight = x["RealHeight"]
-                    Width = x["Width"]
-                    RealWidth = x["RealWidth"]
-                    Length = x["Length"]
-                    RealLength = x["RealLength"]
-                    WeightKg = x["WeightKg"]
-                    RealWeightKg = x["RealWeightKg"]
-                    ModalId = x["ModalId"]
-                    RefId = x["RefId"]
-                    CubicWeight = x["CubicWeight"]
-                    IsKit = x["IsKit"]
-                    InternalNote = x["InternalNote"]
-                    DateUpdated = x["DateUpdated"]
-                    RewardValue = x["RewardValue"]
-                    CommercialConditionId = x["CommercialConditionId"]
-                    EstimatedDateArrival = x["EstimatedDateArrival"]
-                    FlagKitItensSellApart = x["FlagKitItensSellApart"]
-                    ManufacturerCode = x["ManufacturerCode"]
-                    ReferenceStockKeepingUnitId = x["ReferenceStockKeepingUnitId"]
-                    Position = x["Position"]
-                    ActivateIfPossible = x["ActivateIfPossible"]
-                    MeasurementUnit = x["MeasurementUnit"]
-                    UnitMultiplier = x["UnitMultiplier"]
-                    IsInventoried = x["IsInventoried"]
-                    IsTransported = x["IsTransported"]
-                    IsGiftCardRecharge = x["IsGiftCardRecharge"]
-                    ModalType = x["ModalType"]
-                    isKitOptimized = x["isKitOptimized"]
-                    df1 = pd.DataFrame({
-                        'IsPersisted': IsPersisted,
-                        'SkuId': Id,
-                        'ProductId': ProductId,
-                        'IsActive': IsActive,
-                        'Name': Name,
-                        'Height': Height,
-                        'RealHeight': RealHeight,
-                        'Width': Width,
-                        'RealWidth': RealWidth,
-                        'Length': Length,
-                        'RealLength': RealLength,
-                        'WeightKg': WeightKg,
-                        'RealWeightKg': RealWeightKg,
-                        'ModalId': ModalId,
-                        'RefId': RefId,
-                        'CubicWeight': CubicWeight,
-                        'IsKit': IsKit,
-                        'InternalNote': InternalNote,
-                        'DateUpdated': DateUpdated,
-                        'RewardValue': RewardValue,
-                        'CommercialConditionId': CommercialConditionId,
-                        'EstimatedDateArrival': EstimatedDateArrival,
-                        'FlagKitItensSellApart': FlagKitItensSellApart,
-                        'ManufacturerCode': ManufacturerCode,
-                        'ReferenceStockKeepingUnitId': ReferenceStockKeepingUnitId,
-                        'Position': Position,
-                        'ActivateIfPossible': ActivateIfPossible,
-                        'MeasurementUnit': MeasurementUnit,
-                        'UnitMultiplier': UnitMultiplier,
-                        'IsInventoried': IsInventoried,
-                        'IsTransported': IsTransported,
-                        'IsGiftCardRecharge': IsGiftCardRecharge,
-                        'ModalType': ModalType,
-                        'isKitOptimized': isKitOptimized}, index=[0])
-                    init.df = init.df.append(df1)
-                    registro += 1
-                    print("Registro: "+str(registro))
-            except:
-                sku()
+            for x in Fjson:
+                IsPersisted = x["IsPersisted"]
+                Id = x["Id"]
+                ProductId = x["ProductId"]
+                IsActive = x["IsActive"]
+                Name = x["Name"]
+                Height = x["Height"]
+                RealHeight = x["RealHeight"]
+                Width = x["Width"]
+                RealWidth = x["RealWidth"]
+                Length = x["Length"]
+                RealLength = x["RealLength"]
+                WeightKg = x["WeightKg"]
+                RealWeightKg = x["RealWeightKg"]
+                ModalId = x["ModalId"]
+                RefId = x["RefId"]
+                CubicWeight = x["CubicWeight"]
+                IsKit = x["IsKit"]
+                InternalNote = x["InternalNote"]
+                DateUpdated = x["DateUpdated"]
+                RewardValue = x["RewardValue"]
+                CommercialConditionId = x["CommercialConditionId"]
+                EstimatedDateArrival = x["EstimatedDateArrival"]
+                FlagKitItensSellApart = x["FlagKitItensSellApart"]
+                ManufacturerCode = x["ManufacturerCode"]
+                ReferenceStockKeepingUnitId = x["ReferenceStockKeepingUnitId"]
+                Position = x["Position"]
+                ActivateIfPossible = x["ActivateIfPossible"]
+                MeasurementUnit = x["MeasurementUnit"]
+                UnitMultiplier = x["UnitMultiplier"]
+                IsInventoried = x["IsInventoried"]
+                IsTransported = x["IsTransported"]
+                IsGiftCardRecharge = x["IsGiftCardRecharge"]
+                ModalType = x["ModalType"]
+                isKitOptimized = x["isKitOptimized"]
+                df1 = pd.DataFrame({
+                    'IsPersisted': IsPersisted,
+                    'SkuId': Id,
+                    'ProductId': ProductId,
+                    'IsActive': IsActive,
+                    'Name': Name,
+                    'Height': Height,
+                    'RealHeight': RealHeight,
+                    'Width': Width,
+                    'RealWidth': RealWidth,
+                    'Length': Length,
+                    'RealLength': RealLength,
+                    'WeightKg': WeightKg,
+                    'RealWeightKg': RealWeightKg,
+                    'ModalId': ModalId,
+                    'RefId': RefId,
+                    'CubicWeight': CubicWeight,
+                    'IsKit': IsKit,
+                    'InternalNote': InternalNote,
+                    'DateUpdated': DateUpdated,
+                    'RewardValue': RewardValue,
+                    'CommercialConditionId': CommercialConditionId,
+                    'EstimatedDateArrival': EstimatedDateArrival,
+                    'FlagKitItensSellApart': FlagKitItensSellApart,
+                    'ManufacturerCode': ManufacturerCode,
+                    'ReferenceStockKeepingUnitId': ReferenceStockKeepingUnitId,
+                    'Position': Position,
+                    'ActivateIfPossible': ActivateIfPossible,
+                    'MeasurementUnit': MeasurementUnit,
+                    'UnitMultiplier': UnitMultiplier,
+                    'IsInventoried': IsInventoried,
+                    'IsTransported': IsTransported,
+                    'IsGiftCardRecharge': IsGiftCardRecharge,
+                    'ModalType': ModalType,
+                    'isKitOptimized': isKitOptimized}, index=[0])
+                init.df = init.df.append(df1)
+                registro += 1
+                print("Registro: "+str(registro))
         run()
                 
     except:
