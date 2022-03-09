@@ -38,46 +38,7 @@ def sku():
             
         for x in init.listaSku:
             print(x)
-                '''
-                df1 = pd.DataFrame({
-                    'isPersisted': IsPersisted,
-                    'skuId': Id,
-                    'productId': ProductId,
-                    'isActive': IsActive,
-                    'name': Name,
-                    'height': Height,
-                    'realHeight': RealHeight,
-                    'width': Width,
-                    'realWidth': RealWidth,
-                    'length': Length,
-                    'realLength': RealLength,
-                    'weightKg': WeightKg,
-                    'realWeightKg': RealWeightKg,
-                    'modalId': ModalId,
-                    'refId': RefId,
-                    'cubicWeight': CubicWeight,
-                    'isKit': IsKit,
-                    'internalNote': InternalNote,
-                    'dateUpdated': DateUpdated,
-                    'rewardValue': RewardValue,
-                    'commercialConditionId': CommercialConditionId,
-                    'estimatedDateArrival': EstimatedDateArrival,
-                    'flagKitItensSellApart': FlagKitItensSellApart,
-                    'manufacturerCode': ManufacturerCode,
-                    'referenceStockKeepingUnitId': ReferenceStockKeepingUnitId,
-                    'position': Position,
-                    'activateIfPossible': ActivateIfPossible,
-                    'measurementUnit': MeasurementUnit,
-                    'unitMultiplier': UnitMultiplier,
-                    'isInventoried': IsInventoried,
-                    'isTransported': IsTransported,
-                    'isGiftCardRecharge': IsGiftCardRecharge,
-                    'modalType': ModalType}, index=[0])
-                init.df = init.df.append(df1)
-                registro += 1
-                print("Registro: "+str(registro))
-        run()
-           '''   
+               
     except:
         print("Error.")
         logging.exception("message")
