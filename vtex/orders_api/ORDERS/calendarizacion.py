@@ -18,6 +18,7 @@ class init:
   year = dt.year
   month = dt.month
   day = dt.day
+  listaSku = []
 
 
 def sku():
@@ -33,84 +34,85 @@ def sku():
             response = requests.request("GET", url, headers=init.headers)
             Fjson = json.loads(response.text)
             for x in Fjson:
-                try:
-                    IsPersisted = x["IsPersisted"]
-                    Id = x["Id"]
-                    ProductId = x["ProductId"]
-                    IsActive = x["IsActive"]
-                    Name = x["Name"]
-                    Height = x["Height"]
-                    RealHeight = x["RealHeight"]
-                    Width = x["Width"]
-                    RealWidth = x["RealWidth"]
-                    Length = x["Length"]
-                    RealLength = x["RealLength"]
-                    WeightKg = x["WeightKg"]
-                    RealWeightKg = x["RealWeightKg"]
-                    ModalId = x["ModalId"]
-                    RefId = x["RefId"]
-                    CubicWeight = x["CubicWeight"]
-                    IsKit = x["IsKit"]
-                    InternalNote = x["InternalNote"]
-                    DateUpdated = x["DateUpdated"]
-                    RewardValue = x["RewardValue"]
-                    CommercialConditionId = x["CommercialConditionId"]
-                    if  x["EstimatedDateArrival"]:
-                        EstimatedDateArrival = x["EstimatedDateArrival"]
-                        print(EstimatedDateArrival)
-                    else:
-                        EstimatedDateArrival = '1900-01-01 15:15:18.051893 UTC'
-                    
-                    FlagKitItensSellApart = x["FlagKitItensSellApart"]
-                    ManufacturerCode = x["ManufacturerCode"]
-                    ReferenceStockKeepingUnitId = x["ReferenceStockKeepingUnitId"]
-                    Position = x["Position"]
-                    ActivateIfPossible = x["ActivateIfPossible"]
-                    MeasurementUnit = x["MeasurementUnit"]
-                    UnitMultiplier = x["UnitMultiplier"]
-                    IsInventoried = x["IsInventoried"]
-                    IsTransported = x["IsTransported"]
-                    IsGiftCardRecharge = x["IsGiftCardRecharge"]
-                    ModalType = x["ModalType"]
-                    df1 = pd.DataFrame({
-                        'isPersisted': IsPersisted,
-                        'skuId': Id,
-                        'productId': ProductId,
-                        'isActive': IsActive,
-                        'name': Name,
-                        'height': Height,
-                        'realHeight': RealHeight,
-                        'width': Width,
-                        'realWidth': RealWidth,
-                        'length': Length,
-                        'realLength': RealLength,
-                        'weightKg': WeightKg,
-                        'realWeightKg': RealWeightKg,
-                        'modalId': ModalId,
-                        'refId': RefId,
-                        'cubicWeight': CubicWeight,
-                        'isKit': IsKit,
-                        'internalNote': InternalNote,
-                        'dateUpdated': DateUpdated,
-                        'rewardValue': RewardValue,
-                        'commercialConditionId': CommercialConditionId,
-                        'estimatedDateArrival': EstimatedDateArrival,
-                        'flagKitItensSellApart': FlagKitItensSellApart,
-                        'manufacturerCode': ManufacturerCode,
-                        'referenceStockKeepingUnitId': ReferenceStockKeepingUnitId,
-                        'position': Position,
-                        'activateIfPossible': ActivateIfPossible,
-                        'measurementUnit': MeasurementUnit,
-                        'unitMultiplier': UnitMultiplier,
-                        'isInventoried': IsInventoried,
-                        'isTransported': IsTransported,
-                        'isGiftCardRecharge': IsGiftCardRecharge,
-                        'modalType': ModalType}, index=[0])
-                    init.df = init.df.append(df1)
-                    registro += 1
-                    print("Registro: "+str(registro))
-                except:
-                    continue
+                init.listaSku = x["Id"]
+                print(listaSku)
+                
+            for x in Fjson:
+                IsPersisted = x["IsPersisted"]
+                Id = x["Id"]
+                ProductId = x["ProductId"]
+                IsActive = x["IsActive"]
+                Name = x["Name"]
+                Height = x["Height"]
+                RealHeight = x["RealHeight"]
+                Width = x["Width"]
+                RealWidth = x["RealWidth"]
+                Length = x["Length"]
+                RealLength = x["RealLength"]
+                WeightKg = x["WeightKg"]
+                RealWeightKg = x["RealWeightKg"]
+                ModalId = x["ModalId"]
+                RefId = x["RefId"]
+                CubicWeight = x["CubicWeight"]
+                IsKit = x["IsKit"]
+                InternalNote = x["InternalNote"]
+                DateUpdated = x["DateUpdated"]
+                RewardValue = x["RewardValue"]
+                CommercialConditionId = x["CommercialConditionId"]
+                if  x["EstimatedDateArrival"]:
+                    EstimatedDateArrival = x["EstimatedDateArrival"]
+                    print(EstimatedDateArrival)
+                else:
+                    EstimatedDateArrival = '1900-01-01 15:15:18.051893 UTC'
+                
+                FlagKitItensSellApart = x["FlagKitItensSellApart"]
+                ManufacturerCode = x["ManufacturerCode"]
+                ReferenceStockKeepingUnitId = x["ReferenceStockKeepingUnitId"]
+                Position = x["Position"]
+                ActivateIfPossible = x["ActivateIfPossible"]
+                MeasurementUnit = x["MeasurementUnit"]
+                UnitMultiplier = x["UnitMultiplier"]
+                IsInventoried = x["IsInventoried"]
+                IsTransported = x["IsTransported"]
+                IsGiftCardRecharge = x["IsGiftCardRecharge"]
+                ModalType = x["ModalType"]
+                df1 = pd.DataFrame({
+                    'isPersisted': IsPersisted,
+                    'skuId': Id,
+                    'productId': ProductId,
+                    'isActive': IsActive,
+                    'name': Name,
+                    'height': Height,
+                    'realHeight': RealHeight,
+                    'width': Width,
+                    'realWidth': RealWidth,
+                    'length': Length,
+                    'realLength': RealLength,
+                    'weightKg': WeightKg,
+                    'realWeightKg': RealWeightKg,
+                    'modalId': ModalId,
+                    'refId': RefId,
+                    'cubicWeight': CubicWeight,
+                    'isKit': IsKit,
+                    'internalNote': InternalNote,
+                    'dateUpdated': DateUpdated,
+                    'rewardValue': RewardValue,
+                    'commercialConditionId': CommercialConditionId,
+                    'estimatedDateArrival': EstimatedDateArrival,
+                    'flagKitItensSellApart': FlagKitItensSellApart,
+                    'manufacturerCode': ManufacturerCode,
+                    'referenceStockKeepingUnitId': ReferenceStockKeepingUnitId,
+                    'position': Position,
+                    'activateIfPossible': ActivateIfPossible,
+                    'measurementUnit': MeasurementUnit,
+                    'unitMultiplier': UnitMultiplier,
+                    'isInventoried': IsInventoried,
+                    'isTransported': IsTransported,
+                    'isGiftCardRecharge': IsGiftCardRecharge,
+                    'modalType': ModalType}, index=[0])
+                init.df = init.df.append(df1)
+                registro += 1
+                print("Registro: "+str(registro))
         run()
                 
     except:
