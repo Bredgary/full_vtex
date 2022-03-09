@@ -32,9 +32,8 @@ def sku():
             url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitByProductId/"+str(row.productId)+""
             response = requests.request("GET", url, headers=init.headers)
             Fjson = json.loads(response.text)
-            if Fjson is not "Sku não encontrado.":
-                for x in Fjson:
-                    print(Fjson)
+            for x in Fjson:
+                try:
                     IsPersisted = x["IsPersisted"]
                     Id = x["Id"]
                     ProductId = x["ProductId"]
@@ -107,6 +106,8 @@ def sku():
                     init.df = init.df.append(df1)
                     registro += 1
                     print("Registro: "+str(registro))
+                except:
+                    continue
         run()
                 
     except:
