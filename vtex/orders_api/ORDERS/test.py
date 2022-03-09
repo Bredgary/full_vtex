@@ -18,14 +18,12 @@ def get_inventory():
         QUERY = ('SELECT id  FROM `shopstar-datalake.staging_zone.shopstar_vtex_sku`')
         query_job = client.query(QUERY)
         rows = query_job.result()
-        registro = 0
+        registro_sku = 0
         for row in rows:
             url = "https://mercury.vtexcommercestable.com.br/api/logistics/pvt/inventory/skus/"+str(row.id)+""
             response = requests.request("GET", url, headers=init.headers)
             Fjson = json.loads(response.text)
             balance = Fjson["balance"]
-            registro_sku = 0
-            registro_sku += 1
             print("registro_sku: "+str(registro_sku))
             for x in balance:
                 warehouseId = x["warehouseId"]
@@ -159,7 +157,7 @@ def run():
         
         project_id = '999847639598'
         dataset_id = 'staging_zone'
-        table_id = 'shopstar_vtex_list_inventory_by_sku'
+        table_id = 'shopstar_vtex_list_inventory_by_sku2'
         
         if df.empty:
             print('DataFrame is empty!')
