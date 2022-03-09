@@ -16,14 +16,8 @@ class init:
   year = dt.year
   month = dt.month
   day = dt.day
-  
-def format_schema(schema):
-    formatted_schema = []
-    for row in schema:
-        formatted_schema.append(bigquery.SchemaField(row['name'], row['type'], row['mode']))
-    return formatted_schema
 
-def params_product():
+def sku_specification():
     try:
         print("Cargando consulta")
         client = bigquery.Client()
@@ -32,77 +26,101 @@ def params_product():
         rows = query_job.result()
         registro = 0
         for row in rows:
-            url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/product/"+str(row.productId)+""
+            url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitByProductId/"+str(row.productId)+""
             response = requests.request("GET", url, headers=init.headers)
             Fjson = json.loads(response.text)
-            
-            score = Fjson["Score"]
-            taxCode = Fjson["TaxCode"]
-            isActive = Fjson["IsActive"]
-            title = Fjson["Title"]
-            showWithoutStock = Fjson["ShowWithoutStock"]
-            keyWords = Fjson["KeyWords"]
-            supplierId = Fjson["SupplierId"]
-            descriptionShort = Fjson["DescriptionShort"]
-            description = Fjson["Description"]
-            isVisible = Fjson["IsVisible"]
-            metaTagDescription = Fjson["MetaTagDescription"]
-            releaseDate = Fjson["ReleaseDate"]
-            lomadeeCampaignCode = Fjson["LomadeeCampaignCode"]
-            id = Fjson["Id"]
-            linkId = Fjson["LinkId"]
-            brandId = Fjson["BrandId"]
-            refId = Fjson["RefId"]
-            categoryId = Fjson["CategoryId"]
-            adWordsRemarketingCode = Fjson["AdWordsRemarketingCode"]
-            departmentId = Fjson["DepartmentId"]
-            name = Fjson["Name"]
-            
-            df1 = pd.DataFrame({
-                'score': score,
-                'taxCode': taxCode,
-                'isActive': isActive,
-                'title': title,
-                'showWithoutStock': showWithoutStock,
-                'keyWords': keyWords,
-                'supplierId': supplierId,
-                'descriptionShort': descriptionShort,
-                'description': description,
-                'isVisible': isVisible,
-                'metaTagDescription': metaTagDescription,
-                'releaseDate': releaseDate,
-                'lomadeeCampaignCode': lomadeeCampaignCode,
-                'id': id,
-                'linkId': linkId,
-                'brandId': brandId,
-                'refId': refId,
-                'categoryId': categoryId,
-                'adWordsRemarketingCode': adWordsRemarketingCode,
-                'departmentId': departmentId}, index=[0])
-            init.df = init.df.append(df1)
-            registro += 1
-            print("Registro: "+str(registro))
-            if registro == 50:
-                run()
-            if registro == 100:
-                run()
+            for x in Fjson:
+                IsPersisted = x["IsPersisted"]
+                Id = x["Id"]
+                ProductId = x["ProductId"]
+                IsActive = x["IsActive"]
+                Name = x["Name"]
+                Height = x["Height"]
+                RealHeight = x["RealHeight"]
+                Width = x["Width"]
+                RealWidth = x["RealWidth"]
+                Length = x["Length"]
+                RealLength = x["RealLength"]
+                WeightKg = x["WeightKg"]
+                RealWeightKg = x["RealWeightKg"]
+                ModalId = x["ModalId"]
+                RefId = x["RefId"]
+                CubicWeight = x["CubicWeight"]
+                IsKit = x["IsKit"]
+                InternalNote = x["InternalNote"]
+                DateUpdated = x["DateUpdated"]
+                RewardValue = x["RewardValue"]
+                CommercialConditionId = x["CommercialConditionId"]
+                EstimatedDateArrival = x["EstimatedDateArrival"]
+                FlagKitItensSellApart = x["FlagKitItensSellApart"]
+                ManufacturerCode = x["ManufacturerCode"]
+                ReferenceStockKeepingUnitId = x["ReferenceStockKeepingUnitId"]
+                Position = x["Position"]
+                ActivateIfPossible = x["ActivateIfPossible"]
+                MeasurementUnit = x["MeasurementUnit"]
+                UnitMultiplier = x["UnitMultiplier"]
+                IsInventoried = x["IsInventoried"]
+                IsTransported = x["IsTransported"]
+                IsGiftCardRecharge = x["IsGiftCardRecharge"]
+                ModalType = x["ModalType"]
+                isKitOptimized = x["isKitOptimized"]
+                df1 = pd.DataFrame({
+                    'IsPersisted': IsPersisted,
+                    'SkuId': Id,
+                    'ProductId': ProductId,
+                    'IsActive': IsActive,
+                    'Name': Name,
+                    'Height': Height,
+                    'RealHeight': RealHeight,
+                    'Width': Width,
+                    'RealWidth': RealWidth,
+                    'Length': Length,
+                    'RealLength': RealLength,
+                    'WeightKg': WeightKg,
+                    'RealWeightKg': RealWeightKg,
+                    'ModalId': ModalId,
+                    'RefId': RefId,
+                    'CubicWeight': CubicWeight,
+                    'IsKit': IsKit,
+                    'InternalNote': InternalNote,
+                    'DateUpdated': DateUpdated,
+                    'RewardValue': RewardValue,
+                    'CommercialConditionId': CommercialConditionId,
+                    'EstimatedDateArrival': EstimatedDateArrival,
+                    'FlagKitItensSellApart': FlagKitItensSellApart,
+                    'ManufacturerCode': ManufacturerCode,
+                    'ReferenceStockKeepingUnitId': ReferenceStockKeepingUnitId,
+                    'Position': Position,
+                    'ActivateIfPossible': ActivateIfPossible,
+                    'MeasurementUnit': MeasurementUnit,
+                    'UnitMultiplier': UnitMultiplier,
+                    'IsInventoried': IsInventoried,
+                    'IsTransported': IsTransported,
+                    'IsGiftCardRecharge': IsGiftCardRecharge,
+                    'ModalType': ModalType,
+                    'isKitOptimized': isKitOptimized}, index=[0])
+                init.df = init.df.append(df1)
+                registro += 1
+                print("Registro: "+str(registro))
         run()
+                
     except:
         print("Error.")
         logging.exception("message")
 
+def format_schema(schema):
+    formatted_schema = []
+    for row in schema:
+        formatted_schema.append(bigquery.SchemaField(row['name'], row['type'], row['mode']))
+    return formatted_schema
 
 def delete_duplicate():
-  try:
-    print("Eliminando duplicados")
     client = bigquery.Client()
-    QUERY = ('CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_vtex_product` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.shopstar_vtex_product`')
-    query_job = client.query(QUERY)
+    QUERY = (
+        'CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_vtex_sku_specification` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.shopstar_vtex_sku_specification`')
+    query_job = client.query(QUERY)  
     rows = query_job.result()
     print(rows)
-  except:
-    print("Consulta SQL no ejecutada")
-
 
 def run():
     try:
@@ -110,122 +128,25 @@ def run():
         df.reset_index(drop=True, inplace=True)
         json_data = df.to_json(orient = 'records')
         json_object = json.loads(json_data)
-           
         
-        table_schema = [{
-            "name": "score",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "taxCode",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "isActive",
-            "type": "BOOLEAN",
-            "mode": "NULLABLE"
-        },{
-            "name": "title",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "showWithoutStock",
-            "type": "BOOLEAN",
-            "mode": "NULLABLE"
-        },{
-            "name": "keyWords",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "supplierId",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "descriptionShort",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "description",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "isVisible",
-            "type": "BOOLEAN",
-            "mode": "NULLABLE"
-        },{
-            "name": "metaTagDescription",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "releaseDate",
-            "type": "TIMESTAMP",
-            "mode": "NULLABLE"
-        },{
-            "name": "lomadeeCampaignCode",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "id",
-            "type": "INTEGER",
-            "mode": "NULLABLE"
-        },{
-            "name": "linkId",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "brandId",
-            "type": "INTEGER",
-            "mode": "NULLABLE"
-        },{
-            "name": "refId",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "categoryId",
-            "type": "INTEGER",
-            "mode": "NULLABLE"
-        },{
-            "name": "adWordsRemarketingCode",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "departmentId",
-            "type": "INTEGER",
-            "mode": "NULLABLE"
-        },{
-            "name": "name",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        }]
-        
+
         project_id = '999847639598'
         dataset_id = 'staging_zone'
-        table_id = 'shopstar_vtex_product'
+        table_id = 'shopstar_vtex_sku_specification'
         
         if df.empty:
             print('DataFrame is empty!')
         else:
-            try:
-                client  = bigquery.Client(project = project_id)
-                dataset  = client.dataset(dataset_id)
-                table = dataset.table(table_id)
-                job_config = bigquery.LoadJobConfig()
-                job_config.schema = format_schema(table_schema)
-                job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-                job = client.load_table_from_json(json_object, table, job_config = job_config)
-                print(job.result())
-                delete_duplicate()
-            except:
-                client  = bigquery.Client(project = project_id)
-                dataset  = client.dataset(dataset_id)
-                table = dataset.table(table_id)
-                job_config = bigquery.LoadJobConfig()
-                job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-                job = client.load_table_from_json(json_object, table, job_config = job_config)
-                print(job.result())
-                delete_duplicate()
+            client  = bigquery.Client(project = project_id)
+            dataset  = client.dataset(dataset_id)
+            table = dataset.table(table_id)
+            job_config = bigquery.LoadJobConfig()
+            job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+            job = client.load_table_from_json(json_object, table, job_config = job_config)
+            print(job.result())
+            delete_duplicate()
     except:
         print("Error.")
         logging.exception("message")
-
-params_product()
+        
+sku_specification()
