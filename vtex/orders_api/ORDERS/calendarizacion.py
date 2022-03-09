@@ -70,39 +70,39 @@ def sku():
                     ModalType = x["ModalType"]
                     isKitOptimized = x["isKitOptimized"]
                     df1 = pd.DataFrame({
-                        'IsPersisted': IsPersisted,
-                        'SkuId': Id,
-                        'ProductId': ProductId,
-                        'IsActive': IsActive,
-                        'Name': Name,
-                        'Height': Height,
-                        'RealHeight': RealHeight,
-                        'Width': Width,
-                        'RealWidth': RealWidth,
-                        'Length': Length,
-                        'RealLength': RealLength,
-                        'WeightKg': WeightKg,
-                        'RealWeightKg': RealWeightKg,
-                        'ModalId': ModalId,
-                        'RefId': RefId,
-                        'CubicWeight': CubicWeight,
-                        'IsKit': IsKit,
-                        'InternalNote': InternalNote,
-                        'DateUpdated': DateUpdated,
-                        'RewardValue': RewardValue,
-                        'CommercialConditionId': CommercialConditionId,
-                        'EstimatedDateArrival': EstimatedDateArrival,
-                        'FlagKitItensSellApart': FlagKitItensSellApart,
-                        'ManufacturerCode': ManufacturerCode,
-                        'ReferenceStockKeepingUnitId': ReferenceStockKeepingUnitId,
-                        'Position': Position,
-                        'ActivateIfPossible': ActivateIfPossible,
-                        'MeasurementUnit': MeasurementUnit,
-                        'UnitMultiplier': UnitMultiplier,
-                        'IsInventoried': IsInventoried,
-                        'IsTransported': IsTransported,
-                        'IsGiftCardRecharge': IsGiftCardRecharge,
-                        'ModalType': ModalType,
+                        'isPersisted': IsPersisted,
+                        'skuId': Id,
+                        'productId': ProductId,
+                        'isActive': IsActive,
+                        'name': Name,
+                        'height': Height,
+                        'realHeight': RealHeight,
+                        'width': Width,
+                        'realWidth': RealWidth,
+                        'length': Length,
+                        'realLength': RealLength,
+                        'weightKg': WeightKg,
+                        'realWeightKg': RealWeightKg,
+                        'modalId': ModalId,
+                        'refId': RefId,
+                        'cubicWeight': CubicWeight,
+                        'isKit': IsKit,
+                        'internalNote': InternalNote,
+                        'dateUpdated': DateUpdated,
+                        'rewardValue': RewardValue,
+                        'commercialConditionId': CommercialConditionId,
+                        'estimatedDateArrival': EstimatedDateArrival,
+                        'flagKitItensSellApart': FlagKitItensSellApart,
+                        'manufacturerCode': ManufacturerCode,
+                        'referenceStockKeepingUnitId': ReferenceStockKeepingUnitId,
+                        'position': Position,
+                        'activateIfPossible': ActivateIfPossible,
+                        'measurementUnit': MeasurementUnit,
+                        'unitMultiplier': UnitMultiplier,
+                        'isInventoried': IsInventoried,
+                        'isTransported': IsTransported,
+                        'isGiftCardRecharge': IsGiftCardRecharge,
+                        'modalType': ModalType,
                         'isKitOptimized': isKitOptimized}, index=[0])
                     init.df = init.df.append(df1)
                     registro += 1
@@ -135,6 +135,105 @@ def run():
         df.reset_index(drop=True, inplace=True)
         json_data = df.to_json(orient = 'records')
         json_object = json.loads(json_data)
+        
+        table_schema = [
+        {
+            "name": "unitMultiplier",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "commercialConditionId",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "manufacturerCode",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "estimatedDateArrival",
+            "type": "TIMESTAMP",
+            "mode": "NULLABLE"
+        },{
+            "name": "height",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "creationDate",
+            "type": "TIMESTAMP",
+            "mode": "NULLABLE"
+        },{
+            "name": "length",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "cubicWeight",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "name",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "measurementUnit",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "weightKg",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "productId",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "packagedWeightKg",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "packagedLength",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "isActive",
+            "type": "BOOLEAN",
+            "mode": "NULLABLE"
+        },{
+            "name": "packagedHeight",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "width",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "packagedWidth",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "refId",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "modalType",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "rewardValue",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "activateIfPossible",
+            "type": "BOOLEAN",
+            "mode": "NULLABLE"
+        },{
+            "name": "isKit",
+            "type": "BOOLEAN",
+            "mode": "NULLABLE"
+        },{
+            "name": "id",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        }]
         
 
         project_id = '999847639598'
