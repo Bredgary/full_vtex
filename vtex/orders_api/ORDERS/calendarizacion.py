@@ -36,7 +36,7 @@ def sku():
             for x in Fjson:
                 init.listaSku = x["Id"]
             print(init.listaSku)
-                
+            '''
             for x in Fjson:
                 IsPersisted = x["IsPersisted"]
                 Id = x["Id"]
@@ -114,7 +114,7 @@ def sku():
                 registro += 1
                 print("Registro: "+str(registro))
         run()
-                
+             '''   
     except:
         print("Error.")
         logging.exception("message")
