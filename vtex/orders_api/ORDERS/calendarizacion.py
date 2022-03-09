@@ -34,7 +34,7 @@ def sku():
             Fjson = json.loads(response.text)
             if Fjson is not 'Sku não encontrado.':
                 for x in Fjson:
-                    print(row.productId)
+                    print(Fjson)
                     IsPersisted = x["IsPersisted"]
                     Id = x["Id"]
                     ProductId = x["ProductId"]
