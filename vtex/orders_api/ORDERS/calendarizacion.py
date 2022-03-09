@@ -32,7 +32,6 @@ def sku():
             url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitByProductId/"+str(row.productId)+""
             response = requests.request("GET", url, headers=init.headers)
             Fjson = json.loads(response.text)
-            print(Fjson)
             for x in Fjson:
                 try:
                     IsPersisted = x["IsPersisted"]
@@ -56,7 +55,11 @@ def sku():
                     DateUpdated = x["DateUpdated"]
                     RewardValue = x["RewardValue"]
                     CommercialConditionId = x["CommercialConditionId"]
-                    EstimatedDateArrival = x["EstimatedDateArrival"]
+                    if  x["EstimatedDateArrival"] is None:
+                        EstimatedDateArrival = x["EstimatedDateArrival"]
+                    else:
+                        EstimatedDateArrival = '1900-01-01 15:15:18.051893 UTC'
+                    
                     FlagKitItensSellApart = x["FlagKitItensSellApart"]
                     ManufacturerCode = x["ManufacturerCode"]
                     ReferenceStockKeepingUnitId = x["ReferenceStockKeepingUnitId"]
