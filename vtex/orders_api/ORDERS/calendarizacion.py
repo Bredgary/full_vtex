@@ -35,7 +35,7 @@ def sku():
             Fjson = json.loads(response.text)
             for x in Fjson:
                 init.listaSku = x["Id"]
-                print(listaSku)
+            print(init.listaSku)
                 
             for x in Fjson:
                 IsPersisted = x["IsPersisted"]
