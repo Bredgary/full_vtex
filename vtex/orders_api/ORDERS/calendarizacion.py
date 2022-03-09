@@ -72,7 +72,6 @@ def sku():
                     IsTransported = x["IsTransported"]
                     IsGiftCardRecharge = x["IsGiftCardRecharge"]
                     ModalType = x["ModalType"]
-                    isKitOptimized = x["isKitOptimized"]
                     df1 = pd.DataFrame({
                         'isPersisted': IsPersisted,
                         'skuId': Id,
@@ -106,8 +105,7 @@ def sku():
                         'isInventoried': IsInventoried,
                         'isTransported': IsTransported,
                         'isGiftCardRecharge': IsGiftCardRecharge,
-                        'modalType': ModalType,
-                        'isKitOptimized': isKitOptimized}, index=[0])
+                        'modalType': ModalType}, index=[0])
                     init.df = init.df.append(df1)
                     registro += 1
                     print("Registro: "+str(registro))
