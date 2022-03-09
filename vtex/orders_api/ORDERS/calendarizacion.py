@@ -55,8 +55,9 @@ def sku():
                     DateUpdated = x["DateUpdated"]
                     RewardValue = x["RewardValue"]
                     CommercialConditionId = x["CommercialConditionId"]
-                    if  x["EstimatedDateArrival"] is None:
+                    if  x["EstimatedDateArrival"]:
                         EstimatedDateArrival = x["EstimatedDateArrival"]
+                        print(EstimatedDateArrival)
                     else:
                         EstimatedDateArrival = '1900-01-01 15:15:18.051893 UTC'
                     
