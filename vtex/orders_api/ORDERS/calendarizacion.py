@@ -35,47 +35,10 @@ def sku():
             Fjson = json.loads(response.text)
             for x in Fjson:
                 init.listaSku = x["Id"]
-            print(init.listaSku)
-            '''
-            for x in Fjson:
-                IsPersisted = x["IsPersisted"]
-                Id = x["Id"]
-                ProductId = x["ProductId"]
-                IsActive = x["IsActive"]
-                Name = x["Name"]
-                Height = x["Height"]
-                RealHeight = x["RealHeight"]
-                Width = x["Width"]
-                RealWidth = x["RealWidth"]
-                Length = x["Length"]
-                RealLength = x["RealLength"]
-                WeightKg = x["WeightKg"]
-                RealWeightKg = x["RealWeightKg"]
-                ModalId = x["ModalId"]
-                RefId = x["RefId"]
-                CubicWeight = x["CubicWeight"]
-                IsKit = x["IsKit"]
-                InternalNote = x["InternalNote"]
-                DateUpdated = x["DateUpdated"]
-                RewardValue = x["RewardValue"]
-                CommercialConditionId = x["CommercialConditionId"]
-                if  x["EstimatedDateArrival"]:
-                    EstimatedDateArrival = x["EstimatedDateArrival"]
-                    print(EstimatedDateArrival)
-                else:
-                    EstimatedDateArrival = '1900-01-01 15:15:18.051893 UTC'
-                
-                FlagKitItensSellApart = x["FlagKitItensSellApart"]
-                ManufacturerCode = x["ManufacturerCode"]
-                ReferenceStockKeepingUnitId = x["ReferenceStockKeepingUnitId"]
-                Position = x["Position"]
-                ActivateIfPossible = x["ActivateIfPossible"]
-                MeasurementUnit = x["MeasurementUnit"]
-                UnitMultiplier = x["UnitMultiplier"]
-                IsInventoried = x["IsInventoried"]
-                IsTransported = x["IsTransported"]
-                IsGiftCardRecharge = x["IsGiftCardRecharge"]
-                ModalType = x["ModalType"]
+            
+        for x in init.listaSku:
+            print(x)
+                '''
                 df1 = pd.DataFrame({
                     'isPersisted': IsPersisted,
                     'skuId': Id,
@@ -114,7 +77,7 @@ def sku():
                 registro += 1
                 print("Registro: "+str(registro))
         run()
-             '''   
+           '''   
     except:
         print("Error.")
         logging.exception("message")
