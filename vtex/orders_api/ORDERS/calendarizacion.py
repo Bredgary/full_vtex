@@ -21,7 +21,7 @@ def sku_specification():
     try:
         print("Cargando consulta")
         client = bigquery.Client()
-        QUERY = ('SELECT distinct productId, lastChange FROM `shopstar-datalake.staging_zone.shopstar_order_items` WHERE lastChange BETWEEN "'+str(init.year)+'-'+str(init.month)+'-'+str(init.day)+' 00:00:00" AND "'+str(init.year)+'-'+str(init.month)+'-'+str(init.day)+' 06:00:00"')
+        QUERY = ('SELECT distinct productId, lastChange FROM `shopstar-datalake.staging_zone.shopstar_order_items`')
         query_job = client.query(QUERY)
         rows = query_job.result()
         registro = 0
@@ -117,7 +117,7 @@ def format_schema(schema):
 def delete_duplicate():
     client = bigquery.Client()
     QUERY = (
-        'CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_vtex_sku_specification` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.shopstar_vtex_sku_specification`')
+        'CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_vtex_sku` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.shopstar_vtex_sku`')
     query_job = client.query(QUERY)  
     rows = query_job.result()
     print(rows)
@@ -132,7 +132,7 @@ def run():
 
         project_id = '999847639598'
         dataset_id = 'staging_zone'
-        table_id = 'shopstar_vtex_sku_specification'
+        table_id = 'shopstar_vtex_sku'
         
         if df.empty:
             print('DataFrame is empty!')
