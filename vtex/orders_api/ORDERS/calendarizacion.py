@@ -21,6 +21,7 @@ class init:
   year = dt.year
   month = dt.month
   day = dt.day
+  today = datetime.date.today()
   yesterday = today - datetime.timedelta(days=1)
   listaSku = []
 
