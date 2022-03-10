@@ -43,6 +43,8 @@ def sku():
                 df1 = pd.DataFrame({
                     'id': x["Id"]}, index=[0])
                 init.df = init.df.append(df1)
+                registro += 1
+                print("Registro: "+str(registro))
         run()
             
                
