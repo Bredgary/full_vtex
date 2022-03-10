@@ -30,12 +30,12 @@ def sku():
     try:
         print("Cargando consulta")
         client = bigquery.Client()
-        QUERY = ('SELECT SPLIT(`categoriesIds`, "/")[safe_ordinal(2)] AS `cat1`,SPLIT(`categoriesIds`, "/")[safe_ordinal(3)] AS `cat2`,SPLIT(`categoriesIds`, "/")[safe_ordinal(4)] AS `cat3` FROM `shopstar-datalake.staging_zone.shopstar_order_items` WHERE lastChange BETWEEN "'+str(init.year)+'-'+str(init.month)+'-'+str(init.day)+' 00:00:00" AND "'+str(init.year)+'-'+str(init.month)+'-'+str(init.day)+' 23:59:59"')
+        QUERY = ('SELECT id FROM `shopstar-datalake.staging_zone.shopstar_vtex_sku_id_temp`')
         query_job = client.query(QUERY)
         rows = query_job.result()
         registro = 0
         for row in rows:
-            url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pub/specification/field/listTreeByCategoryId/"+str(row.cat1)+""
+            url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/stockkeepingunit/"+str(row.id)+""
 
             response = requests.request("GET", url, headers=init.headers)
             
@@ -43,23 +43,64 @@ def sku():
                 if response.text is not '':
                     
                     Fjson = json.loads(response.text)
-                    for x in Fjson:
-                        
-                        Name = x["Name"]
-                        CategoryId = x["CategoryId"]
-                        FieldId = x["FieldId"]
-                        IsActive = x["IsActive"]
-                        IsStockKeepingUnit = x["IsStockKeepingUnit"]
-                        
-                        df1 = pd.DataFrame({
-                            'Name': Name,
-                            'CategoryId': CategoryId,
-                            'FieldId': FieldId,
-                            'IsActive': IsActive,
-                            'IsStockKeepingUnit': IsStockKeepingUnit}, index=[0])
-                        init.df = init.df.append(df1)
-                        registro += 1
-                        print("Registro: "+str(registro))
+                    
+                    unitMultiplier = Fjson["UnitMultiplier"]
+                    commercialConditionId = Fjson["CommercialConditionId"]
+                    manufacturerCode = Fjson["ManufacturerCode"]
+                    estimatedDateArrival = Fjson["EstimatedDateArrival"]
+                    height = Fjson["Height"]
+                    creationDate = Fjson["CreationDate"]
+                    length = Fjson["Length"]
+                    cubicWeight = Fjson["CubicWeight"]
+                    name = Fjson["Name"]
+                    measurementUnit = Fjson["MeasurementUnit"]
+                    weightKg = Fjson["WeightKg"]
+                    productId = Fjson["ProductId"]
+                    packagedWeightKg = Fjson["PackagedWeightKg"]
+                    packagedLength = Fjson["PackagedLength"]
+                    isActive = Fjson["IsActive"]
+                    packagedHeight = Fjson["PackagedHeight"]
+                    width = Fjson["Width"]
+                    packagedWidth = Fjson["PackagedWidth"]
+                    refId = Fjson["RefId"]
+                    modalType = Fjson["ModalType"]
+                    rewardValue = Fjson["RewardValue"]
+                    activateIfPossible = Fjson["ActivateIfPossible"]
+                    isKit = Fjson["IsKit"]
+                    id = Fjson["Id"]
+                    
+                    df1 = pd.DataFrame({
+                        'unitMultiplier': unitMultiplier,
+                        'commercialConditionId': commercialConditionId,
+                        'manufacturerCode': manufacturerCode,
+                        'estimatedDateArrival': estimatedDateArrival,
+                        'height': height,
+                        'creationDate': creationDate,
+                        'length': length,
+                        'cubicWeight': cubicWeight,
+                        'name': name,
+                        'measurementUnit': measurementUnit,
+                        'weightKg': weightKg,
+                        'productId': productId,
+                        'packagedWeightKg': packagedWeightKg,
+                        'packagedLength': packagedLength,
+                        'isActive': isActive,
+                        'packagedHeight': packagedHeight,
+                        'width': width,
+                        'packagedWidth': packagedWidth,
+                        'refId': refId,
+                        'modalType': modalType,
+                        'rewardValue': rewardValue,
+                        'activateIfPossible': activateIfPossible,
+                        'isKit': isKit,
+                        'id': id}, index=[0])
+                    init.df = init.df.append(df1)
+                    registro += 1
+                    print("Registro: "+str(registro))
+                    if registro == 50:
+                        run()
+                    if registro == 100:
+                        run()
         run()
     except:
         print("Error.")
@@ -88,31 +129,108 @@ def run():
         
         table_schema = [
         {
-            "name": "FieldId",
+            "name": "unitMultiplier",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "commercialConditionId",
             "type": "INTEGER",
             "mode": "NULLABLE"
         },{
-            "name": "IsActive",
-            "type": "BOOLEAN",
-            "mode": "NULLABLE"
-        },{
-            "name": "CategoryId",
-            "type": "INTEGER",
-            "mode": "NULLABLE"
-        },{
-            "name": "IsStockKeepingUnit",
-            "type": "BOOLEAN",
-            "mode": "NULLABLE"
-        },{
-            "name": "Name",
+            "name": "manufacturerCode",
             "type": "STRING",
             "mode": "NULLABLE"
+        },{
+            "name": "estimatedDateArrival",
+            "type": "TIMESTAMP",
+            "mode": "NULLABLE"
+        },{
+            "name": "height",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "creationDate",
+            "type": "TIMESTAMP",
+            "mode": "NULLABLE"
+        },{
+            "name": "length",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "cubicWeight",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "name",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "measurementUnit",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "weightKg",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "productId",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "packagedWeightKg",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "packagedLength",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "isActive",
+            "type": "BOOLEAN",
+            "mode": "NULLABLE"
+        },{
+            "name": "packagedHeight",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "width",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "packagedWidth",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "refId",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "modalType",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "rewardValue",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "activateIfPossible",
+            "type": "BOOLEAN",
+            "mode": "NULLABLE"
+        },{
+            "name": "isKit",
+            "type": "BOOLEAN",
+            "mode": "NULLABLE"
+        },{
+            "name": "id",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
         }]
-        
 
         project_id = '999847639598'
         dataset_id = 'staging_zone'
-        table_id = 'shopstar_vtex_category_specification'
+        table_id = 'shopstar_vtex_sku'
+        
+        
         
         if df.empty:
             print('DataFrame is empty!')
