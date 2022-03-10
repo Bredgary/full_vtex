@@ -23,26 +23,41 @@ class init:
   today = datetime.date.today()
   yesterday = today - datetime.timedelta(days=1)
   listaSku = []
+  now = datetime.datetime.now()
 
 
 def sku():
     try:
         print("Cargando consulta")
         client = bigquery.Client()
-        QUERY = ('SELECT distinct productId, lastChange FROM `shopstar-datalake.staging_zone.shopstar_order_items` WHERE lastChange BETWEEN "'+str(init.yesterday)+' 02:59:59" AND "'+str(init.year)+'-'+str(init.month)+'-'+str(init.day)+' 02:59:59"')
+        QUERY = ('SELECT id FROM `shopstar-datalake.staging_zone.shopstar_vtex_sku_id_temp`')
         query_job = client.query(QUERY)
         rows = query_job.result()
         registro = 0
         for row in rows:
-            url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitByProductId/"+str(row.productId)+""
+            url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/stockkeepingunit/"+str(row.id)+"/specification"
             response = requests.request("GET", url, headers=init.headers)
-            Fjson = json.loads(response.text)
-            for x in Fjson:
-                df1 = pd.DataFrame({
-                    'id': x["Id"]}, index=[0])
-                init.df = init.df.append(df1)
-                registro += 1
-                print("Registro: "+str(registro))
+            
+            if response.status_code == 200:
+                if response.text is not '':
+                    
+                    Fjson = json.loads(response.text)
+                    for x in Fjson:
+                        Id = x["Id"]
+                        SkuId = x["SkuId"]
+                        FieldId = x["FieldId"]
+                        FieldValueId = x["FieldValueId"]
+                        Text = x["Text"]
+                        
+                        df1 = pd.DataFrame({
+                            'id': Id,
+                            'skuId': SkuId,
+                            'fieldId': FieldId,
+                            'fieldValueId': FieldValueId,
+                            'text': Text}, index=[0])
+                        init.df = init.df.append(df1)
+                        registro += 1
+                        print("Registro: "+str(registro))
         run()
     except:
         print("Error.")
@@ -57,7 +72,7 @@ def format_schema(schema):
 def delete_duplicate():
     client = bigquery.Client()
     QUERY = (
-        'CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_vtex_sku_id_temp` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.shopstar_vtex_sku_id_temp`')
+        'CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_vtex_sku_specification` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.shopstar_vtex_sku_specification`')
     query_job = client.query(QUERY)  
     rows = query_job.result()
     print(rows)
@@ -71,14 +86,31 @@ def run():
         
         table_schema = [
         {
+            "name": "fieldValueId",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "text",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "fieldId",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "skuId",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
             "name": "id",
             "type": "INTEGER",
             "mode": "NULLABLE"
         }]
+        
 
         project_id = '999847639598'
         dataset_id = 'staging_zone'
-        table_id = 'shopstar_vtex_sku_id_temp'
+        table_id = 'shopstar_vtex_sku_specification'
         
         if df.empty:
             print('DataFrame is empty!')
@@ -88,8 +120,8 @@ def run():
             table = dataset.table(table_id)
             job_config = bigquery.LoadJobConfig()
             job_config.schema = format_schema(table_schema)
-            job_config.write_disposition = "WRITE_TRUNCATE"
-            job_config.autodetect = True
+            #job_config.write_disposition = "WRITE_TRUNCATE"
+            #job_config.autodetect = True
             job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
             job = client.load_table_from_json(json_object, table, job_config = job_config)
             print(job.result())
