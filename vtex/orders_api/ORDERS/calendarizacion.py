@@ -30,12 +30,13 @@ def sku():
     try:
         print("Cargando consulta")
         client = bigquery.Client()
-        QUERY = ('SELECT id FROM `shopstar-datalake.staging_zone.shopstar_vtex_sku_id_temp`')
+        QUERY = ('SELECT SPLIT(`categoriesIds`, "/")[safe_ordinal(2)] AS `cat1`,SPLIT(`categoriesIds`, "/")[safe_ordinal(3)] AS `cat2`,SPLIT(`categoriesIds`, "/")[safe_ordinal(4)] AS `cat3` FROM `shopstar-datalake.staging_zone.shopstar_order_items` WHERE lastChange BETWEEN "'+str(init.year)+'-'+str(init.month)+'-'+str(init.day)+' 00:00:00" AND "'+str(init.year)+'-'+str(init.month)+'-'+str(init.day)+' 23:59:59"')
         query_job = client.query(QUERY)
         rows = query_job.result()
         registro = 0
         for row in rows:
-            url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/stockkeepingunit/"+str(row.id)+"/specification"
+            url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pub/specification/field/listTreeByCategoryId/"+str(row.cat1)+""
+
             response = requests.request("GET", url, headers=init.headers)
             
             if response.status_code == 200:
@@ -43,18 +44,71 @@ def sku():
                     
                     Fjson = json.loads(response.text)
                     for x in Fjson:
-                        Id = x["Id"]
-                        SkuId = x["SkuId"]
+                        
+                        Name = x["Name"]
+                        CategoryId = x["CategoryId"]
                         FieldId = x["FieldId"]
-                        FieldValueId = x["FieldValueId"]
-                        Text = x["Text"]
+                        IsActive = x["IsActive"]
+                        IsStockKeepingUnit = x["IsStockKeepingUnit"]
                         
                         df1 = pd.DataFrame({
-                            'id': Id,
-                            'skuId': SkuId,
+                            'name': Name,
+                            'categoryId': CategoryId,
                             'fieldId': FieldId,
-                            'fieldValueId': FieldValueId,
-                            'text': Text}, index=[0])
+                            'isActive': IsActive,
+                            'isStockKeepingUnit': IsStockKeepingUnit}, index=[0])
+                        init.df = init.df.append(df1)
+                        registro += 1
+                        print("Registro: "+str(registro))
+        for row in rows:
+            url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pub/specification/field/listTreeByCategoryId/"+str(row.cat2)+""
+
+            response = requests.request("GET", url, headers=init.headers)
+            
+            if response.status_code == 200:
+                if response.text is not '':
+                    
+                    Fjson = json.loads(response.text)
+                    for x in Fjson:
+                        
+                        Name = x["Name"]
+                        CategoryId = x["CategoryId"]
+                        FieldId = x["FieldId"]
+                        IsActive = x["IsActive"]
+                        IsStockKeepingUnit = x["IsStockKeepingUnit"]
+                        
+                        df1 = pd.DataFrame({
+                            'name': Name,
+                            'categoryId': CategoryId,
+                            'fieldId': FieldId,
+                            'isActive': IsActive,
+                            'isStockKeepingUnit': IsStockKeepingUnit}, index=[0])
+                        init.df = init.df.append(df1)
+                        registro += 1
+                        print("Registro: "+str(registro))
+        for row in rows:
+            url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pub/specification/field/listTreeByCategoryId/"+str(row.cat3)+""
+
+            response = requests.request("GET", url, headers=init.headers)
+            
+            if response.status_code == 200:
+                if response.text is not '':
+                    
+                    Fjson = json.loads(response.text)
+                    for x in Fjson:
+                        
+                        Name = x["Name"]
+                        CategoryId = x["CategoryId"]
+                        FieldId = x["FieldId"]
+                        IsActive = x["IsActive"]
+                        IsStockKeepingUnit = x["IsStockKeepingUnit"]
+                        
+                        df1 = pd.DataFrame({
+                            'name': Name,
+                            'categoryId': CategoryId,
+                            'fieldId': FieldId,
+                            'isActive': IsActive,
+                            'isStockKeepingUnit': IsStockKeepingUnit}, index=[0])
                         init.df = init.df.append(df1)
                         registro += 1
                         print("Registro: "+str(registro))
@@ -86,24 +140,24 @@ def run():
         
         table_schema = [
         {
-            "name": "fieldValueId",
+            "name": "FieldId",
             "type": "INTEGER",
             "mode": "NULLABLE"
         },{
-            "name": "text",
+            "name": "IsActive",
+            "type": "BOOLEAN",
+            "mode": "NULLABLE"
+        },{
+            "name": "CategoryId",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "IsStockKeepingUnit",
+            "type": "BOOLEAN",
+            "mode": "NULLABLE"
+        },{
+            "name": "Name",
             "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "fieldId",
-            "type": "INTEGER",
-            "mode": "NULLABLE"
-        },{
-            "name": "skuId",
-            "type": "INTEGER",
-            "mode": "NULLABLE"
-        },{
-            "name": "id",
-            "type": "INTEGER",
             "mode": "NULLABLE"
         }]
         
@@ -115,17 +169,30 @@ def run():
         if df.empty:
             print('DataFrame is empty!')
         else:
-            client  = bigquery.Client(project = project_id)
-            dataset  = client.dataset(dataset_id)
-            table = dataset.table(table_id)
-            job_config = bigquery.LoadJobConfig()
-            job_config.schema = format_schema(table_schema)
-            #job_config.write_disposition = "WRITE_TRUNCATE"
-            #job_config.autodetect = True
-            job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
-            job = client.load_table_from_json(json_object, table, job_config = job_config)
-            print(job.result())
-            delete_duplicate()
+            try:
+                client  = bigquery.Client(project = project_id)
+                dataset  = client.dataset(dataset_id)
+                table = dataset.table(table_id)
+                job_config = bigquery.LoadJobConfig()
+                job_config.schema = format_schema(table_schema)
+                #job_config.write_disposition = "WRITE_TRUNCATE"
+                #job_config.autodetect = True
+                job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+                job = client.load_table_from_json(json_object, table, job_config = job_config)
+                print(job.result())
+                delete_duplicate()
+            except:
+                client  = bigquery.Client(project = project_id)
+                dataset  = client.dataset(dataset_id)
+                table = dataset.table(table_id)
+                job_config = bigquery.LoadJobConfig()
+                #job_config.schema = format_schema(table_schema)
+                #job_config.write_disposition = "WRITE_TRUNCATE"
+                #job_config.autodetect = True
+                job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
+                job = client.load_table_from_json(json_object, table, job_config = job_config)
+                print(job.result())
+                delete_duplicate()
     except:
         print("Error.")
         logging.exception("message")
