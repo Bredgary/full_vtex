@@ -1,17 +1,15 @@
 import pandas as pd
 import numpy as np
-from google.cloud import bigquery
-import os, json
-from datetime import datetime
-from requests import request
 import requests
-from os.path import join
-import logging
-from datetime import date
+import json
+import os
+import re
 import datetime
+from datetime import date
 from datetime import timedelta
 from os import system
-from datetime import date, timedelta
+from google.cloud import bigquery
+import logging
 
 class init:
   df = pd.DataFrame()
