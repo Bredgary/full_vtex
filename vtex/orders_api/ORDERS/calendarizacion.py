@@ -41,7 +41,7 @@ def sku():
             Fjson = json.loads(response.text)
             for x in Fjson:
                 df1 = pd.DataFrame({
-                    'id': x["id"]}, index=[0])
+                    'id': x["Id"]}, index=[0])
                 init.df = init.df.append(df1)
         run()
             
