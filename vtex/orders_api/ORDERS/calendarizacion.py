@@ -1,15 +1,17 @@
 import pandas as pd
 import numpy as np
+from google.cloud import bigquery
+import os, json
+from datetime import datetime
+from requests import request
 import requests
-import json
-import os
-import re
-import datetime
+from os.path import join
+import logging
 from datetime import date
+import datetime
 from datetime import timedelta
 from os import system
-from google.cloud import bigquery
-import logging
+from datetime import date, timedelta
 
 class init:
   df = pd.DataFrame()
@@ -27,7 +29,7 @@ def sku():
     try:
         print("Cargando consulta")
         client = bigquery.Client()
-        QUERY = ('SELECT distinct productId, lastChange FROM `shopstar-datalake.staging_zone.shopstar_order_items` WHERE lastChange BETWEEN "'+str(init.year)+'-'+str(init.month)+'-'+str(init.day)+' 00:00:00" AND "'+str(init.year)+'-'+str(init.month)+'-'+str(init.day)+' 06:00:00"')
+        QUERY = ('SELECT distinct productId, lastChange FROM `shopstar-datalake.staging_zone.shopstar_order_items` WHERE lastChange BETWEEN "'+str(init.yesterday)+' 02:59:59" AND "'+str(init.year)+'-'+str(init.month)+'-'+str(init.day)+' 02:59:59"')
         query_job = client.query(QUERY)
         rows = query_job.result()
         registro = 0
