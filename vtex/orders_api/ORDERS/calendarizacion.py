@@ -112,7 +112,7 @@ def run():
 
         project_id = '999847639598'
         dataset_id = 'staging_zone'
-        table_id = 'shopstar_vtex_sku_specification'
+        table_id = 'shopstar_vtex_category_specification'
         
         if df.empty:
             print('DataFrame is empty!')
