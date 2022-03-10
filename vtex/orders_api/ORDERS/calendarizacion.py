@@ -1,10 +1,9 @@
-#!/usr/bin/python
-# -*- coding: latin-1 -*-
 import pandas as pd
 import numpy as np
 from google.cloud import bigquery
 import os, json
 from datetime import datetime
+from requests import request
 import requests
 from os.path import join
 import logging
@@ -45,8 +44,6 @@ def sku():
                 registro += 1
                 print("Registro: "+str(registro))
         run()
-            
-               
     except:
         print("Error.")
         logging.exception("message")
