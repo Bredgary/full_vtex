@@ -52,63 +52,11 @@ def sku():
                         IsStockKeepingUnit = x["IsStockKeepingUnit"]
                         
                         df1 = pd.DataFrame({
-                            'name': Name,
-                            'categoryId': CategoryId,
-                            'fieldId': FieldId,
-                            'isActive': IsActive,
-                            'isStockKeepingUnit': IsStockKeepingUnit}, index=[0])
-                        init.df = init.df.append(df1)
-                        registro += 1
-                        print("Registro: "+str(registro))
-        for row in rows:
-            url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pub/specification/field/listTreeByCategoryId/"+str(row.cat2)+""
-
-            response = requests.request("GET", url, headers=init.headers)
-            
-            if response.status_code == 200:
-                if response.text is not '':
-                    
-                    Fjson = json.loads(response.text)
-                    for x in Fjson:
-                        
-                        Name = x["Name"]
-                        CategoryId = x["CategoryId"]
-                        FieldId = x["FieldId"]
-                        IsActive = x["IsActive"]
-                        IsStockKeepingUnit = x["IsStockKeepingUnit"]
-                        
-                        df1 = pd.DataFrame({
-                            'name': Name,
-                            'categoryId': CategoryId,
-                            'fieldId': FieldId,
-                            'isActive': IsActive,
-                            'isStockKeepingUnit': IsStockKeepingUnit}, index=[0])
-                        init.df = init.df.append(df1)
-                        registro += 1
-                        print("Registro: "+str(registro))
-        for row in rows:
-            url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pub/specification/field/listTreeByCategoryId/"+str(row.cat3)+""
-
-            response = requests.request("GET", url, headers=init.headers)
-            
-            if response.status_code == 200:
-                if response.text is not '':
-                    
-                    Fjson = json.loads(response.text)
-                    for x in Fjson:
-                        
-                        Name = x["Name"]
-                        CategoryId = x["CategoryId"]
-                        FieldId = x["FieldId"]
-                        IsActive = x["IsActive"]
-                        IsStockKeepingUnit = x["IsStockKeepingUnit"]
-                        
-                        df1 = pd.DataFrame({
-                            'name': Name,
-                            'categoryId': CategoryId,
-                            'fieldId': FieldId,
-                            'isActive': IsActive,
-                            'isStockKeepingUnit': IsStockKeepingUnit}, index=[0])
+                            'Name': Name,
+                            'CategoryId': CategoryId,
+                            'FieldId': FieldId,
+                            'IsActive': IsActive,
+                            'IsStockKeepingUnit': IsStockKeepingUnit}, index=[0])
                         init.df = init.df.append(df1)
                         registro += 1
                         print("Registro: "+str(registro))
