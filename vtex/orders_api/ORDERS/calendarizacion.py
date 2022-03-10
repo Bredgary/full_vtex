@@ -29,7 +29,6 @@ class init:
 def sku():
     try:
         print("Cargando consulta")
-        print(init.yesterday)
         client = bigquery.Client()
         QUERY = ('SELECT distinct productId, lastChange FROM `shopstar-datalake.staging_zone.shopstar_order_items` WHERE lastChange BETWEEN "'+str(init.yesterday)+' 02:59:59" AND "'+str(init.year)+'-'+str(init.month)+'-'+str(init.day)+' 02:59:59"')
         query_job = client.query(QUERY)
