@@ -40,17 +40,17 @@ def sku():
             if response.status_code == 200:
                 if response.text is not '':
                     Fjson = json.loads(response.text)
-                    id = Fjson[0]
-                    
-                    df1 = pd.DataFrame({
-                        'id_ean': id}, index=[0])
-                    init.df = init.df.append(df1)
-                    registro += 1
-                    print("Registro: "+str(registro))
-                    if registro == 100:
-                        run()
-                    if registro == 200:
-                        run()
+                    id = int(Fjson[0])
+                    if type (id) == int:
+                        df1 = pd.DataFrame({
+                            'id_ean': id}, index=[0])
+                        init.df = init.df.append(df1)
+                        registro += 1
+                        print("Registro: "+str(registro))
+                        if registro == 100:
+                            run()
+                        if registro == 200:
+                            run()
         run()
     except:
         print("Error.")
@@ -65,7 +65,7 @@ def format_schema(schema):
 def delete_duplicate():
     client = bigquery.Client()
     QUERY = (
-        'CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_vtex_sku_context` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.shopstar_vtex_sku_context`')
+        'CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_vtex_ean_id_temp` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.shopstar_vtex_ean_id_temp`')
     query_job = client.query(QUERY)  
     rows = query_job.result()
     print(rows)
