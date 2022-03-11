@@ -138,7 +138,7 @@ def run():
         dataset_id = 'staging_zone'
         table_id = 'shopstar_vtex_collection'
         
-        
+
         
         if df.empty:
             print('DataFrame is empty!')
