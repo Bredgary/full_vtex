@@ -34,7 +34,7 @@ def sku():
         #rows = query_job.result()
         registro = 0
         #for row in rows:
-        url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/brand/list"
+        url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/seller/list?sc=1&sellerType=1&isBetterScope=false"
         #url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/specificationvalue/"+str(row.FieldValueId)+""
         response = requests.request("GET", url, headers=init.headers)
         
@@ -43,20 +43,56 @@ def sku():
                 Fjson = json.loads(response.text)
                 
                 for x in Fjson:
-                    id = x["id"]
-                    name = x["name"]
-                    isActive = x["isActive"]
-                    title = x["title"]
-                    metaTagDescription = x["metaTagDescription"]
-                    imageUrl = x["imageUrl"]
+                    UrlLogo = x["UrlLogo"]
+                    SellerId = x["SellerId"]
+                    Name = x["Name"]
+                    Email = x["Email"]
+                    Description = x["Description"]
+                    ExchangeReturnPolicy = x["ExchangeReturnPolicy"]
+                    DeliveryPolicy = x["DeliveryPolicy"]
+                    SecutityPrivacyPolicy = x["SecutityPrivacyPolicy"]
+                    CNPJ = x["CNPJ"]
+                    CSCIdentification = x["CSCIdentification"]
+                    ArchiveId = x["ArchiveId"]
+                    ProductCommissionPercentage = x["ProductCommissionPercentage"]
+                    FreightCommissionPercentage = x["FreightCommissionPercentage"]
+                    FulfillmentEndpoint = x["FulfillmentEndpoint"]
+                    CatalogSystemEndpoint = x["CatalogSystemEndpoint"]
+                    IsActive = x["IsActive"]
+                    IsBetterScope = x["IsBetterScope"]
+                    MerchantName = x["MerchantName"]
+                    UserName = x["UserName"]
+                    Password = x["Password"]
+                    UseHybridPaymentOptions = x["UseHybridPaymentOptions"]
+                    FulfillmentSellerId = x["FulfillmentSellerId"]
+                    SellerType = x["SellerType"]
+                    trustPolicy = x["trustPolicy"]
                     
                     df1 = pd.DataFrame({
-                        'id': id,
-                        'name': name,
-                        'isActive': isActive,
-                        'title': title,
-                        'metaTagDescription': metaTagDescription,
-                        'imageUrl': imageUrl}, index=[0])
+                        'UrlLogo': UrlLogo,
+                        'SellerId': SellerId,
+                        'Name': Name,
+                        'Email': Email,
+                        'Description': Description,
+                        'ExchangeReturnPolicy': ExchangeReturnPolicy,
+                        'DeliveryPolicy': DeliveryPolicy,
+                        'SecutityPrivacyPolicy': SecutityPrivacyPolicy,
+                        'CNPJ': CNPJ,
+                        'CSCIdentification': CSCIdentification,
+                        'ArchiveId': ArchiveId,
+                        'ProductCommissionPercentage': ProductCommissionPercentage,
+                        'FreightCommissionPercentage': FreightCommissionPercentage,
+                        'FulfillmentEndpoint': FulfillmentEndpoint,
+                        'CatalogSystemEndpoint': CatalogSystemEndpoint,
+                        'IsActive': IsActive,
+                        'IsBetterScope': IsBetterScope,
+                        'MerchantName': MerchantName,
+                        'UserName': UserName,
+                        'Password': Password,
+                        'UseHybridPaymentOptions': UseHybridPaymentOptions,
+                        'FulfillmentSellerId': FulfillmentSellerId,
+                        'SellerType': SellerType,
+                        'trustPolicy': trustPolicy}, index=[0])
                     init.df = init.df.append(df1)
                     registro += 1
                     print("Registro: "+str(registro))
@@ -78,7 +114,7 @@ def format_schema(schema):
 def delete_duplicate():
     client = bigquery.Client()
     QUERY = (
-        'CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_vtex_brand_list` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.shopstar_vtex_brand_list`')
+        'CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_vtex_seller` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.shopstar_vtex_seller`')
     query_job = client.query(QUERY)  
     rows = query_job.result()
     print(rows)
@@ -90,36 +126,9 @@ def run():
         json_data = df.to_json(orient = 'records')
         json_object = json.loads(json_data)
         
-        table_schema = [
-        {
-            "name": "imageUrl",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "title",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "isActive",
-            "type": "BOOLEAN",
-            "mode": "NULLABLE"
-        },{
-            "name": "name",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "metaTagDescription",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "id",
-            "type": "INTEGER",
-            "mode": "NULLABLE"
-        }]   
-        
         project_id = '999847639598'
         dataset_id = 'staging_zone'
-        table_id = 'shopstar_vtex_brand_list'
+        table_id = 'shopstar_vtex_seller'
         
         
         if df.empty:
@@ -130,9 +139,9 @@ def run():
                 dataset  = client.dataset(dataset_id)
                 table = dataset.table(table_id)
                 job_config = bigquery.LoadJobConfig()
-                job_config.schema = format_schema(table_schema)
-                #job_config.write_disposition = "WRITE_TRUNCATE"
-                #job_config.autodetect = True
+                #job_config.schema = format_schema(table_schema)
+                job_config.write_disposition = "WRITE_TRUNCATE"
+                job_config.autodetect = True
                 job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
                 job = client.load_table_from_json(json_object, table, job_config = job_config)
                 print(job.result())
