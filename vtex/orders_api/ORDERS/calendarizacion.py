@@ -41,10 +41,11 @@ def sku():
                 if response.text is not '':
                     Fjson = json.loads(response.text)
                     for x in Fjson:
-                        SpecificationValue = x["SpecificationValue"]
-                        SpecificationName = x["SpecificationName"]
-                        SkuId = x["SkuId"]
                         Id = x["Id"]
+                        SkuId = x["SkuId"]
+                        SpecificationName = x["SpecificationName"]
+                        SpecificationValue = x["SpecificationValue"]
+                        
                         
                         df1 = pd.DataFrame({
                             'SpecificationValue': SpecificationValue,
