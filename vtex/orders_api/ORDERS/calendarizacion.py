@@ -29,20 +29,21 @@ def sku():
     try:
         print("Cargando consulta")
         client = bigquery.Client()
-        QUERY = ('SELECT id FROM `shopstar-datalake.staging_zone.shopstar_vtex_sku_id_temp`')
+        QUERY = ('SELECT id_ean FROM `shopstar-datalake.staging_zone.shopstar_vtex_ean_id_temp`')
         query_job = client.query(QUERY)
         rows = query_job.result()
         registro = 0
         for row in rows:
-            url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/stockkeepingunit/"+str(row.id)+"/ean"
+            url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitbyean/"+str(row.id)+""
             response = requests.request("GET", url, headers=init.headers)
             
             if response.status_code == 200:
                 if response.text is not '':
                     Fjson = json.loads(response.text)
-                    id = Fjson[0]
+                    id_brand = Fjson["BrandId"]
+                    
                     df1 = pd.DataFrame({
-                        'id_ean': id}, index=[0])
+                        'id_brand': id_brand}, index=[0])
                     init.df = init.df.append(df1)
                     registro += 1
                     print("Registro: "+str(registro))
@@ -78,7 +79,7 @@ def run():
         
         table_schema = [
         {
-            "name": "id_ean",
+            "name": "id_brand",
             "type": "STRING",
             "mode": "NULLABLE"
         }]
@@ -86,7 +87,7 @@ def run():
         
         project_id = '999847639598'
         dataset_id = 'staging_zone'
-        table_id = 'shopstar_vtex_ean_id_temp'
+        table_id = 'shopstar_vtex_brand_id_temp'
         
         
         
@@ -110,7 +111,6 @@ def run():
                 dataset  = client.dataset(dataset_id)
                 table = dataset.table(table_id)
                 job_config = bigquery.LoadJobConfig()
-                job_config.schema = format_schema(table_schema)
                 job_config.write_disposition = "WRITE_TRUNCATE"
                 job_config.autodetect = True
                 job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
