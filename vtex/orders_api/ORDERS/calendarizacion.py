@@ -29,12 +29,12 @@ def sku():
     try:
         print("Cargando consulta")
         client = bigquery.Client()
-        QUERY = ('SELECT id_ean FROM `shopstar-datalake.staging_zone.shopstar_vtex_ean_id_temp`')
+        QUERY = ('SELECT id FROM `shopstar-datalake.staging_zone.shopstar_vtex_sku_id_temp`')
         query_job = client.query(QUERY)
         rows = query_job.result()
         registro = 0
         for row in rows:
-            url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitbyean/"+str(row.id_ean)+""
+            url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitbyean/"+str(row.id)+""
             response = requests.request("GET", url, headers=init.headers)
             
             if response.status_code == 200:
