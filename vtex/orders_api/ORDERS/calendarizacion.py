@@ -34,65 +34,30 @@ def sku():
         #rows = query_job.result()
         registro = 0
         #for row in rows:
-        url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/seller/list?sc=1&sellerType=1&isBetterScope=false"
+        url = "https://mercury.vtexcommercestable.com.br/api/license-manager/site/pvt/logins/list/paged?numItems=10&pageNumber=1&sort=name&sortType=ASC"
         #url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/specificationvalue/"+str(row.FieldValueId)+""
         response = requests.request("GET", url, headers=init.headers)
         
         if response.status_code == 200:
             if response.text is not '':
                 Fjson = json.loads(response.text)
+                items = Fjson["items"]
                 
-                for x in Fjson:
-                    UrlLogo = x["UrlLogo"]
-                    SellerId = x["SellerId"]
-                    Name = x["Name"]
-                    Email = x["Email"]
-                    Description = x["Description"]
-                    ExchangeReturnPolicy = x["ExchangeReturnPolicy"]
-                    DeliveryPolicy = x["DeliveryPolicy"]
-                    SecutityPrivacyPolicy = x["SecutityPrivacyPolicy"]
-                    CNPJ = x["CNPJ"]
-                    CSCIdentification = x["CSCIdentification"]
-                    ArchiveId = x["ArchiveId"]
-                    ProductCommissionPercentage = x["ProductCommissionPercentage"]
-                    FreightCommissionPercentage = x["FreightCommissionPercentage"]
-                    FulfillmentEndpoint = x["FulfillmentEndpoint"]
-                    CatalogSystemEndpoint = x["CatalogSystemEndpoint"]
-                    IsActive = x["IsActive"]
-                    IsBetterScope = x["IsBetterScope"]
-                    MerchantName = x["MerchantName"]
-                    UserName = x["UserName"]
-                    Password = x["Password"]
-                    UseHybridPaymentOptions = x["UseHybridPaymentOptions"]
-                    FulfillmentSellerId = x["FulfillmentSellerId"]
-                    SellerType = x["SellerType"]
-                    trustPolicy = x["trustPolicy"]
+                for x in items:
+                    id = x["id"]
+                    email = x["email"]
+                    isAdmin = x["isAdmin"]
+                    isReliable = x["isReliable"]
+                    isBlocked = x["isBlocked"]
+                    name = x["name"]
                     
                     df1 = pd.DataFrame({
-                        'UrlLogo': UrlLogo,
-                        'SellerId': SellerId,
-                        'Name': Name,
-                        'Email': Email,
-                        'Description': Description,
-                        'ExchangeReturnPolicy': ExchangeReturnPolicy,
-                        'DeliveryPolicy': DeliveryPolicy,
-                        'SecutityPrivacyPolicy': SecutityPrivacyPolicy,
-                        'CNPJ': CNPJ,
-                        'CSCIdentification': CSCIdentification,
-                        'ArchiveId': ArchiveId,
-                        'ProductCommissionPercentage': ProductCommissionPercentage,
-                        'FreightCommissionPercentage': FreightCommissionPercentage,
-                        'FulfillmentEndpoint': FulfillmentEndpoint,
-                        'CatalogSystemEndpoint': CatalogSystemEndpoint,
-                        'IsActive': IsActive,
-                        'IsBetterScope': IsBetterScope,
-                        'MerchantName': MerchantName,
-                        'UserName': UserName,
-                        'Password': Password,
-                        'UseHybridPaymentOptions': UseHybridPaymentOptions,
-                        'FulfillmentSellerId': FulfillmentSellerId,
-                        'SellerType': SellerType,
-                        'trustPolicy': trustPolicy}, index=[0])
+                        'id': id,
+                        'email': email,
+                        'isAdmin': isAdmin,
+                        'isReliable': isReliable,
+                        'isBlocked': isBlocked,
+                        'name': name}, index=[0])
                     init.df = init.df.append(df1)
                     registro += 1
                     print("Registro: "+str(registro))
@@ -114,7 +79,7 @@ def format_schema(schema):
 def delete_duplicate():
     client = bigquery.Client()
     QUERY = (
-        'CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_vtex_seller` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.shopstar_vtex_seller`')
+        'CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_vtex_user_list` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.shopstar_vtex_user_list`')
     query_job = client.query(QUERY)  
     rows = query_job.result()
     print(rows)
@@ -128,7 +93,7 @@ def run():
         
         project_id = '999847639598'
         dataset_id = 'staging_zone'
-        table_id = 'shopstar_vtex_seller'
+        table_id = 'shopstar_vtex_user_list'
         
         
         if df.empty:
@@ -139,7 +104,7 @@ def run():
                 dataset  = client.dataset(dataset_id)
                 table = dataset.table(table_id)
                 job_config = bigquery.LoadJobConfig()
-                #job_config.schema = format_schema(table_schema)
+                job_config.schema = format_schema(table_schema)
                 job_config.write_disposition = "WRITE_TRUNCATE"
                 job_config.autodetect = True
                 job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
