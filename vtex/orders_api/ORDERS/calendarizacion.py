@@ -48,18 +48,19 @@ def sku():
                         SkuId = x["SkuId"]
                         ParentSkuId = x["ParentSkuId"]
                         ComplementTypeId = x["ComplementTypeId"]
-                    df1 = pd.DataFrame({
-                        'id': Id,
-                        'skuId': SkuId,
-                        'parentSkuId': ParentSkuId,
-                        'complementTypeId': ComplementTypeId}, index=[0])
-                    init.df = init.df.append(df1)
-                    registro += 1
-                    print("Registro: "+str(registro))
-                    if registro == 100:
-                        run()
-                    if registro == 200:
-                        run()
+                        
+                        df1 = pd.DataFrame({
+                            'id': Id,
+                            'skuId': SkuId,
+                            'parentSkuId': ParentSkuId,
+                            'complementTypeId': ComplementTypeId}, index=[0])
+                        init.df = init.df.append(df1)
+                        registro += 1
+                        print("Registro: "+str(registro))
+                        if registro == 100:
+                            run()
+                        if registro == 200:
+                            run()
         run()
     except:
         print("Error.")
