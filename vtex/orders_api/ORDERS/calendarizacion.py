@@ -44,62 +44,117 @@ def sku():
                     
                     Fjson = json.loads(response.text)
                     
-                    unitMultiplier = Fjson["UnitMultiplier"]
-                    commercialConditionId = Fjson["CommercialConditionId"]
-                    manufacturerCode = Fjson["ManufacturerCode"]
-                    estimatedDateArrival = Fjson["EstimatedDateArrival"]
-                    height = Fjson["Height"]
-                    creationDate = Fjson["CreationDate"]
-                    length = Fjson["Length"]
-                    cubicWeight = Fjson["CubicWeight"]
-                    name = Fjson["Name"]
-                    measurementUnit = Fjson["MeasurementUnit"]
-                    weightKg = Fjson["WeightKg"]
-                    productId = Fjson["ProductId"]
-                    packagedWeightKg = Fjson["PackagedWeightKg"]
-                    packagedLength = Fjson["PackagedLength"]
-                    isActive = Fjson["IsActive"]
-                    packagedHeight = Fjson["PackagedHeight"]
-                    width = Fjson["Width"]
-                    packagedWidth = Fjson["PackagedWidth"]
-                    refId = Fjson["RefId"]
-                    modalType = Fjson["ModalType"]
-                    rewardValue = Fjson["RewardValue"]
-                    activateIfPossible = Fjson["ActivateIfPossible"]
-                    isKit = Fjson["IsKit"]
-                    id = Fjson["Id"]
+                    BrandName = Fjson["BrandName"]
+                    UnitMultiplier = Fjson["UnitMultiplier"]
+                    MeasurementUnit = Fjson["MeasurementUnit"]
+                    EstimatedDateArrival = Fjson["EstimatedDateArrival"]
+                    ProductGlobalCategoryId = Fjson["ProductGlobalCategoryId"]
+                    AlternateIds = Fjson["AlternateIds"]
+                    AlternateIds_RefId = AlternateIds["RefId"]
+                    ModalType = Fjson["ModalType"]
+                    RewardValue = Fjson["RewardValue"]
+                    Images = Fjson["Images"]
+                    for x in Images:
+                        Images_ImageName = x["ImageName"]
+                        Images_ImageUrl = x["ImageUrl"]
+                        Images_FileId = x["FileId"]
+                    ProductCategoryIds = Fjson["ProductCategoryIds"]
+                    SkuSellers = Fjson["SkuSellers"]
+                    for x in SkuSellers:
+                        SkuSellers_StockKeepingUnitId = x["StockKeepingUnitId"]
+                        SkuSellers_FreightCommissionPercentage = x["FreightCommissionPercentage"]
+                        SkuSellers_ProductCommissionPercentage = x["ProductCommissionPercentage"]
+                    Attachments_Id = None
+                    RealDimension = Fjson["RealDimension"]
+                    RealDimension_realWeight = RealDimension["realCubicWeight"]
+                    CSCIdentification = Fjson["CSCIdentification"]
+                    RealDimension_realLength = RealDimension["realLength"]
+                    RealDimension_realWidth = RealDimension["realWidth"]
+                    RealDimension_realCubicWeight = RealDimension["realCubicWeight"]    
+                    SkuSellers = Fjson["SkuSellers"]
+                    for x in SkuSellers:
+                        SkuSellers_SellerId = x["SellerId"]
+                        SkuSellers_IsActive = x["IsActive"]
+                        SkuSellers_SellerStockKeepingUnitId = x["SellerStockKeepingUnitId"]
+                    Attachments_Name = None
+                    dimension_height = None
+                    RealDimension_realHeight = None
+                    ProductName = Fjson["ProductName"]
+                    ImageUrl = Fjson["ImageUrl"]
+                    DetailUrl = Fjson["DetailUrl"]
+                    Attachments_IsRequired = None
+                    ProductId = Fjson["ProductId"]
+                    IsGiftCardRecharge = Fjson["IsGiftCardRecharge"]
+                    NameComplete = Fjson["NameComplete"]
+                    dimension_cubicweight = None
+                    CommercialConditionId = Fjson["CommercialConditionId"]
+                    IsTransported = Fjson["IsTransported"]
+                    SkuName = Fjson["SkuName"]
+                    Attachments_IsActive = None
+                    dimension_length = None
+                    InformationSource = Fjson["InformationSource"]
+                    BrandId = Fjson["BrandId"]
+                    IsActive = Fjson["IsActive"]
+                    ProductDescription = Fjson["ProductDescription"]
+                    IsInventoried = Fjson["IsInventoried"]
+                    dimension_weight = None
+                    Id  = Fjson["Id"]
+                    
                     
                     df1 = pd.DataFrame({
-                        'unitMultiplier': unitMultiplier,
-                        'commercialConditionId': commercialConditionId,
-                        'manufacturerCode': manufacturerCode,
-                        'estimatedDateArrival': estimatedDateArrival,
-                        'height': height,
-                        'creationDate': creationDate,
-                        'length': length,
-                        'cubicWeight': cubicWeight,
-                        'name': name,
-                        'measurementUnit': measurementUnit,
-                        'weightKg': weightKg,
-                        'productId': productId,
-                        'packagedWeightKg': packagedWeightKg,
-                        'packagedLength': packagedLength,
-                        'isActive': isActive,
-                        'packagedHeight': packagedHeight,
-                        'width': width,
-                        'packagedWidth': packagedWidth,
-                        'refId': refId,
-                        'modalType': modalType,
-                        'rewardValue': rewardValue,
-                        'activateIfPossible': activateIfPossible,
-                        'isKit': isKit,
-                        'id': id}, index=[0])
+                        'BrandName': BrandName,
+                        'UnitMultiplier': UnitMultiplier,
+                        'MeasurementUnit': MeasurementUnit,
+                        'EstimatedDateArrival': EstimatedDateArrival,
+                        'ProductGlobalCategoryId': ProductGlobalCategoryId,
+                        'AlternateIds_RefId': AlternateIds_RefId,
+                        'ModalType': ModalType,
+                        'RewardValue': RewardValue,
+                        'Images_ImageName': Images_ImageName,
+                        'Images_ImageUrl': Images_ImageUrl,
+                        'Images_FileId': Images_FileId,
+                        'ProductCategoryIds': ProductCategoryIds,
+                        'SkuSellers_StockKeepingUnitId': SkuSellers_StockKeepingUnitId,
+                        'SkuSellers_FreightCommissionPercentage': SkuSellers_FreightCommissionPercentage,
+                        'SkuSellers_ProductCommissionPercentage': SkuSellers_ProductCommissionPercentage,
+                        'Attachments_Id': Attachments_Id,
+                        'RealDimension_realWeight': RealDimension_realWeight,
+                        'CSCIdentification': CSCIdentification,
+                        'RealDimension_realLength': RealDimension_realLength,
+                        'RealDimension_realWidth': RealDimension_realWidth,
+                        'RealDimension_realCubicWeight': RealDimension_realCubicWeight,
+                        'SkuSellers_SellerId': SkuSellers_SellerId,
+                    '    SkuSellers_IsActive': SkuSellers_IsActive,
+                        'SkuSellers_SellerStockKeepingUnitId': SkuSellers_SellerStockKeepingUnitId,
+                        'Attachments_Name': Attachments_Name,
+                    '    dimension_height': dimension_height,
+                        'RealDimension_realHeight': RealDimension_realHeight,
+                        'ProductName': ProductName,
+                        'ImageUrl': ImageUrl,
+                        'DetailUrl': DetailUrl,
+                        'Attachments_IsRequired': Attachments_IsRequired,
+                        'ProductId': ProductId,
+                        'IsGiftCardRecharge': IsGiftCardRecharge,
+                        'NameComplete': NameComplete,
+                        'dimension_cubicweight': dimension_cubicweight,
+                        'CommercialConditionId': CommercialConditionId,
+                        'IsTransported': IsTransported,
+                        'SkuName': SkuName,
+                        'Attachments_IsActive': Attachments_IsActive,
+                        'InformationSource': InformationSource,
+                        'BrandId': BrandId,
+                        'IsActive': IsActive,
+                        'dimension_length': dimension_length,
+                        'ProductDescription': ProductDescription,
+                        'IsInventoried': IsInventoried,
+                        'dimension_weight': dimension_weight,
+                        'Id': Id}, index=[0])
                     init.df = init.df.append(df1)
                     registro += 1
                     print("Registro: "+str(registro))
-                    if registro == 50:
-                        run()
                     if registro == 100:
+                        run()
+                    if registro == 200:
                         run()
         run()
     except:
@@ -115,7 +170,7 @@ def format_schema(schema):
 def delete_duplicate():
     client = bigquery.Client()
     QUERY = (
-        'CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_vtex_sku_specification` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.shopstar_vtex_sku_specification`')
+        'CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_vtex_sku_context` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.shopstar_vtex_sku_context`')
     query_job = client.query(QUERY)  
     rows = query_job.result()
     print(rows)
@@ -129,106 +184,199 @@ def run():
         
         table_schema = [
         {
-            "name": "unitMultiplier",
+            "name": "BrandName",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "UnitMultiplier",
             "type": "FLOAT",
             "mode": "NULLABLE"
         },{
-            "name": "commercialConditionId",
+            "name": "MeasurementUnit",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "EstimatedDateArrival",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "ProductGlobalCategoryId",
             "type": "INTEGER",
             "mode": "NULLABLE"
         },{
-            "name": "manufacturerCode",
+            "name": "AlternateIds_RefId",
             "type": "STRING",
             "mode": "NULLABLE"
         },{
-            "name": "estimatedDateArrival",
-            "type": "TIMESTAMP",
-            "mode": "NULLABLE"
-        },{
-            "name": "height",
-            "type": "FLOAT",
-            "mode": "NULLABLE"
-        },{
-            "name": "creationDate",
-            "type": "TIMESTAMP",
-            "mode": "NULLABLE"
-        },{
-            "name": "length",
-            "type": "FLOAT",
-            "mode": "NULLABLE"
-        },{
-            "name": "cubicWeight",
-            "type": "FLOAT",
-            "mode": "NULLABLE"
-        },{
-            "name": "name",
+            "name": "ModalType",
             "type": "STRING",
             "mode": "NULLABLE"
         },{
-            "name": "measurementUnit",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "weightKg",
+            "name": "RewardValue",
             "type": "FLOAT",
             "mode": "NULLABLE"
         },{
-            "name": "productId",
+            "name": "Images_ImageName",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "Images_ImageUrl",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "SkuSellers_ProductCommissionPercentage",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "ProductCategoryIds",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "SkuSellers_StockKeepingUnitId",
             "type": "INTEGER",
             "mode": "NULLABLE"
         },{
-            "name": "packagedWeightKg",
+            "name": "SkuSellers_FreightCommissionPercentage",
             "type": "FLOAT",
             "mode": "NULLABLE"
         },{
-            "name": "packagedLength",
-            "type": "FLOAT",
-            "mode": "NULLABLE"
-        },{
-            "name": "isActive",
-            "type": "BOOLEAN",
-            "mode": "NULLABLE"
-        },{
-            "name": "packagedHeight",
-            "type": "FLOAT",
-            "mode": "NULLABLE"
-        },{
-            "name": "width",
-            "type": "FLOAT",
-            "mode": "NULLABLE"
-        },{
-            "name": "packagedWidth",
-            "type": "FLOAT",
-            "mode": "NULLABLE"
-        },{
-            "name": "refId",
+            "name": "Attachments_Id",
             "type": "STRING",
             "mode": "NULLABLE"
         },{
-            "name": "modalType",
+            "name": "RealDimension_realWeight",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "CSCIdentification",
             "type": "STRING",
             "mode": "NULLABLE"
         },{
-            "name": "rewardValue",
+            "name": "RealDimension_realLength",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "RealDimension_realWidth",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "RealDimension_realCubicWeight",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "SkuSellers_SellerId",
             "type": "STRING",
             "mode": "NULLABLE"
         },{
-            "name": "activateIfPossible",
+            "name": "Attachments_Name",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "dimension_height",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "RealDimension_realHeight",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "Images_FileId",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "ProductName",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "ImageUrl",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "DetailUrl",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "Attachments_IsRequired",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "ProductId",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "IsGiftCardRecharge",
             "type": "BOOLEAN",
             "mode": "NULLABLE"
         },{
-            "name": "isKit",
+            "name": "SkuSellers_IsActive",
             "type": "BOOLEAN",
             "mode": "NULLABLE"
         },{
-            "name": "id",
+            "name": "NameComplete",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "dimension_cubicweight",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "CommercialConditionId",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "SkuSellers_SellerStockKeepingUnitId",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "IsTransported",
+            "type": "BOOLEAN",
+            "mode": "NULLABLE"
+        },{
+            "name": "SkuName",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "Attachments_IsActive",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "dimension_length",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "InformationSource",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "BrandId",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "IsActive",
+            "type": "BOOLEAN",
+            "mode": "NULLABLE"
+        },{
+            "name": "ProductDescription",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "IsInventoried",
+            "type": "BOOLEAN",
+            "mode": "NULLABLE"
+        },{
+            "name": "dimension_weight",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "Id",
             "type": "INTEGER",
             "mode": "NULLABLE"
         }]
-
+        
+        
         project_id = '999847639598'
         dataset_id = 'staging_zone'
-        table_id = 'shopstar_vtex_sku'
+        table_id = 'shopstar_vtex_sku_context'
         
         
         
