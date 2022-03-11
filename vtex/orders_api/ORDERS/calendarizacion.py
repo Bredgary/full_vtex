@@ -40,10 +40,83 @@ def sku():
             if response.status_code == 200:
                 if response.text is not '':
                     Fjson = json.loads(response.text)
-                    id_brand = Fjson["BrandId"]
+
+                    IsProductActive    = Fjson["IsProductActive"]
+                    ProductIsVisible    = Fjson["ProductIsVisible"]
+                    ReleaseDate    = Fjson["ReleaseDate"]
+                    UnitMultiplier = Fjson["UnitMultiplier"]
+                    EstimatedDateArrival    = Fjson["EstimatedDateArrival"]
+                    ShowIfNotAvailable    = Fjson["ShowIfNotAvailable"]
+                    ModalType    = Fjson["ModalType"]
+                    RewardValue    = Fjson["RewardValue"]
+                    ProductGlobalCategoryId    = Fjson["ProductGlobalCategoryId"]
+                    IsDirectCategoryActive    = Fjson["IsDirectCategoryActive"]
+                    IsKit    = Fjson["IsKit"]
+                    IsBrandActive    = Fjson["IsBrandActive"]
+                    ProductId    = Fjson["ProductId"]
+                    IsGiftCardRecharge    = Fjson["IsGiftCardRecharge"]
+                    KeyWords    = Fjson["KeyWords"]
+                    IsInventoried    = Fjson["IsInventoried"]
+                    BrandName    = Fjson["BrandName"]
+                    CSCIdentification    = Fjson["CSCIdentification"]
+                    CommercialConditionId    = Fjson["CommercialConditionId"]
+                    IsTransported    = Fjson["IsTransported"]
+                    ProductCategoryIds    = Fjson["ProductCategoryIds"]
+                    SkuName    = Fjson["SkuName"]
+                    ProductRefId    = Fjson["ProductRefId"]
+                    InformationSource    = Fjson["InformationSource"]
+                    BrandId    = Fjson["BrandId"]
+                    ProductFinalScore    = Fjson["ProductFinalScore"]
+                    NameComplete    = Fjson["NameComplete"]
+                    IsActive    = Fjson["IsActive"]
+                    ProductDescription    = Fjson["ProductDescription"]
+                    Id_ean    = Fjson["Id"]
+                    TaxCode    = Fjson["TaxCode"]
+                    ComplementName    = Fjson["ComplementName"]
+                    MeasurementUnit    = Fjson["MeasurementUnit"]
+                    ManufacturerCode    = Fjson["ManufacturerCode"]
+                    DetailUrl    = Fjson["DetailUrl"]
+                    ImageUrl    = Fjson["ImageUrl"]
+                    ProductName    = Fjson["ProductName"]
                     
                     df1 = pd.DataFrame({
-                        'id_brand': id_brand}, index=[0])
+                        'IsProductActive': IsProductActive,
+                        'ProductIsVisible': ProductIsVisible,
+                        'ReleaseDate': ReleaseDate,
+                        'UnitMultiplier': UnitMultiplier,
+                        'EstimatedDateArrival': EstimatedDateArrival,
+                        'ShowIfNotAvailable': ShowIfNotAvailable,
+                        'ModalType': ModalType,
+                        'RewardValue': RewardValue,
+                        'ProductGlobalCategoryId': ProductGlobalCategoryId,
+                        'IsDirectCategoryActive': IsDirectCategoryActive,
+                        'IsKit': IsKit,
+                        'IsBrandActive': IsBrandActive,
+                        'ProductId': ProductId,
+                        'IsGiftCardRecharge': IsGiftCardRecharge,
+                        'KeyWords': KeyWords,
+                        'IsInventoried': IsInventoried,
+                        'BrandName': BrandName,
+                        'CSCIdentification': CSCIdentification,
+                        'CommercialConditionId': CommercialConditionId,
+                        'IsTransported': IsTransported,
+                        'ProductCategoryIds': ProductCategoryIds,
+                        'SkuName': SkuName,
+                        'ProductRefId': ProductRefId,
+                        'InformationSource': InformationSource,
+                        'BrandId': BrandId,
+                        'ProductFinalScore': ProductFinalScore,
+                        'NameComplete': NameComplete,
+                        'IsActive': IsActive,
+                        'ProductDescription': ProductDescription,
+                        'Id_ean': Id_ean,
+                        'TaxCode': TaxCode,
+                        'ComplementName': ComplementName,
+                        'MeasurementUnit': MeasurementUnit,
+                        'ManufacturerCode': ManufacturerCode,
+                        'DetailUrl': DetailUrl,
+                        'ImageUrl': ImageUrl,
+                        'ProductName': ProductName}, index=[0])
                     init.df = init.df.append(df1)
                     registro += 1
                     print("Registro: "+str(registro))
@@ -79,7 +152,151 @@ def run():
         
         table_schema = [
         {
-            "name": "id_brand",
+            "name": "IsProductActive",
+            "type": "BOOLEAN",
+            "mode": "NULLABLE"
+        },{
+            "name": "ProductIsVisible",
+            "type": "BOOLEAN",
+            "mode": "NULLABLE"
+        },{
+            "name": "ReleaseDate",
+            "type": "TIMESTAMP",
+            "mode": "NULLABLE"
+        },{
+            "name": "UnitMultiplier",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "EstimatedDateArrival",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "ShowIfNotAvailable",
+            "type": "BOOLEAN",
+            "mode": "NULLABLE"
+        },{
+            "name": "ModalType",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "RewardValue",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+        },{
+            "name": "ProductGlobalCategoryId",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "IsDirectCategoryActive",
+            "type": "BOOLEAN",
+            "mode": "NULLABLE"
+        },{
+            "name": "IsKit",
+            "type": "BOOLEAN",
+            "mode": "NULLABLE"
+        },{
+            "name": "IsBrandActive",
+            "type": "BOOLEAN",
+            "mode": "NULLABLE"
+        },{
+            "name": "ProductId",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "IsGiftCardRecharge",
+            "type": "BOOLEAN",
+            "mode": "NULLABLE"
+        },{
+            "name": "KeyWords",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "IsInventoried",
+            "type": "BOOLEAN",
+            "mode": "NULLABLE"
+        },{
+            "name": "BrandName",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "CSCIdentification",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "CommercialConditionId",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "IsTransported",
+            "type": "BOOLEAN",
+            "mode": "NULLABLE"
+        },{
+            "name": "ProductCategoryIds",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "SkuName",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "ProductRefId",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "InformationSource",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "BrandId",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "ProductFinalScore",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "NameComplete",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "IsActive",
+            "type": "BOOLEAN",
+            "mode": "NULLABLE"
+        },{
+            "name": "ProductDescription",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "Id_ean",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "TaxCode",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "ComplementName",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "MeasurementUnit",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "ManufacturerCode",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "DetailUrl",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "ImageUrl",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "ProductName",
             "type": "STRING",
             "mode": "NULLABLE"
         }]
@@ -87,7 +304,7 @@ def run():
         
         project_id = '999847639598'
         dataset_id = 'staging_zone'
-        table_id = 'shopstar_vtex_brand_id_temp'
+        table_id = 'shopstar_vtex_ean'
         
         
         
@@ -100,8 +317,8 @@ def run():
                 table = dataset.table(table_id)
                 job_config = bigquery.LoadJobConfig()
                 job_config.schema = format_schema(table_schema)
-                job_config.write_disposition = "WRITE_TRUNCATE"
-                job_config.autodetect = True
+                #job_config.write_disposition = "WRITE_TRUNCATE"
+                #job_config.autodetect = True
                 job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
                 job = client.load_table_from_json(json_object, table, job_config = job_config)
                 print(job.result())
@@ -111,8 +328,8 @@ def run():
                 dataset  = client.dataset(dataset_id)
                 table = dataset.table(table_id)
                 job_config = bigquery.LoadJobConfig()
-                job_config.write_disposition = "WRITE_TRUNCATE"
-                job_config.autodetect = True
+                #job_config.write_disposition = "WRITE_TRUNCATE"
+                #job_config.autodetect = True
                 job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
                 job = client.load_table_from_json(json_object, table, job_config = job_config)
                 print(job.result())
