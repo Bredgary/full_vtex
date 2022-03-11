@@ -32,7 +32,7 @@ def sku():
         #QUERY = ('SELECT FieldValueId FROM `shopstar-datalake.staging_zone.shopstar_vtex_field_value`')
         #query_job = client.query(QUERY)
         #rows = query_job.result()
-        #registro = 0
+        registro = 0
         #for row in rows:
         url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/saleschannel/list"
         #url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/specificationvalue/"+str(row.FieldValueId)+""
