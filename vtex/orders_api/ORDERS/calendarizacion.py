@@ -55,7 +55,7 @@ def sku():
                     
                     
                     df1 = pd.DataFrame({
-                        'type_collection': type_collection,
+                        'type': type_collection,
                         'totalProducts': totalProducts,
                         'dateFrom': dateFrom,
                         'highlight': highlight,
