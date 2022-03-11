@@ -40,13 +40,12 @@ def sku():
             if response.status_code == 200:
                 if response.text is not '':
                     Fjson = json.loads(response.text)
-                    
                     for x in Fjson:
                         SpecificationValue = x["SpecificationValue"]
                         SpecificationName = x["SpecificationName"]
                         SkuId = x["SkuId"]
                         Id = x["Id"]
-                    
+                        
                         df1 = pd.DataFrame({
                             'SpecificationValue': SpecificationValue,
                             'SpecificationName': SpecificationName,
