@@ -32,7 +32,7 @@ def sku():
         #QUERY = ('SELECT id FROM `shopstar-datalake.staging_zone.shopstar_vtex_sku_id_temp`')
         #query_job = client.query(QUERY)
         #rows = query_job.result()
-        #registro = 0
+        registro = 0
         #for row in rows:
         url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/collection/search"
         response = requests.request("GET", url, headers=init.headers)
