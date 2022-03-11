@@ -52,7 +52,7 @@ def sku():
                     ProductClusterId = x["ProductClusterId"]
                     CultureInfo = x["CultureInfo"]
                     CurrencySymbol = x["CurrencySymbol"]
-                    if type (x["CurrencyDecimalDigits"]) == INTEGER:
+                    if type (x["CurrencyDecimalDigits"]) == int:
                         CurrencyDecimalDigits = x["CurrencyDecimalDigits"]
                     else:
                         CurrencyDecimalDigits = 0
