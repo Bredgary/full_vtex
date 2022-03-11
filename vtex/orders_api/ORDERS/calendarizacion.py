@@ -69,7 +69,7 @@ def sku():
                     
                     df1 = pd.DataFrame({
                         'Origin': Origin,
-                        'CurrencyFormatInfo': CurrencyFormatInfo,
+                        'CurrencyGroupSeparator': CurrencyGroupSeparator,
                         'StartsWithCurrencySymbol': StartsWithCurrencySymbol,
                         'CurrencyGroupSize': CurrencyGroupSize,
                         'CurrencyDecimalSeparator': CurrencyDecimalSeparator,
@@ -83,7 +83,6 @@ def sku():
                         'TimeZone': TimeZone,
                         'ConditionRule': ConditionRule,
                         'CurrencyLocale': CurrencyLocale,
-                        'CurrencyGroupSeparator': CurrencyGroupSeparator,
                         'IsActive': IsActive,
                         'CountryCode': CountryCode,
                         'Name': Name}, index=[0])
