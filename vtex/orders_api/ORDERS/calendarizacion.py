@@ -27,38 +27,51 @@ class init:
 
 def sku():
     try:
-        print("Cargando consulta")
-        client = bigquery.Client()
-        QUERY = ('SELECT id FROM `shopstar-datalake.staging_zone.shopstar_vtex_sku_id_temp`')
-        query_job = client.query(QUERY)
-        rows = query_job.result()
-        registro = 0
-        for row in rows:
-            url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/specification/nonstructured?skuId="+str(row.id)+""
-            response = requests.request("GET", url, headers=init.headers)
-            
-            if response.status_code == 200:
-                if response.text is not '':
-                    Fjson = json.loads(response.text)
-                    for x in Fjson:
-                        Id = x["Id"]
-                        SkuId = x["SkuId"]
-                        SpecificationName = x["SpecificationName"]
-                        SpecificationValue = x["SpecificationValue"]
-                        
-                        
-                        df1 = pd.DataFrame({
-                            'SpecificationValue': SpecificationValue,
-                            'SpecificationName': SpecificationName,
-                            'SkuId': SkuId,
-                            'Id': Id}, index=[0])
-                        init.df = init.df.append(df1)
-                        registro += 1
-                        print("Registro: "+str(registro))
-                        if registro == 100:
-                            run()
-                        if registro == 200:
-                            run()
+        #print("Cargando consulta")
+        #client = bigquery.Client()
+        #QUERY = ('SELECT id FROM `shopstar-datalake.staging_zone.shopstar_vtex_sku_id_temp`')
+        #query_job = client.query(QUERY)
+        #rows = query_job.result()
+        #registro = 0
+        #for row in rows:
+        url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/collection/search"
+        response = requests.request("GET", url, headers=init.headers)
+        
+        if response.status_code == 200:
+            if response.text is not '':
+                Fjson = json.loads(response.text)
+                items = Fjson["items"]
+                for x in items:
+                    type_collection = x["type"]
+                    totalProducts = x["totalProducts"]
+                    dateFrom = x["dateFrom"]
+                    highlight = x["highlight"]
+                    lastModifiedBy = x["lastModifiedBy"]
+                    totalSku = x["totalSku"]
+                    searchable = x["searchable"]
+                    name = x["name"]
+                    dateTo = x["dateTo"]
+                    id = x["id"]
+                    
+                    
+                    df1 = pd.DataFrame({
+                        'type_collection': type_collection,
+                        'totalProducts': totalProducts,
+                        'dateFrom': dateFrom,
+                        'highlight': highlight,
+                        'lastModifiedBy': lastModifiedBy,
+                        'totalSku': totalSku,
+                        'searchable': searchable,
+                        'name': name,
+                        'dateTo': dateTo,
+                        'id': id}, index=[0])
+                    init.df = init.df.append(df1)
+                    registro += 1
+                    print("Registro: "+str(registro))
+                    if registro == 100:
+                        run()
+                    if registro == 200:
+                        run()
         run()
     except:
         print("Error.")
@@ -87,27 +100,51 @@ def run():
         
         table_schema = [
         {
-            "name": "SpecificationValue",
+            "name": "type",
             "type": "STRING",
             "mode": "NULLABLE"
         },{
-            "name": "SpecificationName",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "SkuId",
+            "name": "totalProducts",
             "type": "INTEGER",
             "mode": "NULLABLE"
         },{
-            "name": "Id",
+            "name": "dateFrom",
+            "type": "TIMESTAMP",
+            "mode": "NULLABLE"
+        },{
+            "name": "highlight",
+            "type": "BOOLEAN",
+            "mode": "NULLABLE"
+        },{
+            "name": "lastModifiedBy",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "totalSku",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "searchable",
+            "type": "BOOLEAN",
+            "mode": "NULLABLE"
+        },{
+            "name": "name",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "dateTo",
+            "type": "TIMESTAMP",
+            "mode": "NULLABLE"
+        },{
+            "name": "id",
             "type": "INTEGER",
             "mode": "NULLABLE"
         }]
-        
+  
         
         project_id = '999847639598'
         dataset_id = 'staging_zone'
-        table_id = 'shopstar_vtex_sku_non_strtuctured'
+        table_id = 'shopstar_vtex_collection_beta'
         
         
         
