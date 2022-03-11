@@ -27,30 +27,62 @@ class init:
 
 def sku():
     try:
-        print("Cargando consulta")
-        client = bigquery.Client()
-        QUERY = ('SELECT FieldValueId FROM `shopstar-datalake.staging_zone.shopstar_vtex_field_value`')
-        query_job = client.query(QUERY)
-        rows = query_job.result()
-        registro = 0
-        for row in rows:
-            url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/specificationvalue/"+str(row.FieldValueId)+""
-            response = requests.request("GET", url, headers=init.headers)
-            
-            if response.status_code == 200:
-                if response.text is not '':
-                    Fjson = json.loads(response.text)
+        #print("Cargando consulta")
+        #client = bigquery.Client()
+        #QUERY = ('SELECT FieldValueId FROM `shopstar-datalake.staging_zone.shopstar_vtex_field_value`')
+        #query_job = client.query(QUERY)
+        #rows = query_job.result()
+        #registro = 0
+        #for row in rows:
+        url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/saleschannel/list"
+        #url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/specificationvalue/"+str(row.FieldValueId)+""
+        response = requests.request("GET", url, headers=init.headers)
+        
+        if response.status_code == 200:
+            if response.text is not '':
+                Fjson = json.loads(response.text)
+                
+                for x in Fjson:
+                    Origin = x["Origin"]
+                    CurrencyFormatInfo = x["CurrencyFormatInfo"]
+                    StartsWithCurrencySymbol = CurrencyFormatInfo["StartsWithCurrencySymbol"]
+                    CurrencyGroupSize = CurrencyFormatInfo["CurrencyGroupSize"]
+                    CurrencyDecimalSeparator = CurrencyFormatInfo["CurrencyDecimalSeparator"]
+                    Id = x["Id"]
+                    ProductClusterId = x["ProductClusterId"]
+                    CultureInfo = x["CultureInfo"]
+                    CurrencySymbol = x["CurrencySymbol"]
+                    CurrencyDecimalDigits = x["CurrencyDecimalDigits"]
+                    CurrencyCode = x["CurrencyCode"]
+                    Position = x["Position"]
+                    TimeZone = x["TimeZone"]
+                    ConditionRule = x["ConditionRule"]
+                    CurrencyLocale = x["CurrencyLocale"]
+                    CurrencyGroupSeparator = CurrencyFormatInfo["CurrencyGroupSeparator"]
+                    IsActive = x["IsActive"]
+                    CountryCode = x["CountryCode"]
+                    Name = x["Name"]
                     
-                    Position = Fjson["Position"]   
-                    IsActive = Fjson["IsActive"]   
-                    Value = Fjson["Value"]   
-                    FieldValueId = Fjson["FieldValueId"]     
-                        
                     df1 = pd.DataFrame({
+                        'Origin': Origin,
+                        'CurrencyFormatInfo': CurrencyFormatInfo,
+                        'StartsWithCurrencySymbol': StartsWithCurrencySymbol,
+                        'CurrencyGroupSize': CurrencyGroupSize,
+                        'CurrencyDecimalSeparator': CurrencyDecimalSeparator,
+                        'Id': Id,
+                        'ProductClusterId': ProductClusterId,
+                        'CultureInfo': CultureInfo,
+                        'CurrencySymbol': CurrencySymbol,
+                        'CurrencyDecimalDigits': CurrencyDecimalDigits,
+                        'CurrencyCode': CurrencyCode,
                         'Position': Position,
+                        'TimeZone': TimeZone,
+                        'ConditionRule': ConditionRule,
+                        'CurrencyLocale': CurrencyLocale,
+                        'CurrencyGroupSeparator': CurrencyGroupSeparator,
                         'IsActive': IsActive,
-                        'Value': Value,
-                        'FieldValueId': FieldValueId}, index=[0])
+                        'CountryCode': CountryCode,
+                        'Name': Name}, index=[0])
                     init.df = init.df.append(df1)
                     registro += 1
                     print("Registro: "+str(registro))
@@ -88,26 +120,83 @@ def run():
         
         table_schema = [
         {
+            "name": "Origin",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "StartsWithCurrencySymbol",
+            "type": "BOOLEAN",
+            "mode": "NULLABLE"
+        },{
+            "name": "CurrencyGroupSize",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "CurrencyDecimalSeparator",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "Id",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "ProductClusterId",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "CultureInfo",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "CurrencySymbol",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "CurrencyDecimalDigits",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "CurrencyCode",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
             "name": "Position",
             "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "TimeZone",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "ConditionRule",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "CurrencyLocale",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "CurrencyGroupSeparator",
+            "type": "STRING",
             "mode": "NULLABLE"
         },{
             "name": "IsActive",
             "type": "BOOLEAN",
             "mode": "NULLABLE"
         },{
-            "name": "Value",
+            "name": "CountryCode",
             "type": "STRING",
             "mode": "NULLABLE"
         },{
-            "name": "FieldValueId",
-            "type": "INTEGER",
+            "name": "Name",
+            "type": "STRING",
             "mode": "NULLABLE"
-        }]
+        }]  
+
         
         project_id = '999847639598'
         dataset_id = 'staging_zone'
-        table_id = 'shopstar_vtex_field_value'
+        table_id = 'shopstar_vtex_sales_channel_list'
         
         
         if df.empty:
