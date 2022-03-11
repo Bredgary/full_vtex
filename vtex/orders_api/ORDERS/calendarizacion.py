@@ -22,7 +22,6 @@ class init:
   day = dt.day
   today = datetime.date.today()
   yesterday = today - datetime.timedelta(days=1)
-  listaSku = []
   now = datetime.datetime.now()
 
 
@@ -35,32 +34,23 @@ def sku():
         rows = query_job.result()
         registro = 0
         for row in rows:
-            url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/stockkeepingunit/"+str(row.id)+"/complement"
-
+            url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/stockkeepingunit/"+str(row.id)+"/ean"
             response = requests.request("GET", url, headers=init.headers)
             
             if response.status_code == 200:
                 if response.text is not '':
                     Fjson = json.loads(response.text)
+                    id = Fjson[0]
                     
-                    for x in Fjson:
-                        Id = x["Id"]
-                        SkuId = x["SkuId"]
-                        ParentSkuId = x["ParentSkuId"]
-                        ComplementTypeId = x["ComplementTypeId"]
-                        
-                        df1 = pd.DataFrame({
-                            'id': Id,
-                            'skuId': SkuId,
-                            'parentSkuId': ParentSkuId,
-                            'complementTypeId': ComplementTypeId}, index=[0])
-                        init.df = init.df.append(df1)
-                        registro += 1
-                        print("Registro: "+str(registro))
-                        if registro == 100:
-                            run()
-                        if registro == 200:
-                            run()
+                    df1 = pd.DataFrame({
+                        'id_ean': id_ean}, index=[0])
+                    init.df = init.df.append(df1)
+                    registro += 1
+                    print("Registro: "+str(registro))
+                    if registro == 100:
+                        run()
+                    if registro == 200:
+                        run()
         run()
     except:
         print("Error.")
@@ -89,19 +79,7 @@ def run():
         
         table_schema = [
         {
-            "name": "id",
-            "type": "INTEGER",
-            "mode": "NULLABLE"
-        },{
-            "name": "skuId",
-            "type": "INTEGER",
-            "mode": "NULLABLE"
-        },{
-            "name": "parentSkuId",
-            "type": "INTEGER",
-            "mode": "NULLABLE"
-        },{
-            "name": "complementTypeId",
+            "name": "id_ean",
             "type": "INTEGER",
             "mode": "NULLABLE"
         }]
@@ -109,7 +87,7 @@ def run():
         
         project_id = '999847639598'
         dataset_id = 'staging_zone'
-        table_id = 'shopstar_vtex_sku_complements'
+        table_id = 'shopstar_vtex_ean_id_temp'
         
         
         
@@ -122,8 +100,8 @@ def run():
                 table = dataset.table(table_id)
                 job_config = bigquery.LoadJobConfig()
                 job_config.schema = format_schema(table_schema)
-                #job_config.write_disposition = "WRITE_TRUNCATE"
-                #job_config.autodetect = True
+                job_config.write_disposition = "WRITE_TRUNCATE"
+                job_config.autodetect = True
                 job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
                 job = client.load_table_from_json(json_object, table, job_config = job_config)
                 print(job.result())
@@ -133,9 +111,9 @@ def run():
                 dataset  = client.dataset(dataset_id)
                 table = dataset.table(table_id)
                 job_config = bigquery.LoadJobConfig()
-                #job_config.schema = format_schema(table_schema)
-                #job_config.write_disposition = "WRITE_TRUNCATE"
-                #job_config.autodetect = True
+                job_config.schema = format_schema(table_schema)
+                job_config.write_disposition = "WRITE_TRUNCATE"
+                job_config.autodetect = True
                 job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
                 job = client.load_table_from_json(json_object, table, job_config = job_config)
                 print(job.result())
