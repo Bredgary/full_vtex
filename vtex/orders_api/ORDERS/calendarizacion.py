@@ -133,7 +133,6 @@ def sku():
                         'ProductId': ProductId,
                         'IsGiftCardRecharge': IsGiftCardRecharge,
                         'NameComplete': NameComplete,
-                        'dimension_cubicweight': dimension_cubicweight,
                         'CommercialConditionId': CommercialConditionId,
                         'IsTransported': IsTransported,
                         'SkuName': SkuName,
