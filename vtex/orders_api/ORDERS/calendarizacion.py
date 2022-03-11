@@ -29,37 +29,28 @@ def sku():
     try:
         print("Cargando consulta")
         client = bigquery.Client()
-        QUERY = ('SELECT id FROM `shopstar-datalake.staging_zone.shopstar_vtex_collection_beta`')
+        QUERY = ('SELECT FieldValueId FROM `shopstar-datalake.staging_zone.shopstar_vtex_field_value`')
         query_job = client.query(QUERY)
         rows = query_job.result()
         registro = 0
         for row in rows:
-            url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/collection/"+str(row.id)+""
+            url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/specificationvalue/"+str(row.FieldValueId)+""
             response = requests.request("GET", url, headers=init.headers)
             
             if response.status_code == 200:
                 if response.text is not '':
                     Fjson = json.loads(response.text)
-                    Id = Fjson["Id"]
-                    Name = Fjson["Name"]
-                    Description = Fjson["Description"]
-                    Searchable = Fjson["Searchable"]
-                    Highlight = Fjson["Highlight"]
-                    DateFrom = Fjson["DateFrom"]
-                    DateTo = Fjson["DateTo"]
-                    TotalProducts = Fjson["TotalProducts"]
-                    Type = Fjson["Type"]
+                    
+                    Position = Fjson["Position"]   
+                    IsActive = Fjson["IsActive"]   
+                    Value = Fjson["Value"]   
+                    FieldValueId = Fjson["FieldValueId"]     
                         
                     df1 = pd.DataFrame({
-                        'Id': Id,
-                        'Name': Name,
-                        'Description': Description,
-                        'Searchable': Searchable,
-                        'Highlight': Highlight,
-                        'DateFrom': DateFrom,
-                        'DateTo': DateTo,
-                        'TotalProducts': TotalProducts,
-                        'Type': Type}, index=[0])
+                        'Position': Position,
+                        'IsActive': IsActive,
+                        'Value': Value,
+                        'FieldValueId': FieldValueId}, index=[0])
                     init.df = init.df.append(df1)
                     registro += 1
                     print("Registro: "+str(registro))
@@ -67,6 +58,8 @@ def sku():
                         run()
                     if registro == 200:
                         run()
+                    if registro == 300:
+                        break
         run()
     except:
         print("Error.")
@@ -81,7 +74,7 @@ def format_schema(schema):
 def delete_duplicate():
     client = bigquery.Client()
     QUERY = (
-        'CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_vtex_ean_id_temp` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.shopstar_vtex_ean_id_temp`')
+        'CREATE OR REPLACE TABLE `shopstar-datalake.staging_zone.shopstar_vtex_field_value` AS SELECT DISTINCT * FROM `shopstar-datalake.staging_zone.shopstar_vtex_field_value`')
     query_job = client.query(QUERY)  
     rows = query_job.result()
     print(rows)
@@ -95,50 +88,27 @@ def run():
         
         table_schema = [
         {
-            "name": "Type",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "DateTo",
-            "type": "TIMESTAMP",
-            "mode": "NULLABLE"
-        },{
-            "name": "DateFrom",
-            "type": "TIMESTAMP",
-            "mode": "NULLABLE"
-        },{
-            "name": "Highlight",
-            "type": "BOOLEAN",
-            "mode": "NULLABLE"
-        },{
-            "name": "TotalProducts",
+            "name": "Position",
             "type": "INTEGER",
             "mode": "NULLABLE"
         },{
-            "name": "Id",
-            "type": "INTEGER",
-            "mode": "NULLABLE"
-        },{
-            "name": "Searchable",
+            "name": "IsActive",
             "type": "BOOLEAN",
             "mode": "NULLABLE"
         },{
-            "name": "Description",
+            "name": "Value",
             "type": "STRING",
             "mode": "NULLABLE"
         },{
-            "name": "Name",
-            "type": "STRING",
+            "name": "FieldValueId",
+            "type": "INTEGER",
             "mode": "NULLABLE"
         }]
         
-  
-        
         project_id = '999847639598'
         dataset_id = 'staging_zone'
-        table_id = 'shopstar_vtex_collection'
+        table_id = 'shopstar_vtex_field_value'
         
-
         
         if df.empty:
             print('DataFrame is empty!')
