@@ -112,7 +112,6 @@ def sku():
                         'RewardValue': RewardValue,
                         'Images_ImageName': Images_ImageName,
                         'Images_ImageUrl': Images_ImageUrl,
-                        'Images_FileId': Images_FileId,
                         'ProductCategoryIds': ProductCategoryIds,
                         'SkuSellers_StockKeepingUnitId': SkuSellers_StockKeepingUnitId,
                         'SkuSellers_FreightCommissionPercentage': SkuSellers_FreightCommissionPercentage,
