@@ -124,7 +124,7 @@ def sku():
                         'RealDimension_realWidth': RealDimension_realWidth,
                         'RealDimension_realCubicWeight': RealDimension_realCubicWeight,
                         'SkuSellers_SellerId': SkuSellers_SellerId,
-                    '    SkuSellers_IsActive': SkuSellers_IsActive,
+                        'SkuSellers_IsActive': SkuSellers_IsActive,
                         'SkuSellers_SellerStockKeepingUnitId': SkuSellers_SellerStockKeepingUnitId,
                         'Attachments_Name': Attachments_Name,
                     '    dimension_height': dimension_height,
