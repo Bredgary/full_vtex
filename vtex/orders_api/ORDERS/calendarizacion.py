@@ -27,44 +27,39 @@ class init:
 
 def sku():
     try:
-        #print("Cargando consulta")
-        #client = bigquery.Client()
-        #QUERY = ('SELECT id FROM `shopstar-datalake.staging_zone.shopstar_vtex_sku_id_temp`')
-        #query_job = client.query(QUERY)
-        #rows = query_job.result()
+        print("Cargando consulta")
+        client = bigquery.Client()
+        QUERY = ('SELECT id FROM `shopstar-datalake.staging_zone.shopstar_vtex_collection_beta`')
+        query_job = client.query(QUERY)
+        rows = query_job.result()
         registro = 0
-        #for row in rows:
-        url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/collection/search"
-        response = requests.request("GET", url, headers=init.headers)
-        
-        if response.status_code == 200:
-            if response.text is not '':
-                Fjson = json.loads(response.text)
-                items = Fjson["items"]
-                for x in items:
-                    type_collection = x["type"]
-                    totalProducts = x["totalProducts"]
-                    dateFrom = x["dateFrom"]
-                    highlight = x["highlight"]
-                    lastModifiedBy = x["lastModifiedBy"]
-                    totalSku = x["totalSku"]
-                    searchable = x["searchable"]
-                    name = x["name"]
-                    dateTo = x["dateTo"]
-                    id = x["id"]
-                    
-                    
+        for row in rows:
+            url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/collection/"+str(row.id)+""
+            response = requests.request("GET", url, headers=init.headers)
+            
+            if response.status_code == 200:
+                if response.text is not '':
+                    Fjson = json.loads(response.text)
+                    Id = Fjson["Id"]
+                    Name = Fjson["Name"]
+                    Description = Fjson["Description"]
+                    Searchable = Fjson["Searchable"]
+                    Highlight = Fjson["Highlight"]
+                    DateFrom = Fjson["DateFrom"]
+                    DateTo = Fjson["DateTo"]
+                    TotalProducts = Fjson["TotalProducts"]
+                    Type = Fjson["Type"]
+                        
                     df1 = pd.DataFrame({
-                        'type': type_collection,
-                        'totalProducts': totalProducts,
-                        'dateFrom': dateFrom,
-                        'highlight': highlight,
-                        'lastModifiedBy': lastModifiedBy,
-                        'totalSku': totalSku,
-                        'searchable': searchable,
-                        'name': name,
-                        'dateTo': dateTo,
-                        'id': id}, index=[0])
+                        'Id': Id,
+                        'Name': Name,
+                        'Description': Description,
+                        'Searchable': Searchable,
+                        'Highlight': Highlight,
+                        'DateFrom': DateFrom,
+                        'DateTo': DateTo,
+                        'TotalProducts': TotalProducts,
+                        'Type': Type}, index=[0])
                     init.df = init.df.append(df1)
                     registro += 1
                     print("Registro: "+str(registro))
@@ -100,51 +95,48 @@ def run():
         
         table_schema = [
         {
-            "name": "type",
+            "name": "Type",
             "type": "STRING",
             "mode": "NULLABLE"
         },{
-            "name": "totalProducts",
-            "type": "INTEGER",
-            "mode": "NULLABLE"
-        },{
-            "name": "dateFrom",
+            "name": "DateTo",
             "type": "TIMESTAMP",
             "mode": "NULLABLE"
         },{
-            "name": "highlight",
-            "type": "BOOLEAN",
-            "mode": "NULLABLE"
-        },{
-            "name": "lastModifiedBy",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "totalSku",
-            "type": "INTEGER",
-            "mode": "NULLABLE"
-        },{
-            "name": "searchable",
-            "type": "BOOLEAN",
-            "mode": "NULLABLE"
-        },{
-            "name": "name",
-            "type": "STRING",
-            "mode": "NULLABLE"
-        },{
-            "name": "dateTo",
+            "name": "DateFrom",
             "type": "TIMESTAMP",
             "mode": "NULLABLE"
         },{
-            "name": "id",
+            "name": "Highlight",
+            "type": "BOOLEAN",
+            "mode": "NULLABLE"
+        },{
+            "name": "TotalProducts",
             "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "Id",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+        },{
+            "name": "Searchable",
+            "type": "BOOLEAN",
+            "mode": "NULLABLE"
+        },{
+            "name": "Description",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },{
+            "name": "Name",
+            "type": "STRING",
             "mode": "NULLABLE"
         }]
+        
   
         
         project_id = '999847639598'
         dataset_id = 'staging_zone'
-        table_id = 'shopstar_vtex_collection_beta'
+        table_id = 'shopstar_vtex_collection'
         
         
         
