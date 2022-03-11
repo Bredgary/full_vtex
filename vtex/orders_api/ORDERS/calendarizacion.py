@@ -40,17 +40,16 @@ def sku():
             if response.status_code == 200:
                 if response.text is not '':
                     Fjson = json.loads(response.text)
-                    id = int(Fjson[0])
-                    if type (id) == int:
-                        df1 = pd.DataFrame({
-                            'id_ean': id}, index=[0])
-                        init.df = init.df.append(df1)
-                        registro += 1
-                        print("Registro: "+str(registro))
-                        if registro == 100:
-                            run()
-                        if registro == 200:
-                            run()
+                    id = Fjson[0]
+                    df1 = pd.DataFrame({
+                        'id_ean': id}, index=[0])
+                    init.df = init.df.append(df1)
+                    registro += 1
+                    print("Registro: "+str(registro))
+                    if registro == 100:
+                        run()
+                    if registro == 200:
+                        run()
         run()
     except:
         print("Error.")
@@ -80,7 +79,7 @@ def run():
         table_schema = [
         {
             "name": "id_ean",
-            "type": "INTEGER",
+            "type": "STRING",
             "mode": "NULLABLE"
         }]
         
