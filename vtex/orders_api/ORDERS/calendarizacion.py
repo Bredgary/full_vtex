@@ -127,7 +127,6 @@ def sku():
                         'SkuSellers_IsActive': SkuSellers_IsActive,
                         'SkuSellers_SellerStockKeepingUnitId': SkuSellers_SellerStockKeepingUnitId,
                         'Attachments_Name': Attachments_Name,
-                        'RealDimension_realHeight': RealDimension_realHeight,
                         'ProductName': ProductName,
                         'ImageUrl': ImageUrl,
                         'DetailUrl': DetailUrl,
