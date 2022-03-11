@@ -34,7 +34,7 @@ def sku():
         rows = query_job.result()
         registro = 0
         for row in rows:
-            url = "https://mercury.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitbyean/"+str(row.id)+""
+            url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/specification/nonstructured?skuId="+str(row.id)+""
             response = requests.request("GET", url, headers=init.headers)
             
             if response.status_code == 200:
