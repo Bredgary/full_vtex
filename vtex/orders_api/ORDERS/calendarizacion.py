@@ -76,6 +76,10 @@ def sku():
                         SkuSellers_SellerId = x["SellerId"]
                         SkuSellers_IsActive = x["IsActive"]
                         SkuSellers_SellerStockKeepingUnitId = x["SellerStockKeepingUnitId"]
+                        if type (SkuSellers_SellerStockKeepingUnitId) == int:
+                            SkuSellers_SellerStockKeepingUnitId = x["SellerStockKeepingUnitId"]
+                        else:
+                            SkuSellers_SellerStockKeepingUnitId = 0
                     Attachments_Name = None
                     dimension_height = None
                     RealDimension_realHeight = None
@@ -101,6 +105,7 @@ def sku():
                     Id  = Fjson["Id"]
                     
                     
+                    
                     df1 = pd.DataFrame({
                         'BrandName': BrandName,
                         'UnitMultiplier': UnitMultiplier,
@@ -124,7 +129,7 @@ def sku():
                         'RealDimension_realCubicWeight': RealDimension_realCubicWeight,
                         'SkuSellers_SellerId': SkuSellers_SellerId,
                         'SkuSellers_IsActive': SkuSellers_IsActive,
-                        'SkuSellers_SellerStockKeepingUnitId': SkuSellers_SellerStockKeepingUnitId,
+                        'SkuSellers_SellerStockKeepingUnitId': SkuSellers_SellerStockKeepingUnitId,    
                         'Attachments_Name': Attachments_Name,
                         'ProductName': ProductName,
                         'ImageUrl': ImageUrl,
