@@ -13,6 +13,7 @@ from os import system
 from google.cloud import bigquery
 import logging
 from datetime import date, timedelta
+import sys
 
 class init:
     today = datetime.date.today()
@@ -263,7 +264,9 @@ def time():
         init.registro = 0
     run()
     
-time()
+#time()
+print(sys.argv)
+print(sys.argv)
 
 
 
