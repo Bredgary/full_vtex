@@ -5,3 +5,6 @@ echo "Second arg: $2"
 
 parameterA="$1" 
 parameterB="$2" 
+
+echo $parameterA
+echo $parameterB
