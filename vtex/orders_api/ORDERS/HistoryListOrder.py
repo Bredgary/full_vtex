@@ -183,9 +183,9 @@ def daterange(start_date, end_date):
     for n in range(int((end_date - start_date).days)):
         yield start_date + timedelta(n)
 
-def time():
-    start_date = date(2019, 1, 1)
-    end_date = date(2022, 2, 8)
+def time(init_anio,init_mes,init_dia,end_anio,end_mes,end_dia):
+    start_date = date(init_anio, init_mes, init_dia)
+    end_date = date(end_anio, end_mes, end_dia)
     for single_date in daterange(start_date, end_date):
         today = single_date.strftime("%Y-%m-%d")
         print(today)
@@ -263,12 +263,18 @@ def time():
         get_params(hora_23)
         init.registro = 0
     run()
-    
-#time()
+
 param1 = sys.argv[1]
 param2 = sys.argv[2]
-print(param1,param2)
-#print(sys.argv)
+param3 = sys.argv[3]
+
+param4 = sys.argv[4]
+param5 = sys.argv[5]
+param6 = sys.argv[6]
+
+time(param1,param2,param3,param4,param5,param6)
+
+
 
 
 
