@@ -266,7 +266,7 @@ def time():
     
 #time()
 print(sys.argv)
-print(sys.argv)
+#print(sys.argv)
 
 
 
