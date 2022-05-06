@@ -27,14 +27,15 @@ class init:
 
 def sku():
     try:
-        #print("Cargando consulta")
-        #client = bigquery.Client()
-        #QUERY = ('SELECT FieldValueId FROM `shopstar-datalake.staging_zone.shopstar_vtex_field_value`')
-        #query_job = client.query(QUERY)
-        #rows = query_job.result()
+        print("Cargando consulta")
+        client = bigquery.Client()
+        QUERY = ('SELECT distinct productId, lastChange FROM `shopstar-datalake.staging_zone.shopstar_order_items` WHERE lastChange BETWEEN "'+str(init.year)+'-'+str(init.month)+'-'+str(init.day)+' 00:00:00" AND "'+str(init.year)+'-'+str(init.month)+'-'+str(init.day)+' 23:00:00"')
+        query_job = client.query(QUERY)
+        rows = query_job.result()
         registro = 0
-        #for row in rows:
-        url = "https://mercury.vtexcommercestable.com.br/api/license-manager/site/pvt/logins/list/paged?numItems=10&pageNumber=1&sort=name&sortType=ASC"
+        for row in rows:
+            url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders//conversation-message"
+
         #url = "https://mercury.vtexcommercestable.com.br/api/catalog/pvt/specificationvalue/"+str(row.FieldValueId)+""
         response = requests.request("GET", url, headers=init.headers)
         

@@ -23,3 +23,4 @@ encoding//vtex/orders_api/ORDERS/descomposicion_orders/itemMetadata.py=latin1
 encoding//vtex/orders_api/ORDERS/descomposicion_orders/marketplace.py=latin1
 encoding//vtex/orders_api/ORDERS/descomposicion_orders/package.py=latin1
 encoding//vtex/orders_api/ORDERS/history_order.py=latin1
+encoding//vtex/subscriptions_api_v2_deprecated/REPORT/Get_report_status_by_ID.py=latin1

@@ -9,6 +9,10 @@ from os.path import join
 import logging
 
 class init:
+    
+    '''
+    initializing fields and variables
+    '''
     productList = []
     df = pd.DataFrame()
     postalCode = None
@@ -24,6 +28,10 @@ class init:
     lon = None
     
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
+
+'''
+    querying and saving the data
+'''
     
 def get_order(id,reg):
     try:
@@ -68,9 +76,14 @@ def get_order(id,reg):
             'lat': str(init.lat)}, index=[0])
         init.df = init.df.append(df1)
     except:
-        print("Vacio")
-        print("Registro: "+str(reg))
+        print("empty record")
+        print("Error.")
+        logging.exception("message")
         
+
+'''
+Get parameters using sql query
+'''
         
 def get_params():
     print("Cargando consulta")

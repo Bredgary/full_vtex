@@ -13,6 +13,10 @@ class init:
     productList = []
     df = pd.DataFrame()
     
+    '''
+    initializing fields and variables
+    '''
+    
     headers = {"Content-Type": "application/json","Accept": "application/json","X-VTEX-API-AppKey": "vtexappkey-mercury-PKEDGA","X-VTEX-API-AppToken": "OJMQPKYBXPQSXCNQHWECEPDPMNVWAEGFBKKCNRLANUBZGNUWAVLSCIPZGWDCOCBTIKQMSLDPKDOJOEJZTYVFSODSVKWQNJLLTHQVWHEPRVHYTFLBNEJPGWAUHYQIPMBA"}
 
 def format_schema(schema):
@@ -21,41 +25,52 @@ def format_schema(schema):
         formatted_schema.append(bigquery.SchemaField(row['name'], row['type'], row['mode']))
     return formatted_schema
 
+'''
+    querying and saving the data
+'''
   
 def get_order(id):
     try:
-        url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
-        response = requests.request("GET", url, headers=init.headers)
-        Fjson = json.loads(response.text)
-        
-        itemMetadata = Fjson["itemMetadata"]
-        ItemMetadata = itemMetadata["Items"]
-        for x in ItemMetadata:
-            itemMetadata_Id = x["Id"]
-            itemMetadata_Seller = x["Seller"]
-            itemMetadata_Name = x["Name"]
-            itemMetadata_SkuName = x["SkuName"]
-            itemMetadata_ProductId = x["ProductId"]
-            itemMetadata_RefId = x["RefId"]
-            itemMetadata_Ean = x["Ean"]
-            itemMetadata_ImageUrl = x["ImageUrl"]
-            itemMetadata_DetailUrl = x["DetailUrl"]
+        try:
+            url = "https://mercury.vtexcommercestable.com.br/api/oms/pvt/orders/"+str(id)+""
+            response = requests.request("GET", url, headers=init.headers)
+            Fjson = json.loads(response.text)
+            
+            itemMetadata = Fjson["itemMetadata"]
+            ItemMetadata = itemMetadata["Items"]
+            for x in ItemMetadata:
+                itemMetadata_Id = x["Id"]
+                itemMetadata_Seller = x["Seller"]
+                itemMetadata_Name = x["Name"]
+                itemMetadata_SkuName = x["SkuName"]
+                itemMetadata_ProductId = x["ProductId"]
+                itemMetadata_RefId = x["RefId"]
+                itemMetadata_Ean = x["Ean"]
+                itemMetadata_ImageUrl = x["ImageUrl"]
+                itemMetadata_DetailUrl = x["DetailUrl"]
+                df1 = pd.DataFrame({
+                    'orderId': id,
+                    'Id': itemMetadata_Id,
+                    'Seller': itemMetadata_Seller,
+                    'Name': itemMetadata_Name,
+                    'SkuName': itemMetadata_SkuName,
+                    'ProductId': itemMetadata_ProductId,
+                    'RefId': itemMetadata_RefId,
+                    'Ean': itemMetadata_Ean,
+                    'ImageUrl': itemMetadata_ImageUrl,
+                    'DetailUrl': itemMetadata_DetailUrl}, index=[0])
+                init.df = init.df.append(df1)
+        except:
             df1 = pd.DataFrame({
-                'orderId': id,
-                'Id': itemMetadata_Id,
-                'Seller': itemMetadata_Seller,
-                'Name': itemMetadata_Name,
-                'SkuName': itemMetadata_SkuName,
-                'ProductId': itemMetadata_ProductId,
-                'RefId': itemMetadata_RefId,
-                'Ean': itemMetadata_Ean,
-                'ImageUrl': itemMetadata_ImageUrl,
-                'DetailUrl': itemMetadata_DetailUrl}, index=[0])
+                'orderId': id}, index=[0])
             init.df = init.df.append(df1)
     except:
-        df1 = pd.DataFrame({
-            'orderId': id}, index=[0])
-        init.df = init.df.append(df1)
+        print("Error.")
+        logging.exception("message")
+
+'''
+    remove duplicate records
+'''
 
 def delete_duplicate():
     try:
@@ -69,12 +84,19 @@ def delete_duplicate():
     except:
         print("Consulta SQL no ejecutada")
 
+'''
+    save the dataframe in a variable to later ingest
+'''
 
 def run():
     df = init.df
     df.reset_index(drop=True, inplace=True)
     json_data = df.to_json(orient = 'records')
     json_object = json.loads(json_data)
+
+    '''
+    table schema
+    '''
 
     table_schema = [
     {
@@ -122,6 +144,11 @@ def run():
     project_id = '999847639598'
     dataset_id = 'staging_zone'
     table_id = 'shopstar_vtex_item_metadata'
+    
+    '''
+    validate that the dataframe is not empty
+    '''
+    
     if df.empty:
         print('DataFrame is empty!')
     else:
@@ -145,6 +172,10 @@ def run():
             print(job.result())
             delete_duplicate()
             
+'''
+Get parameters using sql query
+'''
+
 
 def get_params():
     print("Cargando consulta")
