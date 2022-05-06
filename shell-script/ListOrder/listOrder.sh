@@ -2,8 +2,8 @@
 
 
 
-$parametro_1 
-$parametro_2
+$1 
+$2
 
 #parametro_1=lol
 
