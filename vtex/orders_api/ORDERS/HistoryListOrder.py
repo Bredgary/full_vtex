@@ -265,7 +265,7 @@ def time():
     run()
     
 #time()
-param1 = sys.argv.pop(index)
+param1 = sys.argv.__getattribute__
 print(param1)
 #print(sys.argv)
 
