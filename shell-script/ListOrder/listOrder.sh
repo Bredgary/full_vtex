@@ -2,10 +2,10 @@
 
 
 
-#$param_1 
-#$param_2
+$1 
+$2
 
-#parametro_1=lol
+parametro_1={1}
 
-echo $1
-echo $2
+#echo $1
+#echo $2
