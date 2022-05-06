@@ -7,5 +7,5 @@
 
 parametro_1=lol
 
-echo parametro_1
+echo $parametro_1
 #echo $2
