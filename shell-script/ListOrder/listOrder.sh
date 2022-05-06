@@ -1,7 +1,7 @@
 #! /bin/bash
 
-$param_1
-$param_2
+$1
+$2
 
-echo $param_1
-echo $param_2
+echo $1
+echo $2
