@@ -50,7 +50,7 @@ def get_params():
 			get_productID(x,init.FROM,init.TO)
 			init.FROM +=50
 			init.TO += 50
-			print(x)
+			print("registros: "+ str(x))
 			print(init.TO)
 			if init.TO >= total:
 				break
