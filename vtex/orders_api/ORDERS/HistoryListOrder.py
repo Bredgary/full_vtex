@@ -265,8 +265,9 @@ def time():
     run()
     
 #time()
-param1 = sys.argv[0]
-print(param1)
+param1 = sys.argv[1]
+param2 = sys.argv[2]
+print(param1,param2)
 #print(sys.argv)
 
 
