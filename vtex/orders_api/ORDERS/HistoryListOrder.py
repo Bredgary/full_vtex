@@ -264,13 +264,13 @@ def time(init_anio,init_mes,init_dia,end_anio,end_mes,end_dia):
         init.registro = 0
     run()
 
-param1 = sys.argv[1]
-param2 = sys.argv[2]
-param3 = sys.argv[3]
+param1 = int(sys.argv[1])
+param2 = int(sys.argv[2])
+param3 = int(sys.argv[3])
 
-param4 = sys.argv[4]
-param5 = sys.argv[5]
-param6 = sys.argv[6]
+param4 = int(sys.argv[4])
+param5 = int(sys.argv[5])
+param6 = int(sys.argv[6])
 
 time(param1,param2,param3,param4,param5,param6)
 
